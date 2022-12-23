@@ -6,6 +6,7 @@ import 'presentation/screens/bloon/bloons.dart';
 import 'presentation/widgets/loader.dart';
 
 import 'utilities/global_state.dart';
+import '/utilities/themes.dart';
 
 void main() => runApp(const MyApp());
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BTD6 wiki',
-      theme: GlobalState.darkTheme,
+      theme: Themes.darkTheme,
       home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
@@ -84,8 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Theme(
-        data:
-            isDarkThemeEnabled ? GlobalState.darkTheme : GlobalState.lightTheme,
+        data: isDarkThemeEnabled ? Themes.darkTheme : Themes.lightTheme,
         child: Scaffold(
           appBar: AppBar(
             title: Text(GlobalState.currentTitle),
@@ -104,18 +104,18 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: pages,
                 ),
           bottomNavigationBar: BottomNavigationBar(
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.cell_tower),
-                label: 'Towers',
+                icon: const Icon(Icons.cell_tower),
+                label: titles[0],
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: 'Heroes',
+                icon: const Icon(Icons.person),
+                label: titles[1],
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.nature),
-                label: 'Bloons',
+                icon: const Icon(Icons.nature),
+                label: titles[2],
               ),
             ],
             currentIndex: _selectedIndex,

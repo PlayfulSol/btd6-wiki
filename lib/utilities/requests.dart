@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -9,6 +8,7 @@ import '/models/bloons/basic_bloon.dart';
 import '/models/hero.dart';
 import '/models/tower.dart';
 
+import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 
 // Bloons
