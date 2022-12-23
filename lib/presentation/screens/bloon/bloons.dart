@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/boss_bloon.dart';
+import '/presentation/widgets/loader.dart';
 
 import '/utilities/images_url.dart';
 import '/utilities/requests.dart';
@@ -23,9 +24,7 @@ class _BloonsState extends State<Bloons> {
           future: getBloons(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
-              return const Center(
-                child: Text("Loading..."),
-              );
+              return const Loader();
             } else {
               return GridView.builder(
                   itemCount: snapshot.data.length,

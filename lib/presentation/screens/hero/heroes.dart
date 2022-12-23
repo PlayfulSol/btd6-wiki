@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
 
+import '/presentation/widgets/loader.dart';
 import '/presentation/screens/hero/single_hero.dart';
 
 class Heroes extends StatefulWidget {
@@ -22,28 +23,35 @@ class _HeroesState extends State<Heroes> {
           future: getHeroes(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
-              return const Center(
-                child: Text("Loading..."),
-              );
+              return const Loader();
             } else {
               return LayoutBuilder(builder: (context, constraints) {
                 int crossAxisCount = 2;
                 double childAspectRatio = 1.5;
                 double cardHeight = 130;
+                double titleFontSize = 15;
+                double subtitleFontSize = 13;
 
                 if (constraints.maxWidth < 345) {
                   crossAxisCount = 1;
                   childAspectRatio = 2;
                   cardHeight = 80;
-                } else if (constraints.maxWidth < 400) {
+                } else if (constraints.maxWidth < 450) {
                   crossAxisCount = 2;
                   childAspectRatio = 1.5;
+                  titleFontSize = 18;
+                  subtitleFontSize = 14;
+                  cardHeight = 150;
                 } else if (constraints.maxWidth < 1200) {
                   crossAxisCount = 3;
                   childAspectRatio = 1;
+                  titleFontSize = 20;
+                  subtitleFontSize = 16;
                 } else {
                   crossAxisCount = 4;
                   childAspectRatio = 0.75;
+                  titleFontSize = 24;
+                  subtitleFontSize = 18;
                 }
 
                 return GridView.builder(
@@ -70,13 +78,14 @@ class _HeroesState extends State<Heroes> {
                                       '$baseImageUrl/heroes/${snapshot.data[index].id}/hero.png'),
                                 ),
                                 title: Text(snapshot.data[index].name,
-                                    style: const TextStyle(fontSize: 15)),
+                                    style: TextStyle(fontSize: titleFontSize)),
                                 subtitle: Text(
                                   snapshot.data[index].description.length > 70
                                       ? snapshot.data[index].description
                                               .substring(0, 70) +
                                           "..."
                                       : snapshot.data[index].description,
+                                  style: TextStyle(fontSize: subtitleFontSize),
                                 ),
                                 onTap: () => getHeroData(
                                         snapshot.data[index].id)

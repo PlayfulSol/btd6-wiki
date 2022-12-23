@@ -21,4 +21,5 @@ class GlobalState {
 
   static String currentTitle = '';
   static ThemeData currentTheme = lightTheme;
+  static bool isLoading = false;
 }
