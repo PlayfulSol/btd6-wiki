@@ -41,7 +41,7 @@ class _TowersState extends State<Towers> {
                   childAspectRatio = 1.5;
                   titleFontSize = 18;
                   subtitleFontSize = 14;
-                  cardHeight = 150;
+                  cardHeight = 170;
                 } else if (constraints.maxWidth < 1200) {
                   crossAxisCount = 3;
                   childAspectRatio = 1;
@@ -78,13 +78,17 @@ class _TowersState extends State<Towers> {
                                 ),
                                 title: Text(snapshot.data[index].name,
                                     style: TextStyle(fontSize: titleFontSize)),
-                                subtitle: Text(
-                                  snapshot.data[index].description.length > 60
-                                      ? snapshot.data[index].description
-                                              .substring(0, 60) +
-                                          "..."
-                                      : snapshot.data[index].description,
-                                  style: TextStyle(fontSize: subtitleFontSize),
+                                subtitle: Flexible(
+                                  fit: FlexFit.tight,
+                                  child: Text(
+                                    snapshot.data[index].description.length > 60
+                                        ? snapshot.data[index].description
+                                                .substring(0, 60) +
+                                            "..."
+                                        : snapshot.data[index].description,
+                                    style:
+                                        TextStyle(fontSize: subtitleFontSize),
+                                  ),
                                 ),
                                 onTap: () => getTowerData(
                                         snapshot.data[index].id)
