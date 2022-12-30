@@ -88,6 +88,7 @@ dynamic getTowers() async {
   }
 
   GlobalState.towers = towers;
+  return towers;
 }
 
 Future<SingleTowerModel> getTowerData(towerId) async {

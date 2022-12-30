@@ -1,6 +1,6 @@
-import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:flutter/material.dart';
 
+import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
 
@@ -73,7 +73,7 @@ class _TowersState extends State<Towers> {
                             children: <Widget>[
                               ListTile(
                                 mouseCursor: SystemMouseCursors.click,
-                                isThreeLine: true,
+                                dense: true,
                                 leading: CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       '$baseImageUrl/towers/${snapshot.data[index].id}/tower.png'),

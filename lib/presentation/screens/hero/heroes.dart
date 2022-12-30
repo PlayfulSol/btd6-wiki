@@ -1,6 +1,6 @@
-import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:flutter/material.dart';
 
+import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
 
@@ -42,7 +42,7 @@ class _HeroesState extends State<Heroes> {
                   childAspectRatio = 1.5;
                   titleFontSize = 18;
                   subtitleFontSize = 14;
-                  cardHeight = 130;
+                  cardHeight = 120;
                 } else if (constraints.maxWidth < 1200) {
                   crossAxisCount = 3;
                   childAspectRatio = 1;
