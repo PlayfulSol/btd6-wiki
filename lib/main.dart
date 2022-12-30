@@ -18,7 +18,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'BTD6 wiki',
-      theme: Themes.darkTheme,
+      theme: GlobalState.currentTheme == Themes.darkTheme
+          ? Themes.darkTheme
+          : Themes.lightTheme,
       home: const MyHomePage(),
       debugShowCheckedModeBanner: false,
     );

@@ -83,9 +83,8 @@ class _TowersState extends State<Towers> {
                                 subtitle: Text(snapshot.data[index].description,
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 3,
-                                    style: TextStyle(
-                                        fontSize: subtitleFontSize,
-                                        color: Colors.grey[600])),
+                                    style:
+                                        TextStyle(fontSize: subtitleFontSize)),
                                 onTap: () => getTowerData(
                                         snapshot.data[index].id)
                                     .then((value) => Navigator.push(
