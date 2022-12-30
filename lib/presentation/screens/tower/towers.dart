@@ -40,9 +40,9 @@ class _TowersState extends State<Towers> {
                 } else if (constraints.maxWidth < 450) {
                   crossAxisCount = 2;
                   childAspectRatio = 1.5;
-                  titleFontSize = 18;
+                  titleFontSize = 16;
                   subtitleFontSize = 14;
-                  cardHeight = 170;
+                  cardHeight = 120;
                 } else if (constraints.maxWidth < 1200) {
                   crossAxisCount = 3;
                   childAspectRatio = 1;
@@ -73,24 +73,19 @@ class _TowersState extends State<Towers> {
                             children: <Widget>[
                               ListTile(
                                 mouseCursor: SystemMouseCursors.click,
+                                isThreeLine: true,
                                 leading: CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       '$baseImageUrl/towers/${snapshot.data[index].id}/tower.png'),
                                 ),
                                 title: Text(snapshot.data[index].name,
                                     style: TextStyle(fontSize: titleFontSize)),
-                                subtitle: Flexible(
-                                  fit: FlexFit.tight,
-                                  child: Text(
-                                    snapshot.data[index].description.length > 60
-                                        ? snapshot.data[index].description
-                                                .substring(0, 60) +
-                                            "..."
-                                        : snapshot.data[index].description,
-                                    style:
-                                        TextStyle(fontSize: subtitleFontSize),
-                                  ),
-                                ),
+                                subtitle: Text(snapshot.data[index].description,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                    style: TextStyle(
+                                        fontSize: subtitleFontSize,
+                                        color: Colors.grey[600])),
                                 onTap: () => getTowerData(
                                         snapshot.data[index].id)
                                     .then((value) => Navigator.push(

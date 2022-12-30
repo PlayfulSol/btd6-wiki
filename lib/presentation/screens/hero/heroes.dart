@@ -42,7 +42,7 @@ class _HeroesState extends State<Heroes> {
                   childAspectRatio = 1.5;
                   titleFontSize = 18;
                   subtitleFontSize = 14;
-                  cardHeight = 170;
+                  cardHeight = 130;
                 } else if (constraints.maxWidth < 1200) {
                   crossAxisCount = 3;
                   childAspectRatio = 1;
@@ -80,17 +80,15 @@ class _HeroesState extends State<Heroes> {
                                 ),
                                 title: Text(snapshot.data[index].name,
                                     style: TextStyle(fontSize: titleFontSize)),
-                                subtitle: Flexible(
-                                  fit: FlexFit.tight,
-                                  child: Text(
-                                    snapshot.data[index].description.length > 70
-                                        ? snapshot.data[index].description
-                                                .substring(0, 70) +
-                                            "..."
-                                        : snapshot.data[index].description,
-                                    style:
-                                        TextStyle(fontSize: subtitleFontSize),
-                                  ),
+                                subtitle: Text(
+                                  snapshot.data[index].description.length > 70
+                                      ? snapshot.data[index].description
+                                              .substring(0, 70) +
+                                          "..."
+                                      : snapshot.data[index].description,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 3,
+                                  style: TextStyle(fontSize: subtitleFontSize),
                                 ),
                                 onTap: () => getHeroData(
                                         snapshot.data[index].id)
