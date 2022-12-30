@@ -21,9 +21,7 @@ class _HeroesState extends State<Heroes> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: GlobalState.heroes.isEmpty
-              ? getHeroes()
-              : Future.value(GlobalState.heroes),
+          future: Future.value(GlobalState.heroes),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();

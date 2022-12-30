@@ -22,9 +22,7 @@ class _BloonsState extends State<Bloons> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: GlobalState.bloons.isEmpty
-              ? getBloons()
-              : Future.value(GlobalState.bloons),
+          future: Future.value(GlobalState.bloons),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();

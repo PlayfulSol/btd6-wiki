@@ -21,9 +21,7 @@ class _TowersState extends State<Towers> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: GlobalState.towers.isEmpty
-              ? getTowers()
-              : Future.value(GlobalState.towers),
+          future: Future.value(GlobalState.towers),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();

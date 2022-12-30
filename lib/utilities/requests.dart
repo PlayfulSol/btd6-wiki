@@ -12,7 +12,8 @@ import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 
 // Bloons
-Future<List<BasicBloonModel>> getBloons() async {
+//  getBloons() async {
+dynamic getBloons() async {
   var data = await http.get(Uri.parse("$baseApiUrl/bloons"));
 
   var jsonData = json.decode(data.body);
@@ -25,7 +26,7 @@ Future<List<BasicBloonModel>> getBloons() async {
     bloons.add(bloon);
   }
 
-  return bloons;
+  GlobalState.bloons = bloons;
 }
 
 Future<dynamic> getBloonData(String id) async {
@@ -45,7 +46,7 @@ Future<dynamic> getBloonData(String id) async {
 }
 
 // Heroes
-Future<List<HeroModel>> getHeroes() async {
+dynamic getHeroes() async {
   var data = await http.get(Uri.parse("$baseApiUrl/heroes"));
 
   var jsonData = json.decode(data.body);
@@ -58,7 +59,7 @@ Future<List<HeroModel>> getHeroes() async {
     heros.add(hero);
   }
 
-  return heros;
+  GlobalState.heroes = heros;
 }
 
 Future<HeroModel> getHeroData(towerId) async {
@@ -74,7 +75,7 @@ Future<HeroModel> getHeroData(towerId) async {
 }
 
 // Towers
-Future<List<TowerModel>> getTowers() async {
+dynamic getTowers() async {
   var data = await http.get(Uri.parse("$baseApiUrl/towers"));
 
   var jsonData = json.decode(data.body);
@@ -86,7 +87,7 @@ Future<List<TowerModel>> getTowers() async {
     towers.add(tower);
   }
 
-  return towers;
+  GlobalState.towers = towers;
 }
 
 Future<SingleTowerModel> getTowerData(towerId) async {
