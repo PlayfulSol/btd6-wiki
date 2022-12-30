@@ -13,18 +13,23 @@ import 'package:btd6wiki/main.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // verify that the title is correct and the theme is dark
+    expect(find.text('BTD6 wiki'), findsOneWidget);
+    expect(find.byIcon(Icons.brightness_4), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    // verify that can switch to light theme
+    await tester.tap(find.byIcon(Icons.brightness_4));
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.brightness_7), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // verify that can switch to dark theme
+    await tester.tap(find.byIcon(Icons.brightness_7));
+    await tester.pumpAndSettle();
+    expect(find.byIcon(Icons.brightness_4), findsOneWidget);
+
+    // verify that the page is correct
+    expect(find.text('Towers'), findsOneWidget);
   });
 }
