@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/requests.dart';
 import 'package:flutter/material.dart';
 
 import 'presentation/screens/tower/towers.dart';
@@ -62,7 +63,21 @@ class _MyHomePageState extends State<MyHomePage> {
       GlobalState.currentTitle = 'BTD6 wiki';
       GlobalState.isLoading = true;
     });
-    await Future.delayed(const Duration(seconds: 1));
+    getTowers().then((value) {
+      setState(() {
+        GlobalState.towers = value;
+      });
+    });
+    getHeroes().then((value) {
+      setState(() {
+        GlobalState.heroes = value;
+      });
+    });
+    getBloons().then((value) {
+      setState(() {
+        GlobalState.bloons = value;
+      });
+    });
     setState(() {
       GlobalState.currentTitle = titles[_selectedIndex];
       GlobalState.isLoading = false;

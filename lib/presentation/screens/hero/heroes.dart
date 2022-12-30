@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:flutter/material.dart';
 
 import '/utilities/constants.dart';
@@ -20,7 +21,9 @@ class _HeroesState extends State<Heroes> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: getHeroes(),
+          future: GlobalState.heroes.isEmpty
+              ? getHeroes()
+              : Future.value(GlobalState.heroes),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();

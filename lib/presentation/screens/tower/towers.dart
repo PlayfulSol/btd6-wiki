@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:flutter/material.dart';
 
 import '/utilities/constants.dart';
@@ -20,7 +21,9 @@ class _TowersState extends State<Towers> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: getTowers(),
+          future: GlobalState.towers.isEmpty
+              ? getTowers()
+              : Future.value(GlobalState.towers),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();

@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:flutter/material.dart';
 
 import '/presentation/screens/bloon/single_bloon.dart';
@@ -21,7 +22,9 @@ class _BloonsState extends State<Bloons> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: getBloons(),
+          future: GlobalState.bloons.isEmpty
+              ? getBloons()
+              : Future.value(GlobalState.bloons),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();
