@@ -1,3 +1,5 @@
+import 'package:btd6wiki/models/bloons/bloon_hierarchy.dart';
+
 import '/models/bloons/single_bloon.dart';
 import '/models/hero.dart';
 import '/models/common.dart';
@@ -58,7 +60,7 @@ String getTowerLevel(pathKey, index) {
   }
 }
 
-String bloonsParentsToString(List<Parents> bloonHierarchy) {
+String bloonsParentsToString(List<BloonHierarchyModel> bloonHierarchy) {
   String hierarchy = '';
   for (var bloon in bloonHierarchy) {
     hierarchy += '${bloon.id}, ';

@@ -1,3 +1,4 @@
+import 'package:btd6wiki/presentation/widgets/bloon_hierarchy.dart';
 import 'package:flutter/material.dart';
 
 import '/models/bloons/single_bloon.dart';
@@ -66,40 +67,8 @@ class SingleBloon extends StatelessWidget {
                                 fontWeight: FontWeight.bold, fontSize: 20)),
                         const SizedBox(height: 10),
                         Center(
-                          child: GridView.builder(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 5,
-                              childAspectRatio: 1.5,
-                              mainAxisSpacing: 2,
-                              crossAxisSpacing: 2,
-                              mainAxisExtent: 80,
-                            ),
-                            shrinkWrap: true,
-                            itemCount: bloon.children.length,
-                            itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  getBloonData(bloon.children[index].id).then(
-                                      (value) =>
-                                          // push instead of the current page
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SingleBloon(
-                                                        bloon: value,
-                                                      ))));
-                                },
-                                child: Column(children: [
-                                  Image.network(
-                                    bloonImage(bloon.children[index].id),
-                                    width: 50,
-                                  ),
-                                  Text("Count: ${bloon.children[index].count}"),
-                                ]),
-                              );
-                            },
+                          child: BloonHierarchy(
+                            bloons: bloon.children,
                           ),
                         ),
                         const SizedBox(height: 10)
@@ -110,36 +79,8 @@ class SingleBloon extends StatelessWidget {
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20)),
                         const SizedBox(height: 10),
-                        GridView.builder(
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 5,
-                            childAspectRatio: 1.5,
-                            mainAxisSpacing: 7,
-                            crossAxisSpacing: 7,
-                            mainAxisExtent: 60,
-                          ),
-                          shrinkWrap: true,
-                          itemCount: bloon.parents.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                getBloonData(bloon.parents[index].id)
-                                    .then((value) => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => SingleBloon(
-                                                  bloon: value,
-                                                ))));
-                              },
-                              child: Column(children: [
-                                Image.network(
-                                  bloonImage(bloon.parents[index].id),
-                                  width: 50,
-                                ),
-                              ]),
-                            );
-                          },
+                        BloonHierarchy(
+                          bloons: bloon.parents,
                         ),
                       ],
                     ],
