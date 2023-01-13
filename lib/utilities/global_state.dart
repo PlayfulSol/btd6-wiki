@@ -10,9 +10,11 @@ class GlobalState {
   GlobalState._();
 
   static String currentTitle = '';
+  static int currentPageIndex = 0;
   static ThemeData currentTheme = Themes.darkTheme;
   static bool isLoading = false;
   static List<TowerModel> towers = [];
+  static List<String> towerTypes = [];
   static List<HeroModel> heroes = [];
   static List<BasicBloonModel> bloons = [];
 }

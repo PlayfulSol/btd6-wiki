@@ -88,6 +88,7 @@ dynamic getTowers() async {
   }
 
   GlobalState.towers = towers;
+  GlobalState.towerTypes = towers.map((e) => e.type).toSet().toList();
   return towers;
 }
 

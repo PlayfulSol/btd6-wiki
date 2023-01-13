@@ -1,13 +1,12 @@
+import 'package:btd6wiki/presentation/widgets/drawer_content.dart';
 import 'package:flutter/material.dart';
 
-import '/presentation/screens/tower/towers.dart';
-import '/presentation/screens/hero/heroes.dart';
-import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/widgets/loader.dart';
 
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/themes.dart';
+import '/utilities/constants.dart';
 
 void main() => runApp(const MyApp());
 
@@ -35,7 +34,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
   bool isDarkThemeEnabled = true;
 
   void _toggleDarkTheme(val) {
@@ -45,20 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
     GlobalState.currentTheme =
         isDarkThemeEnabled ? Themes.darkTheme : Themes.lightTheme;
   }
-
-  final PageController _pageController = PageController();
-
-  final List<String> titles = [
-    'Towers',
-    'Heroes',
-    'Bloons',
-  ];
-
-  final List<Widget> pages = [
-    const Towers(key: PageStorageKey<String>('Towers')),
-    const Heroes(key: PageStorageKey<String>('Heroes')),
-    const Bloons(key: PageStorageKey<String>('Bloons')),
-  ];
 
   final PageStorageBucket bucket = PageStorageBucket();
 
@@ -72,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     await getBloons();
     setState(() {
       GlobalState.isLoading = false;
-      GlobalState.currentTitle = titles[_selectedIndex];
+      GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
     });
   }
 
@@ -80,12 +64,14 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     setLoading();
-    _pageController.addListener(() {
-      var page = _pageController.page!.floor();
-      setState(() {
-        _selectedIndex = page;
-        GlobalState.currentTitle = titles[page];
-      });
+    pageController.addListener(() {
+      // when GlobalState.currentPageIndex changes should change the page and the title
+      if (pageController.page?.round() != GlobalState.currentPageIndex) {
+        setState(() {
+          GlobalState.currentPageIndex = pageController.page?.round() ?? 0;
+          GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
+        });
+      }
     });
   }
 
@@ -94,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Theme(
         data: isDarkThemeEnabled ? Themes.darkTheme : Themes.lightTheme,
         child: Scaffold(
+          drawer: const Drawer(child: DrawerContent()),
           appBar: AppBar(
             title: Text(GlobalState.currentTitle),
             actions: [
@@ -106,7 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
           body: GlobalState.isLoading
               ? const Loader()
               : PageView(
-                  controller: _pageController,
+                  controller: pageController,
                   physics: const BouncingScrollPhysics(),
                   children: pages,
                 ),
@@ -125,13 +112,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 label: titles[2],
               ),
             ],
-            currentIndex: _selectedIndex,
+            currentIndex: GlobalState.currentPageIndex,
             onTap: (index) {
               setState(() {
-                _selectedIndex = index;
+                GlobalState.currentPageIndex = index;
                 GlobalState.currentTitle = titles[index];
               });
-              _pageController.animateToPage(index,
+              pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut);
             },
