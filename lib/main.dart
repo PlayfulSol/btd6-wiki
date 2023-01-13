@@ -1,12 +1,12 @@
-import 'package:btd6wiki/utilities/requests.dart';
 import 'package:flutter/material.dart';
 
-import 'presentation/screens/tower/towers.dart';
-import 'presentation/screens/hero/heroes.dart';
-import 'presentation/screens/bloon/bloons.dart';
-import 'presentation/widgets/loader.dart';
+import '/presentation/screens/tower/towers.dart';
+import '/presentation/screens/hero/heroes.dart';
+import '/presentation/screens/bloon/bloons.dart';
+import '/presentation/widgets/loader.dart';
 
-import 'utilities/global_state.dart';
+import '/utilities/requests.dart';
+import '/utilities/global_state.dart';
 import '/utilities/themes.dart';
 
 void main() => runApp(const MyApp());

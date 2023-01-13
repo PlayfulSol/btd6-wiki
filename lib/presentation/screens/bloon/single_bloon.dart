@@ -1,11 +1,11 @@
-import 'package:btd6wiki/presentation/widgets/bloon_hierarchy.dart';
 import 'package:flutter/material.dart';
 
 import '/models/bloons/single_bloon.dart';
 
+import '/presentation/widgets/bloon_hierarchy.dart';
+
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
-import '/utilities/requests.dart';
 import '/utilities/themes.dart';
 
 class SingleBloon extends StatelessWidget {

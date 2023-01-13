@@ -1,6 +1,4 @@
-import 'package:btd6wiki/models/bloons/bloon_hierarchy.dart';
-
-import '/models/bloons/single_bloon.dart';
+import '/models/bloons/bloon_hierarchy.dart';
 import '/models/hero.dart';
 import '/models/common.dart';
 

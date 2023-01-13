@@ -1,8 +1,11 @@
-import 'package:btd6wiki/models/bloons/bloon_hierarchy.dart';
-import 'package:btd6wiki/presentation/screens/bloon/single_bloon.dart';
-import 'package:btd6wiki/utilities/images_url.dart';
-import 'package:btd6wiki/utilities/requests.dart';
 import 'package:flutter/material.dart';
+
+import '/models/bloons/bloon_hierarchy.dart';
+
+import '/presentation/screens/bloon/single_bloon.dart';
+
+import '/utilities/images_url.dart';
+import '/utilities/requests.dart';
 
 class BloonHierarchy extends StatelessWidget {
   final List<BloonHierarchyModel> bloons;

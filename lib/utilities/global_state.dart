@@ -1,7 +1,9 @@
-import 'package:btd6wiki/models/bloons/basic_bloon.dart';
-import 'package:btd6wiki/models/hero.dart';
-import 'package:btd6wiki/models/tower.dart';
 import 'package:flutter/material.dart';
+
+import '/models/bloons/basic_bloon.dart';
+import '/models/hero.dart';
+import '/models/tower.dart';
+
 import '/utilities/themes.dart';
 
 class GlobalState {

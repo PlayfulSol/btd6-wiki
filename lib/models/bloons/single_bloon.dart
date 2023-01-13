@@ -1,4 +1,4 @@
-import 'package:btd6wiki/models/bloons/bloon_hierarchy.dart';
+import '/models/bloons/bloon_hierarchy.dart';
 
 class SingleBloonModel {
   late final String id;
