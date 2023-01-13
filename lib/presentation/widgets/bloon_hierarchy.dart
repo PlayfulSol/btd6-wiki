@@ -47,7 +47,7 @@ class BloonHierarchy extends StatelessWidget {
               Text("Count: ${bloons[index].count}"),
               const SizedBox(height: 10)
             ],
-            if (bloons[index].type != null) ...[
+            if (bloons[index].type != "" && bloons[index].type != null) ...[
               Text("Type: ${bloons[index].type}", textAlign: TextAlign.center),
               const SizedBox(height: 10)
             ],
