@@ -42,6 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       isDarkThemeEnabled = val;
     });
+    GlobalState.currentTheme =
+        isDarkThemeEnabled ? Themes.darkTheme : Themes.lightTheme;
   }
 
   final PageController _pageController = PageController();
