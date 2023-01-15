@@ -1,3 +1,5 @@
+import '/utilities/global_state.dart';
+
 import '/models/bloons/bloon_hierarchy.dart';
 import '/models/hero.dart';
 import '/models/common.dart';
@@ -75,4 +77,12 @@ String bossRbeToString(List<int> bossRbe, List<String> rounds) {
     rbe += 'Round ${rounds[i]}: ${bossRbe[i]}\n';
   }
   return rbe;
+}
+
+String getAppTitle() {
+  if (GlobalState.currentTowerType == '') {
+    return GlobalState.currentTitle;
+  } else {
+    return GlobalState.currentTowerType;
+  }
 }

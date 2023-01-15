@@ -12,6 +12,7 @@ class GlobalState {
   static String currentTitle = '';
   static int currentPageIndex = 0;
   static ThemeData currentTheme = Themes.darkTheme;
+  static String currentTowerType = '';
   static bool isLoading = false;
   static List<TowerModel> towers = [];
   static List<String> towerTypes = [];

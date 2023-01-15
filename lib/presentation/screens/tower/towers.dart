@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '/models/tower.dart';
+
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
@@ -8,20 +10,65 @@ import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/loader.dart';
 
 class Towers extends StatefulWidget {
-  const Towers({super.key});
+  const Towers({super.key, required String towerType});
+  final String? towerTypes = '';
 
   @override
   State<Towers> createState() => _TowersState();
 }
 
-class _TowersState extends State<Towers> {
+List<TowerModel> filterTowers() {
+  if (GlobalState.currentTowerType == '') {
+    return GlobalState.towers;
+  } else {
+    return GlobalState.towers
+        .where((tower) => tower.type == GlobalState.currentTowerType)
+        .toList();
+  }
+}
+
+class _TowersState extends State<Towers>
+    with AutomaticKeepAliveClientMixin<Towers> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // if tower type is not empty show app bar
+      appBar: GlobalState.currentTowerType != ''
+          ? AppBar(
+              title: Text(GlobalState.currentTitle),
+              actions: [
+                DropdownButton<String>(
+                  value: GlobalState.currentTowerType,
+                  icon: const Icon(Icons.arrow_drop_down),
+                  iconSize: 24,
+                  elevation: 16,
+                  style: const TextStyle(color: Colors.black),
+                  underline: Container(
+                    height: 2,
+                    color: Colors.black,
+                  ),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      GlobalState.currentTowerType = newValue!;
+                      GlobalState.currentTitle = newValue;
+                    });
+                  },
+                  items: GlobalState.towerTypes
+                      .map<DropdownMenuItem<String>>((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value,
+                          style: const TextStyle(color: Colors.blue)),
+                    );
+                  }).toList(),
+                ),
+              ],
+            )
+          : null,
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: Future.value(GlobalState.towers),
+          future: Future.value(filterTowers()),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();
@@ -108,4 +155,7 @@ class _TowersState extends State<Towers> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

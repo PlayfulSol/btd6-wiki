@@ -1,12 +1,13 @@
-import 'package:btd6wiki/presentation/widgets/drawer_content.dart';
 import 'package:flutter/material.dart';
 
+import '/presentation/widgets/drawer_content.dart';
 import '/presentation/widgets/loader.dart';
 
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/themes.dart';
 import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 void main() => runApp(const MyApp());
 
@@ -69,7 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
       if (pageController.page?.round() != GlobalState.currentPageIndex) {
         setState(() {
           GlobalState.currentPageIndex = pageController.page?.round() ?? 0;
-          GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
         });
       }
     });
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Scaffold(
           drawer: const Drawer(child: DrawerContent()),
           appBar: AppBar(
-            title: Text(GlobalState.currentTitle),
+            title: Text(getAppTitle()),
             actions: [
               Switch(
                 value: isDarkThemeEnabled,
@@ -94,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ? const Loader()
               : PageView(
                   controller: pageController,
-                  physics: const BouncingScrollPhysics(),
+                  // physics: const BouncingScrollPhysics(),
                   children: pages,
                 ),
           bottomNavigationBar: BottomNavigationBar(
@@ -116,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
             onTap: (index) {
               setState(() {
                 GlobalState.currentPageIndex = index;
-                GlobalState.currentTitle = titles[index];
+                GlobalState.currentTowerType = '';
               });
               pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 300),
