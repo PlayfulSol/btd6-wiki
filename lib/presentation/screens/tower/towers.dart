@@ -1,9 +1,9 @@
-import 'package:btd6wiki/utilities/images_url.dart';
-import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
 
+import '/utilities/images_url.dart';
 import '/utilities/global_state.dart';
 import '/utilities/requests.dart';
+import '/utilities/utils.dart';
 
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/loader.dart';

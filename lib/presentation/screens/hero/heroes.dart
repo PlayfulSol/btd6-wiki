@@ -1,9 +1,8 @@
-import 'package:btd6wiki/utilities/images_url.dart';
 import 'package:flutter/material.dart';
 
 import '/utilities/global_state.dart';
-import '/utilities/constants.dart';
 import '/utilities/requests.dart';
+import '/utilities/images_url.dart';
 
 import '/presentation/widgets/loader.dart';
 import '/presentation/screens/hero/single_hero.dart';

@@ -1,4 +1,3 @@
-import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:flutter/material.dart';
 
 import '/presentation/screens/bloon/single_bloon.dart';
@@ -7,6 +6,7 @@ import '/models/bloons/boss_bloon.dart';
 
 import '/utilities/images_url.dart';
 import '/utilities/requests.dart';
+import '/utilities/global_state.dart';
 
 class BossBloonScatter extends StatelessWidget {
   final List<Spawn> scatter;

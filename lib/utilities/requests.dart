@@ -12,8 +12,7 @@ import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 
 // Bloons
-//  getBloons() async {
-dynamic getBloons() async {
+Future<void> getBloons() async {
   var data = await http.get(Uri.parse("$baseApiUrl/bloons"));
 
   var jsonData = json.decode(data.body);
@@ -21,12 +20,6 @@ dynamic getBloons() async {
   List<BasicBloonModel> bloons = [];
 
   List<BasicBloonModel> bosses = [];
-
-  // for (var b in jsonData) {
-  //   BasicBloonModel bloon = BasicBloonModel.fromJson(b);
-
-  //   bloons.add(bloon);
-  // }
 
   for (var b in jsonData) {
     if (b['type'] == 'boss') {
@@ -63,20 +56,20 @@ Future<dynamic> getBloonData(String id) async {
 }
 
 // Heroes
-dynamic getHeroes() async {
+Future<void> getHeroes() async {
   var data = await http.get(Uri.parse("$baseApiUrl/heroes"));
 
   var jsonData = json.decode(data.body);
 
-  List<HeroModel> heros = [];
+  List<HeroModel> heroes = [];
 
   for (var h in jsonData) {
     HeroModel hero = HeroModel.fromJson(h);
 
-    heros.add(hero);
+    heroes.add(hero);
   }
 
-  GlobalState.heroes = heros;
+  GlobalState.heroes = heroes;
 }
 
 Future<HeroModel> getHeroData(towerId) async {
@@ -96,7 +89,7 @@ Future<HeroModel> getHeroData(towerId) async {
 }
 
 // Towers
-dynamic getTowers() async {
+Future<void> getTowers() async {
   var data = await http.get(Uri.parse("$baseApiUrl/towers"));
 
   var jsonData = json.decode(data.body);
@@ -110,7 +103,6 @@ dynamic getTowers() async {
 
   GlobalState.towers = towers;
   GlobalState.towerTypes = towers.map((e) => e.type).toSet().toList();
-  return towers;
 }
 
 Future<SingleTowerModel> getTowerData(towerId) async {

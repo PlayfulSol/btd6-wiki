@@ -32,10 +32,10 @@ class BossBloon extends StatelessWidget {
                   Text("Speed: ${bloon.speed}",
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 18)),
-                  // const SizedBox(height: 10),
-                  // Text("Type: ${bloon.type}",
-                  //     style: const TextStyle(
-                  //         fontWeight: FontWeight.bold, fontSize: 18)),
+                  const SizedBox(height: 10),
+                  Text("Type: ${bloon.type}",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18)),
                   const SizedBox(height: 15),
                   Text("Immunities: ${bloon.immunities.join(", ")}",
                       style: const TextStyle(

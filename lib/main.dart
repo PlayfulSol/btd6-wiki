@@ -48,13 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
       GlobalState.currentTitle = 'BTD6 wiki';
       GlobalState.isLoading = true;
     });
-    await getTowers();
-    await getHeroes();
-    await getBloons();
-    setState(() {
-      GlobalState.isLoading = false;
-      GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
-    });
+
+    Future.wait([
+      getTowers(),
+      getHeroes(),
+      getBloons(),
+    ]).then((_) => setState(() {
+          GlobalState.isLoading = false;
+          GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
+        }));
   }
 
   @override
