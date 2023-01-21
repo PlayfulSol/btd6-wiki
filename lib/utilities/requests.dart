@@ -20,20 +20,37 @@ dynamic getBloons() async {
 
   List<BasicBloonModel> bloons = [];
 
-  for (var b in jsonData) {
-    BasicBloonModel bloon = BasicBloonModel.fromJson(b);
+  List<BasicBloonModel> bosses = [];
 
-    bloons.add(bloon);
+  // for (var b in jsonData) {
+  //   BasicBloonModel bloon = BasicBloonModel.fromJson(b);
+
+  //   bloons.add(bloon);
+  // }
+
+  for (var b in jsonData) {
+    if (b['type'] == 'boss') {
+      BasicBloonModel boss = BasicBloonModel.fromJson(b);
+
+      bosses.add(boss);
+    } else {
+      BasicBloonModel bloon = BasicBloonModel.fromJson(b);
+
+      bloons.add(bloon);
+    }
   }
 
   GlobalState.bloons = bloons;
+  GlobalState.bosses = bosses;
 }
 
 Future<dynamic> getBloonData(String id) async {
+  GlobalState.isLoading = true;
   var data = await http.get(Uri.parse("$baseApiUrl/bloon/$id"));
 
   var jsonData = json.decode(data.body);
 
+  GlobalState.isLoading = false;
   if (jsonData['type'] == 'boss') {
     var bossData = BossBloonModel.fromJson(jsonData);
     GlobalState.currentTitle = bossData.name;
@@ -63,6 +80,8 @@ dynamic getHeroes() async {
 }
 
 Future<HeroModel> getHeroData(towerId) async {
+  GlobalState.isLoading = true;
+
   var data = (await http.get(Uri.parse("$baseApiUrl/hero/$towerId")));
 
   var jsonData = json.decode(data.body);
@@ -70,6 +89,8 @@ Future<HeroModel> getHeroData(towerId) async {
   HeroModel heroData = HeroModel.fromJson(jsonData);
 
   GlobalState.currentTitle = heroData.name;
+
+  GlobalState.isLoading = false;
 
   return heroData;
 }
@@ -93,6 +114,7 @@ dynamic getTowers() async {
 }
 
 Future<SingleTowerModel> getTowerData(towerId) async {
+  GlobalState.isLoading = true;
   var data = (await http.get(Uri.parse("$baseApiUrl/tower/$towerId")));
 
   var jsonData = json.decode(data.body);
@@ -100,6 +122,8 @@ Future<SingleTowerModel> getTowerData(towerId) async {
   SingleTowerModel towerData = SingleTowerModel.fromJson(jsonData);
 
   GlobalState.currentTitle = towerData.name;
+
+  GlobalState.isLoading = false;
 
   return towerData;
 }

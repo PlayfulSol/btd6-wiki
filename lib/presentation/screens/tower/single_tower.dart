@@ -5,7 +5,6 @@ import '/models/tower.dart';
 import '/utilities/global_state.dart';
 import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
-import '/utilities/themes.dart';
 
 import '/presentation/widgets/path.dart';
 
@@ -34,45 +33,41 @@ class SingleTower extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-        data: GlobalState.currentTheme == Themes.darkTheme
-            ? Themes.darkTheme
-            : Themes.lightTheme,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(GlobalState.currentTitle),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Image.network(towerBaseImage(towerId), width: 200),
-                    const SizedBox(height: 10),
-                    Text(towerData.description,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 16)),
-                    const SizedBox(height: 10),
-                    Text(towerData.type),
-                    const SizedBox(height: 10),
-                    Text(costToString(towerData.cost)),
-                    const SizedBox(height: 10),
-                    Text(statsToString(towerData.stats)),
-                    const SizedBox(height: 10),
-                    ListView.builder(
-                      primary: false,
-                      shrinkWrap: true,
-                      itemCount: towerData.paths.paragon != null ? 4 : 3,
-                      itemBuilder: (context, index) => _buildPath(index),
-                    )
-                  ],
-                ),
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(GlobalState.currentTitle),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.network(towerBaseImage(towerId), width: 200),
+                const SizedBox(height: 10),
+                Text(towerData.description,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16)),
+                const SizedBox(height: 10),
+                Text(towerData.type),
+                const SizedBox(height: 10),
+                Text(costToString(towerData.cost)),
+                const SizedBox(height: 10),
+                Text(statsToString(towerData.stats)),
+                const SizedBox(height: 10),
+                ListView.builder(
+                  primary: false,
+                  shrinkWrap: true,
+                  itemCount: towerData.paths.paragon != null ? 4 : 3,
+                  itemBuilder: (context, index) => _buildPath(index),
+                )
+              ],
             ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

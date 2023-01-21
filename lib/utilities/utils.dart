@@ -1,8 +1,22 @@
+import 'package:btd6wiki/models/tower.dart';
+
 import '/utilities/global_state.dart';
 
 import '/models/bloons/bloon_hierarchy.dart';
 import '/models/hero.dart';
 import '/models/common.dart';
+
+String formatBigNumber(int number) {
+  if (number < 1000) {
+    return number.toString();
+  } else if (number < 1000000) {
+    return "${(number / 1000).toStringAsFixed(1)}K";
+  } else if (number < 1000000000) {
+    return "${(number / 1000000).toStringAsFixed(1)}M";
+  } else {
+    return "${(number / 1000000000).toStringAsFixed(1)}B";
+  }
+}
 
 String getPathKeyFromIndex(int index) {
   switch (index) {
@@ -74,7 +88,7 @@ String bloonsParentsToString(List<BloonHierarchyModel> bloonHierarchy) {
 String bossRbeToString(List<int> bossRbe, List<String> rounds) {
   String rbe = '';
   for (var i = 0; i < bossRbe.length; i++) {
-    rbe += 'Round ${rounds[i]}: ${bossRbe[i]}\n';
+    rbe += 'Round ${rounds[i]}: ${formatBigNumber(bossRbe[i])}\n';
   }
   return rbe;
 }
@@ -84,5 +98,15 @@ String getAppTitle() {
     return GlobalState.currentTitle;
   } else {
     return GlobalState.currentTowerType;
+  }
+}
+
+List<TowerModel> filterTowers() {
+  if (GlobalState.currentTowerType == '') {
+    return GlobalState.towers;
+  } else {
+    return GlobalState.towers
+        .where((tower) => tower.type == GlobalState.currentTowerType)
+        .toList();
   }
 }

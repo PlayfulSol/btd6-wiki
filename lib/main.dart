@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 
 import '/presentation/widgets/drawer_content.dart';
@@ -16,14 +17,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'BTD6 wiki',
-      theme: GlobalState.currentTheme == Themes.darkTheme
-          ? Themes.darkTheme
-          : Themes.lightTheme,
-      home: const MyHomePage(),
-      debugShowCheckedModeBanner: false,
-    );
+    return AdaptiveTheme(
+        light: Themes.lightTheme,
+        dark: Themes.darkTheme,
+        initial: AdaptiveThemeMode.system,
+        builder: (theme, darkTheme) => MaterialApp(
+              theme: theme,
+              darkTheme: darkTheme,
+              title: 'BTD6 wiki',
+              home: const MyHomePage(),
+              debugShowCheckedModeBanner: false,
+            ));
   }
 }
 
@@ -36,14 +40,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   bool isDarkThemeEnabled = true;
-
-  void _toggleDarkTheme(val) {
-    setState(() {
-      isDarkThemeEnabled = val;
-    });
-    GlobalState.currentTheme =
-        isDarkThemeEnabled ? Themes.darkTheme : Themes.lightTheme;
-  }
 
   final PageStorageBucket bucket = PageStorageBucket();
 
@@ -66,8 +62,8 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     setLoading();
     pageController.addListener(() {
-      // when GlobalState.currentPageIndex changes should change the page and the title
-      if (pageController.page?.round() != GlobalState.currentPageIndex) {
+      if (pageController.page?.round() != GlobalState.currentPageIndex &&
+          !GlobalState.isLoading) {
         setState(() {
           GlobalState.currentPageIndex = pageController.page?.round() ?? 0;
         });
@@ -77,52 +73,44 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-        data: isDarkThemeEnabled ? Themes.darkTheme : Themes.lightTheme,
-        child: Scaffold(
-          drawer: const Drawer(child: DrawerContent()),
-          appBar: AppBar(
-            title: Text(getAppTitle()),
-            actions: [
-              Switch(
-                value: isDarkThemeEnabled,
-                onChanged: _toggleDarkTheme,
-              ),
-            ],
+    return Scaffold(
+      drawer: const Drawer(child: DrawerContent()),
+      appBar: AppBar(
+        title: Text(getAppTitle()),
+      ),
+      body: GlobalState.isLoading
+          ? const Loader()
+          : PageView(
+              controller: pageController,
+              // physics: const BouncingScrollPhysics(),
+              children: pages,
+            ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.cell_tower),
+            label: titles[0],
           ),
-          body: GlobalState.isLoading
-              ? const Loader()
-              : PageView(
-                  controller: pageController,
-                  // physics: const BouncingScrollPhysics(),
-                  children: pages,
-                ),
-          bottomNavigationBar: BottomNavigationBar(
-            items: [
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.cell_tower),
-                label: titles[0],
-              ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.person),
-                label: titles[1],
-              ),
-              BottomNavigationBarItem(
-                icon: const Icon(Icons.nature),
-                label: titles[2],
-              ),
-            ],
-            currentIndex: GlobalState.currentPageIndex,
-            onTap: (index) {
-              setState(() {
-                GlobalState.currentPageIndex = index;
-                GlobalState.currentTowerType = '';
-              });
-              pageController.animateToPage(index,
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut);
-            },
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person),
+            label: titles[1],
           ),
-        ));
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.nature),
+            label: titles[2],
+          ),
+        ],
+        currentIndex: GlobalState.currentPageIndex,
+        onTap: (index) {
+          setState(() {
+            GlobalState.currentPageIndex = index;
+            GlobalState.currentTowerType = '';
+          });
+          pageController.animateToPage(index,
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut);
+        },
+      ),
+    );
   }
 }

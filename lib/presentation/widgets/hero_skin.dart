@@ -36,15 +36,18 @@ class HeroSkin extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.network(
-                      heroSkinLevelImage(heroId, skinId, skinChange[index]),
-                      width: 150),
-                  const SizedBox(width: 20),
-                  Text(
-                    "Level ${skinChange[index]} ",
-                    style: const TextStyle(
-                        fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
+                  Column(children: [
+                    Text(
+                      "Level ${skinChange[index]} ",
+                      style: const TextStyle(
+                          fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 10),
+                    Image.network(
+                        heroSkinLevelImage(heroId, skinId, skinChange[index]),
+                        width: 200),
+                    const SizedBox(height: 20),
+                  ])
                 ]),
             separatorBuilder: (context, index) => const SizedBox(height: 20),
           ),

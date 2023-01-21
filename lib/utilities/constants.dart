@@ -4,8 +4,6 @@ import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/tower/towers.dart';
 
-import '/utilities/global_state.dart';
-
 const baseApiUrl = 'https://statsnite.com/api/btd/v3';
 
 const baseImageUrl = 'https://statsnite.com/images/btd';
@@ -23,12 +21,6 @@ List<Widget> pages = [
   ),
   const Heroes(key: PageStorageKey<String>('Heroes')),
   const Bloons(key: PageStorageKey<String>('Bloons')),
-  ...GlobalState.towerTypes.map(
-    (tower) => Towers(
-      key: PageStorageKey<String>(tower),
-      towerType: tower,
-    ),
-  ),
 ];
 
 PageController pageController = PageController();

@@ -1,9 +1,8 @@
+import 'package:btd6wiki/utilities/images_url.dart';
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
 
-import '/models/tower.dart';
-
 import '/utilities/global_state.dart';
-import '/utilities/constants.dart';
 import '/utilities/requests.dart';
 
 import '/presentation/screens/tower/single_tower.dart';
@@ -17,20 +16,11 @@ class Towers extends StatefulWidget {
   State<Towers> createState() => _TowersState();
 }
 
-List<TowerModel> filterTowers() {
-  if (GlobalState.currentTowerType == '') {
-    return GlobalState.towers;
-  } else {
-    return GlobalState.towers
-        .where((tower) => tower.type == GlobalState.currentTowerType)
-        .toList();
-  }
-}
-
 class _TowersState extends State<Towers>
     with AutomaticKeepAliveClientMixin<Towers> {
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       // if tower type is not empty show app bar
       appBar: GlobalState.currentTowerType != ''
@@ -119,30 +109,38 @@ class _TowersState extends State<Towers>
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               ListTile(
-                                mouseCursor: SystemMouseCursors.click,
-                                dense: true,
-                                leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      '$baseImageUrl/towers/${snapshot.data[index].id}/tower.png'),
-                                ),
-                                title: Text(snapshot.data[index].name,
-                                    style: TextStyle(fontSize: titleFontSize)),
-                                subtitle: Text(snapshot.data[index].description,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                    style:
-                                        TextStyle(fontSize: subtitleFontSize)),
-                                onTap: () => getTowerData(
-                                        snapshot.data[index].id)
-                                    .then((value) => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => SingleTower(
-                                                  towerData: value,
-                                                  towerId:
-                                                      snapshot.data[index].id,
-                                                )))),
-                              ),
+                                  mouseCursor: SystemMouseCursors.click,
+                                  dense: true,
+                                  leading: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          towerBaseImage(
+                                              snapshot.data[index].id))),
+                                  title: Text(snapshot.data[index].name,
+                                      style:
+                                          TextStyle(fontSize: titleFontSize)),
+                                  subtitle: Text(
+                                      snapshot.data[index].description,
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 3,
+                                      style: TextStyle(
+                                          fontSize: subtitleFontSize)),
+                                  onTap: () => {
+                                        if (!GlobalState.isLoading)
+                                          {
+                                            getTowerData(
+                                                    snapshot.data[index].id)
+                                                .then((value) => Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SingleTower(
+                                                              towerData: value,
+                                                              towerId: snapshot
+                                                                  .data[index]
+                                                                  .id,
+                                                            )))),
+                                          }
+                                      }),
                             ],
                           ),
                         ),

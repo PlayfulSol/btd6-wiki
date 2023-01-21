@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/images_url.dart';
 import 'package:flutter/material.dart';
 
 import '/utilities/global_state.dart';
@@ -72,35 +73,42 @@ class _HeroesState extends State<Heroes> {
                             mainAxisSize: MainAxisSize.max,
                             children: <Widget>[
                               ListTile(
-                                dense: true,
-                                mouseCursor: SystemMouseCursors.click,
-                                leading: CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      '$baseImageUrl/heroes/${snapshot.data[index].id}/hero.png'),
-                                ),
-                                title: Text(snapshot.data[index].name,
-                                    style: TextStyle(fontSize: titleFontSize)),
-                                subtitle: Text(
-                                  snapshot.data[index].description.length > 70
-                                      ? snapshot.data[index].description
-                                              .substring(0, 70) +
-                                          "..."
-                                      : snapshot.data[index].description,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 3,
-                                  style: TextStyle(fontSize: subtitleFontSize),
-                                ),
-                                onTap: () => getHeroData(
-                                        snapshot.data[index].id)
-                                    .then((value) => Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => SingleHero(
-                                                  singleHero: value,
-                                                  heroId:
-                                                      snapshot.data[index].id,
-                                                )))),
-                              ),
+                                  dense: true,
+                                  mouseCursor: SystemMouseCursors.click,
+                                  leading: CircleAvatar(
+                                      backgroundImage: NetworkImage(
+                                          heroBaseImage(
+                                              snapshot.data[index].id))),
+                                  title: Text(snapshot.data[index].name,
+                                      style:
+                                          TextStyle(fontSize: titleFontSize)),
+                                  subtitle: Text(
+                                    snapshot.data[index].description.length > 70
+                                        ? snapshot.data[index].description
+                                                .substring(0, 70) +
+                                            "..."
+                                        : snapshot.data[index].description,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 3,
+                                    style:
+                                        TextStyle(fontSize: subtitleFontSize),
+                                  ),
+                                  onTap: () => {
+                                        if (!GlobalState.isLoading)
+                                          {
+                                            getHeroData(snapshot.data[index].id)
+                                                .then((value) => Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            SingleHero(
+                                                              singleHero: value,
+                                                              heroId: snapshot
+                                                                  .data[index]
+                                                                  .id,
+                                                            )))),
+                                          }
+                                      }),
                             ],
                           ),
                         ),

@@ -12,11 +12,16 @@ class DrawerContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
         child: ListView(children: <Widget>[
-      const DrawerHeader(
-        child: Text('Bloons TD 6 Wiki By Asaf Hadad'),
-      ),
+      const SizedBox(
+          height: 70,
+          child: DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.teal,
+              ),
+              child: Text('Bloons TD 6 Wiki',
+                  style: TextStyle(color: Colors.white, fontSize: 28)))),
       ExpansionTile(
-        title: Text(titles[0]),
+        title: Text(titles[0], style: const TextStyle(color: Colors.teal)),
         children: [
           ListView.builder(
             itemCount: GlobalState.towerTypes.length,
@@ -25,15 +30,18 @@ class DrawerContent extends StatelessWidget {
               return ListTile(
                 title: Text(GlobalState.towerTypes[index]),
                 onTap: () {
-                  Navigator.pop(context);
-                  GlobalState.currentTowerType = GlobalState.towerTypes[index];
-                  GlobalState.currentTitle = GlobalState.towerTypes[index];
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Towers(
-                                towerType: GlobalState.towerTypes[index],
-                              )));
+                  if (!GlobalState.isLoading) {
+                    Navigator.pop(context);
+                    GlobalState.currentTowerType =
+                        GlobalState.towerTypes[index];
+                    GlobalState.currentTitle = GlobalState.towerTypes[index];
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Towers(
+                                  towerType: GlobalState.towerTypes[index],
+                                )));
+                  }
                 },
               );
             },
@@ -43,30 +51,34 @@ class DrawerContent extends StatelessWidget {
       ListTile(
           title: Text(titles[1]),
           onTap: () {
-            Navigator.pop(context);
-            GlobalState.currentPageIndex = 1;
-            if (GlobalState.currentTowerType != '') {
-              GlobalState.currentTowerType = '';
+            if (!GlobalState.isLoading) {
+              Navigator.pop(context);
+              GlobalState.currentPageIndex = 1;
+              if (GlobalState.currentTowerType != '') {
+                GlobalState.currentTowerType = '';
+              }
+              GlobalState.currentTitle = titles[1];
+              pageController.animateToPage(
+                GlobalState.currentPageIndex,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+              );
             }
-            GlobalState.currentTitle = titles[1];
-            pageController.animateToPage(
-              GlobalState.currentPageIndex,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeInOut,
-            );
           }),
       ListTile(
           title: Text(titles[2]),
           onTap: () {
-            Navigator.pop(context);
-            GlobalState.currentPageIndex = 2;
-            GlobalState.currentTowerType = '';
-            GlobalState.currentTitle = titles[2];
-            pageController.animateToPage(
-              GlobalState.currentPageIndex,
-              duration: const Duration(milliseconds: 500),
-              curve: Curves.easeInOut,
-            );
+            if (!GlobalState.isLoading) {
+              Navigator.pop(context);
+              GlobalState.currentPageIndex = 2;
+              GlobalState.currentTowerType = '';
+              GlobalState.currentTitle = titles[2];
+              pageController.animateToPage(
+                GlobalState.currentPageIndex,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+              );
+            }
           }),
     ]));
   }
