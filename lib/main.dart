@@ -102,13 +102,15 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         currentIndex: GlobalState.currentPageIndex,
         onTap: (index) {
-          setState(() {
-            GlobalState.currentPageIndex = index;
-            GlobalState.currentTowerType = '';
-          });
-          pageController.animateToPage(index,
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut);
+          if (!GlobalState.isLoading) {
+            setState(() {
+              GlobalState.currentPageIndex = index;
+              GlobalState.currentTowerType = '';
+            });
+            pageController.animateToPage(index,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut);
+          }
         },
       ),
     );
