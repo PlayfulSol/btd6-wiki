@@ -37,7 +37,7 @@ class _BloonsState extends State<Bloons> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       childAspectRatio: 1,
-                      mainAxisExtent: 100,
+                      mainAxisExtent: 80,
                     ),
                     shrinkWrap: true,
                     primary: false,
@@ -91,42 +91,35 @@ class _BloonsState extends State<Bloons> {
                     itemCount: snapshot.data.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                      crossAxisCount: 1,
                       childAspectRatio: 1,
-                      mainAxisExtent: 100,
+                      mainAxisExtent: 80,
                     ),
                     shrinkWrap: true,
                     primary: false,
                     itemBuilder: (context, index) {
-                      return Center(
-                        child: Card(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              ListTile(
-                                mouseCursor: SystemMouseCursors.click,
-                                leading: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  backgroundImage: NetworkImage(
-                                      bloonImage(snapshot.data[index].id)),
-                                ),
-                                title: Text(snapshot.data[index].name,
-                                    style: const TextStyle(fontSize: 14)),
-                                subtitle: Text(snapshot.data[index].type),
-                                onTap: () {
-                                  if (!GlobalState.isLoading) {
-                                    getBloonData(snapshot.data[index].id)
-                                        .then((value) => Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => BossBloon(
-                                                      bloon: value,
-                                                    ))));
-                                  }
-                                },
-                              ),
-                            ],
+                      return Card(
+                        child: ListTile(
+                          mouseCursor: SystemMouseCursors.click,
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            backgroundImage: NetworkImage(
+                                bloonImage(snapshot.data[index].id)),
                           ),
+                          title: Text(snapshot.data[index].name,
+                              style: const TextStyle(fontSize: 14)),
+                          subtitle: Text(snapshot.data[index].type),
+                          onTap: () {
+                            if (!GlobalState.isLoading) {
+                              getBloonData(snapshot.data[index].id)
+                                  .then((value) => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => BossBloon(
+                                                bloon: value,
+                                              ))));
+                            }
+                          },
                         ),
                       );
                     });
