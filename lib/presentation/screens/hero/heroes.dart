@@ -33,23 +33,18 @@ class _HeroesState extends State<Heroes> {
                 double titleFontSize = 15;
                 double subtitleFontSize = 13;
 
-                if (constraints.maxWidth < 345) {
+                if (constraints.maxWidth < 450) {
                   crossAxisCount = 1;
-                  childAspectRatio = 2;
-                  cardHeight = 80;
-                } else if (constraints.maxWidth < 450) {
-                  crossAxisCount = 2;
-                  childAspectRatio = 1.5;
                   titleFontSize = 18;
-                  subtitleFontSize = 14;
-                  cardHeight = 120;
+                  subtitleFontSize = 15;
+                  cardHeight = 100;
                 } else if (constraints.maxWidth < 1200) {
-                  crossAxisCount = 3;
+                  crossAxisCount = 2;
                   childAspectRatio = 1;
                   titleFontSize = 20;
                   subtitleFontSize = 16;
                 } else {
-                  crossAxisCount = 4;
+                  crossAxisCount = 3;
                   childAspectRatio = 0.75;
                   titleFontSize = 24;
                   subtitleFontSize = 18;
@@ -66,53 +61,41 @@ class _HeroesState extends State<Heroes> {
                     ),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Center(
-                        child: Card(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              ListTile(
-                                  dense: true,
-                                  mouseCursor: SystemMouseCursors.click,
-                                  leading: CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      backgroundImage: NetworkImage(
-                                          heroBaseImage(
-                                              snapshot.data[index].id))),
-                                  title: Text(snapshot.data[index].name,
-                                      style:
-                                          TextStyle(fontSize: titleFontSize)),
-                                  subtitle: Text(
-                                    snapshot.data[index].description.length > 70
-                                        ? snapshot.data[index].description
-                                                .substring(0, 70) +
-                                            "..."
-                                        : snapshot.data[index].description,
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
-                                    style:
-                                        TextStyle(fontSize: subtitleFontSize),
-                                  ),
-                                  onTap: () => {
-                                        if (!GlobalState.isLoading)
-                                          {
-                                            getHeroData(snapshot.data[index].id)
-                                                .then((value) => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            SingleHero(
-                                                              singleHero: value,
-                                                              heroId: snapshot
-                                                                  .data[index]
-                                                                  .id,
-                                                            )))),
-                                          }
-                                      }),
-                            ],
-                          ),
-                        ),
-                      );
+                      return Card(
+                          child: ListTile(
+                              dense: false,
+                              isThreeLine: true,
+                              mouseCursor: SystemMouseCursors.click,
+                              leading: SizedBox(
+                                height: double.infinity,
+                                child: CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    child: Image.network(heroBaseImage(
+                                        snapshot.data[index].id))),
+                              ),
+                              title: Text(snapshot.data[index].name,
+                                  style: TextStyle(fontSize: titleFontSize)),
+                              subtitle: Text(
+                                snapshot.data[index].description,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                style: TextStyle(fontSize: subtitleFontSize),
+                              ),
+                              onTap: () => {
+                                    if (!GlobalState.isLoading)
+                                      {
+                                        getHeroData(snapshot.data[index].id)
+                                            .then((value) => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        SingleHero(
+                                                          singleHero: value,
+                                                          heroId: snapshot
+                                                              .data[index].id,
+                                                        )))),
+                                      }
+                                  }));
                     });
               });
             }

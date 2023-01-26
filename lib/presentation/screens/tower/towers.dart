@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 import '/utilities/images_url.dart';
@@ -70,23 +71,18 @@ class _TowersState extends State<Towers>
                 double titleFontSize = 15;
                 double subtitleFontSize = 13;
 
-                if (constraints.maxWidth < 345) {
+                if (constraints.maxWidth < 450) {
                   crossAxisCount = 1;
-                  childAspectRatio = 2;
-                  cardHeight = 80;
-                } else if (constraints.maxWidth < 450) {
-                  crossAxisCount = 2;
-                  childAspectRatio = 1.5;
-                  titleFontSize = 16;
-                  subtitleFontSize = 14;
-                  cardHeight = 120;
+                  titleFontSize = 18;
+                  subtitleFontSize = 15;
+                  cardHeight = 100;
                 } else if (constraints.maxWidth < 1200) {
-                  crossAxisCount = 3;
+                  crossAxisCount = 2;
                   childAspectRatio = 1;
                   titleFontSize = 20;
                   subtitleFontSize = 16;
                 } else {
-                  crossAxisCount = 4;
+                  crossAxisCount = 3;
                   childAspectRatio = 0.75;
                   titleFontSize = 24;
                   subtitleFontSize = 18;
@@ -103,47 +99,42 @@ class _TowersState extends State<Towers>
                     ),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return Center(
-                        child: Card(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: <Widget>[
-                              ListTile(
-                                  mouseCursor: SystemMouseCursors.click,
-                                  dense: true,
-                                  leading: CircleAvatar(
-                                      backgroundColor: Colors.transparent,
-                                      child: Image.network(towerBaseImage(
-                                          snapshot.data[index].id))),
-                                  title: Text(snapshot.data[index].name,
-                                      style:
-                                          TextStyle(fontSize: titleFontSize)),
-                                  subtitle: Text(
-                                      snapshot.data[index].description,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 3,
-                                      style: TextStyle(
-                                          fontSize: subtitleFontSize)),
-                                  onTap: () => {
-                                        if (!GlobalState.isLoading)
-                                          {
-                                            getTowerData(
-                                                    snapshot.data[index].id)
-                                                .then((value) => Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            SingleTower(
-                                                              towerData: value,
-                                                              towerId: snapshot
-                                                                  .data[index]
-                                                                  .id,
-                                                            )))),
-                                          }
-                                      }),
-                            ],
-                          ),
-                        ),
+                      return Card(
+                        child: ListTile(
+                            mouseCursor: SystemMouseCursors.click,
+                            dense: false,
+                            isThreeLine: true,
+                            leading: SizedBox(
+                              height: double.infinity,
+                              child: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  child: Image.network(
+                                      towerBaseImage(snapshot.data[index].id))),
+                            ),
+                            title: AutoSizeText(
+                              snapshot.data[index].name,
+                              maxLines: 1,
+                              style: TextStyle(fontSize: titleFontSize),
+                            ),
+                            subtitle: Text(snapshot.data[index].description,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 3,
+                                style: TextStyle(fontSize: subtitleFontSize)),
+                            onTap: () => {
+                                  if (!GlobalState.isLoading)
+                                    {
+                                      getTowerData(snapshot.data[index].id)
+                                          .then((value) => Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SingleTower(
+                                                        towerData: value,
+                                                        towerId: snapshot
+                                                            .data[index].id,
+                                                      )))),
+                                    }
+                                }),
                       );
                     });
               });
