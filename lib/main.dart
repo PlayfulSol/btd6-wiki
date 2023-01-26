@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
-import '/presentation/widgets/drawer_content.dart';
 import '/presentation/widgets/loader.dart';
+import '/presentation/screens/tower/towers.dart';
 
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
@@ -43,6 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final PageStorageBucket bucket = PageStorageBucket();
 
+  PageController pageController = PageController();
+
   setLoading() async {
     setState(() {
       GlobalState.currentTitle = 'BTD6 wiki';
@@ -76,7 +79,78 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(child: DrawerContent()),
+      drawer: Drawer(
+          child: Drawer(
+              child: ListView(children: <Widget>[
+        const SizedBox(
+            height: 70,
+            child: DrawerHeader(
+                decoration: BoxDecoration(
+                  color: Colors.teal,
+                ),
+                child: Text('Bloons TD 6 Wiki',
+                    style: TextStyle(color: Colors.white, fontSize: 28)))),
+        ExpansionTile(
+          title: Text(titles[0], style: TextStyle(color: Colors.teal)),
+          children: [
+            ListView.builder(
+              itemCount: GlobalState.towerTypes.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(GlobalState.towerTypes[index]),
+                  onTap: () {
+                    if (!GlobalState.isLoading) {
+                      Navigator.pop(context);
+                      GlobalState.currentTowerType =
+                          GlobalState.towerTypes[index];
+                      GlobalState.currentTitle = GlobalState.towerTypes[index];
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Towers(
+                                    towerType: GlobalState.towerTypes[index],
+                                  )));
+                    }
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        ListTile(
+            title: Text(titles[1]),
+            onTap: () {
+              if (!GlobalState.isLoading) {
+                Navigator.pop(context);
+                GlobalState.currentPageIndex = 1;
+                if (GlobalState.currentTowerType != '') {
+                  GlobalState.currentTowerType = '';
+                }
+                GlobalState.currentTitle = titles[1];
+                pageController.animateToPage(
+                  GlobalState.currentPageIndex,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              }
+            }),
+        ListTile(
+            title: Text(titles[2]),
+            onTap: () {
+              if (!GlobalState.isLoading) {
+                Navigator.pop(context);
+                GlobalState.currentPageIndex = 2;
+                GlobalState.currentTowerType = '';
+                GlobalState.currentTitle = titles[2];
+                pageController.animateToPage(
+                  GlobalState.currentPageIndex,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut,
+                );
+              }
+            }),
+      ]))),
       appBar: AppBar(
         title: Text(getAppTitle()),
       ),
@@ -84,46 +158,39 @@ class _MyHomePageState extends State<MyHomePage> {
           ? const Loader()
           : PageView(
               controller: pageController,
-              // physics: const BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
+              onPageChanged: (index) {
+                setState(() => GlobalState.currentPageIndex = index);
+              },
               children: pages,
             ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black54,
-                blurRadius: 15.0,
-                offset: Offset(0.0, 0.75))
-          ],
-        ),
-        child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.cell_tower),
-              label: titles[0],
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.person),
-              label: titles[1],
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.nature),
-              label: titles[2],
-            ),
-          ],
-          currentIndex: GlobalState.currentPageIndex,
-          onTap: (index) {
-            if (!GlobalState.isLoading) {
-              setState(() {
-                GlobalState.currentPageIndex = index;
-                GlobalState.currentTowerType = '';
-              });
+      bottomNavigationBar: BottomNavyBar(
+        showElevation: true,
+        selectedIndex: GlobalState.currentPageIndex,
+        itemCornerRadius: 24,
+        curve: Curves.easeIn,
+        items: [
+          BottomNavyBarItem(
+            icon: const Icon(Icons.cell_tower),
+            title: Text(titles[0]),
+          ),
+          BottomNavyBarItem(
+            icon: const Icon(Icons.person),
+            title: Text(titles[1]),
+          ),
+          BottomNavyBarItem(
+            icon: const Icon(Icons.nature),
+            title: Text(titles[2]),
+          ),
+        ],
+        onItemSelected: (index) => setState(() => {
+              GlobalState.currentPageIndex = index,
+              GlobalState.currentTowerType = '',
+              GlobalState.currentTitle = titles[index],
               pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut);
-            }
-          },
-        ),
+                  curve: Curves.ease)
+            }),
       ),
     );
   }

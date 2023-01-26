@@ -22,5 +22,3 @@ List<Widget> pages = [
   const Heroes(key: PageStorageKey<String>('Heroes')),
   const Bloons(key: PageStorageKey<String>('Bloons')),
 ];
-
-PageController pageController = PageController();

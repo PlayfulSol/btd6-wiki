@@ -98,6 +98,7 @@ class _TowersState extends State<Towers>
                       mainAxisExtent: cardHeight,
                     ),
                     shrinkWrap: true,
+                    primary: false,
                     itemBuilder: (context, index) {
                       return Card(
                         child: ListTile(
