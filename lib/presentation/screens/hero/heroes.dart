@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import '/utilities/global_state.dart';
 import '/utilities/requests.dart';
@@ -73,12 +74,14 @@ class _HeroesState extends State<Heroes> {
                                     child: Image.network(heroBaseImage(
                                         snapshot.data[index].id))),
                               ),
-                              title: Text(snapshot.data[index].name,
+                              title: AutoSizeText(snapshot.data[index].name,
+                                  wrapWords: false,
                                   style: TextStyle(fontSize: titleFontSize)),
-                              subtitle: Text(
+                              subtitle: AutoSizeText(
                                 snapshot.data[index].description,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
+                                wrapWords: false,
                                 style: TextStyle(fontSize: subtitleFontSize),
                               ),
                               onTap: () => {

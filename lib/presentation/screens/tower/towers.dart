@@ -116,7 +116,9 @@ class _TowersState extends State<Towers>
                               maxLines: 1,
                               style: TextStyle(fontSize: titleFontSize),
                             ),
-                            subtitle: Text(snapshot.data[index].description,
+                            subtitle: AutoSizeText(
+                                snapshot.data[index].description,
+                                wrapWords: false,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
                                 style: TextStyle(fontSize: subtitleFontSize)),
