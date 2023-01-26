@@ -1,4 +1,4 @@
-package com.example.btd6wiki
+package asafhadad.btd6wiki
 
 import io.flutter.embedding.android.FlutterActivity
 

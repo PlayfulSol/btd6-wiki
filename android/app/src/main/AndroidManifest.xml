@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.btd6wiki">
+    package="asafhadad.btd6wiki">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="btd6wiki"
+        android:label="BTD6 Wiki"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

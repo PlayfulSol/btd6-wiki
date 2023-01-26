@@ -75,6 +75,7 @@ class _HeroesState extends State<Heroes> {
                                   dense: true,
                                   mouseCursor: SystemMouseCursors.click,
                                   leading: CircleAvatar(
+                                      backgroundColor: Colors.transparent,
                                       backgroundImage: NetworkImage(
                                           heroBaseImage(
                                               snapshot.data[index].id))),

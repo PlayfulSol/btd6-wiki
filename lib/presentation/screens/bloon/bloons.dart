@@ -50,6 +50,7 @@ class _BloonsState extends State<Bloons> {
                               ListTile(
                                 mouseCursor: SystemMouseCursors.click,
                                 leading: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
                                   backgroundImage: NetworkImage(
                                       bloonImage(snapshot.data[index].id)),
                                 ),
@@ -105,6 +106,7 @@ class _BloonsState extends State<Bloons> {
                               ListTile(
                                 mouseCursor: SystemMouseCursors.click,
                                 leading: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
                                   backgroundImage: NetworkImage(
                                       bloonImage(snapshot.data[index].id)),
                                 ),

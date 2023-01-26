@@ -1,5 +1,5 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 
 import '/presentation/widgets/drawer_content.dart';
 import '/presentation/widgets/loader.dart';
@@ -87,33 +87,43 @@ class _MyHomePageState extends State<MyHomePage> {
               // physics: const BouncingScrollPhysics(),
               children: pages,
             ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.cell_tower),
-            label: titles[0],
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person),
-            label: titles[1],
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.nature),
-            label: titles[2],
-          ),
-        ],
-        currentIndex: GlobalState.currentPageIndex,
-        onTap: (index) {
-          if (!GlobalState.isLoading) {
-            setState(() {
-              GlobalState.currentPageIndex = index;
-              GlobalState.currentTowerType = '';
-            });
-            pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut);
-          }
-        },
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+                color: Colors.black54,
+                blurRadius: 15.0,
+                offset: Offset(0.0, 0.75))
+          ],
+        ),
+        child: BottomNavigationBar(
+          items: [
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.cell_tower),
+              label: titles[0],
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.person),
+              label: titles[1],
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.nature),
+              label: titles[2],
+            ),
+          ],
+          currentIndex: GlobalState.currentPageIndex,
+          onTap: (index) {
+            if (!GlobalState.isLoading) {
+              setState(() {
+                GlobalState.currentPageIndex = index;
+                GlobalState.currentTowerType = '';
+              });
+              pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut);
+            }
+          },
+        ),
       ),
     );
   }

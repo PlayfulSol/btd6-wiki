@@ -112,9 +112,9 @@ class _TowersState extends State<Towers>
                                   mouseCursor: SystemMouseCursors.click,
                                   dense: true,
                                   leading: CircleAvatar(
-                                      backgroundImage: NetworkImage(
-                                          towerBaseImage(
-                                              snapshot.data[index].id))),
+                                      backgroundColor: Colors.transparent,
+                                      child: Image.network(towerBaseImage(
+                                          snapshot.data[index].id))),
                                   title: Text(snapshot.data[index].name,
                                       style:
                                           TextStyle(fontSize: titleFontSize)),

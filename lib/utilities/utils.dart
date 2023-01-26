@@ -1,10 +1,9 @@
-import 'package:btd6wiki/models/tower.dart';
-
 import '/utilities/global_state.dart';
 
 import '/models/bloons/bloon_hierarchy.dart';
 import '/models/hero.dart';
 import '/models/common.dart';
+import '/models/tower.dart';
 
 String formatBigNumber(int number) {
   if (number < 1000) {
