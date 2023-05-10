@@ -92,25 +92,25 @@ class Special {
 }
 
 class Levels {
-  late final int level;
+  late final String name;
   late final String description;
-  late final int xp;
-  late final Rounds rounds;
-  late final List<String> effects;
+  late final String unlock;
+  // late final Rounds rounds;
+  late final String effect;
 
   Levels(
-      {required this.level,
+      {required this.name,
       required this.description,
-      required this.xp,
-      required this.rounds,
-      required this.effects});
+      required this.unlock,
+      // required this.rounds,
+      required this.effect});
 
   Levels.fromJson(Map<String, dynamic> json) {
-    level = json['level'];
+    name = json['name'];
     description = json['description'];
-    xp = json['xp'];
-    rounds = Rounds.fromJson(json['rounds']);
-    effects = json['effects'].cast<String>();
+    unlock = json['unlock'];
+    // rounds = Rounds.fromJson(json['rounds']);
+    effect = json['effect'];
   }
 }
 

@@ -17,7 +17,9 @@ class SingleHero extends StatelessWidget {
 
   HeroLevel _buildHeroLevel(BuildContext context, Levels level) {
     var shouldShowLevelImage = false;
-    if (singleHero.skinChange.contains(level.level)) {
+    // get last charecter from level name and parse to int
+    var levelNumber = int.parse(level.name.substring(level.name.length - 1));
+    if (singleHero.skinChange.contains(levelNumber)) {
       shouldShowLevelImage = true;
     }
     return HeroLevel(

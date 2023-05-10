@@ -9,7 +9,7 @@ import '/presentation/screens/tower/towers.dart';
 const baseImageUrl = 'https://statsnite.com/images/btd';
 
 // NEW API
-const baseApiUrl = 'http://172.28.224.1:3000';
+const baseApiUrl = 'http://192.168.1.125:3000';
 
 const List<String> titles = [
   'Towers',
