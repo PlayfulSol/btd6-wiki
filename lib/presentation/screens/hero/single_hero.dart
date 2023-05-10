@@ -10,7 +10,7 @@ import '/presentation/widgets/hero_level.dart';
 import '/presentation/screens/hero/hero_skins.dart';
 
 class SingleHero extends StatelessWidget {
-  final HeroModel singleHero;
+  final SingleHeroModel singleHero;
   final String heroId;
 
   const SingleHero({super.key, required this.singleHero, required this.heroId});

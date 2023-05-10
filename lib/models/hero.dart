@@ -4,13 +4,29 @@ class HeroModel {
   late final String id;
   late final String name;
   late final String description;
+  late final String imageURL;
+
+  HeroModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    description = json['inGameDesc'];
+    imageURL = json['image'];
+  }
+
+  HeroModel(id, name, description, type);
+}
+
+class SingleHeroModel {
+  late final String id;
+  late final String name;
+  late final String description;
   late final List<int> skinChange;
   late final List<Skins> skins;
   late final Cost cost;
   late final Stats stats;
   late final String levelSpeed;
   late final List<Levels> levels;
-  HeroModel(
+  SingleHeroModel(
       {required this.id,
       required this.name,
       required this.description,
@@ -21,10 +37,10 @@ class HeroModel {
       required this.levelSpeed,
       required this.levels});
 
-  HeroModel.fromJson(Map<String, dynamic> json) {
+  SingleHeroModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    description = json['description'];
+    description = json['inGameDesc'];
     skinChange = json['skinChange'].cast<int>();
     if (json['skins'] != []) {
       skins = <Skins>[];

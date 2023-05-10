@@ -6,7 +6,7 @@ import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 
 class HeroLevel extends StatelessWidget {
-  final HeroModel singleHero;
+  final SingleHeroModel singleHero;
   final String heroId;
   final Levels level;
   final bool shouldShowLevelImage;
