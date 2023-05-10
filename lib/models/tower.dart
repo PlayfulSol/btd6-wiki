@@ -28,7 +28,7 @@ class SingleTowerModel {
   SingleTowerModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    description = json['description'];
+    description = json['inGameDesc'];
     type = json['type'];
     cost = Cost.fromJson(json['cost']);
     stats = Stats.fromJson(json['stats']);
