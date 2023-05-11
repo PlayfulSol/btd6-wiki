@@ -112,7 +112,7 @@ class _BloonsState extends State<Bloons> {
                         subtitle: Text(snapshot.data[index].type),
                         onTap: () {
                           if (!GlobalState.isLoading) {
-                            getBloonData(snapshot.data[index].id)
+                            getBossData(snapshot.data[index].id)
                                 .then((value) => Navigator.push(
                                     context,
                                     MaterialPageRoute(

@@ -39,22 +39,45 @@ Future<void> getBloons() async {
   GlobalState.bloons = bloons;
 }
 
+// Future<dynamic> getBloonData(String id) async {
+//   GlobalState.isLoading = true;
+//   var data = await http.get(Uri.parse("$baseApiUrl/bloon/$id"));
+//
+//   var jsonData = json.decode(data.body);
+//
+//   GlobalState.isLoading = false;
+//
+//   var bloonData = SingleBloonModel.fromJson(jsonData);
+//   GlobalState.currentTitle = bloonData.name;
+//   return bloonData;
+// }
+
 Future<dynamic> getBloonData(String id) async {
   GlobalState.isLoading = true;
-  var data = await http.get(Uri.parse("$baseApiUrl/bloon/$id"));
+  try {
+    var data = await http.get(Uri.parse("$baseApiUrl/bloon/$id"));
+    var jsonData = json.decode(data.body);
+    GlobalState.isLoading = false;
+    var bloonData = SingleBloonModel.fromJson(jsonData);
+    GlobalState.currentTitle = bloonData.name;
+    return bloonData;
+  } catch (e) {
+    print("Error getting bloon data: $e");
+    return null;
+  }
+}
+
+Future<dynamic> getBossData(String id) async {
+  GlobalState.isLoading = true;
+  var data = await http.get(Uri.parse("$baseApiUrl/boss/$id"));
 
   var jsonData = json.decode(data.body);
 
   GlobalState.isLoading = false;
-  if (jsonData['type'] == 'boss') {
-    var bossData = BossBloonModel.fromJson(jsonData);
-    GlobalState.currentTitle = bossData.name;
-    return bossData;
-  } else {
-    var bloonData = SingleBloonModel.fromJson(jsonData);
-    GlobalState.currentTitle = bloonData.name;
-    return bloonData;
-  }
+
+  var bossData = BossBloonModel.fromJson(jsonData);
+  GlobalState.currentTitle = bossData.name;
+  return bossData;
 }
 
 // Heroes
