@@ -57,7 +57,7 @@ class SingleBloon extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: Colors.teal)),
-                    children: // should be a grid with multiple items in a row of coumns with the image and text
+                    children: // should be a grid with multiple items in a row of columns with the image and text
                         [
                       ListTile(
                         title: const Text("Camo"),
