@@ -10,14 +10,13 @@ class Stats {
       required pierce,
       required attackSpeed,
       required range,
-      required type});
+      type});
 
   Stats.fromJson(Map<String, dynamic> json) {
     damage = json['damage'];
     pierce = json['pierce'];
     attackSpeed = json['attackSpeed'];
     range = json['range'];
-    type = json['type'];
   }
 }
 
