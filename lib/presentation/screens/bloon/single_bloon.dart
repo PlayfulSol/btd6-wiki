@@ -46,34 +46,29 @@ class SingleBloon extends StatelessWidget {
                     Text("Initial Round ABR: ${bloon.initialRoundABR}"),
                     const SizedBox(height: 10)
                   ],
-                  // if (bloon.immunities.isNotEmpty) ...[
-                  //   Text("Immunities: ${bloon.immunities.join(", ")}"),
-                  //   const SizedBox(height: 10)
-                  // ],
-                  if (bloon.variants.isNotEmpty) const SizedBox(height: 10),
-                  ExpansionTile(
-                    title: const Text("Variants",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.teal)),
-                    children: // should be a grid with multiple items in a row of columns with the image and text
-                        [
-                      ListTile(
-                        title: const Text("Camo"),
-                        subtitle: Text("${bloon.variants['camo']}"),
-                      ),
-                      ListTile(
-                        title: const Text("Regrow"),
-                        subtitle: Text("${bloon.variants['regrow']}"),
-                      ),
-                      ListTile(
-                        title: const Text("Fortified"),
-                        subtitle: Text("${bloon.variants['fortified']}"),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
+                  if (bloon.immunities.isNotEmpty) ...[
+                    Text("Immunities: ${bloon.immunities.join(", ")}"),
+                    const SizedBox(height: 10)
+                  ],
+                  if (bloon.variants.isNotEmpty) ...[
+                    const SizedBox(height: 10),
+                    ExpansionTile(
+                        title: const Text("Variants",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.teal)),
+                        children: // should be a grid with multiple items in a row of coumns with the image and text
+                            bloon.variants
+                                .map((e) => ListTile(
+                                      title: Text(e),
+                                      leading: Image.network(
+                                          bloonVariantImage(bloon.id, e),
+                                          width: 50),
+                                    ))
+                                .toList()),
+                    const SizedBox(height: 10)
+                  ],
                   if (bloon.children.isNotEmpty) ...[
                     const Text("Children:",
                         textAlign: TextAlign.center,

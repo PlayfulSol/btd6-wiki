@@ -12,31 +12,29 @@ import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 
 // Bloons
-Future<void> getBosses() async {
-  var data = await http.get(Uri.parse("$baseApiUrl/bosses"));
-  var jsonData = json.decode(data.body);
-
-  List<BasicBloonModel> bosses = [];
-  for (var b in jsonData) {
-    BasicBloonModel boss = BasicBloonModel.fromJson(b);
-    bosses.add(boss);
-  }
-
-  GlobalState.bosses = bosses;
-}
-
 Future<void> getBloons() async {
   var data = await http.get(Uri.parse("$baseApiUrl/bloons"));
+
   var jsonData = json.decode(data.body);
 
   List<BasicBloonModel> bloons = [];
 
+  List<BasicBloonModel> bosses = [];
+
   for (var b in jsonData) {
-    BasicBloonModel bloon = BasicBloonModel.fromJson(b);
-    bloons.add(bloon);
+    if (b['type'] == 'boss') {
+      BasicBloonModel boss = BasicBloonModel.fromJson(b);
+
+      bosses.add(boss);
+    } else {
+      BasicBloonModel bloon = BasicBloonModel.fromJson(b);
+
+      bloons.add(bloon);
+    }
   }
 
   GlobalState.bloons = bloons;
+  GlobalState.bosses = bosses;
 }
 
 Future<dynamic> getBloonData(String id) async {
@@ -46,23 +44,15 @@ Future<dynamic> getBloonData(String id) async {
   var jsonData = json.decode(data.body);
 
   GlobalState.isLoading = false;
-
-  var bloonData = SingleBloonModel.fromJson(jsonData);
-  GlobalState.currentTitle = bloonData.name;
-  return bloonData;
-}
-
-Future<dynamic> getBossData(String id) async {
-  GlobalState.isLoading = true;
-  var data = await http.get(Uri.parse("$baseApiUrl/boss/$id"));
-
-  var jsonData = json.decode(data.body);
-
-  GlobalState.isLoading = false;
-
-  var bossData = BossBloonModel.fromJson(jsonData);
-  GlobalState.currentTitle = bossData.name;
-  return bossData;
+  if (jsonData['type'] == 'boss') {
+    var bossData = BossBloonModel.fromJson(jsonData);
+    GlobalState.currentTitle = bossData.name;
+    return bossData;
+  } else {
+    var bloonData = SingleBloonModel.fromJson(jsonData);
+    GlobalState.currentTitle = bloonData.name;
+    return bloonData;
+  }
 }
 
 // Heroes
@@ -82,14 +72,14 @@ Future<void> getHeroes() async {
   GlobalState.heroes = heroes;
 }
 
-Future<SingleHeroModel> getHeroData(towerId) async {
+Future<HeroModel> getHeroData(towerId) async {
   GlobalState.isLoading = true;
 
   var data = (await http.get(Uri.parse("$baseApiUrl/hero/$towerId")));
 
   var jsonData = json.decode(data.body);
 
-  SingleHeroModel heroData = SingleHeroModel.fromJson(jsonData);
+  HeroModel heroData = HeroModel.fromJson(jsonData);
 
   GlobalState.currentTitle = heroData.name;
 

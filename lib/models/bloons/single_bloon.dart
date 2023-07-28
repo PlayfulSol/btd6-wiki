@@ -4,15 +4,15 @@ class SingleBloonModel {
   late final String id;
   late final String name;
   late final String type;
-  late final List<dynamic> rbe;
+  late final int rbe;
   late final dynamic speed;
   dynamic hp;
   int? initialRound;
   int? initialRoundABR;
   late final List<BloonHierarchyModel> children;
   late final List<BloonHierarchyModel> parents;
-  // late final List<String> immunities;
-  late final Map<dynamic, dynamic> variants;
+  late final List<String> immunities;
+  late final List<String> variants;
 
   SingleBloonModel(
       {required this.id,
@@ -25,7 +25,7 @@ class SingleBloonModel {
       this.initialRoundABR,
       required this.children,
       required this.parents,
-      // required this.immunities,
+      required this.immunities,
       required this.variants});
 
   SingleBloonModel.fromJson(Map<String, dynamic> json) {
@@ -49,12 +49,12 @@ class SingleBloonModel {
         parents.add(BloonHierarchyModel.fromJson(v));
       });
     }
-    // if (json['immunities'] != null) {
-    //   immunities = <String>[];
-    //   json['immunities'].forEach((v) {
-    //     immunities.add(v);
-    //   });
-    // }
-    variants = json['variants'];
+    if (json['immunities'] != null) {
+      immunities = <String>[];
+      json['immunities'].forEach((v) {
+        immunities.add(v);
+      });
+    }
+    variants = json['variants'].cast<String>();
   }
 }

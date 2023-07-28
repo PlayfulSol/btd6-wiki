@@ -4,14 +4,9 @@ import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/tower/towers.dart';
 
-import 'package:btd6wiki/utilities/localhost.dart';
+const baseApiUrl = 'https://statsnite.com/api/btd/v3';
 
-// OLD API
-// const baseApiUrl = 'https://statsnite.com/api/btd/v3';
 const baseImageUrl = 'https://statsnite.com/images/btd';
-
-// NEW API
-const baseApiUrl = 'http://$localhost:3000';
 
 const List<String> titles = [
   'Towers',

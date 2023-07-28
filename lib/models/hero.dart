@@ -4,29 +4,13 @@ class HeroModel {
   late final String id;
   late final String name;
   late final String description;
-  late final String imageURL;
-
-  HeroModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    description = json['inGameDesc'];
-    imageURL = json['image'];
-  }
-
-  HeroModel(id, name, description, type);
-}
-
-class SingleHeroModel {
-  late final String id;
-  late final String name;
-  late final String description;
   late final List<int> skinChange;
   late final List<Skins> skins;
   late final Cost cost;
   late final Stats stats;
   late final String levelSpeed;
   late final List<Levels> levels;
-  SingleHeroModel(
+  HeroModel(
       {required this.id,
       required this.name,
       required this.description,
@@ -37,10 +21,10 @@ class SingleHeroModel {
       required this.levelSpeed,
       required this.levels});
 
-  SingleHeroModel.fromJson(Map<String, dynamic> json) {
+  HeroModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    description = json['inGameDesc'];
+    description = json['description'];
     skinChange = json['skinChange'].cast<int>();
     if (json['skins'] != []) {
       skins = <Skins>[];
@@ -92,25 +76,25 @@ class Special {
 }
 
 class Levels {
-  late final String name;
+  late final int level;
   late final String description;
-  late final String unlock;
-  // late final Rounds rounds;
-  late final String effect;
+  late final int xp;
+  late final Rounds rounds;
+  late final List<String> effects;
 
   Levels(
-      {required this.name,
+      {required this.level,
       required this.description,
-      required this.unlock,
-      // required this.rounds,
-      required this.effect});
+      required this.xp,
+      required this.rounds,
+      required this.effects});
 
   Levels.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
+    level = json['level'];
     description = json['description'];
-    unlock = json['unlock'];
-    // rounds = Rounds.fromJson(json['rounds']);
-    effect = json['effect'];
+    xp = json['xp'];
+    rounds = Rounds.fromJson(json['rounds']);
+    effects = json['effects'].cast<String>();
   }
 }
 
