@@ -10,16 +10,14 @@ import '/presentation/widgets/hero_level.dart';
 import '/presentation/screens/hero/hero_skins.dart';
 
 class SingleHero extends StatelessWidget {
-  final SingleHeroModel singleHero;
+  final HeroModel singleHero;
   final String heroId;
 
   const SingleHero({super.key, required this.singleHero, required this.heroId});
 
   HeroLevel _buildHeroLevel(BuildContext context, Levels level) {
     var shouldShowLevelImage = false;
-    // get last charecter from level name and parse to int
-    var levelNumber = int.parse(level.name.substring(level.name.length - 1));
-    if (singleHero.skinChange.contains(levelNumber)) {
+    if (singleHero.skinChange.contains(level.level)) {
       shouldShowLevelImage = true;
     }
     return HeroLevel(

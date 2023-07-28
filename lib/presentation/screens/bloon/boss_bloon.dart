@@ -37,10 +37,10 @@ class BossBloon extends StatelessWidget {
                       style: const TextStyle(
                           fontWeight: FontWeight.bold, fontSize: 18)),
                   const SizedBox(height: 15),
-                  // Text("Immunities: ${bloon.immunities.join(", ")}",
-                  //     style: const TextStyle(
-                  //         fontWeight: FontWeight.bold, fontSize: 18)),
-                  // const SizedBox(height: 15),
+                  Text("Immunities: ${bloon.immunities.join(", ")}",
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 18)),
+                  const SizedBox(height: 15),
                   const Text("RBE (Red Bloon Equivalent):",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
@@ -49,27 +49,27 @@ class BossBloon extends StatelessWidget {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 10),
-                  // Text(bossRbeToString(bloon.rbe.base, bloon.rounds)),
-                  // const SizedBox(height: 10),
+                  Text(bossRbeToString(bloon.rbe.base, bloon.rounds)),
+                  const SizedBox(height: 10),
                   const Text("Elite:",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
                   const SizedBox(height: 10),
-                  // Text(bossRbeToString(bloon.rbe.elite, bloon.rounds)),
-                  // const SizedBox(height: 10),
+                  Text(bossRbeToString(bloon.rbe.elite, bloon.rounds)),
+                  const SizedBox(height: 10),
                   const Text("Base spawned Bloons:",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                   const SizedBox(height: 10),
-                  // BossBloonScatter(
-                  //     scatter: bloon.spawns.base, rounds: bloon.rounds),
-                  // const SizedBox(height: 15),
+                  BossBloonScatter(
+                      scatter: bloon.spawns.base, rounds: bloon.rounds),
+                  const SizedBox(height: 15),
                   const Text("Elite spawned Bloons:",
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                   const SizedBox(height: 10),
-                  // BossBloonScatter(
-                  //     scatter: bloon.spawns.elite, rounds: bloon.rounds),
+                  BossBloonScatter(
+                      scatter: bloon.spawns.elite, rounds: bloon.rounds),
                 ],
               ),
             ),

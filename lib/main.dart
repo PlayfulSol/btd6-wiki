@@ -53,7 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
       getTowers(),
       getHeroes(),
       getBloons(),
-      getBosses(),
     ]).then((_) => setState(() {
           GlobalState.isLoading = false;
           GlobalState.currentTitle = titles[GlobalState.currentPageIndex];

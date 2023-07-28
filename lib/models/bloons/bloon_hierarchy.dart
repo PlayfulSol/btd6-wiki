@@ -1,6 +1,6 @@
 class BloonHierarchyModel {
   late final String id;
-  late final List<dynamic>? type;
+  late final String? type;
   late final int? count;
 
   BloonHierarchyModel(this.id, this.type, this.count);
