@@ -4,9 +4,6 @@ import 'package:btd6wiki/utilities/images_url.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
-import '/utilities/load_json_data.dart';
 
 class Maps extends StatefulWidget {
   const Maps({required Key key}) : super(key: key);
