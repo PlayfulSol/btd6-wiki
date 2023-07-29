@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:btd6wiki/models/map.dart';
 import 'package:btd6wiki/presentation/screens/maps/single_map.dart';
 import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:btd6wiki/utilities/images_url.dart';
@@ -14,7 +15,7 @@ class Maps extends StatefulWidget {
 }
 
 class _MapsState extends State<Maps> {
-  List<dynamic> _jsonData = [];
+  List<MapModel> _jsonData = [];
 
   @override
   void initState() {
@@ -30,7 +31,10 @@ class _MapsState extends State<Maps> {
         await rootBundle.loadString('assets/data/maps/bazaar.json');
     final anotherParsedMap = jsonDecode(anotherMap);
     setState(() {
-      _jsonData = [parsedData, anotherParsedMap];
+      _jsonData = [
+        MapModel.fromJson(parsedData),
+        MapModel.fromJson(anotherParsedMap),
+      ];
     });
 
     // final files = getFilesInFolder('assets/data/maps');
@@ -60,7 +64,7 @@ class _MapsState extends State<Maps> {
         final data = _jsonData[index];
         return GestureDetector(
           onTap: () {
-            GlobalState.currentTitle = data['name'];
+            GlobalState.currentTitle = data.name;
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -76,7 +80,7 @@ class _MapsState extends State<Maps> {
               children: [
                 Expanded(
                   child: Image(
-                    image: AssetImage(mapImage(data['image'])),
+                    image: AssetImage(mapImage(data.image)),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -86,11 +90,11 @@ class _MapsState extends State<Maps> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        data['name'],
+                        data.name,
                         style: const TextStyle(fontSize: 14),
                       ),
                       const SizedBox(height: 5),
-                      Text(data['difficulty'],
+                      Text(data.difficulty,
                           style: const TextStyle(fontSize: 10)),
                     ],
                   ),
