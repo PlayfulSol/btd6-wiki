@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:btd6wiki/presentation/screens/maps/single_map.dart';
+import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:btd6wiki/utilities/images_url.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -59,6 +60,7 @@ class _MapsState extends State<Maps> {
         final data = _jsonData[index];
         return GestureDetector(
           onTap: () {
+            GlobalState.currentTitle = data['name'];
             Navigator.push(
               context,
               MaterialPageRoute(
