@@ -97,33 +97,41 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         child: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.cell_tower),
-              label: titles[0],
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.person),
-              label: titles[1],
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.nature),
-              label: titles[2],
-            ),
-          ],
-          currentIndex: GlobalState.currentPageIndex,
-          onTap: (index) {
-            if (!GlobalState.isLoading) {
+            type: BottomNavigationBarType.fixed,
+            unselectedItemColor: Colors.white.withOpacity(.55),
+            items: [
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.cell_tower),
+                label: titles[0],
+                tooltip: titles[0],
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.person),
+                label: titles[1],
+                tooltip: titles[1],
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.nature),
+                label: titles[2],
+                tooltip: titles[2],
+              ),
+              BottomNavigationBarItem(
+                icon: const Icon(Icons.map_outlined),
+                label: titles[3],
+                tooltip: titles[3],
+              ),
+            ],
+            currentIndex: GlobalState.currentPageIndex,
+            onTap: (index) {
               setState(() {
                 GlobalState.currentPageIndex = index;
                 GlobalState.currentTowerType = '';
+                GlobalState.currentTitle = titles[index];
               });
               pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 300),
                   curve: Curves.easeInOut);
-            }
-          },
-        ),
+            }),
       ),
     );
   }

@@ -14,7 +14,7 @@ packages:
       name: android_intent_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.1.9"
+    version: "4.0.1"
   archive:
     dependency: transitive
     description:
@@ -286,8 +286,7 @@ packages:
     dependency: transitive
     description:
       name: process
-      sha256: "53fd8db9cec1d37b0574e12f07520d582019cb6c44abf5479a01505099a34a09"
-      url: "https://pub.dev"
+      url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
   shared_preferences:
@@ -399,7 +398,7 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.1.10"
+    version: "6.1.11"
   url_launcher_android:
     dependency: transitive
     description:
