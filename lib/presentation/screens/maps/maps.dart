@@ -30,10 +30,26 @@ class _MapsState extends State<Maps> {
     final anotherMap =
         await rootBundle.loadString('assets/data/maps/bazaar.json');
     final anotherParsedMap = jsonDecode(anotherMap);
+    final anotherAnotherMap =
+        await rootBundle.loadString('assets/data/maps/quad.json');
+    final anotherAnotherParsedMap = jsonDecode(anotherAnotherMap);
+    final mapfour =
+        await rootBundle.loadString('assets/data/maps/winter park.json');
+    final mapfourParsed = jsonDecode(mapfour);
+    final mapfive =
+        await rootBundle.loadString('assets/data/maps/spice islands.json');
+    final mapfiveParsed = jsonDecode(mapfive);
+    final mapsix =
+        await rootBundle.loadString('assets/data/maps/off the coast.json');
+    final mapsixParsed = jsonDecode(mapsix);
     setState(() {
       _jsonData = [
         MapModel.fromJson(parsedData),
         MapModel.fromJson(anotherParsedMap),
+        MapModel.fromJson(anotherAnotherParsedMap),
+        MapModel.fromJson(mapfourParsed),
+        MapModel.fromJson(mapfiveParsed),
+        MapModel.fromJson(mapsixParsed),
       ];
     });
 
@@ -53,57 +69,62 @@ class _MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2, // Number of items in a row
-        crossAxisSpacing: 8, // Spacing between items horizontally
-        mainAxisSpacing: 8, // Spacing between items vertically
-      ),
-      itemCount: _jsonData.length,
-      itemBuilder: (context, index) {
-        final data = _jsonData[index];
-        return GestureDetector(
-          onTap: () {
-            GlobalState.currentTitle = data.name;
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => SingleMap(
-                  map: _jsonData[index],
-                ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: _jsonData.isEmpty
+          ? const Center(child: CircularProgressIndicator())
+          : GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, // Number of items in a row
+                crossAxisSpacing: 8, // Spacing between items horizontally
+                mainAxisSpacing: 8, // Spacing between items vertically
               ),
-            );
-          },
-          child: Card(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Expanded(
-                  child: Image(
-                    image: AssetImage(mapImage(data.image)),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        data.name,
-                        style: const TextStyle(fontSize: 14),
+              itemCount: _jsonData.length,
+              itemBuilder: (context, index) {
+                final data = _jsonData[index];
+                return GestureDetector(
+                  onTap: () {
+                    GlobalState.currentTitle = data.name;
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SingleMap(
+                          map: _jsonData[index],
+                        ),
                       ),
-                      const SizedBox(height: 5),
-                      Text(data.difficulty,
-                          style: const TextStyle(fontSize: 10)),
-                    ],
+                    );
+                  },
+                  child: Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: Image(
+                            image: AssetImage(mapImage(data.image)),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                data.name,
+                                style: const TextStyle(fontSize: 14),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(data.difficulty,
+                                  style: const TextStyle(fontSize: 10)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                );
+              },
             ),
-          ),
-        );
-      },
     );
   }
 }
