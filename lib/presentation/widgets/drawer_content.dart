@@ -80,6 +80,21 @@ class DrawerContent extends StatelessWidget {
               );
             }
           }),
+      ListTile(
+          title: Text(titles[3]),
+          onTap: () {
+            if (!GlobalState.isLoading) {
+              Navigator.pop(context);
+              GlobalState.currentPageIndex = 3;
+              GlobalState.currentTowerType = '';
+              GlobalState.currentTitle = titles[3];
+              pageController.animateToPage(
+                GlobalState.currentPageIndex,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.easeInOut,
+              );
+            }
+          }),
     ]));
   }
 }
