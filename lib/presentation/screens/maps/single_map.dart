@@ -20,11 +20,11 @@ class SingleMap extends StatelessWidget {
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Image(
                     image: AssetImage(mapImage(map['image'])),
-                    width: 300,
+                    height: 200,
                   ),
                   const SizedBox(height: 10),
                   Text("Name: ${map['name']}",
