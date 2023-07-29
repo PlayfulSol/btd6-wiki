@@ -97,6 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: Colors.white.withOpacity(.55),
           items: [
             BottomNavigationBarItem(
               icon: const Icon(Icons.cell_tower),
