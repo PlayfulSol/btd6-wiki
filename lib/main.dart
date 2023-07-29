@@ -101,14 +101,22 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
               icon: const Icon(Icons.cell_tower),
               label: titles[0],
+              tooltip: titles[0],
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.person),
               label: titles[1],
+              tooltip: titles[1],
             ),
             BottomNavigationBarItem(
               icon: const Icon(Icons.nature),
               label: titles[2],
+              tooltip: titles[2],
+            ),
+            BottomNavigationBarItem(
+              icon: const Icon(Icons.map_outlined),
+              label: titles[3],
+              tooltip: titles[3],
             ),
           ],
           currentIndex: GlobalState.currentPageIndex,

@@ -32,3 +32,7 @@ String bloonImage(String bloonId) {
 String bloonVariantImage(String bloonId, String variantId) {
   return '$baseImageUrl/bloons/$bloonId/$variantId.png';
 }
+
+String mapImage(String image) {
+  return 'assets/images/maps/$image';
+}
