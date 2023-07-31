@@ -24,47 +24,13 @@ class _MapsState extends State<Maps> {
   }
 
   Future<void> _loadJsonData() async {
-    final jsonData =
-        await rootBundle.loadString('assets/data/maps/balance.json');
-    final parsedData = jsonDecode(jsonData);
-    final anotherMap =
-        await rootBundle.loadString('assets/data/maps/bazaar.json');
-    final anotherParsedMap = jsonDecode(anotherMap);
-    final anotherAnotherMap =
-        await rootBundle.loadString('assets/data/maps/quad.json');
-    final anotherAnotherParsedMap = jsonDecode(anotherAnotherMap);
-    final mapfour =
-        await rootBundle.loadString('assets/data/maps/winter park.json');
-    final mapfourParsed = jsonDecode(mapfour);
-    final mapfive =
-        await rootBundle.loadString('assets/data/maps/spice islands.json');
-    final mapfiveParsed = jsonDecode(mapfive);
-    final mapsix =
-        await rootBundle.loadString('assets/data/maps/off the coast.json');
-    final mapsixParsed = jsonDecode(mapsix);
+    final jsonConfig =
+        await rootBundle.loadString('assets/data/config/maps.json');
+    final List<dynamic> parsedConfig = json.decode(jsonConfig);
+
     setState(() {
-      _jsonData = [
-        MapModel.fromJson(parsedData),
-        MapModel.fromJson(anotherParsedMap),
-        MapModel.fromJson(anotherAnotherParsedMap),
-        MapModel.fromJson(mapfourParsed),
-        MapModel.fromJson(mapfiveParsed),
-        MapModel.fromJson(mapsixParsed),
-      ];
+      _jsonData = parsedConfig.map((map) => MapModel.fromJson(map)).toList();
     });
-
-    // final files = getFilesInFolder('assets/data/maps');
-
-    // final jsonData = await Future.wait(
-    //   files.map((file) async {
-    //     final contents = await (file as File).readAsString();
-    //     return json.decode(contents);
-    //   }),
-    // );
-
-    // setState(() {
-    //   _jsonData = jsonData;
-    // });
   }
 
   @override
@@ -83,13 +49,17 @@ class _MapsState extends State<Maps> {
               itemBuilder: (context, index) {
                 final data = _jsonData[index];
                 return GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     GlobalState.currentTitle = data.name;
+                    final singleMap = await rootBundle
+                        .loadString('assets/data/maps/${data.name}.json');
+                    final parsedMap = jsonDecode(singleMap);
+                    // ignore: use_build_context_synchronously
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) => SingleMap(
-                          map: _jsonData[index],
+                          map: MapModel.fromJson(parsedMap),
                         ),
                       ),
                     );
@@ -102,6 +72,10 @@ class _MapsState extends State<Maps> {
                           child: Image(
                             image: AssetImage(mapImage(data.image)),
                             fit: BoxFit.cover,
+                            errorBuilder: (BuildContext context,
+                                Object exception, StackTrace? stackTrace) {
+                              return const Icon(Icons.error);
+                            },
                           ),
                         ),
                         Padding(
