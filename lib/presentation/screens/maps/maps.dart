@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:btd6wiki/models/map.dart';
 import 'package:btd6wiki/presentation/screens/maps/single_map.dart';
+import 'package:btd6wiki/utilities/extensions.dart';
 import 'package:btd6wiki/utilities/global_state.dart';
 import 'package:btd6wiki/utilities/images_url.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,8 @@ class Maps extends StatefulWidget {
 class _MapsState extends State<Maps> {
   List<MapModel> _jsonData = [];
 
+  final difficultyOrder = ['Beginner', 'Intermediate', 'Advanced', 'Expert'];
+
   @override
   void initState() {
     super.initState();
@@ -27,6 +30,15 @@ class _MapsState extends State<Maps> {
     final jsonConfig =
         await rootBundle.loadString('assets/data/config/maps.json');
     final List<dynamic> parsedConfig = json.decode(jsonConfig);
+
+    // need to remove by name: park path
+    parsedConfig.removeWhere((map) => map['name'] == 'park path');
+
+    // make into sub arrays by difficulty
+    // the order is: beginner, advanced, intermediate, expert
+    parsedConfig.sort((a, b) =>
+        difficultyOrder.indexOf(a['difficulty']) -
+        difficultyOrder.indexOf(b['difficulty']));
 
     setState(() {
       _jsonData = parsedConfig.map((map) => MapModel.fromJson(map)).toList();
@@ -84,7 +96,7 @@ class _MapsState extends State<Maps> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                data.name,
+                                data.name.capitalizeEveryWord(),
                                 style: const TextStyle(fontSize: 14),
                               ),
                               const SizedBox(height: 5),
