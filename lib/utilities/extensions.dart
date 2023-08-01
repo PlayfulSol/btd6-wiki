@@ -1,9 +1,7 @@
-extension StringExtensions on String {
-  String capitalize() {
-    return "${this[0].toUpperCase()}${substring(1)}";
-  }
+String capitalize(value) {
+  return value[0].toUpperCase() + value.substring(1);
+}
 
-  String capitalizeEveryWord() {
-    return split(' ').map((str) => str.capitalize()).join(' ');
-  }
+String capitalizeEveryWord(value) {
+  return value.split(' ').map((word) => capitalize(word)).toList().join(' ');
 }

@@ -1,3 +1,5 @@
+import 'package:btd6wiki/models/map.dart';
+
 import '/utilities/global_state.dart';
 
 import '/models/bloons/bloon_hierarchy.dart';
@@ -106,6 +108,16 @@ List<TowerModel> filterTowers() {
   } else {
     return GlobalState.towers
         .where((tower) => tower.type == GlobalState.currentTowerType)
+        .toList();
+  }
+}
+
+List<MapModel> filterMaps() {
+  if (GlobalState.currentMapDifficulty == '') {
+    return GlobalState.maps;
+  } else {
+    return GlobalState.maps
+        .where((map) => map.difficulty == GlobalState.currentMapDifficulty)
         .toList();
   }
 }

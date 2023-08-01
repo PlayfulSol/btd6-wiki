@@ -23,7 +23,7 @@ List<Widget> pages = [
   ),
   const Heroes(key: PageStorageKey<String>('Heroes')),
   const Bloons(key: PageStorageKey<String>('Bloons')),
-  const Maps(key: PageStorageKey<String>('Maps')),
+  const Maps(key: PageStorageKey<String>('Maps'), mapDifficulty: ''),
 ];
 
 PageController pageController = PageController();

@@ -1,3 +1,5 @@
+import 'package:btd6wiki/models/map.dart';
+
 import '/models/bloons/basic_bloon.dart';
 import '/models/hero.dart';
 import '/models/tower.dart';
@@ -14,4 +16,12 @@ class GlobalState {
   static List<HeroModel> heroes = [];
   static List<BasicBloonModel> bloons = [];
   static List<BasicBloonModel> bosses = [];
+  static List<MapModel> maps = [];
+  static String currentMapDifficulty = '';
+  static List<String> mapDifficulties = [
+    'Beginner',
+    'Intermediate',
+    'Advanced',
+    'Expert'
+  ];
 }

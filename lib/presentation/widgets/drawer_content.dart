@@ -1,3 +1,4 @@
+import 'package:btd6wiki/presentation/screens/maps/maps.dart';
 import 'package:flutter/material.dart';
 
 import '/presentation/screens/tower/towers.dart';
@@ -80,21 +81,52 @@ class DrawerContent extends StatelessWidget {
               );
             }
           }),
-      ListTile(
-          title: Text(titles[3]),
-          onTap: () {
-            if (!GlobalState.isLoading) {
-              Navigator.pop(context);
-              GlobalState.currentPageIndex = 3;
-              GlobalState.currentTowerType = '';
-              GlobalState.currentTitle = titles[3];
-              pageController.animateToPage(
-                GlobalState.currentPageIndex,
-                duration: const Duration(milliseconds: 500),
-                curve: Curves.easeInOut,
+      // ListTile(
+      //     title: Text(titles[3]),
+      //     onTap: () {
+      //       if (!GlobalState.isLoading) {
+      //         Navigator.pop(context);
+      //         GlobalState.currentPageIndex = 3;
+      //         GlobalState.currentTowerType = '';
+      //         GlobalState.currentTitle = titles[3];
+      //         pageController.animateToPage(
+      //           GlobalState.currentPageIndex,
+      //           duration: const Duration(milliseconds: 500),
+      //           curve: Curves.easeInOut,
+      //         );
+      //       }
+      //     }),
+      ExpansionTile(
+        title: Text(titles[3], style: const TextStyle(color: Colors.teal)),
+        children: [
+          ListView.builder(
+            itemCount: GlobalState.mapDifficulties.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(GlobalState.mapDifficulties[index]),
+                onTap: () {
+                  if (!GlobalState.isLoading) {
+                    Navigator.pop(context);
+                    GlobalState.currentMapDifficulty =
+                        GlobalState.mapDifficulties[index];
+                    GlobalState.currentTitle =
+                        GlobalState.mapDifficulties[index];
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Maps(
+                                  mapDifficulty:
+                                      GlobalState.mapDifficulties[index],
+                                  key: UniqueKey(),
+                                )));
+                  }
+                },
               );
-            }
-          }),
+            },
+          ),
+        ],
+      ),
     ]));
   }
 }
