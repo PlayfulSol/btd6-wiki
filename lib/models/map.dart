@@ -7,10 +7,10 @@ class MapModel {
   late final String? exits;
   late final String? length;
   late final String? music;
-  late final String? terrain;
+  late final dynamic terrain;
   late final String? water;
-  late final String? removableObject;
-  late final String? highground;
+  late final dynamic removableObject;
+  late final dynamic highground;
   late final String? sightBlocker;
 
   MapModel(
@@ -37,10 +37,22 @@ class MapModel {
     exits = json['exits'];
     length = json['length'];
     music = json['music'];
-    terrain = json['terrain'];
+    if (json['terrain'] is bool) {
+      terrain = json['terrain'] == true ? 'yes' : 'no';
+    } else {
+      terrain = json['terrain'];
+    }
     water = json['water'];
-    removableObject = json['removableObject'];
-    highground = json['highground'];
+    if (json['removableObject'] is bool) {
+      removableObject = json['removableObject'] == true ? 'yes' : 'no';
+    } else {
+      removableObject = json['removableObject'];
+    }
+    if (json['highground'] is bool) {
+      highground = json['highground'] == true ? 'yes' : 'no';
+    } else {
+      highground = json['highground'];
+    }
     sightBlocker = json['sightBlocker'];
   }
 }
