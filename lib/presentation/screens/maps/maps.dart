@@ -42,9 +42,6 @@ class _MapsState extends State<Maps> {
   }
 
   Future<void> _loadJsonData() async {
-    // TODO: remove this after fixing the json file
-    GlobalState.maps.removeWhere((map) => map.name == 'park path');
-
     GlobalState.maps.sort((a, b) =>
         GlobalState.mapDifficulties.indexOf(a.difficulty) -
         GlobalState.mapDifficulties.indexOf(b.difficulty));
