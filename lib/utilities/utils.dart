@@ -112,7 +112,20 @@ List<TowerModel> filterTowers() {
   }
 }
 
-List<MapModel> filterMaps() {
+List<MapModel> filterMaps(query) {
+  if (query != '') {
+    if (GlobalState.currentMapDifficulty == '') {
+      return GlobalState.maps
+          .where((map) => map.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    } else {
+      return GlobalState.maps
+          .where((map) =>
+              map.name.toLowerCase().contains(query.toLowerCase()) &&
+              map.difficulty == GlobalState.currentMapDifficulty)
+          .toList();
+    }
+  }
   if (GlobalState.currentMapDifficulty == '') {
     return GlobalState.maps;
   } else {

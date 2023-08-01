@@ -21,12 +21,18 @@ class Maps extends StatefulWidget {
 
 class _MapsState extends State<Maps> {
   late final TextEditingController _searchController;
+  String query = '';
 
   @override
   void initState() {
     super.initState();
     _loadJsonData();
     _searchController = TextEditingController();
+    _searchController.addListener(() {
+      setState(() {
+        query = _searchController.text;
+      });
+    });
   }
 
   @override
@@ -82,7 +88,7 @@ class _MapsState extends State<Maps> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: Future.value(filterMaps()),
+          future: Future.value(filterMaps(query)),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();
@@ -98,6 +104,7 @@ class _MapsState extends State<Maps> {
                       // TODO: Implement search functionality
                     },
                   ),
+                  const SizedBox(height: 10),
                   Expanded(
                     child: LayoutBuilder(builder: (context, constraints) {
                       return GridView.builder(
