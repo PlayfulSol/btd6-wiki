@@ -1,4 +1,5 @@
 class MapModel {
+  late final String? id;
   late final String name;
   late final String image;
   late final String difficulty;
@@ -16,6 +17,7 @@ class MapModel {
       {required this.name,
       required this.image,
       required this.difficulty,
+      this.id,
       this.entrances,
       this.exits,
       this.length,
@@ -27,6 +29,7 @@ class MapModel {
       this.sightBlocker});
 
   MapModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     name = json['name'];
     image = json['image'];
     difficulty = json['difficulty'];

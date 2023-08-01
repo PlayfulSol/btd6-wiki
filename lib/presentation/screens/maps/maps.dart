@@ -93,7 +93,7 @@ class _MapsState extends State<Maps> {
                         onTap: () async {
                           GlobalState.currentTitle = snapshot.data[index].name;
                           final singleMap = await rootBundle.loadString(
-                              'assets/data/maps/${snapshot.data[index].name}.json');
+                              'assets/data/maps/${snapshot.data[index].id}.json');
                           final parsedMap = jsonDecode(singleMap);
                           // ignore: use_build_context_synchronously
                           Navigator.push(
