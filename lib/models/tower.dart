@@ -2,14 +2,16 @@ import '/models/common.dart';
 
 class TowerModel {
   late final String id;
+  late final String image;
   late final String name;
-  late final String description;
+  late final String inGameDesc;
   late final String type;
 
   TowerModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    image = json['image'];
     name = json['name'];
-    description = json['description'];
+    inGameDesc = json['inGameDesc'];
     type = json['type'];
   }
 
@@ -19,7 +21,7 @@ class TowerModel {
 class SingleTowerModel {
   late final String id;
   late final String name;
-  late final String description;
+  late final String inGameDesc;
   late final String type;
   late final Cost cost;
   late final Stats stats;
@@ -28,7 +30,7 @@ class SingleTowerModel {
   SingleTowerModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    description = json['description'];
+    inGameDesc = json['inGameDesc'];
     type = json['type'];
     cost = Cost.fromJson(json['cost']);
     stats = Stats.fromJson(json['stats']);
@@ -80,4 +82,10 @@ class MonkeyPathModel {
   }
 
   MonkeyPathModel(name, description, cost, effects);
+}
+
+class TowerUpgrade {
+  late final String name;
+  late final String image;
+  late final Cost cost;
 }

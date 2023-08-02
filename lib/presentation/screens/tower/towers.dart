@@ -1,16 +1,22 @@
-import 'package:auto_size_text/auto_size_text.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
-import '/utilities/images_url.dart';
-import '/utilities/global_state.dart';
-import '/utilities/requests.dart';
-import '/utilities/utils.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:btd6wiki/utilities/constants.dart';
 
+import '../../../models/tower.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/loader.dart';
 
+import '/utilities/global_state.dart';
+import '/utilities/images_url.dart';
+import '/utilities/utils.dart';
+
 class Towers extends StatefulWidget {
   const Towers({super.key, required String towerType});
+
   final String? towerTypes = '';
 
   @override
@@ -101,42 +107,47 @@ class _TowersState extends State<Towers>
                     itemBuilder: (context, index) {
                       return Card(
                         child: ListTile(
-                            mouseCursor: SystemMouseCursors.click,
-                            dense: false,
-                            isThreeLine: true,
-                            leading: SizedBox(
-                              height: double.infinity,
-                              child: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  child: Image.network(
-                                      towerBaseImage(snapshot.data[index].id))),
+                          mouseCursor: SystemMouseCursors.click,
+                          dense: false,
+                          isThreeLine: true,
+                          leading: SizedBox(
+                            height: double.infinity,
+                            child: CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              child: Image(
+                                image: AssetImage(
+                                    towerImage(snapshot.data[index].image)),
+                              ),
                             ),
-                            title: AutoSizeText(
-                              snapshot.data[index].name,
-                              maxLines: 1,
-                              style: TextStyle(fontSize: titleFontSize),
-                            ),
-                            subtitle: AutoSizeText(
-                                snapshot.data[index].description,
-                                wrapWords: false,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
-                                style: TextStyle(fontSize: subtitleFontSize)),
-                            onTap: () => {
-                                  if (!GlobalState.isLoading)
-                                    {
-                                      getTowerData(snapshot.data[index].id)
-                                          .then((value) => Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SingleTower(
-                                                        towerData: value,
-                                                        towerId: snapshot
-                                                            .data[index].id,
-                                                      )))),
-                                    }
-                                }),
+                          ),
+                          title: AutoSizeText(
+                            snapshot.data[index].name,
+                            maxLines: 1,
+                            style: TextStyle(fontSize: titleFontSize),
+                          ),
+                          subtitle: AutoSizeText(
+                              snapshot.data[index].inGameDesc,
+                              wrapWords: false,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              style: TextStyle(fontSize: subtitleFontSize)),
+                          onTap: () async {
+                            if (!GlobalState.isLoading) {
+                              var id = snapshot.data[index].id;
+                              var path = '${towerDataPath + id}.json';
+                              final data = await rootBundle.loadString(path);
+                              var jsonData = json.decode(data);
+                              SingleTowerModel towerData =
+                                  SingleTowerModel.fromJson(jsonData);
+
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SingleTower(
+                                          towerId: id, towerData: towerData)));
+                            }
+                          },
+                        ),
                       );
                     });
               });

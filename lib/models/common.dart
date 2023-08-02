@@ -1,9 +1,9 @@
 class Stats {
-  String damage = '';
-  String pierce = '';
-  String attackSpeed = '';
-  String range = '';
-  String type = '';
+  late final String damage;
+  late final String pierce;
+  late final String attackSpeed;
+  late final String range;
+  late final String damageType;
 
   Stats(
       {required damage,
@@ -17,15 +17,15 @@ class Stats {
     pierce = json['pierce'];
     attackSpeed = json['attackSpeed'];
     range = json['range'];
-    type = json['type'];
+    damageType = json['damageType'];
   }
 }
 
 class Cost {
-  int easy = 0;
-  int medium = 0;
-  int hard = 0;
-  int impoppable = 0;
+  late final String easy;
+  late final String medium;
+  late final String hard;
+  late final String impoppable;
 
   Cost({required easy, required medium, required hard, required impoppable});
 

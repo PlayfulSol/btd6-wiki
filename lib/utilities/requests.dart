@@ -91,21 +91,21 @@ Future<HeroModel> getHeroData(towerId) async {
 }
 
 // Towers
-Future<void> getTowers() async {
-  var data = await http.get(Uri.parse("$baseApiUrl/towers"));
-
-  var jsonData = json.decode(data.body);
-
-  List<TowerModel> towers = [];
-
-  for (var t in jsonData) {
-    TowerModel tower = TowerModel.fromJson(t);
-    towers.add(tower);
-  }
-
-  GlobalState.towers = towers;
-  GlobalState.towerTypes = towers.map((e) => e.type).toSet().toList();
-}
+// Future<void> getTowers() async {
+//   var data = await http.get(Uri.parse("$baseApiUrl/towers"));
+//
+//   var jsonData = json.decode(data.body);
+//
+//   List<TowerModel> towers = [];
+//
+//   for (var t in jsonData) {
+//     TowerModel tower = TowerModel.fromJson(t);
+//     towers.add(tower);
+//   }
+//
+//   GlobalState.towers = towers;
+//   GlobalState.towerTypes = towers.map((e) => e.type).toSet().toList();
+// }
 
 Future<SingleTowerModel> getTowerData(towerId) async {
   GlobalState.isLoading = true;
@@ -127,4 +127,11 @@ Future<void> getMaps() async {
       await rootBundle.loadString('assets/data/config/maps.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.maps = parsedConfig.map((e) => MapModel.fromJson(e)).toList();
+}
+
+Future<void> getTowers() async {
+  final jsonConfig =
+      await rootBundle.loadString('assets/data/config/towers.json');
+  final List<dynamic> parsedConfig = json.decode(jsonConfig);
+  GlobalState.towers = parsedConfig.map((e) => TowerModel.fromJson(e)).toList();
 }

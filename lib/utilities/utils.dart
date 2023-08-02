@@ -53,7 +53,7 @@ String costToString(Cost cost) {
 }
 
 String statsToString(Stats stats) {
-  return "Damage: ${stats.damage}, Pierce: ${stats.pierce}, Attack Speed: ${stats.attackSpeed}, Range: ${stats.range}, Type: ${stats.type}";
+  return "Damage: ${stats.damage}, Pierce: ${stats.pierce}, Attack Speed: ${stats.attackSpeed}, Range: ${stats.range}, Type: ${stats.damageType}";
 }
 
 String roundsToString(Rounds rounds) {

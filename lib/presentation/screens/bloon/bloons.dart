@@ -58,7 +58,7 @@ class _BloonsState extends State<Bloons> {
                               ),
                               title: Text(snapshot.data[index].name,
                                   style: const TextStyle(fontSize: 14)),
-                              subtitle: Text(snapshot.data[index].type),
+                              subtitle: Text(snapshot.data[index].damageType),
                               onTap: () {
                                 if (!GlobalState.isLoading) {
                                   getBloonData(snapshot.data[index].id)
@@ -109,7 +109,7 @@ class _BloonsState extends State<Bloons> {
                         ),
                         title: Text(snapshot.data[index].name,
                             style: const TextStyle(fontSize: 14)),
-                        subtitle: Text(snapshot.data[index].type),
+                        subtitle: Text(snapshot.data[index].damageType),
                         onTap: () {
                           if (!GlobalState.isLoading) {
                             getBloonData(snapshot.data[index].id)
