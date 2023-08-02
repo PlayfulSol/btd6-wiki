@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:btd6wiki/models/map.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
@@ -9,6 +8,7 @@ import '/models/bloons/single_bloon.dart';
 import '/models/bloons/basic_bloon.dart';
 import '/models/hero.dart';
 import '/models/tower.dart';
+import '/models/map.dart';
 
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';

@@ -1,5 +1,6 @@
-import 'package:btd6wiki/models/map.dart';
 import 'package:flutter/material.dart';
+
+import '/models/map.dart';
 
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';

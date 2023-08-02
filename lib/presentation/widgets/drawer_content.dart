@@ -1,6 +1,6 @@
-import 'package:btd6wiki/presentation/screens/maps/maps.dart';
 import 'package:flutter/material.dart';
 
+import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/tower/towers.dart';
 
 import '/utilities/constants.dart';
@@ -81,21 +81,6 @@ class DrawerContent extends StatelessWidget {
               );
             }
           }),
-      // ListTile(
-      //     title: Text(titles[3]),
-      //     onTap: () {
-      //       if (!GlobalState.isLoading) {
-      //         Navigator.pop(context);
-      //         GlobalState.currentPageIndex = 3;
-      //         GlobalState.currentTowerType = '';
-      //         GlobalState.currentTitle = titles[3];
-      //         pageController.animateToPage(
-      //           GlobalState.currentPageIndex,
-      //           duration: const Duration(milliseconds: 500),
-      //           curve: Curves.easeInOut,
-      //         );
-      //       }
-      //     }),
       ExpansionTile(
         title: Text(titles[3], style: const TextStyle(color: Colors.teal)),
         children: [

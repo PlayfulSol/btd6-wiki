@@ -1,5 +1,4 @@
-import 'package:btd6wiki/models/map.dart';
-
+import '/models/map.dart';
 import '/models/bloons/basic_bloon.dart';
 import '/models/hero.dart';
 import '/models/tower.dart';

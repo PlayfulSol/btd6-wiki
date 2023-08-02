@@ -8,7 +8,7 @@ import '/models/map.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/loader.dart';
 
-import '/utilities/extensions.dart';
+import '/utilities/strings.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
@@ -100,9 +100,6 @@ class _MapsState extends State<Maps> {
                     decoration: const InputDecoration(
                       hintText: 'Search maps',
                     ),
-                    onChanged: (value) {
-                      // TODO: Implement search functionality
-                    },
                   ),
                   const SizedBox(height: 10),
                   Expanded(

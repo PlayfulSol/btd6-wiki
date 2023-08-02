@@ -1,7 +1,6 @@
-import 'package:btd6wiki/models/map.dart';
-
 import '/utilities/global_state.dart';
 
+import '/models/map.dart';
 import '/models/bloons/bloon_hierarchy.dart';
 import '/models/hero.dart';
 import '/models/common.dart';

@@ -1,6 +1,6 @@
-import 'package:btd6wiki/presentation/screens/maps/maps.dart';
 import 'package:flutter/material.dart';
 
+import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/tower/towers.dart';
