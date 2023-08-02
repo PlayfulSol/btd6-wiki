@@ -1,14 +1,17 @@
-import 'dart:convert';
-import 'package:btd6wiki/models/map.dart';
-import 'package:btd6wiki/presentation/screens/maps/single_map.dart';
-import 'package:btd6wiki/presentation/widgets/loader.dart';
-import 'package:btd6wiki/utilities/extensions.dart';
-import 'package:btd6wiki/utilities/global_state.dart';
-import 'package:btd6wiki/utilities/images_url.dart';
-import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:flutter/services.dart' show rootBundle;
+import 'dart:convert';
+import 'dart:async';
+
+import '/models/map.dart';
+
+import '/presentation/screens/maps/single_map.dart';
+import '/presentation/widgets/loader.dart';
+
+import '/utilities/extensions.dart';
+import '/utilities/global_state.dart';
+import '/utilities/images_url.dart';
+import '/utilities/utils.dart';
 
 class Maps extends StatefulWidget {
   const Maps({required Key key, required String mapDifficulty})
@@ -16,7 +19,7 @@ class Maps extends StatefulWidget {
   final String? mapDifficulty = '';
 
   @override
-  _MapsState createState() => _MapsState();
+  State<Maps> createState() => _MapsState();
 }
 
 class _MapsState extends State<Maps> {
