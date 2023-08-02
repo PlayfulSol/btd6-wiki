@@ -1,5 +1,6 @@
 import '/utilities/global_state.dart';
 
+import '/models/map.dart';
 import '/models/bloons/bloon_hierarchy.dart';
 import '/models/hero.dart';
 import '/models/common.dart';
@@ -106,6 +107,29 @@ List<TowerModel> filterTowers() {
   } else {
     return GlobalState.towers
         .where((tower) => tower.type == GlobalState.currentTowerType)
+        .toList();
+  }
+}
+
+List<MapModel> filterMaps(query) {
+  if (query != '') {
+    if (GlobalState.currentMapDifficulty == '') {
+      return GlobalState.maps
+          .where((map) => map.name.toLowerCase().contains(query.toLowerCase()))
+          .toList();
+    } else {
+      return GlobalState.maps
+          .where((map) =>
+              map.name.toLowerCase().contains(query.toLowerCase()) &&
+              map.difficulty == GlobalState.currentMapDifficulty)
+          .toList();
+    }
+  }
+  if (GlobalState.currentMapDifficulty == '') {
+    return GlobalState.maps;
+  } else {
+    return GlobalState.maps
+        .where((map) => map.difficulty == GlobalState.currentMapDifficulty)
         .toList();
   }
 }

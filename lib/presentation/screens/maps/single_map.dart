@@ -1,5 +1,6 @@
-import 'package:btd6wiki/models/map.dart';
 import 'package:flutter/material.dart';
+
+import '/models/map.dart';
 
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
@@ -48,8 +49,7 @@ class SingleMap extends StatelessWidget {
                       const SizedBox(height: 10),
                       const Text("Terrain:", style: TextStyle(fontSize: 20)),
                       const SizedBox(height: 5),
-                      Text(map.terrain ?? '',
-                          style: const TextStyle(fontSize: 14)),
+                      Text(map.terrain ?? ''),
                       const SizedBox(height: 10),
                       const Text("Water:", style: TextStyle(fontSize: 20)),
                       const SizedBox(height: 5),
