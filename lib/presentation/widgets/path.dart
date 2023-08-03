@@ -26,48 +26,68 @@ class MonkeyPath extends StatelessWidget {
           ListView.builder(
             shrinkWrap: true,
             primary: false,
+            padding: const EdgeInsets.symmetric(horizontal: 5),
             itemCount: path.length,
             itemBuilder: (context, index) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(path[index].name, style: const TextStyle(fontSize: 18)),
-                const SizedBox(height: 10),
-                Image.network(towerPathImage(monkeyId, pathKey, index),
-                    width: 200),
-                const SizedBox(height: 10),
-                Text(
-                  path[index].description,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 15),
+                Center(
+                  child: Image(
+                    image: AssetImage(
+                      towerImage(path[index].image),
+                    ),
+                    width: 100,
+                    fit: BoxFit.fill,
+                  ),
                 ),
                 const SizedBox(height: 10),
-                const Text("Cost:"),
+                Center(
+                  child: Text(
+                    path[index].name,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  path[index].upgradeBody,
+                  style: const TextStyle(fontSize: 14),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  "Cost:",
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
                 Text(
                   costToString(path[index].cost),
-                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 14,
+                  ),
                 ),
                 const SizedBox(height: 30),
                 // a closed list of all the effects
-                if (path[index].effects.isNotEmpty) ...[
-                  ExpansionTile(
-                    title: const Text("Effects:"),
-                    children: [
-                      ListView.builder(
-                          shrinkWrap: true,
-                          primary: false,
-                          itemCount: path[index].effects.length,
-                          itemBuilder: (context, effectIndex) => Column(
-                                children: [
-                                  Text(
-                                    path[index].effects[effectIndex],
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  const SizedBox(height: 15),
-                                ],
-                              )),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
-                ],
+                // if (path[index].effects.isNotEmpty) ...[
+                //   ExpansionTile(
+                //     title: const Text("Effects:"),
+                //     children: [
+                //       ListView.builder(
+                //           shrinkWrap: true,
+                //           primary: false,
+                //           itemCount: path[index].effects.length,
+                //           itemBuilder: (context, effectIndex) => Column(
+                //                 children: [
+                //                   Text(
+                //                     path[index].effects[effectIndex],
+                //                     textAlign: TextAlign.center,
+                //                   ),
+                //                   const SizedBox(height: 15),
+                //                 ],
+                //               )),
+                //     ],
+                //   ),
+                //   const SizedBox(height: 30),
+                // ],
               ],
             ),
           ),

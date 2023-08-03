@@ -141,10 +141,13 @@ class _TowersState extends State<Towers>
                                   SingleTowerModel.fromJson(jsonData);
 
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SingleTower(
-                                          towerId: id, towerData: towerData)));
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SingleTower(towerData: towerData),
+                                ),
+                              );
+                              GlobalState.currentTitle = towerData.name;
                             }
                           },
                         ),

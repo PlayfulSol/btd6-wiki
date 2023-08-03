@@ -20,6 +20,7 @@ class TowerModel {
 
 class SingleTowerModel {
   late final String id;
+  late final String image;
   late final String name;
   late final String inGameDesc;
   late final String type;
@@ -29,6 +30,7 @@ class SingleTowerModel {
 
   SingleTowerModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    image = json["image"];
     name = json['name'];
     inGameDesc = json['inGameDesc'];
     type = json['type'];
@@ -70,22 +72,18 @@ class MonkeyPathsModel {
 
 class MonkeyPathModel {
   late final String name;
-  late final String description;
+  late final String image;
+  late final String upgradeBody;
+  late final String unlock;
   late final Cost cost;
-  late final List effects;
 
   MonkeyPathModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    description = json['description'];
+    image = json["image"];
+    upgradeBody = json['upgradeBody'];
+    unlock = json['unlock'];
     cost = Cost.fromJson(json['cost']);
-    effects = json['effects'].cast<String>();
   }
 
   MonkeyPathModel(name, description, cost, effects);
-}
-
-class TowerUpgrade {
-  late final String name;
-  late final String image;
-  late final Cost cost;
 }
