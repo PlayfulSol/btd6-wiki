@@ -103,6 +103,7 @@ Future<HeroModel> getHeroData(towerId) async {
 //     towers.add(tower);
 //   }
 //
+
 //   GlobalState.towers = towers;
 // }
 
