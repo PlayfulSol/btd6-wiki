@@ -1,31 +1,47 @@
 class Stats {
-  String damage = '';
-  String pierce = '';
-  String attackSpeed = '';
-  String range = '';
-  String type = '';
+  late final String damage;
+  late final String pierce;
+  late final String attackSpeed;
+  late final String range;
+  late final String damageType;
+  late final String camo;
+  late final String statuseffects;
+  late final String towerboosts;
+  late final String incomeboosts;
+  late final String footprint;
 
-  Stats(
-      {required damage,
-      required pierce,
-      required attackSpeed,
-      required range,
-      required type});
+  Stats({
+    required damage,
+    required pierce,
+    required attackSpeed,
+    required range,
+    required type,
+    required camo,
+    required statuseffects,
+    required towerboosts,
+    required incomeboosts,
+    required footprint,
+  });
 
   Stats.fromJson(Map<String, dynamic> json) {
     damage = json['damage'];
     pierce = json['pierce'];
     attackSpeed = json['attackSpeed'];
     range = json['range'];
-    type = json['type'];
+    damageType = json['damageType'];
+    camo = json["camo"];
+    statuseffects = json["statuseffects"];
+    towerboosts = json["towerboosts"];
+    incomeboosts = json["incomeboosts"];
+    footprint = json["footprint"];
   }
 }
 
 class Cost {
-  int easy = 0;
-  int medium = 0;
-  int hard = 0;
-  int impoppable = 0;
+  late final String easy;
+  late final String medium;
+  late final String hard;
+  late final String impoppable;
 
   Cost({required easy, required medium, required hard, required impoppable});
 

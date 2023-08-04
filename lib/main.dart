@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         builder: (theme, darkTheme) => MaterialApp(
               theme: theme,
               darkTheme: darkTheme,
-              title: 'BTD6 wiki',
+              title: 'BTD6 Wiki',
               home: const MyHomePage(),
               debugShowCheckedModeBanner: false,
             ));
@@ -49,11 +49,10 @@ class _MyHomePageState extends State<MyHomePage> {
       GlobalState.isLoading = true;
     });
 
-    Future.wait([getTowers(), getHeroes(), getBloons(), getMaps()])
-        .then((_) => setState(() {
-              GlobalState.isLoading = false;
-              GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
-            }));
+    Future.wait([getTowers(), getBloons(), getMaps()]).then((_) => setState(() {
+          GlobalState.isLoading = false;
+          GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
+        }));
   }
 
   @override
@@ -95,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            unselectedItemColor: Colors.white.withOpacity(.55),
             items: [
               BottomNavigationBarItem(
                 icon: const Icon(Icons.cell_tower),

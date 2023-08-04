@@ -56,5 +56,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/data/maps/
+    - assets/data/towers/
     - assets/images/maps/
+    - assets/images/towers/
     - assets/data/config/

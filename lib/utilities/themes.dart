@@ -8,6 +8,7 @@ class Themes {
     appBarTheme: AppBarTheme(
       color: Colors.grey[800],
     ),
+    dividerColor: Colors.transparent,
   );
 
   static final lightTheme = ThemeData.light().copyWith(
@@ -16,5 +17,6 @@ class Themes {
     appBarTheme: AppBarTheme(
       color: Colors.lightBlue[200],
     ),
+    dividerColor: Colors.transparent,
   );
 }

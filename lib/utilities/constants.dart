@@ -17,13 +17,12 @@ const List<String> titles = [
 ];
 
 List<Widget> pages = [
-  const Towers(
-    key: PageStorageKey<String>('Towers'),
-    towerType: '',
-  ),
+  const Towers(key: PageStorageKey<String>('Towers'), towerType: ''),
   const Heroes(key: PageStorageKey<String>('Heroes')),
   const Bloons(key: PageStorageKey<String>('Bloons')),
   const Maps(key: PageStorageKey<String>('Maps'), mapDifficulty: ''),
 ];
+
+const towerDataPath = 'assets/data/towers/';
 
 PageController pageController = PageController();

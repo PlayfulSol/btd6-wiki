@@ -49,11 +49,15 @@ String getPathTitleFromKey(String key) {
 }
 
 String costToString(Cost cost) {
-  return "Easy: ${cost.easy}, Medium: ${cost.medium}, Hard: ${cost.hard}, Impoppable: ${cost.impoppable}";
+  return "Easy: ${cost.easy}, Medium: ${cost.medium}\nHard: ${cost.hard}, Impoppable: ${cost.impoppable}";
 }
 
 String statsToString(Stats stats) {
-  return "Damage: ${stats.damage}, Pierce: ${stats.pierce}, Attack Speed: ${stats.attackSpeed}, Range: ${stats.range}, Type: ${stats.type}";
+  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} | Damage Type: ${stats.damageType}\nCamo: ${stats.camo} ";
+}
+
+String extraStatsToString(Stats stats) {
+  return "Footprint: ${stats.footprint}\nStatus Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
 String roundsToString(Rounds rounds) {
