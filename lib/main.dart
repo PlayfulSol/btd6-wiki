@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         builder: (theme, darkTheme) => MaterialApp(
               theme: theme,
               darkTheme: darkTheme,
-              title: 'BTD6 wiki',
+              title: 'BTD6 Wiki',
               home: const MyHomePage(),
               debugShowCheckedModeBanner: false,
             ));

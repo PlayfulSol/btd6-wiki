@@ -104,7 +104,6 @@ Future<HeroModel> getHeroData(towerId) async {
 //   }
 //
 //   GlobalState.towers = towers;
-//   GlobalState.towerTypes = towers.map((e) => e.type).toSet().toList();
 // }
 
 Future<SingleTowerModel> getTowerData(towerId) async {
@@ -134,4 +133,6 @@ Future<void> getTowers() async {
       await rootBundle.loadString('assets/data/config/towers.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.towers = parsedConfig.map((e) => TowerModel.fromJson(e)).toList();
+  GlobalState.towerTypes =
+      GlobalState.towers.map((e) => e.type).toSet().toList();
 }
