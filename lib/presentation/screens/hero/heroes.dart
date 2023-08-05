@@ -1,6 +1,10 @@
+import 'package:btd6wiki/models/hero.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:convert';
 
+import '../../../utilities/constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/requests.dart';
 import '/utilities/images_url.dart';
@@ -22,7 +26,7 @@ class _HeroesState extends State<Heroes> {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: FutureBuilder(
-          future: Future.value(GlobalState.heroes),
+          future: Future.value(GlobalState.menuHeroes),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.data == null) {
               return const Loader();
@@ -71,8 +75,9 @@ class _HeroesState extends State<Heroes> {
                                 height: double.infinity,
                                 child: CircleAvatar(
                                     backgroundColor: Colors.transparent,
-                                    child: Image.network(heroBaseImage(
-                                        snapshot.data[index].id))),
+                                    child: Image(
+                                        image: AssetImage(heroImage(
+                                            snapshot.data[index].image)))),
                               ),
                               title: AutoSizeText(snapshot.data[index].name,
                                   wrapWords: false,
@@ -84,21 +89,27 @@ class _HeroesState extends State<Heroes> {
                                 wrapWords: false,
                                 style: TextStyle(fontSize: subtitleFontSize),
                               ),
-                              onTap: () => {
-                                    if (!GlobalState.isLoading)
-                                      {
-                                        getHeroData(snapshot.data[index].id)
-                                            .then((value) => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        SingleHero(
-                                                          singleHero: value,
-                                                          heroId: snapshot
-                                                              .data[index].id,
-                                                        )))),
-                                      }
-                                  }));
+                              onTap: () async {
+                                if (!GlobalState.isLoading) {
+                                  var id = snapshot.data[index].id;
+                                  var path = '${heroDataPath + id}.json';
+                                  final data =
+                                      await rootBundle.loadString(path);
+                                  var jsonData = json.decode(data);
+                                  HeroModel heroData =
+                                      HeroModel.fromJson(jsonData);
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return SingleHero(
+                                            heroId: id, singleHero: heroData);
+                                      },
+                                    ),
+                                  );
+                                  GlobalState.currentTitle = heroData.name;
+                                }
+                              }));
                     });
               });
             }

@@ -9,7 +9,8 @@ import '/utilities/global_state.dart';
 class HeroSkins extends StatelessWidget {
   final String heroId;
   final List<Skins> heroSkins;
-  final List<int> skinChange;
+  // final List<int> skinChange;
+  final String skinChange;
   final String heroName;
 
   const HeroSkins(

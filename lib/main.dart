@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       GlobalState.isLoading = true;
     });
 
-    Future.wait([getTowers(), getBloons(), getMaps()]).then((_) => setState(() {
+    Future.wait([getTowers(), getHeroes(), getMaps()]).then((_) => setState(() {
           GlobalState.isLoading = false;
           GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
         }));

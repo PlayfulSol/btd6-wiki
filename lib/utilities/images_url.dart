@@ -9,9 +9,9 @@ String towerPathImage(String monkeyId, String pathKey, int index) {
   return '$baseImageUrl/towers/$monkeyId/${getTowerLevel(pathKey, index)}.png';
 }
 
-String heroBaseImage(String heroId) {
-  return '$baseImageUrl/heroes/$heroId/hero.png';
-}
+// String heroBaseImage(String heroId) {
+//   return '$baseImageUrl/heroes/$heroId/hero.png';
+// }
 
 String heroLevelImage(String heroId, int level) {
   return '$baseImageUrl/heroes/$heroId/$level.png';
@@ -39,4 +39,8 @@ String mapImage(String image) {
 
 String towerImage(String image) {
   return 'assets/images/towers/$image';
+}
+
+String heroImage(String image) {
+  return 'assets/images/heroes/$image';
 }

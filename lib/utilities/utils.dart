@@ -53,11 +53,11 @@ String costToString(Cost cost) {
 }
 
 String statsToString(Stats stats) {
-  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} | Damage Type: ${stats.damageType}\nCamo: ${stats.camo} ";
+  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} |\nCamo: ${stats.camo} ";
 }
 
 String extraStatsToString(Stats stats) {
-  return "Footprint: ${stats.footprint}\nStatus Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
+  return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
 String roundsToString(Rounds rounds) {

@@ -57,6 +57,8 @@ flutter:
   assets:
     - assets/data/maps/
     - assets/data/towers/
+    - assets/data/heroes/
     - assets/images/maps/
     - assets/images/towers/
+    - assets/images/heroes/
     - assets/data/config/

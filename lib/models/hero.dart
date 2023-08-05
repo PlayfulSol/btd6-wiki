@@ -1,40 +1,67 @@
 import '/models/common.dart';
 
-class HeroModel {
+class MenuHeroModel {
   late final String id;
   late final String name;
-  late final String description;
-  late final List<int> skinChange;
-  late final List<Skins> skins;
-  late final Cost cost;
-  late final Stats stats;
-  late final String levelSpeed;
-  late final List<Levels> levels;
-  HeroModel(
+  late final String image;
+  late final String? inGameDesc;
+  MenuHeroModel(
       {required this.id,
       required this.name,
-      required this.description,
-      required this.skinChange,
-      required this.skins,
-      required this.cost,
-      required this.stats,
-      required this.levelSpeed,
-      required this.levels});
+      required this.image,
+      required this.inGameDesc});
 
-  HeroModel.fromJson(Map<String, dynamic> json) {
+  MenuHeroModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    description = json['description'];
-    skinChange = json['skinChange'].cast<int>();
-    if (json['skins'] != []) {
-      skins = <Skins>[];
-      json['skins'].forEach((v) {
-        skins.add(Skins.fromJson(v));
-      });
-    }
-    cost = Cost.fromJson(json['cost']);
-    stats = Stats.fromJson(json['stats']);
-    levelSpeed = json['levelSpeed'];
+    image = json['image'];
+    inGameDesc = json['inGameDesc'];
+  }
+}
+
+class HeroModel {
+  // late final String id;
+  late final String name;
+  late final String skinChange;
+  late final String cost;
+  late final String abilities;
+  late final String target;
+  late final String? inGameDesc;
+  late final String image;
+  // late final List<int> skinChange;
+  // late final List<Skins> skins;
+  // late final Cost cost;
+  late final Stats properties;
+  // late final String levelSpeed;
+  late final List<Levels> levels;
+  // late final String abilities;
+  // late final dynamic properties;
+  HeroModel(
+      {required this.name,
+      required this.inGameDesc,
+      required this.image,
+      required this.skinChange,
+      // required this.skins,
+      required this.cost,
+      // required this.stats,
+      required this.levels,
+      required this.properties});
+
+  HeroModel.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    inGameDesc = json['description'];
+    image = json['image'];
+    // skinChange = json['skinChange'].cast<int>();
+    skinChange = json['skinChange'];
+    // if (json['skins'] != []) {
+    //   skins = <Skins>[];
+    //   json['skins'].forEach((v) {
+    //     skins.add(Skins.fromJson(v));
+    //   });
+    // }
+    // cost = Cost.fromJson(json['cost']);
+    cost = json['cost'];
+    properties = Stats.fromJson(json['properties']);
     if (json['levels'] != null) {
       levels = <Levels>[];
       json['levels'].forEach((v) {
@@ -76,25 +103,32 @@ class Special {
 }
 
 class Levels {
-  late final int level;
+  // late final int level;
+  late final String name;
   late final String description;
-  late final int xp;
-  late final Rounds rounds;
-  late final List<String> effects;
+  // late final int xp;
+  late final String unlock;
+  late final String cost;
+  // late final Rounds rounds;
+  // late final List<String> effects;
 
-  Levels(
-      {required this.level,
-      required this.description,
-      required this.xp,
-      required this.rounds,
-      required this.effects});
+  Levels({
+    // required this.level,
+    required this.name,
+    required this.description,
+    required this.unlock,
+    required this.cost,
+    // required this.rounds,
+    // required this.effects
+  });
 
   Levels.fromJson(Map<String, dynamic> json) {
-    level = json['level'];
-    description = json['description'];
-    xp = json['xp'];
-    rounds = Rounds.fromJson(json['rounds']);
-    effects = json['effects'].cast<String>();
+    name = json['name'];
+    description = json['levelBody'];
+    unlock = json['unlock'];
+    cost = json['cost'];
+    // rounds = Rounds.fromJson(json['rounds']);
+    // effects = json['effects'].cast<String>();
   }
 }
 

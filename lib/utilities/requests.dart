@@ -58,37 +58,37 @@ Future<dynamic> getBloonData(String id) async {
 }
 
 // Heroes
-Future<void> getHeroes() async {
-  var data = await http.get(Uri.parse("$baseApiUrl/heroes"));
+// Future<void> getHeroes() async {
+//   var data = await http.get(Uri.parse("$baseApiUrl/heroes"));
 
-  var jsonData = json.decode(data.body);
+//   var jsonData = json.decode(data.body);
 
-  List<HeroModel> heroes = [];
+//   List<HeroModel> heroes = [];
 
-  for (var h in jsonData) {
-    HeroModel hero = HeroModel.fromJson(h);
+//   for (var h in jsonData) {
+//     HeroModel hero = HeroModel.fromJson(h);
 
-    heroes.add(hero);
-  }
+//     heroes.add(hero);
+//   }
 
-  GlobalState.heroes = heroes;
-}
+//   GlobalState.heroes = heroes;
+// }
 
-Future<HeroModel> getHeroData(towerId) async {
-  GlobalState.isLoading = true;
+// Future<HeroModel> getHeroData(towerId) async {
+//   GlobalState.isLoading = true;
 
-  var data = (await http.get(Uri.parse("$baseApiUrl/hero/$towerId")));
+//   var data = (await http.get(Uri.parse("$baseApiUrl/hero/$towerId")));
 
-  var jsonData = json.decode(data.body);
+//   var jsonData = json.decode(data.body);
 
-  HeroModel heroData = HeroModel.fromJson(jsonData);
+//   HeroModel heroData = HeroModel.fromJson(jsonData);
 
-  GlobalState.currentTitle = heroData.name;
+//   GlobalState.currentTitle = heroData.name;
 
-  GlobalState.isLoading = false;
+//   GlobalState.isLoading = false;
 
-  return heroData;
-}
+//   return heroData;
+// }
 
 // Towers
 // Future<void> getTowers() async {
@@ -136,4 +136,12 @@ Future<void> getTowers() async {
   GlobalState.towers = parsedConfig.map((e) => TowerModel.fromJson(e)).toList();
   GlobalState.towerTypes =
       GlobalState.towers.map((e) => e.type).toSet().toList();
+}
+
+Future<void> getHeroes() async {
+  final jsonConfig =
+      await rootBundle.loadString('assets/data/config/heroes.json');
+  final List<dynamic> parsedConfig = json.decode(jsonConfig);
+  GlobalState.menuHeroes =
+      parsedConfig.map((e) => MenuHeroModel.fromJson(e)).toList();
 }
