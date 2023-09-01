@@ -49,7 +49,7 @@ class HeroModel {
 
   HeroModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
-    inGameDesc = json['description'];
+    inGameDesc = json['inGameDesc'];
     image = json['image'];
     // skinChange = json['skinChange'].cast<int>();
     skinChange = json['skinChange'];

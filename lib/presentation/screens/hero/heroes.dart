@@ -6,7 +6,6 @@ import 'dart:convert';
 
 import '../../../utilities/constants.dart';
 import '/utilities/global_state.dart';
-import '/utilities/requests.dart';
 import '/utilities/images_url.dart';
 
 import '/presentation/widgets/loader.dart';
@@ -83,7 +82,7 @@ class _HeroesState extends State<Heroes> {
                                   wrapWords: false,
                                   style: TextStyle(fontSize: titleFontSize)),
                               subtitle: AutoSizeText(
-                                snapshot.data[index].description,
+                                snapshot.data[index].inGameDesc,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
                                 wrapWords: false,
@@ -98,12 +97,15 @@ class _HeroesState extends State<Heroes> {
                                   var jsonData = json.decode(data);
                                   HeroModel heroData =
                                       HeroModel.fromJson(jsonData);
+                                  // ignore: use_build_context_synchronously
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) {
                                         return SingleHero(
-                                            heroId: id, singleHero: heroData);
+                                          heroId: id,
+                                          singleHero: heroData,
+                                        );
                                       },
                                     ),
                                   );

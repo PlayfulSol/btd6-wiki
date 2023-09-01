@@ -1,4 +1,3 @@
-import 'package:btd6wiki/models/common.dart';
 import 'package:flutter/material.dart';
 
 import '/models/hero.dart';
@@ -8,7 +7,6 @@ import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 
 import '/presentation/widgets/hero_level.dart';
-import '/presentation/screens/hero/hero_skins.dart';
 
 class SingleHero extends StatelessWidget {
   final HeroModel singleHero;
@@ -18,23 +16,12 @@ class SingleHero extends StatelessWidget {
 
   HeroLevel _buildHeroLevel(BuildContext context, Levels level) {
     var shouldShowLevelImage = false;
-//     I/flutter (10804): Level 1
-// I/flutter (10804): Level 3
-// I/flutter (10804): Level 7
-// I/flutter (10804): Level 10
-// I/flutter (10804): Level 20
     final skinChangeMatches = RegExp(r'\d+').allMatches(singleHero.skinChange);
     final skinChangeNumbers =
         skinChangeMatches.map((match) => match.group(0) ?? '0').toList();
-    print('number');
-    print(skinChangeNumbers);
-    print('name');
-    print(level.name);
     if (skinChangeNumbers.contains(level.name)) {
       shouldShowLevelImage = true;
     }
-    print('shouldShowLevelImage');
-    print(shouldShowLevelImage);
     return HeroLevel(
       singleHero: singleHero,
       heroId: heroId,
@@ -61,13 +48,13 @@ class SingleHero extends StatelessWidget {
                     image: AssetImage(heroImage(singleHero.image)),
                     width: 200,
                     fit: BoxFit.fill,
+                    semanticLabel: singleHero.name,
                   ),
                   const SizedBox(height: 10),
                   Text(singleHero.inGameDesc ?? "No description found",
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 16)),
                   const SizedBox(height: 10),
-                  // Text(costToString(singleHero.cost as Cost)),
                   Text(singleHero.cost),
                   const SizedBox(height: 10),
                   Text(statsToString(singleHero.properties),
