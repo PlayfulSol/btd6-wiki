@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '/models/hero.dart';
 
 import '/utilities/images_url.dart';
-import '/utilities/utils.dart';
 
 class HeroLevel extends StatelessWidget {
   final HeroModel singleHero;
@@ -44,26 +43,7 @@ class HeroLevel extends StatelessWidget {
         const SizedBox(height: 15),
         const Text("Rounds:", style: TextStyle(fontSize: 16)),
         const SizedBox(height: 5),
-        // Text(roundsToString(level.rounds)),
         Text(level.cost),
-        const SizedBox(height: 30),
-
-        // const Text("Effects:",
-        //     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-        // const SizedBox(height: 10),
-        // ListView.builder(
-        //     shrinkWrap: true,
-        //     primary: false,
-        //     itemCount: level.effects.length,
-        //     itemBuilder: (context, effectIndex) => Column(
-        //           children: [
-        //             Text(
-        //               level.effects[effectIndex],
-        //               textAlign: TextAlign.center,
-        //             ),
-        //             const SizedBox(height: 10),
-        //           ],
-        //         )),
         const SizedBox(height: 30),
       ],
     );
