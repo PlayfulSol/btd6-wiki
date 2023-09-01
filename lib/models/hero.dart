@@ -6,8 +6,8 @@ class HeroModel {
   late final String description;
   late final List<int> skinChange;
   late final List<Skins> skins;
-  late final Cost cost;
-  late final Stats stats;
+  late final OldCost cost;
+  late final OldStats stats;
   late final String levelSpeed;
   late final List<Levels> levels;
   HeroModel(
@@ -32,8 +32,8 @@ class HeroModel {
         skins.add(Skins.fromJson(v));
       });
     }
-    cost = Cost.fromJson(json['cost']);
-    stats = Stats.fromJson(json['stats']);
+    cost = OldCost.fromJson(json['cost']);
+    stats = OldStats.fromJson(json['stats']);
     levelSpeed = json['levelSpeed'];
     if (json['levels'] != null) {
       levels = <Levels>[];

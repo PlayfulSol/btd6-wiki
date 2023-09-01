@@ -48,11 +48,11 @@ class SingleHero extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 16)),
                   const SizedBox(height: 10),
-                  Text(costToString(singleHero.cost)),
+                  Text(oldCostToString(singleHero.cost)),
                   const SizedBox(height: 10),
                   Text("Level Speed: ${singleHero.levelSpeed}"),
                   const SizedBox(height: 10),
-                  Text(statsToString(singleHero.stats),
+                  Text(oldStatsToString(singleHero.stats),
                       textAlign: TextAlign.center),
                   const SizedBox(height: 10),
                   // if has skins, render a button that will take to a new page that shows the skins
