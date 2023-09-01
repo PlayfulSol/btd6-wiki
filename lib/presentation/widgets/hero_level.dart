@@ -27,7 +27,11 @@ class HeroLevel extends StatelessWidget {
       children: [
         const SizedBox(height: 15),
         shouldShowLevelImage
-            ? Text('Level ${level.name}')
+            ? Image(
+                image: AssetImage(heroLvlImage(singleHero.image, level.name)),
+                width: 200,
+                fit: BoxFit.fill,
+              )
             : const SizedBox.shrink(),
         Text(level.description,
             textAlign: TextAlign.center, style: const TextStyle(fontSize: 15)),

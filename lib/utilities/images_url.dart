@@ -44,3 +44,12 @@ String towerImage(String image) {
 String heroImage(String image) {
   return 'assets/images/heroes/$image';
 }
+
+String heroLvlImage(String baseImage, String level) {
+  if (int.parse(level) == 1) {
+    return heroImage(baseImage);
+  }
+  String imageNameWithoutExtension =
+      baseImage.substring(0, baseImage.length - 4);
+  return 'assets/images/heroes/${imageNameWithoutExtension}lvl$level.png';
+}

@@ -18,9 +18,23 @@ class SingleHero extends StatelessWidget {
 
   HeroLevel _buildHeroLevel(BuildContext context, Levels level) {
     var shouldShowLevelImage = false;
-    if (singleHero.skinChange.contains(level.name)) {
+//     I/flutter (10804): Level 1
+// I/flutter (10804): Level 3
+// I/flutter (10804): Level 7
+// I/flutter (10804): Level 10
+// I/flutter (10804): Level 20
+    final skinChangeMatches = RegExp(r'\d+').allMatches(singleHero.skinChange);
+    final skinChangeNumbers =
+        skinChangeMatches.map((match) => match.group(0) ?? '0').toList();
+    print('number');
+    print(skinChangeNumbers);
+    print('name');
+    print(level.name);
+    if (skinChangeNumbers.contains(level.name)) {
       shouldShowLevelImage = true;
     }
+    print('shouldShowLevelImage');
+    print(shouldShowLevelImage);
     return HeroLevel(
       singleHero: singleHero,
       heroId: heroId,

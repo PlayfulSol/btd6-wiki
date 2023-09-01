@@ -106,6 +106,7 @@ class Levels {
   // late final int level;
   late final String name;
   late final String description;
+  late final String image;
   // late final int xp;
   late final String unlock;
   late final String cost;
@@ -116,6 +117,7 @@ class Levels {
     // required this.level,
     required this.name,
     required this.description,
+    required this.image,
     required this.unlock,
     required this.cost,
     // required this.rounds,
@@ -125,6 +127,7 @@ class Levels {
   Levels.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     description = json['levelBody'];
+    image = json['image'];
     unlock = json['unlock'];
     cost = json['cost'];
     // rounds = Rounds.fromJson(json['rounds']);
