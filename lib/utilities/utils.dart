@@ -52,8 +52,16 @@ String costToString(Cost cost) {
   return "Easy: ${cost.easy}, Medium: ${cost.medium}\nHard: ${cost.hard}, Impoppable: ${cost.impoppable}";
 }
 
+String oldCostToString(OldCost cost) {
+  return "Easy: ${cost.easy}, Medium: ${cost.medium}\nHard: ${cost.hard}, Impoppable: ${cost.impoppable}";
+}
+
 String statsToString(Stats stats) {
   return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} | Damage Type: ${stats.damageType}\nCamo: ${stats.camo} ";
+}
+
+String oldStatsToString(OldStats stats) {
+  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} | Damage Type: ${stats.type}\n ";
 }
 
 String extraStatsToString(Stats stats) {

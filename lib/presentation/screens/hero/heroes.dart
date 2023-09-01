@@ -78,7 +78,7 @@ class _HeroesState extends State<Heroes> {
                                   wrapWords: false,
                                   style: TextStyle(fontSize: titleFontSize)),
                               subtitle: AutoSizeText(
-                                snapshot.data[index].inGameDesc,
+                                snapshot.data[index].description,
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 3,
                                 wrapWords: false,
