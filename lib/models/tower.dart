@@ -74,14 +74,12 @@ class MonkeyPathModel {
   late final String name;
   late final String image;
   late final String upgradeBody;
-  late final String unlock;
   late final Cost cost;
 
   MonkeyPathModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     image = json["image"];
     upgradeBody = json['upgradeBody'];
-    unlock = json['unlock'];
     cost = Cost.fromJson(json['cost']);
   }
 
