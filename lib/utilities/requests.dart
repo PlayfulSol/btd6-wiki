@@ -14,29 +14,9 @@ import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 
 // Bloons
-Future<void> getBloons() async {
-  var data = await http.get(Uri.parse("$baseApiUrl/bloons"));
-
-  var jsonData = json.decode(data.body);
-
-  List<BasicBloonModel> bloons = [];
-
-  List<BasicBloonModel> bosses = [];
-
-  for (var b in jsonData) {
-    if (b['type'] == 'boss') {
-      BasicBloonModel boss = BasicBloonModel.fromJson(b);
-
-      bosses.add(boss);
-    } else {
-      BasicBloonModel bloon = BasicBloonModel.fromJson(b);
-
-      bloons.add(bloon);
-    }
-  }
-
-  GlobalState.bloons = bloons;
-  GlobalState.bosses = bosses;
+Future<void> getBloonsData() async {
+  getBosses();
+  getBloons();
 }
 
 Future<dynamic> getBloonData(String id) async {
@@ -90,38 +70,6 @@ Future<HeroModel> getHeroData(towerId) async {
   return heroData;
 }
 
-// Towers
-// Future<void> getTowers() async {
-//   var data = await http.get(Uri.parse("$baseApiUrl/towers"));
-//
-//   var jsonData = json.decode(data.body);
-//
-//   List<TowerModel> towers = [];
-//
-//   for (var t in jsonData) {
-//     TowerModel tower = TowerModel.fromJson(t);
-//     towers.add(tower);
-//   }
-//
-
-//   GlobalState.towers = towers;
-// }
-
-Future<SingleTowerModel> getTowerData(towerId) async {
-  GlobalState.isLoading = true;
-  var data = (await http.get(Uri.parse("$baseApiUrl/tower/$towerId")));
-
-  var jsonData = json.decode(data.body);
-
-  SingleTowerModel towerData = SingleTowerModel.fromJson(jsonData);
-
-  GlobalState.currentTitle = towerData.name;
-
-  GlobalState.isLoading = false;
-
-  return towerData;
-}
-
 Future<void> getMaps() async {
   final jsonConfig =
       await rootBundle.loadString('assets/data/config/maps.json');
@@ -136,4 +84,30 @@ Future<void> getTowers() async {
   GlobalState.towers = parsedConfig.map((e) => TowerModel.fromJson(e)).toList();
   GlobalState.towerTypes =
       GlobalState.towers.map((e) => e.type).toSet().toList();
+}
+
+Future<void> getBloons() async {
+  final jsonConfig =
+      await rootBundle.loadString('assets/data/config/bloons.json');
+  final List<dynamic> parsedConfig = json.decode(jsonConfig);
+  GlobalState.bloons =
+      parsedConfig.map((e) => BasicBloonModel.fromJson(e)).toList();
+}
+
+Future<void> getBosses() async {
+  var data = await http.get(Uri.parse("$baseApiUrl/bloons"));
+
+  var jsonData = json.decode(data.body);
+
+  List<BasicBossModel> bosses = [];
+
+  for (var b in jsonData) {
+    if (b['type'] == 'boss') {
+      BasicBossModel boss = BasicBossModel.fromJson(b);
+
+      bosses.add(boss);
+    }
+  }
+
+  GlobalState.bosses = bosses;
 }

@@ -14,7 +14,7 @@ class GlobalState {
   static List<String> towerTypes = [];
   static List<HeroModel> heroes = [];
   static List<BasicBloonModel> bloons = [];
-  static List<BasicBloonModel> bosses = [];
+  static List<BasicBossModel> bosses = [];
   static List<MapModel> maps = [];
   static String currentMapDifficulty = '';
   static List<String> mapDifficulties = [

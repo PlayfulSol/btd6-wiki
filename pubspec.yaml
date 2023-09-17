@@ -60,6 +60,8 @@ flutter:
     - assets/images/maps/
     - assets/images/towers/
     - assets/data/config/
+    - assets/data/bloons/
+    - assets/images/bloons/
 
 compileSdkVersion: 33
 buildToolsVersion: "33.0.0"

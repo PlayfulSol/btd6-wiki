@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
       GlobalState.isLoading = true;
     });
 
-    Future.wait([getTowers(), getBloons(), getMaps(), getHeroes()])
+    Future.wait([getTowers(), getBloonsData(), getMaps(), getHeroes()])
         .then((_) => setState(() {
               GlobalState.isLoading = false;
               GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
@@ -81,7 +81,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ? const Loader()
           : PageView(
               controller: pageController,
-              // physics: const BouncingScrollPhysics(),
               children: pages,
             ),
       bottomNavigationBar: Container(

@@ -44,7 +44,7 @@ class BossBloonScatter extends StatelessWidget {
             },
             child: Column(children: [
               Image.network(
-                bloonImage(spawns[index].bloon),
+                bossImage(spawns[index].bloon),
                 width: 50,
               ),
               const SizedBox(height: 3),

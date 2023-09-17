@@ -40,7 +40,7 @@ class BloonHierarchy extends StatelessWidget {
           },
           child: Column(children: [
             Image.network(
-              bloonImage(bloons[index].id),
+              bossImage(bloons[index].id),
               width: 50,
             ),
             if (bloons[index].count != null) ...[
