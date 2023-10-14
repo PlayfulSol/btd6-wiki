@@ -19,49 +19,51 @@ class MenuHeroModel {
   }
 }
 
+class HeroStats {
+  late final dynamic data;
+  // List, either of Maps of name: String, Value: List<String> or just string
+
+  HeroStats({required this.data});
+
+  HeroStats.fromJson(dynamic json) {
+    data = json;
+  }
+}
+
 class HeroModel {
-  // late final String id;
   late final String name;
-  late final String skinChange;
-  late final String cost;
+  late final Map<String, dynamic> skinChange;
   late final String abilities;
   late final String target;
   late final String? inGameDesc;
   late final String image;
-  // late final List<int> skinChange;
-  // late final List<Skins> skins;
-  // late final Cost cost;
-  late final Stats properties;
-  // late final String levelSpeed;
+  late final Cost defCost;
+  late final HeroStats stats;
   late final List<Levels> levels;
-  // late final String abilities;
-  // late final dynamic properties;
-  HeroModel(
-      {required this.name,
-      required this.inGameDesc,
-      required this.image,
-      required this.skinChange,
-      // required this.skins,
-      required this.cost,
-      // required this.stats,
-      required this.levels,
-      required this.properties});
+  late final dynamic testStats;
+  HeroModel({
+    required this.name,
+    required this.skinChange,
+    required this.abilities,
+    required this.target,
+    required this.inGameDesc,
+    required this.image,
+    required this.defCost,
+    required this.stats,
+    required this.levels,
+    required this.testStats,
+  });
 
   HeroModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     inGameDesc = json['inGameDesc'];
     image = json['image'];
-    // skinChange = json['skinChange'].cast<int>();
     skinChange = json['skinChange'];
-    // if (json['skins'] != []) {
-    //   skins = <Skins>[];
-    //   json['skins'].forEach((v) {
-    //     skins.add(Skins.fromJson(v));
-    //   });
-    // }
-    // cost = Cost.fromJson(json['cost']);
-    cost = json['cost'];
-    properties = Stats.fromJson(json['properties']);
+    abilities = json['abilities'];
+    target = json['target'];
+    defCost = Cost.fromJson(json['defCost']);
+    stats = HeroStats.fromJson(json['stats']);
+    testStats = json['stats'];
     if (json['levels'] != null) {
       levels = <Levels>[];
       json['levels'].forEach((v) {

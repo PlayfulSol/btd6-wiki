@@ -1,3 +1,4 @@
+import 'package:btd6wiki/presentation/widgets/hero_stats.dart';
 import 'package:flutter/material.dart';
 
 import '/models/hero.dart';
@@ -16,10 +17,7 @@ class SingleHero extends StatelessWidget {
 
   HeroLevel _buildHeroLevel(BuildContext context, Levels level) {
     var shouldShowLevelImage = false;
-    final skinChangeMatches = RegExp(r'\d+').allMatches(singleHero.skinChange);
-    final skinChangeNumbers =
-        skinChangeMatches.map((match) => match.group(0) ?? '0').toList();
-    if (skinChangeNumbers.contains(level.name)) {
+    if (singleHero.skinChange.keys.toList().contains('level_${level.name}')) {
       shouldShowLevelImage = true;
     }
     return HeroLevel(
@@ -55,10 +53,15 @@ class SingleHero extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 16)),
                   const SizedBox(height: 10),
-                  Text(singleHero.cost),
-                  const SizedBox(height: 10),
-                  Text(statsToString(singleHero.properties),
+                  Text(costToString(singleHero.defCost),
                       textAlign: TextAlign.center),
+                  const SizedBox(height: 10),
+                  ExpansionTile(
+                    title: const Text("Advanced Stats"),
+                    children: [
+                      StatsList(heroStats: singleHero.stats),
+                    ],
+                  ),
                   const SizedBox(height: 10),
                   // if has skins, render a button that will take to a new page that shows the skins
                   // if (singleHero.skins.isNotEmpty)

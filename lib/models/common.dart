@@ -31,10 +31,10 @@ class Stats {
     range = json['range'];
     // damageType = json['damageType'];
     camo = json["camo"];
-    if (json["statusEffects"] is bool) {
-      statuseffects = (json["statusEffects"] ? 'true' : 'false');
-    } else if (json["statusEffects"] is String) {
-      statuseffects = (json["statusEffects"]);
+    if (json["statuseffects"] is bool) {
+      statuseffects = (json["statuseffects"] ? 'true' : 'false');
+    } else if (json["statuseffects"] is String) {
+      statuseffects = (json["statuseffects"]);
     }
     towerboosts = json["towerboosts"] ?? 'none';
     incomeboosts = json["incomeboosts"] ?? 'none';
