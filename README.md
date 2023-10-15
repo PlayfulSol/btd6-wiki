@@ -32,6 +32,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 For questions, suggestions, or collaboration opportunities, you can reach out to the project maintainers:
 
 - Shai Holczer shaitnto@gmail.com
-- Asaf Hadad (asaf147369@gmail.com)
+- Asaf Hadad asaf147369@gmail.com
 
 We hope you find the BTD6 Wiki app useful and enjoy using it as much as we enjoyed creating it!
