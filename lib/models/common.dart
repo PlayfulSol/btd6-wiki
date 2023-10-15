@@ -74,11 +74,19 @@ class Cost {
 
   Cost({required easy, required medium, required hard, required impoppable});
 
-  Cost.fromJson(Map<String, dynamic> json) {
-    easy = json['easy'];
-    medium = json['medium'];
-    hard = json['hard'];
-    impoppable = json['impoppable'];
+  Cost.fromJson(dynamic json) {
+    try {
+      easy = json['easy'];
+      medium = json['medium'];
+      hard = json['hard'];
+      impoppable = json['impoppable'];
+    } catch (e) {
+      // Handle the exception or provide default values
+      easy = json;
+      medium = json;
+      hard = json;
+      impoppable = json;
+    }
   }
 }
 
