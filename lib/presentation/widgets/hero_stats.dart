@@ -27,7 +27,7 @@ class StatsList extends StatelessWidget {
                 children: [
                   for (final dynamicItemValue in dynamicItem)
                     Padding(
-                        padding: const EdgeInsets.only(left: 45.0),
+                        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
                         child: ListTile(
                           title: Text(dynamicItemValue),
                         ))
@@ -39,7 +39,7 @@ class StatsList extends StatelessWidget {
                 children: [
                   for (final dynamicItemValue in dynamicItem)
                     Padding(
-                        padding: const EdgeInsets.only(left: 40.0, right: 40.0),
+                        padding: const EdgeInsets.only(left: 20.0, right: 40.0),
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
