@@ -1,6 +1,3 @@
-<a href="https://www.buymeacoffee.com/playfulpathsolutions" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
-
 # BTD6 Wiki
 
 BTD6 Wiki is a collaborative Flutter app that serves as a comprehensive resource for Bloons TD 6 players. It provides information, strategies, and tips to help players navigate the game effectively.
@@ -11,13 +8,13 @@ This project is a collaboration between two passionate Bloons TD 6 enthusiasts w
 
 ## Features
 
-- *Tower and Hero Information*: Detailed information about all available towers and heroes in the game, including their stats, upgrades, and special abilities.
+- Tower and Hero Information: Detailed information about all available towers and heroes in the game, including their stats, upgrades, and special abilities.
 
-- *Maps and Strategies*: Strategies and tips for completing maps and various game modes. Includes suggested tower placements, upgrade paths, and walkthroughs.
+- Maps and Strategies: Strategies and tips for completing maps and various game modes. Includes suggested tower placements, upgrade paths, and walkthroughs.
 
-- *Bloons Encyclopedia*: A comprehensive guide to all the different types of Bloons, their characteristics, and vulnerabilities.
+- Bloons Encyclopedia: A comprehensive guide to all the different types of Bloons, their characteristics, and vulnerabilities.
 
-- *User-Friendly Interface*: An intuitive and easy-to-navigate interface for a seamless user experience.
+- User-Friendly Interface: An intuitive and easy-to-navigate interface for a seamless user experience.
 
 ## Issues
 
@@ -34,4 +31,6 @@ For questions, suggestions, or collaboration opportunities, you can reach out to
 - Shai Holczer - shaitnto@gmail.com
 - Asaf Hadad - asaf147369@gmail.com
 
-We hope you find the BTD6 Wiki app useful and enjoy using it as much as we enjoyed creating it!
+<a href="https://www.buymeacoffee.com/playfulpathsolutions" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+
+We hope you find the BTD6 Wiki app useful and enjoy using it as much as we enjoyed creating it!
