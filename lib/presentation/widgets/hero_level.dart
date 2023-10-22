@@ -43,7 +43,7 @@ class HeroLevel extends StatelessWidget {
         const SizedBox(height: 15),
         const Text("Rounds:", style: TextStyle(fontSize: 16)),
         const SizedBox(height: 5),
-        Text(level.cost),
+        if (level.name != '1') Text(level.cost),
         const SizedBox(height: 30),
       ],
     );

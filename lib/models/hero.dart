@@ -111,7 +111,7 @@ class Levels {
   late final String image;
   // late final int xp;
   late final String unlock;
-  late final String cost;
+  late final dynamic cost;
   // late final Rounds rounds;
   // late final List<String> effects;
 
