@@ -142,12 +142,10 @@ class DrawerContent extends StatelessWidget {
           ),
         ),
         onTap: () async {
-          Uri url =
+          final Uri url =
               Uri.parse('https://github.com/PlayfulSol/flutter-btd6-wiki');
-          if (await canLaunchUrl(url)) {
-            await launchUrl(url);
-          } else {
-            throw 'Could not launch $url';
+          if (!await launchUrl(url)) {
+            throw Exception('Could not launch $url');
           }
         },
       ),

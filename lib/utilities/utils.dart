@@ -145,3 +145,28 @@ List<MapModel> filterMaps(query) {
         .toList();
   }
 }
+
+String statToText(key) {
+  if (key == 'damage') {
+    return 'Damage';
+  }
+  if (key == 'pierce') {
+    return 'Pierce';
+  }
+  if (key == 'attackSpeed') {
+    return 'Attack Speed';
+  }
+  if (key == 'range') {
+    return 'Range';
+  }
+  if (key == 'towerBoosts') {
+    return 'Tower Boosts';
+  }
+  if (key == 'camo') {
+    return 'Camo';
+  }
+  if (key == 'levelSpeed') {
+    return 'Level Speed';
+  }
+  return key;
+}
