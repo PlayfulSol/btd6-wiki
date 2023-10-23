@@ -22,6 +22,7 @@ class _DrawerContentState extends State<DrawerContent> {
 
   @override
   Widget build(BuildContext context) {
+    print('');
     return Drawer(
         child: Column(
       children: [
