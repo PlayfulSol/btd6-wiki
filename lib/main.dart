@@ -77,6 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPageChanged: (index) {
                 setState(() {
                   GlobalState.currentPageIndex = index;
+                  GlobalState.currentTitle = titles[index];
                 });
               }),
       bottomNavigationBar: Container(
