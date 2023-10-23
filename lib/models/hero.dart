@@ -21,7 +21,6 @@ class MenuHeroModel {
 
 class HeroStats {
   late final dynamic data;
-  // List, either of Maps of name: String, Value: List<String> or just string
 
   HeroStats({required this.data});
 
@@ -105,25 +104,18 @@ class Special {
 }
 
 class Levels {
-  // late final int level;
   late final String name;
   late final String description;
   late final String image;
-  // late final int xp;
   late final String unlock;
   late final dynamic cost;
-  // late final Rounds rounds;
-  // late final List<String> effects;
 
   Levels({
-    // required this.level,
     required this.name,
     required this.description,
     required this.image,
     required this.unlock,
     required this.cost,
-    // required this.rounds,
-    // required this.effects
   });
 
   Levels.fromJson(Map<String, dynamic> json) {
@@ -132,8 +124,6 @@ class Levels {
     image = json['image'];
     unlock = json['unlock'];
     cost = json['cost'];
-    // rounds = Rounds.fromJson(json['rounds']);
-    // effects = json['effects'].cast<String>();
   }
 }
 
