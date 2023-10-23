@@ -8,7 +8,7 @@ import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/themes.dart';
 import '/utilities/constants.dart';
-import '/utilities/utils.dart';
+// import '/utilities/utils.dart';
 
 void main() => runApp(const MyApp());
 
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: const Drawer(child: DrawerContent()),
       appBar: AppBar(
-        title: Text(getAppTitle()),
+        title: Text('BTD6 Wiki'),
       ),
       body: GlobalState.isLoading
           ? const Loader()
