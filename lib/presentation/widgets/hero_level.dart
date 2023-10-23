@@ -35,16 +35,14 @@ class HeroLevel extends StatelessWidget {
         Text(level.description,
             textAlign: TextAlign.center, style: const TextStyle(fontSize: 15)),
         const SizedBox(height: 10),
-        Text(
-          "XP needed: ${level.unlock}",
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 15),
-        ),
-        const SizedBox(height: 15),
-        const Text("Rounds:", style: TextStyle(fontSize: 16)),
-        const SizedBox(height: 5),
-        if (level.name != '1') Text(level.cost),
-        const SizedBox(height: 30),
+        if (level.name != '1') ...[
+          Text(
+            "Cost: ${level.cost}",
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 15),
+          ),
+          const SizedBox(height: 30),
+        ],
       ],
     );
   }
