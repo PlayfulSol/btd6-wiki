@@ -37,7 +37,7 @@ class HeroModel {
   late final String target;
   late final String? inGameDesc;
   late final String image;
-  late final Cost defCost;
+  late final Cost cost;
   late final HeroStats stats;
   late final List<Levels> levels;
   late final dynamic testStats;
@@ -48,7 +48,7 @@ class HeroModel {
     required this.target,
     required this.inGameDesc,
     required this.image,
-    required this.defCost,
+    required this.cost,
     required this.stats,
     required this.levels,
     required this.testStats,
@@ -61,7 +61,7 @@ class HeroModel {
     skinChange = json['skinChange'];
     abilities = json['abilities'];
     target = json['target'];
-    defCost = Cost.fromJson(json['defCost']);
+    cost = Cost.fromJson(json['cost']);
     stats = HeroStats.fromJson(json['stats']);
     testStats = json['stats'];
     if (json['levels'] != null) {

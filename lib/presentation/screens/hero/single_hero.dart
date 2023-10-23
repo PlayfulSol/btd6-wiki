@@ -53,7 +53,7 @@ class SingleHero extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 16)),
                   const SizedBox(height: 10),
-                  Text(costToString(singleHero.defCost),
+                  Text(costToString(singleHero.cost),
                       textAlign: TextAlign.center),
                   const SizedBox(height: 10),
                   ExpansionTile(

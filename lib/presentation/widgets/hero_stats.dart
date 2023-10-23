@@ -18,20 +18,19 @@ class StatsList extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) {
             final listData = heroStats.data.values.toList();
             final dynamicItem = listData[index];
-            if (dynamicItem[0] is String) {
-              if (dynamicItem[0] == 'N/A') {
+            if (dynamicItem is String) {
+              if (dynamicItem == 'N/A') {
                 return const SizedBox.shrink();
               }
-              return ExpansionTile(
-                title: Text(heroStats.data.keys.toList()[index]),
-                children: [
-                  for (final dynamicItemValue in dynamicItem)
-                    Padding(
-                        padding: const EdgeInsets.only(left: 25.0, right: 25.0),
-                        child: ListTile(
-                          title: Text(dynamicItemValue),
-                        ))
-                ],
+              return ListTile(
+                title: Text(
+                  heroStats.data.keys.toList()[index],
+                  style: const TextStyle(fontSize: 16),
+                ),
+                subtitle: Text(
+                  dynamicItem,
+                  style: const TextStyle(fontSize: 14),
+                ),
               );
             } else {
               return ExpansionTile(
@@ -43,7 +42,15 @@ class StatsList extends StatelessWidget {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              if (dynamicItemValue is List) ...[
+                              if (dynamicItemValue is String) ...[
+                                ListTile(
+                                  title: Text(
+                                    dynamicItemValue,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ),
+                                const SizedBox(height: 20)
+                              ] else if (dynamicItemValue is List) ...[
                                 ListView.builder(
                                     shrinkWrap: true,
                                     physics:
