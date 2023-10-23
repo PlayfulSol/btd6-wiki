@@ -26,4 +26,4 @@ List<Widget> pages = [
 const towerDataPath = 'assets/data/towers/';
 const heroDataPath = 'assets/data/heroes/';
 
-PageController pageController = PageController();
+PageController pageController = PageController(initialPage: 0);

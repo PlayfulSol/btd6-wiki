@@ -60,14 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     setLoading();
-    pageController.addListener(() {
-      if (pageController.page?.round() != GlobalState.currentPageIndex &&
-          !GlobalState.isLoading) {
-        setState(() {
-          GlobalState.currentPageIndex = pageController.page?.round() ?? 0;
-        });
-      }
-    });
   }
 
   @override
@@ -81,9 +73,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ? const Loader()
           : PageView(
               controller: pageController,
-              // physics: const BouncingScrollPhysics(),
               children: pages,
-            ),
+              onPageChanged: (index) {
+                setState(() {
+                  GlobalState.currentTitle = titles[index];
+                  GlobalState.currentPageIndex = index;
+                });
+              }),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           boxShadow: <BoxShadow>[
@@ -122,7 +118,6 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() {
                 GlobalState.currentPageIndex = index;
                 GlobalState.currentTowerType = '';
-                GlobalState.currentTitle = titles[index];
               });
               pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 300),

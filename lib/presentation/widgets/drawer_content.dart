@@ -13,7 +13,8 @@ class DrawerContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: Column(children: <Widget>[
+        child: SingleChildScrollView(
+            child: Column(children: <Widget>[
       const SizedBox(
         width: double.infinity,
         child: SizedBox(
@@ -32,6 +33,7 @@ class DrawerContent extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: GlobalState.towerTypes.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
@@ -96,6 +98,7 @@ class DrawerContent extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: ListView.builder(
+              padding: EdgeInsets.zero,
               itemCount: GlobalState.mapDifficulties.length,
               shrinkWrap: true,
               itemBuilder: (context, index) {
@@ -149,6 +152,6 @@ class DrawerContent extends StatelessWidget {
           }
         },
       ),
-    ]));
+    ])));
   }
 }
