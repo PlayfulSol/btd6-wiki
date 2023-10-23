@@ -8,7 +8,7 @@ import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/themes.dart';
 import '/utilities/constants.dart';
-// import '/utilities/utils.dart';
+import '/utilities/utils.dart';
 
 void main() => runApp(const MyApp());
 
@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: const Drawer(child: DrawerContent()),
       appBar: AppBar(
-        title: Text('BTD6 Wiki'),
+        title: Text(GlobalState.currentTitle),
       ),
       body: GlobalState.isLoading
           ? const Loader()
@@ -76,7 +76,6 @@ class _MyHomePageState extends State<MyHomePage> {
               children: pages,
               onPageChanged: (index) {
                 setState(() {
-                  GlobalState.currentTitle = titles[index];
                   GlobalState.currentPageIndex = index;
                 });
               }),
@@ -116,8 +115,10 @@ class _MyHomePageState extends State<MyHomePage> {
             currentIndex: GlobalState.currentPageIndex,
             onTap: (index) {
               setState(() {
+                GlobalState.currentTitle = titles[index];
                 GlobalState.currentPageIndex = index;
                 GlobalState.currentTowerType = '';
+                GlobalState.currentMapDifficulty = '';
               });
               pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 300),

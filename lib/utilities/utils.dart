@@ -106,11 +106,7 @@ String bossRbeToString(List<int> bossRbe, List<String> rounds) {
 }
 
 String getAppTitle() {
-  if (GlobalState.currentTowerType == '') {
-    return GlobalState.currentTitle;
-  } else {
-    return GlobalState.currentTowerType;
-  }
+  return GlobalState.currentTitle;
 }
 
 List<TowerModel> filterTowers() {
