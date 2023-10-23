@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/tower/towers.dart';
@@ -12,41 +13,51 @@ class DrawerContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: ListView(children: <Widget>[
+        child: SingleChildScrollView(
+            child: Column(children: <Widget>[
       const SizedBox(
-          height: 70,
+        width: double.infinity,
+        child: SizedBox(
+          height: 100,
           child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.teal,
               ),
               child: Text('Bloons TD 6 Wiki',
-                  style: TextStyle(color: Colors.white, fontSize: 28)))),
+                  style: TextStyle(color: Colors.white, fontSize: 28))),
+        ),
+      ),
       ExpansionTile(
         title: Text(titles[0], style: const TextStyle(color: Colors.teal)),
         children: [
-          ListView.builder(
-            itemCount: GlobalState.towerTypes.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(GlobalState.towerTypes[index]),
-                onTap: () {
-                  if (!GlobalState.isLoading) {
-                    Navigator.pop(context);
-                    GlobalState.currentTowerType =
-                        GlobalState.towerTypes[index];
-                    GlobalState.currentTitle = GlobalState.towerTypes[index];
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Towers(
-                                  towerType: GlobalState.towerTypes[index],
-                                )));
-                  }
-                },
-              );
-            },
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: GlobalState.towerTypes.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(GlobalState.towerTypes[index]),
+                  onTap: () {
+                    if (!GlobalState.isLoading) {
+                      Navigator.pop(context);
+                      GlobalState.currentTowerType =
+                          GlobalState.towerTypes[index];
+                      GlobalState.currentTitle = GlobalState.towerTypes[index];
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Towers(
+                                    towerType: GlobalState.towerTypes[index],
+                                  )));
+                    }
+                  },
+                );
+              },
+            ),
           ),
+          const Divider(),
         ],
       ),
       ListTile(
@@ -84,34 +95,63 @@ class DrawerContent extends StatelessWidget {
       ExpansionTile(
         title: Text(titles[3], style: const TextStyle(color: Colors.teal)),
         children: [
-          ListView.builder(
-            itemCount: GlobalState.mapDifficulties.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(GlobalState.mapDifficulties[index]),
-                onTap: () {
-                  if (!GlobalState.isLoading) {
-                    Navigator.pop(context);
-                    GlobalState.currentMapDifficulty =
-                        GlobalState.mapDifficulties[index];
-                    GlobalState.currentTitle =
-                        GlobalState.mapDifficulties[index];
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Maps(
-                                  mapDifficulty:
-                                      GlobalState.mapDifficulties[index],
-                                  key: UniqueKey(),
-                                )));
-                  }
-                },
-              );
-            },
-          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: ListView.builder(
+              padding: EdgeInsets.zero,
+              itemCount: GlobalState.mapDifficulties.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(GlobalState.mapDifficulties[index]),
+                  onTap: () {
+                    if (!GlobalState.isLoading) {
+                      Navigator.pop(context);
+                      GlobalState.currentMapDifficulty =
+                          GlobalState.mapDifficulties[index];
+                      GlobalState.currentTitle =
+                          GlobalState.mapDifficulties[index];
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Maps(
+                                    mapDifficulty:
+                                        GlobalState.mapDifficulties[index],
+                                    key: UniqueKey(),
+                                  )));
+                    }
+                  },
+                );
+              },
+            ),
+          )
         ],
       ),
-    ]));
+      Expanded(
+        child: Container(),
+      ),
+      ListTile(
+        leading: const Image(
+          image: AssetImage('assets/github_logo.png'),
+          width: 24,
+          height: 24,
+          fit: BoxFit.fill,
+        ),
+        title: Text(
+          'To contribute, visit our GitHub ',
+          style: TextStyle(
+            color: Colors.grey[300],
+            fontSize: 16,
+          ),
+        ),
+        onTap: () async {
+          final Uri url =
+              Uri.parse('https://github.com/PlayfulSol/flutter-btd6-wiki');
+          if (!await launchUrl(url)) {
+            throw Exception('Could not launch $url');
+          }
+        },
+      ),
+    ])));
   }
 }

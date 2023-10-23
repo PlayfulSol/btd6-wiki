@@ -140,6 +140,7 @@ class _TowersState extends State<Towers>
                               SingleTowerModel towerData =
                                   SingleTowerModel.fromJson(jsonData);
 
+                              // ignore: use_build_context_synchronously
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

@@ -3,12 +3,10 @@ class Stats {
   late final String pierce;
   late final String attackSpeed;
   late final String range;
-  late final String damageType;
   late final String camo;
   late final String statuseffects;
   late final String towerboosts;
   late final String incomeboosts;
-  late final String footprint;
 
   Stats({
     required damage,
@@ -20,7 +18,6 @@ class Stats {
     required statuseffects,
     required towerboosts,
     required incomeboosts,
-    required footprint,
   });
 
   Stats.fromJson(Map<String, dynamic> json) {
@@ -28,12 +25,14 @@ class Stats {
     pierce = json['pierce'];
     attackSpeed = json['attackSpeed'];
     range = json['range'];
-    damageType = json['damageType'];
     camo = json["camo"];
-    statuseffects = json["statuseffects"];
-    towerboosts = json["towerboosts"];
-    incomeboosts = json["incomeboosts"];
-    footprint = json["footprint"];
+    if (json["statuseffects"] is bool) {
+      statuseffects = (json["statuseffects"] ? 'true' : 'false');
+    } else if (json["statuseffects"] is String) {
+      statuseffects = (json["statuseffects"]);
+    }
+    towerboosts = json["towerboosts"] ?? 'none';
+    incomeboosts = json["incomeboosts"] ?? 'none';
   }
 }
 

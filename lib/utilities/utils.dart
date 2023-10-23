@@ -57,7 +57,7 @@ String oldCostToString(OldCost cost) {
 }
 
 String statsToString(Stats stats) {
-  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} | Damage Type: ${stats.damageType}\nCamo: ${stats.camo} ";
+  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} |\nCamo: ${stats.camo} ";
 }
 
 String oldStatsToString(OldStats stats) {
@@ -65,7 +65,7 @@ String oldStatsToString(OldStats stats) {
 }
 
 String extraStatsToString(Stats stats) {
-  return "Footprint: ${stats.footprint}\nStatus Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
+  return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
 String roundsToString(Rounds rounds) {
@@ -144,4 +144,29 @@ List<MapModel> filterMaps(query) {
         .where((map) => map.difficulty == GlobalState.currentMapDifficulty)
         .toList();
   }
+}
+
+String statToText(key) {
+  if (key == 'damage') {
+    return 'Damage';
+  }
+  if (key == 'pierce') {
+    return 'Pierce';
+  }
+  if (key == 'attackSpeed') {
+    return 'Attack Speed';
+  }
+  if (key == 'range') {
+    return 'Range';
+  }
+  if (key == 'towerBoosts') {
+    return 'Tower Boosts';
+  }
+  if (key == 'camo') {
+    return 'Camo';
+  }
+  if (key == 'levelSpeed') {
+    return 'Level Speed';
+  }
+  return key;
 }
