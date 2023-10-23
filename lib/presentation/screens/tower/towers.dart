@@ -34,14 +34,6 @@ class _TowersState extends State<Towers>
   }
 
   @override
-  void initState() {
-    super.initState();
-    setState(() {
-      GlobalState.currentTitle = widget.towerType ?? titles[0];
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(

@@ -30,9 +30,6 @@ class _MapsState extends State<Maps> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      GlobalState.currentTitle = widget.mapDifficulty ?? titles[3];
-    });
     _loadJsonData();
     _searchController = TextEditingController();
     _searchController.addListener(() {
