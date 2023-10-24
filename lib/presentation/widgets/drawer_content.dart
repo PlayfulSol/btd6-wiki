@@ -85,9 +85,8 @@ class _DrawerContentState extends State<DrawerContent> {
               if (!GlobalState.isLoading) {
                 Navigator.pop(context);
                 GlobalState.currentPageIndex = 1;
-                if (GlobalState.currentTowerType != '') {
-                  GlobalState.currentTowerType = '';
-                }
+                GlobalState.currentTowerType = '';
+                GlobalState.currentMapDifficulty = '';
                 GlobalState.currentTitle = titles[1];
                 pageController.animateToPage(
                   GlobalState.currentPageIndex,
@@ -103,6 +102,7 @@ class _DrawerContentState extends State<DrawerContent> {
                 Navigator.pop(context);
                 GlobalState.currentPageIndex = 2;
                 GlobalState.currentTowerType = '';
+                GlobalState.currentMapDifficulty = '';
                 GlobalState.currentTitle = titles[2];
                 pageController.animateToPage(
                   GlobalState.currentPageIndex,
@@ -138,6 +138,7 @@ class _DrawerContentState extends State<DrawerContent> {
                             GlobalState.mapDifficulties[index];
                         GlobalState.currentTitle =
                             GlobalState.mapDifficulties[index];
+                        GlobalState.currentPageIndex = 3;
                         Navigator.push(
                             context,
                             MaterialPageRoute(

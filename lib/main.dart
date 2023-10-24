@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: const Drawer(child: DrawerContent()),
       appBar: AppBar(
-        title: Text(getAppTitle()),
+        title: Text(GlobalState.currentTitle),
       ),
       body: GlobalState.isLoading
           ? const Loader()
@@ -76,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
               children: pages,
               onPageChanged: (index) {
                 setState(() {
-                  GlobalState.currentTitle = titles[index];
                   GlobalState.currentPageIndex = index;
+                  GlobalState.currentTitle = titles[index];
                 });
               }),
       bottomNavigationBar: Container(
@@ -116,8 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
             currentIndex: GlobalState.currentPageIndex,
             onTap: (index) {
               setState(() {
+                GlobalState.currentTitle = titles[index];
                 GlobalState.currentPageIndex = index;
                 GlobalState.currentTowerType = '';
+                GlobalState.currentMapDifficulty = '';
               });
               pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 300),

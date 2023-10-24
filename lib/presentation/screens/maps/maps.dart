@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
@@ -50,12 +51,29 @@ class _MapsState extends State<Maps> {
         GlobalState.mapDifficulties.indexOf(b.difficulty));
   }
 
+  String getPageTitle() {
+    if (GlobalState.currentMapDifficulty != '') {
+      return GlobalState.currentMapDifficulty;
+    } else {
+      return titles[GlobalState.currentPageIndex];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: GlobalState.currentMapDifficulty != ''
           ? AppBar(
-              title: Text(GlobalState.currentTitle),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  setState(() {
+                    GlobalState.currentMapDifficulty = '';
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+              title: Text(getPageTitle()),
               actions: [
                 DropdownButton<String>(
                   value: GlobalState.currentMapDifficulty,
