@@ -17,7 +17,7 @@ import '/utilities/utils.dart';
 class Towers extends StatefulWidget {
   const Towers({super.key, required String towerType});
 
-  final String? towerTypes = '';
+  final String? towerType = '';
 
   @override
   State<Towers> createState() => _TowersState();
@@ -25,14 +25,30 @@ class Towers extends StatefulWidget {
 
 class _TowersState extends State<Towers>
     with AutomaticKeepAliveClientMixin<Towers> {
+  String getPageTitle() {
+    if (GlobalState.currentTowerType != '') {
+      return GlobalState.currentTowerType;
+    } else {
+      return titles[GlobalState.currentPageIndex];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      // if tower type is not empty show app bar
       appBar: GlobalState.currentTowerType != ''
           ? AppBar(
-              title: Text(GlobalState.currentTitle),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  setState(() {
+                    GlobalState.currentTowerType = '';
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+              title: Text(getPageTitle()),
               actions: [
                 DropdownButton<String>(
                   value: GlobalState.currentTowerType,
@@ -133,6 +149,8 @@ class _TowersState extends State<Towers>
                               style: TextStyle(fontSize: subtitleFontSize)),
                           onTap: () async {
                             if (!GlobalState.isLoading) {
+                              GlobalState.currentTitle =
+                                  snapshot.data[index].name;
                               var id = snapshot.data[index].id;
                               var path = '${towerDataPath + id}.json';
                               final data = await rootBundle.loadString(path);
@@ -140,6 +158,7 @@ class _TowersState extends State<Towers>
                               SingleTowerModel towerData =
                                   SingleTowerModel.fromJson(jsonData);
 
+                              // ignore: use_build_context_synchronously
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(

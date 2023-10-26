@@ -1,8 +1,8 @@
 import '/utilities/constants.dart';
 
-String heroBaseImage(String heroId) {
-  return '$baseImageUrl/heroes/$heroId/hero.png';
-}
+// String heroBaseImage(String heroId) {
+//   return '$baseImageUrl/heroes/$heroId/hero.png';
+// }
 
 String heroLevelImage(String heroId, int level) {
   return '$baseImageUrl/heroes/$heroId/$level.png';
@@ -30,4 +30,17 @@ String mapImage(String image) {
 
 String towerImage(String image) {
   return 'assets/images/towers/$image';
+}
+
+String heroImage(String image) {
+  return 'assets/images/heroes/$image';
+}
+
+String heroLvlImage(String baseImage, String level) {
+  if (int.parse(level) == 1) {
+    return heroImage(baseImage);
+  }
+  String imageNameWithoutExtension =
+      baseImage.substring(0, baseImage.length - 4);
+  return 'assets/images/heroes/${imageNameWithoutExtension}lvl$level.png';
 }

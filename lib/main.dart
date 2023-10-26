@@ -60,14 +60,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     setLoading();
-    pageController.addListener(() {
-      if (pageController.page?.round() != GlobalState.currentPageIndex &&
-          !GlobalState.isLoading) {
-        setState(() {
-          GlobalState.currentPageIndex = pageController.page?.round() ?? 0;
-        });
-      }
-    });
   }
 
   @override
@@ -75,14 +67,19 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: const Drawer(child: DrawerContent()),
       appBar: AppBar(
-        title: Text(getAppTitle()),
+        title: Text(GlobalState.currentTitle),
       ),
       body: GlobalState.isLoading
           ? const Loader()
           : PageView(
               controller: pageController,
               children: pages,
-            ),
+              onPageChanged: (index) {
+                setState(() {
+                  GlobalState.currentPageIndex = index;
+                  GlobalState.currentTitle = titles[index];
+                });
+              }),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           boxShadow: <BoxShadow>[
@@ -119,9 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
             currentIndex: GlobalState.currentPageIndex,
             onTap: (index) {
               setState(() {
+                GlobalState.currentTitle = titles[index];
                 GlobalState.currentPageIndex = index;
                 GlobalState.currentTowerType = '';
-                GlobalState.currentTitle = titles[index];
+                GlobalState.currentMapDifficulty = '';
               });
               pageController.animateToPage(index,
                   duration: const Duration(milliseconds: 300),

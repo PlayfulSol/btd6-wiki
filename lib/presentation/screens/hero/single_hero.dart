@@ -1,3 +1,4 @@
+import 'package:btd6wiki/presentation/widgets/hero_stats.dart';
 import 'package:flutter/material.dart';
 
 import '/models/hero.dart';
@@ -7,7 +8,6 @@ import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 
 import '/presentation/widgets/hero_level.dart';
-import '/presentation/screens/hero/hero_skins.dart';
 
 class SingleHero extends StatelessWidget {
   final HeroModel singleHero;
@@ -17,7 +17,7 @@ class SingleHero extends StatelessWidget {
 
   HeroLevel _buildHeroLevel(BuildContext context, Levels level) {
     var shouldShowLevelImage = false;
-    if (singleHero.skinChange.contains(level.level)) {
+    if (singleHero.skinChange.keys.toList().contains('level_${level.name}')) {
       shouldShowLevelImage = true;
     }
     return HeroLevel(
@@ -42,35 +42,43 @@ class SingleHero extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.network(heroBaseImage(heroId), width: 200),
+                  Image(
+                    image: AssetImage(heroImage(singleHero.image)),
+                    width: 200,
+                    fit: BoxFit.fill,
+                    semanticLabel: singleHero.name,
+                  ),
                   const SizedBox(height: 10),
-                  Text(singleHero.description,
+                  Text(singleHero.inGameDesc ?? "No description found",
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 16)),
                   const SizedBox(height: 10),
-                  Text(oldCostToString(singleHero.cost)),
-                  const SizedBox(height: 10),
-                  Text("Level Speed: ${singleHero.levelSpeed}"),
-                  const SizedBox(height: 10),
-                  Text(oldStatsToString(singleHero.stats),
+                  Text(costToString(singleHero.cost),
                       textAlign: TextAlign.center),
                   const SizedBox(height: 10),
+                  ExpansionTile(
+                    title: const Text("Advanced Stats"),
+                    children: [
+                      StatsList(heroStats: singleHero.stats),
+                    ],
+                  ),
+                  const SizedBox(height: 10),
                   // if has skins, render a button that will take to a new page that shows the skins
-                  if (singleHero.skins.isNotEmpty)
-                    ElevatedButton(
-                      child: const Text("Skins"),
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HeroSkins(
-                            heroId: heroId,
-                            heroSkins: singleHero.skins,
-                            skinChange: singleHero.skinChange,
-                            heroName: singleHero.name,
-                          ),
-                        ),
-                      ),
-                    ),
+                  // if (singleHero.skins.isNotEmpty)
+                  //   ElevatedButton(
+                  //     child: const Text("Skins"),
+                  //     onPressed: () => Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //         builder: (context) => HeroSkins(
+                  //           heroId: heroId,
+                  //           heroSkins: singleHero.skins,
+                  //           skinChange: singleHero.skinChange,
+                  //           heroName: singleHero.name,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
                   const SizedBox(height: 10),
                   ListView.builder(
                       primary: false,

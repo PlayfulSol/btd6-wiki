@@ -13,6 +13,7 @@ class GlobalState {
   static List<TowerModel> towers = [];
   static List<String> towerTypes = [];
   static List<HeroModel> heroes = [];
+  static List<MenuHeroModel> menuHeroes = [];
   static List<BasicBloonModel> bloons = [];
   static List<BasicBossModel> bosses = [];
   static List<MapModel> maps = [];

@@ -6,7 +6,8 @@ class HeroSkin extends StatelessWidget {
   final String heroId;
   final String skinId;
   final String skinName;
-  final List<int> skinChange;
+  // final List<int> skinChange;
+  final String skinChange;
 
   const HeroSkin(
       {super.key,
@@ -44,7 +45,8 @@ class HeroSkin extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Image.network(
-                        heroSkinLevelImage(heroId, skinId, skinChange[index]),
+                        heroSkinLevelImage(heroId, skinId,
+                            int.parse(skinChange.split('/n')[index])),
                         width: 200),
                     const SizedBox(height: 20),
                   ])

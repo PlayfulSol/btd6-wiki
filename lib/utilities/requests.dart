@@ -13,12 +13,6 @@ import '/models/map.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 
-// Bloons
-Future<void> getBloonsData() async {
-  getBosses();
-  getBloons();
-}
-
 Future<dynamic> getBloonData(String id) async {
   GlobalState.isLoading = true;
   var data = await http.get(Uri.parse("$baseApiUrl/bloon/$id"));
@@ -37,21 +31,29 @@ Future<dynamic> getBloonData(String id) async {
   }
 }
 
+// Towers
+Future<void> getTowers() async {
+  final jsonConfig =
+      await rootBundle.loadString('assets/data/config/towers.json');
+  final List<dynamic> parsedConfig = json.decode(jsonConfig);
+  GlobalState.towers = parsedConfig.map((e) => TowerModel.fromJson(e)).toList();
+  GlobalState.towerTypes =
+      GlobalState.towers.map((e) => e.type).toSet().toList();
+}
+
 // Heroes
 Future<void> getHeroes() async {
-  var data = await http.get(Uri.parse("$baseApiUrl/heroes"));
+  final jsonConfig =
+      await rootBundle.loadString('assets/data/config/heroes.json');
+  final List<dynamic> parsedConfig = json.decode(jsonConfig);
+  GlobalState.menuHeroes =
+      parsedConfig.map((e) => MenuHeroModel.fromJson(e)).toList();
+}
 
-  var jsonData = json.decode(data.body);
-
-  List<HeroModel> heroes = [];
-
-  for (var h in jsonData) {
-    HeroModel hero = HeroModel.fromJson(h);
-
-    heroes.add(hero);
-  }
-
-  GlobalState.heroes = heroes;
+// Bloons
+Future<void> getBloonsData() async {
+  getBosses();
+  getBloons();
 }
 
 Future<HeroModel> getHeroData(towerId) async {
@@ -70,20 +72,12 @@ Future<HeroModel> getHeroData(towerId) async {
   return heroData;
 }
 
+// Maps
 Future<void> getMaps() async {
   final jsonConfig =
       await rootBundle.loadString('assets/data/config/maps.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.maps = parsedConfig.map((e) => MapModel.fromJson(e)).toList();
-}
-
-Future<void> getTowers() async {
-  final jsonConfig =
-      await rootBundle.loadString('assets/data/config/towers.json');
-  final List<dynamic> parsedConfig = json.decode(jsonConfig);
-  GlobalState.towers = parsedConfig.map((e) => TowerModel.fromJson(e)).toList();
-  GlobalState.towerTypes =
-      GlobalState.towers.map((e) => e.type).toSet().toList();
 }
 
 Future<void> getBloons() async {
