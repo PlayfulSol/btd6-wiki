@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../utilities/constants.dart';
 import '/models/tower.dart';
 
 import '/utilities/utils.dart';
@@ -19,7 +20,7 @@ class MonkeyPath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-        title: Text(getPathTitleFromKey(pathKey),
+        title: Text(pathTitle[pathKey]!,
             style: const TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, color: Colors.teal)),
         children: [
