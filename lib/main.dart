@@ -8,7 +8,6 @@ import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/themes.dart';
 import '/utilities/constants.dart';
-import '/utilities/utils.dart';
 
 void main() => runApp(const MyApp());
 

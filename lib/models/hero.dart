@@ -39,7 +39,6 @@ class HeroModel {
   late final Cost cost;
   late final HeroStats stats;
   late final List<Levels> levels;
-  late final dynamic testStats;
   HeroModel({
     required this.name,
     required this.skinChange,
@@ -50,7 +49,6 @@ class HeroModel {
     required this.cost,
     required this.stats,
     required this.levels,
-    required this.testStats,
   });
 
   HeroModel.fromJson(Map<String, dynamic> json) {
@@ -62,7 +60,6 @@ class HeroModel {
     target = json['target'];
     cost = Cost.fromJson(json['cost']);
     stats = HeroStats.fromJson(json['stats']);
-    testStats = json['stats'];
     if (json['levels'] != null) {
       levels = <Levels>[];
       json['levels'].forEach((v) {
@@ -107,14 +104,12 @@ class Levels {
   late final String name;
   late final String description;
   late final String image;
-  late final String unlock;
   late final dynamic cost;
 
   Levels({
     required this.name,
     required this.description,
     required this.image,
-    required this.unlock,
     required this.cost,
   });
 
@@ -122,7 +117,6 @@ class Levels {
     name = json['name'];
     description = json['levelBody'];
     image = json['image'];
-    unlock = json['unlock'];
     cost = json['cost'];
   }
 }

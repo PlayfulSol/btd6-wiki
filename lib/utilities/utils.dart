@@ -33,21 +33,6 @@ String getPathKeyFromIndex(int index) {
   }
 }
 
-String getPathTitleFromKey(String key) {
-  switch (key) {
-    case 'path1':
-      return 'Top Path';
-    case 'path2':
-      return 'Middle Path';
-    case 'path3':
-      return 'Bottom Path';
-    case 'paragon':
-      return 'Paragon';
-    default:
-      return 'Top Path';
-  }
-}
-
 String costToString(Cost cost) {
   return "Easy: ${cost.easy}, Medium: ${cost.medium}\nHard: ${cost.hard}, Impoppable: ${cost.impoppable}";
 }
@@ -140,29 +125,4 @@ List<MapModel> filterMaps(query) {
         .where((map) => map.difficulty == GlobalState.currentMapDifficulty)
         .toList();
   }
-}
-
-String statToText(key) {
-  if (key == 'damage') {
-    return 'Damage';
-  }
-  if (key == 'pierce') {
-    return 'Pierce';
-  }
-  if (key == 'attackSpeed') {
-    return 'Attack Speed';
-  }
-  if (key == 'range') {
-    return 'Range';
-  }
-  if (key == 'towerBoosts') {
-    return 'Tower Boosts';
-  }
-  if (key == 'camo') {
-    return 'Camo';
-  }
-  if (key == 'levelSpeed') {
-    return 'Level Speed';
-  }
-  return key;
 }

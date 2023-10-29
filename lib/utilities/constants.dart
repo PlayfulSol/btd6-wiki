@@ -28,3 +28,22 @@ const bloondDatatPath = 'assets/data/bloons/';
 const heroDataPath = 'assets/data/heroes/';
 
 PageController pageController = PageController(initialPage: 0);
+
+Map<String, String> statsDictionary = {
+  'damage': 'Damage',
+  'pierce': 'Pierce',
+  'attackSpeed': 'Attack Speed',
+  'range': 'Range',
+  'statusEffects': 'Status Effects',
+  'towerBoosts': 'Tower Boosts',
+  'incomeBoosts': 'Income Boosts',
+  'camo': 'Camo',
+  'levelSpeed': 'Level Speed',
+};
+
+Map<String, String> pathsDictionary = {
+  'path1': 'Top Path',
+  'path2': 'Middle Path',
+  'path3': 'Bottom Path',
+  'paragon': 'Paragon',
+};
