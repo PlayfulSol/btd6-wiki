@@ -28,7 +28,7 @@ const heroDataPath = 'assets/data/heroes/';
 
 PageController pageController = PageController(initialPage: 0);
 
-Map<String, String> statsToText = {
+Map<String, String> statsDictionary = {
   'damage': 'Damage',
   'pierce': 'Pierce',
   'attackSpeed': 'Attack Speed',
@@ -40,7 +40,7 @@ Map<String, String> statsToText = {
   'levelSpeed': 'Level Speed',
 };
 
-Map<String, String> pathTitle = {
+Map<String, String> pathsDictionary = {
   'path1': 'Top Path',
   'path2': 'Middle Path',
   'path3': 'Bottom Path',

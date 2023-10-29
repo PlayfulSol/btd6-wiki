@@ -20,7 +20,7 @@ class MonkeyPath extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-        title: Text(pathTitle[pathKey]!,
+        title: Text(pathsDictionary[pathKey]!,
             style: const TextStyle(
                 fontSize: 24, fontWeight: FontWeight.bold, color: Colors.teal)),
         children: [

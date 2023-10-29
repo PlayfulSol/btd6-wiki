@@ -35,7 +35,8 @@ class StatsList extends StatelessWidget {
               );
             } else {
               return ExpansionTile(
-                title: Text(statsToText[heroStats.data.keys.toList()[index]]!),
+                title:
+                    Text(statsDictionary[heroStats.data.keys.toList()[index]]!),
                 children: [
                   for (final dynamicItemValue in dynamicItem)
                     Padding(
