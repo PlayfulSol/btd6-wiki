@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:btd6wiki/presentation/widgets/bloon_aid_widget.dart';
 import '/models/bloons/single_bloon.dart';
 
 import '/utilities/global_state.dart';
@@ -25,8 +26,10 @@ class SingleBloon extends StatelessWidget {
             children: [
               Image(
                 image: AssetImage(bloonImage(bloon.image)),
-                width: 75,
-                fit: BoxFit.scaleDown,
+                width: 130,
+                // fit: BoxFit.scaleDown,
+                // fit: BoxFit.fill,
+                fit: BoxFit.contain,
               ),
               const SizedBox(height: 10),
               const Text(
@@ -34,7 +37,7 @@ class SingleBloon extends StatelessWidget {
                 style: TextStyle(fontSize: 20),
               ),
               const SizedBox(height: 5),
-              Text(bloon.rbe, textAlign: TextAlign.center),
+              Center(child: BloonAidWidget(data: bloon.rbe)),
               const SizedBox(height: 10),
               const Text("Speed", style: TextStyle(fontSize: 20)),
               const SizedBox(height: 5),
@@ -42,17 +45,13 @@ class SingleBloon extends StatelessWidget {
               const SizedBox(height: 5),
               Text("Absolute units: ${bloon.speed.absolute}"),
               const SizedBox(height: 10),
-              if (bloon.children.isNotEmpty) ...[
-                const Text("Children", style: TextStyle(fontSize: 20)),
-                const SizedBox(height: 10),
-                Text(bloon.children),
-              ],
+              const Text("Children", style: TextStyle(fontSize: 20)),
+              const SizedBox(height: 10),
+              Center(child: BloonAidWidget(data: bloon.children)),
               const SizedBox(height: 20),
-              if (bloon.parents.isNotEmpty) ...[
-                const Text("Parents", style: TextStyle(fontSize: 20)),
-                const SizedBox(height: 10),
-                Text(bloon.parents),
-              ],
+              const Text("Parents", style: TextStyle(fontSize: 20)),
+              const SizedBox(height: 10),
+              Center(child: BloonAidWidget(data: bloon.parents)),
               if (bloon.variants.isNotEmpty) ...[
                 const SizedBox(height: 10),
                 ExpansionTile(

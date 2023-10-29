@@ -43,13 +43,27 @@ class Rounds {
   }
 }
 
+class Relative {
+  late final String id;
+  late final String name;
+  late final String image;
+  late final String value;
+
+  Relative({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.value,
+  });
+}
+
 class SingleBloonModel {
   late final String name;
   late final String image;
-  late final String rbe;
+  late final List<dynamic> rbe;
   late final Speed speed;
-  late final String children;
-  late final String parents;
+  late final List<dynamic> children;
+  late final List<dynamic> parents;
   late final List<Variant> variants;
   late final Rounds rounds;
 
