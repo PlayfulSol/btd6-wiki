@@ -5,9 +5,10 @@ import '../../utilities/images_url.dart';
 import '../../utilities/utils.dart';
 
 class BloonAidWidget extends StatelessWidget {
-  const BloonAidWidget({super.key, required this.data});
+  const BloonAidWidget({super.key, required this.data, required this.title});
 
   final dynamic data;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -16,46 +17,67 @@ class BloonAidWidget extends StatelessWidget {
     bool stringType = typeCheck == 'str' ? true : false;
     // bool mixType = typeCheck == 'mix' ? true : false;
     if (objectType) {
-      return listObject(data);
+      return listObject(data, title);
     } else if (stringType) {
       List<String> newData = data.cast<String>();
 
-      return listString(newData);
+      return listString(newData, title);
     } else {
-      return const Text('Something went wrong');
+      return Container();
     }
   }
 }
 
-Widget listString(List<String> data) {
-  return ListView.builder(
-    shrinkWrap: true,
-    itemCount: data.length,
-    itemBuilder: (context, index) {
-      return Text(data[index]);
-    },
+Widget listString(List<String> data, String title) {
+  return Column(
+    children: [
+      Text(title, style: const TextStyle(fontSize: 22)),
+      const SizedBox(height: 5),
+      ListView.builder(
+        shrinkWrap: true,
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return Center(
+            child: Text(
+              data[index],
+              style: const TextStyle(fontSize: 18),
+            ),
+          );
+        },
+      ),
+    ],
   );
 }
 
-Widget listObject(List<dynamic> data) {
-  return ListView.builder(
-    shrinkWrap: true,
-    itemCount: data.length,
-    itemBuilder: (context, index) {
-      Relative relative = Relative(
-        id: data[index]['id'],
-        name: data[index]['name'],
-        image: data[index]['image'],
-        value: data[index]['value'],
-      );
-
-      return ListTile(
-        leading: Image(
-          image: AssetImage(bloonImage(relative.image)),
-        ),
-        title: Text(relative.name),
-        subtitle: Text(relative.value),
-      );
-    },
+Widget listObject(List<dynamic> data, String title) {
+  return ExpansionTile(
+    initiallyExpanded: (title == 'Children') ? true : false,
+    title: Text(title,
+        style: const TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 20, color: Colors.teal)),
+    children: generateChildren(data),
   );
+}
+
+List<Widget> generateChildren(List<dynamic> data) {
+  List<Widget> items = [];
+
+  for (int index = 0; index < data.length; index++) {
+    Relative relative = Relative(
+      id: data[index]['id'],
+      name: data[index]['name'],
+      image: data[index]['image'],
+      value: data[index]['value'],
+    );
+    ListTile tile = ListTile(
+      leading: Image(
+        image: AssetImage(bloonImage(relative.image)),
+      ),
+      title: Text(relative.name),
+      subtitle: Text('Spawn ${relative.value}'),
+    );
+    items.add(tile);
+  }
+
+  return items;
 }
