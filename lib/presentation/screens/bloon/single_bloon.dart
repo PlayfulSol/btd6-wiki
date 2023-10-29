@@ -6,16 +6,28 @@ import '/models/bloons/single_bloon.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 
-class SingleBloon extends StatelessWidget {
+class SingleBloon extends StatefulWidget {
   final SingleBloonModel bloon;
 
   const SingleBloon({super.key, required this.bloon});
 
   @override
+  State<SingleBloon> createState() => _SingleBloonState();
+}
+
+class _SingleBloonState extends State<SingleBloon> {
+  late String currentTitle;
+  @override
+  void initState() {
+    super.initState();
+    currentTitle = GlobalState.currentTitle;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(GlobalState.currentTitle),
+        title: Text(currentTitle),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -25,7 +37,7 @@ class SingleBloon extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                image: AssetImage(bloonImage(bloon.image)),
+                image: AssetImage(bloonImage(widget.bloon.image)),
                 width: 200,
                 fit: BoxFit.scaleDown,
                 // fit: BoxFit.fill,
@@ -33,32 +45,32 @@ class SingleBloon extends StatelessWidget {
               ),
               const SizedBox(height: 50),
               BloonAidWidget(
-                data: bloon.rbe,
+                data: widget.bloon.rbe,
                 title: "RBE (Red Bloon Equivalent)",
               ),
               const SizedBox(height: 15),
               const Text("Speed", style: TextStyle(fontSize: 22)),
               const SizedBox(height: 5),
               Text(
-                "Relative (to red bloon) ${bloon.speed.relative}",
+                "Relative (to red bloon) ${widget.bloon.speed.relative}",
                 style: const TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 5),
               Text(
-                "Absolute units: ${bloon.speed.absolute}",
+                "Absolute units: ${widget.bloon.speed.absolute}",
                 style: const TextStyle(fontSize: 18),
               ),
               const SizedBox(height: 10),
               BloonAidWidget(
-                data: bloon.children,
+                data: widget.bloon.children,
                 title: "Children",
               ),
               const SizedBox(height: 10),
               BloonAidWidget(
-                data: bloon.parents,
+                data: widget.bloon.parents,
                 title: "Parents",
               ),
-              if (bloon.variants.isNotEmpty) ...[
+              if (widget.bloon.variants.isNotEmpty) ...[
                 const SizedBox(height: 10),
                 ExpansionTile(
                     title: const Text("Variants",
@@ -66,7 +78,7 @@ class SingleBloon extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                             color: Colors.teal)),
-                    children: bloon.variants
+                    children: widget.bloon.variants
                         .map((e) => ListTile(
                               title: Text(e.name),
                               subtitle: Text(e.appearances),
@@ -88,7 +100,7 @@ class SingleBloon extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                           color: Colors.teal)),
-                  children: bloon.rounds.normal
+                  children: widget.bloon.rounds.normal
                       .map((e) => ListTile(
                             title: Text(e),
                           ))
@@ -100,7 +112,7 @@ class SingleBloon extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                           color: Colors.teal)),
-                  children: bloon.rounds.abr
+                  children: widget.bloon.rounds.abr
                       .map((e) => ListTile(
                             title: Text(e),
                           ))
