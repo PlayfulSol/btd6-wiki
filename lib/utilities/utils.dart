@@ -127,6 +127,10 @@ List<MapModel> filterMaps(query) {
   }
 }
 
+List<String> separateString(String stringToSeparate) {
+  return stringToSeparate.split(':');
+}
+
 dynamic extractItemTypeFromList(List<dynamic> data) {
   bool isString = false;
   bool isObject = false;

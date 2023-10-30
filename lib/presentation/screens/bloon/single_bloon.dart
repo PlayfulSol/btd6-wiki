@@ -1,4 +1,5 @@
 import 'package:btd6wiki/utilities/constants.dart';
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:btd6wiki/presentation/widgets/bloon_aid_widget.dart';
@@ -101,7 +102,7 @@ class _SingleBloonState extends State<SingleBloon> {
                                 title: Text(
                                   e.name,
                                   style: normalStyle.copyWith(
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.w600),
                                 ),
                                 subtitle: Text(
                                   e.appearances,
@@ -127,9 +128,19 @@ class _SingleBloonState extends State<SingleBloon> {
                 ),
                 children: widget.bloon.rounds.normal
                     .map((e) => ListTile(
-                          title: Text(
-                            e,
-                            style: normalStyle,
+                          title: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: '${separateString(e)[0]}:',
+                                    style: normalStyle.copyWith(
+                                        fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                  text: separateString(e)[1],
+                                  style: normalStyle,
+                                ),
+                              ],
+                            ),
                           ),
                         ))
                     .toList(),
@@ -142,9 +153,19 @@ class _SingleBloonState extends State<SingleBloon> {
                 ),
                 children: widget.bloon.rounds.abr
                     .map((e) => ListTile(
-                          title: Text(
-                            e,
-                            style: normalStyle,
+                          title: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                    text: '${separateString(e)[0]}:',
+                                    style: normalStyle.copyWith(
+                                        fontWeight: FontWeight.bold)),
+                                TextSpan(
+                                  text: separateString(e)[1],
+                                  style: normalStyle,
+                                ),
+                              ],
+                            ),
                           ),
                         ))
                     .toList(),
