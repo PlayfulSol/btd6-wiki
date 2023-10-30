@@ -8,13 +8,6 @@ class Speed {
     absolute = json['absolute'];
     relative = json['relative'];
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'absolute': absolute,
-      'relative': relative,
-    };
-  }
 }
 
 class Variant {

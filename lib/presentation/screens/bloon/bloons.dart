@@ -67,7 +67,7 @@ class _BloonsState extends State<Bloons> {
                           title: Text(
                             snapshot.data[index].name,
                             style: normalStyle.copyWith(
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                           ),
                           onTap: () async {
                             if (!GlobalState.isLoading) {

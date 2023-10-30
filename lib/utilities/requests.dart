@@ -56,22 +56,6 @@ Future<void> getBloonsData() async {
   getBloons();
 }
 
-Future<HeroModel> getHeroData(towerId) async {
-  GlobalState.isLoading = true;
-
-  var data = (await http.get(Uri.parse("$baseApiUrl/hero/$towerId")));
-
-  var jsonData = json.decode(data.body);
-
-  HeroModel heroData = HeroModel.fromJson(jsonData);
-
-  GlobalState.currentTitle = heroData.name;
-
-  GlobalState.isLoading = false;
-
-  return heroData;
-}
-
 // Maps
 Future<void> getMaps() async {
   final jsonConfig =

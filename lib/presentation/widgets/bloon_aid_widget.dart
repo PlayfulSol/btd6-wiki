@@ -19,12 +19,9 @@ class BloonAidWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String? typeCheck = extractItemTypeFromList(data);
-    bool objectType = typeCheck == 'obj' ? true : false;
-    bool stringType = typeCheck == 'str' ? true : false;
-    // bool mixType = typeCheck == 'mix' ? true : false;
-    if (objectType) {
+    if (typeCheck == 'obj') {
       return listObject(data, title, context);
-    } else if (stringType) {
+    } else if (typeCheck == 'str') {
       List<String> newData = data.cast<String>();
       return listString(newData, title);
     } else {
@@ -35,7 +32,7 @@ class BloonAidWidget extends StatelessWidget {
 
 Widget listObject(List<dynamic> data, String title, BuildContext context) {
   return ExpansionTile(
-    initiallyExpanded: (title == 'Children') ? true : false,
+    initiallyExpanded: title == 'Children',
     title: Text(
       title,
       style: smallTitleStyle.copyWith(color: Colors.teal),
