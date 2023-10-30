@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'package:btd6wiki/presentation/widgets/bloon_aid_widget.dart';
@@ -42,22 +43,39 @@ class _SingleBloonState extends State<SingleBloon> {
                 height: MediaQuery.of(context).size.width * 0.35,
                 filterQuality: FilterQuality.high,
               ),
+              Text(
+                widget.bloon.fullName,
+                style: bigTitleStyle,
+              ),
+              const SizedBox(height: 5),
+              Divider(
+                thickness: 2,
+                color: Colors.grey[600],
+              ),
               const SizedBox(height: 15),
               BloonAidWidget(
                 data: widget.bloon.rbe,
                 title: "RBE (Red Bloon Equivalent)",
               ),
               const SizedBox(height: 15),
-              const Text("Speed", style: TextStyle(fontSize: 22)),
+              const Text(
+                "Speed",
+                style: titleStyle,
+              ),
               const SizedBox(height: 5),
               Text(
                 "Relative (to red bloon) ${widget.bloon.speed.relative}",
-                style: const TextStyle(fontSize: 18),
+                style: normalStyle,
               ),
               const SizedBox(height: 5),
               Text(
                 "Absolute units: ${widget.bloon.speed.absolute}",
-                style: const TextStyle(fontSize: 18),
+                style: normalStyle,
+              ),
+              const SizedBox(height: 10),
+              Divider(
+                thickness: 2,
+                color: Colors.grey[600],
               ),
               const SizedBox(height: 10),
               BloonAidWidget(
@@ -72,17 +90,22 @@ class _SingleBloonState extends State<SingleBloon> {
               if (widget.bloon.variants.isNotEmpty) ...[
                 const SizedBox(height: 10),
                 ExpansionTile(
-                    title: const Text("Variants",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                            color: Colors.teal)),
+                    title: Text(
+                      "Variants",
+                      style: smallTitleStyle.copyWith(color: Colors.teal),
+                    ),
                     children: widget.bloon.variants
                         .map((e) => Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: ListTile(
-                                title: Text(e.name),
-                                subtitle: Text(e.appearances),
+                                title: Text(
+                                  e.name,
+                                  style: smallTitleStyle,
+                                ),
+                                subtitle: Text(
+                                  e.appearances,
+                                  style: normalStyle,
+                                ),
                                 leading: SizedBox(
                                   width: 50,
                                   child: Image.asset(
@@ -95,30 +118,36 @@ class _SingleBloonState extends State<SingleBloon> {
                 const SizedBox(height: 10)
               ],
               const SizedBox(height: 10),
-              const Text("Rounds", style: TextStyle(fontSize: 20)),
+              const Text("Rounds", style: titleStyle),
               ExpansionTile(
-                  title: const Text("Normal",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.teal)),
-                  children: widget.bloon.rounds.normal
-                      .map((e) => ListTile(
-                            title: Text(e),
-                          ))
-                      .toList()),
+                title: Text(
+                  "Normal",
+                  style: smallTitleStyle.copyWith(color: Colors.teal),
+                ),
+                children: widget.bloon.rounds.normal
+                    .map((e) => ListTile(
+                          title: Text(
+                            e,
+                            style: normalStyle,
+                          ),
+                        ))
+                    .toList(),
+              ),
               const SizedBox(height: 10),
               ExpansionTile(
-                  title: const Text("ABR",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                          color: Colors.teal)),
-                  children: widget.bloon.rounds.abr
-                      .map((e) => ListTile(
-                            title: Text(e),
-                          ))
-                      .toList()),
+                title: Text(
+                  "ABR",
+                  style: smallTitleStyle.copyWith(color: Colors.teal),
+                ),
+                children: widget.bloon.rounds.abr
+                    .map((e) => ListTile(
+                          title: Text(
+                            e,
+                            style: normalStyle,
+                          ),
+                        ))
+                    .toList(),
+              ),
             ],
           ),
         ),

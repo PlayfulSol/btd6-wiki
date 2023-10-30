@@ -29,7 +29,7 @@ const heroDataPath = 'assets/data/heroes/';
 
 PageController pageController = PageController(initialPage: 0);
 
-Map<String, String> statsDictionary = {
+const Map<String, String> statsDictionary = {
   'damage': 'Damage',
   'pierce': 'Pierce',
   'attackSpeed': 'Attack Speed',
@@ -41,9 +41,28 @@ Map<String, String> statsDictionary = {
   'levelSpeed': 'Level Speed',
 };
 
-Map<String, String> pathsDictionary = {
+const Map<String, String> pathsDictionary = {
   'path1': 'Top Path',
   'path2': 'Middle Path',
   'path3': 'Bottom Path',
   'paragon': 'Paragon',
 };
+
+const TextStyle normalStyle = TextStyle(
+  fontSize: 16,
+);
+
+const TextStyle smallTitleStyle = TextStyle(
+  fontSize: 19,
+  fontWeight: FontWeight.bold,
+);
+
+const TextStyle titleStyle = TextStyle(
+  fontSize: 21,
+  fontWeight: FontWeight.bold,
+);
+
+const TextStyle bigTitleStyle = TextStyle(
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
+);

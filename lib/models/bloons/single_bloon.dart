@@ -59,6 +59,7 @@ class Relative {
 
 class SingleBloonModel {
   late final String name;
+  late final String fullName;
   late final String image;
   late final List<dynamic> rbe;
   late final Speed speed;
@@ -79,6 +80,7 @@ class SingleBloonModel {
 
   SingleBloonModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
+    fullName = json['fullName'];
     image = json['image'];
     rbe = json['rbe'];
     speed = Speed.fromJson(json['speed']);

@@ -29,7 +29,7 @@ class _BloonsState extends State<Bloons> {
       child: ListView(children: [
         const Text(
           "Bloons",
-          style: TextStyle(fontSize: 20),
+          style: bigTitleStyle,
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 15),
@@ -65,8 +65,10 @@ class _BloonsState extends State<Bloons> {
                                   fit: BoxFit.scaleDown,
                                 ),
                               ),
-                              title: Text(snapshot.data[index].name,
-                                  style: const TextStyle(fontSize: 14)),
+                              title: Text(
+                                snapshot.data[index].name,
+                                style: smallTitleStyle,
+                              ),
                               onTap: () async {
                                 if (!GlobalState.isLoading) {
                                   var id = snapshot.data[index].id;
@@ -97,8 +99,11 @@ class _BloonsState extends State<Bloons> {
           },
         ),
         const SizedBox(height: 30),
-        const Text("Bosses",
-            style: TextStyle(fontSize: 20), textAlign: TextAlign.center),
+        const Text(
+          "Bosses",
+          style: bigTitleStyle,
+          textAlign: TextAlign.center,
+        ),
         const SizedBox(height: 15),
         FutureBuilder(
           future: Future.value(GlobalState.bosses),
@@ -125,8 +130,11 @@ class _BloonsState extends State<Bloons> {
                               NetworkImage(bossImage(snapshot.data[index].id)),
                         ),
                         title: Text(snapshot.data[index].name,
-                            style: const TextStyle(fontSize: 14)),
-                        subtitle: Text(snapshot.data[index].type),
+                            style: smallTitleStyle),
+                        subtitle: Text(
+                          snapshot.data[index].type,
+                          style: normalStyle,
+                        ),
                         onTap: () {
                           if (!GlobalState.isLoading) {
                             getBloonData(snapshot.data[index].id)

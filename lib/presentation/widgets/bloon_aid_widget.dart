@@ -36,9 +36,10 @@ class BloonAidWidget extends StatelessWidget {
 Widget listObject(List<dynamic> data, String title, BuildContext context) {
   return ExpansionTile(
     initiallyExpanded: (title == 'Children') ? true : false,
-    title: Text(title,
-        style: const TextStyle(
-            fontWeight: FontWeight.bold, fontSize: 20, color: Colors.teal)),
+    title: Text(
+      title,
+      style: smallTitleStyle.copyWith(color: Colors.teal),
+    ),
     children: generateChildren(data, context),
   );
 }
@@ -57,8 +58,14 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
       leading: Image(
         image: AssetImage(bloonImage(relative.image)),
       ),
-      title: Text(relative.name),
-      subtitle: Text('Spawn ${relative.value}'),
+      title: Text(
+        relative.name,
+        style: smallTitleStyle,
+      ),
+      subtitle: Text(
+        'Spawn ${relative.value}',
+        style: normalStyle,
+      ),
       onTap: () async {
         var id = relative.id;
         var path = '${bloonsDataPath + id}.json';
@@ -83,7 +90,10 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
 Widget listString(List<String> data, String title) {
   return Column(
     children: [
-      Text(title, style: const TextStyle(fontSize: 22)),
+      Text(
+        title,
+        style: smallTitleStyle,
+      ),
       const SizedBox(height: 5),
       ListView.builder(
         shrinkWrap: true,
@@ -92,7 +102,7 @@ Widget listString(List<String> data, String title) {
           return Center(
             child: Text(
               data[index],
-              style: const TextStyle(fontSize: 18),
+              style: normalStyle,
             ),
           );
         },
