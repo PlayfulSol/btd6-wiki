@@ -38,12 +38,11 @@ class _SingleBloonState extends State<SingleBloon> {
             children: [
               Image(
                 image: AssetImage(bloonImage(widget.bloon.image)),
-                width: 200,
-                fit: BoxFit.scaleDown,
-                // fit: BoxFit.fill,
-                // fit: BoxFit.contain,
+                width: MediaQuery.of(context).size.width * 0.3,
+                height: MediaQuery.of(context).size.width * 0.35,
+                filterQuality: FilterQuality.high,
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 15),
               BloonAidWidget(
                 data: widget.bloon.rbe,
                 title: "RBE (Red Bloon Equivalent)",
@@ -79,13 +78,16 @@ class _SingleBloonState extends State<SingleBloon> {
                             fontSize: 20,
                             color: Colors.teal)),
                     children: widget.bloon.variants
-                        .map((e) => ListTile(
-                              title: Text(e.name),
-                              subtitle: Text(e.appearances),
-                              leading: SizedBox(
-                                width: 50,
-                                child: Image.asset(
-                                  bloonImage(e.image),
+                        .map((e) => Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              child: ListTile(
+                                title: Text(e.name),
+                                subtitle: Text(e.appearances),
+                                leading: SizedBox(
+                                  width: 50,
+                                  child: Image.asset(
+                                    bloonImage(e.image),
+                                  ),
                                 ),
                               ),
                             ))

@@ -61,13 +61,12 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
       subtitle: Text('Spawn ${relative.value}'),
       onTap: () async {
         var id = relative.id;
-        var path = '${bloondDatatPath + id}.json';
+        var path = '${bloonsDataPath + id}.json';
         final data = await rootBundle.loadString(path);
         var jsonData = json.decode(data);
         SingleBloonModel bloonData = SingleBloonModel.fromJson(jsonData);
         GlobalState.currentTitle = bloonData.name;
-        Navigator.pop(context);
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) => SingleBloon(bloon: bloonData),

@@ -58,15 +58,19 @@ class _BloonsState extends State<Bloons> {
                               mouseCursor: SystemMouseCursors.click,
                               leading: CircleAvatar(
                                 backgroundColor: Colors.transparent,
-                                backgroundImage: AssetImage(
-                                    bloonImage(snapshot.data[index].image)),
+                                child: Image(
+                                  image: AssetImage(
+                                    bloonImage(snapshot.data[index].image),
+                                  ),
+                                  fit: BoxFit.scaleDown,
+                                ),
                               ),
                               title: Text(snapshot.data[index].name,
                                   style: const TextStyle(fontSize: 14)),
                               onTap: () async {
                                 if (!GlobalState.isLoading) {
                                   var id = snapshot.data[index].id;
-                                  var path = '${bloondDatatPath + id}.json';
+                                  var path = '${bloonsDataPath + id}.json';
                                   final data =
                                       await rootBundle.loadString(path);
                                   var jsonData = json.decode(data);
