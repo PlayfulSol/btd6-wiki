@@ -60,7 +60,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
       ),
       title: Text(
         relative.name,
-        style: smallTitleStyle,
+        style: normalStyle.copyWith(fontWeight: FontWeight.bold),
       ),
       subtitle: Text(
         'Spawn ${relative.value}',

@@ -100,7 +100,8 @@ class _SingleBloonState extends State<SingleBloon> {
                               child: ListTile(
                                 title: Text(
                                   e.name,
-                                  style: smallTitleStyle,
+                                  style: normalStyle.copyWith(
+                                      fontWeight: FontWeight.bold),
                                 ),
                                 subtitle: Text(
                                   e.appearances,

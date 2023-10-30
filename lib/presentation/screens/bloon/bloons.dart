@@ -51,46 +51,43 @@ class _BloonsState extends State<Bloons> {
                   itemBuilder: (context, index) {
                     return Center(
                       child: Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            ListTile(
-                              mouseCursor: SystemMouseCursors.click,
-                              leading: CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                child: Image(
-                                  image: AssetImage(
-                                    bloonImage(snapshot.data[index].image),
-                                  ),
-                                  fit: BoxFit.scaleDown,
-                                ),
+                        child: ListTile(
+                          mouseCursor: SystemMouseCursors.click,
+                          minVerticalPadding: 25,
+                          contentPadding: const EdgeInsets.only(left: 10),
+                          horizontalTitleGap: 10,
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            child: Image(
+                              image: AssetImage(
+                                bloonImage(snapshot.data[index].image),
                               ),
-                              title: Text(
-                                snapshot.data[index].name,
-                                style: smallTitleStyle,
-                              ),
-                              onTap: () async {
-                                if (!GlobalState.isLoading) {
-                                  var id = snapshot.data[index].id;
-                                  var path = '${bloonsDataPath + id}.json';
-                                  final data =
-                                      await rootBundle.loadString(path);
-                                  var jsonData = json.decode(data);
-                                  SingleBloonModel bloonData =
-                                      SingleBloonModel.fromJson(jsonData);
-                                  // ignore: use_build_context_synchronously
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          SingleBloon(bloon: bloonData),
-                                    ),
-                                  );
-                                  GlobalState.currentTitle = bloonData.name;
-                                }
-                              },
                             ),
-                          ],
+                          ),
+                          title: Text(
+                            snapshot.data[index].name,
+                            style: normalStyle.copyWith(
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onTap: () async {
+                            if (!GlobalState.isLoading) {
+                              var id = snapshot.data[index].id;
+                              var path = '${bloonsDataPath + id}.json';
+                              final data = await rootBundle.loadString(path);
+                              var jsonData = json.decode(data);
+                              SingleBloonModel bloonData =
+                                  SingleBloonModel.fromJson(jsonData);
+                              // ignore: use_build_context_synchronously
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SingleBloon(bloon: bloonData),
+                                ),
+                              );
+                              GlobalState.currentTitle = bloonData.name;
+                            }
+                          },
                         ),
                       ),
                     );
