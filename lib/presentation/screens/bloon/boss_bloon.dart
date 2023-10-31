@@ -27,7 +27,7 @@ class BossBloon extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.network(bloonImage(bloon.id), width: 200),
+                  Image.network(bossImage(bloon.id), width: 200),
                   const SizedBox(height: 10),
                   Text("Speed: ${bloon.speed}",
                       style: const TextStyle(

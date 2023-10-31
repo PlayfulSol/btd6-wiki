@@ -126,3 +126,41 @@ List<MapModel> filterMaps(query) {
         .toList();
   }
 }
+
+List<String> separateString(String stringToSeparate) {
+  if (stringToSeparate.contains(':')) {
+    List<String> returnList = stringToSeparate.split(':');
+    returnList[0] += ':';
+    return returnList;
+  } else {
+    return ["", stringToSeparate];
+  }
+}
+
+dynamic extractItemTypeFromList(List<dynamic> data) {
+  bool isString = false;
+  bool isObject = false;
+
+  if (data.isEmpty) {
+    return null; // Return null for an empty list (or handle it differently if needed)
+  }
+
+  for (int i = 0; i < data.length; i++) {
+    if (data[i] is String && data[i] != 'None') {
+      isString = true;
+    } else if (data[i] is Map<String, dynamic>) {
+      // Assuming objects are Map<String, dynamic>, you can adjust the type check as needed
+      isObject = true;
+    }
+  }
+
+  if (isString && isObject) {
+    return "mix"; // Both strings and objects are present
+  } else if (isString) {
+    return "str"; // Only strings are present
+  } else if (isObject) {
+    return "obj"; // Only objects are present
+  } else {
+    return "none"; // No strings or objects found
+  }
+}

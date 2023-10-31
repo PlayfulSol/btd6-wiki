@@ -1,60 +1,86 @@
-import '/models/bloons/bloon_hierarchy.dart';
+class Speed {
+  late final String absolute;
+  late final String relative;
 
-class SingleBloonModel {
+  Speed({required this.absolute, required this.relative});
+
+  Speed.fromJson(Map<String, dynamic> json) {
+    absolute = json['absolute'];
+    relative = json['relative'];
+  }
+}
+
+class Variant {
+  late final String image;
+  late final String name;
+  late final String appearances;
+
+  Variant({required this.image, required this.name, required this.appearances});
+
+  Variant.fromJson(Map<String, dynamic> json) {
+    image = json['image'];
+    name = json['name'];
+    appearances = json['appearances'];
+  }
+}
+
+class Rounds {
+  late final List<String> normal;
+  late final List<String> abr;
+
+  Rounds({required this.normal, required this.abr});
+
+  Rounds.fromJson(Map<String, dynamic> json) {
+    normal = List<String>.from(json['normal']);
+    abr = List<String>.from(json['abr']);
+  }
+}
+
+class Relative {
   late final String id;
   late final String name;
-  late final String type;
-  late final int rbe;
-  late final dynamic speed;
-  dynamic hp;
-  int? initialRound;
-  int? initialRoundABR;
-  late final List<BloonHierarchyModel> children;
-  late final List<BloonHierarchyModel> parents;
-  late final List<String> immunities;
-  late final List<String> variants;
+  late final String image;
+  late final String value;
+
+  Relative({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.value,
+  });
+}
+
+class SingleBloonModel {
+  late final String name;
+  late final String fullName;
+  late final String image;
+  late final List<dynamic> rbe;
+  late final Speed speed;
+  late final List<dynamic> children;
+  late final List<dynamic> parents;
+  late final List<Variant> variants;
+  late final Rounds rounds;
 
   SingleBloonModel(
-      {required this.id,
-      required this.name,
-      required this.type,
+      {required this.name,
+      required this.image,
       required this.rbe,
       required this.speed,
-      this.hp,
-      this.initialRound,
-      this.initialRoundABR,
       required this.children,
       required this.parents,
-      required this.immunities,
-      required this.variants});
+      required this.variants,
+      required this.rounds});
 
   SingleBloonModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
     name = json['name'];
-    type = json['type'];
+    fullName = json['fullName'];
+    image = json['image'];
     rbe = json['rbe'];
-    speed = json['speed'];
-    hp = json['hp'];
-    initialRound = json['initialRound'];
-    initialRoundABR = json['initialRoundABR'];
-    if (json['children'] != null) {
-      children = <BloonHierarchyModel>[];
-      json['children'].forEach((v) {
-        children.add(BloonHierarchyModel.fromJson(v));
-      });
-    }
-    if (json['parents'] != null) {
-      parents = <BloonHierarchyModel>[];
-      json['parents'].forEach((v) {
-        parents.add(BloonHierarchyModel.fromJson(v));
-      });
-    }
-    if (json['immunities'] != null) {
-      immunities = <String>[];
-      json['immunities'].forEach((v) {
-        immunities.add(v);
-      });
-    }
-    variants = json['variants'].cast<String>();
+    speed = Speed.fromJson(json['speed']);
+    children = json['children'];
+    parents = json['parents'];
+    variants = List<Variant>.from(
+        json['variants'].map((e) => Variant.fromJson(e)).toList());
+    rounds = Rounds.fromJson(json['rounds']);
   }
 }

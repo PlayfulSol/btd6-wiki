@@ -1,13 +1,4 @@
 import '/utilities/constants.dart';
-import '/utilities/utils.dart';
-
-String towerBaseImage(String towerId) {
-  return '$baseImageUrl/towers/$towerId/tower.png';
-}
-
-String towerPathImage(String monkeyId, String pathKey, int index) {
-  return '$baseImageUrl/towers/$monkeyId/${getTowerLevel(pathKey, index)}.png';
-}
 
 // String heroBaseImage(String heroId) {
 //   return '$baseImageUrl/heroes/$heroId/hero.png';
@@ -25,12 +16,12 @@ String heroSkinLevelImage(String heroId, String skinId, int level) {
   return '$baseImageUrl/heroes/$heroId/$skinId/$level.png';
 }
 
-String bloonImage(String bloonId) {
+String bossImage(String bloonId) {
   return '$baseImageUrl/bloons/$bloonId/base.png';
 }
 
-String bloonVariantImage(String bloonId, String variantId) {
-  return '$baseImageUrl/bloons/$bloonId/$variantId.png';
+String bloonImage(String image) {
+  return 'assets/images/bloons/$image';
 }
 
 String mapImage(String image) {

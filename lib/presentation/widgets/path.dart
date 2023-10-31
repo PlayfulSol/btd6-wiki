@@ -67,28 +67,6 @@ class MonkeyPath extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                // a closed list of all the effects
-                // if (path[index].effects.isNotEmpty) ...[
-                //   ExpansionTile(
-                //     title: const Text("Effects:"),
-                //     children: [
-                //       ListView.builder(
-                //           shrinkWrap: true,
-                //           primary: false,
-                //           itemCount: path[index].effects.length,
-                //           itemBuilder: (context, effectIndex) => Column(
-                //                 children: [
-                //                   Text(
-                //                     path[index].effects[effectIndex],
-                //                     textAlign: TextAlign.center,
-                //                   ),
-                //                   const SizedBox(height: 15),
-                //                 ],
-                //               )),
-                //     ],
-                //   ),
-                //   const SizedBox(height: 30),
-                // ],
               ],
             ),
           ),
