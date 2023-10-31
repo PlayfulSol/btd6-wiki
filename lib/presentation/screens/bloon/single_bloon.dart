@@ -132,7 +132,7 @@ class _SingleBloonState extends State<SingleBloon> {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                    text: '${separateString(e)[0]}:',
+                                    text: separateString(e)[0],
                                     style: normalStyle.copyWith(
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
@@ -157,7 +157,7 @@ class _SingleBloonState extends State<SingleBloon> {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                    text: '${separateString(e)[0]}:',
+                                    text: separateString(e)[0],
                                     style: normalStyle.copyWith(
                                         fontWeight: FontWeight.bold)),
                                 TextSpan(
