@@ -25,42 +25,30 @@ class DeveloperInfo extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Expanded(
+            Flexible(
+              flex: 3,
               child: Text(
                 name,
                 textAlign: TextAlign.center,
               ),
             ),
-            IconButton(
-              icon: const Icon(Icons.email),
-              onPressed: () async {
-                final Uri emailLaunchUri = Uri(
-                  scheme: 'mailto',
-                  path: email,
-                  query: encodeQueryParameters({'subject': 'About BTD6 Wiki'}),
-                );
-                if (!await launchUrl(emailLaunchUri)) {
-                  throw 'Could not launch $emailLaunchUri';
-                }
-              },
+            Flexible(
+              child: IconButton(
+                icon: const Icon(Icons.email),
+                onPressed: () => openMail(email),
+              ),
             ),
-            IconButton(
-              icon: const FaIcon(FontAwesomeIcons.github),
-              onPressed: () async {
-                final Uri url = Uri.parse(githubUrl);
-                if (!await launchUrl(url)) {
-                  throw 'Could not launch $url';
-                }
-              },
+            Flexible(
+              child: IconButton(
+                icon: const FaIcon(FontAwesomeIcons.github),
+                onPressed: () => openUrl(githubUrl),
+              ),
             ),
-            IconButton(
-              icon: const FaIcon(FontAwesomeIcons.linkedin),
-              onPressed: () async {
-                final Uri url = Uri.parse(githubUrl);
-                if (!await launchUrl(url)) {
-                  throw 'Could not launch $url';
-                }
-              },
+            Flexible(
+              child: IconButton(
+                icon: const FaIcon(FontAwesomeIcons.linkedin),
+                onPressed: () => openUrl(githubUrl),
+              ),
             ),
           ],
         ),
