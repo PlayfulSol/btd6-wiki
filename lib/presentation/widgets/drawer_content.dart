@@ -1,7 +1,7 @@
 import 'package:btd6wiki/presentation/widgets/about_us.dart';
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/tower/towers.dart';
@@ -165,15 +165,14 @@ class _DrawerContentState extends State<DrawerContent> {
           children: [
             const AboutUsPopup(),
             ElevatedButton.icon(
-                onPressed: () async {
-                  final Uri url = Uri.parse(
-                      'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki');
-                  if (!await launchUrl(url)) {
-                    throw Exception('Could not launch $url');
-                  }
-                },
-                icon: const FaIcon(FontAwesomeIcons.googlePlay),
-                label: const Text('Rate Us'))
+              onPressed: () => openUrl(
+                  'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki'),
+              icon: const FaIcon(FontAwesomeIcons.googlePlay),
+              label: const Text('Rate Us'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.teal),
+              ),
+            ),
           ],
         ),
         const SizedBox(

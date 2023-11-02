@@ -1,7 +1,7 @@
 import 'package:btd6wiki/presentation/widgets/developer_info.dart';
+import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../utilities/utils.dart';
 
@@ -11,6 +11,9 @@ class AboutUsPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(Colors.teal),
+      ),
       onPressed: () {
         showDialog(
           context: context,
@@ -34,66 +37,76 @@ class AboutUs extends StatelessWidget {
         'About Us',
         textAlign: TextAlign.center,
       ),
+      titleTextStyle: bigTitleStyle,
+      contentPadding: const EdgeInsets.fromLTRB(15, 15, 15, 25),
       content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () async {
-                final Uri emailLaunchUri = Uri(
-                  scheme: 'mailto',
-                  path: 'Playfulsols@gamil.com',
-                  query: encodeQueryParameters({'subject': 'About BTD6 Wiki'}),
-                );
-                if (!await launchUrl(emailLaunchUri)) {
-                  throw 'Could not launch $emailLaunchUri';
-                }
-              },
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [Icon(Icons.email), Text('  Contact Us')],
-              ),
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.teal),
             ),
-            const SizedBox(height: 15),
-            const Text(
-              'This app is made with love by:',
-              style: TextStyle(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+            onPressed: () => openMail('Playfulsols@gamil.com'),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(Icons.email),
+                SizedBox(width: 7),
+                Text(
+                  'Contact Us',
+                  style: normalStyle,
+                )
+              ],
             ),
-            const SizedBox(height: 15),
-            const DeveloperInfo(
-              name: 'Asaf Hadad',
-              email: 'asaf147369@gmail.com',
-              githubUrl: 'https://github.com/asaf147369',
+          ),
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.teal),
             ),
-            const DeveloperInfo(
-              name: 'Shai Holczer',
-              email: 'Shaitnto@gmail.com',
-              githubUrl: 'https://github.com/namelessto',
+            onPressed: () =>
+                openUrl('https://github.com/PlayfulSol/flutter-btd6-wiki'),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                FaIcon(FontAwesomeIcons.github),
+                SizedBox(width: 7),
+                Text(
+                  'To Our GitHub',
+                  style: normalStyle,
+                )
+              ],
             ),
-            ListTile(
-              leading: const FaIcon(FontAwesomeIcons.github),
-              title: Text(
-                'To Our GitHub',
-                style: TextStyle(
-                  color: Colors.grey[300],
-                  fontSize: 16,
-                ),
-              ),
-              onTap: () async {
-                final Uri url = Uri.parse(
-                    'https://github.com/PlayfulSol/flutter-btd6-wiki');
-                if (!await launchUrl(url)) {
-                  throw Exception('Could not launch $url');
-                }
-              },
-            ),
-          ]),
+          ),
+          const SizedBox(height: 15),
+          const Text(
+            'This app is made with love by:',
+            style: TextStyle(fontWeight: FontWeight.bold),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 15),
+          const DeveloperInfo(
+            name: 'Asaf Hadad',
+            email: 'asaf147369@gmail.com',
+            githubUrl: 'https://github.com/asaf147369',
+            linkedinUrl: 'https://www.linkedin.com/in/asaf-hadad/',
+          ),
+          const DeveloperInfo(
+            name: 'Shai Holczer',
+            email: 'Shaitnto@gmail.com',
+            githubUrl: 'https://github.com/namelessto',
+            linkedinUrl: 'https://www.linkedin.com/in/shai-holczer/',
+          ),
+        ],
+      ),
       actions: [
         TextButton(
           style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.teal)),
+            backgroundColor: MaterialStateProperty.all(Colors.teal),
+          ),
           onPressed: () {
             Navigator.of(context).pop();
           },
