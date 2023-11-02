@@ -1,4 +1,6 @@
+import 'package:btd6wiki/presentation/widgets/about_us.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '/presentation/screens/maps/maps.dart';
@@ -158,28 +160,13 @@ class _DrawerContentState extends State<DrawerContent> {
         Expanded(
           child: Container(),
         ),
-        ListTile(
-          leading: const Image(
-            image: AssetImage('assets/github_logo.png'),
-            width: 24,
-            height: 24,
-            fit: BoxFit.fill,
-          ),
-          title: Text(
-            'To contribute, visit our GitHub ',
-            style: TextStyle(
-              color: Colors.grey[300],
-              fontSize: 16,
-            ),
-          ),
-          onTap: () async {
-            final Uri url =
-                Uri.parse('https://github.com/PlayfulSol/flutter-btd6-wiki');
-            if (!await launchUrl(url)) {
-              throw Exception('Could not launch $url');
-            }
-          },
-        ),
+        Row(children: [
+          const AboutUsPopup(),
+          ElevatedButton.icon(
+              onPressed: null,
+              icon: FaIcon(FontAwesomeIcons.googlePlay),
+              label: Text('Rate Us'))
+        ])
       ],
     ));
   }
