@@ -1,5 +1,7 @@
+import 'package:btd6wiki/presentation/widgets/about_us.dart';
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/tower/towers.dart';
@@ -158,27 +160,23 @@ class _DrawerContentState extends State<DrawerContent> {
         Expanded(
           child: Container(),
         ),
-        ListTile(
-          leading: const Image(
-            image: AssetImage('assets/github_logo.png'),
-            width: 24,
-            height: 24,
-            fit: BoxFit.fill,
-          ),
-          title: Text(
-            'To contribute, visit our GitHub ',
-            style: TextStyle(
-              color: Colors.grey[300],
-              fontSize: 16,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const AboutUsPopup(),
+            ElevatedButton.icon(
+              onPressed: () => openUrl(
+                  'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki'),
+              icon: const FaIcon(FontAwesomeIcons.googlePlay),
+              label: const Text('Rate Us'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.teal),
+              ),
             ),
-          ),
-          onTap: () async {
-            final Uri url =
-                Uri.parse('https://github.com/PlayfulSol/flutter-btd6-wiki');
-            if (!await launchUrl(url)) {
-              throw Exception('Could not launch $url');
-            }
-          },
+          ],
+        ),
+        const SizedBox(
+          height: 10,
         ),
       ],
     ));

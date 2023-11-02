@@ -1,3 +1,5 @@
+import 'package:url_launcher/url_launcher.dart';
+
 import '/utilities/global_state.dart';
 
 import '/models/map.dart';
@@ -162,5 +164,30 @@ dynamic extractItemTypeFromList(List<dynamic> data) {
     return "obj"; // Only objects are present
   } else {
     return "none"; // No strings or objects found
+  }
+}
+
+String? encodeQueryParameters(Map<String, String> params) {
+  return params.entries
+      .map((MapEntry<String, String> e) =>
+          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+      .join('&');
+}
+
+Future<void> openUrl(String urlString) async {
+  final Uri url = Uri.parse(urlString);
+  if (!await launchUrl(url)) {
+    throw 'Could not launch $url';
+  }
+}
+
+Future<void> openMail(String mailString) async {
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: mailString,
+    query: encodeQueryParameters({'subject': 'About BTD6 Wiki'}),
+  );
+  if (!await launchUrl(emailLaunchUri)) {
+    throw 'Could not launch $emailLaunchUri';
   }
 }
