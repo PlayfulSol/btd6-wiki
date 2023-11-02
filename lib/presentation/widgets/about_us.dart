@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../utilities/utils.dart';
+
 class AboutUsPopup extends StatelessWidget {
   const AboutUsPopup({super.key});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style:
-          ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.teal)),
       onPressed: () {
         showDialog(
           context: context,
@@ -36,22 +36,25 @@ class AboutUs extends StatelessWidget {
       ),
       content: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            GestureDetector(
-                onTap: () async {
-                  final Uri emailLaunchUri = Uri(
-                    scheme: 'mailto',
-                    path: 'Playfulsols@gamil.com',
-                    queryParameters: {'subject': 'About BTD6 Wiki'},
-                  );
-                  if (!await launchUrl(emailLaunchUri)) {
-                    throw 'Could not launch $emailLaunchUri';
-                  }
-                },
-                child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Icon(Icons.email), Text('  Contact Us')])),
+            ElevatedButton(
+              onPressed: () async {
+                final Uri emailLaunchUri = Uri(
+                  scheme: 'mailto',
+                  path: 'Playfulsols@gamil.com',
+                  query: encodeQueryParameters({'subject': 'About BTD6 Wiki'}),
+                );
+                if (!await launchUrl(emailLaunchUri)) {
+                  throw 'Could not launch $emailLaunchUri';
+                }
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [Icon(Icons.email), Text('  Contact Us')],
+              ),
+            ),
             const SizedBox(height: 15),
             const Text(
               'This app is made with love by:',

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../utilities/utils.dart';
+
 class DeveloperInfo extends StatelessWidget {
   final String name;
   final String email;
@@ -35,7 +37,7 @@ class DeveloperInfo extends StatelessWidget {
                 final Uri emailLaunchUri = Uri(
                   scheme: 'mailto',
                   path: email,
-                  queryParameters: {'subject': 'About BTD6 Wiki'},
+                  query: encodeQueryParameters({'subject': 'About BTD6 Wiki'}),
                 );
                 if (!await launchUrl(emailLaunchUri)) {
                   throw 'Could not launch $emailLaunchUri';

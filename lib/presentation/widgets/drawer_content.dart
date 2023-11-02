@@ -160,13 +160,25 @@ class _DrawerContentState extends State<DrawerContent> {
         Expanded(
           child: Container(),
         ),
-        Row(children: [
-          const AboutUsPopup(),
-          ElevatedButton.icon(
-              onPressed: null,
-              icon: FaIcon(FontAwesomeIcons.googlePlay),
-              label: Text('Rate Us'))
-        ])
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const AboutUsPopup(),
+            ElevatedButton.icon(
+                onPressed: () async {
+                  final Uri url = Uri.parse(
+                      'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki');
+                  if (!await launchUrl(url)) {
+                    throw Exception('Could not launch $url');
+                  }
+                },
+                icon: const FaIcon(FontAwesomeIcons.googlePlay),
+                label: const Text('Rate Us'))
+          ],
+        ),
+        const SizedBox(
+          height: 10,
+        ),
       ],
     ));
   }
