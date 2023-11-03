@@ -51,34 +51,36 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
       image: data[index]['image'],
       value: data[index]['value'],
     );
-    ListTile tile = ListTile(
-      leading: Image(
-        image: AssetImage(bloonImage(relative.image)),
+    Card card = Card(
+      child: ListTile(
+        leading: Image(
+          image: AssetImage(bloonImage(relative.image)),
+        ),
+        title: Text(
+          relative.name,
+          style: normalStyle.copyWith(fontWeight: FontWeight.w600),
+        ),
+        subtitle: Text(
+          'Spawn ${relative.value}',
+          style: normalStyle,
+        ),
+        onTap: () async {
+          var id = relative.id;
+          var path = '${bloonsDataPath + id}.json';
+          final data = await rootBundle.loadString(path);
+          var jsonData = json.decode(data);
+          SingleBloonModel bloonData = SingleBloonModel.fromJson(jsonData);
+          GlobalState.currentTitle = bloonData.name;
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SingleBloon(bloon: bloonData),
+            ),
+          );
+        },
       ),
-      title: Text(
-        relative.name,
-        style: normalStyle.copyWith(fontWeight: FontWeight.w600),
-      ),
-      subtitle: Text(
-        'Spawn ${relative.value}',
-        style: normalStyle,
-      ),
-      onTap: () async {
-        var id = relative.id;
-        var path = '${bloonsDataPath + id}.json';
-        final data = await rootBundle.loadString(path);
-        var jsonData = json.decode(data);
-        SingleBloonModel bloonData = SingleBloonModel.fromJson(jsonData);
-        GlobalState.currentTitle = bloonData.name;
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => SingleBloon(bloon: bloonData),
-          ),
-        );
-      },
     );
-    items.add(tile);
+    items.add(card);
   }
 
   return items;

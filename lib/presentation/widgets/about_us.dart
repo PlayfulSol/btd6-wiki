@@ -10,7 +10,7 @@ class AboutUsPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return ElevatedButton.icon(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all(Colors.teal),
       ),
@@ -22,7 +22,8 @@ class AboutUsPopup extends StatelessWidget {
           },
         );
       },
-      child: const Text('About Us'),
+      icon: const FaIcon(FontAwesomeIcons.circleInfo),
+      label: const Text('About Us'),
     );
   }
 }
