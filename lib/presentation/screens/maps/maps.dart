@@ -34,6 +34,7 @@ class _MapsState extends State<Maps> {
     _loadJsonData();
     _searchController = TextEditingController();
     _searchController.addListener(() {
+      logEvent('search', 'searching for map ${_searchController.text}');
       setState(() {
         query = _searchController.text;
       });
