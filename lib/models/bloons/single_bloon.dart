@@ -72,8 +72,8 @@ class SingleBloonModel {
       required this.rounds});
 
   SingleBloonModel.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    fullName = json['fullName'];
+    name = json['shortName'];
+    fullName = json['longName'];
     image = json['image'];
     rbe = json['rbe'];
     speed = Speed.fromJson(json['speed']);

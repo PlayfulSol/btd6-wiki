@@ -11,12 +11,12 @@ class DeveloperInfo extends StatelessWidget {
   final String linkedinUrl;
 
   const DeveloperInfo({
-    Key? key,
+    super.key,
     required this.name,
     required this.email,
     required this.githubUrl,
     required this.linkedinUrl,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
