@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "918686354616",
+    "project_id": "btd6-wiki",
+    "storage_bucket": "btd6-wiki.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918686354616:android:517981078d775b709a784d",
+        "android_client_info": {
+          "package_name": "asafhadad.btd6wiki"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvhQpeZlR7jjUPzNBFs9GQLuDOU2EuguQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
