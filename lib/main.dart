@@ -26,6 +26,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
+
   @override
   Widget build(BuildContext context) {
     return AdaptiveTheme(
@@ -33,17 +37,28 @@ class MyApp extends StatelessWidget {
         dark: Themes.darkTheme,
         initial: AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => MaterialApp(
+              navigatorObservers: <NavigatorObserver>[observer],
               theme: theme,
               darkTheme: darkTheme,
               title: 'BTD6 Wiki',
-              home: const MyHomePage(),
+              home: MyHomePage(
+                analytics: analytics,
+                observer: observer,
+              ),
               debugShowCheckedModeBanner: false,
             ));
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({
+    super.key,
+    required this.analytics,
+    required this.observer,
+  });
+
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -65,6 +80,13 @@ class _MyHomePageState extends State<MyHomePage> {
               GlobalState.isLoading = false;
               GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
             }));
+  }
+
+  Future<void> _logCurrentScreen() async {
+    await widget.analytics.setCurrentScreen(
+      screenName: titles[GlobalState.currentPageIndex],
+      screenClassOverride: titles[GlobalState.currentPageIndex],
+    );
   }
 
   @override
@@ -90,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   GlobalState.currentPageIndex = index;
                   GlobalState.currentTitle = titles[index];
                   logPageView(titles[index]);
+                  _logCurrentScreen();
                 });
               }),
       bottomNavigationBar: Container(
