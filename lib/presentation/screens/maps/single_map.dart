@@ -118,13 +118,13 @@ class SingleMap extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                    rewardKeys[index] ?? '',
+                                    rewardKeys[index],
                                     style: normalStyle,
                                   ),
                                 ),
                                 Expanded(
                                   child: Text(
-                                    rewardValues[index] ?? '',
+                                    rewardValues[index],
                                     style: normalStyle,
                                   ),
                                 ),
