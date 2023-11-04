@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -75,6 +76,7 @@ class _BloonsState extends State<Bloons> {
                               var path = '${bloonsDataPath + id}.json';
                               final data = await rootBundle.loadString(path);
                               var jsonData = json.decode(data);
+                              logInnerPageView(snapshot.data[index].name);
                               SingleBloonModel bloonData =
                                   SingleBloonModel.fromJson(jsonData);
                               // ignore: use_build_context_synchronously
@@ -134,6 +136,7 @@ class _BloonsState extends State<Bloons> {
                         ),
                         onTap: () {
                           if (!GlobalState.isLoading) {
+                            logInnerPageView(snapshot.data[index].name);
                             getBloonData(snapshot.data[index].id)
                                 .then((value) => Navigator.push(
                                     context,

@@ -1,4 +1,5 @@
 import 'package:btd6wiki/firebase_options.dart';
+import 'package:btd6wiki/utilities/analytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -88,6 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   GlobalState.currentPageIndex = index;
                   GlobalState.currentTitle = titles[index];
+                  logPageView(titles[index]);
                 });
               }),
       bottomNavigationBar: Container(

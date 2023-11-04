@@ -1,4 +1,5 @@
 import 'package:btd6wiki/models/hero.dart';
+import 'package:btd6wiki/utilities/analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -95,6 +96,7 @@ class _HeroesState extends State<Heroes> {
                                   final data =
                                       await rootBundle.loadString(path);
                                   var jsonData = json.decode(data);
+                                  logInnerPageView(snapshot.data[index].name);
                                   HeroModel heroData =
                                       HeroModel.fromJson(jsonData);
                                   // ignore: use_build_context_synchronously
