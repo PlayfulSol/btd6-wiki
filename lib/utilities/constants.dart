@@ -48,6 +48,33 @@ const Map<String, String> pathsDictionary = {
   'paragon': 'Paragon',
 };
 
+const Map<String, Map<String, String>> mapDifficultyToReward = {
+  'Beginner': {
+    'easy': '75\$',
+    'medium': '125\$',
+    'hard': '200\$',
+    'impoppable': '300\$',
+  },
+  'Intermediate': {
+    'easy': '150\$',
+    'medium': '250\$',
+    'hard': '400\$',
+    'impoppable': '600\$',
+  },
+  'Advanced': {
+    'easy': '225\$',
+    'medium': '375\$',
+    'hard': '600\$',
+    'impoppable': '900\$',
+  },
+  'Expert': {
+    'easy': '300\$',
+    'medium': '500\$',
+    'hard': '800\$',
+    'impoppable': '1200\$',
+  },
+};
+
 const TextStyle normalStyle = TextStyle(
   fontSize: 16,
 );
