@@ -1,6 +1,6 @@
 # BTD6 Wiki
 
-BTD6 Wiki is a collaborative Flutter app that serves as a comprehensive resource for Bloons TD 6 players. It provides information, strategies, and tips to help players navigate the game effectively.
+BTD6 Wiki is a collaborative Flutter app that serves as a comprehensive resource for Bloons TD 6 players. It provides information, strategies, and tips to help players navigate the game effectively
 
 ## About
 
