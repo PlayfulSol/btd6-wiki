@@ -1,0 +1,16 @@
+{
+  "id": "one_two_tree",
+  "name": "One Two Tree",
+  "image": "onetwotree_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Beginner",
+  "entrances": "1",
+  "exits": "1",
+  "length": "43 RBS",
+  "music": "Sunshine Serenade",
+  "terrain": "Snow",
+  "water": "Yes (Round 4+)",
+  "removableObject": "None (Trees are removed automatically)",
+  "highground": "None",
+  "sightBlocker": "Yes"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "ouch",
+  "name": "#Ouch",
+  "image": "ouch_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Expert",
+  "entrances": "4",
+  "exits": "4",
+  "length": "Left Vertical\n4.520 RBS\n124.3 Range Units\nRight Vertical\n4.520 RBS\n124.3 Range Units\nTop Horizontal\n5.765 RBS\n158.5 Range Units\nBottom Horizontal\n5.760 RBS\n158.4 Range Units",
+  "music": "Tribes and Tribulations",
+  "terrain": "Asphalt",
+  "water": "Yes (Removable)",
+  "removableObject": "Yes",
+  "highground": "No",
+  "sightBlocker": "No"
+}

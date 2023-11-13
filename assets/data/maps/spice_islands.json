@@ -1,0 +1,16 @@
+{
+  "id": "spice_islands",
+  "name": "Spice Islands",
+  "image": "spiceislands_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Intermediate",
+  "entrances": "1",
+  "exits": "1",
+  "length": "27.10 RBS\n745.1 Range Units",
+  "music": "Sails Again",
+  "terrain": "Grass and Sand",
+  "water": "Yes",
+  "removableObject": "Yes",
+  "highground": "No",
+  "sightBlocker": "Yes"
+}

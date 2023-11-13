@@ -1,0 +1,16 @@
+{
+  "id": "muddy_puddles",
+  "name": "Muddy Puddles",
+  "image": "muddypuddles_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Expert",
+  "entrances": "4",
+  "exits": "4",
+  "length": "Leftmost\n10.89 RBS\n299.5 Range Units\nLeft Middle\n11.01 RBS\n302.8 Range Units\nRight Middle\n10.87 RBS\n298.9 Range Units\nRightmost\n10.87 RBS\n298.9 Range Units",
+  "music": "Tropical Carnival",
+  "terrain": "Mud",
+  "water": "Yes",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "No"
+}

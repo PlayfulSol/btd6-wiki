@@ -1,0 +1,16 @@
+{
+  "id": "infernal",
+  "name": "Infernal",
+  "image": "infernal_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Expert",
+  "entrances": "2",
+  "exits": "2",
+  "length": "Bottom Path:\n21.98 RBS\n604.3 Range Units\nTop Path:\n21.95 RBS\n603.5 Range Units",
+  "music": "Tribes and Tribulations",
+  "terrain": "Volcano",
+  "water": "Yes",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "No"
+}

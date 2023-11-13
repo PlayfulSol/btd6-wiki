@@ -1,0 +1,88 @@
+{
+  "id": "green",
+  "name": "Green",
+  "fullName": "Green Bloon",
+  "image": "btd6green.png",
+  "rbe": [
+    "3"
+  ],
+  "children": [
+    {
+      "id": "blue",
+      "name": "Blue Bloon",
+      "image": "btd6blue.png",
+      "value": "1"
+    }
+  ],
+  "parents": [
+    {
+      "id": "yellow",
+      "name": "Yellow Bloon",
+      "image": "btd6yellow.png",
+      "value": "1"
+    }
+  ],
+  "speed": {
+    "absolute": "45",
+    "relative": "1.8"
+  },
+  "variants": [
+    {
+      "image": "btd6green.png",
+      "name": "Green Bloon",
+      "appearances": "Round 6"
+    },
+    {
+      "image": "btd6camogreen.png",
+      "name": "Green Camo Bloon",
+      "appearances": "Round 24"
+    },
+    {
+      "image": "btd6regrowgreen.png",
+      "name": "Green Regrow Bloon",
+      "appearances": "Round 17"
+    },
+    {
+      "image": "btd6camoregrowgreen.png",
+      "name": "Green Camo Regrow Bloon",
+      "appearances": "Round 36"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 6: 15 Red, 15 Blue, 4 Green",
+      "Round 7: 20 Red, 20 Blue, 5 Green",
+      "Round 8: 10 Red, 20 Blue, 14 Green",
+      "Round 9: 30 Green",
+      "Round 11: 10 Red, 10 Blue, 12 Green, 3 Yellow",
+      "Round 12: 15 Blue, 10 Green, 5 Yellow",
+      "Round 13: 50 Blue, 23 Green",
+      "Round 14: 49 Red, 15 Blue, 10 Green, 9 Yellow",
+      "Round 15: 20 Red, 15 Blue, 12 Green, 10 Yellow, 5 Pink",
+      "Round 16: 40 Green, 8 Yellow",
+      "Round 18: 80 Green",
+      "Round 19: 10 Green, 4 Yellow, 5 Yellow Regrowth, 15 Pink",
+      "Round 24: 20 Blue, 1 Green Camo",
+      "Round 27: 100 Red, 60 Blue, 45 Green, 45 Yellow",
+      "Round 36: 140 Pink, 20 Green Camo Regrowth",
+      "Round 49: 343 Green, 20 Zebra, 20 Rainbow, 10 Rainbow Regrowth, 18 Ceramic"
+    ],
+    "abr": [
+      "Round 5: 12 Red Camo, 1 Red Camo Regrowth, 15 Blue Regrowth, 3 Green",
+      "Round 6: 10 Blue, 8 Green, 5 Green Regrowth",
+      "Round 7: 15 Blue Camo, 10 Blue Regrowth, 6 Green, 2 Black",
+      "Round 8: 10 Yellow, 12 Green, 3 Green Regrowth",
+      "Round 9: 30 Green Regrowth",
+      "Round 10: 22 Blue, 40 Green, 2 Lead",
+      "Round 11: 10 Blue, 10 Blue Regrowth, 20 Green, 3 Green Camo",
+      "Round 12: 20 Blue, 6 Green Regrowth, 3 Pink",
+      "Round 14: 49 Red, 10 Blue Regrowth, 5 Green Camo Regrowth, 4 Yellow Regrowth, 3 Black, 1 White",
+      "Round 15: 20 Blue, 15 Green, 12 Yellow, 10 Pink, 3 Purple",
+      "Round 16: 15 Green, 20 Green Camo, 20 Green Regrowth",
+      "Round 18: 30 Green, 60 Yellow",
+      "Round 19: 10 Blue, 5 Green Regrowth, 15 Pink, 2 Black",
+      "Round 27: 100 Red Camo, 60 Blue Camo, 45 Green Camo, 45 Yellow Camo",
+      "Round 34: 200 Green, 6 Rainbow"
+    ]
+  }
+}

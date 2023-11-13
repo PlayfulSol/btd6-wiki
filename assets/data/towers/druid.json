@@ -1,0 +1,215 @@
+{
+  "id": "druid",
+  "name": "Druid",
+  "image": "druid_monkey.png",
+  "type": "Magic",
+  "unlock": "Level 15-17 and Level 19-20",
+  "inGameDesc": "Creates a blast of thorns for each attack. Upgrades can call forth powers of the Jungle, Storm, or Wrath.",
+  "cost": {
+    "easy": "340",
+    "medium": "400",
+    "hard": "430",
+    "impoppable": "480"
+  },
+  "target": "First, Last, Close, Strong",
+  "stats": {
+    "damage": "1 (spray of 5)",
+    "pierce": "1 (spray of 5)",
+    "attackSpeed": "1.1s",
+    "range": "35",
+    "statuseffects": "Requires upgrades",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "Requires upgrades",
+    "camo": "Yes (5-x-x and x-5-x brambles only)",
+    "footprint": "Medium (7)",
+    "damageType": " Sharp"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "hardthornsupgradeicon.png",
+        "name": "Hard Thorns",
+        "cost": {
+          "easy": "210",
+          "medium": "250",
+          "hard": "270",
+          "impoppable": "300"
+        },
+        "unlock": "150 XP",
+        "upgradeBody": "Description: Hard thorns can pop 2 bloons each and can pop all bloon types.\nEffect: Druid thorns gain +1 pierce, and all thorns pop Frozen and Lead. For Druids of the Jungle and Spirit of the Forest, on-track vines now pop all bloon types."
+      },
+      {
+        "image": "heartofthunderupgradeicon.png",
+        "name": "Heart of Thunder",
+        "cost": {
+          "easy": "850",
+          "medium": "1,000",
+          "hard": "1,080",
+          "impoppable": "1,200"
+        },
+        "unlock": "750 XP",
+        "upgradeBody": "Description: Unleashes regular blasts of forked lightning that arc from bloon to bloon.\nEffect: Creates regular blasts of forked lightning onto bloons as it attacks, splitting repetitively and affecting up to 31 bloons per lightning bolt, inflicting 2 damage to each bloon damaged."
+      },
+      {
+        "image": "druidofthestormupgradeicon.png",
+        "name": "Druid of the Storm",
+        "cost": {
+          "easy": "1,400",
+          "medium": "1,650",
+          "hard": "1,780",
+          "impoppable": "1,980"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Gusts of wind blow Bloons off the track away from the exit.\nEffect: Creates small tornadoes that home towards Bloons, blowing away up to 30 Bloons backwards."
+      },
+      {
+        "image": "balllightningupgradeicon.png",
+        "name": "Ball Lightning",
+        "cost": {
+          "easy": "3,825",
+          "medium": "4,500",
+          "hard": "4,860",
+          "impoppable": "5,400"
+        },
+        "unlock": "12,000 XP",
+        "upgradeBody": "Description: Creates powerful balls of lightning that can freeze Bloons. Additional lightning bolts arc off main attack to nearby Bloons.\nEffect: Creates moving balls of lightning that shoot high-damage lightning bolts. The ball has a 25% to freeze bloons on contact including white and zebra bloons. Also can create stronger tornadoes."
+      },
+      {
+        "image": "superstormupgradeicon.png",
+        "name": "Superstorm",
+        "cost": {
+          "easy": "51,000",
+          "medium": "60,000",
+          "hard": "64,800",
+          "impoppable": "72,000"
+        },
+        "unlock": "35,000 XP",
+        "upgradeBody": "Description: Superstorm blasts all Bloon types for massive damage and blows them away from the exit.\nEffect: Creates supertornadoes that blow away up to 200 bloons including MOAB-class, although MOAB-class consume more pierce. Additional Ball Lightnings are produced the longer the supertornadoes last. Most attacks gain even more damage. Also gains camo detection."
+      }
+    ],
+    "path2": [
+      {
+        "image": "thornswarmupgradeicon.png",
+        "name": "Thorn Swarm",
+        "cost": {
+          "easy": "210",
+          "medium": "250",
+          "hard": "270",
+          "impoppable": "300"
+        },
+        "unlock": "140 XP",
+        "upgradeBody": "Description: Shoots 8 thorns per shot instead of 5.\nEffect: Self-explanatory"
+      },
+      {
+        "image": "heartofoakupgradeicon.png",
+        "name": "Heart of Oak",
+        "cost": {
+          "easy": "295",
+          "medium": "350",
+          "hard": "380",
+          "impoppable": "420"
+        },
+        "unlock": "600 XP",
+        "upgradeBody": "Description: Attacks convert Regrow Bloons into normal Bloons. Gains 1% pierce for every life gained from the starting value after the upgrade. Maxes at 100% and diminishes if lives are lost.\nEffect: Self-explanatory"
+      },
+      {
+        "image": "druidofthejungleupgradeicon.png",
+        "name": "Druid of the Jungle",
+        "cost": {
+          "easy": "890",
+          "medium": "1,050",
+          "hard": "1,135",
+          "impoppable": "1,260"
+        },
+        "unlock": "2,000 XP",
+        "upgradeBody": "Description: Calls a vine from the ground to entangle and crush Bloons one at a time, leaving behind a deadly thorn pile.\nEffect: The Druid now summons a vine with infinite range, which will kill the strongest non-MOAB bloon on screen, strangling onto that bloon until it withers into nothing, taking longer the more powerful the bloon is. This has a minimum 1.4 second cooldown. It also leaves behind a bramble (\"after-vine\") that constantly damages passing bloons. The vine deals extremely high damage per second, and ignores line of sight."
+      },
+      {
+        "image": "junglesbountyupgradeicon.png",
+        "name": "Jungle's Bounty",
+        "cost": {
+          "easy": "4,165",
+          "medium": "4,900",
+          "hard": "5,290",
+          "impoppable": "5,880"
+        },
+        "unlock": "11,000 XP",
+        "upgradeBody": "Description: Calls in two vines to grab Bloons and thorn piles have extra pierce. Generates 1 life at the end of each round. Jungle's Bounty Ability: Generates cash each use, plus extra cash per Banana Farm near the Druid.\nEffect: Gains +10 range, and grants an ability which generates $320, plus $130 more per Banana Farm within range. Can activate two vines simultaneously at targeted bloons, and after-vines have double pierce and damage. At the end of each round, generates 1 life."
+      },
+      {
+        "image": "spiritoftheforestupgradeicon.png",
+        "name": "Spirit of the Forest",
+        "cost": {
+          "easy": "29,750",
+          "medium": "35,000",
+          "hard": "37,800",
+          "impoppable": "42,000"
+        },
+        "unlock": "40,000 XP",
+        "upgradeBody": "Description: Grows thorned vines along the path that deal constant damage plus bonus damage to ceramics. Vines nearest the Spirit of the Forest do more damage. Activated ability generates lives and more cash.\nEffect: Continually grows thorned vines starting from its direct location and grows more vines outwards every 0.5s. Thorned vines deal constant damage to bloons passing through, and deal more damage if closer to the Druid. Also greatly strengthens most attacks. Ability also provides 25 lives per use. Gives 1000 cash every round. Also with the monkey knowledge \"Vine Rupture\" the Druid gains an ability to explode all the vines in the screen, after about 5 seconds the vines will regrow."
+      }
+    ],
+    "path3": [
+      {
+        "image": "druidicreachupgradeicon.png",
+        "name": "Druidic Reach",
+        "cost": {
+          "easy": "85",
+          "medium": "100",
+          "hard": "110",
+          "impoppable": "120"
+        },
+        "unlock": "120 XP",
+        "upgradeBody": "Description: Increases range by a large amount.\nEffect: Gains +10 range (28% more than base), from 35 to 45."
+      },
+      {
+        "image": "heartofvengeanceupgradeicon.png",
+        "name": "Heart of Vengeance",
+        "cost": {
+          "easy": "255",
+          "medium": "300",
+          "hard": "325",
+          "impoppable": "360"
+        },
+        "unlock": "550 XP",
+        "upgradeBody": "Description: Gains 10% attack speed and 1% for every life lost from the starting value after the upgrade. Maxes at 100% and diminishes if lives are restored.\nEffect: Self-explanatory"
+      },
+      {
+        "image": "druidofwrathupgradeicon.png",
+        "name": "Druid of Wrath",
+        "cost": {
+          "easy": "510",
+          "medium": "600",
+          "hard": "650",
+          "impoppable": "720"
+        },
+        "unlock": "1,700 XP",
+        "upgradeBody": "Description: Gains attack speed during the round as long as the Druid is attacking Bloons.\nEffect: Gains +0.5% attack speed every time it does 1 point of damage to bloons, up to +100%. Wrath attack speed bonus resets if not attacking within 2 seconds."
+      },
+      {
+        "image": "poplustupgradeicon.png",
+        "name": "Poplust",
+        "cost": {
+          "easy": "2,125",
+          "medium": "2,500",
+          "hard": "2,700",
+          "impoppable": "3,000"
+        },
+        "unlock": "14,000 XP",
+        "upgradeBody": "Description: Boosts attack speed and pierce for all Druids in the radius. Can stack up to 5 times on a single Druid.\nEffect: Nearby Druids gain increased pierce and attack speed by +15%, stackable additively up to 5 times for +75% pierce and attack speed."
+      },
+      {
+        "image": "avatarofwrathupgradeicon.png",
+        "name": "Avatar of Wrath",
+        "cost": {
+          "easy": "38,250",
+          "medium": "45,000",
+          "hard": "48,600",
+          "impoppable": "54,000"
+        },
+        "unlock": "33,000 XP",
+        "upgradeBody": "Description: The more bloons there are, the more damage it does!\nEffect: Attack speed twice as fast, +5 range and deals 4 damage per thorn by default, plus another +1 damage every 3000 RBE on screen, capped at +30. Also gives equal damage-ramping for lightning if given the Heart of Thunder upgrade."
+      }
+    ]
+  }
+}

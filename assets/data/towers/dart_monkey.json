@@ -1,0 +1,227 @@
+{
+  "id": "dart_monkey",
+  "name": "Dart Monkey",
+  "image": "000_dartmonkey.png",
+  "type": "Primary",
+  "unlock": "Level 1",
+  "inGameDesc": "Throws a single dart at nearby bloons. Short range and low pierce but cheap.",
+  "cost": {
+    "easy": "170",
+    "medium": "200",
+    "hard": "215",
+    "impoppable": "240"
+  },
+  "target": "First, Last, Close, Strong,\nCamo Prioritization with Enhanced Eyesight",
+  "stats": {
+    "damage": "1",
+    "pierce": "2",
+    "attackSpeed": "0.95s",
+    "range": "32",
+    "statuseffects": "Requires upgrades",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "N/A",
+    "camo": "Yes (x-x-2)",
+    "footprint": "Small (6)",
+    "damageType": " Sharp"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "sharpshotsupgradeicon.png",
+        "name": "Sharp Shots",
+        "cost": {
+          "easy": "120",
+          "medium": "140",
+          "hard": "150",
+          "impoppable": "170"
+        },
+        "unlock": "100 XP",
+        "upgradeBody": "Description: Can pop 1 extra Bloon per shot.\nEffect: Gains +1 pierce, for 3 pierce by default. With Crossbow Master, gains +6 pierce instead."
+      },
+      {
+        "image": "razorsharpshotsupgradeicon.png",
+        "name": "Razor Sharp Shots",
+        "cost": {
+          "easy": "185",
+          "medium": "220",
+          "hard": "235",
+          "impoppable": "265"
+        },
+        "unlock": "500 XP",
+        "upgradeBody": "Description: Can pop 2 more bloons per shot.\nEffect: Gains +2 pierce, for 5 pierce by default. With Crossbow Master, gains +7 pierce instead."
+      },
+      {
+        "image": "spike_o_pultupgradeicon.png",
+        "name": "Spike-O-Pult",
+        "cost": {
+          "easy": "255",
+          "medium": "300",
+          "hard": "325",
+          "impoppable": "360"
+        },
+        "unlock": "2,100 XP",
+        "upgradeBody": "Description: Converts the Dart Monkey into a slower attacking Spike-o-pult that hurls large spiked balls. Each ball can pop lots of Bloons and rebounds off obstacles.\nEffect: Hurls spiked balls that pop up to 22 bloons per shot, deal +1 damage to Ceramics and pop Frozen bloons. Spiked balls bounce off obstacles and can rehit the same bloons again if the projectile hits any obstacle. Attacks slightly slower (1.15s instead of 0.95s)."
+      },
+      {
+        "image": "juggernautupgradeicon.png",
+        "name": "Juggernaut",
+        "cost": {
+          "easy": "1,530",
+          "medium": "1,800",
+          "hard": "1,945",
+          "impoppable": "2,160"
+        },
+        "unlock": "7,500 XP",
+        "upgradeBody": "Description: Hurls a giant spiked ball that pops lead and excels at crushing Ceramic and Fortified Bloons.\nEffect: Hurls juggernaut balls that pop up to 50 bloons per shot, pop all Bloon types except Camo, deal 2 damage, +3 to Ceramics and +2 to Fortified, increases the range by 15%, and gains extra projectile speed. Attacks slightly faster (1s instead of 1.15s). Inflicts a speed-based knockback for 0.1s upon hitting Bloons."
+      },
+      {
+        "image": "ultrajuggernautupgradeicon.png",
+        "name": "Ultra-Juggernaut",
+        "cost": {
+          "easy": "12,750",
+          "medium": "15,000",
+          "hard": "16,200",
+          "impoppable": "18,000"
+        },
+        "unlock": "22,000 XP",
+        "upgradeBody": "Description: Gigantic spiked ball splits twice into 6 Juggernaut balls for even more destructive power against Ceramic, Fortified and Lead Bloons.\nEffect: Hurls gigantic juggernaut balls that retains knockback effect and each dealing 5 damage, +8 to Ceramics, +20 to leads and +5 to Fortified, have 200 pierce, travel faster, and split twice into 6 mini juggernaut balls every 100 bloons hit. These mini juggernaut balls each have 2 damage, +3 ceramic damage, +2 fortified damage, and 50 pierce. Both main projectile and mini projectiles can rehit bloons if they hit any walls."
+      }
+    ],
+    "path2": [
+      {
+        "image": "quickshotsupgradeicon.png",
+        "name": "Quick Shots",
+        "cost": {
+          "easy": "85",
+          "medium": "100",
+          "hard": "110",
+          "impoppable": "120"
+        },
+        "unlock": "80 XP",
+        "upgradeBody": "Description: Shoots 15% faster.\nEffect: Attacks +17.6% faster (0.85x attack cooldown)."
+      },
+      {
+        "image": "veryquickshotsupgradeicon.png",
+        "name": "Very Quick Shots",
+        "cost": {
+          "easy": "160",
+          "medium": "190",
+          "hard": "205",
+          "impoppable": "230"
+        },
+        "unlock": "400 XP",
+        "upgradeBody": "Description: Shoots 33% faster!\nEffect: Attacks +50% faster than base Dart Monkey (attack cooldown from 0.85x to 0.67x (~2/3x))."
+      },
+      {
+        "image": "tripleshotupgradeicon.png",
+        "name": "Triple Shot",
+        "cost": {
+          "easy": "340",
+          "medium": "400",
+          "hard": "430",
+          "impoppable": "480"
+        },
+        "unlock": "2,000 XP",
+        "upgradeBody": "Description: Throws 3 darts at a time instead of 1.\nEffect: Throws 3 darts per attack, in a 60\u00b0 spread."
+      },
+      {
+        "image": "supermonkeyfanclubupgradeicon.png",
+        "name": "Super Monkey Fan Club",
+        "cost": {
+          "easy": "6,800",
+          "medium": "8,000",
+          "hard": "8,640",
+          "impoppable": "9,600"
+        },
+        "unlock": "9,500 XP",
+        "upgradeBody": "Description: Super Monkey Fan Club Ability: Converts up to 10 nearby Dart Monkeys including itself into Super Monkeys for 15 seconds. Regular attack speed also increased.\nEffect: Gains an ability that transforms itself and up to 9 of the nearest non-special Dart Monkeys into Super Monkeys, which have 40 range. Cannot affect catapult-operating Dart Monkeys nor crossbow wielders nor the Plasma Monkey Fan Club. Attacks 1.5x as fast as a basic Dart Monkey (attack cooldown from 0.67x to 0.5025x (~1/2)."
+      },
+      {
+        "image": "pmfcupgradeicon.png",
+        "name": "Plasma Monkey Fan Club",
+        "cost": {
+          "easy": "38,250",
+          "medium": "45,000",
+          "hard": "48,600",
+          "impoppable": "54,000"
+        },
+        "unlock": "30,000 XP",
+        "upgradeBody": "Description: Elite membership of this club grants the Dart Monkeys even more power.\nEffect: Ability now transforms the club leader and up to 20 of the nearest non-special Dart Monkeys into Super Monkeys that shoot plasma blasts instead of darts. The plasma attacks twice as fast, deals 2 damage per hit and has 5 pierce."
+      }
+    ],
+    "path3": [
+      {
+        "image": "longrangedartsupgradeicon.png",
+        "name": "Long Range Darts",
+        "cost": {
+          "easy": "75",
+          "medium": "90",
+          "hard": "95",
+          "impoppable": "110"
+        },
+        "unlock": "50 XP",
+        "upgradeBody": "Description: Makes the Dart Monkey shoot further than normal.\nEffect: Gains +8 range, increases projectile lifespan by 15%."
+      },
+      {
+        "image": "enhancedeyesightupgradeicon.png",
+        "name": "Enhanced Eyesight",
+        "cost": {
+          "easy": "170",
+          "medium": "200",
+          "hard": "215",
+          "impoppable": "240"
+        },
+        "unlock": "450 XP",
+        "upgradeBody": "Description: Shoots even further and can detect Camo bloons.\nEffect: Gains +8 range on top of previous upgrades, 20% increased projectile lifespan, 10% increased projectile speed, camo detection and the Camo Prioritization targeting option."
+      },
+      {
+        "image": "crossbowupgradeicon.png",
+        "name": "Crossbow",
+        "cost": {
+          "easy": "530",
+          "medium": "625",
+          "hard": "675",
+          "impoppable": "750"
+        },
+        "unlock": "2,100 XP",
+        "upgradeBody": "Description: Uses a long range Crossbow that can pop 3 layers of Bloon for every hit.\nEffect: Deals 3 damage per hit, gains +1 pierce, slightly increase projectile speed and gains +8 range again."
+      },
+      {
+        "image": "sharpshooterupgradeicon.png",
+        "name": "Sharp Shooter",
+        "cost": {
+          "easy": "1,700",
+          "medium": "2,000",
+          "hard": "2,160",
+          "impoppable": "2,400"
+        },
+        "unlock": "12,000 XP",
+        "upgradeBody": "Description: Sharp Shooter attacks faster and does powerful Crit shots every few shots that do a lot more damage.\nEffect: Deals 6 damage per hit, attacks every 0.6s instead of 0.95s, projectile speed increased and lands a Critical Hit after every 10 shots. Crits deal 50 damage per hit. Also increases range from 56 to 60."
+      },
+      {
+        "image": "crossbowmasterupgradeicon.png",
+        "name": "Crossbow Master",
+        "cost": {
+          "easy": "18,275",
+          "medium": "21,500",
+          "hard": "23,220",
+          "impoppable": "25,800"
+        },
+        "unlock": "35,000 XP",
+        "upgradeBody": "Description: Crossbow Master shoots really fast and devastates most Bloon types with ease.\nEffect: Attacks every 0.16s instead of 0.6s, slightly increases projectile speed to 450, increases pierce from 3 to 8, range from 60 to 80, and applies Critical Hits every 5 shots instead of every 10 shots. Can also damage any bloon type."
+      }
+    ],
+    "paragon": {
+      "image": "apexplasmamasterupgradeicon.png",
+      "name": "Apex Plasma Master",
+      "cost": {
+        "easy": "127,500",
+        "medium": "150,000",
+        "hard": "162,000",
+        "impoppable": "180,000"
+      },
+      "unlock": "500,000 XP",
+      "upgradeBody": "Description: Fill the area with Bloon shredding plasma juggernaut balls, leaving nothing behind...\nEffect: Shoots triple rapid-fire plasma Ultra-Juggernaut balls that deal enormous damage, especially to Ceramics and Bosses. Can rehit bloons after bouncing off obstacles or the edges of the screen."
+    }
+  }
+}

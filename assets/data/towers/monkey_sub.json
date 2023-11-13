@@ -1,0 +1,215 @@
+{
+  "id": "monkey_sub",
+  "name": "Monkey Sub",
+  "image": "btd6_monkey_sub.png",
+  "type": "Military",
+  "unlock": "Level 7-12",
+  "inGameDesc": "Shoots homing torp-e-darts at nearby Bloons. Must be placed in water.",
+  "cost": {
+    "easy": "275",
+    "medium": "325",
+    "hard": "350",
+    "impoppable": "390"
+  },
+  "target": "First, Last, Close, Strong, Submerge (with Submerge and Support)",
+  "stats": {
+    "damage": "1",
+    "pierce": "2",
+    "attackSpeed": "0.75s",
+    "range": "42",
+    "statuseffects": "Requires upgrades",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "N/A",
+    "camo": "Yes (3-x-x submersion, 2-x-x plus Camo-seeing tower)",
+    "footprint": "Medium (7)",
+    "damageType": " Sharp"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "longerrangeupgradeicon.png",
+        "name": "Longer Range",
+        "cost": {
+          "easy": "110",
+          "medium": "130",
+          "hard": "140",
+          "impoppable": "155"
+        },
+        "unlock": "125 XP",
+        "upgradeBody": "Description: Increases attack range.\nEffect: Gains +10 range."
+      },
+      {
+        "image": "advancedintelupgradeicon.png",
+        "name": "Advanced Intel",
+        "cost": {
+          "easy": "425",
+          "medium": "500",
+          "hard": "540",
+          "impoppable": "600"
+        },
+        "unlock": "750 XP",
+        "upgradeBody": "Description: Allows long range targeting of Bloons in radius of your other towers.\nEffect: Allows the Monkey Sub to target any bloon within the range of any tower on screen. Can target Camo Bloons detected in the range of any tower with direct camo detection."
+      },
+      {
+        "image": "submergeandsupportupgradeicon.png",
+        "name": "Submerge and Support",
+        "cost": {
+          "easy": "425",
+          "medium": "500",
+          "hard": "540",
+          "impoppable": "600"
+        },
+        "unlock": "2,250 XP",
+        "upgradeBody": "Description: Adds Submerge targeting option that permanently reveals Camo bloons in its radius but does not attack while submerged.\nEffect: Gains the Submerge targeting option. When active, it produces a non-damaging decamo wave every 1.5s that hits up to 100 affected bloons within range, but the Sub cannot use other attacks while submerged."
+      },
+      {
+        "image": "bloontoniumreactorupgradeicon.png",
+        "name": "Bloontonium Reactor",
+        "cost": {
+          "easy": "2,125",
+          "medium": "2,500",
+          "hard": "2,700",
+          "impoppable": "3,000"
+        },
+        "unlock": "11,000 XP",
+        "upgradeBody": "Description: Submerge to detect Camo, pop Bloons and reduce ability cooldowns of nearby water-based Monkeys by 15%.\nEffect: When submerged, creates a radioactive damage zone that pops up to 50 bloons every cycle, decamos much faster, and reduces ability cooldowns of nearby water-based towers by 15%."
+      },
+      {
+        "image": "energizerupgradeicon.png",
+        "name": "Energizer",
+        "cost": {
+          "easy": "27,200",
+          "medium": "32,000",
+          "hard": "34,560",
+          "impoppable": "38,400"
+        },
+        "unlock": "33,000 XP",
+        "upgradeBody": "Description: Reduces ability cooldowns everywhere by 20%. While in radius, heroes earn XP 50% faster and water Monkey ability cooldowns are halved.\nEffect: Submerging allows its damage zone to deal 5 damage per cycle instead of 1, +5 versus Ceramics, reduces ability cooldowns of all towers on screen by 20%, gives nearby heroes with 50% more XP, and nearby water-based towers gain 50% reduced ability cooldowns instead of 15%."
+      }
+    ],
+    "path2": [
+      {
+        "image": "barbeddartsupgradeicon.png",
+        "name": "Barbed Darts",
+        "cost": {
+          "easy": "380",
+          "medium": "450",
+          "hard": "485",
+          "impoppable": "540"
+        },
+        "unlock": "130 XP",
+        "upgradeBody": "Description: Sub's darts can pop an additional 3 bloons each.\nEffect: Darts pop 5 bloons per shot instead of 2. Also gives Reactors and Submerge Sub decamo pulses +20 pierce."
+      },
+      {
+        "image": "heattippeddartsupgradeicon.png",
+        "name": "Heat-tipped Darts",
+        "cost": {
+          "easy": "255",
+          "medium": "300",
+          "hard": "325",
+          "impoppable": "360"
+        },
+        "unlock": "600 XP",
+        "upgradeBody": "Description: Heat tipped darts allow popping of Frozen and Lead Bloons.\nEffect: Darts can pop Frozen and Lead Bloons and Reactors can pop Lead Bloons. Also gives Reactors and Submerge Sub decamo pulses +30 pierce, for a total of +50 pierce."
+      },
+      {
+        "image": "ballisticmissileupgradeicon.png",
+        "name": "Ballistic Missile",
+        "cost": {
+          "easy": "1,190",
+          "medium": "1,400",
+          "hard": "1,510",
+          "impoppable": "1,680"
+        },
+        "unlock": "3,000 XP",
+        "upgradeBody": "Description: Missile seeks target within range and does extra MOAB and Ceramic damage.\nEffect: Gains a ballistic missile attack. Missiles fly in the sky and crash onto the target bloon. Missile explosions deal 6 damage to MOAB-class and Ceramics. Also gains +8 range."
+      },
+      {
+        "image": "firststrikecapabilityupgradeicon.png",
+        "name": "First Strike Capability",
+        "cost": {
+          "easy": "11,050",
+          "medium": "13,000",
+          "hard": "14,040",
+          "impoppable": "15,600"
+        },
+        "unlock": "20,000 XP",
+        "upgradeBody": "Description: First Strike Ability: A devastating missile strike targeting the largest bloon on screen, plus splash damage.\nEffect: Ability shoots a large missile that deals 10,000 damage onto the strongest bloon on screen plus a splash with 350 damage onto up to 80 bloons."
+      },
+      {
+        "image": "preemptivestrikeupgradeicon.png",
+        "name": "Pre-Emptive Strike",
+        "cost": {
+          "easy": "24,650",
+          "medium": "29,000",
+          "hard": "31,320",
+          "impoppable": "34,800"
+        },
+        "unlock": "45,000 XP",
+        "upgradeBody": "Description: Automatically triggers a powerful missile attack whenever MOAB-Class Bloon spawns from the Bloon entrance.\nEffect: Every time a MOAB-class bloon enters the screen, it will automatically inflict 750 damage to them. In addition, it gains even stronger and faster ballistic missiles and a faster ability cooldown."
+      }
+    ],
+    "path3": [
+      {
+        "image": "twingunsupgradeicon.png",
+        "name": "Twin Guns",
+        "cost": {
+          "easy": "380",
+          "medium": "450",
+          "hard": "485",
+          "impoppable": "540"
+        },
+        "unlock": "150 XP",
+        "upgradeBody": "Description: Added twin gun doubles attack speed. Enhances Ballistic Missile and Bloontonium Reactor.\nEffect: Dart gains 2x attack speed, and the attack speed of alternate attacks increases."
+      },
+      {
+        "image": "airburstdartsupgradeicon.png",
+        "name": "Airburst Darts",
+        "cost": {
+          "easy": "850",
+          "medium": "1,000",
+          "hard": "1,080",
+          "impoppable": "1,200"
+        },
+        "unlock": "1,000 XP",
+        "upgradeBody": "Description: Airburst darts split into 3 on impact for massively increased popping power. Further enhances Bloontonium Reactor.\nEffect: Main dart now splits into 3 darts on impact, and the attack speed of Submerged Subs and Bloontonium Reactors further increases."
+      },
+      {
+        "image": "triplegunsupgradeicon.png",
+        "name": "Triple Guns",
+        "cost": {
+          "easy": "935",
+          "medium": "1,100",
+          "hard": "1,190",
+          "impoppable": "1,320"
+        },
+        "unlock": "2,750 XP",
+        "upgradeBody": "Description: Adds a third gun for even faster firing.\nEffect: Increases attack speed by 1.5x. Retains the Airburst Darts attack."
+      },
+      {
+        "image": "armorpiercingdartsupgradeicon.png",
+        "name": "Armor Piercing Darts",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "10,000 XP",
+        "upgradeBody": "Description: Special AP darts gain increased damage and popping power, plus additional damage to MOAB class Bloons.\nEffect: Main dart deals 2 damage on-hit, 4 versus MOAB-class, while airburst darts have 5 pierce per dart instead of 2 and deal 2 damage versus MOAB-class."
+      },
+      {
+        "image": "subcommanderupgradeicon.png",
+        "name": "Sub Commander",
+        "cost": {
+          "easy": "21,250",
+          "medium": "25,000",
+          "hard": "27,000",
+          "impoppable": "30,000"
+        },
+        "unlock": "25,000 XP",
+        "upgradeBody": "Description: Adds extra pierce and damage to Commander and all Subs in its radius.\nEffect: All Subs within range, including itself, deal double damage and gain +4 pierce. Also, the Sub Commander gains 2x attack speed."
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "flooded_valley",
+  "name": "Flooded Valley",
+  "image": "flooded_valley_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Expert",
+  "entrances": "2",
+  "exits": "2",
+  "length": "10.12 RBS\n278.3 Range Units",
+  "music": "Tribes and Tribulations",
+  "terrain": "Dam",
+  "water": "Yes",
+  "removableObject": "Yes (secret)",
+  "highground": "Yes",
+  "sightBlocker": "Yes"
+}

@@ -1,0 +1,250 @@
+{
+  "id": "benjamin",
+  "name": "Benjamin",
+  "image": "benjaminportrait.png",
+  "skinChange": {
+    "level_1": "benjaminportrait.png",
+    "level_3": "benjaminportraitlvl3.png",
+    "level_7": "benjaminportraitlvl7.png",
+    "level_10": "benjaminportraitlvl10.png",
+    "level_20": "benjaminportraitlvl20.png"
+  },
+  "unlock": "Level 10 and  3,000",
+  "cost": {
+    "easy": "1,020",
+    "medium": "1,200",
+    "hard": "1,295",
+    "impoppable": "1,440"
+  },
+  "discountCost": {
+    "easy": "920",
+    "medium": "1,080",
+    "hard": "1,165",
+    "impoppable": "1,295"
+  },
+  "abilities": "Biohack (Level 3)\nSyphon Funding (Level 10)",
+  "target": "None, Trojan locked to attack randomly.",
+  "inGameDesc": "Using his elite hacking skills, Benjamin can create extra money for the cause.",
+  "stats": {
+    "damage": [
+      {
+        "name": "Trojan",
+        "value": [
+          "x - current health (where \"x\" is the RBE of the bloon)"
+        ]
+      },
+      {
+        "name": "Syphon Funding",
+        "value": [
+          "Total external HP + (m + 1) where m is number of offspring of the original bloon"
+        ]
+      }
+    ],
+    "pierce": "N/A",
+    "attackSpeed": [
+      "Level 7-15: Extremely Slow (every 5.0s-7.0s, Trojan)",
+      "Level 16+: Extremely Slow (every 3.0s-4.0s, Trojan)"
+    ],
+    "range": [
+      "20"
+    ],
+    "statusEffects": [
+      {
+        "name": "Trojan",
+        "value": [
+          "Causes no offspring"
+        ]
+      },
+      {
+        "name": "Syphon Funding",
+        "value": [
+          "Receive 2x (or 3x at Level 20) cash per pop"
+        ]
+      }
+    ],
+    "towerBoosts": [
+      {
+        "name": "Biohack",
+        "value": [
+          "Level 3-12: Nearest 4 towers get +1 damage for 6s, then can't attack for 2s",
+          "Level 13-18: Nearest 6 towers get +2 damage for 8s, then can't attack for 2s",
+          "Level 19+: Nearest 6 towers get +3 damage for 9s, then can't attack for 2s"
+        ]
+      },
+      {
+        "name": "Bank Hack",
+        "value": [
+          "Level 5-8: Banks earn +5% income (does not affect interest)",
+          "Level 9+: Banks earn +12% income (does not affect interest)"
+        ]
+      }
+    ],
+    "incomeBoosts": [
+      {
+        "name": "Base Income",
+        "value": [
+          "Level 1: +$100 per round, automatic generation",
+          "Level 2-7: +$150 per round, automatic generation",
+          "Level 8-10: +$250 per round, automatic generation",
+          "Level 11-14: +$300 per round, automatic generation",
+          "Level 15-16: +$500 per round, automatic generation",
+          "Level 17: +$800 per round, automatic generation"
+        ]
+      },
+      {
+        "name": "Skimming",
+        "value": [
+          "Level 4-11: +$1 whenever a new Bloon enters the screen",
+          "Level 12+: +$2 whenever a new Bloon enters the screen"
+        ]
+      },
+      {
+        "name": "Bloon Trojan",
+        "value": [
+          "Level 7-15: $2 + x (where x is the number of layers skipped)",
+          "Level 16+: $3 + x (where x is the number of layers skipped)"
+        ]
+      },
+      {
+        "name": "Syphon Funding",
+        "value": [
+          "Level 10-19: $2x per layer",
+          "Level 20: $3x per layer"
+        ]
+      }
+    ],
+    "camo": [
+      "Yes (DDT's at Level 18+)"
+    ],
+    "levelSpeed": [
+      "Moderately Slow (1.5x)"
+    ]
+  },
+  "levels": [
+    {
+      "image": "herolevel1.png",
+      "name": "1",
+      "cost": {
+        "easy": "1,020",
+        "medium": "1,200",
+        "hard": "1,295",
+        "impoppable": "1,440"
+      },
+      "levelBody": "Description: Hacks in $100 every round.\nEffect: Generates $100 per round. Benjamin starts with a \"dummy\" range of 20."
+    },
+    {
+      "image": "herolevel2.png",
+      "name": "2",
+      "cost": "270",
+      "levelBody": "Description: Generates $150 per round instead of $100.\nEffect: Self-explanatory"
+    },
+    {
+      "image": "herolevel3.png",
+      "name": "3",
+      "cost": "690",
+      "levelBody": "Description: Biohack: 4 closest Monkeys pop an extra layer per attack for 6 seconds. Affected Monkeys can't attack for 2 seconds after effect ends.\nEffect: Gains the Biohack ability. When activated, grants +1 damage to the nearest 4 Monkeys for 6 seconds. Affected Monkeys are disabled from attacking for 2 seconds after the buff expires. Cooldown is 30 seconds."
+    },
+    {
+      "image": "herolevel4.png",
+      "name": "4",
+      "cost": "1500",
+      "levelBody": "Description: Skimming - earns +$1 for every new Bloon spawned.\nEffect: Every bloon spawned from the entrance earns $1."
+    },
+    {
+      "image": "herolevel5.png",
+      "name": "5",
+      "cost": "2790",
+      "levelBody": "Description: Bank Hack - all banks earn +5% income.\nEffect: All Banks on screen generate +5% more cash via packets (i.e. \"bananas\")."
+    },
+    {
+      "image": "herolevel6.png",
+      "name": "6",
+      "cost": "4920",
+      "levelBody": "Description: Cyber Security - Restores 5 lives at the end of each round.\nEffect: Heals 5 lives at the end of each round. Will not heal if past full lives."
+    },
+    {
+      "image": "herolevel7.png",
+      "name": "7",
+      "cost": "7770",
+      "levelBody": "Description: Bloon Trojan - Every few seconds sends a Trojan software virus to random Bloon. Affected Bloons spawns no children when destroyed and produces 1 extra cash for every layer.\nEffect: Benjamin regularly attacks bloons with Bloon Trojan, and attacks every 5s-7s. Bloon Trojan homes towards the closest target, and cannot go through Line of Sight obstacles. Affected bloons up to MOABs spawn no children when popped, and generates $2 + $1 for each layer skipped. (So, a Zebra Bloon would be worth $8 when popped, because it has 6 different layers.)\nCannot target Red Bloons, Blue Bloons, Green Bloons, Yellow Bloons, BFBs, ZOMGs, DDTs, BADs, or Bosses. Requires camo detection to affect Camo Bloons. Does affect Test Bloon.\nIf target is destroyed before the Trojan reaches it, it can choose a different target."
+    },
+    {
+      "image": "herolevel8.png",
+      "name": "8",
+      "cost": "12480",
+      "levelBody": "Description: Income increased to $250 per round.\nEffect: Generates $250 per round instead of $150."
+    },
+    {
+      "image": "herolevel9.png",
+      "name": "9",
+      "cost": "14070",
+      "levelBody": "Description: Bank hack increased to 12%\nEffect: Improves Bank Hack benefit from 5% to 12%."
+    },
+    {
+      "image": "herolevel10.png",
+      "name": "10",
+      "cost": "20430",
+      "levelBody": "Description: Syphon Funding: Downgrades most newly spawned Bloons by 1 rank. Cash per pop from affected Bloons is double. Lasts 10 seconds.\nEffect: Gains the Syphon Funding ability. For 10 seconds, Syphon Funding downgrades all new Bloons other than DDTs, BADs, and Bosses by one rank, and downgraded Bloons give double cash. Cooldown is 65 seconds."
+    },
+    {
+      "image": "herolevel11.png",
+      "name": "11",
+      "cost": "24570",
+      "levelBody": "Description: Income increased to $300 per round.\nEffect: Generates $300 per round instead of $250."
+    },
+    {
+      "image": "herolevel12.png",
+      "name": "12",
+      "cost": "21600",
+      "levelBody": "Description: Skimming increased to $2 per Bloon.\nEffect: Skimming earns $2 per bloon instead of $1."
+    },
+    {
+      "image": "herolevel13.png",
+      "name": "13",
+      "cost": "24975",
+      "levelBody": "Description: Biohack increases bonus damage and affects 6 Monkeys for 8 seconds.\nEffect: Biohack damage bonus increased from +1 to +2, increases max number of biohacked towers from 4 to 6, and buffs them for 8 seconds."
+    },
+    {
+      "image": "herolevel14.png",
+      "name": "14",
+      "cost": "22410",
+      "levelBody": "Description: Cyber Security adds 10 lives per round and can go up to 100 over starting lives.\nEffect: Heals up to 10 lives per round, and can generate up to 100 lives over the starting lives."
+    },
+    {
+      "image": "herolevel15.png",
+      "name": "15",
+      "cost": "24570",
+      "levelBody": "Description: Income increased to $500 per round.\nEffect: Generates $500 per round instead of $300."
+    },
+    {
+      "image": "herolevel16.png",
+      "name": "16",
+      "cost": "26730",
+      "levelBody": "Description: Bloon Trojan is sent more often and earns more cash.\nEffect: Bloon Trojan is sent every 3s-4s instead of 5s-7s. Popped bloons affected by Trojan now give $3 + 2 * number of layers skipped instead of $2 + number of layers skipped.\nFor example, a Zebra popped gives $15 ($3 + $12 = $15)."
+    },
+    {
+      "image": "herolevel17.png",
+      "name": "17",
+      "cost": "28890",
+      "levelBody": "Description: Income increased to $800 per round.\nEffect: Generates $800 per round instead of $500."
+    },
+    {
+      "image": "herolevel18.png",
+      "name": "18",
+      "cost": "31050",
+      "levelBody": "Description: Bloon Trojan can affect BFB and DDT Bloons.\nEffect: Bloon Trojan can now target BFBs and DDTs, and Benjamin gains camo detection. Benjamin's Syphon Funding also now affects DDTs."
+    },
+    {
+      "image": "herolevel19.png",
+      "name": "19",
+      "cost": "24705",
+      "levelBody": "Description: Biohack lasts 9 seconds and affected Monkeys pop 3 extra layers instead of 2.\nEffect: Biohack increases damage by +3 instead of +2, and lasts for 9 seconds."
+    },
+    {
+      "image": "herolevel20.png",
+      "name": "20",
+      "cost": "25920",
+      "levelBody": "Description: Syphon Funding lasts 20 seconds and cash per pop is triple normal for affected Bloons.\nEffect: Syphon Funding lasts for 20s instead of 10s, and affected bloons give 3x cash."
+    }
+  ]
+}

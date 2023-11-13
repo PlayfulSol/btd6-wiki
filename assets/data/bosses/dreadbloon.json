@@ -1,0 +1,112 @@
+{
+  "id": "dreadbloon",
+  "name": "Dreadbloon Armored Behemoth",
+  "description": "Dreadbloon has Lead properties and reduces all incoming damage by 1.\n\nWhen each skull is reached, Dreadbloon grows a Ceramic Armor Shell and Dreadrock Bloons will begin spawning at the start of the track.\nWhen Dreadbloon appears, it is immune to Primary towers. At each skull, this immunity changes to a different tower type Military, Magic, Support. Dreadrock Bloons and the Ceramic Armor Shell also have these immunities.\nDreadrock Bloons have a Strong taunt, be careful what your towers are targeting!",
+  "images": {
+    "normal": "dreadbloonportrait.png",
+    "defeated": "dreadbloonportraitdefeat.png",
+    "elite": "dreadbloonportraitelite.png",
+    "eliteDefeated": "dreadbloonportraitelitedefeat.png"
+  },
+  "health": {
+    "normal": [
+      {
+        "tier": "1",
+        "normal": "7,500",
+        "coop2": "9,000",
+        "coop3": "10,500",
+        "coop4": "12,000"
+      },
+      {
+        "tier": "2",
+        "normal": "25,000",
+        "coop2": "30,000",
+        "coop3": "35,000",
+        "coop4": "40,000"
+      },
+      {
+        "tier": "3",
+        "normal": "120,000",
+        "coop2": "144,000",
+        "coop3": "168,000",
+        "coop4": "192,000"
+      },
+      {
+        "tier": "4",
+        "normal": "260,000",
+        "coop2": "312,000",
+        "coop3": "364,000",
+        "coop4": "416,000"
+      },
+      {
+        "tier": "5",
+        "normal": "1,000,000",
+        "coop2": "1,200,000",
+        "coop3": "1,400,000",
+        "coop4": "1,600,000"
+      }
+    ],
+    "elite": [
+      {
+        "tier": "1",
+        "normal": "15,000",
+        "coop2": "18,000",
+        "coop3": "21,000",
+        "coop4": "24,000"
+      },
+      {
+        "tier": "2",
+        "normal": "90,000",
+        "coop2": "108,000",
+        "coop3": "126,000",
+        "coop4": "144,000"
+      },
+      {
+        "tier": "3",
+        "normal": "650,000",
+        "coop2": "780,000",
+        "coop3": "910,000",
+        "coop4": "1,040,000"
+      },
+      {
+        "tier": "4",
+        "normal": "2,625,000",
+        "coop2": "3,150,000",
+        "coop3": "3,675,000",
+        "coop4": "4,200,000"
+      },
+      {
+        "tier": "5",
+        "normal": "12,500,000",
+        "coop2": "15,000,000",
+        "coop3": "17,500,000",
+        "coop4": "20,000,000"
+      }
+    ]
+  },
+  "skullCount": {
+    "normal": "3",
+    "elite": "3"
+  },
+  "generalImmunities": [
+    "The same immunities as the BAD (Stuns, Slowness, Knockback & Instapops).",
+    "Immune to all forms of percentage-based damage and instant health reduction (i.e. MOAB Hex, Big Bloon Sabotage, and Grand Saboteur ability).",
+    "Immune to Legend of the Night's passive black hole ability, meaning that leaking the boss will always result in a game over.",
+    "Immune to Navarch of the Seas hook ability.",
+    "Immune to Megalodon devour attack."
+  ],
+  "individualImmunities": [],
+  "gimmicks": {
+    "normal": [
+      "Dreadbloon is initially protected by a Ceramic outer shell that must be destroyed before damaging the boss.",
+      "The boss is immune to one entire tower type at a time (Primary, Military, Magic, Support, including Paragons in those categories).",
+      "Deflects immune attacks with a unique sound effect, including some deflected abilities (e.g., Cripple MOAB, Glue Strike).",
+      "After the Ceramic shell is destroyed, Dreadbloon's inner layer gains Lead properties and reduces all damage taken by 1.",
+      "The UI displays Dreadbloon's current properties, including Lead interior or Ceramic shell, current class immunity, and outer shell health (if present).",
+      "Blue text appears above a tower if its attacks cannot damage Dreadbloon, indicating 'IMMUNE' for tower type immunity and 'RESIST' for zero damage.",
+      "Upon reaching skull health, Dreadbloon regenerates its Ceramic shell, changes its tower type immunity, and spawns recurring Rock Bloons.",
+      "Rock Bloons have immense health, force Strong targeting options to prioritize them, and are immune to the current damage type Dreadbloon is immune to."
+    ],
+    "elite": []
+  }
+}

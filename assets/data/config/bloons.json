@@ -1,0 +1,87 @@
+[
+  {
+    "id": "red",
+    "name": "Red",
+    "image": "btd6red.png"
+  },
+  {
+    "id": "blue",
+    "name": "Blue",
+    "image": "btd6blue.png"
+  },
+  {
+    "id": "green",
+    "name": "Green",
+    "image": "btd6green.png"
+  },
+  {
+    "id": "yellow",
+    "name": "Yellow",
+    "image": "btd6yellow.png"
+  },
+  {
+    "id": "pink",
+    "name": "Pink",
+    "image": "btd6pink.png"
+  },
+  {
+    "id": "black",
+    "name": "Black",
+    "image": "btd6black.png"
+  },
+  {
+    "id": "white",
+    "name": "White",
+    "image": "btd6white.png"
+  },
+  {
+    "id": "purple",
+    "name": "Purple",
+    "image": "btd6purple.png"
+  },
+  {
+    "id": "lead",
+    "name": "Lead",
+    "image": "btd6lead.png"
+  },
+  {
+    "id": "zebra",
+    "name": "Zebra",
+    "image": "btd6zebra.png"
+  },
+  {
+    "id": "rainbow",
+    "name": "Rainbow",
+    "image": "btd6rainbow.png"
+  },
+  {
+    "id": "ceramic",
+    "name": "Ceramic",
+    "image": "btd6ceramic.png"
+  },
+  {
+    "id": "moab",
+    "name": "MOAB",
+    "image": "btd63dmoab.png"
+  },
+  {
+    "id": "bfb",
+    "name": "BFB",
+    "image": "btd63dbfb.png"
+  },
+  {
+    "id": "zomg",
+    "name": "ZOMG",
+    "image": "btd63dzomg.png"
+  },
+  {
+    "id": "ddt",
+    "name": "DDT",
+    "image": "btd63dddt.png"
+  },
+  {
+    "id": "bad",
+    "name": "BAD",
+    "image": "btd63dbad.png"
+  }
+]

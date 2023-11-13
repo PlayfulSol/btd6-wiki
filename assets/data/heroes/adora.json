@@ -1,0 +1,244 @@
+{
+  "id": "adora",
+  "name": "Adora",
+  "image": "adoraportrait.png",
+  "skinChange": {
+    "level_1": "adoraportrait.png",
+    "level_3": "adoraportraitlvl3.png",
+    "level_7": "adoraportraitlvl7.png",
+    "level_10": "adoraportraitlvl10.png",
+    "level_20_sun_goddess": "adoraportraitlvl20.png",
+    "level_20_true_sun_goddess": "adoraportraitlvl20sungod.png",
+    "level_20_vengeful_sun_goddess": "adoraportraitlvl20sungodvengeful.png"
+  },
+  "unlock": "Level 10 and 5,000",
+  "cost": {
+    "easy": "850",
+    "medium": "1,000",
+    "hard": "1,080",
+    "impoppable": "1,200"
+  },
+  "discountCost": {
+    "easy": "765",
+    "medium": "900",
+    "hard": "970",
+    "impoppable": "1,080"
+  },
+  "abilities": "The Long Arm of Light (Level 3)\nBlood Sacrifice (Level 7)\nBall of Light (Level 10)",
+  "target": "First, Last, Close, Strong,\nBall of Light obeys Target Priority",
+  "inGameDesc": "Adora's devotion compels her to strike Bloons down with furious vengeance.",
+  "stats": {
+    "damage": [
+      {
+        "name": "Divine Bolts",
+        "value": [
+          "Level 1-14: 1",
+          "Level 15+: 2"
+        ]
+      },
+      {
+        "name": "Long Arm of Light",
+        "value": [
+          "Level 16+: Double damage to Divine Bolts (applies before all buffs)"
+        ]
+      },
+      {
+        "name": "Ball of Light",
+        "value": [
+          "Level 10-14: 3",
+          "Level 15-19: 5",
+          "Level 20: 20"
+        ]
+      }
+    ],
+    "pierce": [
+      {
+        "name": "Divine Bolts",
+        "value": [
+          "Level 1-4: 5",
+          "Level 5-12: 8",
+          "Level 13+: 13"
+        ]
+      },
+      {
+        "name": "Long Arm of Light",
+        "value": [
+          "Level 3+: Double pierce to Divine Bolts (applies before all buffs)"
+        ]
+      },
+      {
+        "name": "Ball of Light",
+        "value": [
+          "Level 10-12: 8",
+          "Level 13+: 11"
+        ]
+      }
+    ],
+    "attackSpeed": [
+      "Level 1-10: Every 1.0s",
+      "Level 11-16: Every 0.8s",
+      "Level 17+: Every 0.6s"
+    ],
+    "range": [
+      {
+        "name": "Divine Bolts",
+        "value": [
+          "Level 1: 45",
+          "Level 2-8: 49",
+          "Level 9-18: 54",
+          "Level 19+: 59"
+        ]
+      },
+      {
+        "name": "Long Arm of Light",
+        "value": [
+          "Level 3+: Double range (applies before all buffs)"
+        ]
+      }
+    ],
+    "statusEffects": "N/A",
+    "towerBoosts": [
+      {
+        "name": "Blood Sacrifice",
+        "value": [
+          "Level 7-19: Gives 1% more range and 0.99x attack cooldown to herself and 3+xx Super Monkeys in range for every $100 sacrificed. Cannot increase past +25% range and 0.75x attack cooldown (+33% attack speed)",
+          "Level 20: Gives 1% more range and 0.99x attack cooldown to herself and 3+xx Super Monkeys in range for every $50 sacrificed. Cannot increase past +50% range and 0.5x attack cooldown (+100% attack speed)."
+        ]
+      }
+    ],
+    "incomeBoosts": "N/A",
+    "camo": [
+      "No"
+    ],
+    "levelSpeed": [
+      "Slow (1.71x)"
+    ]
+  },
+  "levels": [
+    {
+      "image": "herolevel1.png",
+      "name": "1",
+      "cost": {
+        "easy": "850",
+        "medium": "1,000",
+        "hard": "1,080",
+        "impoppable": "1,200"
+      },
+      "levelBody": "Description: Divine Bolt seeks out and destroys.\nEffect: Summons bolts of the sun every 1.0s. Each bolt deals 1 damage, can pop up to 5 bloons, can pop Frozen Bloons and Lead Bloons, and aggressively seeks bloons. Adora starts with 45 range."
+    },
+    {
+      "image": "herolevel2.png",
+      "name": "2",
+      "cost": "308",
+      "levelBody": "Description: Increased attack range.\nEffect: Range increases from 45 to 49."
+    },
+    {
+      "image": "herolevel3.png",
+      "name": "3",
+      "cost": "787",
+      "levelBody": "Description: The Long Arm of Light: Greatly increases attack range and power for a short time & damages all Bloon Types.\nEffect: Gains The Long Arm of Light Ability. When activated, Adora receives double attack range, double pierce, and Normal type (NOTE: all of these improvements apply before any buffs) for 10s. Has a 45s cooldown."
+    },
+    {
+      "image": "herolevel4.png",
+      "name": "4",
+      "cost": "1,710",
+      "levelBody": "Description: Shoots double Divine Bolts.\nEffect: Shoots two Divine Bolts at a time in an angular spray.."
+    },
+    {
+      "image": "herolevel5.png",
+      "name": "5",
+      "cost": "3,181",
+      "levelBody": "Description: Divine bolts pierce through more Bloons.\nEffect: Increases pierce per Divine Bolt from 5 to 8."
+    },
+    {
+      "image": "herolevel6.png",
+      "name": "6",
+      "cost": "5,609",
+      "levelBody": "Description: Shoots 3 Divine Bolts at a time.\nEffect: Gains a 3rd Divine Bolt per shot."
+    },
+    {
+      "image": "herolevel7alt.png",
+      "name": "7",
+      "cost": "8,858",
+      "levelBody": "Description: Blood Sacrifice: Sacrifice a targeted Tower to grant Adora large amounts of XP and boost her attack range and rate of fire for a short time.\nEffect: Gains the Blood Sacrifice ability. When activated, the player selects a tower to sacrifice, removing it from the map and giving Adora XP and temporary range and attack speed buffs as follows:\nAdora gains 4x XP per $1 worth of sacrifices and gains a minimum of both +10% range and 0.90x attack cooldown for up to 10 seconds.\nBy default, the temporary buff gives +10% range and 0.90x attack cooldown. For every $100 worth of sacrifices, Adora gains +1% range and attack cooldown additively decreased by 0.01, capped at 0.75x attack cooldown and +25% range.\nThe range and attack speed buffs last 10 seconds and the ability has a 30 second cooldown. The range and speed buffs also apply to nearby Sun Avatars and above."
+    },
+    {
+      "image": "herolevel8.png",
+      "name": "8",
+      "cost": "14,227",
+      "levelBody": "Description: Shoots 4 Divine Bolts at a time.\nEffect: Gains a 4th Divine Bolt per shot."
+    },
+    {
+      "image": "herolevel9.png",
+      "name": "9",
+      "cost": "16,040",
+      "levelBody": "Description: Increased attack range and increased damage to fortified bloons.\nEffect: Range increases from 49 to 54. Main attack grant +1 damage to Fortified bloons."
+    },
+    {
+      "image": "herolevel10.png",
+      "name": "10",
+      "cost": "23,290",
+      "levelBody": "Description: Ball of Light: Brings forth a powerful ball of energy to strike down the Bloons.\nEffect: Gains the Ball of Light ability. When activated, a ball orbits Adora that damages bloons based on her target priority. The ball deals 3 damage, +3 damage to fortified Bloons, every 0.05 seconds on up to 8 bloons, and has infinite range. Lasts for 12s and has a 60s cooldown."
+    },
+    {
+      "image": "herolevel11.png",
+      "name": "11",
+      "cost": "28,010",
+      "levelBody": "Description: Adora increased attack speed.\nEffect: Increases attack speed by 17.6% (0.85x attack cooldown). Now attacks every 0.85s."
+    },
+    {
+      "image": "herolevel12.png",
+      "name": "12",
+      "cost": "24,624",
+      "levelBody": "Description: Shoots 5 Divine Bolts at a time.\nEffect: Gains a 5th Divine Bolt per shot."
+    },
+    {
+      "image": "herolevel13.png",
+      "name": "13",
+      "cost": "28,472",
+      "levelBody": "Description: Divine Bolts pierce through even more Bloons. Increased damage to fortified bloons.\nEffect: Pierce of Divine Bolts and Ball of Light improves from 8 to 11. Main attack deal extra damage +2 to fortified instead of +1."
+    },
+    {
+      "image": "herolevel14.png",
+      "name": "14",
+      "cost": "25,547",
+      "levelBody": "Description: Shoots 6 Divine Bolts at a time.\nEffect: Gains a 6th Divine Bolt per shot."
+    },
+    {
+      "image": "herolevel15.png",
+      "name": "15",
+      "cost": "28,010",
+      "levelBody": "Description: Divine Bolts burn through an extra Bloon layer, plus Ball of Light deals more damage.\nEffect: Divine Bolt damage increases from 1 to 2, and Ball of Light damage increases from 3 to 5, and Ball of Light does extra +5 damage to fortified Bloons instead of +3."
+    },
+    {
+      "image": "herolevel16.png",
+      "name": "16",
+      "cost": "30,472",
+      "levelBody": "Description: Long Arm of Light becomes even more deadly.\nEffect: Long Arm of Light lasts 5 seconds longer and doubles the damage of Divine Bolts for the duration."
+    },
+    {
+      "image": "herolevel17.png",
+      "name": "17",
+      "cost": "32,935",
+      "levelBody": "Description: Adora increases attack speed even more.\nEffect: +21.42% attack speed (0.8235x attack cooldown). Now attacks every 0.7s."
+    },
+    {
+      "image": "herolevel18.png",
+      "name": "18",
+      "cost": "35,397",
+      "levelBody": "Description: Shoots 8 Divine Bolts at a time.\nEffect: Shoots 2 more Divine Bolts per shot, for a total of 8 Divine Bolts per shot."
+    },
+    {
+      "image": "herolevel19.png",
+      "name": "19",
+      "cost": "28,164",
+      "levelBody": "Description: Increased attack range. Increased damage to fortified Bloons.\nEffect: Range increases from 54 to 59. Main attack now deal extra +3 damage to fortified bloons instead of +2."
+    },
+    {
+      "image": "herolevel20.png",
+      "name": "20",
+      "cost": "29,549",
+      "levelBody": "Description: Ball of Light is greatly improved, plus increased rate of fire, range, and duration buffs from Sacrifices.\nEffect: Ball of Light deals 20 damage instead of 5, deal extra +20 damage to fortified Bloons instead of +5 and gains normal damage type, letting it damage purple bloons. Sacrifices still cost the same rate ($100 per 1%), the cap is doubled (+50% range and 0.5x attack cooldown), and last for 60s instead of 10s. Can receive enormous damage and pierce buffs if nearby a True Sun God (or VTSG): Divine Bolts gain +8 Damage and +30 Pierce, and Ball of Light gains +80 Damage and +35 Pierce."
+    }
+  ]
+}

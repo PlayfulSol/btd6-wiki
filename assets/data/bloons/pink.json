@@ -1,0 +1,89 @@
+{
+  "id": "pink",
+  "name": "Pink",
+  "fullName": "Pink Bloon",
+  "image": "btd6pink.png",
+  "rbe": [
+    "5"
+  ],
+  "children": [
+    {
+      "id": "yellow",
+      "name": "Yellow Bloon",
+      "image": "btd6yellow.png",
+      "value": "1"
+    }
+  ],
+  "parents": [
+    {
+      "id": "black",
+      "name": "Black Bloon",
+      "image": "btd6black.png",
+      "value": "2"
+    },
+    {
+      "id": "white",
+      "name": "White Bloon",
+      "image": "btd6white.png",
+      "value": "2"
+    },
+    {
+      "id": "purple",
+      "name": "Purple Bloon",
+      "image": "btd6purple.png",
+      "value": "2"
+    }
+  ],
+  "speed": {
+    "absolute": "87.5",
+    "relative": "3.5"
+  },
+  "variants": [
+    {
+      "image": "btd6pink.png",
+      "name": "Pink Bloon",
+      "appearances": "Round 15"
+    },
+    {
+      "image": "btd6camopink.png",
+      "name": "Pink Camo Bloon",
+      "appearances": "Round 37\nRound 47"
+    },
+    {
+      "image": "btd6regrowpink.png",
+      "name": "Pink Regrow Bloon",
+      "appearances": "Round 31\nRound 48"
+    },
+    {
+      "image": "btd6camoregrowpink.png",
+      "name": "Pink Camo Regrow Bloon",
+      "appearances": "Round 62"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 15: 20 Red, 15 Blue, 12 Green, 10 Yellow, 5 Pink",
+      "Round 19: 10 Green, 4 Yellow, 5 Yellow Regrowth, 15 Pink",
+      "Round 21: 40 Yellow, 14 Pink",
+      "Round 26: 23 Pink, 4 Zebra",
+      "Round 35: 35 Pink, 30 Black, 25 White, 5 Rainbow",
+      "Round 36: 140 Pink, 20 Green Camo Regrowth",
+      "Round 38: 42 Pink, 17 White, 10 Zebra, 14 Lead, 2 Ceramic",
+      "Round 45: 180 Pink, 10 Purple Camo, 4 Fortified Lead, 25 Rainbow",
+      "Round 47: 70 Pink Camo, 12 Ceramic",
+      "Round 48: 40 Pink Regrowth, 30 Purple Camo Regrowth, 40 Rainbow, 3 Fortified Ceramic",
+      "Round 53: 80 Pink Camo, 3 M.O.A.B."
+    ],
+    "abr": [
+      "Round 12: 20 Blue, 6 Green Regrowth, 3 Pink",
+      "Round 15: 20 Blue, 15 Green, 12 Yellow, 10 Pink, 3 Purple",
+      "Round 17: 12 Pink",
+      "Round 19: 10 Blue, 5 Green Regrowth, 15 Pink, 2 Black",
+      "Round 25: 22 Pink Regrowth, 10 Purple Regrowth",
+      "Round 29: 50 Pink Regrowth, 8 White",
+      "Round 45: 120 Pink, 10 Purple Camo, 4 Fortified Lead, 10 Ceramic",
+      "Round 47: 70 Pink Camo Regrowth, 3 M.O.A.B.",
+      "Round 53: 120 Pink Camo, 3 Fortified M.O.A.B."
+    ]
+  }
+}

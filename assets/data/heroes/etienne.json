@@ -1,0 +1,240 @@
+{
+  "id": "etienne",
+  "name": "Etienne",
+  "image": "etienneportrait.png",
+  "skinChange": {
+    "level_1": "etienneportrait.png",
+    "level_3": "etienneportraitlvl3.png",
+    "level_8": "etienneportraitlvl7.png",
+    "level_10": "etienneportraitlvl10.png",
+    "level_20": "etienneportraitlvl20.png",
+    "hero_icon": "heroiconetienne.png"
+  },
+  "unlock": "Level 10 and 5000",
+  "cost": {
+    "easy": "650",
+    "medium": "850",
+    "hard": "920",
+    "impoppable": "1,020"
+  },
+  "discountCost": {
+    "easy": "650",
+    "medium": "765",
+    "hard": "825",
+    "impoppable": "920"
+  },
+  "abilities": "Drone Swarm (Level 3)\nUCAV (Level 10)",
+  "target": "Level 1-6:\nFirst\nLevel 7-10:\nDivide and Conquer, First\nLevel 11+\nZone Defense, Divide and Conquer, First\n\nSpecific drone targeting formations are further discussed on #Targeting",
+  "inGameDesc": "This high-tech hero can pursue the Bloons wherever they go with his remote-controlled drone.",
+  "stats": {
+    "damage": [
+      {
+        "name": "Drone Damage",
+        "value": [
+          "Level 1-8: 1",
+          "Level 9-13: 2",
+          "Level 14-17: 3",
+          "Level 18+: 4"
+        ]
+      },
+      {
+        "name": "UCAV",
+        "value": [
+          "Level 10-14: 2 (spray of 10)",
+          "Level 15-16: 4",
+          "Level 17-20: 7"
+        ]
+      },
+      {
+        "name": "Perma-UCAV",
+        "value": [
+          "Passive: 2",
+          "Ability: 10"
+        ]
+      }
+    ],
+    "pierce": [
+      {
+        "name": "Drones",
+        "value": [
+          "Level 1-3: 2",
+          "Level 4-11: 3",
+          "Level 12-15: 6",
+          "Level 16+: 9"
+        ]
+      },
+      {
+        "name": "UCAV",
+        "value": [
+          "Level 10-14: 25 (explosion)",
+          "Level 15+: 30 (explosion)"
+        ]
+      },
+      {
+        "name": "Perma-UCAV",
+        "value": [
+          "Level 20: 25 (explosion)"
+        ]
+      }
+    ],
+    "attackSpeed": [
+      {
+        "name": "Drone Attack",
+        "value": [
+          "Level 1-4: Every 0.7s",
+          "Level 5+: Every 0.55s"
+        ]
+      },
+      {
+        "name": "UCAV",
+        "value": [
+          "Level 10+: Every 0.6s (spray of 10)",
+          ""
+        ]
+      }
+    ],
+    "range": [
+      "Level 1: 55",
+      "Level 2-15: 60",
+      "Level 16+: 80"
+    ],
+    "statusEffects": "N/A",
+    "towerBoosts": [
+      "Grants camo detection to all towers on screen (Level 8+)"
+    ],
+    "incomeBoosts": "N/A",
+    "camo": [
+      "Yes (Level 5+)"
+    ],
+    "levelSpeed": [
+      "Fast (1.0x)"
+    ]
+  },
+  "levels": [
+    {
+      "image": "herolevel1.png",
+      "name": "1",
+      "cost": {
+        "easy": "720",
+        "medium": "850",
+        "hard": "920",
+        "impoppable": "1,020"
+      },
+      "levelBody": "Description: Flies a deadly little drone around to shoot at the Bloons.\nEffect: Starts with 55 range and operates a dart-firing drone that targets bloons within his range. Etienne himself doesn't directly attack.\n\nDetailed notes:\n\nDrones have 1 damage, 2 pierce and attack every 0.7 seconds. This drone always targets on First targeting. Despite being a possible subtower, it is affected by Overclock but still not by Berserker Brew or above. The drone attack uses the sharp damage type.\nThe drone can fly around Etienne's range of 55 and fire at bloons within his range."
+    },
+    {
+      "image": "herolevel2.png",
+      "name": "2",
+      "cost": "180",
+      "levelBody": "Description: Etienne's range increased.\nEffect: Etienne's range increased from 55 to 60."
+    },
+    {
+      "image": "herolevel3.png",
+      "name": "3",
+      "cost": "460",
+      "levelBody": "Description: Drone Swarm Ability: Etienne launches 4 more temporary drones to wreak some Bloon popping havoc.\nEffect: Unlocks Drone Swarm ability. When activated, summons 4 temporary drones with fixed targeting and identical stats to his other drone(s). Duration increases with levels. Cooldown of 70 seconds.\n\nDetailed notes:\n\nSpawns 4 temporary drones with the same stats as main drones which last 18.5 seconds at Level 3. The 4 drones always target, First, Last, Strong, Strong (blue, green, yellow, yellow) regardless of Etienne's targeting.\nDuration increases by +0.5 seconds for every level of Etienne, up to a maximum of 27.0 seconds at Level 20. It can be calculated using the formula (17+.5*level)"
+    },
+    {
+      "image": "herolevel4.png",
+      "name": "4",
+      "cost": "1,000",
+      "levelBody": "Description: Drones increase in popping power.\nEffect: Drone dart pierce increased from 2 to 3."
+    },
+    {
+      "image": "herolevel5.png",
+      "name": "5",
+      "cost": "1,860",
+      "levelBody": "Description: Drone increased attack speed and infra red camera allows shooting of Camo Bloons.\nEffect: Gains camo detection, and his drones gain ~+27.28% attack speed (0.7857x attack cooldown), with the attack cooldown reduced to 0.55s. Does not receive Camo Prioritization target option."
+    },
+    {
+      "image": "herolevel6.png",
+      "name": "6",
+      "cost": "3,280",
+      "levelBody": "Description: Drone Swarm ability cooldown reduced.\nEffect: Cooldown for Drone Swarm reduced from 70 seconds to 55 seconds."
+    },
+    {
+      "image": "herolevel7.png",
+      "name": "7",
+      "cost": "5,180",
+      "levelBody": "Description: Etienne now controls 2 drones at once.\nEffect: Etienne gains a second independent drone. The second drone has a separate target priority compared to his first drone. He also gains the \"First\" and \"Divide and Conquer\" target priorities, and defaults to \"Divide and Conquer\".\n\nDetailed notes:\n\nGains \"First\" targeting option, which switches all drones to target first (blue, blue).\nGains \"Divide and Conquer\" targeting option, which switches one drone each to target first and strong (blue, yellow)\nNote again that these targeting options do not change the targeting of Drones from Drone Swarm."
+    },
+    {
+      "image": "herolevel8.png",
+      "name": "8",
+      "cost": "8,320",
+      "levelBody": "Description: UAV: all Monkeys gain Camo Bloon detection.\nEffect: All towers on screen will now receive external camo detection."
+    },
+    {
+      "image": "herolevel9.png",
+      "name": "9",
+      "cost": "9,380",
+      "levelBody": "Description: Drones pop an extra Bloon layer.\nEffect: All drone darts deal 2 damage instead of 1."
+    },
+    {
+      "image": "herolevel10.png",
+      "name": "10",
+      "cost": "13,620",
+      "levelBody": "Description: UCAV ability: high altitude surveillance drone becomes devastating combat drone for a short time.\nEffect: Unlocks UCAV ability. When activated, the ability summons a UCAV from above that rapidly shoots multiple high-damage homing missiles. Naturally detects camo. Cooldown of 90 seconds, and lasts for up to 18 seconds.\n\nDetailed notes:\n\nUCAV has 10 missiles with 2 damage, 25 pierce and attacks every 0.6 seconds with infinite range. The missiles are of the explosive damage type, and always seek towards the first bloon.\nThe missile may hit another bloon beforehand and explode without hitting the first bloon.\nUnlike his drones, the UCAV ability is unaffected by Overclock as well as Alch Buff."
+    },
+    {
+      "image": "herolevel11.png",
+      "name": "11",
+      "cost": "16,380",
+      "levelBody": "Description: Etienne gains a third drone to control.\nEffect: Etienne gains a third independent drone. Also gains \"Zone Defense\" targeting option, plus adjusted \"Divide and Conquer\" to account for the third drone.\n\nDetailed notes:\n\n\"Zone Defense\" switches one drone each to target First, Strong and Last (blue, yellow, green).\n\"Divide and Conquer\" now becomes First, Strong, Strong targeting (blue, yellow, yellow)."
+    },
+    {
+      "image": "herolevel12.png",
+      "name": "12",
+      "cost": "14,400",
+      "levelBody": "Description: Drone upgrades! Increased popping power and flight speed.\nEffect: Pierce of drone darts increased from 3 to 6, and drones gain extra flight speed."
+    },
+    {
+      "image": "herolevel13.png",
+      "name": "13",
+      "cost": "16,650",
+      "levelBody": "Description: UCAV ability cooldown reduced.\nEffect: UCAV ability cooldown decreased from 90 seconds to 75 seconds."
+    },
+    {
+      "image": "herolevel14.png",
+      "name": "14",
+      "cost": "14,940",
+      "levelBody": "Description: Drone damage increased greatly.\nEffect: All drone darts deal 3 damage instead of 2."
+    },
+    {
+      "image": "herolevel15.png",
+      "name": "15",
+      "cost": "16,380",
+      "levelBody": "Description: UCAV damage output and duration greatly increased.\nEffect: Duration of UCAV increased from 18 seconds to 20 seconds, and UCAV missile damage increased from 2 to 4 and pierce increased from 25 to 30."
+    },
+    {
+      "image": "herolevel16.png",
+      "name": "16",
+      "cost": "17,820",
+      "levelBody": "Description: Etienne's range, drone popping power, and Drone Swarm ability cooldown all improved.\nEffect: Drone dart pierce increased from 6 to 9, Etienne's range increases from 60 to 80, and cooldown for Drone Swarm ability reduced from 70s to 50s."
+    },
+    {
+      "image": "herolevel17.png",
+      "name": "17",
+      "cost": "19,260",
+      "levelBody": "Description: UCAV damage output greatly increased again!\nEffect: UCAV missile damage increased from 4 to 7."
+    },
+    {
+      "image": "herolevel18.png",
+      "name": "18",
+      "cost": "20,700",
+      "levelBody": "Description: Drone damage increased.\nEffect: All drone darts deal 4 damage instead of 3."
+    },
+    {
+      "image": "herolevel19.png",
+      "name": "19",
+      "cost": "16,470",
+      "levelBody": "Description: Etienne now controls four drones all the time!\nEffect: Etienne gains a fourth independently flying drone. Target priorities for his drones are now modified to account for this fourth drone.\n\nDetailed notes:\n\nFourth drone targets Close (purple) with Zone Defense. Drones will target First, Strong, Last, Close (blue, yellow, green, purple).\nFourth drone targets first (blue) with Divide and Conquer. Drones will target First, Strong, Strong, First (blue, yellow, yellow, blue)."
+    },
+    {
+      "image": "herolevel20.png",
+      "name": "20",
+      "cost": "17,280",
+      "levelBody": "Description: Perma-UCAV: Surveillance drone becomes permanent UCAV. When activated becomes more powerful for a short time and can pop all Bloon types.\nEffect: Gains a permanent Level 10 UCAV. UCAV ability now increases UCAV missile damage from 2 to 10, pierce from 25 to 30, and temporarily damages any bloon type, and cooldown remains at 20 seconds. Without the ability, UCAV missile damage is reduced to 2, and pierce to 25."
+    }
+  ]
+}

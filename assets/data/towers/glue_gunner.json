@@ -1,0 +1,215 @@
+{
+  "id": "glue_gunner",
+  "name": "Glue Gunner",
+  "image": "000_gluegunner.png",
+  "type": "Primary",
+  "unlock": "Level 2-6",
+  "inGameDesc": "Shoots a blob of sticky glue that slows Bloons down by 50%",
+  "cost": {
+    "easy": "190",
+    "medium": "225",
+    "hard": "245",
+    "impoppable": "270"
+  },
+  "target": "First, Last, Close, Strong",
+  "stats": {
+    "damage": "0",
+    "pierce": "1",
+    "attackSpeed": "1.0s",
+    "range": "46",
+    "statuseffects": "Glued Status: Affected bloons move at 50% speed, lasts for 11s and soaks through 3 layers of bloon.",
+    "towerboosts": "N/A",
+    "incomeboosts": "N/A",
+    "camo": "Situational (x-4-x ability)",
+    "footprint": "Small (6)",
+    "damageType": " Acid"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "gluesoakupgradeicon.png",
+        "name": "Glue Soak",
+        "cost": {
+          "easy": "170",
+          "medium": "200",
+          "hard": "215",
+          "impoppable": "240"
+        },
+        "unlock": "150 XP",
+        "upgradeBody": "Description: Glue soaks through all layers of Bloon.\nEffect: Soaks through all non-blimp layers of bloon. Cannot soak through MOAB-class, even with upgrades."
+      },
+      {
+        "image": "corrosiveglueupgradeicon.png",
+        "name": "Corrosive Glue",
+        "cost": {
+          "easy": "255",
+          "medium": "300",
+          "hard": "325",
+          "impoppable": "360"
+        },
+        "unlock": "550 XP",
+        "upgradeBody": "Description: Glued Bloons pop one layer every few seconds.\nEffect: Slowly deals damage to bloons every 2.0s while glued. Can target MOAB-class but does not slow them down and only lasts for half duration."
+      },
+      {
+        "image": "bloondissolverupgradeicon.png",
+        "name": "Bloon Dissolver",
+        "cost": {
+          "easy": "2,125",
+          "medium": "2,500",
+          "hard": "2,700",
+          "impoppable": "3,000"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Can glue one additional Bloon per shot and solvents melt two layers every second.\nEffect: Corrosion rate increased to 1 damage per 0.5s or 2 damage per 0.5s to Ceramics, glue gains +1 pierce."
+      },
+      {
+        "image": "bloonliquefierupgradeicon.png",
+        "name": "Bloon Liquefier",
+        "cost": {
+          "easy": "4,250",
+          "medium": "5,000",
+          "hard": "5,400",
+          "impoppable": "6,000"
+        },
+        "unlock": "9,000 XP",
+        "upgradeBody": "Description: Applies liquefying compounds that do 10 pops every second, and drops powerful acid onto the track after destroying a Bloon.\nEffect: Corrosion rate increased to 1 damage per 0.1s, or 3 damage per 0.1s versus Ceramics. Attacks every 0.75s instead of 1.0s, and bloons that were directly glued leave a blob of glue on the track when popped."
+      },
+      {
+        "image": "thebloonsolverupgradeicon.png",
+        "name": "The Bloon Solver",
+        "cost": {
+          "easy": "18,700",
+          "medium": "22,000",
+          "hard": "23,760",
+          "impoppable": "26,400"
+        },
+        "unlock": "37,500 XP",
+        "upgradeBody": "Description: Bloons a problem? Here's the solution.\nEffect: Corrosion rate increases versus Ceramics and MOAB-class to 8 damage per 0.1s for Ceramics and 6 damage per 0.1s for MOABs. Glue attack becomes a twin splatter attack with 6 pierce per splash, greatly increased damage to popped blob of glue on the track, spreading glue even further. Attacks 3x faster."
+      }
+    ],
+    "path2": [
+      {
+        "image": "biggerglobsupgradeicon.png",
+        "name": "Bigger Globs",
+        "cost": {
+          "easy": "85",
+          "medium": "100",
+          "hard": "110",
+          "impoppable": "120"
+        },
+        "unlock": "120 XP",
+        "upgradeBody": "Description: Can coat 2 Bloons per shot.\nEffect: Glue projectile gains +1 pierce."
+      },
+      {
+        "image": "gluesplatterupgradeicon.png",
+        "name": "Glue Splatter",
+        "cost": {
+          "easy": "1,400",
+          "medium": "1,650",
+          "hard": "1,945",
+          "impoppable": "1,980"
+        },
+        "unlock": "900 XP",
+        "upgradeBody": "Description: Splatters glue across up to 6 Bloons per shot.\nEffect: Converts glue attack into a splash attack, gluing up to 6 bloons per shot (equivalent to +4 pierce)."
+      },
+      {
+        "image": "gluehoseupgradeicon.png",
+        "name": "Glue Hose",
+        "cost": {
+          "easy": "2,125",
+          "medium": "2,500",
+          "hard": "2,700",
+          "impoppable": "3,000"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Shoots glue 3x as fast!\nEffect: Triples its attack speed."
+      },
+      {
+        "image": "gluestrikeupgradeicon.png",
+        "name": "Glue Strike",
+        "cost": {
+          "easy": "2,930",
+          "medium": "3,450",
+          "hard": "3,725",
+          "impoppable": "4,140"
+        },
+        "unlock": "8,500 XP",
+        "upgradeBody": "Description: Glue Strike ability: Glues all Bloons on screen, causing them to take more damage from all sources while it lasts.\nEffect: Gains an ability that glues all bloons currently on screen and renders affected bloons vulnerable to +2 damage and temporarily stop Lead properties while glued."
+      },
+      {
+        "image": "gluestormupgradeicon.png",
+        "name": "Glue Storm",
+        "cost": {
+          "easy": "12,750",
+          "medium": "15,000",
+          "hard": "16,200",
+          "impoppable": "18,000"
+        },
+        "unlock": "25,000 XP",
+        "upgradeBody": "Description: Glue Storm Ability: Pelts the whole screen with glue for 20 seconds.\nEffect: Ability improved, allowing the ability to glue all bloons currently on screen every 1.0s until the ability expires. Alongside effects from its predecessor, ability glue now has double slowdown and gains double lifespan."
+      }
+    ],
+    "path3": [
+      {
+        "image": "stickierglueupgradeicon.png",
+        "name": "Stickier Glue",
+        "cost": {
+          "easy": "240",
+          "medium": "280",
+          "hard": "300",
+          "impoppable": "335"
+        },
+        "unlock": "130 XP",
+        "upgradeBody": "Description: Makes glue effect last much longer.\nEffect: Glue lasts for 24.0s instead of 11.0s."
+      },
+      {
+        "image": "strongerglueupgradeicon.png",
+        "name": "Stronger Glue",
+        "cost": {
+          "easy": "340",
+          "medium": "400",
+          "hard": "430",
+          "impoppable": "480"
+        },
+        "unlock": "600 XP",
+        "upgradeBody": "Description: Slows down Bloons even more.\nEffect: Slows down bloons by 75% instead of 50%."
+      },
+      {
+        "image": "moabglueupgradeicon.png",
+        "name": "MOAB Glue",
+        "cost": {
+          "easy": "2,890",
+          "medium": "3,400",
+          "hard": "3,670",
+          "impoppable": "4,080"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Improved glue formula allows it to stick to MOAB-class Bloons.\nEffect: Can glue MOAB-class bloons and slows them down by 37.5% for half the duration."
+      },
+      {
+        "image": "relentlessglueupgradeicon.png",
+        "name": "Relentless Glue",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "8,000 XP",
+        "upgradeBody": "Description: Popped Bloons that were glued stun nearby Bloons.\nEffect: If the Glue Gunner glues a bloon, and that bloon is popped while glued, it will cause nearby bloons, MOABs, and DDTs (with camo detection) to become stunned."
+      },
+      {
+        "image": "superglueupgradeicon.png",
+        "name": "Super Glue",
+        "cost": {
+          "easy": "23,800",
+          "medium": "28,000",
+          "hard": "30,240",
+          "impoppable": "33,600"
+        },
+        "unlock": "30,000 XP",
+        "upgradeBody": "Description: Glue so strong it temporarily immobilizes all affected Bloons!\nEffect: Improves the glue slowdown greatly. Locks MOABs, DDTs, and non-MOAB-class bloons in place, while slowing down BFBs by 95% and ZOMGs by 90%. Increases base pierce by 6. Also can rehit the same glued bloon. Popped bloons now stun nearby BFBs and ZOMGs as well for full duration."
+      }
+    ]
+  }
+}

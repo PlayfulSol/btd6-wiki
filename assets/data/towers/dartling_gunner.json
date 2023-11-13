@@ -1,0 +1,215 @@
+{
+  "id": "dartling_gunner",
+  "name": "Dartling Gunner",
+  "image": "000_dartlinggunner.png",
+  "type": "Military",
+  "unlock": "500,000 Pops since Level 20",
+  "inGameDesc": "Uses a dart-shooting machine-gun. Aims wherever you point on the screen.",
+  "cost": {
+    "easy": "720",
+    "medium": "850",
+    "hard": "920",
+    "impoppable": "1,020"
+  },
+  "target": "Normal, Locked, Target Independent with B.A.D.S.",
+  "stats": {
+    "damage": "1",
+    "pierce": "1",
+    "attackSpeed": "Fast (every 0.2s)",
+    "range": "Infinite (dart attack)\n20 (\"display\" range, BTD6)",
+    "statuseffects": "Requires upgrades",
+    "towerboosts": "N/A",
+    "incomeboosts": "N/A",
+    "camo": "Yes (x-1-x)",
+    "footprint": "Medium (7)",
+    "damageType": " Sharp"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "focusedfiringupgradeicon.png",
+        "name": "Focused Firing",
+        "cost": {
+          "easy": "255",
+          "medium": "300",
+          "hard": "325",
+          "impoppable": "360"
+        },
+        "unlock": "150 XP",
+        "upgradeBody": "Description: Increases accuracy of the Dartling Gun.\nEffect: Decreases angular deviation from 23\u00b0 to 9.6\u00b0, reducing projectile deviation by 60%. Also increases projectile lifespan for all Buckshot projectiles by +40%."
+      },
+      {
+        "image": "lasershockupgradeicon.png",
+        "name": "Laser Shock",
+        "cost": {
+          "easy": "765",
+          "medium": "900",
+          "hard": "970",
+          "impoppable": "1,080"
+        },
+        "unlock": "600 XP",
+        "upgradeBody": "Description: Laser tipped shots shock bloons into popping again 1 second after being struck.\nEffect: Every point of damage applies an extra electric shock damage-over-time onto affected Bloons. Dartling Gunners with this upgrade also deal bonus damage to shocked Bloons."
+      },
+      {
+        "image": "lasercannonupgradeicon.png",
+        "name": "Laser Cannon",
+        "cost": {
+          "easy": "3,615",
+          "medium": "3,750",
+          "hard": "4,050",
+          "impoppable": "4,500"
+        },
+        "unlock": "2,600 XP",
+        "upgradeBody": "Description: Rapidly fires much more powerful laser blasts that can pop frozen Bloons.\nEffect: Converts into a laser attack that deals increased damage and pierce. Damage improves from 1 to 2, pierce from 1 to 6, and additionally improves duration of Laser Shock effect."
+      },
+      {
+        "image": "plasmaacceleratorupgradeicon.png",
+        "name": "Plasma Accelerator",
+        "cost": {
+          "easy": "9,350",
+          "medium": "11,000",
+          "hard": "11,880",
+          "impoppable": "13,200"
+        },
+        "unlock": "12,500 XP",
+        "upgradeBody": "Description: Concentrates a powerful beam of energy to a single point.\nEffect: Generates a powerful beam of energy towards a single point instead of shooting fast lasers, popping bloons that make regular contact with them. Any remaining pierce from the beam itself is used to inflict greater damage at the endpoint. Affected bloons additionally will be affected by an even longer-lasting Laser Shock effect."
+      },
+      {
+        "image": "rayofdoomupgradeicon.png",
+        "name": "Ray of Doom",
+        "cost": {
+          "easy": "68,000",
+          "medium": "80,000",
+          "hard": "86,400",
+          "impoppable": "96,000"
+        },
+        "unlock": "75,000 XP",
+        "upgradeBody": "Description: Creates a solid line of annihilation. You can erase most Bloons at your leisure.\nEffect: Produces an endless death ray that rapidly destroys bloons, inflicts huge damage, and pierces up to 1000 bloons instead of 50. Deals an additional +55 against the first bloon damage. Laser Shock deals much more damage."
+      }
+    ],
+    "path2": [
+      {
+        "image": "advancedtargetingupgradeicon.png",
+        "name": "Advanced Targeting",
+        "cost": {
+          "easy": "215",
+          "medium": "250",
+          "hard": "270",
+          "impoppable": "300"
+        },
+        "unlock": "130 XP",
+        "upgradeBody": "Description: Allows Dartling Gunner to hit Camo Bloons.\nEffect: Self-explanatory"
+      },
+      {
+        "image": "fasterbarrelspinupgradeicon.png",
+        "name": "Faster Barrel Spin",
+        "cost": {
+          "easy": "810",
+          "medium": "950",
+          "hard": "1,025",
+          "impoppable": "1,140"
+        },
+        "unlock": "700 XP",
+        "upgradeBody": "Description: Makes gun fire much faster.\nEffect: Attacks +50% faster (0.66x attack cooldown)."
+      },
+      {
+        "image": "hydrarocketsupgradeicon.png",
+        "name": "Hydra Rocket Pods",
+        "cost": {
+          "easy": "4,080",
+          "medium": "4,800",
+          "hard": "5,185",
+          "impoppable": "5,760"
+        },
+        "unlock": "2,700 XP",
+        "upgradeBody": "Description: Shoots depleted bloontonium missiles that can damage all Bloon types and trigger multiple explosions.\nEffect: Hydra Rocket Pod missiles damage any bloon type and produce up to 3 low-pierce explosions by default. Gains even more explosions with pierce buffs."
+      },
+      {
+        "image": "rocketstormupgradeicon.png",
+        "name": "Rocket Storm",
+        "cost": {
+          "easy": "4,715",
+          "medium": "5,550",
+          "hard": "5,995",
+          "impoppable": "6,660"
+        },
+        "unlock": "14,000 XP",
+        "upgradeBody": "Description: Rocket Storm ability: Launches a powerful storm of rockets in a wide cone.\nEffect: Ability generates waves of erratically moving rockets that deal 5 damage per shot onto up to 8 bloons per explosion. Main attack gains more pierce for its main attack, increasing pierce of explosions by +2 and increasing number of explosions by +1."
+      },
+      {
+        "image": "madupgradeicon.png",
+        "name": "M.A.D",
+        "cost": {
+          "easy": "51,000",
+          "medium": "60,000",
+          "hard": "64,800",
+          "impoppable": "72,000"
+        },
+        "unlock": "60,000 XP",
+        "upgradeBody": "Description: Moab Assured Destroyer. Slower firing mega missiles do extreme damage to MOAB-class Bloons.\nEffect: Main attack deals 3 damage each plus an extra +550 to MOAB-class and increases pierce to 12, but attacks over twice as slow and alternates attacks between two arms. Ability gains extra pierce and deals more damage to Ceramics and MOAB-class."
+      }
+    ],
+    "path3": [
+      {
+        "image": "fasterswivelupgradeicon.png",
+        "name": "Faster Swivel",
+        "cost": {
+          "easy": "130",
+          "medium": "150",
+          "hard": "160",
+          "impoppable": "180"
+        },
+        "unlock": "110 XP",
+        "upgradeBody": "Description: Gun can swivel much faster.\nEffect: Dartling Gunner rotates towards the pointer twice as fast."
+      },
+      {
+        "image": "powerfuldartsupgradeicon.png",
+        "name": "Powerful Darts",
+        "cost": {
+          "easy": "1,020",
+          "medium": "1,200",
+          "hard": "1,295",
+          "impoppable": "1,440"
+        },
+        "unlock": "650 XP",
+        "upgradeBody": "Description: Darts move faster and can pop 3 bloons each.\nEffect: Darts gain +2 pierce per shot, pop Frozen, and increases projectile speed and projectile size by 50%. For Hydra Rocket Pods, gains +2 pierce and one more explosion plus extra blast radius, most other Tier 3 crosspaths and above receive +50% pierce overall."
+      },
+      {
+        "image": "buckshotupgradeicon.png",
+        "name": "Buckshot",
+        "cost": {
+          "easy": "2,890",
+          "medium": "3,400",
+          "hard": "3,670",
+          "impoppable": "4,080"
+        },
+        "unlock": "3,000 XP",
+        "upgradeBody": "Description: Shoots blasts of deadly buckshot instead of darts.\nEffect: Blasts out slow bursts of deadly buckshot instead of spinning rapid-fire darts. Buckshot balls deal 4 damage, pierces through 4 bloons per buckshot, and can knock back bloons. Accuracy decreases and projectiles have much shorter lifespan. With Laser Shock, improves Laser Shock to deal 2 damage per tic instead of 1, and take +2 extra damage from Dartling Gunners with Laser Shock."
+      },
+      {
+        "image": "bloonareadenialsystemupgradeicon.png",
+        "name": "Bloon Area Denial System",
+        "cost": {
+          "easy": "10,200",
+          "medium": "12,000",
+          "hard": "12,960",
+          "impoppable": "14,400"
+        },
+        "unlock": "15,000 XP",
+        "upgradeBody": "Description: 4-barreled auto-cannon that can be set to attack automatically.\nEffect: Upgrades into a tall 4-barreled auto-cannon that alternates attacks per cannon, allowing it to attack 4x faster than normal. Can be set to attack automatically. With Laser Shock, improves Laser Shock to deal 3 damage per tic instead of 2, and take +3 extra damage from Dartling Gunners with Laser Shock."
+      },
+      {
+        "image": "bloonexclusionzoneupgradeicon.png",
+        "name": "Bloon Exclusion Zone",
+        "cost": {
+          "easy": "49,300",
+          "medium": "58,000",
+          "hard": "62,640",
+          "impoppable": "69,600"
+        },
+        "unlock": "55,000 XP",
+        "upgradeBody": "Description: Upgraded to 6 barrels and massively increased damage. Bloons are excluded from existence.\nEffect: Further upgrades into 6 barrels for even faster attack speed and gains even more buckshots per cannon. Buckshots deal 8 damage instead of 4, and pierce 6 bloons instead of 4. With Laser Shock, improves Laser Shock to deal 6 damage per tic instead of 3, and take +6 extra damage from Dartling Gunners with Laser Shock."
+      }
+    ]
+  }
+}

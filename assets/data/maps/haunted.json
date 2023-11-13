@@ -1,0 +1,16 @@
+{
+  "id": "haunted",
+  "name": "Haunted",
+  "image": "haunted_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Intermediate",
+  "entrances": "2",
+  "exits": "2",
+  "length": "Both Paths\n\n21.14 RBS\n581.4 Range Units",
+  "music": "Tropical Carnival",
+  "terrain": "Swampy",
+  "water": "Yes",
+  "removableObject": "Yes",
+  "highground": "No",
+  "sightBlocker": "Yes"
+}

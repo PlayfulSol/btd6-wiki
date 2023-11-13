@@ -1,0 +1,247 @@
+{
+  "id": "captain_churchill",
+  "name": "Captain Churchill",
+  "image": "captainchurchillportrait.png",
+  "skinChange": {
+    "level_1": "captainchurchillportrait.png",
+    "level_3": "captainchurchillportraitlvl3.png",
+    "level_5": "captainchurchillportraitlvl5.png",
+    "level_6": "captainchurchillportraitlvl6.png",
+    "level_10": "captainchurchillportraitlvl10.png",
+    "level_20": "captainchurchillportraitlvl20.png"
+  },
+  "unlock": "Level 10 and 2,500",
+  "cost": {
+    "easy": "1,700",
+    "medium": "2,000",
+    "hard": "2,160",
+    "impoppable": "2,400"
+  },
+  "discountCost": {
+    "easy": "1,530",
+    "medium": "1,800",
+    "hard": "1,945",
+    "impoppable": "2,160"
+  },
+  "abilities": "Armor Piercing Shells (Level 3)\nMOAB Barrage (Level 10)",
+  "target": "First, Last, Close, Strong,\nSMG locked to First, Barrage evenly distributed among 10 Strongest Bloons.",
+  "inGameDesc": "In his armored tank, the Captain is a no-nonsense powerhouse on the battlefield.",
+  "stats": {
+    "damage": [
+      {
+        "name": "Main Attack",
+        "value": [
+          "Level 1: 1",
+          "Level 7: 2",
+          "Level 12: 3",
+          "Level 14: 4",
+          "Level 15: 5 (fortified)",
+          "Level 18: 5, 6 (fortified)",
+          "Level 20: 8 (MOAB Barrage ability), 9 (MOAB Barrage ability, fortified)"
+        ]
+      },
+      {
+        "name": "Machine Gun",
+        "value": [
+          "Level 5: 1",
+          "Level 14: 2",
+          "Level 15: 3 (fortified)"
+        ]
+      },
+      {
+        "name": "Armor Piercing Shells",
+        "value": [
+          "Level 3: +3 bonus (Ceramics and MOABs)",
+          "Level 13: +1 bonus (all bloons)",
+          "Level 13: +8 bonus total (Ceramics and MOABs)",
+          "Level 17: +2 bonus total (all bloons)",
+          "Level 17: +13 bonus total (Ceramics and MOABs)"
+        ]
+      },
+      {
+        "name": "MOAB Barrage",
+        "value": [
+          "Level 10: 200",
+          "Level 20: 500"
+        ]
+      }
+    ],
+    "pierce": [
+      {
+        "name": "Explosion Count",
+        "value": [
+          "Level 1: 3",
+          "Level 7: 4",
+          "Level 9: 5",
+          "Level 12: 6",
+          "Level 19: 7",
+          "Armor Piercing Shells: +2 bonus explosions (all levels)"
+        ]
+      },
+      {
+        "name": "Explosion Pierce",
+        "value": [
+          "Level 1: 15",
+          "Level 2: 18",
+          "Level 11: 23"
+        ]
+      }
+    ],
+    "attackSpeed": [
+      {
+        "name": "Main Attack",
+        "value": [
+          "Level 1: Every 0.7s",
+          "Level 8: Every 0.5s",
+          "Level 16: Every 0.3s"
+        ]
+      },
+      {
+        "name": "Machine Gun",
+        "value": [
+          "Every 0.1s (all levels)"
+        ]
+      }
+    ],
+    "range": [
+      "Level 1: 63",
+      "Level 4: 66"
+    ],
+    "statusEffects": "N/A",
+    "towerBoosts": "N/A",
+    "incomeBoosts": "N/A",
+    "camo": [
+      "Yes (Level 6+)"
+    ],
+    "levelSpeed": [
+      "Slow (1.71x)"
+    ]
+  },
+  "levels": [
+    {
+      "image": "herolevel1.png",
+      "name": "1",
+      "cost": {
+        "easy": "1,700",
+        "medium": "2,000",
+        "hard": "2,160",
+        "impoppable": "2,400"
+      },
+      "levelBody": "Description: Piercing bombs shot from the tank can explode up to 3 times.\nEffect: Main Gun fires shell every 0.7 seconds with a range of 63 and creates explosion on impact up to 3 times. There is a cooldown between every time the explosions can be created. Explosions deal 1 damage, have 12 pierce, are of the explosion type and have ~24 blast radius. Churchill starts with 63 range."
+    },
+    {
+      "image": "herolevel2.png",
+      "name": "2",
+      "cost": "308",
+      "levelBody": "Description: Increased popping power per shot.\nEffect: Pierce for explosions increased from 12 to 15."
+    },
+    {
+      "image": "herolevel3.png",
+      "name": "3",
+      "cost": "787",
+      "levelBody": "Description: Armor Piercing Shells: Shots can pop Black Bloons and do extra damage to Ceramic Bloons. Duration increases as Churchill levels.\nEffect: Unlocks Armor Piercing Shells ability. When activated, shells explode up to two more times, pop Black properties, and deal extra damage to Ceramic and above. Lasts longer with upgrades.\nFor (7.5+0.5 seconds*l), where l is the level of Captain Churchill, gives all attacks normal damage type (able to damage all bloon types), allows shell to create two more explosions, and increases explosion ceramic and MOAB damage by +3. 30s cooldown, starts at 9.0s duration."
+    },
+    {
+      "image": "herolevel4.png",
+      "name": "4",
+      "cost": "1710",
+      "levelBody": "Description: Increased attack range.\nEffect: Range increased from 63 to 66."
+    },
+    {
+      "image": "herolevel5.png",
+      "name": "5",
+      "cost": "3181",
+      "levelBody": "Description: Adds a fast firing machine gun attack to the tank.\nEffect: Machine Gun has 1 damage, 1 pierce and attacks every 0.1 seconds and uses the sharp damage type. The machine gun has its own targeting independent of the main gun, and is always set to First."
+    },
+    {
+      "image": "herolevel6.png",
+      "name": "6",
+      "cost": "5609",
+      "levelBody": "Description: Binoculars allow Churchill to pop Camo Bloons.\nEffect: Churchill gains camo detection."
+    },
+    {
+      "image": "herolevel7.png",
+      "name": "7",
+      "cost": "8858",
+      "levelBody": "Description: Shells deal more damage and can explode 4 times instead of 3.\nEffect: Shell damage increased from 1 to 2 and shell can create 4 explosions."
+    },
+    {
+      "image": "herolevel8.png",
+      "name": "8",
+      "cost": "14227",
+      "levelBody": "Description: Increased attack speed.\nEffect: Main Gun attack speed increased from 0.7 seconds to 0.5 seconds."
+    },
+    {
+      "image": "herolevel9.png",
+      "name": "9",
+      "cost": "16040",
+      "levelBody": "Description: Shells explode 5 times.\nEffect: Shell can create 5 explosions."
+    },
+    {
+      "image": "herolevel10.png",
+      "name": "10",
+      "cost": "23290",
+      "levelBody": "Description: MOAB Barrage: Launches a barrage of shells at up to 10 MOAB-class Bloons on screen, dealing massive damage each time.\nEffect: Gains the MOAB Barrage ability. When activated, Churchill launches barrages of missiles onto up to 10 of the strongest blimps on screen. Each barrage missile deals 200 damage, and is repeatedly shot every 0.5s, and will continue firing at each target until the target pops or been shot 16 times. 60 seconds cooldown."
+    },
+    {
+      "image": "herolevel11.png",
+      "name": "11",
+      "cost": "28010",
+      "levelBody": "Description: Increased popping power per shell.\nEffect: Explosion pierce increased from 15 to 20."
+    },
+    {
+      "image": "herolevel12.png",
+      "name": "12",
+      "cost": "24624",
+      "levelBody": "Description: Shells get additional increased damage and can explode 6 times.\nEffect: Explosion damage increased from 2 to 3 and shell can create 6 explosions."
+    },
+    {
+      "image": "herolevel13.png",
+      "name": "13",
+      "cost": "28472",
+      "levelBody": "Description: Armor Piercing Shells pop 2 layers of Bloon and do extra damage to Ceramic and higher.\nEffect: Armor Piercing Shells now grants +1 damage, +7 ceramic damage and +7 MOAB damage."
+    },
+    {
+      "image": "herolevel14.png",
+      "name": "14",
+      "cost": "25547",
+      "levelBody": "Description: Machine Gun and Main Gun can pop 1 additional layer per shot.\nEffect: Explosion damage increased from 3 to 4, Machine Gun damage increased from 1 to 2."
+    },
+    {
+      "image": "herolevel15.png",
+      "name": "15",
+      "cost": "28010",
+      "levelBody": "Description: All attacks do extra damage vs Fortified Bloons.\nEffect: Explosion and Machine Gun now deal +1 fortified damage."
+    },
+    {
+      "image": "herolevel16.png",
+      "name": "16",
+      "cost": "30472",
+      "levelBody": "Description: Increased attack speed.\nEffect: Main Gun attack speed increased from 0.5 to 0.3 seconds."
+    },
+    {
+      "image": "herolevel17.png",
+      "name": "17",
+      "cost": "32935",
+      "levelBody": "Description: Armor Piercing Shells do even more damage.\nEffect: Armor Piercing Shells now gives +2 damage, +11 ceramic damage, and +11 MOAB damage to Churchill when activated."
+    },
+    {
+      "image": "herolevel18.png",
+      "name": "18",
+      "cost": "35397",
+      "levelBody": "Description: All shells pop an extra layer of Bloon.\nEffect: Main gun explosion damage increased from 4 to 5."
+    },
+    {
+      "image": "herolevel19.png",
+      "name": "19",
+      "cost": "28164",
+      "levelBody": "Description: Shells can explode 7 times.\nEffect: Shell can create 7 explosions."
+    },
+    {
+      "image": "herolevel20.png",
+      "name": "20",
+      "cost": "29549",
+      "levelBody": "Description: MOAB Barrage shells and Main Gun do massively increased damage per hit.\nEffect: Main gun explosion damage increased from 5 to 8, and greatly improves MOAB Barrage. Each barrage missile from MOAB Barrage deals 500 damage, and ability cooldown of MOAB Barrage reduced from 60s to 30s."
+    }
+  ]
+}

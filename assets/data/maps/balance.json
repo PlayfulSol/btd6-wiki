@@ -1,0 +1,16 @@
+{
+  "id": "balance",
+  "name": "Balance",
+  "image": "balance_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Intermediate",
+  "entrances": "8 (2 active)",
+  "exits": "2",
+  "length": "Tracks denoted by how bloons enter center relative to a clockface.\n\n\n1 o'clock Entrance\n28.34 RBS\n779.4 Range Units\n11 o'clock Entrance\n28.48 RBS\n783.2 Range Units\n2:30 Entrance\n27.20 RBS\n748.0 Range Units\n9:30 Entrance\n27.26 RBS\n749.7 Range Units\n3:30 Entrance\n28.50 RBS\n783.8 Range Units\n8:30 Entrance\n28.32 RBS\n778.8 Range Units\n5 o'clock Entrance\n27.26 RBS\n749.7 Range Units\n7 o'clock Entrance\n27.17 RBS\n747.2 Range Units",
+  "music": "Sunshine Serenade",
+  "terrain": "Garden",
+  "water": "Yes",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "Yes"
+}

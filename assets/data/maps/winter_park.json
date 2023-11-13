@@ -1,0 +1,16 @@
+{
+  "id": "winter_park",
+  "name": "Winter Park",
+  "image": "winterpark_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Beginner",
+  "entrances": "1",
+  "exits": "1",
+  "length": "41.05 RBS\n1,128 Range Units",
+  "music": "Winter Nights",
+  "terrain": "Snow",
+  "water": "Yes",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "No"
+}

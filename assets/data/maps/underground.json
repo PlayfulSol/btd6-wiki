@@ -1,0 +1,16 @@
+{
+  "id": "underground",
+  "name": "Underground",
+  "image": "underground_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Advanced",
+  "entrances": "2",
+  "exits": "2",
+  "length": "Bottom Loop:\n15.09 RBS\n415.0 Range Units\nTop Loop:\n14.44 RBS\n397.1 Range Units",
+  "music": "Tribes and Tribulations (version TBA)\n\nSunshine Serenade (version ~20 (?) and up)",
+  "terrain": "Rock",
+  "water": "No",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "Yes (non-intrusive)"
+}

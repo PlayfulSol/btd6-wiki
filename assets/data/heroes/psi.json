@@ -1,0 +1,200 @@
+{
+  "id": "psi",
+  "name": "Psi",
+  "image": "psiportrait.png",
+  "skinChange": {
+    "level_1": "psiportrait.png",
+    "level_3": "psiportraitlvl3.png",
+    "level_8": "psiportraitlvl8.png",
+    "level_9": "psiportraitlvl9.png",
+    "level_10": "psiportraitlvl10.png",
+    "level_17": "psiportraitlvl17.png",
+    "level_20": "psiportraitlvl20.png",
+    "hero_icon": "heroiconpsi.png"
+  },
+  "unlock": "Level 10 and 5000",
+  "cost": {
+    "easy": "850",
+    "medium": "1,000",
+    "hard": "1,080",
+    "impoppable": "1,200"
+  },
+  "discountCost": {
+    "easy": "765",
+    "medium": "900",
+    "hard": "970",
+    "impoppable": "1,080"
+  },
+  "abilities": "Psychic Blast (Level 3)\nPsionic Scream (Level 10)",
+  "target": "First, Last,\nClose, Strong",
+  "inGameDesc": "A gifted monkey child, Psi uses only the power of the mind to destroy Bloons from the inside out.",
+  "stats": {
+    "damage": [
+      [
+        "Main attack: Infinite"
+      ],
+      {
+        "name": "Destructive Resonance",
+        "value": [
+          "Level 8: 1",
+          "Level 15: 3",
+          "level 19: 10"
+        ]
+      }
+    ],
+    "pierce": [
+      "Level 1: 1",
+      "Level 4: 2",
+      "Level 6: 3",
+      "Level 8: 10 (Destructive Resonance explosions)",
+      "Level 10: 2000 (Psionic Scream)",
+      "Level 11: 4 (main attack)",
+      "Level 18: 5 (main attack)"
+    ],
+    "attackSpeed": [
+      "Level 1: 1.0 second",
+      "Level 2: 0.85 seconds"
+    ],
+    "range": [
+      "Infinite (Main attack)"
+    ],
+    "statusEffects": [
+      "Psychic Attack"
+    ],
+    "towerBoosts": "N/A",
+    "incomeBoosts": "N/A",
+    "camo": [
+      "Yes"
+    ],
+    "levelSpeed": [
+      "Moderately Slow (1.5x)"
+    ]
+  },
+  "levels": [
+    {
+      "image": "herolevel1.png",
+      "name": "1",
+      "cost": {
+        "easy": "850",
+        "medium": "1,000",
+        "hard": "1,080",
+        "impoppable": "1,200"
+      },
+      "levelBody": "Description: Over any range or obstacle, Psi sets up deadly vibrations that completely destroy one Bloon at a time. Can target Camo.\nEffect: Psi creates psychic attacks that instantly hold and destroy their targets. Each psychic attack sends mind-powered vibrations that slowly destroy the targeted bloon at any range, ignoring Line of Sight. Initially cannot target Leads, Purples, Ceramics, or MOAB-class. Each bloon layer takes a set amount of time to destroy, and once fully popped Psi's psychic attack undergoes an attack cooldown before attacking again. Psi starts with a \"dummy\" range of 20.\n\nPsi will instantly target a bloon, damages at a rate of 0.2s per single-HP layer, attack cooldown of 1.0s. Regardless of number of layers, a bloon will vibrate for up to 15 seconds before it fully pops, or 3 seconds if there are otherwise no more bloons on screen."
+    },
+    {
+      "image": "herolevel2.png",
+      "name": "2",
+      "cost": "270",
+      "levelBody": "Description: The psionic vibrations destroy Bloons faster than normal.\nEffect: It now takes 0.15s per single-HP bloon layer until Psi can make another psychic attack, and then the attack cooldown begins."
+    },
+    {
+      "image": "herolevel3.png",
+      "name": "3",
+      "cost": "690",
+      "levelBody": "Description: Psychic Blast: Psi unleashes a wave of power that stuns nearby Bloons for a long time.\nEffect: Gains the Psychic Blast ability. When activated, Psi creates a stunwave that stuns up to 200 nearby bloons for 6s, or 1.5s for MOAB-class. Range of 60. Cooldown of 40 seconds. The blast can affect any bloon type, even those that Psi cannot attack with vibrations."
+    },
+    {
+      "image": "herolevel4.png",
+      "name": "4",
+      "cost": "1500",
+      "levelBody": "Description: Psi's attack can hit another Bloon if very close to the targeted Bloon.\nEffect: Psychic attack produces a tiny blast that can hit up to 1 nearby bloon with a very small gap between. Blast radius of 6. Can affect more bloons with pierce buffs (e.g. Berserker Brew)."
+    },
+    {
+      "image": "herolevel5.png",
+      "name": "5",
+      "cost": "2790",
+      "levelBody": "Description: Attacks slightly faster.\nEffect: Psychic attack cooldown reduced from 1.0s to 0.85s. Uses the same waiting formula as Level 2."
+    },
+    {
+      "image": "herolevel6.png",
+      "name": "6",
+      "cost": "4920",
+      "levelBody": "Description: Psi's powerful mind can penetrate through Lead Bloons.\nEffect: Psi's vibrations can target and affect Lead Bloons. Psi's contagious blast affects two bloons instead of one."
+    },
+    {
+      "image": "herolevel7.png",
+      "name": "7",
+      "cost": "7770",
+      "levelBody": "Description: Psychic Blast pulses twice. Psi can now destroy Ceramic Bloons.\nEffect: Psychic Blast pulses twice, with a short delay of 2.0s between, each pulse remaining to stun up to 200 bloons each. Vibrations now target and affect Ceramics, dealing damage to each unit health remaining. Vibrations damage the Ceramic layer at a rate of 0.15s per unit health remaining."
+    },
+    {
+      "image": "herolevel8.png",
+      "name": "8",
+      "cost": "12480",
+      "levelBody": "Description: Destructive Resonance causes Bloons destroyed by Psi's main attack to damage other Bloons nearby.\nEffect: Once the bloon pops, it will create an explosion that inflicts 1 damage to up to 10 bloons. Explosion is plasma type. Blast radius of 20."
+    },
+    {
+      "image": "herolevel9.png",
+      "name": "9",
+      "cost": "14070",
+      "levelBody": "Description: Split the Mind. Psi can now target two different Bloons at once.\nEffect: Gains twice the attacks. Second psychic attack just like the first one, vibrating bloons and creating a contagious blast and the resulting destructive resonance, except the second psychic attack has independent targeting. The second psychic attack will attack on First if bloons are past halfway or otherwise on Strong, mimicking Elite targeting. Both psychic attacks work independently."
+    },
+    {
+      "image": "herolevel10.png",
+      "name": "10",
+      "cost": "20430",
+      "levelBody": "Description: Psionic Scream: Psi unleashes a silent scream that throws the Bloons into utter chaos.\nEffect: Gains the Psionic Scream ability. Psionic Scream causes up to 2000 affected bloons to have a random 50/50 chance of either getting blown backwards towards the start or undergoing an instakill. It can only affect bloons Psi can target with their main attack. Bloons affected by the blowback effect move backwards between 50 and 300 units. 60 second cooldown."
+    },
+    {
+      "image": "herolevel11.png",
+      "name": "11",
+      "cost": "24570",
+      "levelBody": "Description: The psionic vibrations destroy Bloons even faster.\nEffect: Vibrations now take 0.1s per bloon layer. Additionally, contagious blast affects up to 3 nearby bloons instead of 2."
+    },
+    {
+      "image": "herolevel12.png",
+      "name": "12",
+      "cost": "21600",
+      "levelBody": "Description: Psychic Blast pulses three times.\nEffect: Psychic Blast now pulses a 3rd time after 2.0s from the 2nd."
+    },
+    {
+      "image": "herolevel13.png",
+      "name": "13",
+      "cost": "24975",
+      "levelBody": "Description: Not even Purple Bloons can resist the power of Psi's mind attacks.\nEffect: Psi's psychic attack and Psionic Scream can target and affect Purple Bloons."
+    },
+    {
+      "image": "herolevel14.png",
+      "name": "14",
+      "cost": "22410",
+      "levelBody": "Description: Psi's immense psychic power allows targeting and destruction of MOABs.\nEffect: Can target and affect MOABs, now instakilling MOABs. Psionic Scream now can blowback or instakill MOABs depending on chance. Vibrations also deal damage at a much faster rate. Psychic attack now deals 4 damage every 0.1s instead of the old vibration formula. Psi's main psychic attack can now affect MOAB-class but does not allow its secondary vibrations to affect MOAB-class."
+    },
+    {
+      "image": "herolevel15.png",
+      "name": "15",
+      "cost": "24570",
+      "levelBody": "Description: Destructive Resonance is more destructive.\nEffect: Popped bloon explosions now deal 3 damage onto up to 10 bloons."
+    },
+    {
+      "image": "herolevel16.png",
+      "name": "16",
+      "cost": "26730",
+      "levelBody": "Description: The psionic vibrations destroy Bloons very fast. Psi can now target BFBs.\nEffect: Can target and affect BFBs. Will be able to instakill BFBs including its children. Psionic Scream now can blowback and/or instakill BFBs. Vibrations damage bloons even faster, with the psychic attack now dealing 4 damage every 0.075s."
+    },
+    {
+      "image": "herolevel17.png",
+      "name": "17",
+      "cost": "28890",
+      "levelBody": "Description: Split the Mind. Psi can now target three different Bloons at once.\nEffect: Can target 3 bloons per shot. Third psychic attack mimics the second and is independent from the other psychic attacks."
+    },
+    {
+      "image": "herolevel18.png",
+      "name": "18",
+      "cost": "31050",
+      "levelBody": "Description: Psi's attacks affect Bloons within a larger radius of the target Bloon.\nEffect: Contagious blast now affects up to 5 bloons. Blast radius increased to 15."
+    },
+    {
+      "image": "herolevel19.png",
+      "name": "19",
+      "cost": "24705",
+      "levelBody": "Description: Destructive Resonance is much much more destructive.\nEffect: Popped bloon explosions now deal 10 damage onto up to 10 bloons. Blast radius increased to 30."
+    },
+    {
+      "image": "herolevel20.png",
+      "name": "20",
+      "cost": "25920",
+      "levelBody": "Description: Psionic Scream holds and damages all Bloons on screen. Psi can now target DDTs and ZOMGs.\nEffect: Psionic Scream now guarantees chance of affected bloons to become instakilled rather than the off-chance of receiving blowback instead. Main attack and Psionic Scream ability can affect DDTs and ZOMGs."
+    }
+  ]
+}

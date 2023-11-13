@@ -1,0 +1,268 @@
+{
+  "id": "gwendolin",
+  "name": "Gwendolin",
+  "image": "gwendolinportrait.png",
+  "skinChange": {
+    "level_1": "gwendolinportrait.png",
+    "level_3": "gwendolinportraitlvl3.png",
+    "level_10": "gwendolinportraitlvl10.png",
+    "level_20": "gwendolinportraitlvl20.png"
+  },
+  "unlock": "Level 14",
+  "cost": {
+    "easy": "615",
+    "medium": "725",
+    "hard": "785",
+    "impoppable": "870"
+  },
+  "discountCost": {
+    "easy": "555",
+    "medium": "655",
+    "hard": "710",
+    "impoppable": "785"
+  },
+  "abilities": "Cocktail of Fire (Level 3)\nFirestorm (Level 10)",
+  "target": "First, Last, Close, Strong,\nCocktail obeys Target Priority if Bloons in Range, Random otherwise.",
+  "inGameDesc": "Gwendolin believes there hasn't yet been a Bloon problem that can't be solved with fire. Lots of fire.",
+  "stats": {
+    "damage": [
+      {
+        "name": "Main Attack",
+        "value": [
+          "Level 1-7: 1 (normal bloons)",
+          "Level 8: 1 (normal bloons, spray of 2)",
+          "Level 9-18: 2 (normal bloons, spray of 2)",
+          "Level 19-20: 2 (normal bloons, spray of 3)",
+          "All Levels: 1 per 1.5 seconds napalm damage over time"
+        ]
+      },
+      {
+        "name": "Cocktail",
+        "value": [
+          "Level 3-13: 1",
+          "Level 14-20: 2"
+        ]
+      },
+      {
+        "name": "Heatwave",
+        "value": [
+          "Level 4: 3"
+        ]
+      },
+      {
+        "name": "Firestorm",
+        "value": [
+          "Level 10-19: 2 (normal bloons)",
+          "Level 10-19: 10 (MOAB-class)",
+          "Level 20: 5 (normal bloons)",
+          "Level 20: 15 (MOAB-class)"
+        ]
+      }
+    ],
+    "pierce": [
+      {
+        "name": "Main Attack",
+        "value": [
+          "Level 1: 3",
+          "Level 2-4: 4",
+          "Level 5-7: 6",
+          "Level 8-18: 6 (spray of 2)",
+          "Level 19-20: 6 (spray of 3)"
+        ]
+      },
+      {
+        "name": "Cocktail",
+        "value": [
+          "Level 1-6: 30",
+          "Level 7+: 50"
+        ]
+      },
+      {
+        "name": "Fireblast",
+        "value": [
+          "Infinite"
+        ]
+      },
+      {
+        "name": "Firestorm",
+        "value": [
+          "Infinite"
+        ]
+      }
+    ],
+    "attackSpeed": [
+      "Level 1-11: Every 0.5s",
+      "Level 12-14: Every 0.4s",
+      "Level 15-17: Every 0.3s",
+      "Level 18+: Every 0.15s"
+    ],
+    "range": [
+      [
+        "Main Range: 38"
+      ],
+      [
+        "Heatwave: Level 7+: +5"
+      ]
+    ],
+    "statusEffects": [
+      {
+        "name": "Main Attack Napalm",
+        "value": [
+          "1 damage per 1.5 seconds (all levels)"
+        ]
+      },
+      {
+        "name": "Firestorm Burn",
+        "value": [
+          "1 damage per 0.5 seconds (Level 10-19, normal bloons)",
+          "10 damage per second (Level 10-19, MOAB-class)",
+          "2 damage per 0.5 seconds (Level 20, normal bloons)",
+          "15 damage per second (Level 20, MOAB-class)"
+        ]
+      }
+    ],
+    "towerBoosts": [
+      {
+        "name": "Heat it Up Heatwave",
+        "value": [
+          "Level 4-16: +1 pierce, lead popping",
+          "Level 17+: +1 damage, +2 lead damage (total: +3), +1 pierce, lead popping"
+        ]
+      }
+    ],
+    "incomeBoosts": "N/A",
+    "camo": [
+      "Limited (Level 3+ Cocktail, Level 10+ Firestorm)"
+    ],
+    "levelSpeed": [
+      "Fast (1.0x)"
+    ]
+  },
+  "levels": [
+    {
+      "image": "herolevel1.png",
+      "name": "1",
+      "cost": {
+        "easy": "615",
+        "medium": "725",
+        "hard": "785",
+        "impoppable": "870"
+      },
+      "levelBody": "Description: Blasts Bloons with fire from her pyro gun.\nEffect: Shoots fire every 0.5s that deal 1 damage and pops up to 3 bloons. Gwendolin starts with 38 range."
+    },
+    {
+      "image": "herolevel2.png",
+      "name": "2",
+      "cost": "180",
+      "levelBody": "Description: Slightly increased popping power per shot.\nEffect: Flame pierce increases from 3 to 4."
+    },
+    {
+      "image": "herolevel3.png",
+      "name": "3",
+      "cost": "460",
+      "levelBody": "Description: Cocktail of Fire: Hurls a flask of flammable liquid, burning Bloons that pass through the fire.\nEffect: Unlocks Cocktail of Fire ability. When activated, lobs a burning cocktail that produces a blaze resembling Wall of Fire that deals 1 damage per tick at a rate of 30 bloons per damage tick, refreshing every 0.2s. 30s cooldown, lasts for 12s, produces cocktail onto nearby track based on a selected point. Selected point defaults on Close."
+    },
+    {
+      "image": "herolevel4.png",
+      "name": "4",
+      "cost": "1,000",
+      "levelBody": "Description: Heat it up - Every few seconds creates a powerful blast wave of fire that pops Bloons and adds fire to nearby Monkeys' attacks.\nEffect: Periodically creates a powerful blast of fire around Gwendolin that pops Bloons, and adds fire to nearby Monkeys' attacks. This occurs every 40 shots she makes (assuming she consistently attacks, occurs every 20 seconds). This buff allows nearby affected towers to pop Frozen Bloons and Lead Bloons, and also gives them +1 pierce. Lasts 8 seconds."
+    },
+    {
+      "image": "herolevel5.png",
+      "name": "5",
+      "cost": "1,860",
+      "levelBody": "Description: Increased popping power. 10% improved attack speed and radius for Ring of Fire, Signal Flare and Dragon's Breath.\nEffect: Flame pierce increased from 4 to 6. Ring of Fire, Signal Flare and Dragon Breath now gain 0.90x attack cooldown (+11% attack speed) and +10% blast radius."
+    },
+    {
+      "image": "herolevel6.png",
+      "name": "6",
+      "cost": "3,280",
+      "levelBody": "Description: Attacks cause a burn effect on target Bloon.\nEffect: Cause a burn damage-over-time effect onto bloons hit, dealing 1 damage every 1.5s for 3.0s."
+    },
+    {
+      "image": "herolevel7.png",
+      "name": "7",
+      "cost": "5,180",
+      "levelBody": "Description: Heat it up has increased radius, Cocktail of Fire is more effective.\nEffect: Heat-it-up gains +5 range from base range of 38, totalling 43 range for that attack and buff. Also gains faster tick rate for cocktails, from 0.2s to 0.1s, and pierce from 30 to 50."
+    },
+    {
+      "image": "herolevel8.png",
+      "name": "8",
+      "cost": "8,320",
+      "levelBody": "Description: Shoots 2 blasts of fire per shot.\nEffect: Shoots two flames per shot in a straight spray."
+    },
+    {
+      "image": "herolevel9.png",
+      "name": "9",
+      "cost": "9,380",
+      "levelBody": "Description: Initial hit per blast pops 1 extra layer.\nEffect: Deals 2 damage per flame instead of 1, and her napalm deals 2 damage per tick instead of 1."
+    },
+    {
+      "image": "herolevel10.png",
+      "name": "10",
+      "cost": "13,620",
+      "levelBody": "Description: Firestorm: Sets the whole screen alight, burning all Bloons and granting the Heat It Up buff to all Monkeys.\nEffect: Unlocks the Firestorm ability. Upon activation, it deals 5 damage to all bloons on screen, or 20 to MOAB-Class bloons, and additionally applies a stronger burn status: 1 damage per 0.5 seconds for bloons, 10 damage per second for blimps, lasts for 8s. Ability cooldown of 60 seconds. Gwendolin's base attack napalm now deals 3 damage per tick instead of 2."
+    },
+    {
+      "image": "herolevel11.png",
+      "name": "11",
+      "cost": "16,380",
+      "levelBody": "Description: Increased attack range.\nEffect: Both base range and Heat-It-Up gain +3 range, 38 to 41 for base range and 43 to 46 for Heat-It-Up. Gwendolin's base attack napalm now deals 4 damage per tick instead of 3."
+    },
+    {
+      "image": "herolevel12.png",
+      "name": "12",
+      "cost": "14,400",
+      "levelBody": "Description: Increased attack speed.\nEffect: +25% attack speed (0.8x attack cooldown), decreasing attack cooldown of her main attack to 0.4s. However, Heat-It-Up takes 48 shots instead of 40 shots to trigger each time (assuming she consistently attacks, occurs every 19.2 seconds). Gwendolin's base attack napalm now deals 5 damage per tick instead of 4."
+    },
+    {
+      "image": "herolevel13.png",
+      "name": "13",
+      "cost": "16,650",
+      "levelBody": "Description: Greatly increased popping power, plus projectiles move faster and last longer.\nEffect: Flame pierce increased from 6 to 9, and increases projectile speed and projectile lifespan of flame. Gwendolin's base attack napalm now deals 6 damage per tick instead of 5."
+    },
+    {
+      "image": "herolevel14.png",
+      "name": "14",
+      "cost": "14,940",
+      "levelBody": "Description: Cocktail of Fire does extra damage and sets MOAB class Bloons alight.\nEffect: Cocktail of Fire increased damage from 1 to 2 and applies a stronger burn status on MOABs: 5 damage per second, lasts for 10 seconds. Gwendolin's base attack napalm now deals 7 damage per tick instead of 6."
+    },
+    {
+      "image": "herolevel15.png",
+      "name": "15",
+      "cost": "16,380",
+      "levelBody": "Description: Increased attack speed.\nEffect: +33% attack speed (0.75x attack cooldown), decreasing attack cooldown of her main attack to 0.3s. However, Heat-It-Up takes 64 shots instead of 48 shots to trigger each time (assuming she consistently attacks, occurs every 19.2 seconds). Gwendolin's base attack napalm now deals 8 damage per tick instead of 7."
+    },
+    {
+      "image": "herolevel16.png",
+      "name": "16",
+      "cost": "17,820",
+      "levelBody": "Description: Firestorm has increased duration and does more damage. Purple Bloons are no longer immune to Gwendolin's attacks.\nEffect: Firestorm burn status duration increased from 8s to 10.4s, and all of her attacks now affect Purple Bloons. Newly dropped cocktails now pop Purples. Also increases Firestorm fire per tic to 5 damage, deals MOAB-Class Bloons to 15 damage. Gwendolin's base attack napalm now deals 9 damage per tick instead of 8."
+    },
+    {
+      "image": "herolevel17.png",
+      "name": "17",
+      "cost": "19,260",
+      "levelBody": "Description: Heat it up empowers affected Monkeys to pop 1 extra layer, and do +2 damage to Lead Bloons.\nEffect: Heat-It-Up buff now also allows all affected towers to deal +1 damage and another +1 to bloons with Lead properties. Also applies to Firestorm's Heat-It-Up. Gwendolin's base attack napalm now deals 10 damage per tick instead of 9."
+    },
+    {
+      "image": "herolevel18.png",
+      "name": "18",
+      "cost": "20,700",
+      "levelBody": "Description: Increased attack speed. 20% improved attack speed and radius for Ring of Fire, Signal Flare and Dragon's Breath.\nEffect: +100% attack speed (0.5x attack cooldown), decreasing attack cooldown of her main attack to 0.15s. However, Heat-It-Up takes 70 shots instead of 64 shots to trigger each time (assuming she consistently attacks, occurs every 10.5 seconds). Ring of Fire, Signal Flare, and Dragon Breath buffs now give 20% instead of 10%, now decreasing attack cooldown by 0.80x and blast radius by +20%. Gwendolin's base attack napalm now deals 11 damage per tick instead of 10."
+    },
+    {
+      "image": "herolevel19.png",
+      "name": "19",
+      "cost": "16,470",
+      "levelBody": "Description: Shoots 3 blasts of fire per shot.\nEffect: Shoots three flames per shot in a straight spray. Gwendolin's base attack napalm now deals 12 damage per tick instead of 11."
+    },
+    {
+      "image": "herolevel20.png",
+      "name": "20",
+      "cost": "17,280",
+      "levelBody": "Description: Firestorm does hugely increased damage.\nEffect: Initial damage from Firestorm increased from 5 to 10 to standard bloons, initial damage to MOAB-class Bloons increased from 20 to 50. Burn status from Firestorm further improved from 5 damage per 0.5 seconds / 15 MOAB damage per second to 5 damage per 0.5 seconds / 25 MOAB damage per second. Gwendolin's base attack napalm now deals 13 damage per tick instead of 12."
+    }
+  ]
+}

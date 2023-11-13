@@ -1,0 +1,120 @@
+{
+  "id": "bfb",
+  "name": "BFB",
+  "fullName": "Brutal Floating Behemoth",
+  "image": "btd63dbfb.png",
+  "rbe": [
+    "3,164",
+    "4,824 fortified"
+  ],
+  "children": [
+    {
+      "id": "moab",
+      "name": "Massive Ornary Air Blimp",
+      "image": "btd63dmoab.png",
+      "value": "4"
+    }
+  ],
+  "parents": [
+    {
+      "id": "zomg",
+      "name": "Zeppelin Of Mighty Gargantuaness",
+      "image": "btd63dzomg.png",
+      "value": "4"
+    }
+  ],
+  "speed": {
+    "absolute": "6.25",
+    "relative": "0.25"
+  },
+  "variants": [
+    {
+      "image": "btd63dbfb.png",
+      "name": "BFB",
+      "appearances": "Round 60\nRound 54 (ABR)"
+    },
+    {
+      "image": "btd3dfortifiedbfb.png",
+      "name": "Fortified BFB",
+      "appearances": "Round 79\nRound 60 (ABR)"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 60: 1 BFB",
+      "Round 65: 100 Zebra, 70 Rainbow, 50 Ceramic, 3 M.O.A.B., 2 B.F.B.",
+      "Round 68: 4 M.O.A.B., 1 B.F.B.",
+      "Round 72: 38 Regrowth Ceramic, 2 B.F.B.",
+      "Round 73: 8 M.O.A.B., 2 B.F.B.",
+      "Round 74: 50 Ceramic, 60 Fortified Ceramic, 25 Fortified Ceramic Camo Regrowth, 1 B.F.B.",
+      "Round 75: 14 Lead, 14 Fortified Lead, 3 Fortified M.O.A.B., 7 B.F.B.",
+      "Round 77: 11 M.O.A.B., 5 B.F.B.",
+      "Round 78: 80 Purple, 150 Rainbow, 75 Ceramic, 72 Ceramic Camo, 1 B.F.B.",
+      "Round 79: 500 Rainbow Regrowth, 4 B.F.B., 2 Fortified B.F.B.",
+      "Round 81: 17 B.F.B.",
+      "Round 82: 10 B.F.B., 5 Fortified B.F.B.",
+      "Round 84: 50 M.O.A.B., 10 B.F.B.",
+      "Round 86: 5 Fortified B.F.B.",
+      "Round 88: 18 M.O.A.B., 8 B.F.B., 2 Z.O.M.G.",
+      "Round 89: 20 Fortified M.O.A.B., 8 Fortified B.F.B.",
+      "Round 91: 100 Fortified Ceramic, 20 B.F.B.",
+      "Round 93: 10 Fortified B.F.B., 6 D.D.T.",
+      "Round 94: 25 B.F.B., 6 Z.O.M.G.",
+      "Round 96: 40 Fortified M.O.A.B., 30 B.F.B., 6 Z.O.M.G.",
+      "Round 98: 30 Fortified B.F.B., 8 Z.O.M.G.",
+      "Round 102: 3 B.F.B., 3 Fortified B.F.B., 1 Z.O.M.G., 3 Fortified Z.O.M.G. (last 2 are stacked), 18 D.D.T., 12 Fortified D.D.T.",
+      "Round 104: 200 Purple (2 groups of 100), 200 Fortified Lead (2 groups of 100), 200 Ceramic (2 groups of 100), 25 M.O.A.B., 150 Fortified M.O.A.B., 25 B.F.B., 14 Fortified B.F.B.",
+      "Round 105: 25 Fortified Lead, 100 Ceramic, 300 Fortified Ceramic, 30 B.F.B.",
+      "Round 109: 15 Purple, 30 Fortified M.O.A.B. (15 groups of 2, stacked), 15 B.F.B., 15 Fortified B.F.B. (each stacked with a regular B.F.B.), 15 Z.O.M.G.",
+      "Round 110: 25 B.F.B., 18 D.D.T., 12 Fortified D.D.T.",
+      "Round 112: 20 Fortified B.F.B., 18 Fortified D.D.T.",
+      "Round 113: 42 Ceramic Camo, 42 Fortified Ceramic, 50 Fortified M.O.A.B., 10 Fortified B.F.B.",
+      "Round 114: 24 M.O.A.B., 36 Fortified M.O.A.B., 12 B.F.B., 8 Fortified B.F.B., 5 Z.O.M.G., 3 Fortified Z.O.M.G., 9 D.D.T., 6 Fortified D.D.T. (D.D.T.s and Fortified D.D.T.s spawn throughout the round, then it goes Fortified M.O.A.B., M.O.A.B., B.F.B., Fortified B.F.B., Z.O.M.G., Fortified Z.O.M.G., Round 115 has them in roughly reverse order)",
+      "Round 115: 24 M.O.A.B., 36 Fortified M.O.A.B., 12 B.F.B., 8 Fortified B.F.B., 5 Z.O.M.G., 3 Fortified Z.O.M.G., 9 D.D.T., 6 Fortified D.D.T. (D.D.T.s and Fortified D.D.T.s spawn throughout the round, the rest goes in roughly reverse order compared to Round 114)",
+      "Round 116: 400 Purple, 18 Fortified B.F.B., 8 Fortified Z.O.M.G.",
+      "Round 120: 24 Fortified M.O.A.B., 12 B.F.B., 12 Z.O.M.G.",
+      "Round 121: 14 Fortified B.F.B., 28 Fortified M.O.A.B., 6 Fortified Z.O.M.G.",
+      "Round 122: 20 Fortified B.F.B., 40 B.F.B., 225 Fortified Lead",
+      "Round 124: 75 Fortified B.F.B.",
+      "Round 125: 6 Z.O.M.G, 42 B.F.B, 63 M.O.A.B.",
+      "Round 127: 48 M.O.A.B., 24 B.F.B.",
+      "Round 128: 39 Fortified D.D.T., 200 Fortified Ceramic Camo (2 groups of 100), 30 B.F.B.",
+      "Round 133: 12 Fortified M.O.A.B., 12 Fortified B.F.B., 4 Fortified Z.O.M.G., 27 M.O.A.B., 27 B.F.B., 12 Z.O.M.G.",
+      "Round 134: 12 Fortified B.F.B., 28 B.F.B.",
+      "Round 136: 96 Fortified M.O.A.B., 24 B.F.B.",
+      "Round 137: 18 Z.O.M.G., 24 B.F.B., 48 M.O.A.B.",
+      "Round 141+: randomized",
+      "Round 10,003: 100 B.F.B."
+    ],
+    "abr": [
+      "Round 54: 35 Black Regrowth, 1 M.O.A.B, 1 B.F.B.",
+      "Round 57: 25 Ceramic, 2 Fortified M.O.A.B, 1 B.F.B.",
+      "Round 60: 1 Fortified B.F.B.",
+      "Round 62: 250 Purple, 15 Fortified Lead Camo Regrowth, 5 Fortified M.O.A.B, 2 B.F.B.",
+      "Round 64: 6 Fortified M.O.A.B, 2 B.F.B.",
+      "Round 65: 70 Rainbow, 50 Fortified Ceramic, 3 Fortified M.O.A.B, 3 B.F.B.",
+      "Round 66: 6 M.O.A.B., 3 B.F.B.",
+      "Round 68: 4 M.O.A.B, 1 Fortified B.F.B.",
+      "Round 72: 38 Fortified Ceramic, 1 B.F.B, 1 Fortified B.F.B.",
+      "Round 73: 8 Fortified M.O.A.B, 2 Fortified B.F.B.",
+      "Round 74: 100 Black Camo Regrowth, 25 Fortified Ceramic Camo Regrowth, 1 Fortified B.F.B.",
+      "Round 75: 50 Lead, 14 Fortified Lead, 4 Fortified M.O.A.B, 4 B.F.B, 4 Fortified B.F.B.",
+      "Round 76: 10 B.F.B.",
+      "Round 77: 11 Fortified M.O.A.B, 5 Fortified B.F.B.",
+      "Round 78: 80 Purple, 150 Zebra, 60 Fortified Ceramic, 72 Ceramic Camo, 1 Fortified B.F.B.",
+      "Round 79: 500 Rainbow Camo, 4 Fortified B.F.B, 1 Z.O.M.G.",
+      "Round 81: 15 B.F.B, 20 Fortified M.O.A.B",
+      "Round 82: 15 B.F.B, 8 Fortified B.F.B, 1 Z.O.M.G.",
+      "Round 84: 50 M.O.A.B, 15 Fortified B.F.B.",
+      "Round 86: 8 Fortified B.F.B.",
+      "Round 88: 15 Fortified M.O.A.B, 12 B.F.B, 3 D.D.T.",
+      "Round 89: 15 Fortified M.O.A.B, 12 Fortified B.F.B.",
+      "Round 91: 100 Fortified Ceramic, 15 Fortified B.F.B.",
+      "Round 93: 17 Fortified B.F.B, 7 Fortified D.D.T",
+      "Round 94: 25 B.F.B, 8 Z.O.M.G",
+      "Round 96: 20 Fortified M.O.A.B, 20 Fortified B.F.B, 10 D.D.T, 11 Z.O.M.G.",
+      "Round 98: 20 Fortified B.F.B, 11 Z.O.M.G",
+      "Round 101+: randomized"
+    ]
+  }
+}

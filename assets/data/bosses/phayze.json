@@ -1,0 +1,113 @@
+{
+  "id": "phayze",
+  "name": "Reality Warper Phayze",
+  "description": "\n\n\nPhayze has the Camo property and a Reality Shield that increases its speed while the Shield is active.\nWhen each skull is reached, Phayze rebuilds the Reality Shield and warps forward, opening a tear in the fabric of reality allowing Bloons to spawn further along the track.\nSkulls also trigger a slow aura around Phayze, reducing the attack speed of all Monkey Towers.\nPhayze triggers Radar Jam every 24 seconds, disabling Camo-seeing buffs as well as restoring its Camo property if it has been stripped.\nRadar Jam also pulls Bloons to Phayzes location and grants them the Camo property.",
+  "images": {
+    "normal": "btd6_phayze_icon.png",
+    "defeated": "btd6_phayze_defeat_icon.png",
+    "elite": "btd6_phayze_elite_icon.png",
+    "eliteDefeated": "btd6_phayze_elite_defeat_icon.png"
+  },
+  "health": {
+    "normal": [
+      {
+        "tier": "1",
+        "normal": "10,000",
+        "coop2": "12,000",
+        "coop3": "14,000",
+        "coop4": "16,000"
+      },
+      {
+        "tier": "2",
+        "normal": "37,500",
+        "coop2": "45,000",
+        "coop3": "52,500",
+        "coop4": "60,000"
+      },
+      {
+        "tier": "3",
+        "normal": "175,000",
+        "coop2": "210,000",
+        "coop3": "245,000",
+        "coop4": "280,000"
+      },
+      {
+        "tier": "4",
+        "normal": "375,000",
+        "coop2": "450,000",
+        "coop3": "520,000",
+        "coop4": "600,000"
+      },
+      {
+        "tier": "5",
+        "normal": "1,500,000",
+        "coop2": "1,800,000",
+        "coop3": "2,100,000",
+        "coop4": "2,400,000"
+      }
+    ],
+    "elite": [
+      {
+        "tier": "1",
+        "normal": "20,000",
+        "coop2": "24,000",
+        "coop3": "28,000",
+        "coop4": "32,000"
+      },
+      {
+        "tier": "2",
+        "normal": "120,000",
+        "coop2": "144,000",
+        "coop3": "168,000",
+        "coop4": "192,000"
+      },
+      {
+        "tier": "3",
+        "normal": "800,000",
+        "coop2": "960,000",
+        "coop3": "1,120,000",
+        "coop4": "1,280,000"
+      },
+      {
+        "tier": "4",
+        "normal": "3,200,000",
+        "coop2": "3,840,000",
+        "coop3": "4,480,000",
+        "coop4": "5,120,000"
+      },
+      {
+        "tier": "5",
+        "normal": "16,000,000",
+        "coop2": "19,200,000",
+        "coop3": "22,400,000",
+        "coop4": "25,600,000"
+      }
+    ]
+  },
+  "skullCount": {
+    "normal": "3",
+    "elite": "5"
+  },
+  "generalImmunities": [
+    "The same immunities as the BAD (Stuns, Slowness, Knockback & Instapops).",
+    "Immune to all forms of percentage-based damage and instant health reduction (i.e. MOAB Hex, Big Bloon Sabotage, and Grand Saboteur ability).",
+    "Immune to Legend of the Night's passive black hole ability, meaning that leaking the boss will always result in a game over.",
+    "Immune to Navarch of the Seas' hook ability.",
+    "Immune to Megalodon's devour attack."
+  ],
+  "individualImmunities": [],
+  "gimmicks": {
+    "normal": [
+      "Phayze has a natural camo property displayed beneath its health bar and a Reality Shield that increases its speed by up to 70% while active.",
+      "The Reality Shield must be destroyed to damage Phayze.",
+      "Every 24 seconds, Phayze triggers a 'Radar Jam' for 12 seconds, disabling camo detection buffs and making its camo property immune to decamo sources.",
+      "Radar Jam also pulls active bloons to Phayze's location, grants nearby natural bloons the camo property, and increases bloon speed to 600%.",
+      "Upon reaching a skull, Phayze rebuilds its Reality Shield, warps 8% of the track forward, and creates a portal acting as a forward spawn point for bloons until Phayze is defeated.",
+      "A slow aura is triggered, increasing the attack cooldown of all monkeys as Phayze nears defeat. Elite Phayze's speed reduction increases at higher tiers.",
+      "Phayze does not affect the cooldown of Activated Abilities.",
+      "Attack cooldown increases upon reaching a skull: 1st Skull - x1.1 (90.9%), 2nd Skull - x1.15 (86.96%), 3rd Skull - x1.2 (83.3%).",
+      "Attack cooldown multipliers do not stack; Phayze changes the multiplier at each skull reached."
+    ],
+    "elite": []
+  }
+}

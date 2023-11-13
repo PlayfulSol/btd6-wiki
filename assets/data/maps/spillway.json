@@ -1,0 +1,16 @@
+{
+  "id": "spillway",
+  "name": "Spillway",
+  "image": "spillway_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Advanced",
+  "entrances": "4",
+  "exits": "4",
+  "length": "Top Left Entrance:\n25.30 RBS\n695.6 Range Units\nTop Right Entrance:\n26.68 RBS\n733.7 Range Units\n\n\nBottom Left Entrance:\n26.70 RBS\n734.1 Range Units\nBottom Right Entrance:\n25.41 RBS\n698.6 Range Units",
+  "music": "Sunset Samba",
+  "terrain": "Toxic Waste Dump",
+  "water": "Yes",
+  "removableObject": "Yes",
+  "highground": "Yes",
+  "sightBlocker": "Yes"
+}

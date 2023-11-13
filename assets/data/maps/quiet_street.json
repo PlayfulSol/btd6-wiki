@@ -1,0 +1,16 @@
+{
+  "id": "quiet_street",
+  "name": "Quiet Street",
+  "image": "quietstreet_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Intermediate",
+  "entrances": "3",
+  "exits": "3",
+  "length": "Bloon Paths:\n28.89 RBS\n794.5 Range Units\n\nMOAB Path:\n30.24 RBS\n831.6 Range Units",
+  "music": "Jazz Theme",
+  "terrain": "Snow",
+  "water": "Yes",
+  "removableObject": "Yes",
+  "highground": "No?",
+  "sightBlocker": "Yes"
+}

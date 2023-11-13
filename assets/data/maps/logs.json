@@ -1,0 +1,16 @@
+{
+  "id": "logs",
+  "name": "Logs",
+  "image": "logs_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Beginner",
+  "entrances": "1",
+  "exits": "1",
+  "length": "60.33 RBS\n1,659 Range Units",
+  "music": "Sunset Samba (pre-17.1, since 18.0)\nJazz Theme (17.1)",
+  "terrain": "Grass",
+  "water": "Yes",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "Yes"
+}

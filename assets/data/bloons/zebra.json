@@ -1,0 +1,84 @@
+{
+  "id": "zebra",
+  "name": "Zebra",
+  "fullName": "Zebra Bloon",
+  "image": "btd6zebra.png",
+  "rbe": [
+    "23"
+  ],
+  "children": [
+    {
+      "id": "black",
+      "name": "Black Bloon",
+      "image": "btd6black.png",
+      "value": "1"
+    },
+    {
+      "id": "white",
+      "name": "White Bloon",
+      "image": "btd6white.png",
+      "value": "1"
+    }
+  ],
+  "parents": [
+    {
+      "id": "rainbow",
+      "name": "Rainbow Bloon",
+      "image": "btd6rainbow.png",
+      "value": "2"
+    }
+  ],
+  "speed": {
+    "absolute": "45",
+    "relative": "1.8"
+  },
+  "variants": [
+    {
+      "image": "btd6zebra.png",
+      "name": "Zebra Bloon",
+      "appearances": "Round 26"
+    },
+    {
+      "image": "btd6camozebra.png",
+      "name": "Camo Zebra Bloon",
+      "appearances": "Round 42\nRound 49 (ABR)"
+    },
+    {
+      "image": "btd6regrowzebra.png",
+      "name": "Regrow Zebra Bloon",
+      "appearances": "Round 31"
+    },
+    {
+      "image": "btd6camoregrowzebra.png",
+      "name": "Camo Regrow Zebra Bloon",
+      "appearances": "Round 62\nRound 42 (ABR)"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 26: 23 Pink, 4 Zebra",
+      "Round 31: 8 Black, 8 White, 8 Zebra, 2 Zebra Regrowth",
+      "Round 34: 160 Yellow, 6 Zebra",
+      "Round 37: 25 Black, 25 White, 7 Camo White, 10 Zebra, 15 Lead",
+      "Round 38: 42 Pink, 17 White, 10 Zebra, 14 Lead, 2 Ceramic",
+      "Round 39: 10 Black, 10 White, 20 Zebra, 18 Rainbow, 2 Rainbow Regrowth",
+      "Round 41: 60 Black, 60 Zebra",
+      "Round 44: 50 Zebra",
+      "Round 49: 343 Green, 20 Zebra, 20 Rainbow, 10 Rainbow Regrowth, 18 Ceramic",
+      "Round 61: 150 Zebra Regrowth, 5 M.O.A.B.",
+      "Round 65: 100 Zebra, 70 Rainbow, 50 Ceramic, 3 M.O.A.B., 2 B.F.B."
+    ],
+    "abr": [
+      "Round 26: 15 Black, 3 Zebra, 2 Rainbow",
+      "Round 31: 8 Black Regrowth, 8 White Camo, 10 Zebra, 3 Zebra Regrowth",
+      "Round 37: 7 Black Regrowth, 25 White, 25 White Regrowth, 18 Lead, 10 Zebra",
+      "Round 39: 10 White Camo, 20 Zebra, 15 Rainbow, 2 Camo Rainbows",
+      "Round 41: 60 Black, 70 Zebra",
+      "Round 44: 10 Fortified Lead, 40 Zebra",
+      "Round 49: 300 Yellow Regrowth, 10 Zebra Camo, 10 Rainbow Camo, 10 Rainbow Regrowth, 14 Ceramic Regrowth",
+      "Round 51: 10 Zebra, 28 Fortified Ceramic Camo",
+      "Round 61: 57 Zebra Regrowth, 8 Fortified Lead, 15 M.O.A.B.",
+      "Round 78: 80 Purple, 150 Zebra, 60 Fortified Ceramic, 72 Ceramic Camo, 1 Fortified B.F.B."
+    ]
+  }
+}

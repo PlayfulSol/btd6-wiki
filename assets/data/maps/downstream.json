@@ -1,0 +1,16 @@
+{
+  "id": "downstream",
+  "name": "Downstream",
+  "image": "downstream_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Intermediate",
+  "entrances": "1",
+  "exits": "1",
+  "length": "29.97 RBS\n824.2 Range Units",
+  "music": "Sunset Samba",
+  "terrain": "River",
+  "water": "Yes",
+  "removableObject": "Yes",
+  "highground": "No",
+  "sightBlocker": "Yes (non-intrusive)"
+}

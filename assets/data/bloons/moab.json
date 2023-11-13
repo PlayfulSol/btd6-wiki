@@ -1,0 +1,112 @@
+{
+  "id": "moab",
+  "name": "MOAB",
+  "fullName": "Massive Ornary Air Blimp",
+  "image": "btd63dmoab.png",
+  "rbe": [
+    "613",
+    "856 fortified"
+  ],
+  "children": [
+    {
+      "id": "ceramic",
+      "name": "Ceramic Bloon",
+      "image": "btd6ceramic.png",
+      "value": "4"
+    }
+  ],
+  "parents": [
+    {
+      "id": "bfb",
+      "name": "Brutal Floating Behemoth",
+      "image": "btd63dbfb.png",
+      "value": "4"
+    }
+  ],
+  "speed": {
+    "absolute": "25",
+    "relative": "1"
+  },
+  "variants": [
+    {
+      "image": "btd63dmoab.png",
+      "name": "MOAB",
+      "appearances": "Round 40\nRound 43 (ABR)"
+    },
+    {
+      "image": "btd63dfortifiedmoab.png",
+      "name": "Fortified MOAB",
+      "appearances": "Round 62\nRound 40 (ABR)"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 40: 1 MOAB",
+      "Round 50: 20 Red, 8 Fortified Lead, 20 Ceramic, 2 MOAB",
+      "Round 52: 25 Rainbow, 10 Ceramic, 2 MOAB",
+      "Round 53: 80 Pink Camo, 3 MOAB",
+      "Round 54: 35 Ceramic, 2 MOAB",
+      "Round 55: 45 Ceramic, 1 MOAB",
+      "Round 56: 40 Rainbow Camo, 1 MOAB",
+      "Round 57: 40 Rainbow, 4 MOAB",
+      "Round 58: 15 Ceramic, 10 Fortified Ceramic, 5 MOAB",
+      "Round 61: 150 Zebra Regrowth, 5 MOAB",
+      "Round 62: 250 Purple, 15 Rainbow Camo Regrowth, 5 MOAB, 2 Fortified MOAB",
+      "Round 64: 6 MOAB, 3 Fortified MOAB",
+      "Round 65: 100 Zebra, 70 Rainbow, 50 Ceramic, 3 MOAB, 2 BFB",
+      "Round 66: 8 MOAB, 3 Fortified MOAB",
+      "Round 67: 13 Fortified Ceramic Camo Regrowth, 8 MOAB",
+      "Round 68: 4 MOAB, 1 BFB",
+      "Round 70: 120 White Camo Regrowth, 200 Rainbow, 4 MOAB",
+      "Round 71: 30 Ceramic, 10 MOAB",
+      "Round 73: 8 MOAB, 2 BFB",
+      "Round 75: 14 Lead, 14 Fortified Lead, 3 Fortified MOAB, 7 BFB",
+      "Round 77: 11 MOAB, 5 BFB",
+      "Round 83: 40 Ceramic, 40 Ceramic Regrowth, 40 Fortified Ceramic, 30 MOAB",
+      "Round 84: 50 MOAB, 10 BFB",
+      "Round 88: 18 MOAB, 8 BFB, 2 ZOMG",
+      "Round 89: 20 Fortified MOAB, 8 Fortified BFB",
+      "Round 92: 50 Fortified MOAB, 4 ZOMG",
+      "Round 95: 500 Purple Camo Regrowth, 250 Fortified Lead Camo Regrowth, 50 Fortified MOAB, 30 DDT",
+      "Round 96: 40 Fortified MOAB, 30 BFB, 6 ZOMG",
+      "Round 99: 60 MOAB, 9 Fortified DDT",
+      "Round 101: 450 Purple (1 group of 250 and 1 group of 200), 50 Fortified Ceramic, 10 Fortified MOAB",
+      "Round 103: 198 Purple (3 groups of 66), 100 MOAB, 50 Fortified MOAB, 10 Fortified ZOMG",
+      "Round 104: 200 Purple (2 groups of 100), 200 Fortified Lead (2 groups of 100), 200 Ceramic (2 groups of 100), 25 MOAB, 150 Fortified MOAB, 25 BFB, 14 Fortified BFB",
+      "Round 109: 15 Purple, 30 Fortified MOAB (15 groups of 2, stacked), 15 BFB, 15 Fortified BFB (each stacked with a regular BFB), 15 ZOMG",
+      "Round 113: 42 Ceramic Camo, 42 Fortified Ceramic, 75 Fortified MOAB, 15 Fortified BFB",
+      "Round 114: 24 MOAB, 36 Fortified MOAB, 12 BFB, 8 Fortified BFB, 5 ZOMG, 3 Fortified ZOMG, 9 DDT, 6 Fortified DDT. (DDTs and Fortified DDTs spawn throughout the round, then it goes Fortified MOAB, MOAB, BFB, Fortified BFB, ZOMG, Fortified ZOMG, Round 115 has them in roughly reverse order)",
+      "Round 115: 24 MOAB, 36 Fortified MOAB, 12 BFB, 8 Fortified BFB, 5 ZOMG, 3 Fortified ZOMG, 9 DDT, 6 Fortified DDT (DDTs and Fortified DDTs spawn throughout the round, the rest goes in roughly reverse order compared to Round 114)",
+      "Round 120: 24 Fortified MOAB, 12 BFB, 12 ZOMG",
+      "Round 121: 14 Fortified BFB, 28 Fortified MOAB, 6 Fortified ZOMG",
+      "Round 123: 200 MOAB, 8 Fortified ZOMG",
+      "Round 125: 6 ZOMG, 42 BFB, 63 MOAB",
+      "Round 127: 48 MOAB, 24 BFB",
+      "Round 130: 84 MOAB, 66 Fortified MOAB, 48 DDT, 6 Fortified DDT",
+      "Round 133: 12 Fortified MOAB, 12 Fortified BFB, 4 Fortified ZOMG, 27 MOAB, 27 BFB, 12 ZOMG",
+      "Round 136: 96 Fortified MOAB, 24 BFB",
+      "Round 137: 18 ZOMG, 24 BFB, 48 MOAB",
+      "Round 139: 181 MOAB, 72 Fortified MOAB",
+      "From rounds 141 to 9,999, MOABs are randomly spawned, except for rounds 163 and 200. However, on Round 263, MOABs are guaranteed to spawn, and could also be stacked in the large groups. The other round that MOABs are guaranteed to spawn is Round 10,002, where 100 MOABs spawn."
+    ],
+    "abr": [
+      "Round 40: 1 Fortified MOAB",
+      "Round 43: 10 Rainbow, 2 MOAB",
+      "Round 47: 70 Pink Camo Regrowth, 3 MOAB",
+      "Round 50: 8 Fortified Lead Regrowth, 4 MOAB, 2 Fortified MOAB",
+      "Round 52: 35 Rainbow, 5 Ceramic Regrowth, 5 Fortified Ceramic, 1 MOAB, 1 Fortified MOAB",
+      "Round 53: 120 Pink Camo, 3 Fortified MOAB",
+      "Round 55: 20 Ceramic, 25 Ceramic Camo, 1 Fortified MOAB",
+      "Round 56: 40 Purple Camo Regrowth, 5 MOAB",
+      "Round 58: 15 Ceramic, 10 Fortified Ceramic, 10 MOAB",
+      "Round 61: 57 Zebra Regrowth, 8 Fortified Lead, 15 MOAB",
+      "Round 63: 40 Ceramic, 30 Fortified Ceramic, 40 Ceramic Camo, 5 MOAB",
+      "Round 66: 6 MOAB, 3 BFB",
+      "Round 67: 20 Fortified Ceramic Camo Regrowth, 6 MOAB, 4 Fortified MOAB",
+      "Round 70: 200 Rainbow, 6 Fortified MOAB",
+      "Round 71: 30 Fortified Ceramic Regrowth, 10 Fortified MOAB",
+      "Round 83: 40 Ceramic Camo, 40 Ceramic Regrowth Camo, 40 Fortified Ceramic Camo, 20 Fortified MOAB",
+      "Round 101+: randomized"
+    ]
+  }
+}

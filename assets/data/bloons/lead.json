@@ -1,0 +1,108 @@
+{
+  "id": "lead",
+  "name": "Lead",
+  "fullName": "Lead Bloon",
+  "image": "btd6lead.png",
+  "rbe": [
+    "23",
+    "26 fortified"
+  ],
+  "children": [
+    {
+      "id": "black",
+      "name": "Black Bloon",
+      "image": "btd6black.png",
+      "value": "2"
+    }
+  ],
+  "parents": [
+    "None"
+  ],
+  "speed": {
+    "absolute": "25",
+    "relative": "1"
+  },
+  "variants": [
+    {
+      "image": "btd6lead.png",
+      "name": "Lead Bloon",
+      "appearances": "Round 28\nRound 10 (ABR)"
+    },
+    {
+      "image": "btd6camolead.png",
+      "name": "Lead Camo Bloon",
+      "appearances": "Round 59\nRound 35 (Apopalypse)\nRound 24 (ABR)"
+    },
+    {
+      "image": "btd6regrowthlead.png",
+      "name": "Lead Regrow Bloon",
+      "appearances": "Round 20 (Apopalypse)\nRound 28 (ABR)"
+    },
+    {
+      "image": "btd6camoregrowlead.png",
+      "name": "Lead Camo Regrow Bloon",
+      "appearances": "Round 163Round 59 (ABR)"
+    },
+    {
+      "image": "fortifiedlead.png",
+      "name": "Fortified Lead Bloon",
+      "appearances": "Round 25 (Apopalypse)\nRound 45\nRound 44 (ABR)"
+    },
+    {
+      "image": "fortifiedcamolead.png",
+      "name": "Fortified Lead Camo Bloon",
+      "appearances": "Round 129"
+    },
+    {
+      "image": "fortifiedregrowlead.png",
+      "name": "Fortified Lead Regrowth Bloon",
+      "appearances": "Round 163Round 48 (ABR)"
+    },
+    {
+      "image": "fortifiedcamoregrowlead.png",
+      "name": "Fortified Lead Camo Regrowth Bloon",
+      "appearances": "Round 90\nRound 62 (ABR)"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 28: 6 Lead",
+      "Round 30: 9 Lead",
+      "Round 37: 25 Black, 25 White, 7 Camo White, 10 Zebra, 15 Lead",
+      "Round 38: 42 Pink, 17 White, 10 Zebra, 14 Lead, 2 Ceramic",
+      "Round 45: 180 Pink, 10 Purple Camo, 4 Fortified Lead, 25 Rainbow",
+      "Round 50: 20 Red, 8 Fortified Lead, 20 Ceramic, 2 M.O.A.B.",
+      "Round 59: 50 Lead Camo, 20 Ceramic, 10 Ceramic Regrow",
+      "Round 63: 75 Lead, 122 Ceramic",
+      "Round 69: 40 Black Regrow, 40 Fortified Lead, 50 Ceramic",
+      "Round 75: 14 Lead, 14 Fortified Lead, 3 Fortified M.O.A.B., 7 B.F.B.",
+      "Round 90: 50 Fortified Lead Camo Regrow, 3 D.D.T.",
+      "Round 95: 500 Purple Camo Regrow, 250 Fortified Lead Camo Regrow, 50 Fortified M.O.A.B., 30 D.D.T.",
+      "Round 104: 200 Purple (2 groups of 100), 200 Fortified Lead (2 groups of 100), 200 Ceramic (2 groups of 100), 150 Fortified M.O.A.B., 25 B.F.B., 14 Fortified B.F.B.",
+      "Round 105: 25 Fortified Lead, 100 Ceramic, 300 Fortified Ceramic, 30 B.F.B.",
+      "Round 117: 250 Lead, 27 D.D.T., 18 Fortified D.D.T.",
+      "Round 122: 20 Fortified B.F.B., 40 B.F.B., 225 Fortified Lead",
+      "Round 126: 1 Fortified Lead Camo Regrow, 99 D.D.T.",
+      "Round 129: 7 Fortified Z.O.M.G., 77 Fortified Lead Camo, 77 Purple Camo, 77 Ceramic Camo, 7 Z.O.M.G., 18 D.D.T.",
+      "Round 163: randomized Leads and Ceramics"
+    ],
+    "abr": [
+      "Round 10: 22 Blue, 40 Green, 2 Lead",
+      "Round 23: 7 Black, 6 White, 4 Lead",
+      "Round 24: 1 Lead Camo",
+      "Round 28: 6 Lead Regrow",
+      "Round 30: 9 Lead Camo",
+      "Round 37: 7 Black Regrow, 25 White, 25 White Regrow, 18 Lead, 10 Zebra",
+      "Round 38: 42 Purple, 17 Black, 14 Lead, 7 Rainbow, 1 Ceramic Regrow",
+      "Round 44: 10 Fortified Lead, 40 Zebra",
+      "Round 45: 120 Pink, 10 Purple Camo, 4 Fortified Lead, 10 Ceramic",
+      "Round 48: 30 Purple Camo Regrow, 80 Black Regrow, 15 Fortified Lead Regrow, 3 Fortified Ceramic",
+      "Round 50: 8 Fortified Lead Regrow, 4 M.O.A.B, 2 Fortified M.O.A.B.",
+      "Round 59: 50 Lead Camo Regrow, 20 Fortified Ceramic Camo, 25 Rainbow",
+      "Round 61: 57 Zebra Regrow, 8 Fortified Lead, 15 M.O.A.B.",
+      "Round 62: 250 Purple, 15 Fortified Lead Camo Regrow, 5 Fortified M.O.A.B, 2 B.F.B.",
+      "Round 75: 50 Lead, 14 Fortified Lead, 4 Fortified M.O.A.B, 6 B.F.B, 2 Fortified B.F.B.",
+      "Rounds 101+: randomized"
+    ]
+  }
+}

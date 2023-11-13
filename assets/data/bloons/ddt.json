@@ -1,0 +1,85 @@
+{
+  "id": "ddt",
+  "name": "DDT",
+  "fullName": "Dark Dirigible Titan",
+  "image": "btd63dddt.png",
+  "rbe": [
+    "816",
+    "1,256 fortified"
+  ],
+  "children": [
+    {
+      "id": "ceramic",
+      "name": "Ceramic Bloon",
+      "image": "btd6ceramic.png",
+      "value": "4 Camo Regen"
+    }
+  ],
+  "parents": [
+    {
+      "id": "bad",
+      "name": "Big Airship of Doom",
+      "image": "btd63dbad.png",
+      "value": "3"
+    }
+  ],
+  "speed": {
+    "absolute": "66",
+    "relative": "2.64"
+  },
+  "variants": [
+    {
+      "image": "btd63dddt.png",
+      "name": "DDT",
+      "appearances": "Round 90\nRound 88 (ABR)"
+    },
+    {
+      "image": "btd63dddt_nocamo.png",
+      "name": "Decamoed DDT",
+      "appearances": "Unnaturally occurring"
+    },
+    {
+      "image": "btd6fddt.png",
+      "name": "Fortified DDT",
+      "appearances": "Round 99\nRound 93 (ABR)"
+    },
+    {
+      "image": "btd6fddt_nocamo.png",
+      "name": "Decamoed Fortified DDT",
+      "appearances": "Unnaturally occurring"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 90: 50 Fortified Lead Camo Regrowth, 3 DDT",
+      "Round 93: 10 Fortified BFB, 6 DDT",
+      "Round 95: 500 Purple Camo Regrowth, 250 Fortified Lead Camo Regrowth, 50 Fortified MOAB, 30 DDT",
+      "Round 99: 60 MOAB, 9 Fortified DDT",
+      "Round 102: 3 BFB, 3 Fortified BFB, 1 ZOMG, 3 Fortified ZOMG (last 2 are stacked), 18 DDT, 12 Fortified DDT",
+      "Round 106: 66 DDT, 27 Fortified DDT",
+      "Round 110: 25 BFB, 18 DDT, 12 Fortified DDT",
+      "Round 112: 27 Fortified BFB, 21 Fortified DDT",
+      "Round 114: 24 MOAB, 36 Fortified MOAB, 12 BFB, 8 Fortified BFB, 5 ZOMG, 3 Fortified ZOMG, 9 DDT, 6 Fortified DDT (DDTs and Fortified DDTs spawn throughout the round, then it goes Fortified MOAB, MOAB, BFB, Fortified BFB, ZOMG, Fortified ZOMG, Round 115 has them in roughly reverse order)",
+      "Round 115: 24 MOAB, 36 Fortified MOAB, 12 BFB, 8 Fortified BFB, 5 ZOMG, 3 Fortified ZOMG, 9 DDT, 6 Fortified DDT (DDTs and Fortified DDTs spawn throughout the round, the rest goes in roughly reverse order compared to Round 114)",
+      "Round 117: 250 Lead, 27 DDT, 18 Fortified DDT",
+      "Round 118: 12 ZOMG, 30 Fortified DDT",
+      "Round 126: 1 Fortified Lead Camo Regrowth, 99 DDT",
+      "Round 128: 39 Fortified DDT, 200 Fortified Ceramic Camo (2 groups of 100), 30 BFB",
+      "Round 129: 7 Fortified ZOMG, 77 Fortified Lead Camo, 77 Purple Camo, 77 Ceramic Camo, 7 ZOMG, 18 DDT",
+      "Round 130: 84 MOAB, 66 Fortified MOAB, 48 DDT, 6 Fortified DDT",
+      "Round 135: 21 Fortified DDT, 14 Fortified ZOMG",
+      "Round 138: 81 Fortified DDT, 45 DDT"
+    ],
+    "abr": [
+      "Round 88: 3 DDTs",
+      "Round 90: 4 DDTs",
+      "Round 92: 4 DDTs",
+      "Round 93: 7 Fortified DDTs",
+      "Round 95: 30 DDTs",
+      "Round 96: 10 DDTs",
+      "Round 97: 8 Fortified DDTs",
+      "Round 99: 9 Fortified DDTs",
+      "Round 101+: randomized"
+    ]
+  }
+}

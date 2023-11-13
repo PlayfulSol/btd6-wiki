@@ -1,0 +1,215 @@
+{
+  "id": "sniper_monkey",
+  "name": "Sniper Monkey",
+  "image": "btd6_sniper_monkey.png",
+  "type": "Military",
+  "unlock": "Level 7-12",
+  "inGameDesc": "Can shoot Bloons it can see anywhere on the screen with a long-range rifle, and pops 2 layers off Bloons hit by it.",
+  "cost": {
+    "easy": "300",
+    "medium": "350",
+    "hard": "380",
+    "impoppable": "420"
+  },
+  "target": "First, Last, Close, Strong, Camo Priority with Night Vision Goggles, Elite with Elite Sniper on Map",
+  "stats": {
+    "damage": "2",
+    "pierce": "1",
+    "attackSpeed": "1.59s",
+    "range": "Infinite\n20 (\"dummy\" range)",
+    "statuseffects": "Requires upgrades",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "Requires upgrades",
+    "camo": "Yes (x-1-x)",
+    "footprint": "Small (6)",
+    "damageType": " Sharp"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "fullmetaljacketupgradeicon.png",
+        "name": "Full Metal Jacket",
+        "cost": {
+          "easy": "295",
+          "medium": "350",
+          "hard": "380",
+          "impoppable": "420"
+        },
+        "unlock": "120 XP",
+        "upgradeBody": "Description: Shots pop through 4 layers of bloon, and both bullets and shrapnel can pop Lead and Frozen Bloons.\nEffect: Bullets deal 4 damage and pop Frozen and Leads. With Shrapnel Shot, shrapnel pieces also pop Frozen and Lead."
+      },
+      {
+        "image": "largecalibreupgradeicon.png",
+        "name": "Large Calibre",
+        "cost": {
+          "easy": "1,275",
+          "medium": "1,500",
+          "hard": "1,620",
+          "impoppable": "1,800"
+        },
+        "unlock": "800 XP",
+        "upgradeBody": "Description: Shots can pop through 7 layers of Bloon.\nEffect: Bullets deal 7 damage instead of 4. With Shrapnel Shot, each shrapnel piece deals 2 damage instead of 1."
+      },
+      {
+        "image": "deadlyprecisionupgradeicon.png",
+        "name": "Deadly Precision",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "3,500 XP",
+        "upgradeBody": "Description: 20 damage per shot, plus bonus damage to Ceramics.\nEffect: Bullets deal 20 damage plus +15 damage to Ceramics. With Shrapnel Shot, each shrapnel piece deals 4 damage instead of 2."
+      },
+      {
+        "image": "maimmoabupgradeicon.png",
+        "name": "Maim MOAB",
+        "cost": {
+          "easy": "4,590",
+          "medium": "5,400",
+          "hard": "5,830",
+          "impoppable": "6,480"
+        },
+        "unlock": "10,500 XP",
+        "upgradeBody": "Description: Deals much more damage and immobilizes MOAB class bloons for a short time.\nEffect: Bullets temporarily stun MOAB-class bloons and deal 30 damage instead of 20. With Shrapnel Shot, each shrapnel piece deals 6 damage instead of 4 and can stun MOAB-class bloons."
+      },
+      {
+        "image": "cripplemoabupgradeicon.png",
+        "name": "Cripple MOAB",
+        "cost": {
+          "easy": "27,200",
+          "medium": "32,000",
+          "hard": "34,560",
+          "impoppable": "38,400"
+        },
+        "unlock": "37,500 XP",
+        "upgradeBody": "Description: Crippled MOABs are immobilized for longer and take extra damage from all other attacks.\nEffect: Bullets temporarily cripple MOAB-class bloons, rendering them vulnerable to +5 damage and become stunned for longer, on top of 280 damage per bullet instead of 30. With Shrapnel Shot, each shrapnel piece deals 12 damage instead of 6 and can cripple MOAB-class bloons."
+      }
+    ],
+    "path2": [
+      {
+        "image": "nightvisiongogglesupgradeicon.png",
+        "name": "Night Vision Goggles",
+        "cost": {
+          "easy": "255",
+          "medium": "300",
+          "hard": "325",
+          "impoppable": "360"
+        },
+        "unlock": "200 XP",
+        "upgradeBody": "Description: Allows Sniper to detect and do an additional 2 damage to Camo bloons.\nEffect: Gains camo detection, and all attacks deal +2 damage to Camo Bloons."
+      },
+      {
+        "image": "shrapnelshotupgradeicon.png",
+        "name": "Shrapnel Shot",
+        "cost": {
+          "easy": "380",
+          "medium": "450",
+          "hard": "485",
+          "impoppable": "540"
+        },
+        "unlock": "600 XP",
+        "upgradeBody": "Description: Damaged bloons spray out a cone of sharp shrapnel.\nEffect: If a bloon is damaged, it will spray out a cone of sharp shrapnel in the same direction as the bullet. Shrapnel improves damage potential with Path 1 upgrades. Shrapnel cannot hit the bloon which spawned it."
+      },
+      {
+        "image": "bouncingbulletupgradeicon.png",
+        "name": "Bouncing Bullet",
+        "cost": {
+          "easy": "2,720",
+          "medium": "3,200",
+          "hard": "3,455",
+          "impoppable": "3,840"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Shots bounce to new targets up to 2 times.\nEffect: Bullet can bounce onto nearby targets, popping up to 3 bloons each. Bullets produce shrapnel in the direction of the bullet prior to collision every time they damage bloons."
+      },
+      {
+        "image": "cashdropupgradeicon.png",
+        "name": "Supply Drop",
+        "cost": {
+          "easy": "6,120",
+          "medium": "7,200",
+          "hard": "7,775",
+          "impoppable": "8,640"
+        },
+        "unlock": "11,000 XP",
+        "upgradeBody": "Description: Supply Drop ability: Drops a crate full of cash. Regular attack also damages Lead Bloons and increases Shrapnel popping power.\nEffect: Ability gives $1200 cash when deployed cash crate is collected. Bullets pop Frozen and Lead, hit up to 4 Bloons, and each shrapnel piece has 5 pierce instead of 2."
+      },
+      {
+        "image": "elitesniperupgradeicon.png",
+        "name": "Elite Sniper",
+        "cost": {
+          "easy": "12,325",
+          "medium": "14,500",
+          "hard": "15,660",
+          "impoppable": "17,400"
+        },
+        "unlock": "35,000 XP",
+        "upgradeBody": "Description: Supply Drop gives much more cash and activates Supply Drop for other snipers. Grants Elite targeting prio and faster reload to all snipers.\nEffect: Ability gives $3000 cash when deployed cash crate is collected, and activates the abilities of all other Supply Drop Snipers that are not on cooldown. Attacks +150% faster (0.4x attack cooldown) and gives all other Snipers +33% attack speed (0.75x attack cooldown)."
+      }
+    ],
+    "path3": [
+      {
+        "image": "fastfiringupgradeicon.png",
+        "name": "Fast Firing",
+        "cost": {
+          "easy": "340",
+          "medium": "400",
+          "hard": "430",
+          "impoppable": "480"
+        },
+        "unlock": "130 XP",
+        "upgradeBody": "Description: Shoots faster than normal.\nEffect: Gains +42% attack speed (0.70x attack cooldown)."
+      },
+      {
+        "image": "evenfasterfiringupgradeicon.png",
+        "name": "Even Faster Firing",
+        "cost": {
+          "easy": "340",
+          "medium": "400",
+          "hard": "430",
+          "impoppable": "480"
+        },
+        "unlock": "600 XP",
+        "upgradeBody": "Description: Shoots even faster!\nEffect: Gains a further +42% attack speed (0.70x attack cooldown)."
+      },
+      {
+        "image": "semiautomaticupgradeicon.png",
+        "name": "Semi-Automatic",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "2,750 XP",
+        "upgradeBody": "Description: Attacks 3x as fast!\nEffect: 3x attack speed on top of previous upgrades."
+      },
+      {
+        "image": "fullautorifleupgradeicon.png",
+        "name": "Full Auto Rifle",
+        "cost": {
+          "easy": "3,610",
+          "medium": "4,250",
+          "hard": "4,590",
+          "impoppable": "5,100"
+        },
+        "unlock": "10,000 XP",
+        "upgradeBody": "Description: Fully automatic weapon with incredible popping power.\nEffect: 2x attack speed on top of previous upgrades, and bullets deal +2 MOAB-class damage."
+      },
+      {
+        "image": "elitedefenderupgradeicon.png",
+        "name": "Elite Defender",
+        "cost": {
+          "easy": "12,325",
+          "medium": "14,500",
+          "hard": "15,660",
+          "impoppable": "17,400"
+        },
+        "unlock": "30,000 XP",
+        "upgradeBody": "Description: Fires super fast and does more damage to MOAB-class Bloons. Fires faster the further the Bloons are along the track. Gains 4x attack speed briefly on losing lives.\nEffect: 2x attack speed on top of previous upgrades, as well as attacking an additive percentage amount faster depending on how close the Bloons are nearing the exit. If lives are lost, attacks 4x faster for about 7 seconds (on top of other attack speed bonuses). Bullets deal +4 damage to MOAB-class Bloons."
+      }
+    ]
+  }
+}

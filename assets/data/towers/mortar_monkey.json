@@ -1,0 +1,215 @@
+{
+  "id": "mortar_monkey",
+  "name": "Mortar Monkey",
+  "image": "000_mortarmonkey.png",
+  "type": "Military",
+  "unlock": "Level 7-12",
+  "inGameDesc": "Launches an exploding mortar shell to a fixed location anywhere on the screen.",
+  "cost": {
+    "easy": "640",
+    "medium": "750",
+    "hard": "810",
+    "impoppable": "900"
+  },
+  "target": "Set Target",
+  "stats": {
+    "damage": "2",
+    "pierce": "25",
+    "attackSpeed": "2.0s",
+    "range": "Infinite (mortar projectile)\n30 (\"display\" range)\n20 (blast radius)",
+    "statuseffects": "Requires upgrades",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "N/A",
+    "camo": "Yes (x-x-3)",
+    "footprint": "Large (9)",
+    "damageType": " Explosion"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "biggerblastupgradeicon.png",
+        "name": "Bigger Blast",
+        "cost": {
+          "easy": "425",
+          "medium": "500",
+          "hard": "540",
+          "impoppable": "600"
+        },
+        "unlock": "180 XP",
+        "upgradeBody": "Description: Bigger shells deliver a bigger blast radius.\nEffect: Each explosion produces a large explosion radius (20 to 30), and increases main pierce from 25 to 45."
+      },
+      {
+        "image": "bloonbusterupgradeicon.png",
+        "name": "Bloon Buster",
+        "cost": {
+          "easy": "425",
+          "medium": "500",
+          "hard": "540",
+          "impoppable": "600"
+        },
+        "unlock": "600 XP",
+        "upgradeBody": "Description: Smash through 3 layers of Bloon at once!\nEffect: Explosions deal 3 damage instead of 2."
+      },
+      {
+        "image": "shellshockupgradeicon.png",
+        "name": "Shell Shock",
+        "cost": {
+          "easy": "765",
+          "medium": "900",
+          "hard": "970",
+          "impoppable": "1,080"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Blast shockwave stuns bloons at impact, pops bloons in a wider area, and increases Burny Stuff damage.\nEffect: Creates a secondary shockwave explosion that stuns bloons close to the epicenter and deals extra damage further from the main explosion. Bloons damaged by the inner shockwave get stunned for 0.5s, otherwise taking 1 damage. When given Burny Stuff, deals 2 damage per tick instead of 1 and burn twice as fast. Explosion radius of main explosion slightly increased from 30 to 40."
+      },
+      {
+        "image": "thebigoneupgradeicon.png",
+        "name": "The Big One",
+        "cost": {
+          "easy": "6,800",
+          "medium": "8,000",
+          "hard": "8,640",
+          "impoppable": "9,600"
+        },
+        "unlock": "15,000 XP",
+        "upgradeBody": "Description: Devastating explosions pop 7 layers of any Bloon type. Increases Burny Stuff damage further.\nEffect: Explosion radius is even bigger (40 to 60), deals 7 damage per main explosion, stuns bloons for 0.75s instead of 0.5s, and increases pierce of main and secondary explosions from 45 to 85. When given Burny Stuff, deals 5 damage per tick instead of 2. Shockwave explosion now deals +1 damage to Ceramics."
+      },
+      {
+        "image": "thebiggestoneupgradeicon.png",
+        "name": "The Biggest One",
+        "cost": {
+          "easy": "30,600",
+          "medium": "36,000",
+          "hard": "38,880",
+          "impoppable": "43,200"
+        },
+        "unlock": "29,000 XP",
+        "upgradeBody": "Description: Blasts deeply through Bloons and layers over a huge area, plus powerful Burny Stuff damage.\nEffect: Creates gigantic explosions (60 to 75) that deal 25 damage per main explosion, plus +25 to Ceramics and +20 to MOAB-class, and pops 200 bloons instead of 85. Shockwave explosion deals +20 damage to Ceramics. When given Burny Stuff, deals 45 damage per tick instead of 5. In addition, Shockwave explosion now can stun MOAB-class bloons for short time."
+      }
+    ],
+    "path2": [
+      {
+        "image": "fasterreloadupgradeicon_1912.png",
+        "name": "Faster Reload",
+        "cost": {
+          "easy": "255",
+          "medium": "300",
+          "hard": "325",
+          "impoppable": "360"
+        },
+        "unlock": "150 XP",
+        "upgradeBody": "Description: Increases the attack speed of the Mortar.\nEffect: Gains +33% attack speed (an equivalent value from 0.75x attack cooldown)."
+      },
+      {
+        "image": "rapidreloadupgradeicon.png",
+        "name": "Rapid Reload",
+        "cost": {
+          "easy": "425",
+          "medium": "500",
+          "hard": "540",
+          "impoppable": "600"
+        },
+        "unlock": "600 XP",
+        "upgradeBody": "Description: Even faster reload.\nEffect: Gains another +39% attack speed (an equivalent value from 0.72x attack cooldown), for a total of +85% attack speed (0.54x attack cooldown)."
+      },
+      {
+        "image": "heavyshellsupgradeicon.png",
+        "name": "Heavy Shells",
+        "cost": {
+          "easy": "765",
+          "medium": "900",
+          "hard": "970",
+          "impoppable": "1,080"
+        },
+        "unlock": "2,300 XP",
+        "upgradeBody": "Description: Heavy shells do extra damage to Ceramic, Lead, all Fortified, and all stunned bloons. Can also pop black Bloons.\nEffect: Explosions pop Black Bloons and deal +3 damage to Ceramics, +1 damage to Leads, +1 damage to Fortified, +1 damage to MOAB-class, and +2 damage to stunned bloons."
+      },
+      {
+        "image": "artillerybatteryupgradeicon.png",
+        "name": "Artillery Battery",
+        "cost": {
+          "easy": "4,675",
+          "medium": "5,500",
+          "hard": "5,940",
+          "impoppable": "6,600"
+        },
+        "unlock": "12,500 XP",
+        "upgradeBody": "Description: Bombardment Ability: Unleashes a rapid fire attack in a slightly wider area. Main attack does more damage to BADs and Boss Bloons and upgrades to 3 barrels for incredibly fast attacks.\nEffect: 4x attack speed. Ability increases attack speed by another 4x and blast radius by +15%. Gain deal +4 damage to BAD and Boss Bloons."
+      },
+      {
+        "image": "popandaweupgradeicon.png",
+        "name": "Pop and Awe",
+        "cost": {
+          "easy": "25,500",
+          "medium": "30,000",
+          "hard": "32,400",
+          "impoppable": "36,000"
+        },
+        "unlock": "32,000 XP",
+        "upgradeBody": "Description: Pop and Awe has permanent rapid attack speed and enhances the BAD and Boss damage of all Artillery Batteries. Pop and Awe Ability: rains explosions over the whole screen, damaging Bloons and stunning them periodically.\nEffect: Ability stuns all bloons on screen repetitively every 1 second for 8 seconds. Main attack gains its previous Bombardment ability permanently. Bonus damage to stunned bloons increased from +2 to +10 and bonus BAD and Boss damage from +4 to +10. Also now grants all Artillery Batteries +6 to BADs and Bosses damage on screen."
+      }
+    ],
+    "path3": [
+      {
+        "image": "increasedaccuracyupgradeicon.png",
+        "name": "Increased Accuracy",
+        "cost": {
+          "easy": "170",
+          "medium": "200",
+          "hard": "215",
+          "impoppable": "240"
+        },
+        "unlock": "140 XP",
+        "upgradeBody": "Description: Makes the shots more accurate.\nEffect: Reduces deviation radius from 18 to 8."
+      },
+      {
+        "image": "burnystuffupgradeicon.png",
+        "name": "Burny Stuff",
+        "cost": {
+          "easy": "425",
+          "medium": "500",
+          "hard": "540",
+          "impoppable": "600"
+        },
+        "unlock": "650 XP",
+        "upgradeBody": "Description: Damaged Bloons are set ablaze momentarily with each hit.\nEffect: Affected bloons slowly deal 1 damage every 1.25s for 3.75s after getting ignited with napalm. Napalm is amplified by Shell Shock, The Big One, and The Biggest One."
+      },
+      {
+        "image": "signalflareupgradeicon.png",
+        "name": "Signal Flare",
+        "cost": {
+          "easy": "680",
+          "medium": "800",
+          "hard": "865",
+          "impoppable": "960"
+        },
+        "unlock": "2,200 XP",
+        "upgradeBody": "Description: Camo Bloons popped by flares lose their camouflage permanently.\nEffect: Explosions produce wide non-damaging secondary flares that strip camo properties off any bloon hit, including Camo Blacks, Camo Zebras, and DDTs. Can detect Camo Bloons."
+      },
+      {
+        "image": "shatteringshellsupgradeicon.png",
+        "name": "Shattering Shells",
+        "cost": {
+          "easy": "9,265",
+          "medium": "10,900",
+          "hard": "11,770",
+          "impoppable": "13,080"
+        },
+        "unlock": "12,000 XP",
+        "upgradeBody": "Description: Shattering shells strip special Bloon properties off all but the biggest bloons. Burny stuff melts through 5 layers with each shot and burns MOAB-class Bloons for extra damage.\nEffect: Strips all Camo and Regrow from all bloon types with each hit, and strips Fortified from all non-MOAB-class bloons, MOABs, and BFBs. Also deals 5 burn damage to bloons instead of 1, and 10 to MOAB-class Bloons. With Bloon Buster, burn damage deals +3 damage per tick."
+      },
+      {
+        "image": "blooncinerationupgradeicon.png",
+        "name": "Blooncineration",
+        "cost": {
+          "easy": "34,000",
+          "medium": "40,000",
+          "hard": "43,200",
+          "impoppable": "48,000"
+        },
+        "unlock": "35,000 XP",
+        "upgradeBody": "Description: Superhot burny stuff that incinerates MOAB-Class Bloons with ease.\nEffect: Burns twice as fast and deals 100 damage to blimps per damage tick. Blazes (resembling Walls of Fire) are also produced at the location where the explosions landed, dealing contact damage to passing bloons. Explosions now also strip fortified properties from DDTs. With Bloon Buster, deals 8 burn damage per tick instead of 5, 150 to blimps instead of 100, and also gives +1 damage to the Blazes."
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "sunken_columns",
+  "name": "Sunken Columns",
+  "image": "sunken_columns_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Advanced",
+  "entrances": "2",
+  "exits": "2",
+  "length": "TBA RBS\n\nTBA Range Units",
+  "music": "Fiesta Flamenco",
+  "terrain": "Rocky",
+  "water": "Yes",
+  "removableObject": "Yes",
+  "highground": "Unknown",
+  "sightBlocker": "Yes"
+}

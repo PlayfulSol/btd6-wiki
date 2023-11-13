@@ -1,0 +1,227 @@
+{
+  "id": "boomerang_monkey",
+  "name": "Boomerang Monkey",
+  "image": "btd6_boomerang_monkey.png",
+  "type": "Primary",
+  "unlock": "Level 2-6",
+  "inGameDesc": "Hurls a boomerang that follows a curved path. Good range and pierce.",
+  "cost": {
+    "easy": "275",
+    "medium": "325",
+    "hard": "350",
+    "impoppable": "390"
+  },
+  "target": "First, Last, Close, Strong,\nChange Hands",
+  "stats": {
+    "damage": "1",
+    "pierce": "4",
+    "attackSpeed": "1.2s",
+    "range": "43",
+    "statuseffects": "Requires upgrades",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "N/A",
+    "camo": "Yes (5-x-x)",
+    "footprint": "Medium (7)",
+    "damageType": " Sharp"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "improvedrangsupgradeicon.png",
+        "name": "Improved Rangs",
+        "cost": {
+          "easy": "170",
+          "medium": "200",
+          "hard": "215",
+          "impoppable": "240"
+        },
+        "unlock": "100 XP",
+        "upgradeBody": "Description: Can pop up to 8 Bloons per throw.\nEffect: Gains +4 pierce, equivalent to 8 pierce for most upgrades."
+      },
+      {
+        "image": "glaivesupgradeicon.png",
+        "name": "Glaives",
+        "cost": {
+          "easy": "240",
+          "medium": "280",
+          "hard": "300",
+          "impoppable": "335"
+        },
+        "unlock": "520 XP",
+        "upgradeBody": "Description: Throws glaives instead of boomerangs. Glaives are bigger and faster, hitting more Bloons with each throw.\nEffect: Gains +5 pierce on top of the previous upgrade, equivalent to 13 pierce for most upgrades. Also gives +50% knockback for MOAB Press."
+      },
+      {
+        "image": "glaivericochetupgradeicon.png",
+        "name": "Glaive Ricochet",
+        "cost": {
+          "easy": "1,020",
+          "medium": "1,200",
+          "hard": "1,405",
+          "impoppable": "1,440"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Glaives will bounce from Bloon to Bloon automatically and aggressively.\nEffect: Glaives automatically bounce towards each bloon with sharp turning. Pops up to 60 bloons per glaive. Glaives can travel through obstacles."
+      },
+      {
+        "image": "moarglaivesupgradeicon.png",
+        "name": "M.O.A.R Glaives",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "8,500 XP",
+        "upgradeBody": "Description: Multiple Object Advanced Ricochet greatly enhances the already extraordinary powers of the Glaive Ricochet Monkey.\nEffect: Pierce increased from 60 to 100, +1 damage to Ceramics, attack speed is doubled, glaive bounce distance is increased."
+      },
+      {
+        "image": "glaivelordupgradeicon.png",
+        "name": "Glaive Lord",
+        "cost": {
+          "easy": "24,990",
+          "medium": "29,400",
+          "hard": "31,750",
+          "impoppable": "35,280"
+        },
+        "unlock": "37,500 XP",
+        "upgradeBody": "Description: Glaive Lord surrounds itself in 3 special glaives that shred anything that comes near. Glaive Lord's glaives now rip through MOAB-class Bloons, slowly tearing them apart from the inside.\nEffect: Gains a sharp 30 range zone that deals 2 damage every 0.1 seconds to all affected bloons in radius, including Camo Bloons, +8 to Ceramics and +5 to MOAB-class, and 2 more to Fortified. Main glaive deals +7 damage and +8 to Ceramics and can now inflict a shredding damage-over-time to MOAB-class, slowly dealing 100 damage every 1.0s for 15s."
+      }
+    ],
+    "path2": [
+      {
+        "image": "fasterthrowingupgradeicon_boomerangmonkey.png",
+        "name": "Faster Throwing",
+        "cost": {
+          "easy": "150",
+          "medium": "175",
+          "hard": "190",
+          "impoppable": "210"
+        },
+        "unlock": "120 XP",
+        "upgradeBody": "Description: Throws boomerangs faster.\nEffect: Attacks +33% faster (0.75x attack cooldown)."
+      },
+      {
+        "image": "fasterrangsupgradeicon.png",
+        "name": "Faster Rangs",
+        "cost": {
+          "easy": "210",
+          "medium": "250",
+          "hard": "270",
+          "impoppable": "300"
+        },
+        "unlock": "550 XP",
+        "upgradeBody": "Description: Boomerangs fire and travel faster.\nEffect: Attacks +33% faster (0.75x attack cooldown) on top of the previous upgrade, and projectile speed increased."
+      },
+      {
+        "image": "bionicboomerangupgradeicon.png",
+        "name": "Bionic Boomerang",
+        "cost": {
+          "easy": "1,230",
+          "medium": "1,450",
+          "hard": "1,565",
+          "impoppable": "1,740"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Replaces arm with a strong bionic arm that can throw boomerangs extremely fast and does extra damage to MOAB-class bloons.\nEffect: Attacks over 5x faster (0.1983x attack cooldown) than an ordinary Boomerang Monkey and deals +2 damage to MOAB-class."
+      },
+      {
+        "image": "turbochargeupgradeicon.png",
+        "name": "Turbo Charge",
+        "cost": {
+          "easy": "3,570",
+          "medium": "4,200",
+          "hard": "4,535",
+          "impoppable": "5,040"
+        },
+        "unlock": "9,000 XP",
+        "upgradeBody": "Description: Turbo Charge ability: Makes this Monkey attack incredibly fast for 10 seconds.\nEffect: Ability makes the Boomerang Monkey attack 7x faster and deal +1 damage for 10 seconds. Has a cooldown of 45 seconds."
+      },
+      {
+        "image": "permachargeupgradeicon.png",
+        "name": "Perma Charge",
+        "cost": {
+          "easy": "29,750",
+          "medium": "35,000",
+          "hard": "37,800",
+          "impoppable": "42,000"
+        },
+        "unlock": "32,000 XP",
+        "upgradeBody": "Description: Perma Charge has a permanent super fast attack speed. Ability increases the lethality even more.\nEffect: Permanently gains Turbo Charge attack speed and deals 4 damage by default. Ability now deals +8 damage for 15 seconds. With Red Hot Rangs, its attacks deal another +4 damage, and the ability damage is further increased by +2."
+      }
+    ],
+    "path3": [
+      {
+        "image": "longrangerangsupgradeicon.png",
+        "name": "Long Range Rangs",
+        "cost": {
+          "easy": "85",
+          "medium": "100",
+          "hard": "110",
+          "impoppable": "120"
+        },
+        "unlock": "110 XP",
+        "upgradeBody": "Description: Can throw boomerangs further than normal.\nEffect: Gains +14.19 range (+33%) and boomerangs are thrown on a wider curve."
+      },
+      {
+        "image": "redhotrangsupgradeicon.png",
+        "name": "Red Hot Rangs",
+        "cost": {
+          "easy": "255",
+          "medium": "300",
+          "hard": "325",
+          "impoppable": "360"
+        },
+        "unlock": "490 XP",
+        "upgradeBody": "Description: Allows boomerangs to pop Frozen and Lead Bloons and do more damage to all.\nEffect: Pops any bloon type and main attack and Glaive Lord's glaive orbitals deal +1 damage. Gives even more damage with Perma Charge."
+      },
+      {
+        "image": "kylieboomerangupgradeicon.png",
+        "name": "Kylie Boomerang",
+        "cost": {
+          "easy": "1,100",
+          "medium": "1,300",
+          "hard": "1,400",
+          "impoppable": "1,560"
+        },
+        "unlock": "3,000 XP",
+        "upgradeBody": "Description: Throws heavy Kylie boomerangs that follow a straight path instead of curved.\nEffect: Kylie boomerangs are thrown and returned in a straight path instead of curved. Pierce improves to 18 and can rehit the same bloons after 0.3 seconds."
+      },
+      {
+        "image": "moabpressupgradeicon.png",
+        "name": "MOAB Press",
+        "cost": {
+          "easy": "2,040",
+          "medium": "2,400",
+          "hard": "2,375",
+          "impoppable": "2,880"
+        },
+        "unlock": "9,500 XP",
+        "upgradeBody": "Description: Heavy Kylie boomerangs hit MOAB-Class Bloons multiple times per throw and sometimes knocks them back a short way along the path.\nEffect: Throws a powerful knockback boomerang at MOAB-class bloons every once in a while, dealing 1 damage to Bloons in its path, and 5 to MOABs, while pushing them backwards by a set amount of distance. These boomerangs have 200 pierce and can redamage Bloons after 0.1 seconds. Path 1 upgrades increase pierce and knockback distance."
+      },
+      {
+        "image": "moabdominationupgradeicon.png",
+        "name": "MOAB Domination",
+        "cost": {
+          "easy": "42,500",
+          "medium": "50,000",
+          "hard": "54,000",
+          "impoppable": "60,000"
+        },
+        "unlock": "28,000 XP",
+        "upgradeBody": "Description: Special knockback kylies trigger more often and do lots of extra damage.\nEffect: Kylie boomerangs deal +10 damage, all attacks fire twice as fast, special knockback boomerangs deal increased MOAB damage, have +100 pierce, double range, and produce a powerful burning explosion upon projectile expiry for even more damage."
+      }
+    ],
+    "paragon": {
+      "image": "glaivedominusupgradeicon.png",
+      "name": "Glaive Dominus",
+      "cost": {
+        "easy": "233,750",
+        "medium": "275,000",
+        "hard": "297,000",
+        "impoppable": "330,000"
+      },
+      "unlock": "500,000 XP",
+      "upgradeBody": "Description: The Bloons will look upon my Glaives, and they will know fear.\nEffect: Attacks ricocheting glaives hypersonically fast, surrounds itself in a powerful glaive ring, and regularly throws stronger anti-blimp glaives. Also buffs attack speed of all Primary Monkeys on screen by a 0.90x attack cooldown multiplier."
+    }
+  }
+}

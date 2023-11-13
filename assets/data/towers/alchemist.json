@@ -1,0 +1,215 @@
+{
+  "id": "alchemist",
+  "name": "Alchemist",
+  "image": "monkey_alchemist.png",
+  "type": "Magic",
+  "unlock": "Level 15-17 and Level 19-20",
+  "inGameDesc": "Harnessing powers of science and magic, splashes Bloons with acid, also brews various potions with different effects.",
+  "cost": {
+    "easy": "470",
+    "medium": "550",
+    "hard": "595",
+    "impoppable": "660"
+  },
+  "target": "First, Last, Close, Strong",
+  "stats": {
+    "damage": "1 (attack potion and acid pools)\n1 / 2.0s for 4.0s (corrosion DoT)",
+    "pierce": "15",
+    "attackSpeed": "2.0s",
+    "range": "45",
+    "statuseffects": "Red Acid",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "Requires upgrades",
+    "camo": "No",
+    "footprint": "Small (6)",
+    "damageType": " Acid"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "largerpotionsupgradeicon.png",
+        "name": "Larger Potions",
+        "cost": {
+          "easy": "210",
+          "medium": "250",
+          "hard": "270",
+          "impoppable": "300"
+        },
+        "unlock": "140 XP",
+        "upgradeBody": "Description: Larger potions splash in a larger area.\nEffect: Acid potion attack deals a large splash radius and can hit up to 20 bloons per shot instead of 15."
+      },
+      {
+        "image": "acidicmixturedipupgradeicon.png",
+        "name": "Acidic Mixture Dip",
+        "cost": {
+          "easy": "295",
+          "medium": "350",
+          "hard": "380",
+          "impoppable": "420"
+        },
+        "unlock": "550 XP",
+        "upgradeBody": "Description: Throws a helpful potion at nearby Monkeys that allows them to pop Lead Bloons and do extra damage to Ceramic and MOAB-Class Bloons. Wears off after several attacks.\nEffect: Regularly throws acidic mixture dip potions at monkeys, boosting their damage to Ceramics and MOAB-class by +1 and allows them to pop Leads, with extra damage to fortified Leads but not fortified DDTs. Lasts for 10 shots, 12 with 2-2-0."
+      },
+      {
+        "image": "berserkerbrewupgradeicon.png",
+        "name": "Berserker Brew",
+        "cost": {
+          "easy": "1,060",
+          "medium": "1,250",
+          "hard": "1,350",
+          "impoppable": "1,500"
+        },
+        "unlock": "2,250 XP",
+        "upgradeBody": "Description: Special brew gives Monkeys extra damage, range, and attack speed. Lasts longer.\nEffect: Gives special brew to nearby Monkeys that temporarily provide +1 damage, +10% range, +10% attack speed, and +2 pierce. Wears off after 25 attacks or for 5 seconds, whichever comes first. Always targets closest buffable tower."
+      },
+      {
+        "image": "strongerstimulantupgradeicon.png",
+        "name": "Stronger Stimulant",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "10,000 XP",
+        "upgradeBody": "Description: Extra strong berserker brew has even more powerful effect on the target. Lasts even longer.\nEffect: Improves brew to provide further attack speed, pierce, and range. For the duration of the improved brew, gives +15% range, +17.6% attack speed, +3 pierce, and +1 damage. Lasts for 40 shots and lasts up to 12 seconds."
+      },
+      {
+        "image": "permanentbrewupgradeicon.png",
+        "name": "Permanent Brew",
+        "cost": {
+          "easy": "51,000",
+          "medium": "60,000",
+          "hard": "64,800",
+          "impoppable": "72,000"
+        },
+        "unlock": "30,000 XP",
+        "upgradeBody": "Description: Berserker brew becomes PERMANENT on Monkeys who drink it.\nEffect: Brew and acidic mixture dips now last indefinitely, provided that the Permanent Brew is still on screen. Effects immediately disappear if this Alchemist is sold or sacrificed. Also increases its own range from 45 to 65."
+      }
+    ],
+    "path2": [
+      {
+        "image": "strongeracidupgradeicon.png",
+        "name": "Stronger Acid",
+        "cost": {
+          "easy": "210",
+          "medium": "250",
+          "hard": "270",
+          "impoppable": "300"
+        },
+        "unlock": "140 XP",
+        "upgradeBody": "Description: Acid potions dissolve Bloons faster.\nEffect: Improves red acid into a stronger purple acid. Acid damage-over-time tick rate now increases from every 2.0s to every 1.5s, and increases lifespan of the acid from 4.0s to 4.5s."
+      },
+      {
+        "image": "perishingpotionsupgradeicon.png",
+        "name": "Perishing Potions",
+        "cost": {
+          "easy": "405",
+          "medium": "475",
+          "hard": "515",
+          "impoppable": "570"
+        },
+        "unlock": "500 XP",
+        "upgradeBody": "Description: Attack potions deal more damage to MOAB-class Bloons and strip Fortified off smaller Bloons. Buff potions last longer.\nEffect: Acid now can strip Fortified off non-blimp bloons, and attacks deal 5 damage to MOAB-class, 20 damage to Fortified MOAB-class. Also increases duration of Berserker Brew and Stronger Stimulant, decreases downtime of expired brews, and improves shot counts of all Alchemist buffs except Permanent Brew."
+      },
+      {
+        "image": "unstableconcoctionupgradeicon.png",
+        "name": "Unstable Concoction",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Coats MOAB-Class Bloons in an explosive substance that causes a large explosion when they are popped.\nEffect: Coats MOAB-class bloons with an explosive substance. MOAB-class bloons affected by them will produce explosions with damage equivalent to 10% of its base health (i.e. no health ramping), including Fortified."
+      },
+      {
+        "image": "transformingtonicupgradeicon.png",
+        "name": "Transforming Tonic",
+        "cost": {
+          "easy": "3,825",
+          "medium": "4,500",
+          "hard": "4,860",
+          "impoppable": "5,400"
+        },
+        "unlock": "10,000 XP",
+        "upgradeBody": "Description: Transformation ability: Turns Alchemist into powerful attack Monster for 20 seconds.\nEffect: Ability stops the Alchemist's main attacks and transforms it into a monster with +27 range that fires a 3 damage and 6 pierce laser beam every 0.03s (0.024s with Faster Throwing crosspath) that can pop any bloon type except Purple."
+      },
+      {
+        "image": "totaltransformationupgradeicon.png",
+        "name": "Total Transformation",
+        "cost": {
+          "easy": "38,250",
+          "medium": "45,000",
+          "hard": "48,600",
+          "impoppable": "54,000"
+        },
+        "unlock": "28,000 XP",
+        "upgradeBody": "Description: Transforms five Monkeys nearby into crazy attack monsters for 20 seconds.\nEffect: Ability now affects up to 5 nearby monkeys up to Tier 3 into laser-shooting monsters. Ability cooldown is decreased. Most transformed monkeys can inherit tower-exclusive buffs on top."
+      }
+    ],
+    "path3": [
+      {
+        "image": "fasterthrowingupgradeicon.png",
+        "name": "Faster Throwing",
+        "cost": {
+          "easy": "550",
+          "medium": "650",
+          "hard": "700",
+          "impoppable": "780"
+        },
+        "unlock": "145 XP",
+        "upgradeBody": "Description: Throws potions and attacks faster.\nEffect: Attacks and throws potions +25% faster (0.80x attack cooldown)."
+      },
+      {
+        "image": "acidpoolupgradeicon.png",
+        "name": "Acid Pool",
+        "cost": {
+          "easy": "380",
+          "medium": "450",
+          "hard": "485",
+          "impoppable": "540"
+        },
+        "unlock": "700 XP",
+        "upgradeBody": "Description: If no Bloons are nearby Alchemist can drench nearby track with acid.\nEffect: Produces pools of acid on nearby bloon track if there are no bloons within range. Can also produce acid pools if its main potion misses bloons."
+      },
+      {
+        "image": "leadtogoldupgradeicon.png",
+        "name": "Lead To Gold",
+        "cost": {
+          "easy": "850",
+          "medium": "1,000",
+          "hard": "1,080",
+          "impoppable": "1,200"
+        },
+        "unlock": "2,000 XP",
+        "upgradeBody": "Description: Converts Lead Bloons to GOLD! Special solvents do extra damage to Lead Bloons, destroying them in one shot and generating cash.\nEffect: Deals +9 damage to lead properties and rewards $50 every time it pops a Lead Bloon."
+      },
+      {
+        "image": "rubbertogoldupgradeicon.png",
+        "name": "Rubber to Gold",
+        "cost": {
+          "easy": "2,335",
+          "medium": "2,750",
+          "hard": "2,970",
+          "impoppable": "3,300"
+        },
+        "unlock": "8,500 XP",
+        "upgradeBody": "Description: Converts all Bloons partially into gold, getting more cash per pop from affected Bloons.\nEffect: Regularly produces a goldify potion that partially converts bloons into gold. Affected bloons give +200% more income."
+      },
+      {
+        "image": "bloonmasteralchemistupgradeicon.png",
+        "name": "Bloon Master Alchemist",
+        "cost": {
+          "easy": "34,000",
+          "medium": "40,000",
+          "hard": "43,200",
+          "impoppable": "48,000"
+        },
+        "unlock": "24,000 XP",
+        "upgradeBody": "Description: Secret shrink potion converts all affected Bloons to Red Bloons.\nEffect: Throws a shrink potion that converts up to 200 bloons into Red Bloons, including MOAB-class (up to a Z.O.M.G), although MOAB-class bloons consume more pierce. Shrink potions have unlimited range and always target the strongest transformable bloon types on screen. Does not reward extra money for converted bloons."
+      }
+    ]
+  }
+}

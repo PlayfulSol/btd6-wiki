@@ -1,0 +1,163 @@
+[
+  {
+    "id": "dart_monkey",
+    "name": "Dart Monkey",
+    "image": "000_dartmonkey.png",
+    "inGameDesc": "Throws a single dart at nearby bloons. Short range and low pierce but cheap.",
+    "type": "Primary"
+  },
+  {
+    "id": "boomerang_monkey",
+    "name": "Boomerang Monkey",
+    "image": "btd6_boomerang_monkey.png",
+    "inGameDesc": "Hurls a boomerang that follows a curved path. Good range and pierce.",
+    "type": "Primary"
+  },
+  {
+    "id": "bomb_shooter",
+    "name": "Bomb Shooter",
+    "image": "bomb_shooter.png",
+    "inGameDesc": "Launches a powerful bomb at the Bloons. Slow rate of fire but affects a radius around the explosion.",
+    "type": "Primary"
+  },
+  {
+    "id": "tack_shooter",
+    "name": "Tack Shooter",
+    "image": "btd6_tack_shooter.png",
+    "inGameDesc": "Shoots a short range volley of sharp tacks in 8 directions.",
+    "type": "Primary"
+  },
+  {
+    "id": "ice_monkey",
+    "name": "Ice Monkey",
+    "image": "ice_monkey.png",
+    "inGameDesc": "Pops and freezes nearby Bloons for a short time. Frozen Bloons are immune to sharp damage. Can't freeze White, Zebra, or Lead Bloons.",
+    "type": "Primary"
+  },
+  {
+    "id": "glue_gunner",
+    "name": "Glue Gunner",
+    "image": "000_gluegunner.png",
+    "inGameDesc": "Shoots a blob of sticky glue that slows Bloons down by 50%",
+    "type": "Primary"
+  },
+  {
+    "id": "sniper_monkey",
+    "name": "Sniper Monkey",
+    "image": "btd6_sniper_monkey.png",
+    "inGameDesc": "Can shoot Bloons it can see anywhere on the screen with a long-range rifle, and pops 2 layers off Bloons hit by it.",
+    "type": "Military"
+  },
+  {
+    "id": "monkey_sub",
+    "name": "Monkey Sub",
+    "image": "btd6_monkey_sub.png",
+    "inGameDesc": "Shoots homing torp-e-darts at nearby Bloons. Must be placed in water.",
+    "type": "Military"
+  },
+  {
+    "id": "monkey_buccaneer",
+    "name": "Monkey Buccaneer",
+    "image": "btd6_monkey_buccaneer.png",
+    "inGameDesc": "Shoots a single, heavy dart from both sides of the ship. Must be placed in water.",
+    "type": "Military"
+  },
+  {
+    "id": "monkey_ace",
+    "name": "Monkey Ace",
+    "image": "btd6_monkey_ace.png",
+    "inGameDesc": "Flies above the ground shooting volleys of high-pierce darts.",
+    "type": "Military"
+  },
+  {
+    "id": "heli_pilot",
+    "name": "Heli Pilot",
+    "image": "btd6_heli_pilot.png",
+    "inGameDesc": "Hovers wherever you direct it. Shoots from twin heavy dart guns.",
+    "type": "Military"
+  },
+  {
+    "id": "mortar_monkey",
+    "name": "Mortar Monkey",
+    "image": "000_mortarmonkey.png",
+    "inGameDesc": "Launches an exploding mortar shell to a fixed location anywhere on the screen.",
+    "type": "Military"
+  },
+  {
+    "id": "dartling_gunner",
+    "name": "Dartling Gunner",
+    "image": "000_dartlinggunner.png",
+    "inGameDesc": "Uses a dart-shooting machine-gun. Aims wherever you point on the screen.",
+    "type": "Military"
+  },
+  {
+    "id": "wizard_monkey",
+    "name": "Wizard Monkey",
+    "image": "000_wizardmonkey.png",
+    "inGameDesc": "Hurls magical bolts of energy at the Bloons. Can upgrade to a variety of powerful spells.",
+    "type": "Magic"
+  },
+  {
+    "id": "super_monkey",
+    "name": "Super Monkey",
+    "image": "000_supermonkey.png",
+    "inGameDesc": "Throws hundreds of darts at hypersonic speed with a huge attack range.",
+    "type": "Magic"
+  },
+  {
+    "id": "ninja_monkey",
+    "name": "Ninja Monkey",
+    "image": "000_ninjamonkey.png",
+    "inGameDesc": "Stealthy and fast Monkey that throws bladed shurikens to pop the Bloons. Can target Camo Bloons.",
+    "type": "Magic"
+  },
+  {
+    "id": "alchemist",
+    "name": "Alchemist",
+    "image": "monkey_alchemist.png",
+    "inGameDesc": "Harnessing powers of science and magic, splashes Bloons with acid, also brews various potions with different effects.",
+    "type": "Magic"
+  },
+  {
+    "id": "druid",
+    "name": "Druid",
+    "image": "druid_monkey.png",
+    "inGameDesc": "Creates a blast of thorns for each attack. Upgrades can call forth powers of the Jungle, Storm, or Wrath.",
+    "type": "Magic"
+  },
+  {
+    "id": "banana_farm",
+    "name": "Banana Farm",
+    "image": "000_bananafarm.png",
+    "inGameDesc": "Generates Bananas each round that convert into game money to spend on more stuff.",
+    "type": "Support"
+  },
+  {
+    "id": "spike_factory",
+    "name": "Spike Factory",
+    "image": "000_spikefactory.png",
+    "inGameDesc": "Automatically generates piles of Road Spikes on the nearby track. Excellent last line of defense.",
+    "type": "Support"
+  },
+  {
+    "id": "monkey_village",
+    "name": "Monkey Village",
+    "image": "000_monkeyvillage.png",
+    "inGameDesc": "Hub of Monkey industry, has a number of different benefits to aid all of your Monkeys. Increases range of all Monkeys in its radius by 10%.",
+    "type": "Support"
+  },
+  {
+    "id": "engineer_monkey",
+    "name": "Engineer Monkey",
+    "image": "000_engineermonkey.png",
+    "inGameDesc": "Holds a trusty nail-gun to pop the Bloons. Can upgrade to create its own nail-shooting sentry turrets.",
+    "type": "Support"
+  },
+  {
+    "id": "beast_handler",
+    "name": "Beast Handler",
+    "image": "000_beasthandler.png",
+    "inGameDesc": "Trains land, water, or air beasts. Multiple Beast Handlers can have their own beasts, or combine efforts to train a single beast with greater beast power.",
+    "type": "Support"
+  }
+]

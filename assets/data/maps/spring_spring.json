@@ -1,0 +1,16 @@
+{
+  "id": "spring_spring",
+  "name": "Spring Spring",
+  "image": "springspring_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Intermediate",
+  "entrances": "2",
+  "exits": "2",
+  "length": "Top Path:\n28.11 RBS\n772.9 Range Units\nBottom Path:\n28.00 RBS\n770.0 Range Units",
+  "music": "Sunset Samba",
+  "terrain": "Lake",
+  "water": "Yes",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "Yes (non-intrusive)"
+}

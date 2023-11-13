@@ -1,0 +1,143 @@
+{
+  "id": "ceramic",
+  "name": "Ceramic",
+  "fullName": "Ceramic Bloon",
+  "image": "btd6ceramic.png",
+  "rbe": [
+    "104",
+    "114 Fortified"
+  ],
+  "children": [
+    {
+      "id": "rainbow",
+      "name": "Rainbow Bloon",
+      "image": "btd6rainbow.png",
+      "value": "2"
+    }
+  ],
+  "parents": [
+    {
+      "id": "moab",
+      "name": "Massive Ornary Air Blimp",
+      "image": "btd63dmoab.png",
+      "value": "4"
+    },
+    {
+      "id": "ddt",
+      "name": "Dark Dirigible Titan",
+      "image": "btd63dddt.png",
+      "value": "4 Camo Regen"
+    }
+  ],
+  "speed": {
+    "absolute": "62.5",
+    "relative": "2.5"
+  },
+  "variants": [
+    {
+      "image": "btd6ceramic.png",
+      "name": "Ceramic Bloon",
+      "appearances": "Round 38\nRound 32 (ABR)"
+    },
+    {
+      "image": "ceramiccamo.png",
+      "name": "Camo Ceramic Bloon",
+      "appearances": "Round 51\nRound 55 (ABR)"
+    },
+    {
+      "image": "ceramicregrow.png",
+      "name": "Regrow Ceramic Bloon",
+      "appearances": "Round 59\nRound 38 (ABR)"
+    },
+    {
+      "image": "ceramicregrowcamo.png",
+      "name": "Camo Regrow Ceramic Bloon",
+      "appearances": "Round 90\nRound 83 (ABR)"
+    },
+    {
+      "image": "ceramicfortified.png",
+      "name": "Fortified Ceramic Bloon",
+      "appearances": "Round 46\nRound 40 (ABR)"
+    },
+    {
+      "image": "ceramicfortifiedcamo.png",
+      "name": "Fortified Camo Ceramic Bloon",
+      "appearances": "Round 128\nRound 51 (ABR)"
+    },
+    {
+      "image": "ceramicregrowfortified.png",
+      "name": "Fortified Regrow Ceramic Bloon",
+      "appearances": "Round 163\nRound 71 (ABR)"
+    },
+    {
+      "image": "ceramicfortifiedregrowcamo.png",
+      "name": "Fortified Camo Regrow Ceramic Bloon",
+      "appearances": "Round 67\nRound 67 (ABR)"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 38: 42 Pink, 17 White, 10 Zebra, 14 Lead, 2 Ceramic",
+      "Round 43: 10 Rainbow, 7 Ceramic",
+      "Round 46: 6 Fortified Ceramic",
+      "Round 47: 70 Pink Camo, 12 Ceramic",
+      "Round 48: 40 Pink Regrowth, 30 Purple Camo Regrowth, 40 Rainbow, 3 Fortified Ceramic",
+      "Round 49: 343 Green, 20 Zebra, 20 Rainbow, 10 Rainbow Regrowth, 18 Ceramic",
+      "Round 50: 20 Red, 8 Fortified Lead, 20 Ceramic, 2 M.O.A.B.",
+      "Round 51: 10 Rainbow Regrowth, 15 Ceramic Camo",
+      "Round 52: 25 Rainbow, 10 Ceramic, 2 M.O.A.B.",
+      "Round 54: 35 Ceramic, 2 M.O.A.B.",
+      "Round 55: 45 Ceramic, 1 M.O.A.B.",
+      "Round 58: 15 Ceramic, 10 Fortified Ceramic, 5 M.O.A.B.",
+      "Round 59: 50 Lead Camo, 20 Ceramic, 10 Ceramic Regrowth",
+      "Round 63: 75 Lead, 122 Ceramic",
+      "Round 65: 100 Zebra, 70 Rainbow, 50 Ceramic, 3 M.O.A.B., 2 B.F.B.",
+      "Round 67: 13 Fortified Ceramic Camo Regrowth, 8 M.O.A.B.",
+      "Round 69: 40 Black Regrowth, 40 Fortified Lead, 50 Ceramic",
+      "Round 71: 30 Ceramic, 10 M.O.A.B.",
+      "Round 72: 38 Regrowth Ceramic, 2 B.F.B.",
+      "Round 74: 50 Ceramic, 60 Fortified Ceramic, 25 Fortified Ceramic Camo Regrowth, 1 B.F.B.",
+      "Round 76: 60 Ceramic Regrowth",
+      "Round 78: 80 Purple, 150 Rainbow, 75 Ceramic, 72 Ceramic Camo, 1 B.F.B.",
+      "Round 83: 40 Ceramic, 40 Ceramic Regrowth, 40 Fortified Ceramic, 30 M.O.A.B.",
+      "Round 91: 100 Fortified Ceramic, 20 B.F.B.",
+      "Round 101: 450 Purple (1 group of 250 and 1 group of 200), 50 Fortified Ceramic, 10 Fortified M.O.A.B.",
+      "Round 104: 200 Purple (2 groups of 100), 200 Fortified Lead (2 groups of 100), 200 Ceramic (2 groups of 100), 25 M.O.A.B., 150 Fortified M.O.A.B., 25 B.F.B., 14 Fortified B.F.B.",
+      "Round 105: 25 Fortified Lead, 100 Ceramic, 300 Fortified Ceramic, 30 B.F.B.",
+      "Round 107: 444 Purple Camo, 100 Fortified Ceramic, 10 Fortified Z.O.M.G.",
+      "Round 113: 42 Ceramic Camo, 42 Fortified Ceramic, 75 Fortified M.O.A.B., 15 Fortified B.F.B.",
+      "Round 128: 39 Fortified D.D.T., 200 Fortified Ceramic Camo (2 groups of 100), 30 B.F.B.",
+      "Round 129: 7 Fortified Z.O.M.G., 77 Fortified Lead Camo, 77 Purple Camo, 77 Ceramic Camo, 7 Z.O.M.G., 18 D.D.T.",
+      "Round 163: randomized Lead and Ceramic",
+      "Round 10,001: 9,999 Fortified Ceramic"
+    ],
+    "abr": [
+      "Round 32: 10 Purple, 5 Rainbow, 3 Ceramic",
+      "Round 35: 25 White Regrowth, 3 Ceramic, 25 Purple, 30 Black Camo",
+      "Round 36: 80 Yellow Camo Regrowth, 10 Black, 2 Ceramic",
+      "Round 38: 42 Purple, 17 Black, 14 Lead, 7 Rainbow, 1 Ceramic Regrowth",
+      "Round 45: 120 Pink, 10 Purple Camo, 4 Fortified Lead, 10 Ceramic",
+      "Round 46: 8 Fortified Ceramic",
+      "Round 48: 30 Purple Camo Regrowth, 80 Black Regrowth, 15 Fortified Lead Regrowth, 3 Fortified Ceramic",
+      "Round 49: 300 Yellow Regrowth, 10 Zebra Camo, 10 Rainbow Camo, 10 Rainbow Regrowth, 14 Ceramic Regrowth",
+      "Round 51: 10 Zebra, 28 Fortified Ceramic Camo",
+      "Round 52: 35 Rainbow, 5 Ceramic Regrowth, 5 Fortified Ceramic, 1 M.O.A.B, 1 Fortified M.O.A.B.",
+      "Round 55: 20 Ceramic, 25 Ceramic Camo, 1 Fortified M.O.A.B.",
+      "Round 57: 25 Ceramic, 2 Fortified M.O.A.B, 1 B.F.B.",
+      "Round 58: 15 Ceramic, 10 Fortified Ceramic, 10 M.O.A.B.",
+      "Round 59: 50 Lead Camo Regrowth, 20 Fortified Ceramic Camo, 25 Rainbow",
+      "Round 63: 40 Ceramic, 30 Fortified Ceramic, 40 Ceramic Camo, 5 M.O.A.B.",
+      "Round 65: 70 Rainbow, 50 Fortified Ceramic, 3 Fortified M.O.A.B, 3 B.F.B.",
+      "Round 67: 20 Fortified Ceramic Camo Regrowth, 6 M.O.A.B, 4 Fortified M.O.A.B.",
+      "Round 69: 40 Black Camo Regrowth, 40 Purple Camo Regrowth, 50 Camo Ceramic",
+      "Round 71: 30 Fortified Ceramic Regrowth, 10 Fortified M.O.A.B.",
+      "Round 72: 38 Fortified Ceramic, 1 B.F.B, 1 Fortified B.F.B.",
+      "Round 74: 100 Black Camo Regrowth, 25 Fortified Ceramic Camo Regrowth, 1 Fortified B.F.B.",
+      "Round 78: 80 Purple, 150 Zebra, 60 Fortified Ceramic, 72 Ceramic Camo, 1 Fortified B.F.B.",
+      "Round 83: 40 Ceramic Camo, 40 Ceramic Regrowth Camo, 40 Fortified Ceramic Camo, 20 Fortified M.O.A.B.",
+      "Round 90: 50 Fortified Ceramic Camo Regrowth, 4 D.D.T.",
+      "Round 91: 100 Fortified Ceramic, 15 Fortified B.F.B.",
+      "Round 101+: randomized"
+    ]
+  }
+}

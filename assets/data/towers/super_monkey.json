@@ -1,0 +1,215 @@
+{
+  "id": "super_monkey",
+  "name": "Super Monkey",
+  "image": "000_supermonkey.png",
+  "type": "Magic",
+  "unlock": "Level 15-17 and Level 19-20",
+  "inGameDesc": "Throws hundreds of darts at hypersonic speed with a huge attack range.",
+  "cost": {
+    "easy": "2,125",
+    "medium": "2,500",
+    "hard": "2,700",
+    "impoppable": "3,000"
+  },
+  "target": "First, Last, Close, Strong,\nCamo Priority with Ultravision",
+  "stats": {
+    "damage": "1",
+    "pierce": "1",
+    "attackSpeed": "0.045s",
+    "range": "50",
+    "statuseffects": "Requires upgrades",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "N/A",
+    "camo": "Yes (x-x-2)",
+    "footprint": "Very Large (11)",
+    "damageType": " Sharp"
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "laserblastsupgradeicon.png",
+        "name": "Laser Blasts",
+        "cost": {
+          "easy": "2,125",
+          "medium": "2,500",
+          "hard": "2,700",
+          "impoppable": "3,000"
+        },
+        "unlock": "500 XP",
+        "upgradeBody": "Description: Shoots powerful blasts of laser instead of darts.\nEffect: Gains +1 pierce and pops Frozen Bloons. Can no longer pop Purples, and cannot pop Leads."
+      },
+      {
+        "image": "plasmablastupgradeicon.png",
+        "name": "Plasma Blasts",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "2,000 XP",
+        "upgradeBody": "Description: Super fast plasma vaporizes almost everything it touches.\nEffect: Attacks 1.5x faster and pops Lead Bloons. Cannot pop Purples."
+      },
+      {
+        "image": "sunavatarupgradeicon.png",
+        "name": "Sun Avatar",
+        "cost": {
+          "easy": "17,000",
+          "medium": "20,000",
+          "hard": "21,600",
+          "impoppable": "24,000"
+        },
+        "unlock": "7,000 XP",
+        "upgradeBody": "Description: Channels power from the core of the Sun.\nEffect: Shoots three waves of sunbeams per shot. Each sunbeam pops up to 6 bloons. Can't pop Purple Bloons, unless the player has the Strike Down The False MK enabled."
+      },
+      {
+        "image": "suntempleupgradeicon.png",
+        "name": "Sun Temple",
+        "cost": {
+          "easy": "85,000",
+          "medium": "100,000",
+          "hard": "108,000",
+          "impoppable": "120,000"
+        },
+        "unlock": "50,000 XP",
+        "upgradeBody": "Description: Tower sacrifices enhance and modify the Temple's attacks.\nEffect: Sacrifices all towers within range and absorbs their power into its own special attacks based on both tower categorization and sacrifice values."
+      },
+      {
+        "image": "truesungodupgradeicon.png",
+        "name": "True Sun God",
+        "cost": {
+          "easy": "425,000",
+          "medium": "500,000",
+          "hard": "540,000",
+          "impoppable": "600,000"
+        },
+        "unlock": "150,000 XP",
+        "upgradeBody": "Description: Tremble before the AWESOME power of the TRUE Sun God!!\nEffect: Sacrifices all towers within range once again, again absorbing their power into its own special attacks based on both tower categorization and sacrifice values.\nKeep in mind that the True Sun God also has a secret variety; The Vengeful True Sun God - a much more powerful variant. Visit its page for more information, but beware of spoilers."
+      }
+    ],
+    "path2": [
+      {
+        "image": "superrangeupgradeicon.png",
+        "name": "Super Range",
+        "cost": {
+          "easy": "850",
+          "medium": "1,000",
+          "hard": "1,080",
+          "impoppable": "1,200"
+        },
+        "unlock": "300 XP",
+        "upgradeBody": "Description: Super Monkeys need Super Range.\nEffect: Gains +10 range and +1 pierce."
+      },
+      {
+        "image": "epicrangeupgradeicon.png",
+        "name": "Epic Range",
+        "cost": {
+          "easy": "1,190",
+          "medium": "1,400",
+          "hard": "1,510",
+          "impoppable": "1,680"
+        },
+        "unlock": "1,300 XP",
+        "upgradeBody": "Description: Why settle for super when you can have EPIC?\nEffect: Gains a further +12 range and extra +2 pierce."
+      },
+      {
+        "image": "robomonkeyupgradeicon.png",
+        "name": "Robo Monkey",
+        "cost": {
+          "easy": "5,950",
+          "medium": "7,000",
+          "hard": "7,560",
+          "impoppable": "8,400"
+        },
+        "unlock": "6,000 XP",
+        "upgradeBody": "Description: Half Super Monkey, half killer robot of death. Shoots from 2 guns at once and can crit!\nEffect: Gains +3 pierce and shoots from both arms at once. Arms have independent targeting and cannot both have the same target priorities. Does Crits every 15-20th shot that deals 10 damage."
+      },
+      {
+        "image": "techterrorupgradeicon.png",
+        "name": "Tech Terror",
+        "cost": {
+          "easy": "16,150",
+          "medium": "19,000",
+          "hard": "20,520",
+          "impoppable": "22,800"
+        },
+        "unlock": "35,000 XP",
+        "upgradeBody": "Description: Annihilation ability: Destroys most Bloons completely and utterly within blast radius.\nEffect: Base attack becomes dual plasma cannons that each shoot green plasma, for +2 pierce and +25% attack speed (x0.8 attack cooldown) per plasma ball. Ability instantly deals 2600 damage to up to 2000 bloons within the blast range, and every third use inflicts crits for 3900 damage."
+      },
+      {
+        "image": "theantibloonupgradeicon.png",
+        "name": "The Anti-Bloon",
+        "cost": {
+          "easy": "76,500",
+          "medium": "90,000",
+          "hard": "97,200",
+          "impoppable": "108,000"
+        },
+        "unlock": "85,000 XP",
+        "upgradeBody": "Description: <Program Directive> <Eradicate Bloons> <INITIATE>\nEffect: Ability instantly deals 10,400 damage (15,600 with critical ability) to up to 2,000 bloons within a bigger blast range. Main attack becomes much stronger, gaining +4 damage, +5 pierce, pops any bloon type, and the Super Monkey gains +10 range. Does Crits every 13-17th shot that deals 50 damage."
+      }
+    ],
+    "path3": [
+      {
+        "image": "knockbackupgradeicon.png",
+        "name": "Knockback",
+        "cost": {
+          "easy": "2,550",
+          "medium": "3,000",
+          "hard": "3,240",
+          "impoppable": "3,600"
+        },
+        "unlock": "550 XP",
+        "upgradeBody": "Description: Bloons get pushed backwards or slowed after each hit.\nEffect: Bloons affected are pushed backwards by 30% speed, Leads and Ceramics slowed by 60%, and MOAB-class slowed by 30%."
+      },
+      {
+        "image": "ultravisionupgradeicon.png",
+        "name": "Ultravision",
+        "cost": {
+          "easy": "1,020",
+          "medium": "1,200",
+          "hard": "1,295",
+          "impoppable": "1,440"
+        },
+        "unlock": "2,000 XP",
+        "upgradeBody": "Description: Enables Super Monkey to shoot slightly further and to see Camo Bloons.\nEffect: +3 range, gains camo detection and deal +1 damage to Camo Bloons. With the X-Ray Ultra MK, allows the Super Monkey to see and shoot through any blocking objects."
+      },
+      {
+        "image": "darkknightupgradeicon.png",
+        "name": "Dark Knight",
+        "cost": {
+          "easy": "4,760",
+          "medium": "5,600",
+          "hard": "6,050",
+          "impoppable": "6,720"
+        },
+        "unlock": "6,500 XP",
+        "upgradeBody": "Description: Dark blades increase knockback and pierce and deal extra damage to MOAB-class Bloons. Gains Darkshift ability to shift to a nearby location.\nEffect: Gains +2 MOAB-class damage, Leads and Ceramics slowed by 90%, and gains +3 pierce. Can teleport onto any valid land location within range with a new ability."
+      },
+      {
+        "image": "darkchampionupgradeicon.png",
+        "name": "Dark Champion",
+        "cost": {
+          "easy": "47,220",
+          "medium": "55,555",
+          "hard": "60,000",
+          "impoppable": "66,665"
+        },
+        "unlock": "47,500 XP",
+        "upgradeBody": "Description: Champion dark blades excel at puncturing and ruining all Bloon types. Darkshift ability extends mapwide.\nEffect: Gains +1 damage to all bloons, another +1 damage to Camos, another +1 damage to MOAB-class, +2 damage to ceramics, can completely lock Leads and Ceramics, doubles attack speed, gains another +4 pierce, and pops any bloon type. Projectiles now ricochet from Bloon to Bloon with a 0.1s delay. Ability now allows it to teleport to any valid land location on screen."
+      },
+      {
+        "image": "legendofthenightupgradeicon.png",
+        "name": "Legend of the Night",
+        "cost": {
+          "easy": "170,000",
+          "medium": "200,000",
+          "hard": "216,000",
+          "impoppable": "240,000"
+        },
+        "unlock": "100,000 XP",
+        "upgradeBody": "Description: We turn to him, when all hope is lost...\nEffect: If bloons reach the exit, a black hole is summoned on all exits, deleting any bloons passing through them. Black holes last for up to 7.5s with a 3 minute cooldown. Main attack gains +8 damage and +15 pierce and additional +16 damage against MOABs."
+      }
+    ]
+  }
+}

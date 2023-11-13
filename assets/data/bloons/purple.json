@@ -1,0 +1,81 @@
+{
+  "id": "purple",
+  "name": "Purple",
+  "fullName": "Purple Bloon",
+  "image": "btd6purple.png",
+  "rbe": [
+    "11"
+  ],
+  "children": [
+    {
+      "id": "pink",
+      "name": "Pink Bloon",
+      "image": "btd6pink.png",
+      "value": "2"
+    }
+  ],
+  "parents": [
+    "None"
+  ],
+  "speed": {
+    "absolute": "75",
+    "relative": "3"
+  },
+  "variants": [
+    {
+      "image": "btd6purple.png",
+      "name": "Purple Bloon",
+      "appearances": "Round 25\nRound 15 (ABR)"
+    },
+    {
+      "image": "camo_purple.png",
+      "name": "Purple Camo Bloon",
+      "appearances": "Round 45"
+    },
+    {
+      "image": "regrow_purple.png",
+      "name": "Purple Regrow Bloon",
+      "appearances": "Round 25 (ABR only)"
+    },
+    {
+      "image": "camo_regrow_purple.png",
+      "name": "Purple Camo Regrow Bloon",
+      "appearances": "Round 48"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 25: 25 Yellow Regrowth, 10 Purple",
+      "Round 32: 15 Black, 20 White, 10 Purple",
+      "Round 45: 180 Pink, 10 Purple Camo, 4 Fortified Lead, 25 Rainbow",
+      "Round 48: 40 Pink Regrowth, 30 Purple Camo Regrowth, 40 Rainbow, 3 Fortified Ceramic",
+      "Round 62: 250 Purple, 15 Rainbow Camo Regrowth, 5 M.O.A.B., 2 Fortified M.O.A.B.",
+      "Round 78: 80 Purple, 150 Rainbow, 75 Ceramic, 72 Ceramic Camo, 1 B.F.B.",
+      "Round 95: 500 Purple Camo Regrowth, 250 Fortified Lead Camo Regrowth, 50 Fortified M.O.A.B., 30 D.D.T.",
+      "Round 101: 450 Purple (1 group of 250 and 1 group of 200), 50 Fortified Ceramic, 10 Fortified M.O.A.B.",
+      "Round 103: 198 Purple (3 groups of 66), 100 M.O.A.B., 50 Fortified M.O.A.B., 10 Fortified Z.O.M.G.",
+      "Round 104: 200 Purple (2 groups of 100), 200 Fortified Lead (2 groups of 100), 200 Ceramic (2 groups of 100), 25 M.O.A.B., 150 Fortified M.O.A.B., 25 B.F.B., 14 Fortified B.F.B.",
+      "Round 107: 444 Purple Camo, 100 Fortified Ceramic, 10 Fortified Z.O.M.G.",
+      "Round 109: 15 Purple, 30 Fortified M.O.A.B. (15 groups of 2, stacked), 15 B.F.B., 15 Fortified B.F.B. (each stacked with a regular B.F.B.), 15 Z.O.M.G.",
+      "Round 116: 400 Purple, 18 Fortified B.F.B., 8 Fortified Z.O.M.G.",
+      "Round 129: 7 Fortified Z.O.M.G., 77 Fortified Lead Camo, 77 Purple Camo, 77 Ceramic Camo, 7 Z.O.M.G., 18 D.D.T.",
+      "Round 132: 18 Z.O.M.G., 6 Fortified Z.O.M.G., 200 Purple Camo"
+    ],
+    "abr": [
+      "Round 15: 20 Blue, 15 Green, 12 Yellow, 10 Pink, 3 Purple",
+      "Round 22: 16 Purple",
+      "Round 25: 22 Pink Regrowth, 10 Purple Regrowth",
+      "Round 32: 10 Purple, 5 Rainbow, 3 Ceramic",
+      "Round 35: 25 White Regrowth, 3 Ceramic, 25 Purple, 30 Black Camo",
+      "Round 38: 42 Purple, 17 Black, 14 Lead, 7 Rainbow, 1 Ceramic Regrowth",
+      "Round 45: 120 Pink, 10 Purple Camo, 4 Fortified Lead, 10 Ceramic",
+      "Round 48: 30 Purple Camo Regrowth, 80 Black Regrowth, 15 Fortified Lead Regrowth, 3 Fortified Ceramic",
+      "Round 56: 40 Purple Camo Regrowth, 5 M.O.A.B.",
+      "Round 62: 250 Purple, 15 Fortified Lead Camo Regrowth, 5 Fortified M.O.A.B, 2 B.F.B.",
+      "Round 69: 40 Black Camo Regrowth, 40 Purple Camo Regrowth, 50 Camo Ceramic",
+      "Round 78: 80 Purple, 150 Zebra, 60 Fortified Ceramic, 72 Ceramic Camo, 1 Fortified B.F.B.",
+      "Round 95: 500 Purple Camo Regrowth, 30 Fortified M.O.A.B, 30 D.D.T.",
+      "Round 101+: randomized"
+    ]
+  }
+}

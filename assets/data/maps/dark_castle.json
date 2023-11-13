@@ -1,0 +1,16 @@
+{
+  "id": "dark_castle",
+  "name": "Dark Castle",
+  "image": "darkcastle_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Expert",
+  "entrances": "4",
+  "exits": "1",
+  "length": "Top\n11.56 RBS\n317.8 Range Units\nSecond from Top\n10.39 RBS\n285.7 Range Units\nSecond from Bottom\n10.37 RBS\n285.2 Range Units\nBottom\n11.52 RBS\n316.7 Range Units",
+  "music": "Tribes and Tribulations (version 6.0 and up)\nSunset Samba (version 5.0)",
+  "terrain": "Grass",
+  "water": "Yes",
+  "removableObject": "Yes",
+  "highground": "Yes",
+  "sightBlocker": "Yes"
+}

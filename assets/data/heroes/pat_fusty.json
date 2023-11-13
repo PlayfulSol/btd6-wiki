@@ -1,0 +1,236 @@
+{
+  "id": "pat_fusty",
+  "name": "Pat Fusty",
+  "image": "patfustyportrait.png",
+  "skinChange": {
+    "level_1": "patfustyportrait.png",
+    "level_3": "patfustyportraitlvl3.png",
+    "level_5": "patfustyportraitlvl5.png",
+    "level_10": "patfustyportraitlvl10.png",
+    "level_20": "patfustyportraitlvl20.png"
+  },
+  "unlock": "Level 10 and 3,000",
+  "cost": {
+    "easy": "680",
+    "medium": "800",
+    "hard": "865",
+    "impoppable": "960"
+  },
+  "discountCost": {
+    "easy": "610",
+    "medium": "720",
+    "hard": "780",
+    "impoppable": "865"
+  },
+  "abilities": "Rallying Roar (Level 3)\nBig Squeeze (Level 10)",
+  "target": "First, Last, Close, Strong,\nBig Squeeze locked to Strong.",
+  "inGameDesc": "Pat is a huge monkey of enormous strength. His unique size and power is a great asset in the war on Bloons.",
+  "stats": {
+    "damage": [
+      {
+        "name": "Slam Hit",
+        "value": [
+          "3 (non-Ceramics)",
+          "5 (Ceramics)"
+        ]
+      },
+      {
+        "name": "Slam Splash",
+        "value": [
+          "2 (non-Ceramics)",
+          "4 (Ceramics)"
+        ]
+      }
+    ],
+    "pierce": [
+      [
+        "Slam Hit: 1"
+      ],
+      [
+        "Slam Splash: 10"
+      ]
+    ],
+    "attackSpeed": [
+      "Moderately Slow (every 1.1s, Level 1)"
+    ],
+    "range": [
+      {
+        "name": "Main Attack",
+        "value": [
+          "Level 1-8: 24",
+          "Level 9+: 27"
+        ]
+      },
+      {
+        "name": "Rallying Roar",
+        "value": [
+          "Level 3-13: 30",
+          "Level 14+: 40"
+        ]
+      }
+    ],
+    "statusEffects": [
+      {
+        "name": "Pat Slap",
+        "value": [
+          "Level 5+: Affected Bloons move toward the entrance at 3x speed for 1s. Does not affect BFBs and above."
+        ]
+      },
+      {
+        "name": "Bloon Stun",
+        "value": [
+          "Level 6+: Affected Bloons are stunned for 0.3s."
+        ]
+      },
+      {
+        "name": "Blimp Stun",
+        "value": [
+          "Level 13+: Affected MOAB-Class Bloons are stunned for 0.2s."
+        ]
+      }
+    ],
+    "towerBoosts": [
+      {
+        "name": "Rallying Roar",
+        "value": [
+          "Level 3-13: Affected towers get +1 damage",
+          "Level 14+: Affected towers get +3 damage"
+        ]
+      }
+    ],
+    "incomeBoosts": "N/A",
+    "camo": [
+      "No"
+    ],
+    "levelSpeed": [
+      "Moderate (1.425x)"
+    ]
+  },
+  "levels": [
+    {
+      "image": "herolevel1.png",
+      "name": "1",
+      "cost": {
+        "easy": "680",
+        "medium": "800",
+        "hard": "865",
+        "impoppable": "960"
+      },
+      "levelBody": "Description: Pat slams Bloons into the ground.\nEffect: Slams one bloon within 24 radius every 1.1s and creates a splash. The initial hit does 3 damage (5 for Ceramics), while the splash has 10 pierce, 2 damage (4 for Ceramics) and 8 blast radius. Can damage all bloon types except Camo."
+    },
+    {
+      "image": "herolevel2.png",
+      "name": "2",
+      "cost": "257",
+      "levelBody": "Description: Increase radius of slam attack.\nEffect: Splash radius increased from 8 to 13."
+    },
+    {
+      "image": "herolevel3.png",
+      "name": "3",
+      "cost": "656",
+      "levelBody": "Description: Rallying Roar: All nearby Monkeys can pop +1 layer for a short time.\nEffect: Unlocks Rallying Roar ability. When activated, all towers within 30 radius including himself gain +1 damage. Has 8s duration and 45s cooldown."
+    },
+    {
+      "image": "herolevel4.png",
+      "name": "4",
+      "cost": "1,425",
+      "levelBody": "Description: Increased attack speed.\nEffect: Attacks every 0.9s (+22.2% attack speed)."
+    },
+    {
+      "image": "herolevel5.png",
+      "name": "5",
+      "cost": "2,651",
+      "levelBody": "Description: Sometimes does a powerful slap that pushes Bloons away from the exit.\nEffect: Slam is replaced with slap every 5th attack. Slap has 8 pierce and also creates splash (same as slam splash). Bloons and M.O.A.B.s hit by slap move backwards at triple speed for 1s."
+    },
+    {
+      "image": "herolevel6.png",
+      "name": "6",
+      "cost": "4,674",
+      "levelBody": "Description: Bloons struck by Pat are stunned for a short time.\nEffect: Every attack can stun normal bloons for 0.2s. Note that this results in less knockback for the slap attack as bloons spend some of the knockback time being stunned. Splash radius is also increased from 13 to 20."
+    },
+    {
+      "image": "herolevel7.png",
+      "name": "7",
+      "cost": "7,382",
+      "levelBody": "Description: Increased popping power and damage.\nEffect: Slam damage increased to 4 (6 for Ceramics). Splash damage increased to 3 (5 for Ceramics) and pierce increased to 20."
+    },
+    {
+      "image": "herolevel8.png",
+      "name": "8",
+      "cost": "11,856",
+      "levelBody": "Description: Increased attack speed.\nEffect: Attacks every 0.75s (+20% attack speed)."
+    },
+    {
+      "image": "herolevel9.png",
+      "name": "9",
+      "cost": "13,367",
+      "levelBody": "Description: Increased attack range.\nEffect: Attack range increased from 24 to 27."
+    },
+    {
+      "image": "herolevel10.png",
+      "name": "10",
+      "cost": "19,409",
+      "levelBody": "Description: Big Squeeze: Grabs a MOAB, BFB, DDT (if visible), or ZOMG and crushes it to bits over 5 seconds.\nEffect: Unlocks Big Squeeze ability. When activated, squeezes one strongest non-BAD/Boss blimp (including the Rock Bloon, excluding Lych-Soul) within 35 radius for 4 seconds, and completely destroys the upper layer. The children bloons become stunned for 2 seconds. But cannot attack for 5 seconds. Cooldown is 20 seconds."
+    },
+    {
+      "image": "herolevel11.png",
+      "name": "11",
+      "cost": "23,242",
+      "levelBody": "Description: Attack pops more layers.\nEffect: Slam damage increased to 5 (7 for Ceramics) and splash increased to 4 (6 for Ceramics)."
+    },
+    {
+      "image": "herolevel12.png",
+      "name": "12",
+      "cost": "20,520",
+      "levelBody": "Description: Increased attack speed.\nEffect: Attacks every 0.65s (+15.4% attack speed)."
+    },
+    {
+      "image": "herolevel13.png",
+      "name": "13",
+      "cost": "23,726",
+      "levelBody": "Description: Attack stuns Bloons for longer and can stun MOAB-Class Bloons very briefly.\nEffect: Stun duration increased to 0.5s and also applies to blimps for 0.2s."
+    },
+    {
+      "image": "herolevel14.png",
+      "name": "14",
+      "cost": "21,290",
+      "levelBody": "Description: Rallying Roar increased radius and duration and increased damage of rallied monkeys.\nEffect: Rallying Roar ability now gives +3 damage within 40 radius and has 10s duration."
+    },
+    {
+      "image": "herolevel15.png",
+      "name": "15",
+      "cost": "23,342",
+      "levelBody": "Description: Slap attack can affect more Bloons.\nEffect: Slap pierce increased from 8 to 16."
+    },
+    {
+      "image": "herolevel16.png",
+      "name": "16",
+      "cost": "25,394",
+      "levelBody": "Description: Increased attack range and bonus damage to ceramics.\nEffect: Attack range increased from 27 to 29. Slam deals +5 damage to Ceramics and splash deals +6 to Ceramics (both are 12 in total)."
+    },
+    {
+      "image": "herolevel17.png",
+      "name": "17",
+      "cost": "27,446",
+      "levelBody": "Description: Increased attack speed.\nEffect: Attacks every 0.55s (+18.2% attack speed)."
+    },
+    {
+      "image": "herolevel18.png",
+      "name": "18",
+      "cost": "29,498",
+      "levelBody": "Description: Increased popping power.\nEffect: Increases splash pierce from 20 to 30."
+    },
+    {
+      "image": "herolevel19.png",
+      "name": "19",
+      "cost": "23,470",
+      "levelBody": "Description: Attack pops more layers.\nEffect: Slam damage increased to 10 and splash increased to 9 (both are 17 for Ceramics)."
+    },
+    {
+      "image": "herolevel20.png",
+      "name": "20",
+      "cost": "24,624",
+      "levelBody": "Description: Big Squeeze can grab several big Bloons at once.\nEffect: Big Squeeze now affects 4 blimps at once."
+    }
+  ]
+}

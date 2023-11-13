@@ -1,0 +1,16 @@
+{
+  "id": "geared",
+  "name": "Geared",
+  "image": "geared_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Advanced",
+  "entrances": "1",
+  "exits": "1",
+  "length": "15.79 RBS\n434.2 Range Units",
+  "music": "Sunset Samba",
+  "terrain": "Gears",
+  "water": "No",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "No"
+}

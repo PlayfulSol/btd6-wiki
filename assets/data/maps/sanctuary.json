@@ -1,0 +1,16 @@
+{
+  "id": "sanctuary",
+  "name": "Sanctuary",
+  "image": "sanctuary_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Expert",
+  "entrances": "2",
+  "exits": "4",
+  "length": "Tracks Denoted by Exit\nMiddle Right Exit:\n12.44 RBS\n342.0 Range Units\nFar Right Exit:\n14.53 RBS\n399.4 Range Units\nFar Left Exit:\n14.54 RBS\n399.7 Range Units\nMiddle Left Exit\n12.42 RBS\n341.6 Range Units",
+  "music": "Tribes and Tribulations",
+  "terrain": "Temple",
+  "water": "Yes",
+  "removableObject": "No",
+  "highground": "No",
+  "sightBlocker": "No"
+}

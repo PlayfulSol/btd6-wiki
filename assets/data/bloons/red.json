@@ -1,0 +1,74 @@
+{
+  "id": "red",
+  "name": "Red",
+  "fullName": "Red Bloon",
+  "image": "btd6red.png",
+  "rbe": [
+    "1"
+  ],
+  "children": [
+    "None"
+  ],
+  "parents": [
+    {
+      "id": "blue",
+      "name": "Blue Bloon",
+      "image": "btd6blue.png",
+      "value": "1"
+    }
+  ],
+  "speed": {
+    "absolute": "25",
+    "relative": "1"
+  },
+  "variants": [
+    {
+      "image": "btd6red.png",
+      "name": "Red Bloon",
+      "appearances": "Round 1\nRound 2 (ABR)"
+    },
+    {
+      "image": "btd6camored.png",
+      "name": "Red Camo Bloon",
+      "appearances": "Round 24\nRound 33\nRound 5 (ABR)\nRound 20 (Apopalypse)"
+    },
+    {
+      "image": "btd6regrowred.png",
+      "name": "Red Regrow Bloon",
+      "appearances": "Round 17"
+    },
+    {
+      "image": "btd6camoregrowred.png",
+      "name": "Red Camo Regrow Bloon",
+      "appearances": "Round 36\nRound 5 (ABR)"
+    }
+  ],
+  "rounds": {
+    "normal": [
+      "Round 1: 20 Reds",
+      "Round 2: 35 Reds",
+      "Round 3: 25 Reds, 5 Blues",
+      "Round 4: 35 Reds, 18 Blues",
+      "Round 5: 5 Reds, 27 Blues",
+      "Round 6: 15 Reds, 15 Blues, 4 Greens",
+      "Round 7: 20 Reds, 20 Blues, 5 Greens",
+      "Round 8: 10 Reds, 20 Blues, 14 Greens",
+      "Round 11: 10 Reds, 10 Blues, 12 Greens, 3 Yellows",
+      "Round 14: 49 Reds, 15 Blues, 10 Greens, 9 Yellows",
+      "Round 15: 20 Reds, 15 Blues, 12 Greens, 10 Yellows, 5 Pinks",
+      "Round 27: 100 Reds, 60 Blues, 45 Greens, 45 Yellows",
+      "Round 33: 20 Red Camo, 13 Yellow Camo",
+      "Round 50: 20 Reds, 8 Fortified Lead, 20 Ceramics, 2 M.O.A.B"
+    ],
+    "abr": [
+      "Round 2: 55 Reds",
+      "Round 3: 15 Reds, 6 Blue, 5 Blue Regrowth",
+      "Round 4: 10 Reds, 32 Blue",
+      "Round 5: 12 Red Camo, 1 Red Camo Regrowth, 15 Blue Regrowth, 3 Green",
+      "Round 14: 50 Red, 10 Blue Regrowth, 5 Green Camo Regrowth, 4 Yellow Regrowth, 3 Black, 1 White",
+      "Round 21: 50 Red, 4 Blue",
+      "Round 27: 100 Red Camo, 60 Blue Camo, 45 Green Camo, 45 Yellow Camo",
+      "Round 33: 20 Red Camo, 13 Blue Camo"
+    ]
+  }
+}

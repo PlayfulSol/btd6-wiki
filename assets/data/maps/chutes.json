@@ -1,0 +1,16 @@
+{
+  "id": "chutes",
+  "name": "Chutes",
+  "image": "chutes_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Intermediate",
+  "entrances": "2",
+  "exits": "2",
+  "length": "Left Entrance:\n18.26 RBS\n502.0 Range Units\nRight Entrance:\n17.21 RBS\n473.1 Range Units",
+  "music": "Tropical Carnival",
+  "terrain": "Concrete or Brick",
+  "water": "Yes",
+  "removableObject": "Yes",
+  "highground": "No",
+  "sightBlocker": "Yes"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "covered_garden",
+  "name": "Covered Garden",
+  "image": "coveredgarden_no_ui.png",
+  "appearances": "Bloons TD 6",
+  "difficulty": "Intermediate",
+  "entrances": "1",
+  "exits": "1",
+  "length": "~19.7 RBS",
+  "music": "Sunshine Serenade",
+  "terrain": "Garden",
+  "water": "Yes",
+  "removableObject": "No",
+  "highground": "Partial (bench)",
+  "sightBlocker": "Yes"
+}

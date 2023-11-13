@@ -1,0 +1,215 @@
+{
+  "id": "ice_monkey",
+  "name": "Ice Monkey",
+  "image": "ice_monkey.png",
+  "type": "Primary",
+  "unlock": "Level 2-6",
+  "inGameDesc": "Pops and freezes nearby Bloons for a short time. Frozen Bloons are immune to sharp damage. Can't freeze White, Zebra, or Lead Bloons.",
+  "cost": {
+    "easy": "425",
+    "medium": "500",
+    "hard": "540",
+    "impoppable": "600"
+  },
+  "target": "None\nFirst, Last, Close, Strong with Cryo Cannon or higher",
+  "stats": {
+    "damage": "1",
+    "pierce": "30",
+    "attackSpeed": "2.4s",
+    "range": "20",
+    "statuseffects": "Freeze (1.5s duration)",
+    "towerboosts": "Requires upgrades",
+    "incomeboosts": "N/A",
+    "camo": "Yes (2-x-x, or x-4-x ability)",
+    "footprint": "Small (6)",
+    "damageType": "Cold "
+  },
+  "paths": {
+    "path1": [
+      {
+        "image": "permafrostupgradeicon.png",
+        "name": "Permafrost",
+        "cost": {
+          "easy": "125",
+          "medium": "150",
+          "hard": "160",
+          "impoppable": "180"
+        },
+        "unlock": "160 XP",
+        "upgradeBody": "Description: Bloons move slowly even after thawing out.\nEffect: Slows bloons by 50% after thawing out. Lasts as many layers as the freeze does. At Tier 5, the Permafrost effect can affect blimps but by 25% instead."
+      },
+      {
+        "image": "metalfreezeupgradeicon.png",
+        "name": "Cold Snap",
+        "cost": {
+          "easy": "295",
+          "medium": "350",
+          "hard": "380",
+          "impoppable": "420"
+        },
+        "unlock": "500 XP",
+        "upgradeBody": "Description: Can freeze and pop Lead Bloons and Camo Bloons.\nEffect: Detects camo and can freeze and pop Lead Bloons."
+      },
+      {
+        "image": "iceshardsupgradeicon.png",
+        "name": "Ice Shards",
+        "cost": {
+          "easy": "1,275",
+          "medium": "1,500",
+          "hard": "1,620",
+          "impoppable": "1,800"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Razor sharp shards fly out when Frozen Bloons pop.\nEffect: Bloons frozen by this Ice Monkey will each release three equally-spaced shards if popped while frozen."
+      },
+      {
+        "image": "embrittlementupgradeicon.png",
+        "name": "Embrittlement",
+        "cost": {
+          "easy": "1,870",
+          "medium": "2,200",
+          "hard": "2,375",
+          "impoppable": "2,640"
+        },
+        "unlock": "8,250 XP",
+        "upgradeBody": "Description: Can hit MOAB-class Bloons. All hit Bloons become brittle, take extra damage while frozen, and lose Camo properties.\nEffect: All bloons, including Lead and MOAB-class affected, will become temporarily vulnerable to damage from sharp and freezing attacks, temporarily take +1 damage, and permanently lose Camo and Regrow properties. Can target MOAB-class bloons, as well as decamo DDTs and temporarily cause DDTs to become brittle."
+      },
+      {
+        "image": "superbrittleupgradeicon.png",
+        "name": "Super Brittle",
+        "cost": {
+          "easy": "23,800",
+          "medium": "28,000",
+          "hard": "30,240",
+          "impoppable": "33,600"
+        },
+        "unlock": "25,000 XP",
+        "upgradeBody": "Description: Bloons take huge damage while frozen including MOAB-class Bloons.\nEffect: Bloons, including MOAB-class, take +4 damage if frozen, on top of previous upgrade's benefits."
+      }
+    ],
+    "path2": [
+      {
+        "image": "enhancedfreezeupgradeicon.png",
+        "name": "Enhanced Freeze",
+        "cost": {
+          "easy": "190",
+          "medium": "225",
+          "hard": "245",
+          "impoppable": "270"
+        },
+        "unlock": "160 XP",
+        "upgradeBody": "Description: Attacks faster and freezes for longer.\nEffect: Attacks +33% faster (0.75x attack cooldown) and freezes bloons for 1.75s instead of 1.5s."
+      },
+      {
+        "image": "deepfreezeupgradeicon.png",
+        "name": "Deep Freeze",
+        "cost": {
+          "easy": "380",
+          "medium": "450",
+          "hard": "485",
+          "impoppable": "540"
+        },
+        "unlock": "500 XP",
+        "upgradeBody": "Description: Increases pierce, freezes an extra layer and freeze lasts longer.\nEffect: Freezes through 2 layers of Bloon and freezes bloons for 2.2s instead of 1.75s. Pierce increases from 40 to 45."
+      },
+      {
+        "image": "arcticwindupgradeicon.png",
+        "name": "Arctic Wind",
+        "cost": {
+          "easy": "2,380",
+          "medium": "2,800",
+          "hard": "3,025",
+          "impoppable": "3,360"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Gains a super cold aura that slows Bloons and freezes water nearby.\nEffect: Freeze-vulnerable bloons are slowed by 50% within range. Can freeze water in range to let land towers become placeable on water. Water can only be frozen on initial tower placement, and not for existing towers, whether they are moved to the Ice Monkey's radius or the terrain is altered to become water."
+      },
+      {
+        "image": "snowstormupgradeicon.png",
+        "name": "Snowstorm",
+        "cost": {
+          "easy": "3,230",
+          "medium": "3,800",
+          "hard": "4,105",
+          "impoppable": "4,560"
+        },
+        "unlock": "8,500 XP",
+        "upgradeBody": "Description: Snowstorm Ability: Freezes all regular Bloons on screen, briefly freezes White, Zebra, and Camo, and slows MOAB-class.\nEffect: Increases range from 20 to 30. Ability will freeze all bloons on screen, including White and Zebra, except Leads unless given lead-popping power. MOAB-class, White, Zebra, and Camo are frozen for only 3 seconds, while all other affected bloons are frozen for a full 6 seconds. Ability freeze soaks through 2 non-blimp layers."
+      },
+      {
+        "image": "absolutezeroupgradeicon.png",
+        "name": "Absolute Zero",
+        "cost": {
+          "easy": "16,320",
+          "medium": "19,200",
+          "hard": "20,735",
+          "impoppable": "23,040"
+        },
+        "unlock": "27,500 XP",
+        "upgradeBody": "Description: Ability is so cold it freezes all regular Bloons for longer, including White, Zebra, and Camo, slows MOAB-class longer, and greatly increases the attack speed of all Ice Monkeys for the duration.\nEffect: Pierce increased from 45 to 300 and range from 30 to 40. Freezes all bloons currently on screen for a full 10 seconds, including freeze-immune. For the same duration, all Ice Monkeys attack +50% faster. Both main attack and ability soak up to 4 non-blimp layers."
+      }
+    ],
+    "path3": [
+      {
+        "image": "largerradiusupgradeicon.png",
+        "name": "Larger Radius",
+        "cost": {
+          "easy": "150",
+          "medium": "175",
+          "hard": "190",
+          "impoppable": "210"
+        },
+        "unlock": "160 XP",
+        "upgradeBody": "Description: Larger freeze area.\nEffect: Gains +7 range."
+      },
+      {
+        "image": "re_freezeupgradeicon.png",
+        "name": "Re-Freeze",
+        "cost": {
+          "easy": "190",
+          "medium": "225",
+          "hard": "245",
+          "impoppable": "270"
+        },
+        "unlock": "500 XP",
+        "upgradeBody": "Description: Can re-freeze Bloons that are already frozen.\nEffect: Self-explanatory"
+      },
+      {
+        "image": "cryocannonupgradeicon.png",
+        "name": "Cryo Cannon",
+        "cost": {
+          "easy": "1,910",
+          "medium": "2,250",
+          "hard": "2,430",
+          "impoppable": "2,700"
+        },
+        "unlock": "2,500 XP",
+        "upgradeBody": "Description: Rapidly shoots smaller ice bombs over longer range.\nEffect: Converts slow radial ice blasts into moderately fast-shooting snowballs. Snowball blasts deal 2 damage and freeze up to 30 bloons within a tighter 20 blast radius, but freeze duration is decreased from 1.5 seconds to 1.2 seconds. Gains +19 range over other upgrades for a total of 46."
+      },
+      {
+        "image": "iciclesupgradeicon.png",
+        "name": "Icicles",
+        "cost": {
+          "easy": "2,335",
+          "medium": "2,750",
+          "hard": "2,970",
+          "impoppable": "3,300"
+        },
+        "unlock": "9,000 XP",
+        "upgradeBody": "Description: Frozen Bloons grow sharp icicles that can pop Bloons that touch them.\nEffect: Bloons affected by ice blasts will grow sharp icicles on top of them. Icicles deal 2 damage onto up to 3 bloons and act like spike piles. Icicles will thaw after 2 seconds. Can directly target MOAB-class bloons but not apply slowdown statuses. Also attacks slightly faster."
+      },
+      {
+        "image": "icicleimpaleupgradeicon.png",
+        "name": "Icicle Impale",
+        "cost": {
+          "easy": "25,500",
+          "medium": "30,000",
+          "hard": "32,400",
+          "impoppable": "36,000"
+        },
+        "unlock": "30,000 XP",
+        "upgradeBody": "Description: Shoots huge icicle spikes that do huge damage to MOAB-Class Bloons and freezes them.\nEffect: Ice blasts deal 50 damage to MOAB-class bloons and can freeze them. Attacks slightly faster."
+      }
+    ]
+  }
+}
