@@ -104,7 +104,7 @@ class _BossBloonState extends State<BossBloon> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    "Skulls:",
+                    "Skulls",
                     style: titleStyle,
                   ),
                   const SizedBox(height: 10),
@@ -117,14 +117,14 @@ class _BossBloonState extends State<BossBloon> {
                         style: normalStyle,
                       ),
                       Text(
-                        "Normal: ${widget.bloon.skullCount['elite']}",
+                        "Elite: ${widget.bloon.skullCount['elite']}",
                         style: normalStyle,
                       ),
                     ],
                   ),
                   const SizedBox(height: 20),
                   const Text(
-                    "Health:",
+                    "Health",
                     style: titleStyle,
                   ),
                   Text(
@@ -140,21 +140,45 @@ class _BossBloonState extends State<BossBloon> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    "General Immunities:",
+                    "General Immunities",
                     style: titleStyle,
                   ),
                   const SizedBox(height: 5),
                   ListView.builder(
-                      primary: false,
-                      shrinkWrap: true,
-                      itemCount: widget.bloon.immunities.length,
-                      itemBuilder: ((context, index) => Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 7),
-                            child: Text(
-                              "- ${widget.bloon.immunities[index]}",
-                              style: normalStyle,
-                            ),
-                          )))
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: widget.bloon.immunities.length,
+                    itemBuilder: ((context, index) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 7),
+                          child: Text(
+                            "- ${widget.bloon.immunities[index]}",
+                            style: normalStyle,
+                          ),
+                        )),
+                  ),
+                  const SizedBox(height: 10),
+                  Divider(
+                    thickness: 2,
+                    color: Colors.grey[600],
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Properties",
+                    style: titleStyle,
+                  ),
+                  const SizedBox(height: 5),
+                  ListView.builder(
+                    primary: false,
+                    shrinkWrap: true,
+                    itemCount: widget.bloon.gimmicks["normal"].length,
+                    itemBuilder: ((context, index) => Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 7),
+                          child: Text(
+                            "- ${widget.bloon.gimmicks["normal"][index]}",
+                            style: normalStyle,
+                          ),
+                        )),
+                  ),
                 ],
               ),
             ),
