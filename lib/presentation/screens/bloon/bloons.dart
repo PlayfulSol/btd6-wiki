@@ -118,8 +118,10 @@ class _BloonsState extends State<Bloons> {
                         mouseCursor: SystemMouseCursors.click,
                         leading: CircleAvatar(
                           backgroundColor: Colors.transparent,
-                          backgroundImage: AssetImage(
-                            bossImage(snapshot.data[index].image),
+                          child: Image(
+                            image: AssetImage(
+                              bossImage(snapshot.data[index].image),
+                            ),
                           ),
                         ),
                         title: Text(snapshot.data[index].name,

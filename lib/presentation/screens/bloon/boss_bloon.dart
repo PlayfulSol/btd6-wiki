@@ -47,6 +47,7 @@ class _BossBloonState extends State<BossBloon> {
                       CarouselSlider.builder(
                         carouselController: controller,
                         options: CarouselOptions(
+                          viewportFraction: 1,
                           initialPage: 0,
                           height: MediaQuery.of(context).size.width * 0.5,
                           enableInfiniteScroll: false,
