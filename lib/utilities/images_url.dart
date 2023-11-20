@@ -1,9 +1,5 @@
 import '/utilities/constants.dart';
 
-// String heroBaseImage(String heroId) {
-//   return '$baseImageUrl/heroes/$heroId/hero.png';
-// }
-
 String heroLevelImage(String heroId, int level) {
   return '$baseImageUrl/heroes/$heroId/$level.png';
 }
@@ -16,8 +12,8 @@ String heroSkinLevelImage(String heroId, String skinId, int level) {
   return '$baseImageUrl/heroes/$heroId/$skinId/$level.png';
 }
 
-String bossImage(String bloonId) {
-  return '$baseImageUrl/bloons/$bloonId/base.png';
+String bossImage(String image) {
+  return 'assets/images/bosses/$image';
 }
 
 String bloonImage(String image) {
