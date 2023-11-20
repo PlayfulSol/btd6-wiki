@@ -44,24 +44,28 @@ class _BossBloonState extends State<BossBloon> {
                 children: [
                   Column(
                     children: [
-                      CarouselSlider.builder(
-                        carouselController: controller,
-                        options: CarouselOptions(
-                          viewportFraction: 1,
-                          initialPage: 0,
-                          height: MediaQuery.of(context).size.width * 0.5,
-                          enableInfiniteScroll: false,
-                          onPageChanged: (index, reason) {
-                            setState(() {
-                              activeIndex = index;
-                            });
-                          },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: CarouselSlider.builder(
+                          carouselController: controller,
+                          options: CarouselOptions(
+                            viewportFraction: 0.7,
+                            initialPage: 0,
+                            height: MediaQuery.of(context).size.width * 0.5,
+                            enableInfiniteScroll: false,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                activeIndex = index;
+                              });
+                            },
+                          ),
+                          itemCount: images.length,
+                          itemBuilder: ((context, index, realIndex) => Image(
+                                image: AssetImage(bossImage(images[index])),
+                                filterQuality: FilterQuality.high,
+                                width: MediaQuery.of(context).size.width * 0.56,
+                              )),
                         ),
-                        itemCount: images.length,
-                        itemBuilder: ((context, index, realIndex) => Image(
-                              image: AssetImage(bossImage(images[index])),
-                              filterQuality: FilterQuality.high,
-                            )),
                       ),
                       const SizedBox(height: 10),
                       AnimatedSmoothIndicator(
@@ -69,7 +73,12 @@ class _BossBloonState extends State<BossBloon> {
                         count: images.length,
                         onDotClicked: (index) => controller.jumpToPage(index),
                         effect: const ScrollingDotsEffect(
-                            activeDotColor: Colors.teal),
+                          activeDotScale: 1.25,
+                          spacing: 11,
+                          dotHeight: 9,
+                          dotWidth: 9,
+                          activeDotColor: Colors.teal,
+                        ),
                       ),
                     ],
                   ),
@@ -84,7 +93,10 @@ class _BossBloonState extends State<BossBloon> {
                     color: Colors.grey[600],
                   ),
                   const SizedBox(height: 10),
-                  Text(widget.bloon.description, style: smallTitleStyle),
+                  Text(
+                    widget.bloon.description.trimLeft(),
+                    style: normalStyle,
+                  ),
                   const SizedBox(height: 10),
                   Divider(
                     thickness: 2,
@@ -95,7 +107,7 @@ class _BossBloonState extends State<BossBloon> {
                     "Skulls:",
                     style: titleStyle,
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -110,14 +122,14 @@ class _BossBloonState extends State<BossBloon> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   const Text(
                     "Health:",
                     style: titleStyle,
                   ),
-                  const Text(
+                  Text(
                     "Each additional player adds 20%",
-                    style: normalStyle,
+                    style: normalStyle.copyWith(fontSize: 13),
                   ),
                   bossHealth("Normal", widget.bloon.health.base),
                   bossHealth("Elite", widget.bloon.health.elite),
@@ -165,9 +177,9 @@ class _BossBloonState extends State<BossBloon> {
                 style: normalStyle.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
-                "1: ${tierHealth.normal}, 2: ${tierHealth.coop2}"
-                "\n3: ${tierHealth.coop3}, 4: ${tierHealth.coop4}",
-                style: normalStyle,
+                "1 Palyer: ${tierHealth.normal}, 2 Palyers: ${tierHealth.coop2}"
+                "\n3 Palyers: ${tierHealth.coop3}, 4 Palyers: ${tierHealth.coop4}",
+                style: normalStyle.copyWith(color: Colors.white),
               ),
             ),
           )
