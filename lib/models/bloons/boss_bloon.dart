@@ -25,7 +25,7 @@ class BossBloonModel {
     images = json["images"];
     health = Health.fromJson(json["health"]);
     skullCount = json['skullCount'];
-    immunities = List<String>.from(['generalImmunities']);
+    immunities = List<String>.from(json['generalImmunities']);
     gimmicks = json["gimmicks"];
   }
 }
