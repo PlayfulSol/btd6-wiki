@@ -1,17 +1,32 @@
+import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
-import '/presentation/widgets/boss_bloon_scatter.dart';
-
 import '/models/bloons/boss_bloon.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 
-class BossBloon extends StatelessWidget {
+class BossBloon extends StatefulWidget {
   final BossBloonModel bloon;
 
   const BossBloon({super.key, required this.bloon});
+
+  @override
+  State<BossBloon> createState() => _BossBloonState();
+}
+
+class _BossBloonState extends State<BossBloon> {
+  final controller = CarouselController();
+  List<String> images = [];
+  int activeIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    images = List.from(widget.bloon.images.values);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,53 +42,191 @@ class BossBloon extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.network(bossImage(bloon.id), width: 200),
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: CarouselSlider.builder(
+                          carouselController: controller,
+                          options: CarouselOptions(
+                            viewportFraction: 0.7,
+                            initialPage: 0,
+                            height: MediaQuery.of(context).size.width * 0.5,
+                            enableInfiniteScroll: false,
+                            onPageChanged: (index, reason) {
+                              setState(() {
+                                activeIndex = index;
+                              });
+                            },
+                          ),
+                          itemCount: images.length,
+                          itemBuilder: ((context, index, realIndex) => Image(
+                                image: AssetImage(bossImage(images[index])),
+                                filterQuality: FilterQuality.high,
+                                width: MediaQuery.of(context).size.width * 0.56,
+                              )),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      AnimatedSmoothIndicator(
+                        activeIndex: activeIndex,
+                        count: images.length,
+                        onDotClicked: (index) => controller.jumpToPage(index),
+                        effect: const ScrollingDotsEffect(
+                          activeDotScale: 1.25,
+                          spacing: 11,
+                          dotHeight: 9,
+                          dotWidth: 9,
+                          activeDotColor: Colors.teal,
+                        ),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 10),
-                  Text("Speed: ${bloon.speed}",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18)),
+                  Text(
+                    widget.bloon.name,
+                    style: bigTitleStyle,
+                    textAlign: TextAlign.center,
+                  ),
+                  Divider(
+                    thickness: 2,
+                    color: Colors.grey[600],
+                  ),
                   const SizedBox(height: 10),
-                  Text("Type: ${bloon.type}",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18)),
-                  const SizedBox(height: 15),
-                  Text("Immunities: ${bloon.immunities.join(", ")}",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18)),
-                  const SizedBox(height: 15),
-                  const Text("RBE (Red Bloon Equivalent):",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                  Text(
+                    widget.bloon.description.trimLeft(),
+                    style: normalStyle,
+                  ),
+                  const SizedBox(height: 10),
+                  Divider(
+                    thickness: 2,
+                    color: Colors.grey[600],
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Skulls",
+                    style: titleStyle,
+                  ),
+                  const SizedBox(height: 10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Normal: ${widget.bloon.skullCount['normal']}",
+                        style: normalStyle,
+                      ),
+                      Text(
+                        "Elite: ${widget.bloon.skullCount['elite']}",
+                        style: normalStyle,
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 20),
-                  const Text("Base:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  const Text(
+                    "Health",
+                    style: titleStyle,
+                  ),
+                  Text(
+                    "Each additional player adds 20%",
+                    style: normalStyle.copyWith(fontSize: 13),
+                  ),
+                  bossHealth("Normal", widget.bloon.health.base),
+                  bossHealth("Elite", widget.bloon.health.elite),
                   const SizedBox(height: 10),
-                  Text(bossRbeToString(bloon.rbe.base, bloon.rounds)),
+                  Divider(
+                    thickness: 2,
+                    color: Colors.grey[600],
+                  ),
                   const SizedBox(height: 10),
-                  const Text("Elite:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  const Text(
+                    "Properties and Gimmicks",
+                    style: titleStyle,
+                  ),
+                  const SizedBox(height: 5),
+                  gimmicks(
+                    "General Properties",
+                    List<String>.from(widget.bloon.gimmicks["general"]),
+                    true,
+                  ),
+                  gimmicks(
+                    "Normal Gimmicks",
+                    List<String>.from(widget.bloon.gimmicks["normal"]),
+                    false,
+                  ),
+                  gimmicks(
+                    "Elite Gimmicks",
+                    List<String>.from(widget.bloon.gimmicks["elite"]),
+                    false,
+                  ),
                   const SizedBox(height: 10),
-                  Text(bossRbeToString(bloon.rbe.elite, bloon.rounds)),
+                  Divider(
+                    thickness: 2,
+                    color: Colors.grey[600],
+                  ),
                   const SizedBox(height: 10),
-                  const Text("Base spawned Bloons:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                  const SizedBox(height: 10),
-                  BossBloonScatter(
-                      scatter: bloon.spawns.base, rounds: bloon.rounds),
-                  const SizedBox(height: 15),
-                  const Text("Elite spawned Bloons:",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                  const SizedBox(height: 10),
-                  BossBloonScatter(
-                      scatter: bloon.spawns.elite, rounds: bloon.rounds),
+                  ExpansionTile(
+                    title: Text(
+                      "General Immunities",
+                      style: smallTitleStyle.copyWith(color: Colors.teal),
+                    ),
+                    children: widget.bloon.immunities
+                        .map<Widget>(
+                          (item) => ListTile(
+                            title: Text("- $item:", style: normalStyle),
+                          ),
+                        )
+                        .toList(),
+                  ),
                 ],
               ),
             ),
           ),
         ));
+  }
+
+  ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
+    return ExpansionTile(
+      initiallyExpanded: expand,
+      title: Text(
+        title,
+        style: smallTitleStyle.copyWith(color: Colors.teal),
+      ),
+      children: gimmicks
+          .map<Widget>(
+            (item) => ListTile(
+              title: Text(
+                "- $item",
+                style: normalStyle,
+              ),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  ExpansionTile bossHealth(String title, List<TierHealth> healthTiers) {
+    return ExpansionTile(
+      title: Text(
+        title,
+        style: smallTitleStyle.copyWith(color: Colors.teal),
+      ),
+      children: healthTiers
+          .map(
+            (tierHealth) => ListTile(
+              isThreeLine: true,
+              title: Text(
+                "Tier ${tierHealth.tier}:",
+                style: normalStyle.copyWith(fontWeight: FontWeight.bold),
+              ),
+              subtitle: Text(
+                "1 Palyer: ${tierHealth.normal}, 2 Palyers: ${tierHealth.coop2}"
+                "\n3 Palyers: ${tierHealth.coop3}, 4 Palyers: ${tierHealth.coop4}",
+                style: normalStyle.copyWith(color: Colors.white),
+              ),
+            ),
+          )
+          .toList(),
+    );
   }
 }

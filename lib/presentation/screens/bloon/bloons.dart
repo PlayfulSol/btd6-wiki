@@ -1,3 +1,4 @@
+import 'package:btd6wiki/models/bloons/boss_bloon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';
@@ -108,39 +109,43 @@ class _BloonsState extends State<Bloons> {
             if (snapshot.data == null) {
               return const Loader();
             } else {
-              return GridView.builder(
+              return ListView.builder(
                   itemCount: snapshot.data.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    childAspectRatio: 1,
-                    mainAxisExtent: 80,
-                  ),
                   shrinkWrap: true,
-                  primary: false,
                   itemBuilder: (context, index) {
                     return Card(
                       child: ListTile(
                         mouseCursor: SystemMouseCursors.click,
                         leading: CircleAvatar(
                           backgroundColor: Colors.transparent,
-                          backgroundImage:
-                              NetworkImage(bossImage(snapshot.data[index].id)),
+                          child: Image(
+                            image: AssetImage(
+                              bossImage(snapshot.data[index].image),
+                            ),
+                          ),
                         ),
-                        title: Text(snapshot.data[index].name,
-                            style: smallTitleStyle),
-                        subtitle: Text(
-                          snapshot.data[index].type,
-                          style: normalStyle,
+                        title: Text(
+                          snapshot.data[index].name,
+                          style:
+                              normalStyle.copyWith(fontWeight: FontWeight.w600),
                         ),
-                        onTap: () {
+                        onTap: () async {
                           if (!GlobalState.isLoading) {
-                            getBloonData(snapshot.data[index].id)
-                                .then((value) => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => BossBloon(
-                                              bloon: value,
-                                            ))));
+                            var id = snapshot.data[index].id;
+                            var path = '${bossesDataPath + id}.json';
+                            final data = await rootBundle.loadString(path);
+                            var jsonData = json.decode(data);
+                            BossBloonModel bossData =
+                                BossBloonModel.fromJson(jsonData);
+                            // ignore: use_build_context_synchronously
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    BossBloon(bloon: bossData),
+                              ),
+                            );
+                            GlobalState.currentTitle = bossData.name;
                           }
                         },
                       ),

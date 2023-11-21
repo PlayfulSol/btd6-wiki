@@ -47,6 +47,7 @@ class _SingleBloonState extends State<SingleBloon> {
               Text(
                 widget.bloon.fullName,
                 style: bigTitleStyle,
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 5),
               Divider(

@@ -1,102 +1,77 @@
 class BossBloonModel {
   late final String id;
   late final String name;
-  late final String type;
-  late final Rbe rbe;
-  late final double speed;
-  late final List<String> rounds;
-  late final Spawns spawns;
+  late final String description;
+  late final Map<String, dynamic> images;
+  late final Health health;
+  late final Map<String, dynamic> skullCount;
   late final List<String> immunities;
+  late final Map<String, dynamic> gimmicks;
 
   BossBloonModel({
     required this.id,
     required this.name,
-    required this.type,
-    required this.rbe,
-    required this.speed,
-    required this.rounds,
-    required this.spawns,
+    required this.description,
+    required this.health,
+    required this.skullCount,
     required this.immunities,
+    required this.gimmicks,
   });
 
   BossBloonModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    type = json['type'];
-    rbe = (json['rbe'] != null ? Rbe.fromJson(json['rbe']) : null)!;
-    speed = json['speed'];
-    rounds = json['rounds'].cast<String>();
-    spawns = (json['spawns'] != null ? Spawns.fromJson(json['spawns']) : null)!;
-    immunities = json['immunities'].cast<String>();
+    description = json['description'];
+    images = json["images"];
+    health = Health.fromJson(json["health"]);
+    skullCount = json['skullCount'];
+    immunities = List<String>.from(json['generalImmunities']);
+    gimmicks = json["gimmicks"];
   }
 }
 
-class Rbe {
-  late final List<int> base;
-  late final List<int> elite;
+class Health {
+  late final List<TierHealth> base;
+  late final List<TierHealth> elite;
 
-  Rbe({required this.base, required this.elite});
+  Health({required this.base, required this.elite});
 
-  Rbe.fromJson(Map<String, dynamic> json) {
-    base = json['base'].cast<int>();
-    elite = json['elite'].cast<int>();
-  }
-}
-
-class Spawns {
-  late final List<Spawn> base;
-  late final List<Spawn> elite;
-
-  Spawns({required this.base, required this.elite});
-
-  Spawns.fromJson(Map<String, dynamic> json) {
-    if (json['base'] != null) {
-      base = <Spawn>[];
-      json['base'].forEach((v) {
-        base.add(Spawn.fromJson(v));
+  Health.fromJson(Map<String, dynamic> json) {
+    if (json['normal'] != null) {
+      base = <TierHealth>[];
+      json['normal'].forEach((v) {
+        base.add(TierHealth.fromJson(v));
       });
     }
     if (json['elite'] != null) {
-      elite = <Spawn>[];
+      elite = <TierHealth>[];
       json['elite'].forEach((v) {
-        elite.add(Spawn.fromJson(v));
+        elite.add(TierHealth.fromJson(v));
       });
     }
   }
 }
 
-class Spawn {
-  late final List<SpawnedBloon> scatter;
-  late final List<SpawnedBloon> skull;
+class TierHealth {
+  late final String tier;
+  late final String normal;
+  late final String coop2;
+  late final String coop3;
+  late final String coop4;
 
-  Spawn({required this.scatter, required this.skull});
+  TierHealth({
+    required this.tier,
+    required this.normal,
+    required this.coop2,
+    required this.coop3,
+    required this.coop4,
+  });
 
-  Spawn.fromJson(Map<String, dynamic> json) {
-    if (json['scatter'] != null) {
-      scatter = <SpawnedBloon>[];
-      json['scatter'].forEach((v) {
-        scatter.add(SpawnedBloon.fromJson(v));
-      });
-    }
-    if (json['skull'] != null) {
-      skull = <SpawnedBloon>[];
-      json['skull'].forEach((v) {
-        skull.add(SpawnedBloon.fromJson(v));
-      });
-    }
-  }
-}
-
-class SpawnedBloon {
-  late final String bloon;
-  late final int count;
-  String? variant;
-
-  SpawnedBloon({required this.bloon, required this.count, this.variant});
-
-  SpawnedBloon.fromJson(Map<String, dynamic> json) {
-    bloon = json['bloon'];
-    count = json['count'];
-    variant = json['variant'];
+  TierHealth.fromJson(Map<String, dynamic> json) {
+    tier = json["tier"];
+    normal = json["normal"];
+    coop2 = json["coop2"];
+    coop3 = json["coop3"];
+    coop4 = json["coop4"];
   }
 }

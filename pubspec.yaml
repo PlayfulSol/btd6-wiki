@@ -41,6 +41,8 @@ dependencies:
   model_viewer_plus: ^1.5.0
   url_launcher: ^6.1.14
   font_awesome_flutter: ^10.6.0
+  carousel_slider: ^4.2.1
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_launcher_icons: "^0.11.0"
@@ -58,15 +60,17 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
-    - assets/data/maps/
+    - assets/data/config/
     - assets/data/towers/
     - assets/data/heroes/
-    - assets/images/maps/
+    - assets/data/bloons/
+    - assets/data/bosses/
+    - assets/data/maps/
     - assets/images/towers/
     - assets/images/heroes/
-    - assets/data/config/
-    - assets/data/bloons/
     - assets/images/bloons/
+    - assets/images/bosses/
+    - assets/images/maps/
 
 compileSdkVersion: 33
 buildToolsVersion: "33.0.0"
