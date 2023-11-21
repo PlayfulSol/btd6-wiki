@@ -124,8 +124,11 @@ class _BloonsState extends State<Bloons> {
                             ),
                           ),
                         ),
-                        title: Text(snapshot.data[index].name,
-                            style: smallTitleStyle),
+                        title: Text(
+                          snapshot.data[index].name,
+                          style:
+                              normalStyle.copyWith(fontWeight: FontWeight.w600),
+                        ),
                         onTap: () async {
                           if (!GlobalState.isLoading) {
                             var id = snapshot.data[index].id;

@@ -140,21 +140,24 @@ class _BossBloonState extends State<BossBloon> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    "General Immunities",
+                    "Properties and Gimmicks",
                     style: titleStyle,
                   ),
                   const SizedBox(height: 5),
-                  ListView.builder(
-                    primary: false,
-                    shrinkWrap: true,
-                    itemCount: widget.bloon.immunities.length,
-                    itemBuilder: ((context, index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 7),
-                          child: Text(
-                            "- ${widget.bloon.immunities[index]}",
-                            style: normalStyle,
-                          ),
-                        )),
+                  gimmicks(
+                    "General Properties",
+                    List<String>.from(widget.bloon.gimmicks["general"]),
+                    true,
+                  ),
+                  gimmicks(
+                    "Normal Gimmicks",
+                    List<String>.from(widget.bloon.gimmicks["normal"]),
+                    false,
+                  ),
+                  gimmicks(
+                    "Elite Gimmicks",
+                    List<String>.from(widget.bloon.gimmicks["elite"]),
+                    false,
                   ),
                   const SizedBox(height: 10),
                   Divider(
@@ -162,28 +165,44 @@ class _BossBloonState extends State<BossBloon> {
                     color: Colors.grey[600],
                   ),
                   const SizedBox(height: 10),
-                  const Text(
-                    "Properties",
-                    style: titleStyle,
-                  ),
-                  const SizedBox(height: 5),
-                  ListView.builder(
-                    primary: false,
-                    shrinkWrap: true,
-                    itemCount: widget.bloon.gimmicks["normal"].length,
-                    itemBuilder: ((context, index) => Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 7),
-                          child: Text(
-                            "- ${widget.bloon.gimmicks["normal"][index]}",
-                            style: normalStyle,
+                  ExpansionTile(
+                    title: Text(
+                      "General Immunities",
+                      style: smallTitleStyle.copyWith(color: Colors.teal),
+                    ),
+                    children: widget.bloon.immunities
+                        .map<Widget>(
+                          (item) => ListTile(
+                            title: Text("- $item:", style: normalStyle),
                           ),
-                        )),
+                        )
+                        .toList(),
                   ),
                 ],
               ),
             ),
           ),
         ));
+  }
+
+  ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
+    return ExpansionTile(
+      initiallyExpanded: expand,
+      title: Text(
+        title,
+        style: smallTitleStyle.copyWith(color: Colors.teal),
+      ),
+      children: gimmicks
+          .map<Widget>(
+            (item) => ListTile(
+              title: Text(
+                "- $item",
+                style: normalStyle,
+              ),
+            ),
+          )
+          .toList(),
+    );
   }
 
   ExpansionTile bossHealth(String title, List<TierHealth> healthTiers) {
