@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/models/tower.dart';
+import 'package:btd6wiki/models/towers/tower.dart';
 
 import '/utilities/global_state.dart';
 import '/utilities/utils.dart';

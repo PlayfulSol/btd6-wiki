@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/models/hero.dart';
+import 'package:btd6wiki/models/towers/hero.dart';
 
 import '/presentation/widgets/hero_skin.dart';
 

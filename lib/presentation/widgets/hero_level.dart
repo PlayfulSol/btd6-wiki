@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '/models/hero.dart';
+import 'package:btd6wiki/models/towers/hero.dart';
 
 import '/utilities/images_url.dart';
 

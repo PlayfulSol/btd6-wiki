@@ -2,11 +2,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '/utilities/global_state.dart';
 
-import '/models/map.dart';
+import 'package:btd6wiki/models/maps/map.dart';
 import '/models/bloons/bloon_hierarchy.dart';
-import '/models/hero.dart';
-import '/models/common.dart';
-import '/models/tower.dart';
+import 'package:btd6wiki/models/towers/hero.dart';
+import 'package:btd6wiki/models/towers/common.dart';
+import 'package:btd6wiki/models/towers/tower.dart';
 
 String formatBigNumber(int number) {
   if (number < 1000) {

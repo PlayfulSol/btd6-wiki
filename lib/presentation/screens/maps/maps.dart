@@ -4,7 +4,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'dart:async';
 
-import '/models/map.dart';
+import "package:btd6wiki/models/maps/map.dart";
 
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/loader.dart';

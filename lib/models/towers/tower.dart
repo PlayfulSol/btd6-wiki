@@ -1,4 +1,4 @@
-import '/models/common.dart';
+import 'package:btd6wiki/models/towers/common.dart';
 
 class TowerModel {
   late final String id;

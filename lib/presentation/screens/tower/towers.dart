@@ -6,7 +6,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:btd6wiki/utilities/constants.dart';
 
-import '../../../models/tower.dart';
+import 'package:btd6wiki/models/towers/tower.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/loader.dart';
 

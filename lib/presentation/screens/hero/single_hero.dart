@@ -1,7 +1,7 @@
 import 'package:btd6wiki/presentation/widgets/hero_stats.dart';
 import 'package:flutter/material.dart';
 
-import '/models/hero.dart';
+import 'package:btd6wiki/models/towers/hero.dart';
 
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';

@@ -1,7 +1,7 @@
-import '/models/map.dart';
+import "package:btd6wiki/models/maps/map.dart";
 import '/models/bloons/basic_bloon.dart';
-import '/models/hero.dart';
-import '/models/tower.dart';
+import 'package:btd6wiki/models/towers/hero.dart';
+import 'package:btd6wiki/models/towers/tower.dart';
 
 class GlobalState {
   GlobalState._();

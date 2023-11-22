@@ -1,7 +1,7 @@
 import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
-import '/models/map.dart';
+import "package:btd6wiki/models/maps/map.dart";
 
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';

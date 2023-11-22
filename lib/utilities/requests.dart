@@ -6,9 +6,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import '/models/bloons/boss_bloon.dart';
 import '/models/bloons/single_bloon.dart';
 import '/models/bloons/basic_bloon.dart';
-import '/models/hero.dart';
-import '/models/tower.dart';
-import '/models/map.dart';
+import 'package:btd6wiki/models/towers/hero.dart';
+import 'package:btd6wiki/models/towers/tower.dart';
+import "package:btd6wiki/models/maps/map.dart";
 
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';

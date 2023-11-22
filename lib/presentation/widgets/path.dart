@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../utilities/constants.dart';
-import '/models/tower.dart';
+import 'package:btd6wiki/models/towers/tower.dart';
 
 import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
