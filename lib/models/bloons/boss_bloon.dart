@@ -1,8 +1,11 @@
+import 'package:btd6wiki/models/bloons/single_bloon.dart';
+
 class BossBloonModel {
   late final String id;
   late final String name;
   late final String description;
   late final Map<String, dynamic> images;
+  late final Relative children;
   late final Health health;
   late final Map<String, dynamic> skullCount;
   late final List<String> immunities;
@@ -12,6 +15,7 @@ class BossBloonModel {
     required this.id,
     required this.name,
     required this.description,
+    required this.children,
     required this.health,
     required this.skullCount,
     required this.immunities,
@@ -23,6 +27,7 @@ class BossBloonModel {
     name = json['name'];
     description = json['description'];
     images = json["images"];
+    children = Relative.fromJson(json["children"]);
     health = Health.fromJson(json["health"]);
     skullCount = json['skullCount'];
     immunities = List<String>.from(json['generalImmunities']);

@@ -53,7 +53,7 @@ class Relative {
     id = json['id'] as String;
     name = json['name'] as String;
     image = json['image'] as String;
-    value = json['type'] as String;
+    value = json['value'] as String;
   }
 }
 
