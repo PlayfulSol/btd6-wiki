@@ -77,5 +77,5 @@ Future<void> getBosses() async {
       await rootBundle.loadString('assets/data/config/bosses.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.bosses =
-      parsedConfig.map((e) => BasicBossModel.fromJson(e)).toList();
+      parsedConfig.map((e) => BasicBloonModel.fromJson(e)).toList();
 }
