@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:btd6wiki/models/bloons/minion_bloon.dart';
+import 'package:btd6wiki/presentation/screens/bloon/minion_bloon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -39,6 +41,52 @@ Widget listObject(List<dynamic> data, String title, BuildContext context) {
     ),
     children: generateChildren(data, context),
   );
+}
+
+Widget generateMinion(Relative relative, BuildContext context) {
+  if (relative.id == "N/A") {
+    return Container();
+  } else {
+    return Column(
+      children: [
+        Divider(
+          thickness: 2,
+          color: Colors.grey[600],
+        ),
+        const SizedBox(height: 10),
+        Card(
+          child: ListTile(
+            leading: Image(
+              image: AssetImage(minionImage(relative.image)),
+            ),
+            title: Text(
+              relative.name,
+              style: normalStyle.copyWith(fontWeight: FontWeight.w600),
+            ),
+            subtitle: Text(
+              'Spawn ${relative.value}',
+              style: normalStyle,
+            ),
+            onTap: () async {
+              var id = relative.id;
+              var path = '${minionsDataPath + id}.json';
+              final data = await rootBundle.loadString(path);
+              var jsonData = json.decode(data);
+              MinionBloon bloonData = MinionBloon.fromJson(jsonData);
+              GlobalState.currentTitle = bloonData.name;
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MinionBloonPage(minion: bloonData),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
 }
 
 List<Widget> generateChildren(List<dynamic> data, BuildContext context) {

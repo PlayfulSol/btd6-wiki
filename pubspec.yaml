@@ -65,12 +65,14 @@ flutter:
     - assets/data/heroes/
     - assets/data/bloons/
     - assets/data/bosses/
+    - assets/data/minions/
     - assets/data/maps/
     - assets/images/towers/
     - assets/images/heroes/
     - assets/images/bloons/
     - assets/images/bosses/
     - assets/images/maps/
+    - assets/images/minions/
 
 compileSdkVersion: 33
 buildToolsVersion: "33.0.0"

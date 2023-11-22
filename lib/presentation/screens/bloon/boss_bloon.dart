@@ -1,3 +1,4 @@
+import 'package:btd6wiki/presentation/widgets/bloon_aid_widget.dart';
 import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -133,6 +134,7 @@ class _BossBloonState extends State<BossBloon> {
                   bossHealth("Normal", widget.bloon.health.base),
                   bossHealth("Elite", widget.bloon.health.elite),
                   const SizedBox(height: 10),
+                  generateMinion(widget.bloon.children, context),
                   Divider(
                     thickness: 2,
                     color: Colors.grey[600],
