@@ -48,6 +48,13 @@ class Relative {
     required this.image,
     required this.value,
   });
+
+  Relative.fromJson(Map<String, dynamic> json) {
+    id = json['id'] as String;
+    name = json['name'] as String;
+    image = json['image'] as String;
+    value = json['type'] as String;
+  }
 }
 
 class SingleBloonModel {
