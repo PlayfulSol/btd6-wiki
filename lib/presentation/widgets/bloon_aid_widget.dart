@@ -74,7 +74,7 @@ Widget generateMinion(Relative relative, BuildContext context) {
               var jsonData = json.decode(data);
               MinionBloon bloonData = MinionBloon.fromJson(jsonData);
               GlobalState.currentTitle = bloonData.name;
-              Navigator.pushReplacement(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MinionBloonPage(minion: bloonData),
