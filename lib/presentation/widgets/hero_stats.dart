@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class StatsList extends StatelessWidget {
   final HeroStats heroStats;
 
-  const StatsList({super.key, required this.heroStats});
+  const StatsList({Key? key, required this.heroStats}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
