@@ -1,4 +1,4 @@
-import 'package:btd6wiki/utilities/constants.dart';
+import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 import '/models/map.dart';

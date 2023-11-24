@@ -1,5 +1,5 @@
-import 'package:btd6wiki/presentation/widgets/about_us.dart';
-import 'package:btd6wiki/utilities/utils.dart';
+import '/presentation/widgets/about_us.dart';
+import '/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

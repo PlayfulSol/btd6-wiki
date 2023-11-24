@@ -1,5 +1,5 @@
-import 'package:btd6wiki/models/hero.dart';
-import 'package:btd6wiki/utilities/analytics.dart';
+import '/models/hero.dart';
+import '/utilities/analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart' show rootBundle;

@@ -1,8 +1,8 @@
-import 'package:btd6wiki/utilities/constants.dart';
-import 'package:btd6wiki/utilities/utils.dart';
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 import 'package:flutter/material.dart';
 
-import 'package:btd6wiki/presentation/widgets/bloon_aid_widget.dart';
+import '/presentation/widgets/bloon_aid_widget.dart';
 import '/models/bloons/single_bloon.dart';
 
 import '/utilities/global_state.dart';

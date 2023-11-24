@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-import 'package:btd6wiki/utilities/analytics.dart';
+import '/utilities/analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:btd6wiki/utilities/constants.dart';
+import '/utilities/constants.dart';
 
 import '../../../models/tower.dart';
 import '/presentation/screens/tower/single_tower.dart';

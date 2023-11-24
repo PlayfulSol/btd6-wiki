@@ -1,5 +1,5 @@
-import 'package:btd6wiki/utilities/analytics.dart';
-import 'package:btd6wiki/models/bloons/boss_bloon.dart';
+import '/utilities/analytics.dart';
+import '/models/bloons/boss_bloon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:convert';

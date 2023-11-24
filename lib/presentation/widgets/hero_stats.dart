@@ -1,5 +1,5 @@
-import 'package:btd6wiki/models/hero.dart';
-import 'package:btd6wiki/utilities/constants.dart';
+import '/models/hero.dart';
+import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class StatsList extends StatelessWidget {
