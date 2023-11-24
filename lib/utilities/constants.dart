@@ -5,10 +5,6 @@ import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/tower/towers.dart';
 
-const baseApiUrl = 'https://statsnite.com/api/btd/v3';
-
-const baseImageUrl = 'https://statsnite.com/images/btd';
-
 const List<String> titles = [
   'Towers',
   'Heroes',

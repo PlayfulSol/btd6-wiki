@@ -12,7 +12,6 @@ import '/presentation/widgets/loader.dart';
 
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
-import '/utilities/requests.dart';
 import '/utilities/constants.dart';
 
 class Bloons extends StatefulWidget {

@@ -1,35 +1,13 @@
 import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
-import '/models/bloons/boss_bloon.dart';
-import '/models/bloons/single_bloon.dart';
 import '/models/bloons/basic_bloon.dart';
 import '/models/hero.dart';
 import '/models/tower.dart';
 import '/models/map.dart';
 
 import '/utilities/global_state.dart';
-import '/utilities/constants.dart';
-
-Future<dynamic> getBloonData(String id) async {
-  GlobalState.isLoading = true;
-  var data = await http.get(Uri.parse("$baseApiUrl/bloon/$id"));
-
-  var jsonData = json.decode(data.body);
-
-  GlobalState.isLoading = false;
-  if (jsonData['type'] == 'boss') {
-    var bossData = BossBloonModel.fromJson(jsonData);
-    GlobalState.currentTitle = bossData.name;
-    return bossData;
-  } else {
-    var bloonData = SingleBloonModel.fromJson(jsonData);
-    GlobalState.currentTitle = bloonData.name;
-    return bloonData;
-  }
-}
 
 // Towers
 Future<void> getTowers() async {
