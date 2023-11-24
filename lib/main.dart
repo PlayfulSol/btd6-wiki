@@ -1,4 +1,4 @@
-import '/firebase_options.dart';
+import 'package:btd6wiki/firebase_options.dart';
 import '/utilities/analytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
