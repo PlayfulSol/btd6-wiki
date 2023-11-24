@@ -41,4 +41,4 @@ jobs:
       with:
         title: "Increment version number"
         body: "This PR increments the version number in `pubspec.yaml`."
-        branch: ${{ env.branch_name }}
+        branch: ${{ github.ref }}
