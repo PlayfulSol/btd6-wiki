@@ -1,4 +1,4 @@
-import 'package:btd6wiki/presentation/widgets/hero_stats.dart';
+import '/presentation/widgets/hero_stats.dart';
 import 'package:flutter/material.dart';
 
 import 'package:btd6wiki/models/towers/hero.dart';

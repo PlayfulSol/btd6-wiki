@@ -1,40 +1,19 @@
 import 'dart:async';
-import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 
-import '/models/bloons/boss_bloon.dart';
-import '/models/bloons/single_bloon.dart';
 import '/models/bloons/basic_bloon.dart';
 import 'package:btd6wiki/models/towers/hero.dart';
 import 'package:btd6wiki/models/towers/tower.dart';
 import "package:btd6wiki/models/maps/map.dart";
 
 import '/utilities/global_state.dart';
-import '/utilities/constants.dart';
-
-Future<dynamic> getBloonData(String id) async {
-  GlobalState.isLoading = true;
-  var data = await http.get(Uri.parse("$baseApiUrl/bloon/$id"));
-
-  var jsonData = json.decode(data.body);
-
-  GlobalState.isLoading = false;
-  if (jsonData['type'] == 'boss') {
-    var bossData = BossBloonModel.fromJson(jsonData);
-    GlobalState.currentTitle = bossData.name;
-    return bossData;
-  } else {
-    var bloonData = SingleBloonModel.fromJson(jsonData);
-    GlobalState.currentTitle = bloonData.name;
-    return bloonData;
-  }
-}
+import 'constants.dart';
 
 // Towers
 Future<void> getTowers() async {
   final jsonConfig =
-      await rootBundle.loadString('assets/data/config/towers.json');
+      await rootBundle.loadString('$configDirectory/towers.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.towers = parsedConfig.map((e) => TowerModel.fromJson(e)).toList();
   GlobalState.towerTypes =
@@ -44,7 +23,7 @@ Future<void> getTowers() async {
 // Heroes
 Future<void> getHeroes() async {
   final jsonConfig =
-      await rootBundle.loadString('assets/data/config/heroes.json');
+      await rootBundle.loadString('$configDirectory/heroes.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.menuHeroes =
       parsedConfig.map((e) => MenuHeroModel.fromJson(e)).toList();
@@ -58,15 +37,14 @@ Future<void> getBloonsData() async {
 
 // Maps
 Future<void> getMaps() async {
-  final jsonConfig =
-      await rootBundle.loadString('assets/data/config/maps.json');
+  final jsonConfig = await rootBundle.loadString('$configDirectory/maps.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.maps = parsedConfig.map((e) => MapModel.fromJson(e)).toList();
 }
 
 Future<void> getBloons() async {
   final jsonConfig =
-      await rootBundle.loadString('assets/data/config/bloons.json');
+      await rootBundle.loadString('$configDirectory/bloons.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.bloons =
       parsedConfig.map((e) => BasicBloonModel.fromJson(e)).toList();
@@ -74,7 +52,7 @@ Future<void> getBloons() async {
 
 Future<void> getBosses() async {
   final jsonConfig =
-      await rootBundle.loadString('assets/data/config/bosses.json');
+      await rootBundle.loadString('$configDirectory/bosses.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.bosses =
       parsedConfig.map((e) => BasicBloonModel.fromJson(e)).toList();

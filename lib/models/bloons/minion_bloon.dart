@@ -8,15 +8,15 @@ class MinionBloon extends BaseModel {
   late final Speed speed;
 
   MinionBloon(
-    String id,
-    String name,
-    String image,
-    String type,
+    super.id,
+    super.name,
+    super.image,
+    super.type,
     this.images,
     this.health,
     this.parent,
     this.speed,
-  ) : super(id, name, image, type);
+  );
 
   MinionBloon.fromJson(Map<String, dynamic> json)
       : images = json["images"] as Map<String, dynamic>,

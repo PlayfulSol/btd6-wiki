@@ -81,25 +81,6 @@ class Skins {
   }
 }
 
-class Special {
-  String? name;
-  String? value;
-
-  Special({this.name, this.value});
-
-  Special.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    value = json['value'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['value'] = value;
-    return data;
-  }
-}
-
 class Levels {
   late final String name;
   late final String description;
@@ -118,21 +99,5 @@ class Levels {
     description = json['levelBody'];
     image = json['image'];
     cost = json['cost'];
-  }
-}
-
-class Rounds {
-  String? easy;
-  String? medium;
-  String? hard;
-  String? impoppable;
-
-  Rounds({this.easy, this.medium, this.hard, this.impoppable});
-
-  Rounds.fromJson(Map<String, dynamic> json) {
-    easy = json['easy'];
-    medium = json['medium'];
-    hard = json['hard'];
-    impoppable = json['impoppable'];
   }
 }

@@ -1,3 +1,7 @@
+import 'package:btd6wiki/firebase_options.dart';
+import '/utilities/analytics.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 
@@ -9,10 +13,20 @@ import '/utilities/global_state.dart';
 import '/utilities/themes.dart';
 import '/utilities/constants.dart';
 
-void main() => runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+  static FirebaseAnalyticsObserver observer =
+      FirebaseAnalyticsObserver(analytics: analytics);
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +35,28 @@ class MyApp extends StatelessWidget {
         dark: Themes.darkTheme,
         initial: AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => MaterialApp(
+              navigatorObservers: <NavigatorObserver>[observer],
               theme: theme,
               darkTheme: darkTheme,
               title: 'BTD6 Wiki',
-              home: const MyHomePage(),
+              home: MyHomePage(
+                analytics: analytics,
+                observer: observer,
+              ),
               debugShowCheckedModeBanner: false,
             ));
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+  const MyHomePage({
+    super.key,
+    required this.analytics,
+    required this.observer,
+  });
+
+  final FirebaseAnalytics analytics;
+  final FirebaseAnalyticsObserver observer;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -53,6 +78,13 @@ class _MyHomePageState extends State<MyHomePage> {
               GlobalState.isLoading = false;
               GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
             }));
+  }
+
+  Future<void> _logCurrentScreen() async {
+    await widget.analytics.setCurrentScreen(
+      screenName: titles[GlobalState.currentPageIndex],
+      screenClassOverride: titles[GlobalState.currentPageIndex],
+    );
   }
 
   @override
@@ -77,6 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 setState(() {
                   GlobalState.currentPageIndex = index;
                   GlobalState.currentTitle = titles[index];
+                  logPageView(titles[index]);
+                  _logCurrentScreen();
                 });
               }),
       bottomNavigationBar: Container(
@@ -114,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
             currentIndex: GlobalState.currentPageIndex,
             onTap: (index) {
+              logEvent('bottom_navigation', titles[index]);
               setState(() {
                 GlobalState.currentTitle = titles[index];
                 GlobalState.currentPageIndex = index;

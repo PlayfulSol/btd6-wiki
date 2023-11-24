@@ -119,6 +119,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
           var jsonData = json.decode(data);
           SingleBloonModel bloonData = SingleBloonModel.fromJson(jsonData);
           GlobalState.currentTitle = bloonData.name;
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

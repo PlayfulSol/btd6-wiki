@@ -1,5 +1,7 @@
-import 'package:btd6wiki/presentation/widgets/developer_info.dart';
-import 'package:btd6wiki/utilities/constants.dart';
+import 'package:btd6wiki/utilities/analytics.dart';
+
+import '/presentation/widgets/developer_info.dart';
+import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,6 +17,7 @@ class AboutUsPopup extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all(Colors.teal),
       ),
       onPressed: () {
+        logEvent('about_us', 'opened');
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -49,7 +52,10 @@ class AboutUs extends StatelessWidget {
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.teal),
             ),
-            onPressed: () => openMail('Playfulsols@gamil.com'),
+            onPressed: () => {
+              logEvent('contact_us', 'opened'),
+              openMail('Playfulsols@gamil.com'),
+            },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -67,8 +73,10 @@ class AboutUs extends StatelessWidget {
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.teal),
             ),
-            onPressed: () =>
-                openUrl('https://github.com/PlayfulSol/flutter-btd6-wiki'),
+            onPressed: () => {
+              logEvent('github', 'opened'),
+              openUrl('https://github.com/PlayfulSol/flutter-btd6-wiki'),
+            },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
@@ -109,6 +117,7 @@ class AboutUs extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(Colors.teal),
           ),
           onPressed: () {
+            logEvent('about_us', 'closed');
             Navigator.of(context).pop();
           },
           child: const Text('Close', style: TextStyle(color: Colors.white)),

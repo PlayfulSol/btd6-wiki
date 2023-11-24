@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import '/utilities/analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:btd6wiki/utilities/constants.dart';
+import '/utilities/constants.dart';
 
 import 'package:btd6wiki/models/towers/tower.dart';
 import '/presentation/screens/tower/single_tower.dart';
@@ -155,6 +156,7 @@ class _TowersState extends State<Towers>
                               var path = '${towerDataPath + id}.json';
                               final data = await rootBundle.loadString(path);
                               var jsonData = json.decode(data);
+                              logInnerPageView(snapshot.data[index].name);
                               SingleTowerModel towerData =
                                   SingleTowerModel.fromJson(jsonData);
 

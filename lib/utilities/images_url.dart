@@ -1,17 +1,3 @@
-import '/utilities/constants.dart';
-
-String heroLevelImage(String heroId, int level) {
-  return '$baseImageUrl/heroes/$heroId/$level.png';
-}
-
-String heroSkinImage(String heroId, String skinId) {
-  return '$baseImageUrl/heroes/$heroId/$skinId/hero.png';
-}
-
-String heroSkinLevelImage(String heroId, String skinId, int level) {
-  return '$baseImageUrl/heroes/$heroId/$skinId/$level.png';
-}
-
 String bossImage(String image) {
   return 'assets/images/bosses/$image';
 }

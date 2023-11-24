@@ -1,5 +1,7 @@
-import 'package:btd6wiki/presentation/widgets/about_us.dart';
-import 'package:btd6wiki/utilities/utils.dart';
+import 'package:btd6wiki/utilities/analytics.dart';
+
+import '/presentation/widgets/about_us.dart';
+import '/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -41,8 +43,10 @@ class _DrawerContentState extends State<DrawerContent> {
         ),
         ExpansionTile(
           controller: _towersExpansionTileController,
-          title: Text(titles[0], style: const TextStyle(color: Colors.teal)),
+          title:
+              Text(drawrTitles[0], style: const TextStyle(color: Colors.teal)),
           onExpansionChanged: (bool expended) {
+            logEvent('menu', 'towers_expanded');
             setState(() {
               if (expended) {
                 _mapsExpansionTileController.collapse();
@@ -60,6 +64,8 @@ class _DrawerContentState extends State<DrawerContent> {
                   return ListTile(
                     title: Text(GlobalState.towerTypes[index]),
                     onTap: () {
+                      logEvent(
+                          'menu_tower_type', GlobalState.towerTypes[index]);
                       if (!GlobalState.isLoading) {
                         Navigator.pop(context);
                         GlobalState.currentTowerType =
@@ -82,8 +88,9 @@ class _DrawerContentState extends State<DrawerContent> {
           ],
         ),
         ListTile(
-            title: Text(titles[1]),
+            title: Text(drawrTitles[1]),
             onTap: () {
+              logEvent('menu', 'heroes');
               if (!GlobalState.isLoading) {
                 Navigator.pop(context);
                 GlobalState.currentPageIndex = 1;
@@ -98,8 +105,9 @@ class _DrawerContentState extends State<DrawerContent> {
               }
             }),
         ListTile(
-            title: Text(titles[2]),
+            title: Text(drawrTitles[2]),
             onTap: () {
+              logEvent('menu', 'bloons');
               if (!GlobalState.isLoading) {
                 Navigator.pop(context);
                 GlobalState.currentPageIndex = 2;
@@ -115,8 +123,10 @@ class _DrawerContentState extends State<DrawerContent> {
             }),
         ExpansionTile(
           controller: _mapsExpansionTileController,
-          title: Text(titles[3], style: const TextStyle(color: Colors.teal)),
+          title:
+              Text(drawrTitles[3], style: const TextStyle(color: Colors.teal)),
           onExpansionChanged: (bool expended) {
+            logEvent('menu', 'maps_expanded');
             setState(() {
               if (expended) {
                 _towersExpansionTileController.collapse();
@@ -134,6 +144,8 @@ class _DrawerContentState extends State<DrawerContent> {
                   return ListTile(
                     title: Text(GlobalState.mapDifficulties[index]),
                     onTap: () {
+                      logEvent('menu_map_difficulty',
+                          GlobalState.mapDifficulties[index]);
                       if (!GlobalState.isLoading) {
                         Navigator.pop(context);
                         GlobalState.currentMapDifficulty =
@@ -165,8 +177,11 @@ class _DrawerContentState extends State<DrawerContent> {
           children: [
             const AboutUsPopup(),
             ElevatedButton.icon(
-              onPressed: () => openUrl(
-                  'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki'),
+              onPressed: () => {
+                logEvent('rate_us', 'rate_us'),
+                openUrl(
+                    'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki')
+              },
               icon: const FaIcon(FontAwesomeIcons.googlePlay),
               label: const Text('Rate Us'),
               style: ButtonStyle(
