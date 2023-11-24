@@ -1,11 +1,11 @@
-import 'package:btd6wiki/models/hero.dart';
-import 'package:btd6wiki/utilities/constants.dart';
+import '/models/hero.dart';
+import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 class StatsList extends StatelessWidget {
   final HeroStats heroStats;
 
-  const StatsList({Key? key, required this.heroStats}) : super(key: key);
+  const StatsList({super.key, required this.heroStats});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'package:btd6wiki/utilities/constants.dart';
+import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
 import '/models/bloons/boss_bloon.dart';
@@ -6,7 +6,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
-import '/utilities/utils.dart';
 
 class BossBloon extends StatefulWidget {
   final BossBloonModel bloon;

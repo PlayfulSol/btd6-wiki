@@ -1,5 +1,5 @@
-import 'package:btd6wiki/utilities/analytics.dart';
-import 'package:btd6wiki/utilities/constants.dart';
+import '/utilities/analytics.dart';
+import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
