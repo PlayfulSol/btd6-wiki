@@ -1,15 +1,18 @@
 class BasicBossModel {
   late final String id;
   late final String name;
-  late final String type;
-  late final double speed;
+  late final String image;
 
-  BasicBossModel(this.id, this.name, this.type, this.speed);
+  BasicBossModel(
+    this.id,
+    this.name,
+    this.image,
+  );
 
   BasicBossModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    type = json['type'];
+    image = json['image'];
   }
 }
 

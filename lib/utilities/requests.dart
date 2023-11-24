@@ -73,19 +73,9 @@ Future<void> getBloons() async {
 }
 
 Future<void> getBosses() async {
-  var data = await http.get(Uri.parse("$baseApiUrl/bloons"));
-
-  var jsonData = json.decode(data.body);
-
-  List<BasicBossModel> bosses = [];
-
-  for (var b in jsonData) {
-    if (b['type'] == 'boss') {
-      BasicBossModel boss = BasicBossModel.fromJson(b);
-
-      bosses.add(boss);
-    }
-  }
-
-  GlobalState.bosses = bosses;
+  final jsonConfig =
+      await rootBundle.loadString('assets/data/config/bosses.json');
+  final List<dynamic> parsedConfig = json.decode(jsonConfig);
+  GlobalState.bosses =
+      parsedConfig.map((e) => BasicBossModel.fromJson(e)).toList();
 }
