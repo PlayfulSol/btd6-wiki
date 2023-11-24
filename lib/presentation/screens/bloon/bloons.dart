@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/analytics.dart';
 import 'package:btd6wiki/models/bloons/boss_bloon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -76,6 +77,7 @@ class _BloonsState extends State<Bloons> {
                               var path = '${bloonsDataPath + id}.json';
                               final data = await rootBundle.loadString(path);
                               var jsonData = json.decode(data);
+                              logInnerPageView(snapshot.data[index].name);
                               SingleBloonModel bloonData =
                                   SingleBloonModel.fromJson(jsonData);
                               // ignore: use_build_context_synchronously
@@ -135,6 +137,7 @@ class _BloonsState extends State<Bloons> {
                             var path = '${bossesDataPath + id}.json';
                             final data = await rootBundle.loadString(path);
                             var jsonData = json.decode(data);
+                            logInnerPageView(snapshot.data[index].name);
                             BossBloonModel bossData =
                                 BossBloonModel.fromJson(jsonData);
                             // ignore: use_build_context_synchronously

@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/analytics.dart';
 import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -33,6 +34,7 @@ class _MapsState extends State<Maps> {
     _loadJsonData();
     _searchController = TextEditingController();
     _searchController.addListener(() {
+      logEvent('search', 'searching for map ${_searchController.text}');
       setState(() {
         query = _searchController.text;
       });
@@ -139,6 +141,7 @@ class _MapsState extends State<Maps> {
                                 final singleMap = await rootBundle.loadString(
                                     'assets/data/maps/${snapshot.data[index].id}.json');
                                 final parsedMap = jsonDecode(singleMap);
+                                logInnerPageView(snapshot.data[index].name);
                                 // ignore: use_build_context_synchronously
                                 Navigator.push(
                                   context,
