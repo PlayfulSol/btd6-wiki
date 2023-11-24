@@ -25,7 +25,7 @@ class BasicBloonModel {
 
   BasicBloonModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    name = json['shortName'];
+    name = json['name'];
     image = json['image'];
   }
 }
