@@ -5,10 +5,19 @@ import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/tower/towers.dart';
 
+String configDirectory = 'assets/data/config';
+
 const List<String> titles = [
   'Towers',
   'Heroes',
   'Bloons',
+  'Maps',
+];
+
+const List<String> drawrTitles = [
+  'Towers',
+  'Heroes',
+  'Bloons & Bosses',
   'Maps',
 ];
 
