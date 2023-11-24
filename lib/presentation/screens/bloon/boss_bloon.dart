@@ -174,7 +174,7 @@ class _BossBloonState extends State<BossBloon> {
                     children: widget.bloon.immunities
                         .map<Widget>(
                           (item) => ListTile(
-                            title: Text("- $item:", style: normalStyle),
+                            title: Text("- $item", style: normalStyle),
                           ),
                         )
                         .toList(),
@@ -184,26 +184,6 @@ class _BossBloonState extends State<BossBloon> {
             ),
           ),
         ));
-  }
-
-  ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
-    return ExpansionTile(
-      initiallyExpanded: expand,
-      title: Text(
-        title,
-        style: smallTitleStyle.copyWith(color: Colors.teal),
-      ),
-      children: gimmicks
-          .map<Widget>(
-            (item) => ListTile(
-              title: Text(
-                "- $item",
-                style: normalStyle,
-              ),
-            ),
-          )
-          .toList(),
-    );
   }
 
   ExpansionTile bossHealth(String title, List<TierHealth> healthTiers) {

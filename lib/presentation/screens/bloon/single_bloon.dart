@@ -66,7 +66,7 @@ class _SingleBloonState extends State<SingleBloon> {
               ),
               const SizedBox(height: 5),
               Text(
-                "Relative (to red bloon) ${widget.bloon.speed.relative}",
+                "Relative (to red bloon): ${widget.bloon.speed.relative}",
                 style: normalStyle,
               ),
               const SizedBox(height: 5),

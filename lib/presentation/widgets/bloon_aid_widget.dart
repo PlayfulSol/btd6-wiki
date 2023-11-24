@@ -74,6 +74,7 @@ Widget generateMinion(Relative relative, BuildContext context) {
               var jsonData = json.decode(data);
               MinionBloon bloonData = MinionBloon.fromJson(jsonData);
               GlobalState.currentTitle = bloonData.name;
+              // ignore: use_build_context_synchronously
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -137,6 +138,9 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
 
 Widget listString(List<String> data, String title) {
   return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    mainAxisSize: MainAxisSize.min,
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         title,
@@ -144,6 +148,7 @@ Widget listString(List<String> data, String title) {
       ),
       const SizedBox(height: 5),
       ListView.builder(
+        primary: false,
         shrinkWrap: true,
         itemCount: data.length,
         itemBuilder: (context, index) {
@@ -156,5 +161,25 @@ Widget listString(List<String> data, String title) {
         },
       ),
     ],
+  );
+}
+
+ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
+  return ExpansionTile(
+    initiallyExpanded: expand,
+    title: Text(
+      title,
+      style: smallTitleStyle.copyWith(color: Colors.teal),
+    ),
+    children: gimmicks
+        .map<Widget>(
+          (item) => ListTile(
+            title: Text(
+              "- $item",
+              style: normalStyle,
+            ),
+          ),
+        )
+        .toList(),
   );
 }
