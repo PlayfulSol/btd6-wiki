@@ -1,3 +1,5 @@
+import 'package:btd6wiki/utilities/analytics.dart';
+
 import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -40,19 +42,22 @@ class DeveloperInfo extends StatelessWidget {
             Flexible(
               child: IconButton(
                 icon: const Icon(Icons.email),
-                onPressed: () => openMail(email),
+                onPressed: () =>
+                    {logEvent('email_personal', name), openMail(email)},
               ),
             ),
             Flexible(
               child: IconButton(
                 icon: const FaIcon(FontAwesomeIcons.github),
-                onPressed: () => openUrl(githubUrl),
+                onPressed: () =>
+                    {logEvent('github_personal', name), openUrl(githubUrl)},
               ),
             ),
             Flexible(
               child: IconButton(
                 icon: const FaIcon(FontAwesomeIcons.linkedin),
-                onPressed: () => openUrl(linkedinUrl),
+                onPressed: () =>
+                    {logEvent('linkedin_personal', name), openUrl(linkedinUrl)},
               ),
             ),
           ],

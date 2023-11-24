@@ -148,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
             currentIndex: GlobalState.currentPageIndex,
             onTap: (index) {
+              logEvent('bottom_navigation', titles[index]);
               setState(() {
                 GlobalState.currentTitle = titles[index];
                 GlobalState.currentPageIndex = index;
