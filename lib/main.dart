@@ -13,13 +13,11 @@ import '/utilities/global_state.dart';
 import '/utilities/themes.dart';
 import '/utilities/constants.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  analytics.logAppOpen();
   runApp(const MyApp());
 }
 
