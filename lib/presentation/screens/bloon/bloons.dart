@@ -8,7 +8,6 @@ import '/models/bloons/single_bloon.dart';
 
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/boss_bloon.dart';
-import '/presentation/widgets/loader.dart';
 
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
