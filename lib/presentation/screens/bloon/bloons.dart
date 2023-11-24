@@ -137,6 +137,7 @@ class _BloonsState extends State<Bloons> {
                             var path = '${bossesDataPath + id}.json';
                             final data = await rootBundle.loadString(path);
                             var jsonData = json.decode(data);
+                            logInnerPageView(snapshot.data[index].name);
                             BossBloonModel bossData =
                                 BossBloonModel.fromJson(jsonData);
                             // ignore: use_build_context_synchronously
