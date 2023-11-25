@@ -37,6 +37,7 @@ class _BloonsState extends State<Bloons> {
               childAspectRatio: 1,
               mainAxisExtent: 80,
             ),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             primary: false,
             itemBuilder: (context, index) {
