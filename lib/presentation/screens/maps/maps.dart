@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import "/models/maps/map.dart";
@@ -150,6 +151,8 @@ class _MapsState extends State<Maps> {
                                 );
                               },
                               child: Card(
+                                elevation: 5,
+                                shadowColor: Colors.black87,
                                 child: Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
@@ -172,11 +175,11 @@ class _MapsState extends State<Maps> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
+                                          AutoSizeText(
                                             capitalizeEveryWord(
                                                 snapshot.data[index].name),
-                                            style:
-                                                const TextStyle(fontSize: 14),
+                                            maxLines: 1,
+                                            style: TextStyle(fontSize: 14),
                                           ),
                                           const SizedBox(height: 5),
                                           Text(snapshot.data[index].difficulty,

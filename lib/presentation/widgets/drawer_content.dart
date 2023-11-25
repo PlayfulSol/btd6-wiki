@@ -182,6 +182,8 @@ class _DrawerContentState extends State<DrawerContent> {
               icon: const FaIcon(FontAwesomeIcons.googlePlay),
               label: const Text('Rate Us'),
               style: ButtonStyle(
+                iconColor: MaterialStateProperty.all(Colors.white),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
                 backgroundColor: MaterialStateProperty.all(Colors.teal),
               ),
             ),

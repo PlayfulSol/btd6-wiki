@@ -12,6 +12,8 @@ class AboutUsPopup extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       style: ButtonStyle(
+        iconColor: MaterialStateProperty.all(Colors.white),
+        foregroundColor: MaterialStateProperty.all(Colors.white),
         backgroundColor: MaterialStateProperty.all(Colors.teal),
       ),
       onPressed: () {
@@ -48,6 +50,8 @@ class AboutUs extends StatelessWidget {
         children: [
           ElevatedButton(
             style: ButtonStyle(
+              iconColor: MaterialStateProperty.all(Colors.white),
+              foregroundColor: MaterialStateProperty.all(Colors.white),
               backgroundColor: MaterialStateProperty.all(Colors.teal),
             ),
             onPressed: () => {
@@ -69,6 +73,8 @@ class AboutUs extends StatelessWidget {
           ),
           ElevatedButton(
             style: ButtonStyle(
+              iconColor: MaterialStateProperty.all(Colors.white),
+              foregroundColor: MaterialStateProperty.all(Colors.white),
               backgroundColor: MaterialStateProperty.all(Colors.teal),
             ),
             onPressed: () => {

@@ -43,6 +43,8 @@ class _BloonsState extends State<Bloons> {
             itemBuilder: (context, index) {
               return Center(
                 child: Card(
+                  elevation: 5,
+                  shadowColor: Colors.black87,
                   child: ListTile(
                     mouseCursor: SystemMouseCursors.click,
                     minVerticalPadding: 25,
@@ -97,6 +99,7 @@ class _BloonsState extends State<Bloons> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return Card(
+                elevation: 5,
                 child: ListTile(
                   mouseCursor: SystemMouseCursors.click,
                   leading: CircleAvatar(

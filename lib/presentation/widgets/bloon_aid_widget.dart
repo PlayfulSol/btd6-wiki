@@ -37,6 +37,7 @@ Widget listObject(List<dynamic> data, String title, BuildContext context) {
       title,
       style: smallTitleStyle.copyWith(color: Colors.teal),
     ),
+    childrenPadding: const EdgeInsets.symmetric(vertical: 10),
     children: generateChildren(data, context),
   );
 }
@@ -53,6 +54,8 @@ Widget generateMinion(Relative relative, BuildContext context) {
         ),
         const SizedBox(height: 10),
         Card(
+          elevation: 5,
+          shadowColor: Colors.black87,
           child: ListTile(
             leading: Image(
               image: AssetImage(minionImage(relative.image)),
