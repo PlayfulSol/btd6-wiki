@@ -28,14 +28,15 @@ class _DrawerContentState extends State<DrawerContent> {
       children: [
         const SizedBox(
           width: double.infinity,
-          child: SizedBox(
-            height: 100,
-            child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                ),
-                child: Text('Bloons TD 6 Wiki',
-                    style: TextStyle(color: Colors.white, fontSize: 28))),
+          height: 100,
+          child: DrawerHeader(
+            child: Text(
+              'Bloons TD 6 Wiki',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+              ),
+            ),
           ),
         ),
         ExpansionTile(
