@@ -1,13 +1,10 @@
-import '/presentation/widgets/hero_stats.dart';
 import 'package:flutter/material.dart';
-
-import 'package:btd6wiki/models/towers/hero.dart';
-
+import '/presentation/widgets/hero_stats.dart';
+import '/presentation/widgets/hero_level.dart';
+import '/models/towers/hero.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
-
-import '/presentation/widgets/hero_level.dart';
 
 class SingleHero extends StatelessWidget {
   final HeroModel singleHero;

@@ -1,5 +1,5 @@
-import 'package:btd6wiki/models/base_model.dart';
-import 'package:btd6wiki/models/bloons/single_bloon.dart';
+import '/models/base_model.dart';
+import '/models/bloons/single_bloon.dart';
 
 class MinionBloon extends BaseModel {
   late final Map<String, dynamic> images;

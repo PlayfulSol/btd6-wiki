@@ -1,10 +1,8 @@
-import 'package:btd6wiki/utilities/analytics.dart';
-
-import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../utilities/utils.dart';
+import '/utilities/analytics.dart';
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class DeveloperInfo extends StatelessWidget {
   final String name;

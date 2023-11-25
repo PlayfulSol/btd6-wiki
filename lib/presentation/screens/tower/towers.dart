@@ -1,16 +1,12 @@
 import 'dart:convert';
-
-import '/utilities/analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-
 import 'package:auto_size_text/auto_size_text.dart';
-import '/utilities/constants.dart';
-
-import 'package:btd6wiki/models/towers/tower.dart';
+import '/models/towers/tower.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/loader.dart';
-
+import '/utilities/constants.dart';
+import '/utilities/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';

@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-
-import 'package:btd6wiki/models/towers/tower.dart';
-
+import '/models/towers/tower.dart';
+import '/presentation/widgets/path.dart';
 import '/utilities/global_state.dart';
 import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
-
-import '/presentation/widgets/path.dart';
 
 class SingleTower extends StatelessWidget {
   final SingleTowerModel towerData;

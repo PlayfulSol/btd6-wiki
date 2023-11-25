@@ -1,16 +1,14 @@
 import 'dart:convert';
-
-import 'package:btd6wiki/models/bloons/minion_bloon.dart';
-import 'package:btd6wiki/presentation/screens/bloon/minion_bloon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../models/bloons/single_bloon.dart';
-import '../../utilities/constants.dart';
-import '../../utilities/global_state.dart';
-import '../../utilities/images_url.dart';
-import '../../utilities/utils.dart';
-import '../screens/bloon/single_bloon.dart';
+import '/models/bloons/single_bloon.dart';
+import '/models/bloons/minion_bloon.dart';
+import '/presentation/screens/bloon/single_bloon.dart';
+import '/presentation/screens/bloon/minion_bloon.dart';
+import '/utilities/constants.dart';
+import '/utilities/global_state.dart';
+import '/utilities/images_url.dart';
+import '/utilities/utils.dart';
 
 class BloonAidWidget extends StatelessWidget {
   const BloonAidWidget({super.key, required this.data, required this.title});

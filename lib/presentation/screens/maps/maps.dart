@@ -1,15 +1,12 @@
-import '/utilities/analytics.dart';
-import '/utilities/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'dart:async';
-
-import "package:btd6wiki/models/maps/map.dart";
-
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import "/models/maps/map.dart";
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/loader.dart';
-
+import '/utilities/analytics.dart';
+import '/utilities/constants.dart';
 import '/utilities/strings.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';

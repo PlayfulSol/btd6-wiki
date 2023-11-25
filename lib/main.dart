@@ -1,13 +1,11 @@
 import 'package:btd6wiki/firebase_options.dart';
-import '/utilities/analytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
-
 import '/presentation/widgets/drawer_content.dart';
 import '/presentation/widgets/loader.dart';
-
+import '/utilities/analytics.dart';
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/themes.dart';

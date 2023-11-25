@@ -2,10 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import '../../../models/bloons/minion_bloon.dart';
-import '../../../utilities/images_url.dart';
-import '../../../utilities/constants.dart';
-import '../../widgets/bloon_aid_widget.dart';
+import '/models/bloons/minion_bloon.dart';
+import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
+import '/presentation/widgets/bloon_aid_widget.dart';
 
 class MinionBloonPage extends StatefulWidget {
   final MinionBloon minion;

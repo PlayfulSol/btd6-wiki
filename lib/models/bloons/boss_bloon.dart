@@ -1,4 +1,4 @@
-import 'package:btd6wiki/models/bloons/single_bloon.dart';
+import '/models/bloons/single_bloon.dart';
 
 class BossBloonModel {
   late final String id;
