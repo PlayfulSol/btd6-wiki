@@ -91,6 +91,7 @@ class _BloonsState extends State<Bloons> {
         ),
         const SizedBox(height: 15),
         ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             primary: false,
             itemCount: GlobalState.bosses.length,
             shrinkWrap: true,
