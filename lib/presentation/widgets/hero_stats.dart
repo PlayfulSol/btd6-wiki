@@ -1,6 +1,6 @@
-import '/models/hero.dart';
-import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
+import '/models/towers/hero.dart';
+import '/utilities/constants.dart';
 
 class StatsList extends StatelessWidget {
   final HeroStats heroStats;

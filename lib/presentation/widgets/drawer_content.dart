@@ -1,13 +1,10 @@
-import 'package:btd6wiki/utilities/analytics.dart';
-
-import '/presentation/widgets/about_us.dart';
-import '/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/tower/towers.dart';
-
+import '/presentation/widgets/about_us.dart';
+import '/utilities/analytics.dart';
+import '/utilities/utils.dart';
 import '/utilities/constants.dart';
 import '/utilities/global_state.dart';
 

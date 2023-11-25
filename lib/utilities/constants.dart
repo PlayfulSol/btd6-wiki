@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/bloon/bloons.dart';
@@ -31,6 +30,7 @@ List<Widget> pages = [
 const towerDataPath = 'assets/data/towers/';
 const heroDataPath = 'assets/data/heroes/';
 const bloonsDataPath = 'assets/data/bloons/';
+const minionsDataPath = 'assets/data/minions/';
 const bossesDataPath = 'assets/data/bosses/';
 
 PageController pageController = PageController(initialPage: 0);
@@ -79,6 +79,13 @@ const Map<String, Map<String, String>> mapDifficultyToReward = {
     'hard': '800\$',
     'impoppable': '1200\$',
   },
+};
+
+const Map<String, String> bossImageLabels = {
+  'normal': 'Normal',
+  'defeated': 'Defeated',
+  'elite': 'Elite',
+  'eliteDefeated': 'Elite Defeated',
 };
 
 const TextStyle normalStyle = TextStyle(

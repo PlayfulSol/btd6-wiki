@@ -1,14 +1,14 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import '../../models/bloons/single_bloon.dart';
-import '../../utilities/constants.dart';
-import '../../utilities/global_state.dart';
-import '../../utilities/images_url.dart';
-import '../../utilities/utils.dart';
-import '../screens/bloon/single_bloon.dart';
+import '/models/bloons/single_bloon.dart';
+import '/models/bloons/minion_bloon.dart';
+import '/presentation/screens/bloon/single_bloon.dart';
+import '/presentation/screens/bloon/minion_bloon.dart';
+import '/utilities/constants.dart';
+import '/utilities/global_state.dart';
+import '/utilities/images_url.dart';
+import '/utilities/utils.dart';
 
 class BloonAidWidget extends StatelessWidget {
   const BloonAidWidget({super.key, required this.data, required this.title});
@@ -39,6 +39,53 @@ Widget listObject(List<dynamic> data, String title, BuildContext context) {
     ),
     children: generateChildren(data, context),
   );
+}
+
+Widget generateMinion(Relative relative, BuildContext context) {
+  if (relative.id == "N/A") {
+    return Container();
+  } else {
+    return Column(
+      children: [
+        Divider(
+          thickness: 2,
+          color: Colors.grey[600],
+        ),
+        const SizedBox(height: 10),
+        Card(
+          child: ListTile(
+            leading: Image(
+              image: AssetImage(minionImage(relative.image)),
+            ),
+            title: Text(
+              relative.name,
+              style: normalStyle.copyWith(fontWeight: FontWeight.w600),
+            ),
+            subtitle: Text(
+              'Spawn ${relative.value}',
+              style: normalStyle,
+            ),
+            onTap: () async {
+              var id = relative.id;
+              var path = '${minionsDataPath + id}.json';
+              final data = await rootBundle.loadString(path);
+              var jsonData = json.decode(data);
+              MinionBloon bloonData = MinionBloon.fromJson(jsonData);
+              GlobalState.currentTitle = bloonData.name;
+              // ignore: use_build_context_synchronously
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MinionBloonPage(minion: bloonData),
+                ),
+              );
+            },
+          ),
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
 }
 
 List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
@@ -89,6 +136,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
 
 Widget listString(List<String> data, String title) {
   return Column(
+    mainAxisSize: MainAxisSize.min,
     children: [
       Text(
         title,
@@ -96,6 +144,7 @@ Widget listString(List<String> data, String title) {
       ),
       const SizedBox(height: 5),
       ListView.builder(
+        primary: false,
         shrinkWrap: true,
         itemCount: data.length,
         itemBuilder: (context, index) {
@@ -108,5 +157,25 @@ Widget listString(List<String> data, String title) {
         },
       ),
     ],
+  );
+}
+
+ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
+  return ExpansionTile(
+    initiallyExpanded: expand,
+    title: Text(
+      title,
+      style: smallTitleStyle.copyWith(color: Colors.teal),
+    ),
+    children: gimmicks
+        .map<Widget>(
+          (item) => ListTile(
+            title: Text(
+              "- $item",
+              style: normalStyle,
+            ),
+          ),
+        )
+        .toList(),
   );
 }

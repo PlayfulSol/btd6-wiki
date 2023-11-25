@@ -1,14 +1,11 @@
-import '/utilities/analytics.dart';
-import '/models/bloons/boss_bloon.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:convert';
-
 import '/models/bloons/single_bloon.dart';
-
+import '/models/bloons/boss_bloon.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/boss_bloon.dart';
-
+import '/utilities/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -40,6 +37,7 @@ class _BloonsState extends State<Bloons> {
               childAspectRatio: 1,
               mainAxisExtent: 80,
             ),
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             primary: false,
             itemBuilder: (context, index) {
@@ -93,6 +91,7 @@ class _BloonsState extends State<Bloons> {
         ),
         const SizedBox(height: 15),
         ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             primary: false,
             itemCount: GlobalState.bosses.length,
             shrinkWrap: true,

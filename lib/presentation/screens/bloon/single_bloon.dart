@@ -1,10 +1,8 @@
-import '/utilities/constants.dart';
-import '/utilities/utils.dart';
 import 'package:flutter/material.dart';
-
 import '/presentation/widgets/bloon_aid_widget.dart';
 import '/models/bloons/single_bloon.dart';
-
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 
@@ -66,7 +64,7 @@ class _SingleBloonState extends State<SingleBloon> {
               ),
               const SizedBox(height: 5),
               Text(
-                "Relative (to red bloon) ${widget.bloon.speed.relative}",
+                "Relative (to red bloon): ${widget.bloon.speed.relative}",
                 style: normalStyle,
               ),
               const SizedBox(height: 5),

@@ -1,4 +1,4 @@
-import '/models/common.dart';
+import '/models/towers/common.dart';
 
 class TowerModel {
   late final String id;

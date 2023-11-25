@@ -1,4 +1,4 @@
-import '/models/common.dart';
+import '/models/towers/common.dart';
 
 class MenuHeroModel {
   late final String id;

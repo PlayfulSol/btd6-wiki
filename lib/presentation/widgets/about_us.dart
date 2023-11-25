@@ -1,11 +1,9 @@
-import 'package:btd6wiki/utilities/analytics.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart';
+import '/utilities/analytics.dart';
 import '/presentation/widgets/developer_info.dart';
 import '/utilities/constants.dart';
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../utilities/utils.dart';
+import '/utilities/utils.dart';
 
 class AboutUsPopup extends StatelessWidget {
   const AboutUsPopup({super.key});

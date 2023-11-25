@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '/models/hero.dart';
-
+import '/models/towers/hero.dart';
 import '/utilities/images_url.dart';
 
 class HeroLevel extends StatelessWidget {

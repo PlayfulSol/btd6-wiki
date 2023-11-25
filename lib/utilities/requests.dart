@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-
+import '/models/maps/map.dart';
+import '/models/towers/hero.dart';
+import '/models/towers/tower.dart';
 import '/models/bloons/basic_bloon.dart';
-import '/models/hero.dart';
-import '/models/tower.dart';
-import '/models/map.dart';
-
 import '/utilities/global_state.dart';
 import 'constants.dart';
 
@@ -55,5 +53,5 @@ Future<void> getBosses() async {
       await rootBundle.loadString('$configDirectory/bosses.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
   GlobalState.bosses =
-      parsedConfig.map((e) => BasicBossModel.fromJson(e)).toList();
+      parsedConfig.map((e) => BasicBloonModel.fromJson(e)).toList();
 }
