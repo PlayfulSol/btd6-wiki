@@ -1,5 +1,5 @@
-import 'package:btd6wiki/themes/color_schemes.g.dart';
 import 'package:flutter/material.dart';
+import '/themes/color_schemes.g.dart';
 
 class Themes {
   Themes._();

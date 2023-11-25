@@ -1,7 +1,7 @@
-import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import '/models/towers/hero.dart';
 import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
 
 class HeroLevel extends StatelessWidget {
   final HeroModel singleHero;
