@@ -8,7 +8,7 @@ import '/presentation/widgets/loader.dart';
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
-import '/utilities/analytics.dart';
+import 'analytics/analytics.dart';
 import '/themes/themes.dart';
 
 Future<void> main() async {
@@ -17,6 +17,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   logEvent('theme_used', AdaptiveThemeMode.system.toString());
+  logPageView(titles[0]);
   runApp(const MyApp());
 }
 
@@ -34,7 +35,10 @@ class MyApp extends StatelessWidget {
         dark: Themes.darkTheme,
         initial: AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => MaterialApp(
-              navigatorObservers: <NavigatorObserver>[observer],
+              navigatorObservers: <NavigatorObserver>[
+                observer,
+                FirebaseAnalyticsObserver(analytics: analytics)
+              ],
               theme: theme,
               darkTheme: darkTheme,
               title: 'BTD6 Wiki',

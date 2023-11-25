@@ -3,6 +3,8 @@ import '/models/towers/tower.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class MonkeyPath extends StatelessWidget {
   final List<MonkeyPathModel> path;
@@ -20,6 +22,10 @@ class MonkeyPath extends StatelessWidget {
     return ExpansionTile(
         title: Text(pathsDictionary[pathKey]!,
             style: titleStyle.copyWith(color: Colors.teal)),
+        onExpansionChanged: (value) {
+          logEvent(
+              towerConst, 'tower_${monkeyId}_path_${pathsDictionary[pathKey]}');
+        },
         children: [
           ListView.builder(
             shrinkWrap: true,

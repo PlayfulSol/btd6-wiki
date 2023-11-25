@@ -9,6 +9,8 @@ import '/utilities/constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class BloonAidWidget extends StatelessWidget {
   const BloonAidWidget({super.key, required this.data, required this.title});
@@ -37,6 +39,9 @@ Widget listObject(List<dynamic> data, String title, BuildContext context) {
       title,
       style: smallTitleStyle.copyWith(color: Colors.teal),
     ),
+    onExpansionChanged: (value) {
+      logEvent(bloonAidConst, 'expand_children');
+    },
     childrenPadding: const EdgeInsets.symmetric(vertical: 10),
     children: generateChildren(data, context),
   );
@@ -74,6 +79,7 @@ Widget generateMinion(Relative relative, BuildContext context) {
               var path = '${minionsDataPath + id}.json';
               final data = await rootBundle.loadString(path);
               var jsonData = json.decode(data);
+              logInnerPageView(relative.name);
               MinionBloon bloonData = MinionBloon.fromJson(jsonData);
               GlobalState.currentTitle = bloonData.name;
               // ignore: use_build_context_synchronously
@@ -123,6 +129,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
           var jsonData = json.decode(data);
           SingleBloonModel bloonData = SingleBloonModel.fromJson(jsonData);
           GlobalState.currentTitle = bloonData.name;
+          logPageView(relative.name);
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
             context,
@@ -172,6 +179,9 @@ ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
       title,
       style: smallTitleStyle.copyWith(color: Colors.teal),
     ),
+    onExpansionChanged: (value) {
+      logEvent(bloonAidConst, 'expand_gimmicks');
+    },
     children: gimmicks
         .map<Widget>(
           (item) => ListTile(

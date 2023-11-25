@@ -1,4 +1,3 @@
-import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import '/presentation/widgets/hero_stats.dart';
 import '/presentation/widgets/hero_level.dart';
@@ -6,6 +5,9 @@ import '/models/towers/hero.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
+import '/utilities/constants.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class SingleHero extends StatelessWidget {
   final HeroModel singleHero;
@@ -57,6 +59,9 @@ class SingleHero extends StatelessWidget {
                   const SizedBox(height: 10),
                   ExpansionTile(
                     title: const Text("Advanced Stats"),
+                    onExpansionChanged: (value) {
+                      logEvent(heroConst, 'Stats');
+                    },
                     children: [
                       StatsList(heroStats: singleHero.stats),
                     ],

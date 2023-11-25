@@ -5,7 +5,7 @@ import '/models/bloons/single_bloon.dart';
 import '/models/bloons/boss_bloon.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/boss_bloon.dart';
-import '/utilities/analytics.dart';
+import '/../analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';

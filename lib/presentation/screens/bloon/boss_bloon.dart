@@ -6,6 +6,8 @@ import '/presentation/widgets/bloon_aid_widget.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/images_url.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class BossBloon extends StatefulWidget {
   final BossBloonModel bloon;
@@ -180,6 +182,9 @@ class _BossBloonState extends State<BossBloon> {
                       "General Immunities",
                       style: smallTitleStyle.copyWith(color: Colors.teal),
                     ),
+                    onExpansionChanged: (bool expanded) {
+                      logEvent(bossBloonConst, 'general_immunities');
+                    },
                     children: widget.bloon.immunities
                         .map<Widget>(
                           (item) => ListTile(
@@ -201,6 +206,9 @@ class _BossBloonState extends State<BossBloon> {
         title,
         style: smallTitleStyle.copyWith(color: Colors.teal),
       ),
+      onExpansionChanged: (bool expanded) {
+        logEvent(bossBloonConst, 'health_$title');
+      },
       children: healthTiers
           .map(
             (tierHealth) => ListTile(
