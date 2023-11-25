@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '/models/towers/hero.dart';
 import '/utilities/constants.dart';
+import '/utilities/analytics.dart';
 
 class StatsList extends StatelessWidget {
   final HeroStats heroStats;
@@ -37,6 +38,10 @@ class StatsList extends StatelessWidget {
               return ExpansionTile(
                 title:
                     Text(statsDictionary[heroStats.data.keys.toList()[index]]!),
+                onExpansionChanged: (value) {
+                  logEvent('hero',
+                      'expand_stats_${heroStats.data.keys.toList()[index]}');
+                },
                 children: [
                   for (final dynamicItemValue in dynamicItem)
                     Padding(

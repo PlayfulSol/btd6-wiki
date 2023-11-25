@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '/models/towers/hero.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
+import '/utilities/analytics.dart';
 
 class HeroLevel extends StatelessWidget {
   final HeroModel singleHero;
@@ -21,6 +22,9 @@ class HeroLevel extends StatelessWidget {
     return ExpansionTile(
       title: Text("Level ${level.name}",
           style: titleStyle.copyWith(color: Colors.teal)),
+      onExpansionChanged: (value) {
+        logEvent('hero', 'expand_level_${level.name}');
+      },
       children: [
         const SizedBox(height: 15),
         shouldShowLevelImage

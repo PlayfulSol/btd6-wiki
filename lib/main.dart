@@ -17,6 +17,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   logEvent('theme_used', AdaptiveThemeMode.system.toString());
+  logPageView(titles[0]);
   runApp(const MyApp());
 }
 

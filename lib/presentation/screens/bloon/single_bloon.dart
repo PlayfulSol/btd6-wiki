@@ -5,6 +5,7 @@ import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
+import '/utilities/analytics.dart';
 
 class SingleBloon extends StatefulWidget {
   final SingleBloonModel bloon;
@@ -95,6 +96,9 @@ class _SingleBloonState extends State<SingleBloon> {
                       "Variants",
                       style: smallTitleStyle.copyWith(color: Colors.teal),
                     ),
+                    onExpansionChanged: (value) {
+                      logEvent('single_bloon', 'variants');
+                    },
                     children: widget.bloon.variants
                         .map((e) => Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
@@ -126,6 +130,9 @@ class _SingleBloonState extends State<SingleBloon> {
                   "Normal",
                   style: smallTitleStyle.copyWith(color: Colors.teal),
                 ),
+                onExpansionChanged: (value) {
+                  logEvent('single_bloon', 'rounds');
+                },
                 children: widget.bloon.rounds.normal
                     .map((e) => ListTile(
                           title: RichText(
@@ -151,6 +158,9 @@ class _SingleBloonState extends State<SingleBloon> {
                   "ABR",
                   style: smallTitleStyle.copyWith(color: Colors.teal),
                 ),
+                onExpansionChanged: (value) {
+                  logEvent('single_bloon', 'ABR');
+                },
                 children: widget.bloon.rounds.abr
                     .map((e) => ListTile(
                           title: RichText(
