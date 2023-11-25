@@ -128,7 +128,6 @@ class _TowersState extends State<Towers>
                         child: ListTile(
                           mouseCursor: SystemMouseCursors.click,
                           dense: false,
-                          isThreeLine: false,
                           leading: CircleAvatar(
                             backgroundColor: Colors.transparent,
                             child: Image(
@@ -140,8 +139,7 @@ class _TowersState extends State<Towers>
                           title: AutoSizeText(
                             snapshot.data[index].name,
                             maxLines: 1,
-                            style: bolderNormalStyle.copyWith(
-                                fontSize: titleFontSize),
+                            style: titleStyle.copyWith(fontSize: titleFontSize),
                           ),
                           subtitle: AutoSizeText(
                               snapshot.data[index].inGameDesc,

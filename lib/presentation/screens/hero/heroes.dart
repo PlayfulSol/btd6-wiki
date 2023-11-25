@@ -68,7 +68,6 @@ class _HeroesState extends State<Heroes> {
                           elevation: 5,
                           shadowColor: Colors.black87,
                           child: ListTile(
-                              isThreeLine: false,
                               mouseCursor: SystemMouseCursors.click,
                               leading: CircleAvatar(
                                   backgroundColor: Colors.transparent,
@@ -78,7 +77,7 @@ class _HeroesState extends State<Heroes> {
                                           snapshot.data[index].image)))),
                               title: AutoSizeText(snapshot.data[index].name,
                                   wrapWords: false,
-                                  style: bolderNormalStyle.copyWith(
+                                  style: titleStyle.copyWith(
                                       fontSize: titleFontSize)),
                               subtitle: AutoSizeText(
                                 snapshot.data[index].inGameDesc,

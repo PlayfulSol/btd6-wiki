@@ -32,8 +32,7 @@ class DeveloperInfo extends StatelessWidget {
             Flexible(
               flex: 4,
               child: Text(name,
-                  textAlign: TextAlign.center,
-                  style: normalStyle.copyWith(fontWeight: FontWeight.bold)),
+                  textAlign: TextAlign.center, style: bolderNormalStyle),
             ),
             Flexible(
               child: IconButton(
