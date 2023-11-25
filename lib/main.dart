@@ -35,7 +35,10 @@ class MyApp extends StatelessWidget {
         dark: Themes.darkTheme,
         initial: AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => MaterialApp(
-              navigatorObservers: <NavigatorObserver>[observer],
+              navigatorObservers: <NavigatorObserver>[
+                observer,
+                FirebaseAnalyticsObserver(analytics: analytics)
+              ],
               theme: theme,
               darkTheme: darkTheme,
               title: 'BTD6 Wiki',
