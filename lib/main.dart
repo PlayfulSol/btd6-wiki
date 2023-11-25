@@ -17,7 +17,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   logEvent('theme_used', AdaptiveThemeMode.system.toString());
-  logPageView(titles[0]);
   runApp(const MyApp());
 }
 
@@ -37,7 +36,6 @@ class MyApp extends StatelessWidget {
         builder: (theme, darkTheme) => MaterialApp(
               navigatorObservers: <NavigatorObserver>[
                 observer,
-                FirebaseAnalyticsObserver(analytics: analytics)
               ],
               theme: theme,
               darkTheme: darkTheme,
@@ -78,6 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Future.wait([getTowers(), getBloonsData(), getMaps(), getHeroes()])
         .then((_) => setState(() {
+              logPageView(titles[GlobalState.currentPageIndex]);
               GlobalState.isLoading = false;
               GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
             }));

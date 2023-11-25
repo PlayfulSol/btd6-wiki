@@ -13,6 +13,8 @@ Future<void> logEvent(String eventName, String eventValue) async {
     name: eventName,
     parameters: <String, dynamic>{
       'eventValue': eventValue,
+      'timestamp': DateTime.now().toString(),
+      'value': eventValue
     },
   );
 }
