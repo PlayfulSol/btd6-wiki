@@ -136,9 +136,9 @@ class _BossBloonState extends State<BossBloon> {
                     "Health",
                     style: titleStyle,
                   ),
-                  Text(
+                  const Text(
                     "Each additional player adds 20%",
-                    style: normalStyle.copyWith(fontSize: 13),
+                    style: subtitleStyle,
                   ),
                   bossHealth("Normal", widget.bloon.health.base),
                   bossHealth("Elite", widget.bloon.health.elite),

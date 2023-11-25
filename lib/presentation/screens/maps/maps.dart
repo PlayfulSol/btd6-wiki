@@ -179,13 +179,11 @@ class _MapsState extends State<Maps> {
                                             capitalizeEveryWord(
                                                 snapshot.data[index].name),
                                             maxLines: 1,
-                                            style:
-                                                const TextStyle(fontSize: 14),
+                                            style: bolderNormalStyle,
                                           ),
                                           const SizedBox(height: 5),
                                           Text(snapshot.data[index].difficulty,
-                                              style: const TextStyle(
-                                                  fontSize: 10)),
+                                              style: subtitleStyle),
                                         ],
                                       ),
                                     ),

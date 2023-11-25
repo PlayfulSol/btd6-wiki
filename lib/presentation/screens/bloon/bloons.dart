@@ -60,7 +60,7 @@ class _BloonsState extends State<Bloons> {
                     ),
                     title: Text(
                       GlobalState.bloons[index].name,
-                      style: normalStyle.copyWith(fontWeight: FontWeight.w600),
+                      style: bolderNormalStyle,
                     ),
                     onTap: () async {
                       if (!GlobalState.isLoading) {
@@ -112,7 +112,7 @@ class _BloonsState extends State<Bloons> {
                   ),
                   title: Text(
                     GlobalState.bosses[index].name,
-                    style: normalStyle.copyWith(fontWeight: FontWeight.w600),
+                    style: bolderNormalStyle,
                   ),
                   onTap: () async {
                     if (!GlobalState.isLoading) {

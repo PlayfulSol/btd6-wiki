@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import '/presentation/widgets/hero_stats.dart';
 import '/presentation/widgets/hero_level.dart';
@@ -49,8 +50,7 @@ class SingleHero extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   Text(singleHero.inGameDesc ?? "No description found",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 16)),
+                      textAlign: TextAlign.center, style: normalStyle),
                   const SizedBox(height: 10),
                   Text(costToString(singleHero.cost),
                       textAlign: TextAlign.center),

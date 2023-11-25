@@ -26,11 +26,11 @@ class StatsList extends StatelessWidget {
               return ListTile(
                 title: Text(
                   heroStats.data.keys.toList()[index],
-                  style: const TextStyle(fontSize: 16),
+                  style: normalStyle,
                 ),
                 subtitle: Text(
                   dynamicItem,
-                  style: const TextStyle(fontSize: 14),
+                  style: subtitleStyle,
                 ),
               );
             } else {
@@ -48,7 +48,7 @@ class StatsList extends StatelessWidget {
                                 ListTile(
                                   title: Text(
                                     dynamicItemValue,
-                                    style: const TextStyle(fontSize: 14),
+                                    style: normalStyle,
                                   ),
                                 ),
                                 const SizedBox(height: 20)
@@ -67,16 +67,14 @@ class StatsList extends StatelessWidget {
                                       return ListTile(
                                         title: Text(
                                           dynamicItemValueValue,
-                                          style: const TextStyle(fontSize: 14),
+                                          style: subtitleStyle,
                                         ),
                                       );
                                     })
                               ] else ...[
                                 Text(dynamicItemValue['name'],
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold)),
+                                    style: bolderNormalStyle),
                                 ListView.builder(
                                   shrinkWrap: true,
                                   physics: const NeverScrollableScrollPhysics(),
@@ -90,7 +88,7 @@ class StatsList extends StatelessWidget {
                                     return ListTile(
                                       title: Text(
                                         dynamicItemValueValue,
-                                        style: const TextStyle(fontSize: 14),
+                                        style: subtitleStyle,
                                       ),
                                     );
                                   },

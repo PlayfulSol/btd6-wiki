@@ -77,7 +77,8 @@ class _HeroesState extends State<Heroes> {
                                           snapshot.data[index].image)))),
                               title: AutoSizeText(snapshot.data[index].name,
                                   wrapWords: false,
-                                  style: TextStyle(fontSize: titleFontSize)),
+                                  style: bolderNormalStyle.copyWith(
+                                      fontSize: titleFontSize)),
                               subtitle: AutoSizeText(
                                 snapshot.data[index].inGameDesc,
                                 overflow: TextOverflow.ellipsis,

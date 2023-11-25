@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import '/models/towers/hero.dart';
 import '/utilities/images_url.dart';
@@ -19,25 +20,30 @@ class HeroLevel extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Text("Level ${level.name}",
-          style: const TextStyle(
-              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.teal)),
+          style: titleStyle.copyWith(color: Colors.teal)),
       children: [
         const SizedBox(height: 15),
         shouldShowLevelImage
-            ? Image(
-                image: AssetImage(heroLvlImage(singleHero.image, level.name)),
-                width: 200,
-                fit: BoxFit.fill,
+            ? Column(
+                children: [
+                  Image(
+                    image:
+                        AssetImage(heroLvlImage(singleHero.image, level.name)),
+                    width: 200,
+                    fit: BoxFit.fill,
+                  ),
+                  const SizedBox(height: 15),
+                ],
               )
             : const SizedBox.shrink(),
         Text(level.description,
-            textAlign: TextAlign.center, style: const TextStyle(fontSize: 15)),
+            textAlign: TextAlign.center, style: normalStyle),
         const SizedBox(height: 10),
         if (level.name != '1') ...[
           Text(
             "Cost: ${level.cost}",
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 15),
+            style: normalStyle,
           ),
           const SizedBox(height: 30),
         ],

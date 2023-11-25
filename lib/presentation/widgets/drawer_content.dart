@@ -26,16 +26,13 @@ class _DrawerContentState extends State<DrawerContent> {
     return Drawer(
         child: Column(
       children: [
-        const SizedBox(
-          width: double.infinity,
-          height: 100,
-          child: DrawerHeader(
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 50, 0, 10),
+          child: SizedBox(
+            width: double.infinity,
             child: Text(
               'Bloons TD 6 Wiki',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 28,
-              ),
+              style: bigTitleStyle.copyWith(color: Colors.white),
             ),
           ),
         ),

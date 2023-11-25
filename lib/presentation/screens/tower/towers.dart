@@ -139,13 +139,16 @@ class _TowersState extends State<Towers>
                           title: AutoSizeText(
                             snapshot.data[index].name,
                             maxLines: 1,
-                            style: TextStyle(fontSize: titleFontSize),
+                            style: bolderNormalStyle.copyWith(
+                                fontSize: titleFontSize),
                           ),
                           subtitle: AutoSizeText(
                               snapshot.data[index].inGameDesc,
                               wrapWords: false,
                               overflow: TextOverflow.ellipsis,
                               maxLines: rowsToShow,
+                              style: subtitleStyle.copyWith(
+                                  fontSize: subtitleFontSize),
                               minFontSize: subtitleFontSize,
                               maxFontSize: subtitleFontSize),
                           onTap: () async {

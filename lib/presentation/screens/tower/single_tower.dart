@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import '/models/towers/tower.dart';
 import '/presentation/widgets/path.dart';
@@ -49,14 +50,12 @@ class SingleTower extends StatelessWidget {
                 Text(
                   towerData.inGameDesc,
                   textAlign: TextAlign.left,
-                  style: const TextStyle(fontSize: 20),
+                  style: normalStyle,
                 ),
                 const BetterDivider(),
                 Text(
                   'Class - ${towerData.type}',
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
+                  style: smallTitleStyle,
                 ),
                 const SizedBox(
                   height: 10,
@@ -64,9 +63,7 @@ class SingleTower extends StatelessWidget {
                 Text(
                   costToString(towerData.cost),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 17,
-                  ),
+                  style: normalStyle,
                 ),
                 const SizedBox(
                   height: 20,
@@ -74,9 +71,7 @@ class SingleTower extends StatelessWidget {
                 Text(
                   statsToString(towerData.stats),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 17,
-                  ),
+                  style: normalStyle,
                 ),
                 const SizedBox(
                   height: 10,
@@ -84,9 +79,7 @@ class SingleTower extends StatelessWidget {
                 Text(
                   extraStatsToString(towerData.stats),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 17,
-                  ),
+                  style: normalStyle,
                 ),
                 const BetterDivider(),
                 ListView.builder(
