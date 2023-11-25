@@ -1,10 +1,8 @@
 import 'package:url_launcher/url_launcher.dart';
-
+import '/models/maps/map.dart';
+import '/models/towers/common.dart';
+import '/models/towers/tower.dart';
 import '/utilities/global_state.dart';
-
-import '/models/map.dart';
-import '/models/common.dart';
-import '/models/tower.dart';
 
 String formatBigNumber(int number) {
   if (number < 1000) {

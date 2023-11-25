@@ -1,10 +1,10 @@
-import '/utilities/constants.dart';
 import 'package:flutter/material.dart';
-
-import '/models/bloons/boss_bloon.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import '/models/bloons/boss_bloon.dart';
+import '/presentation/widgets/bloon_aid_widget.dart';
 import '/utilities/global_state.dart';
+import '/utilities/constants.dart';
 import '/utilities/images_url.dart';
 
 class BossBloon extends StatefulWidget {
@@ -19,12 +19,15 @@ class BossBloon extends StatefulWidget {
 class _BossBloonState extends State<BossBloon> {
   final controller = CarouselController();
   List<String> images = [];
+  List<String> imageKeys = [];
+
   int activeIndex = 0;
 
   @override
   void initState() {
     super.initState();
     images = List.from(widget.bloon.images.values);
+    imageKeys = List.from(widget.bloon.images.keys);
   }
 
   @override
@@ -63,8 +66,15 @@ class _BossBloonState extends State<BossBloon> {
                                 image: AssetImage(bossImage(images[index])),
                                 filterQuality: FilterQuality.high,
                                 width: MediaQuery.of(context).size.width * 0.56,
+                                semanticLabel:
+                                    bossImageLabels[imageKeys[index]],
                               )),
                         ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        bossImageLabels[imageKeys[activeIndex]]!,
+                        style: smallTitleStyle,
                       ),
                       const SizedBox(height: 10),
                       AnimatedSmoothIndicator(
@@ -133,6 +143,7 @@ class _BossBloonState extends State<BossBloon> {
                   bossHealth("Normal", widget.bloon.health.base),
                   bossHealth("Elite", widget.bloon.health.elite),
                   const SizedBox(height: 10),
+                  generateMinion(widget.bloon.children, context),
                   Divider(
                     thickness: 2,
                     color: Colors.grey[600],
@@ -172,7 +183,7 @@ class _BossBloonState extends State<BossBloon> {
                     children: widget.bloon.immunities
                         .map<Widget>(
                           (item) => ListTile(
-                            title: Text("- $item:", style: normalStyle),
+                            title: Text("- $item", style: normalStyle),
                           ),
                         )
                         .toList(),
@@ -182,26 +193,6 @@ class _BossBloonState extends State<BossBloon> {
             ),
           ),
         ));
-  }
-
-  ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
-    return ExpansionTile(
-      initiallyExpanded: expand,
-      title: Text(
-        title,
-        style: smallTitleStyle.copyWith(color: Colors.teal),
-      ),
-      children: gimmicks
-          .map<Widget>(
-            (item) => ListTile(
-              title: Text(
-                "- $item",
-                style: normalStyle,
-              ),
-            ),
-          )
-          .toList(),
-    );
   }
 
   ExpansionTile bossHealth(String title, List<TierHealth> healthTiers) {

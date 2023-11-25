@@ -1,16 +1,14 @@
-import '/models/hero.dart';
-import '/utilities/analytics.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
-
-import '../../../utilities/constants.dart';
-import '/utilities/global_state.dart';
-import '/utilities/images_url.dart';
-
+import '/models/towers/hero.dart';
 import '/presentation/widgets/loader.dart';
 import '/presentation/screens/hero/single_hero.dart';
+import '/utilities/analytics.dart';
+import '/utilities/constants.dart';
+import '/utilities/global_state.dart';
+import '/utilities/images_url.dart';
 
 class Heroes extends StatefulWidget {
   const Heroes({super.key});
