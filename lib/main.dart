@@ -1,4 +1,5 @@
 import 'package:btd6wiki/firebase_options.dart';
+import 'package:btd6wiki/themes/color_schemes.g.dart';
 import '/utilities/analytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,7 +11,7 @@ import '/presentation/widgets/loader.dart';
 
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
-import '/utilities/themes.dart';
+import 'themes/themes.dart';
 import '/utilities/constants.dart';
 
 Future<void> main() async {
@@ -31,8 +32,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AdaptiveTheme(
-        light: Themes.lightTheme,
-        dark: Themes.darkTheme,
+        light: ThemeData(useMaterial3: true, colorScheme: lightColorScheme),
+        dark: ThemeData(useMaterial3: true, colorScheme: darkColorScheme),
         initial: AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => MaterialApp(
               navigatorObservers: <NavigatorObserver>[observer],
