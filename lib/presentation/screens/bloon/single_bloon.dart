@@ -5,7 +5,8 @@ import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
-import '/utilities/analytics.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class SingleBloon extends StatefulWidget {
   final SingleBloonModel bloon;
@@ -97,7 +98,7 @@ class _SingleBloonState extends State<SingleBloon> {
                       style: smallTitleStyle.copyWith(color: Colors.teal),
                     ),
                     onExpansionChanged: (value) {
-                      logEvent('single_bloon', 'variants');
+                      logEvent(bloonConst, 'variants');
                     },
                     children: widget.bloon.variants
                         .map((e) => Padding(
@@ -131,7 +132,7 @@ class _SingleBloonState extends State<SingleBloon> {
                   style: smallTitleStyle.copyWith(color: Colors.teal),
                 ),
                 onExpansionChanged: (value) {
-                  logEvent('single_bloon', 'rounds');
+                  logEvent(bloonConst, 'rounds');
                 },
                 children: widget.bloon.rounds.normal
                     .map((e) => ListTile(
@@ -159,7 +160,7 @@ class _SingleBloonState extends State<SingleBloon> {
                   style: smallTitleStyle.copyWith(color: Colors.teal),
                 ),
                 onExpansionChanged: (value) {
-                  logEvent('single_bloon', 'ABR');
+                  logEvent(bloonConst, 'ABR');
                 },
                 children: widget.bloon.rounds.abr
                     .map((e) => ListTile(

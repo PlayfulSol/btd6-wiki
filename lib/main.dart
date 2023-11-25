@@ -8,7 +8,7 @@ import '/presentation/widgets/loader.dart';
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
-import '/utilities/analytics.dart';
+import 'analytics/analytics.dart';
 import '/themes/themes.dart';
 
 Future<void> main() async {

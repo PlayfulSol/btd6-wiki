@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '/models/towers/hero.dart';
 import '/utilities/constants.dart';
-import '/utilities/analytics.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class StatsList extends StatelessWidget {
   final HeroStats heroStats;
@@ -39,7 +40,7 @@ class StatsList extends StatelessWidget {
                 title:
                     Text(statsDictionary[heroStats.data.keys.toList()[index]]!),
                 onExpansionChanged: (value) {
-                  logEvent('hero',
+                  logEvent(heroConst,
                       'expand_stats_${heroStats.data.keys.toList()[index]}');
                 },
                 children: [

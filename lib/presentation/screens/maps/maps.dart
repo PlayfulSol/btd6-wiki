@@ -6,7 +6,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import "/models/maps/map.dart";
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/loader.dart';
-import '/utilities/analytics.dart';
+import '/../analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/strings.dart';
 import '/utilities/global_state.dart';

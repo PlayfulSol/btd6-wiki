@@ -6,7 +6,7 @@ import '/models/towers/tower.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/loader.dart';
 import '/utilities/constants.dart';
-import '/utilities/analytics.dart';
+import '/../analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';

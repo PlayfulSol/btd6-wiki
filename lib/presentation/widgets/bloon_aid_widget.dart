@@ -9,7 +9,8 @@ import '/utilities/constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
-import '/utilities/analytics.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class BloonAidWidget extends StatelessWidget {
   const BloonAidWidget({super.key, required this.data, required this.title});
@@ -39,7 +40,7 @@ Widget listObject(List<dynamic> data, String title, BuildContext context) {
       style: smallTitleStyle.copyWith(color: Colors.teal),
     ),
     onExpansionChanged: (value) {
-      logEvent('bloon_aid', 'expand_children');
+      logEvent(bloonAidConst, 'expand_children');
     },
     childrenPadding: const EdgeInsets.symmetric(vertical: 10),
     children: generateChildren(data, context),
@@ -179,7 +180,7 @@ ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
       style: smallTitleStyle.copyWith(color: Colors.teal),
     ),
     onExpansionChanged: (value) {
-      logEvent('bloon_aid', 'expand_gimmicks');
+      logEvent(bloonAidConst, 'expand_gimmicks');
     },
     children: gimmicks
         .map<Widget>(

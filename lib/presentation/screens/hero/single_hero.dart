@@ -6,7 +6,8 @@ import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 import '/utilities/constants.dart';
-import '/utilities/analytics.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class SingleHero extends StatelessWidget {
   final HeroModel singleHero;
@@ -59,7 +60,7 @@ class SingleHero extends StatelessWidget {
                   ExpansionTile(
                     title: const Text("Advanced Stats"),
                     onExpansionChanged: (value) {
-                      logEvent('single_hero', 'Stats');
+                      logEvent(heroConst, 'Stats');
                     },
                     children: [
                       StatsList(heroStats: singleHero.stats),

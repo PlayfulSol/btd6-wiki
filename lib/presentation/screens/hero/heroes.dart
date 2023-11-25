@@ -5,7 +5,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import '/models/towers/hero.dart';
 import '/presentation/widgets/loader.dart';
 import '/presentation/screens/hero/single_hero.dart';
-import '/utilities/analytics.dart';
+import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';

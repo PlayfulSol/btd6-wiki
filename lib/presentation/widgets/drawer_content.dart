@@ -3,10 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/tower/towers.dart';
 import '/presentation/widgets/about_us.dart';
-import '/utilities/analytics.dart';
 import '/utilities/utils.dart';
 import '/utilities/constants.dart';
 import '/utilities/global_state.dart';
+import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 
 class DrawerContent extends StatefulWidget {
   const DrawerContent({super.key});
@@ -41,7 +42,7 @@ class _DrawerContentState extends State<DrawerContent> {
           title:
               Text(drawrTitles[0], style: const TextStyle(color: Colors.teal)),
           onExpansionChanged: (bool expended) {
-            logEvent('menu', 'towers_expanded');
+            logEvent(drawrConst, 'towers_expanded');
             setState(() {
               if (expended) {
                 _mapsExpansionTileController.collapse();
@@ -85,7 +86,7 @@ class _DrawerContentState extends State<DrawerContent> {
         ListTile(
             title: Text(drawrTitles[1]),
             onTap: () {
-              logEvent('menu', 'heroes');
+              logEvent(drawrConst, 'heroes');
               if (!GlobalState.isLoading) {
                 Navigator.pop(context);
                 GlobalState.currentPageIndex = 1;
@@ -102,7 +103,7 @@ class _DrawerContentState extends State<DrawerContent> {
         ListTile(
             title: Text(drawrTitles[2]),
             onTap: () {
-              logEvent('menu', 'bloons');
+              logEvent(drawrConst, 'bloons');
               if (!GlobalState.isLoading) {
                 Navigator.pop(context);
                 GlobalState.currentPageIndex = 2;
@@ -121,7 +122,7 @@ class _DrawerContentState extends State<DrawerContent> {
           title:
               Text(drawrTitles[3], style: const TextStyle(color: Colors.teal)),
           onExpansionChanged: (bool expended) {
-            logEvent('menu', 'maps_expanded');
+            logEvent(drawrConst, 'maps_expanded');
             setState(() {
               if (expended) {
                 _towersExpansionTileController.collapse();
