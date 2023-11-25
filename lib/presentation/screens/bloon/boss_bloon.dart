@@ -20,12 +20,15 @@ class BossBloon extends StatefulWidget {
 class _BossBloonState extends State<BossBloon> {
   final controller = CarouselController();
   List<String> images = [];
+  List<String> imageKeys = [];
+
   int activeIndex = 0;
 
   @override
   void initState() {
     super.initState();
     images = List.from(widget.bloon.images.values);
+    imageKeys = List.from(widget.bloon.images.keys);
   }
 
   @override
@@ -64,8 +67,15 @@ class _BossBloonState extends State<BossBloon> {
                                 image: AssetImage(bossImage(images[index])),
                                 filterQuality: FilterQuality.high,
                                 width: MediaQuery.of(context).size.width * 0.56,
+                                semanticLabel:
+                                    bossImageLabels[imageKeys[index]],
                               )),
                         ),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        bossImageLabels[imageKeys[activeIndex]]!,
+                        style: smallTitleStyle,
                       ),
                       const SizedBox(height: 10),
                       AnimatedSmoothIndicator(

@@ -82,6 +82,13 @@ const Map<String, Map<String, String>> mapDifficultyToReward = {
   },
 };
 
+const Map<String, String> bossImageLabels = {
+  'normal': 'Normal',
+  'defeated': 'Defeated',
+  'elite': 'Elite',
+  'eliteDefeated': 'Elite Defeated',
+};
+
 const TextStyle normalStyle = TextStyle(
   fontSize: 16,
 );

@@ -138,9 +138,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
 
 Widget listString(List<String> data, String title) {
   return Column(
-    mainAxisAlignment: MainAxisAlignment.start,
     mainAxisSize: MainAxisSize.min,
-    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Text(
         title,
