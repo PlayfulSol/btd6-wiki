@@ -24,6 +24,7 @@ class SingleMap extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Image(
+                    semanticLabel: map.name,
                     image: AssetImage(mapImage(map.image)),
                     height: 200,
                   ),

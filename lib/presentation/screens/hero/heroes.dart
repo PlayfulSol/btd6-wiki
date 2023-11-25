@@ -73,6 +73,7 @@ class _HeroesState extends State<Heroes> {
                               leading: CircleAvatar(
                                   backgroundColor: Colors.transparent,
                                   child: Image(
+                                      semanticLabel: snapshot.data[index].name,
                                       image: AssetImage(heroImage(
                                           snapshot.data[index].image)))),
                               title: AutoSizeText(snapshot.data[index].name,

@@ -58,6 +58,7 @@ Widget generateMinion(Relative relative, BuildContext context) {
           shadowColor: Colors.black87,
           child: ListTile(
             leading: Image(
+              semanticLabel: relative.name,
               image: AssetImage(minionImage(relative.image)),
             ),
             title: Text(
@@ -104,6 +105,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
     Card card = Card(
       child: ListTile(
         leading: Image(
+          semanticLabel: relative.name,
           image: AssetImage(bloonImage(relative.image)),
         ),
         title: Text(

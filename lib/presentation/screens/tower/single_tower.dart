@@ -42,6 +42,7 @@ class SingleTower extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image(
+                  semanticLabel: towerData.name,
                   image: AssetImage(towerImage(towerData.image)),
                   width: 200,
                   fit: BoxFit.fill,

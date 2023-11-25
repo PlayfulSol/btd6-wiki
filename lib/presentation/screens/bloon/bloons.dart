@@ -53,6 +53,7 @@ class _BloonsState extends State<Bloons> {
                     leading: CircleAvatar(
                       backgroundColor: Colors.transparent,
                       child: Image(
+                        semanticLabel: GlobalState.bloons[index].name,
                         image: AssetImage(
                           bloonImage(GlobalState.bloons[index].image),
                         ),
@@ -105,6 +106,7 @@ class _BloonsState extends State<Bloons> {
                   leading: CircleAvatar(
                     backgroundColor: Colors.transparent,
                     child: Image(
+                      semanticLabel: GlobalState.bosses[index].name,
                       image: AssetImage(
                         bossImage(GlobalState.bosses[index].image),
                       ),

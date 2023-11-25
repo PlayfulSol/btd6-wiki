@@ -132,6 +132,7 @@ class _TowersState extends State<Towers>
                           leading: CircleAvatar(
                             backgroundColor: Colors.transparent,
                             child: Image(
+                              semanticLabel: snapshot.data[index].name,
                               image: AssetImage(
                                   towerImage(snapshot.data[index].image)),
                             ),

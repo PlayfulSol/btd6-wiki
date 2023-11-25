@@ -37,6 +37,7 @@ class _SingleBloonState extends State<SingleBloon> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
+                semanticLabel: widget.bloon.fullName,
                 image: AssetImage(bloonImage(widget.bloon.image)),
                 width: MediaQuery.of(context).size.width * 0.3,
                 height: MediaQuery.of(context).size.width * 0.35,

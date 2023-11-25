@@ -31,6 +31,7 @@ class MonkeyPath extends StatelessWidget {
               children: [
                 Center(
                   child: Image(
+                    semanticLabel: path[index].name,
                     image: AssetImage(
                       towerImage(path[index].image),
                     ),

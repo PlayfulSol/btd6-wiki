@@ -27,6 +27,7 @@ class HeroLevel extends StatelessWidget {
             ? Column(
                 children: [
                   Image(
+                    semanticLabel: singleHero.name,
                     image:
                         AssetImage(heroLvlImage(singleHero.image, level.name)),
                     width: 200,

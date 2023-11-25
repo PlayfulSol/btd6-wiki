@@ -159,6 +159,8 @@ class _MapsState extends State<Maps> {
                                   children: [
                                     Expanded(
                                       child: Image(
+                                        semanticLabel:
+                                            snapshot.data[index].name,
                                         image: AssetImage(mapImage(
                                             snapshot.data[index].image)),
                                         fit: BoxFit.cover,
