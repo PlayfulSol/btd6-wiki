@@ -65,25 +65,26 @@ class _HeroesState extends State<Heroes> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Card(
+                          elevation: 5,
+                          shadowColor: Colors.black87,
                           child: ListTile(
-                              dense: false,
-                              isThreeLine: true,
                               mouseCursor: SystemMouseCursors.click,
-                              leading: SizedBox(
-                                height: double.infinity,
-                                child: CircleAvatar(
-                                    backgroundColor: Colors.transparent,
-                                    child: Image(
-                                        image: AssetImage(heroImage(
-                                            snapshot.data[index].image)))),
-                              ),
+                              leading: CircleAvatar(
+                                  backgroundColor: Colors.transparent,
+                                  child: Image(
+                                      semanticLabel: snapshot.data[index].name,
+                                      image: AssetImage(heroImage(
+                                          snapshot.data[index].image)))),
                               title: AutoSizeText(snapshot.data[index].name,
                                   wrapWords: false,
-                                  style: TextStyle(fontSize: titleFontSize)),
+                                  style: titleStyle.copyWith(
+                                      fontSize: titleFontSize)),
                               subtitle: AutoSizeText(
                                 snapshot.data[index].inGameDesc,
                                 overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
+                                maxLines: 2,
+                                minFontSize: subtitleFontSize,
+                                maxFontSize: subtitleFontSize,
                                 wrapWords: false,
                                 style: TextStyle(fontSize: subtitleFontSize),
                               ),

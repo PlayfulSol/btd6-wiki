@@ -4,6 +4,7 @@ import '/presentation/widgets/path.dart';
 import '/utilities/global_state.dart';
 import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
 
 class SingleTower extends StatelessWidget {
   final SingleTowerModel towerData;
@@ -41,6 +42,7 @@ class SingleTower extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image(
+                  semanticLabel: towerData.name,
                   image: AssetImage(towerImage(towerData.image)),
                   width: 200,
                   fit: BoxFit.fill,
@@ -49,14 +51,12 @@ class SingleTower extends StatelessWidget {
                 Text(
                   towerData.inGameDesc,
                   textAlign: TextAlign.left,
-                  style: const TextStyle(fontSize: 20),
+                  style: normalStyle,
                 ),
                 const BetterDivider(),
                 Text(
                   'Class - ${towerData.type}',
-                  style: const TextStyle(
-                    fontSize: 20,
-                  ),
+                  style: smallTitleStyle,
                 ),
                 const SizedBox(
                   height: 10,
@@ -64,9 +64,7 @@ class SingleTower extends StatelessWidget {
                 Text(
                   costToString(towerData.cost),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 17,
-                  ),
+                  style: normalStyle,
                 ),
                 const SizedBox(
                   height: 20,
@@ -74,9 +72,7 @@ class SingleTower extends StatelessWidget {
                 Text(
                   statsToString(towerData.stats),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 17,
-                  ),
+                  style: normalStyle,
                 ),
                 const SizedBox(
                   height: 10,
@@ -84,9 +80,7 @@ class SingleTower extends StatelessWidget {
                 Text(
                   extraStatsToString(towerData.stats),
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 17,
-                  ),
+                  style: normalStyle,
                 ),
                 const BetterDivider(),
                 ListView.builder(

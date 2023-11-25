@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import "/models/maps/map.dart";
@@ -150,12 +151,16 @@ class _MapsState extends State<Maps> {
                                 );
                               },
                               child: Card(
+                                elevation: 5,
+                                shadowColor: Colors.black87,
                                 child: Column(
                                   crossAxisAlignment:
                                       CrossAxisAlignment.stretch,
                                   children: [
                                     Expanded(
                                       child: Image(
+                                        semanticLabel:
+                                            snapshot.data[index].name,
                                         image: AssetImage(mapImage(
                                             snapshot.data[index].image)),
                                         fit: BoxFit.cover,
@@ -172,16 +177,15 @@ class _MapsState extends State<Maps> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
+                                          AutoSizeText(
                                             capitalizeEveryWord(
                                                 snapshot.data[index].name),
-                                            style:
-                                                const TextStyle(fontSize: 14),
+                                            maxLines: 1,
+                                            style: bolderNormalStyle,
                                           ),
                                           const SizedBox(height: 5),
                                           Text(snapshot.data[index].difficulty,
-                                              style: const TextStyle(
-                                                  fontSize: 10)),
+                                              style: subtitleStyle),
                                         ],
                                       ),
                                     ),

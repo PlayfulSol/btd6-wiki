@@ -19,8 +19,7 @@ class MonkeyPath extends StatelessWidget {
   Widget build(BuildContext context) {
     return ExpansionTile(
         title: Text(pathsDictionary[pathKey]!,
-            style: const TextStyle(
-                fontSize: 24, fontWeight: FontWeight.bold, color: Colors.teal)),
+            style: titleStyle.copyWith(color: Colors.teal)),
         children: [
           ListView.builder(
             shrinkWrap: true,
@@ -32,6 +31,7 @@ class MonkeyPath extends StatelessWidget {
               children: [
                 Center(
                   child: Image(
+                    semanticLabel: path[index].name,
                     image: AssetImage(
                       towerImage(path[index].image),
                     ),
@@ -43,27 +43,17 @@ class MonkeyPath extends StatelessWidget {
                 Center(
                   child: Text(
                     path[index].name,
-                    style: const TextStyle(fontSize: 20),
+                    style: smallTitleStyle,
                   ),
                 ),
                 const SizedBox(height: 10),
                 Text(
                   path[index].upgradeBody,
-                  style: const TextStyle(fontSize: 14),
+                  style: normalStyle,
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  "Cost:",
-                  style: TextStyle(
-                    fontSize: 16,
-                  ),
-                ),
-                Text(
-                  costToString(path[index].cost),
-                  style: const TextStyle(
-                    fontSize: 14,
-                  ),
-                ),
+                const Text("Cost:", style: normalStyle),
+                Text(costToString(path[index].cost), style: normalStyle),
                 const SizedBox(height: 30),
               ],
             ),

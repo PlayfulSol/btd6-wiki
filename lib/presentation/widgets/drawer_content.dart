@@ -26,16 +26,14 @@ class _DrawerContentState extends State<DrawerContent> {
     return Drawer(
         child: Column(
       children: [
-        const SizedBox(
-          width: double.infinity,
+        Padding(
+          padding: const EdgeInsets.fromLTRB(15, 50, 0, 10),
           child: SizedBox(
-            height: 100,
-            child: DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.teal,
-                ),
-                child: Text('Bloons TD 6 Wiki',
-                    style: TextStyle(color: Colors.white, fontSize: 28))),
+            width: double.infinity,
+            child: Text(
+              'Bloons TD 6 Wiki',
+              style: bigTitleStyle.copyWith(color: Colors.white),
+            ),
           ),
         ),
         ExpansionTile(
@@ -182,6 +180,8 @@ class _DrawerContentState extends State<DrawerContent> {
               icon: const FaIcon(FontAwesomeIcons.googlePlay),
               label: const Text('Rate Us'),
               style: ButtonStyle(
+                iconColor: MaterialStateProperty.all(Colors.white),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
                 backgroundColor: MaterialStateProperty.all(Colors.teal),
               ),
             ),

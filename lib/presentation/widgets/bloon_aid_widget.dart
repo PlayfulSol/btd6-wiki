@@ -37,6 +37,7 @@ Widget listObject(List<dynamic> data, String title, BuildContext context) {
       title,
       style: smallTitleStyle.copyWith(color: Colors.teal),
     ),
+    childrenPadding: const EdgeInsets.symmetric(vertical: 10),
     children: generateChildren(data, context),
   );
 }
@@ -53,8 +54,11 @@ Widget generateMinion(Relative relative, BuildContext context) {
         ),
         const SizedBox(height: 10),
         Card(
+          elevation: 5,
+          shadowColor: Colors.black87,
           child: ListTile(
             leading: Image(
+              semanticLabel: relative.name,
               image: AssetImage(minionImage(relative.image)),
             ),
             title: Text(
@@ -101,6 +105,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
     Card card = Card(
       child: ListTile(
         leading: Image(
+          semanticLabel: relative.name,
           image: AssetImage(bloonImage(relative.image)),
         ),
         title: Text(

@@ -89,22 +89,26 @@ class _TowersState extends State<Towers>
                 double cardHeight = 130;
                 double titleFontSize = 15;
                 double subtitleFontSize = 13;
+                int rowsToShow = 2;
 
                 if (constraints.maxWidth < 450) {
                   crossAxisCount = 1;
                   titleFontSize = 18;
                   subtitleFontSize = 15;
                   cardHeight = 100;
+                  rowsToShow = 2;
                 } else if (constraints.maxWidth < 1200) {
                   crossAxisCount = 2;
                   childAspectRatio = 1;
                   titleFontSize = 20;
                   subtitleFontSize = 16;
+                  rowsToShow = 3;
                 } else {
                   crossAxisCount = 3;
                   childAspectRatio = 0.75;
                   titleFontSize = 24;
                   subtitleFontSize = 18;
+                  rowsToShow = 2;
                 }
 
                 return GridView.builder(
@@ -119,31 +123,33 @@ class _TowersState extends State<Towers>
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Card(
+                        elevation: 5,
+                        shadowColor: Colors.black87,
                         child: ListTile(
                           mouseCursor: SystemMouseCursors.click,
                           dense: false,
-                          isThreeLine: true,
-                          leading: SizedBox(
-                            height: double.infinity,
-                            child: CircleAvatar(
-                              backgroundColor: Colors.transparent,
-                              child: Image(
-                                image: AssetImage(
-                                    towerImage(snapshot.data[index].image)),
-                              ),
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            child: Image(
+                              semanticLabel: snapshot.data[index].name,
+                              image: AssetImage(
+                                  towerImage(snapshot.data[index].image)),
                             ),
                           ),
                           title: AutoSizeText(
                             snapshot.data[index].name,
                             maxLines: 1,
-                            style: TextStyle(fontSize: titleFontSize),
+                            style: titleStyle.copyWith(fontSize: titleFontSize),
                           ),
                           subtitle: AutoSizeText(
                               snapshot.data[index].inGameDesc,
                               wrapWords: false,
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              style: TextStyle(fontSize: subtitleFontSize)),
+                              maxLines: rowsToShow,
+                              style: subtitleStyle.copyWith(
+                                  fontSize: subtitleFontSize),
+                              minFontSize: subtitleFontSize,
+                              maxFontSize: subtitleFontSize),
                           onTap: () async {
                             if (!GlobalState.isLoading) {
                               GlobalState.currentTitle =

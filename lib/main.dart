@@ -5,17 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import '/presentation/widgets/drawer_content.dart';
 import '/presentation/widgets/loader.dart';
-import '/utilities/analytics.dart';
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
-import '/utilities/themes.dart';
 import '/utilities/constants.dart';
+import '/utilities/analytics.dart';
+import '/themes/themes.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  logEvent('theme_used', AdaptiveThemeMode.system.toString());
   runApp(const MyApp());
 }
 

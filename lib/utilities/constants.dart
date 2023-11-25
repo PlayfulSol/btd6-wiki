@@ -88,8 +88,17 @@ const Map<String, String> bossImageLabels = {
   'eliteDefeated': 'Elite Defeated',
 };
 
+const TextStyle subtitleStyle = TextStyle(
+  fontSize: 13,
+);
+
 const TextStyle normalStyle = TextStyle(
   fontSize: 16,
+);
+
+const TextStyle bolderNormalStyle = TextStyle(
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
 );
 
 const TextStyle smallTitleStyle = TextStyle(

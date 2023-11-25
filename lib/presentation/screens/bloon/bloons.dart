@@ -43,6 +43,8 @@ class _BloonsState extends State<Bloons> {
             itemBuilder: (context, index) {
               return Center(
                 child: Card(
+                  elevation: 5,
+                  shadowColor: Colors.black87,
                   child: ListTile(
                     mouseCursor: SystemMouseCursors.click,
                     minVerticalPadding: 25,
@@ -51,6 +53,7 @@ class _BloonsState extends State<Bloons> {
                     leading: CircleAvatar(
                       backgroundColor: Colors.transparent,
                       child: Image(
+                        semanticLabel: GlobalState.bloons[index].name,
                         image: AssetImage(
                           bloonImage(GlobalState.bloons[index].image),
                         ),
@@ -58,7 +61,7 @@ class _BloonsState extends State<Bloons> {
                     ),
                     title: Text(
                       GlobalState.bloons[index].name,
-                      style: normalStyle.copyWith(fontWeight: FontWeight.w600),
+                      style: bolderNormalStyle,
                     ),
                     onTap: () async {
                       if (!GlobalState.isLoading) {
@@ -97,11 +100,13 @@ class _BloonsState extends State<Bloons> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return Card(
+                elevation: 5,
                 child: ListTile(
                   mouseCursor: SystemMouseCursors.click,
                   leading: CircleAvatar(
                     backgroundColor: Colors.transparent,
                     child: Image(
+                      semanticLabel: GlobalState.bosses[index].name,
                       image: AssetImage(
                         bossImage(GlobalState.bosses[index].image),
                       ),
@@ -109,7 +114,7 @@ class _BloonsState extends State<Bloons> {
                   ),
                   title: Text(
                     GlobalState.bosses[index].name,
-                    style: normalStyle.copyWith(fontWeight: FontWeight.w600),
+                    style: bolderNormalStyle,
                   ),
                   onTap: () async {
                     if (!GlobalState.isLoading) {
