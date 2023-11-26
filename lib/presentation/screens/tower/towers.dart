@@ -89,49 +89,52 @@ class _TowersState extends State<Towers>
             itemBuilder: (context, index) {
               return Card(
                 margin: const EdgeInsets.all(10),
-                child: ListTile(
-                  leading: ImageOutliner(
-                    imageName: GlobalState.towers[index].image,
-                    imagePath: towerImage(GlobalState.towers[index].image),
-                  ),
-                  title: AutoSizeText(
-                    GlobalState.towers[index].name,
-                    maxLines: 1,
-                    style: titleStyle.copyWith(
-                        fontSize: constraintsValues["titleFontSize"]),
-                  ),
-                  subtitle: AutoSizeText(
-                    GlobalState.towers[index].inGameDesc,
-                    wrapWords: false,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: constraintsValues["rowsToShow"],
-                    style: subtitleStyle.copyWith(
-                        fontSize: constraintsValues["subtitleFontSize"]),
-                    minFontSize: constraintsValues["subtitleFontSize"],
-                    maxFontSize: constraintsValues["subtitleFontSize"],
-                  ),
-                  onTap: () async {
-                    if (!GlobalState.isLoading) {
-                      GlobalState.currentTitle = GlobalState.towers[index].name;
-                      var id = GlobalState.towers[index].id;
-                      var path = '${towerDataPath + id}.json';
-                      final data = await rootBundle.loadString(path);
-                      var jsonData = json.decode(data);
-                      logPageView(GlobalState.towers[index].name);
-                      SingleTowerModel towerData =
-                          SingleTowerModel.fromJson(jsonData);
+                child: Center(
+                  child: ListTile(
+                    leading: ImageOutliner(
+                      imageName: GlobalState.towers[index].image,
+                      imagePath: towerImage(GlobalState.towers[index].image),
+                    ),
+                    title: AutoSizeText(
+                      GlobalState.towers[index].name,
+                      maxLines: 1,
+                      style: titleStyle.copyWith(
+                          fontSize: constraintsValues["titleFontSize"]),
+                    ),
+                    subtitle: AutoSizeText(
+                      GlobalState.towers[index].inGameDesc,
+                      wrapWords: false,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: constraintsValues["rowsToShow"],
+                      style: subtitleStyle.copyWith(
+                          fontSize: constraintsValues["subtitleFontSize"]),
+                      minFontSize: constraintsValues["subtitleFontSize"],
+                      maxFontSize: constraintsValues["subtitleFontSize"],
+                    ),
+                    onTap: () async {
+                      if (!GlobalState.isLoading) {
+                        GlobalState.currentTitle =
+                            GlobalState.towers[index].name;
+                        var id = GlobalState.towers[index].id;
+                        var path = '${towerDataPath + id}.json';
+                        final data = await rootBundle.loadString(path);
+                        var jsonData = json.decode(data);
+                        logPageView(GlobalState.towers[index].name);
+                        SingleTowerModel towerData =
+                            SingleTowerModel.fromJson(jsonData);
 
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              SingleTower(towerData: towerData),
-                        ),
-                      );
-                      GlobalState.currentTitle = towerData.name;
-                    }
-                  },
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SingleTower(towerData: towerData),
+                          ),
+                        );
+                        GlobalState.currentTitle = towerData.name;
+                      }
+                    },
+                  ),
                 ),
               );
             });

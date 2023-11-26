@@ -37,49 +37,51 @@ class _HeroesState extends State<Heroes> {
             itemBuilder: (context, index) {
               return Card(
                 margin: const EdgeInsets.all(10),
-                child: ListTile(
-                  mouseCursor: SystemMouseCursors.click,
-                  leading: ImageOutliner(
-                    imageName: GlobalState.menuHeroes[index].image,
-                    imagePath: heroImage(GlobalState.menuHeroes[index].image),
-                  ),
-                  title: AutoSizeText(GlobalState.menuHeroes[index].name,
+                child: Center(
+                  child: ListTile(
+                    mouseCursor: SystemMouseCursors.click,
+                    leading: ImageOutliner(
+                      imageName: GlobalState.menuHeroes[index].image,
+                      imagePath: heroImage(GlobalState.menuHeroes[index].image),
+                    ),
+                    title: AutoSizeText(GlobalState.menuHeroes[index].name,
+                        wrapWords: false,
+                        style: titleStyle.copyWith(
+                            fontSize: constraintsValues["titleFontSize"])),
+                    subtitle: AutoSizeText(
+                      GlobalState.menuHeroes[index].inGameDesc,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: constraintsValues["rowsToShow"],
+                      minFontSize: constraintsValues["subtitleFontSize"],
+                      maxFontSize: constraintsValues["subtitleFontSize"],
                       wrapWords: false,
-                      style: titleStyle.copyWith(
-                          fontSize: constraintsValues["titleFontSize"])),
-                  subtitle: AutoSizeText(
-                    GlobalState.menuHeroes[index].inGameDesc,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    minFontSize: constraintsValues["subtitleFontSize"],
-                    maxFontSize: constraintsValues["subtitleFontSize"],
-                    wrapWords: false,
-                    style: TextStyle(
-                        fontSize: constraintsValues["subtitleFontSize"]),
+                      style: TextStyle(
+                          fontSize: constraintsValues["subtitleFontSize"]),
+                    ),
+                    onTap: () async {
+                      if (!GlobalState.isLoading) {
+                        var id = GlobalState.menuHeroes[index].id;
+                        var path = '${heroDataPath + id}.json';
+                        final data = await rootBundle.loadString(path);
+                        var jsonData = json.decode(data);
+                        logPageView(GlobalState.menuHeroes[index].name);
+                        HeroModel heroData = HeroModel.fromJson(jsonData);
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SingleHero(
+                                heroId: id,
+                                singleHero: heroData,
+                              );
+                            },
+                          ),
+                        );
+                        GlobalState.currentTitle = heroData.name;
+                      }
+                    },
                   ),
-                  onTap: () async {
-                    if (!GlobalState.isLoading) {
-                      var id = GlobalState.menuHeroes[index].id;
-                      var path = '${heroDataPath + id}.json';
-                      final data = await rootBundle.loadString(path);
-                      var jsonData = json.decode(data);
-                      logPageView(GlobalState.menuHeroes[index].name);
-                      HeroModel heroData = HeroModel.fromJson(jsonData);
-                      // ignore: use_build_context_synchronously
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return SingleHero(
-                              heroId: id,
-                              singleHero: heroData,
-                            );
-                          },
-                        ),
-                      );
-                      GlobalState.currentTitle = heroData.name;
-                    }
-                  },
                 ),
               );
             },
