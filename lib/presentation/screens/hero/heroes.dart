@@ -63,7 +63,7 @@ class _HeroesState extends State<Heroes> {
                       var path = '${heroDataPath + id}.json';
                       final data = await rootBundle.loadString(path);
                       var jsonData = json.decode(data);
-                      logInnerPageView(GlobalState.menuHeroes[index].name);
+                      logPageView(GlobalState.menuHeroes[index].name);
                       HeroModel heroData = HeroModel.fromJson(jsonData);
                       // ignore: use_build_context_synchronously
                       Navigator.push(

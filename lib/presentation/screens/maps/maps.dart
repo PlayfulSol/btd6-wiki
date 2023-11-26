@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import "/models/maps/map.dart";
+import '/models/maps/map.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/loader.dart';
-import '/../analytics/analytics.dart';
+import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/strings.dart';
 import '/utilities/global_state.dart';
@@ -139,7 +139,7 @@ class _MapsState extends State<Maps> {
                                 final singleMap = await rootBundle.loadString(
                                     'assets/data/maps/${snapshot.data[index].id}.json');
                                 final parsedMap = jsonDecode(singleMap);
-                                logInnerPageView(snapshot.data[index].name);
+                                logPageView(snapshot.data[index].name);
                                 // ignore: use_build_context_synchronously
                                 Navigator.push(
                                   context,

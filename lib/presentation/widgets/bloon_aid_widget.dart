@@ -79,7 +79,7 @@ Widget generateMinion(Relative relative, BuildContext context) {
               var path = '${minionsDataPath + id}.json';
               final data = await rootBundle.loadString(path);
               var jsonData = json.decode(data);
-              logInnerPageView(relative.name);
+              logPageView(relative.name);
               MinionBloon bloonData = MinionBloon.fromJson(jsonData);
               GlobalState.currentTitle = bloonData.name;
               // ignore: use_build_context_synchronously

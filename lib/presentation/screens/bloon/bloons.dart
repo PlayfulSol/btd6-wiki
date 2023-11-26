@@ -69,7 +69,7 @@ class _BloonsState extends State<Bloons> {
                         var path = '${bloonsDataPath + id}.json';
                         final data = await rootBundle.loadString(path);
                         var jsonData = json.decode(data);
-                        logInnerPageView(GlobalState.bloons[index].name);
+                        logPageView(GlobalState.bloons[index].name);
                         SingleBloonModel bloonData =
                             SingleBloonModel.fromJson(jsonData);
                         // ignore: use_build_context_synchronously
@@ -122,7 +122,7 @@ class _BloonsState extends State<Bloons> {
                       var path = '${bossesDataPath + id}.json';
                       final data = await rootBundle.loadString(path);
                       var jsonData = json.decode(data);
-                      logInnerPageView(GlobalState.bosses[index].name);
+                      logPageView(GlobalState.bosses[index].name);
                       BossBloonModel bossData =
                           BossBloonModel.fromJson(jsonData);
                       // ignore: use_build_context_synchronously

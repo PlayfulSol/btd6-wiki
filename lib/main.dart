@@ -16,7 +16,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  logEvent('theme_used', AdaptiveThemeMode.system.toString());
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  logEvent('theme_used', savedThemeMode.toString());
   runApp(const MyApp());
 }
 

@@ -117,7 +117,7 @@ class _TowersState extends State<Towers>
                       var path = '${towerDataPath + id}.json';
                       final data = await rootBundle.loadString(path);
                       var jsonData = json.decode(data);
-                      logInnerPageView(GlobalState.towers[index].name);
+                      logPageView(GlobalState.towers[index].name);
                       SingleTowerModel towerData =
                           SingleTowerModel.fromJson(jsonData);
 
