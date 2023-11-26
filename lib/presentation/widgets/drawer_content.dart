@@ -39,8 +39,8 @@ class _DrawerContentState extends State<DrawerContent> {
         ),
         ExpansionTile(
           controller: _towersExpansionTileController,
-          title:
-              Text(drawrTitles[0], style: const TextStyle(color: Colors.teal)),
+          title: Text(drawrTitles[0],
+              style: titleStyle.copyWith(color: Colors.teal)),
           onExpansionChanged: (bool expended) {
             logEvent(drawrConst, 'towers_expanded');
             setState(() {
@@ -58,7 +58,10 @@ class _DrawerContentState extends State<DrawerContent> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(GlobalState.towerTypes[index]),
+                    title: Text(
+                      GlobalState.towerTypes[index],
+                      style: bolderNormalStyle,
+                    ),
                     onTap: () {
                       logEvent(
                           'menu_tower_type', GlobalState.towerTypes[index]);
@@ -80,11 +83,13 @@ class _DrawerContentState extends State<DrawerContent> {
                 },
               ),
             ),
-            const Divider(),
           ],
         ),
         ListTile(
-            title: Text(drawrTitles[1]),
+            title: Text(
+              drawrTitles[1],
+              style: titleStyle,
+            ),
             onTap: () {
               logEvent(drawrConst, 'heroes');
               if (!GlobalState.isLoading) {
@@ -101,7 +106,10 @@ class _DrawerContentState extends State<DrawerContent> {
               }
             }),
         ListTile(
-            title: Text(drawrTitles[2]),
+            title: Text(
+              drawrTitles[2],
+              style: titleStyle,
+            ),
             onTap: () {
               logEvent(drawrConst, 'bloons');
               if (!GlobalState.isLoading) {
@@ -119,8 +127,8 @@ class _DrawerContentState extends State<DrawerContent> {
             }),
         ExpansionTile(
           controller: _mapsExpansionTileController,
-          title:
-              Text(drawrTitles[3], style: const TextStyle(color: Colors.teal)),
+          title: Text(drawrTitles[3],
+              style: titleStyle.copyWith(color: Colors.teal)),
           onExpansionChanged: (bool expended) {
             logEvent(drawrConst, 'maps_expanded');
             setState(() {
@@ -138,7 +146,10 @@ class _DrawerContentState extends State<DrawerContent> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
-                    title: Text(GlobalState.mapDifficulties[index]),
+                    title: Text(
+                      GlobalState.mapDifficulties[index],
+                      style: bolderNormalStyle,
+                    ),
                     onTap: () {
                       logEvent('menu_map_difficulty',
                           GlobalState.mapDifficulties[index]);

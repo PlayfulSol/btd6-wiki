@@ -117,15 +117,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               }),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black54,
-                blurRadius: 15.0,
-                offset: Offset(0.0, 0.75))
-          ],
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+                color: Theme.of(context).colorScheme.outline, width: 0.5),
+          ),
         ),
         child: BottomNavigationBar(
+            elevation: 0,
+            selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+            ),
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(

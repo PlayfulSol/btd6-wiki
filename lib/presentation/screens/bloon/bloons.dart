@@ -21,124 +21,120 @@ class _BloonsState extends State<Bloons> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: ListView(children: [
-        const Text(
-          "Bloons",
-          style: bigTitleStyle,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 15),
-        GridView.builder(
-            itemCount: GlobalState.bloons.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 1,
-              mainAxisExtent: 80,
-            ),
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            primary: false,
-            itemBuilder: (context, index) {
-              return Center(
-                child: Card(
-                  elevation: 5,
-                  shadowColor: Colors.black87,
-                  child: ListTile(
-                    mouseCursor: SystemMouseCursors.click,
-                    minVerticalPadding: 25,
-                    contentPadding: const EdgeInsets.only(left: 10),
-                    horizontalTitleGap: 10,
-                    leading: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      child: Image(
-                        semanticLabel: GlobalState.bloons[index].name,
-                        image: AssetImage(
-                          bloonImage(GlobalState.bloons[index].image),
-                        ),
-                      ),
-                    ),
-                    title: Text(
-                      GlobalState.bloons[index].name,
-                      style: bolderNormalStyle,
-                    ),
-                    onTap: () async {
-                      if (!GlobalState.isLoading) {
-                        var id = GlobalState.bloons[index].id;
-                        var path = '${bloonsDataPath + id}.json';
-                        final data = await rootBundle.loadString(path);
-                        var jsonData = json.decode(data);
-                        logPageView(GlobalState.bloons[index].name);
-                        SingleBloonModel bloonData =
-                            SingleBloonModel.fromJson(jsonData);
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SingleBloon(bloon: bloonData),
-                          ),
-                        );
-                        GlobalState.currentTitle = bloonData.name;
-                      }
-                    },
-                  ),
-                ),
-              );
-            }),
-        const SizedBox(height: 30),
-        const Text(
-          "Bosses",
-          style: bigTitleStyle,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 15),
-        ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            primary: false,
-            itemCount: GlobalState.bosses.length,
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Card(
+        body: ListView(children: [
+      const Text(
+        "Bloons",
+        style: bigTitleStyle,
+        textAlign: TextAlign.center,
+      ),
+      const SizedBox(height: 15),
+      GridView.builder(
+          itemCount: GlobalState.bloons.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 1,
+            mainAxisExtent: 80,
+          ),
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          primary: false,
+          itemBuilder: (context, index) {
+            return Center(
+              child: Card(
                 elevation: 5,
+                shadowColor: Colors.black87,
                 child: ListTile(
                   mouseCursor: SystemMouseCursors.click,
+                  minVerticalPadding: 25,
+                  contentPadding: const EdgeInsets.only(left: 10),
+                  horizontalTitleGap: 10,
                   leading: CircleAvatar(
                     backgroundColor: Colors.transparent,
                     child: Image(
-                      semanticLabel: GlobalState.bosses[index].name,
+                      semanticLabel: GlobalState.bloons[index].name,
                       image: AssetImage(
-                        bossImage(GlobalState.bosses[index].image),
+                        bloonImage(GlobalState.bloons[index].image),
                       ),
                     ),
                   ),
                   title: Text(
-                    GlobalState.bosses[index].name,
+                    GlobalState.bloons[index].name,
                     style: bolderNormalStyle,
                   ),
                   onTap: () async {
                     if (!GlobalState.isLoading) {
-                      var id = GlobalState.bosses[index].id;
-                      var path = '${bossesDataPath + id}.json';
+                      var id = GlobalState.bloons[index].id;
+                      var path = '${bloonsDataPath + id}.json';
                       final data = await rootBundle.loadString(path);
                       var jsonData = json.decode(data);
-                      logPageView(GlobalState.bosses[index].name);
-                      BossBloonModel bossData =
-                          BossBloonModel.fromJson(jsonData);
+                      logPageView(GlobalState.bloons[index].name);
+                      SingleBloonModel bloonData =
+                          SingleBloonModel.fromJson(jsonData);
                       // ignore: use_build_context_synchronously
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BossBloon(bloon: bossData),
+                          builder: (context) => SingleBloon(bloon: bloonData),
                         ),
                       );
-                      GlobalState.currentTitle = bossData.name;
+                      GlobalState.currentTitle = bloonData.name;
                     }
                   },
                 ),
-              );
-            })
-      ]),
-    ));
+              ),
+            );
+          }),
+      const SizedBox(height: 30),
+      const Text(
+        "Bosses",
+        style: bigTitleStyle,
+        textAlign: TextAlign.center,
+      ),
+      const SizedBox(height: 15),
+      ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          primary: false,
+          itemCount: GlobalState.bosses.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return Card(
+              elevation: 5,
+              child: ListTile(
+                mouseCursor: SystemMouseCursors.click,
+                leading: CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  child: Image(
+                    semanticLabel: GlobalState.bosses[index].name,
+                    image: AssetImage(
+                      bossImage(GlobalState.bosses[index].image),
+                    ),
+                  ),
+                ),
+                title: Text(
+                  GlobalState.bosses[index].name,
+                  style: bolderNormalStyle,
+                ),
+                onTap: () async {
+                  if (!GlobalState.isLoading) {
+                    var id = GlobalState.bosses[index].id;
+                    var path = '${bossesDataPath + id}.json';
+                    final data = await rootBundle.loadString(path);
+                    var jsonData = json.decode(data);
+                    logPageView(GlobalState.bosses[index].name);
+                    BossBloonModel bossData = BossBloonModel.fromJson(jsonData);
+                    // ignore: use_build_context_synchronously
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BossBloon(bloon: bossData),
+                      ),
+                    );
+                    GlobalState.currentTitle = bossData.name;
+                  }
+                },
+              ),
+            );
+          })
+    ]));
   }
 }

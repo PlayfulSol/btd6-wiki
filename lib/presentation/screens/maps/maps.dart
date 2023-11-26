@@ -103,104 +103,99 @@ class _MapsState extends State<Maps> {
               ],
             )
           : null,
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: FutureBuilder(
-          future: Future.value(filterMaps(query)),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return const Loader();
-            } else {
-              return Column(
-                children: [
-                  TextField(
-                    controller: _searchController,
-                    decoration: const InputDecoration(
-                      hintText: 'Search maps',
-                    ),
+      body: FutureBuilder(
+        future: Future.value(filterMaps(query)),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.data == null) {
+            return const Loader();
+          } else {
+            return Column(
+              children: [
+                TextField(
+                  controller: _searchController,
+                  decoration: const InputDecoration(
+                    hintText: 'Search maps',
                   ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: LayoutBuilder(builder: (context, constraints) {
-                      return GridView.builder(
-                          itemCount: snapshot.data.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1.4,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () async {
-                                GlobalState.currentTitle =
-                                    snapshot.data[index].name;
-                                final singleMap = await rootBundle.loadString(
-                                    'assets/data/maps/${snapshot.data[index].id}.json');
-                                final parsedMap = jsonDecode(singleMap);
-                                logPageView(snapshot.data[index].name);
-                                // ignore: use_build_context_synchronously
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SingleMap(
-                                      map: MapModel.fromJson(parsedMap),
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: LayoutBuilder(builder: (context, constraints) {
+                    return GridView.builder(
+                        itemCount: snapshot.data.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 1.4,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () async {
+                              GlobalState.currentTitle =
+                                  snapshot.data[index].name;
+                              final singleMap = await rootBundle.loadString(
+                                  'assets/data/maps/${snapshot.data[index].id}.json');
+                              final parsedMap = jsonDecode(singleMap);
+                              logPageView(snapshot.data[index].name);
+                              // ignore: use_build_context_synchronously
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SingleMap(
+                                    map: MapModel.fromJson(parsedMap),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              elevation: 5,
+                              shadowColor: Colors.black87,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Expanded(
+                                    child: Image(
+                                      semanticLabel: snapshot.data[index].name,
+                                      image: AssetImage(
+                                          mapImage(snapshot.data[index].image)),
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (BuildContext context,
+                                          Object exception,
+                                          StackTrace? stackTrace) {
+                                        return const Icon(Icons.error);
+                                      },
                                     ),
                                   ),
-                                );
-                              },
-                              child: Card(
-                                elevation: 5,
-                                shadowColor: Colors.black87,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Expanded(
-                                      child: Image(
-                                        semanticLabel:
-                                            snapshot.data[index].name,
-                                        image: AssetImage(mapImage(
-                                            snapshot.data[index].image)),
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (BuildContext context,
-                                            Object exception,
-                                            StackTrace? stackTrace) {
-                                          return const Icon(Icons.error);
-                                        },
-                                      ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AutoSizeText(
+                                          capitalizeEveryWord(
+                                              snapshot.data[index].name),
+                                          maxLines: 1,
+                                          style: bolderNormalStyle,
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(snapshot.data[index].difficulty,
+                                            style: subtitleStyle),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          AutoSizeText(
-                                            capitalizeEveryWord(
-                                                snapshot.data[index].name),
-                                            maxLines: 1,
-                                            style: bolderNormalStyle,
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Text(snapshot.data[index].difficulty,
-                                              style: subtitleStyle),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            );
-                          });
-                    }),
-                  ),
-                ],
-              );
-            }
-          },
-        ),
+                            ),
+                          );
+                        });
+                  }),
+                ),
+              ],
+            );
+          }
+        },
       ),
     );
   }
