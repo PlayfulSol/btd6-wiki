@@ -34,6 +34,16 @@ class Themes {
         ),
       ),
     ),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      menuStyle: MenuStyle(
+          backgroundColor: MaterialStateProperty.all(
+        darkColorScheme.background,
+      )),
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none,
+        // Use InputBorder.none to remove the default border.
+      ),
+    ),
   );
 
   static final lightTheme = ThemeData(

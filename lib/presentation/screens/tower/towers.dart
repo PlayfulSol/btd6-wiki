@@ -49,6 +49,31 @@ class _TowersState extends State<Towers>
               ),
               title: Text(getPageTitle()),
               actions: [
+                DropdownMenu<String>(
+                  initialSelection: GlobalState.currentTowerType,
+                  // requestFocusOnTap is enabled/disabled by platforms when it is null.
+                  // On mobile platforms, this is false by default. Setting this to true will
+                  // trigger focus request on the text field and virtual keyboard will appear
+                  // afterward. On desktop platforms however, this defaults to true.
+                  requestFocusOnTap: false,
+                  onSelected: (String? newValue) {
+                    setState(() {
+                      GlobalState.currentTowerType = newValue!;
+                      GlobalState.currentTitle = newValue;
+                    });
+                  },
+                  dropdownMenuEntries: GlobalState.towerTypes
+                      .map<DropdownMenuEntry<String>>((String value) {
+                    return DropdownMenuEntry<String>(
+                      value: value,
+                      label: value,
+
+                      // style: MenuItemButton.styleFrom(
+                      //   foregroundColor: color.color,
+                      // ),
+                    );
+                  }).toList(),
+                ),
                 DropdownButton<String>(
                   value: GlobalState.currentTowerType,
                   icon: const Icon(Icons.arrow_drop_down),
@@ -65,14 +90,17 @@ class _TowersState extends State<Towers>
                       GlobalState.currentTitle = newValue;
                     });
                   },
-                  items: GlobalState.towerTypes
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value,
-                          style: const TextStyle(color: Colors.blue)),
-                    );
-                  }).toList(),
+                  items: GlobalState.towerTypes.map<DropdownMenuItem<String>>(
+                    (String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: const TextStyle(color: Colors.blue),
+                        ),
+                      );
+                    },
+                  ).toList(),
                 ),
               ],
             )
