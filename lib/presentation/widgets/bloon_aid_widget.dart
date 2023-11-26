@@ -109,6 +109,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
       value: data[index]['value'],
     );
     Card card = Card(
+      shadowColor: Colors.black87,
       child: ListTile(
         leading: Image(
           semanticLabel: relative.name,

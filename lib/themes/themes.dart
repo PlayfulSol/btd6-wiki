@@ -7,8 +7,30 @@ class Themes {
     useMaterial3: true,
     colorScheme: darkColorScheme,
     expansionTileTheme: const ExpansionTileThemeData(
-      collapsedShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    ),
+    cardTheme: const CardTheme(
+      elevation: 5,
+      shadowColor: Colors.black,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all<double>(2),
+        iconColor: MaterialStateProperty.all(
+          darkColorScheme.onPrimaryContainer,
+        ),
+        foregroundColor: MaterialStateProperty.all(
+          darkColorScheme.onPrimaryContainer,
+        ),
+        backgroundColor: MaterialStateProperty.all(
+          darkColorScheme.primaryContainer,
+        ),
+      ),
+    ),
+    iconButtonTheme: IconButtonThemeData(
+      style: ButtonStyle(
+        iconColor:
+            MaterialStateProperty.all(darkColorScheme.onPrimaryContainer),
       ),
     ),
   );
@@ -17,9 +39,28 @@ class Themes {
     useMaterial3: true,
     colorScheme: lightColorScheme,
     expansionTileTheme: const ExpansionTileThemeData(
-      collapsedShape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(0)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+    ),
+    cardTheme: const CardTheme(
+      elevation: 5,
+      shadowColor: Colors.black,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all<double>(2),
+        iconColor: MaterialStateProperty.all(
+          lightColorScheme.onPrimaryContainer,
+        ),
+        foregroundColor: MaterialStateProperty.all(
+          lightColorScheme.onPrimaryContainer,
+        ),
+        backgroundColor: MaterialStateProperty.all(
+          lightColorScheme.primaryContainer,
+        ),
       ),
+    ),
+    iconTheme: IconThemeData(
+      color: lightColorScheme.onPrimaryContainer,
     ),
   );
 }
