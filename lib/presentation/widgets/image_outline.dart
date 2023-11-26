@@ -8,11 +8,11 @@ class ImageOutliner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double maxSize = 40;
-    double minSize = 35;
-    return Container(
-      width: 150,
-      height: 150,
+    double maxWidth = 40;
+    double maxHeight = 40;
+    return SizedBox(
+      width: maxWidth,
+      height: maxHeight,
       child: Stack(
         alignment: AlignmentDirectional.center,
         fit: StackFit.expand,
@@ -23,6 +23,7 @@ class ImageOutliner extends StatelessWidget {
               BlendMode.srcIn,
             ),
             child: Image(
+              fit: BoxFit.fitWidth,
               semanticLabel: imageName,
               image: AssetImage(
                 towerImage(imageName),
@@ -30,6 +31,9 @@ class ImageOutliner extends StatelessWidget {
             ),
           ),
           Image(
+            fit: BoxFit.contain,
+            width: maxWidth * 0.8,
+            height: maxHeight * 0.8,
             semanticLabel: imageName,
             image: AssetImage(
               towerImage(imageName),
