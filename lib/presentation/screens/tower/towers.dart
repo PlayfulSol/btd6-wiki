@@ -2,14 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:auto_size_text/auto_size_text.dart';
-import '../../widgets/image_outline.dart';
 import '/models/towers/tower.dart';
+import '/presentation/widgets/image_outline.dart';
 import '/presentation/screens/tower/single_tower.dart';
-import '/presentation/widgets/loader.dart';
+import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
-import '/../analytics/analytics.dart';
 import '/utilities/global_state.dart';
-import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 
 class Towers extends StatefulWidget {
@@ -84,64 +82,52 @@ class _TowersState extends State<Towers>
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: constraintsValues["crossAxisCount"],
               childAspectRatio: constraintsValues["childAspectRatio"],
-              mainAxisSpacing: 7,
-              crossAxisSpacing: 7,
-              // mainAxisExtent: constraintsValues["cardHeight"],
             ),
             shrinkWrap: true,
             itemBuilder: (context, index) {
-              return Container(
-                color: Colors.green,
-                child: Card(
-                  margin: EdgeInsets.zero,
-                  child: ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    minVerticalPadding: 0,
-                    leading: ImageOutliner(
-                        imageName: GlobalState.towers[index].image),
-                    title: AutoSizeText(
-                      GlobalState.towers[index].name,
-                      maxLines: 1,
-                      style: titleStyle.copyWith(
-                          fontSize: constraintsValues["titleFontSize"]),
-                    ),
-                    subtitle: Container(
-                      color: Colors.orange,
-                      child: AutoSizeText(
-                        GlobalState.towers[index].inGameDesc,
-                        wrapWords: false,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: constraintsValues["rowsToShow"],
-                        style: subtitleStyle.copyWith(
-                            fontSize: constraintsValues["subtitleFontSize"]),
-                        minFontSize: constraintsValues["subtitleFontSize"],
-                        maxFontSize: constraintsValues["subtitleFontSize"],
-                      ),
-                    ),
-                    onTap: () async {
-                      if (!GlobalState.isLoading) {
-                        GlobalState.currentTitle =
-                            GlobalState.towers[index].name;
-                        var id = GlobalState.towers[index].id;
-                        var path = '${towerDataPath + id}.json';
-                        final data = await rootBundle.loadString(path);
-                        var jsonData = json.decode(data);
-                        logInnerPageView(GlobalState.towers[index].name);
-                        SingleTowerModel towerData =
-                            SingleTowerModel.fromJson(jsonData);
-
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SingleTower(towerData: towerData),
-                          ),
-                        );
-                        GlobalState.currentTitle = towerData.name;
-                      }
-                    },
+              return Card(
+                margin: const EdgeInsets.all(10),
+                child: ListTile(
+                  leading:
+                      ImageOutliner(imageName: GlobalState.towers[index].image),
+                  title: AutoSizeText(
+                    GlobalState.towers[index].name,
+                    maxLines: 1,
+                    style: titleStyle.copyWith(
+                        fontSize: constraintsValues["titleFontSize"]),
                   ),
+                  subtitle: AutoSizeText(
+                    GlobalState.towers[index].inGameDesc,
+                    wrapWords: false,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: constraintsValues["rowsToShow"],
+                    style: subtitleStyle.copyWith(
+                        fontSize: constraintsValues["subtitleFontSize"]),
+                    minFontSize: constraintsValues["subtitleFontSize"],
+                    maxFontSize: constraintsValues["subtitleFontSize"],
+                  ),
+                  onTap: () async {
+                    if (!GlobalState.isLoading) {
+                      GlobalState.currentTitle = GlobalState.towers[index].name;
+                      var id = GlobalState.towers[index].id;
+                      var path = '${towerDataPath + id}.json';
+                      final data = await rootBundle.loadString(path);
+                      var jsonData = json.decode(data);
+                      logInnerPageView(GlobalState.towers[index].name);
+                      SingleTowerModel towerData =
+                          SingleTowerModel.fromJson(jsonData);
+
+                      // ignore: use_build_context_synchronously
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              SingleTower(towerData: towerData),
+                        ),
+                      );
+                      GlobalState.currentTitle = towerData.name;
+                    }
+                  },
                 ),
               );
             });

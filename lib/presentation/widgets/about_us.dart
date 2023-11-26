@@ -98,7 +98,7 @@ class AboutUs extends StatelessWidget {
           ),
           const DeveloperInfo(
             name: 'Shai Holczer',
-            email: 'Shaitnto@gmail.com',
+            email: 'shaitnto@gmail.com',
             githubUrl: 'https://github.com/namelessto',
             linkedinUrl: 'https://www.linkedin.com/in/shai-holczer/',
           ),

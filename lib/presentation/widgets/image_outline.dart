@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '/utilities/images_url.dart';
 
 class ImageOutliner extends StatelessWidget {
@@ -8,7 +7,7 @@ class ImageOutliner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double maxWidth = 90;
+    double maxWidth = 65;
     double maxHeight = 90;
     return SizedBox(
       width: maxWidth,
@@ -19,11 +18,7 @@ class ImageOutliner extends StatelessWidget {
         children: [
           ColorFiltered(
             colorFilter: ColorFilter.mode(
-              // Theme.of(context)
-              //     .colorScheme
-              //     .onBackground
-              Colors.black
-                  .withOpacity(0.9), // Adjust opacity for contrast effect
+              Colors.black.withOpacity(1), // Adjust opacity for contrast effect
               BlendMode.srcIn,
             ),
             child: Image(
@@ -36,7 +31,7 @@ class ImageOutliner extends StatelessWidget {
           ),
           Image(
             fit: BoxFit.contain,
-            height: maxHeight * 0.6,
+            height: maxHeight * 0.606,
             semanticLabel: imageName,
             image: AssetImage(
               towerImage(imageName),

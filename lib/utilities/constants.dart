@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/bloon/bloons.dart';
@@ -120,26 +119,23 @@ const TextStyle bigTitleStyle = TextStyle(
 const Map<String, dynamic> constraintsNormalPreset = {
   "crossAxisCount": 1,
   "rowsToShow": 2,
-  "childAspectRatio": 3.8,
+  "childAspectRatio": 4.0,
   "titleFontSize": 18.0,
   "subtitleFontSize": 15.0,
-  "cardHeight": 70.0,
 };
 
 const Map<String, dynamic> constraintsWidePreset = {
   "crossAxisCount": 2,
   "rowsToShow": 3,
-  "childAspectRatio": 4.0,
+  "childAspectRatio": 2.4,
   "titleFontSize": 20.0,
   "subtitleFontSize": 16.0,
-  "cardHeight": 70.0,
 };
 
 const Map<String, dynamic> constraintsUWPreset = {
   "crossAxisCount": 3,
   "rowsToShow": 3,
-  "childAspectRatio": 4.0,
+  "childAspectRatio": 2.0,
   "titleFontSize": 24.0,
   "subtitleFontSize": 15.0,
-  "cardHeight": 70.0,
 };
