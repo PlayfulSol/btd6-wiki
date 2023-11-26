@@ -17,10 +17,10 @@ class Themes {
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(2),
         iconColor: MaterialStateProperty.all(
-          darkColorScheme.onPrimaryContainer,
+          darkColorScheme.onBackground,
         ),
         foregroundColor: MaterialStateProperty.all(
-          darkColorScheme.onPrimaryContainer,
+          darkColorScheme.onBackground,
         ),
         backgroundColor: MaterialStateProperty.all(
           darkColorScheme.primaryContainer,
@@ -29,8 +29,9 @@ class Themes {
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        iconColor:
-            MaterialStateProperty.all(darkColorScheme.onPrimaryContainer),
+        iconColor: MaterialStateProperty.all(
+          darkColorScheme.onBackground,
+        ),
       ),
     ),
   );
@@ -49,10 +50,10 @@ class Themes {
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(2),
         iconColor: MaterialStateProperty.all(
-          lightColorScheme.onPrimaryContainer,
+          lightColorScheme.onBackground,
         ),
         foregroundColor: MaterialStateProperty.all(
-          lightColorScheme.onPrimaryContainer,
+          lightColorScheme.onBackground,
         ),
         backgroundColor: MaterialStateProperty.all(
           lightColorScheme.primaryContainer,
@@ -60,7 +61,7 @@ class Themes {
       ),
     ),
     iconTheme: IconThemeData(
-      color: lightColorScheme.onPrimaryContainer,
+      color: lightColorScheme.onBackground,
     ),
   );
 }

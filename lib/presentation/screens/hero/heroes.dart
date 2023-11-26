@@ -65,8 +65,6 @@ class _HeroesState extends State<Heroes> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Card(
-                          elevation: 5,
-                          shadowColor: Colors.black87,
                           child: ListTile(
                               mouseCursor: SystemMouseCursors.click,
                               leading: CircleAvatar(
