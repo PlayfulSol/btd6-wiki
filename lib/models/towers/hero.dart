@@ -4,7 +4,7 @@ class MenuHeroModel {
   late final String id;
   late final String name;
   late final String image;
-  late final String? inGameDesc;
+  late final String inGameDesc;
   MenuHeroModel(
       {required this.id,
       required this.name,

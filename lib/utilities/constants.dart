@@ -119,7 +119,7 @@ const TextStyle bigTitleStyle = TextStyle(
 const Map<String, dynamic> constraintsNormalPreset = {
   "crossAxisCount": 1,
   "rowsToShow": 2,
-  "childAspectRatio": 4.0,
+  "childAspectRatio": 3.75,
   "titleFontSize": 18.0,
   "subtitleFontSize": 15.0,
 };

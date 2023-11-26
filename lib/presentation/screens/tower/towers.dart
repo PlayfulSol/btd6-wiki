@@ -6,6 +6,7 @@ import '/models/towers/tower.dart';
 import '/presentation/widgets/image_outline.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/analytics/analytics.dart';
+import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/utils.dart';
@@ -21,6 +22,8 @@ class Towers extends StatefulWidget {
 
 class _TowersState extends State<Towers>
     with AutomaticKeepAliveClientMixin<Towers> {
+  Map<String, dynamic> constraintsValues = {};
+
   String getPageTitle() {
     if (GlobalState.currentTowerType != '') {
       return GlobalState.currentTowerType;
@@ -31,7 +34,6 @@ class _TowersState extends State<Towers>
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> constraintsValues;
     super.build(context);
     return Scaffold(
       appBar: GlobalState.currentTowerType != ''
@@ -88,8 +90,10 @@ class _TowersState extends State<Towers>
               return Card(
                 margin: const EdgeInsets.all(10),
                 child: ListTile(
-                  leading:
-                      ImageOutliner(imageName: GlobalState.towers[index].image),
+                  leading: ImageOutliner(
+                    imageName: GlobalState.towers[index].image,
+                    imagePath: towerImage(GlobalState.towers[index].image),
+                  ),
                   title: AutoSizeText(
                     GlobalState.towers[index].name,
                     maxLines: 1,

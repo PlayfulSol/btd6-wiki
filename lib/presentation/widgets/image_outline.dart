@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '/utilities/images_url.dart';
 
 class ImageOutliner extends StatelessWidget {
   final String imageName;
-  const ImageOutliner({super.key, required this.imageName});
+  final String imagePath;
+  const ImageOutliner(
+      {super.key, required this.imageName, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +25,14 @@ class ImageOutliner extends StatelessWidget {
             child: Image(
               fit: BoxFit.fitWidth,
               semanticLabel: imageName,
-              image: AssetImage(
-                towerImage(imageName),
-              ),
+              image: AssetImage(imagePath),
             ),
           ),
           Image(
             fit: BoxFit.contain,
             height: maxHeight * 0.606,
             semanticLabel: imageName,
-            image: AssetImage(
-              towerImage(imageName),
-            ),
+            image: AssetImage(imagePath),
           ),
         ],
       ),
