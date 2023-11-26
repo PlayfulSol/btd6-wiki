@@ -130,62 +130,67 @@ class _MapsState extends State<Maps> {
                                 mainAxisSpacing: 10),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () async {
-                              GlobalState.currentTitle =
-                                  snapshot.data[index].name;
-                              final singleMap = await rootBundle.loadString(
-                                  'assets/data/maps/${snapshot.data[index].id}.json');
-                              final parsedMap = jsonDecode(singleMap);
-                              logPageView(snapshot.data[index].name);
-                              // ignore: use_build_context_synchronously
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SingleMap(
-                                    map: MapModel.fromJson(parsedMap),
+                          return Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: GestureDetector(
+                              onTap: () async {
+                                GlobalState.currentTitle =
+                                    snapshot.data[index].name;
+                                final singleMap = await rootBundle.loadString(
+                                    'assets/data/maps/${snapshot.data[index].id}.json');
+                                final parsedMap = jsonDecode(singleMap);
+                                logPageView(snapshot.data[index].name);
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SingleMap(
+                                      map: MapModel.fromJson(parsedMap),
+                                    ),
                                   ),
+                                );
+                              },
+                              child: Card(
+                                elevation: 5,
+                                shadowColor: Colors.black87,
+                                child: Column(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: [
+                                    Expanded(
+                                      child: Image(
+                                        semanticLabel:
+                                            snapshot.data[index].name,
+                                        image: AssetImage(mapImage(
+                                            snapshot.data[index].image)),
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (BuildContext context,
+                                            Object exception,
+                                            StackTrace? stackTrace) {
+                                          return const Icon(Icons.error);
+                                        },
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          AutoSizeText(
+                                            capitalizeEveryWord(
+                                                snapshot.data[index].name),
+                                            maxLines: 1,
+                                            style: bolderNormalStyle,
+                                          ),
+                                          const SizedBox(height: 5),
+                                          Text(snapshot.data[index].difficulty,
+                                              style: subtitleStyle),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              );
-                            },
-                            child: Card(
-                              elevation: 5,
-                              shadowColor: Colors.black87,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: Image(
-                                      semanticLabel: snapshot.data[index].name,
-                                      image: AssetImage(
-                                          mapImage(snapshot.data[index].image)),
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                        return const Icon(Icons.error);
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        AutoSizeText(
-                                          capitalizeEveryWord(
-                                              snapshot.data[index].name),
-                                          maxLines: 1,
-                                          style: bolderNormalStyle,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Text(snapshot.data[index].difficulty,
-                                            style: subtitleStyle),
-                                      ],
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
                           );

@@ -99,7 +99,8 @@ class _TowersState extends State<Towers>
                       GlobalState.towers[index].name,
                       maxLines: 1,
                       style: titleStyle.copyWith(
-                          fontSize: constraintsValues["titleFontSize"]),
+                        fontSize: constraintsValues["titleFontSize"],
+                      ),
                     ),
                     subtitle: AutoSizeText(
                       GlobalState.towers[index].inGameDesc,
