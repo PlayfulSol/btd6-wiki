@@ -93,7 +93,10 @@ class _TowersState extends State<Towers>
               return Container(
                 color: Colors.green,
                 child: Card(
+                  margin: EdgeInsets.zero,
                   child: ListTile(
+                    contentPadding: EdgeInsets.zero,
+                    minVerticalPadding: 0,
                     leading: ImageOutliner(
                         imageName: GlobalState.towers[index].image),
                     title: AutoSizeText(

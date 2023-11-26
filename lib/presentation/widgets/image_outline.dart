@@ -8,18 +8,22 @@ class ImageOutliner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double maxWidth = 40;
-    double maxHeight = 40;
+    double maxWidth = 90;
+    double maxHeight = 90;
     return SizedBox(
       width: maxWidth,
       height: maxHeight,
       child: Stack(
         alignment: AlignmentDirectional.center,
-        fit: StackFit.expand,
+        fit: StackFit.loose,
         children: [
           ColorFiltered(
             colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(1), // Adjust opacity for contrast effect
+              // Theme.of(context)
+              //     .colorScheme
+              //     .onBackground
+              Colors.black
+                  .withOpacity(0.9), // Adjust opacity for contrast effect
               BlendMode.srcIn,
             ),
             child: Image(
@@ -32,8 +36,7 @@ class ImageOutliner extends StatelessWidget {
           ),
           Image(
             fit: BoxFit.contain,
-            width: maxWidth * 0.8,
-            height: maxHeight * 0.8,
+            height: maxHeight * 0.6,
             semanticLabel: imageName,
             image: AssetImage(
               towerImage(imageName),
