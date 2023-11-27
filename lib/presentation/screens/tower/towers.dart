@@ -98,8 +98,9 @@ class _TowersState extends State<Towers>
           : null,
       body: LayoutBuilder(builder: (context, constraints) {
         constraintsValues = calculateConstraints(constraints);
+        List<TowerModel> towers = filterTowers();
         return GridView.builder(
-            itemCount: GlobalState.towers.length,
+            itemCount: towers.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: constraintsValues["crossAxisCount"],
               childAspectRatio: constraintsValues["childAspectRatio"],
@@ -111,18 +112,18 @@ class _TowersState extends State<Towers>
                 child: Center(
                   child: ListTile(
                     leading: ImageOutliner(
-                      imageName: GlobalState.towers[index].image,
-                      imagePath: towerImage(GlobalState.towers[index].image),
+                      imageName: towers[index].image,
+                      imagePath: towerImage(towers[index].image),
                     ),
                     title: AutoSizeText(
-                      GlobalState.towers[index].name,
+                      towers[index].name,
                       maxLines: 1,
                       style: titleStyle.copyWith(
                         fontSize: constraintsValues["titleFontSize"],
                       ),
                     ),
                     subtitle: AutoSizeText(
-                      GlobalState.towers[index].inGameDesc,
+                      towers[index].inGameDesc,
                       wrapWords: false,
                       overflow: TextOverflow.ellipsis,
                       maxLines: constraintsValues["rowsToShow"],
@@ -133,13 +134,12 @@ class _TowersState extends State<Towers>
                     ),
                     onTap: () async {
                       if (!GlobalState.isLoading) {
-                        GlobalState.currentTitle =
-                            GlobalState.towers[index].name;
-                        var id = GlobalState.towers[index].id;
+                        GlobalState.currentTitle = towers[index].name;
+                        var id = towers[index].id;
                         var path = '${towerDataPath + id}.json';
                         final data = await rootBundle.loadString(path);
                         var jsonData = json.decode(data);
-                        logPageView(GlobalState.towers[index].name);
+                        logPageView(towers[index].name);
                         SingleTowerModel towerData =
                             SingleTowerModel.fromJson(jsonData);
 

@@ -39,7 +39,7 @@ class Themes {
           backgroundColor: MaterialStateProperty.all(
         darkColorScheme.background,
       )),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
         // Use InputBorder.none to remove the default border.
       ),
@@ -78,7 +78,7 @@ class Themes {
           backgroundColor: MaterialStateProperty.all(
         lightColorScheme.background,
       )),
-      inputDecorationTheme: InputDecorationTheme(
+      inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
       ),
     ),

@@ -71,7 +71,6 @@ class _DrawerContentState extends State<DrawerContent> {
                             GlobalState.towerTypes[index];
                         GlobalState.currentTitle =
                             GlobalState.towerTypes[index];
-                        print(' this is - ${GlobalState.currentTitle}');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -162,13 +161,14 @@ class _DrawerContentState extends State<DrawerContent> {
                             GlobalState.mapDifficulties[index];
                         GlobalState.currentPageIndex = 3;
                         Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Maps(
-                                      mapDifficulty:
-                                          GlobalState.mapDifficulties[index],
-                                      key: UniqueKey(),
-                                    )));
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Maps(
+                              mapDifficulty: GlobalState.mapDifficulties[index],
+                              key: UniqueKey(),
+                            ),
+                          ),
+                        );
                       }
                     },
                   );
