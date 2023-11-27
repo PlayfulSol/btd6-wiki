@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import '/models/towers/hero.dart';
-import '/presentation/widgets/loader.dart';
+import '/presentation/widgets/image_outline.dart';
 import '/presentation/screens/hero/single_hero.dart';
 import '/analytics/analytics.dart';
+import '/utilities/utils.dart';
 import '/utilities/constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
@@ -18,106 +19,74 @@ class Heroes extends StatefulWidget {
 }
 
 class _HeroesState extends State<Heroes> {
+  Map<String, dynamic> constraintsValues = {};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: FutureBuilder(
-          future: Future.value(GlobalState.menuHeroes),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return const Loader();
-            } else {
-              return LayoutBuilder(builder: (context, constraints) {
-                int crossAxisCount = 2;
-                double childAspectRatio = 1.5;
-                double cardHeight = 130;
-                double titleFontSize = 15;
-                double subtitleFontSize = 13;
-
-                if (constraints.maxWidth < 450) {
-                  crossAxisCount = 1;
-                  titleFontSize = 18;
-                  subtitleFontSize = 15;
-                  cardHeight = 100;
-                } else if (constraints.maxWidth < 1200) {
-                  crossAxisCount = 2;
-                  childAspectRatio = 1;
-                  titleFontSize = 20;
-                  subtitleFontSize = 16;
-                } else {
-                  crossAxisCount = 3;
-                  childAspectRatio = 0.75;
-                  titleFontSize = 24;
-                  subtitleFontSize = 18;
-                }
-
-                return GridView.builder(
-                    itemCount: snapshot.data.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      childAspectRatio: childAspectRatio,
-                      mainAxisSpacing: 7,
-                      crossAxisSpacing: 7,
-                      mainAxisExtent: cardHeight,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          constraintsValues = calculateConstraints(constraints);
+          return GridView.builder(
+            itemCount: GlobalState.menuHeroes.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: constraintsValues["crossAxisCount"],
+              childAspectRatio: constraintsValues["childAspectRatio"],
+            ),
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Card(
+                margin: const EdgeInsets.all(10),
+                child: Center(
+                  child: ListTile(
+                    mouseCursor: SystemMouseCursors.click,
+                    leading: ImageOutliner(
+                      imageName: GlobalState.menuHeroes[index].image,
+                      imagePath: heroImage(GlobalState.menuHeroes[index].image),
                     ),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Card(
-                          elevation: 5,
-                          shadowColor: Colors.black87,
-                          child: ListTile(
-                              mouseCursor: SystemMouseCursors.click,
-                              leading: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  child: Image(
-                                      semanticLabel: snapshot.data[index].name,
-                                      image: AssetImage(heroImage(
-                                          snapshot.data[index].image)))),
-                              title: AutoSizeText(snapshot.data[index].name,
-                                  wrapWords: false,
-                                  style: titleStyle.copyWith(
-                                      fontSize: titleFontSize)),
-                              subtitle: AutoSizeText(
-                                snapshot.data[index].inGameDesc,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 2,
-                                minFontSize: subtitleFontSize,
-                                maxFontSize: subtitleFontSize,
-                                wrapWords: false,
-                                style: TextStyle(fontSize: subtitleFontSize),
-                              ),
-                              onTap: () async {
-                                if (!GlobalState.isLoading) {
-                                  var id = snapshot.data[index].id;
-                                  var path = '${heroDataPath + id}.json';
-                                  final data =
-                                      await rootBundle.loadString(path);
-                                  var jsonData = json.decode(data);
-                                  logInnerPageView(snapshot.data[index].name);
-                                  HeroModel heroData =
-                                      HeroModel.fromJson(jsonData);
-                                  // ignore: use_build_context_synchronously
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return SingleHero(
-                                          heroId: id,
-                                          singleHero: heroData,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                  GlobalState.currentTitle = heroData.name;
-                                }
-                              }));
-                    });
-              });
-            }
-          },
-        ),
+                    title: AutoSizeText(GlobalState.menuHeroes[index].name,
+                        wrapWords: false,
+                        style: titleStyle.copyWith(
+                            fontSize: constraintsValues["titleFontSize"])),
+                    subtitle: AutoSizeText(
+                      GlobalState.menuHeroes[index].inGameDesc,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: constraintsValues["rowsToShow"],
+                      minFontSize: constraintsValues["subtitleFontSize"],
+                      maxFontSize: constraintsValues["subtitleFontSize"],
+                      wrapWords: false,
+                      style: TextStyle(
+                          fontSize: constraintsValues["subtitleFontSize"]),
+                    ),
+                    onTap: () async {
+                      if (!GlobalState.isLoading) {
+                        var id = GlobalState.menuHeroes[index].id;
+                        var path = '${heroDataPath + id}.json';
+                        final data = await rootBundle.loadString(path);
+                        var jsonData = json.decode(data);
+                        logPageView(GlobalState.menuHeroes[index].name);
+                        HeroModel heroData = HeroModel.fromJson(jsonData);
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return SingleHero(
+                                heroId: id,
+                                singleHero: heroData,
+                              );
+                            },
+                          ),
+                        );
+                        GlobalState.currentTitle = heroData.name;
+                      }
+                    },
+                  ),
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }

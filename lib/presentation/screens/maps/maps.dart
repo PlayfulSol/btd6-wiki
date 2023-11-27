@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import "/models/maps/map.dart";
+import '/models/maps/map.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/loader.dart';
-import '/../analytics/analytics.dart';
+import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/strings.dart';
 import '/utilities/global_state.dart';
@@ -75,71 +75,65 @@ class _MapsState extends State<Maps> {
               ),
               title: Text(getPageTitle()),
               actions: [
-                DropdownButton<String>(
-                  value: GlobalState.currentMapDifficulty,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  iconSize: 24,
-                  elevation: 16,
-                  style: const TextStyle(color: Colors.black),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.black,
-                  ),
-                  onChanged: (String? newValue) {
+                DropdownMenu<String>(
+                  initialSelection: GlobalState.currentMapDifficulty,
+                  onSelected: (String? newValue) {
                     setState(() {
                       GlobalState.currentMapDifficulty = newValue!;
                       GlobalState.currentTitle = newValue;
                     });
                   },
-                  items: GlobalState.mapDifficulties
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
+                  dropdownMenuEntries: GlobalState.mapDifficulties
+                      .map<DropdownMenuEntry<String>>((String value) {
+                    return DropdownMenuEntry<String>(
                       value: value,
-                      child: Text(value,
-                          style: const TextStyle(color: Colors.blue)),
+                      label: value,
                     );
                   }).toList(),
                 ),
               ],
             )
           : null,
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: FutureBuilder(
-          future: Future.value(filterMaps(query)),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return const Loader();
-            } else {
-              return Column(
-                children: [
-                  TextField(
+      body: FutureBuilder(
+        future: Future.value(filterMaps(query)),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.data == null) {
+            return const Loader();
+          } else {
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
                     controller: _searchController,
                     decoration: const InputDecoration(
                       hintText: 'Search maps',
                     ),
                   ),
-                  const SizedBox(height: 10),
-                  Expanded(
-                    child: LayoutBuilder(builder: (context, constraints) {
-                      return GridView.builder(
-                          itemCount: snapshot.data.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
-                                  childAspectRatio: 1.4,
-                                  crossAxisSpacing: 10,
-                                  mainAxisSpacing: 10),
-                          shrinkWrap: true,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
+                ),
+                const SizedBox(height: 10),
+                Expanded(
+                  child: LayoutBuilder(builder: (context, constraints) {
+                    return GridView.builder(
+                        itemCount: snapshot.data.length,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                childAspectRatio: 1.4,
+                                crossAxisSpacing: 10,
+                                mainAxisSpacing: 10),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(5.0),
+                            child: GestureDetector(
                               onTap: () async {
                                 GlobalState.currentTitle =
                                     snapshot.data[index].name;
                                 final singleMap = await rootBundle.loadString(
                                     'assets/data/maps/${snapshot.data[index].id}.json');
                                 final parsedMap = jsonDecode(singleMap);
-                                logInnerPageView(snapshot.data[index].name);
+                                logPageView(snapshot.data[index].name);
                                 // ignore: use_build_context_synchronously
                                 Navigator.push(
                                   context,
@@ -192,15 +186,15 @@ class _MapsState extends State<Maps> {
                                   ],
                                 ),
                               ),
-                            );
-                          });
-                    }),
-                  ),
-                ],
-              );
-            }
-          },
-        ),
+                            ),
+                          );
+                        });
+                  }),
+                ),
+              ],
+            );
+          }
+        },
       ),
     );
   }

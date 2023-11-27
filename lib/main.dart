@@ -16,7 +16,8 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  logEvent('theme_used', AdaptiveThemeMode.system.toString());
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  logEvent('theme_used', savedThemeMode.toString());
   runApp(const MyApp());
 }
 
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logEvent(
+        'device_width', MediaQuery.of(context).size.width.toStringAsFixed(1));
+
     return AdaptiveTheme(
         light: Themes.lightTheme,
         dark: Themes.darkTheme,
@@ -116,15 +120,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 });
               }),
       bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.black54,
-                blurRadius: 15.0,
-                offset: Offset(0.0, 0.75))
-          ],
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(
+                color: Theme.of(context).colorScheme.outline, width: 0.5),
+          ),
         ),
         child: BottomNavigationBar(
+            elevation: 0,
+            selectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 18,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+            ),
             type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(

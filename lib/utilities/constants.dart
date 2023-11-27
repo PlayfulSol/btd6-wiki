@@ -115,3 +115,67 @@ const TextStyle bigTitleStyle = TextStyle(
   fontSize: 25,
   fontWeight: FontWeight.bold,
 );
+
+const Map<String, dynamic> constraintsNormalPreset = {
+  "crossAxisCount": 1,
+  "rowsToShow": 2,
+  "childAspectRatio": 3.15,
+  "titleFontSize": 18.0,
+  "subtitleFontSize": 15.0,
+};
+
+const Map<String, dynamic> constraintsWidePreset = {
+  "crossAxisCount": 2,
+  "rowsToShow": 3,
+  "childAspectRatio": 2.4,
+  "titleFontSize": 20.0,
+  "subtitleFontSize": 16.0,
+};
+
+const Map<String, dynamic> constraintsUWPreset = {
+  "crossAxisCount": 3,
+  "rowsToShow": 3,
+  "childAspectRatio": 2.0,
+  "titleFontSize": 24.0,
+  "subtitleFontSize": 15.0,
+};
+
+const Map<String, dynamic> constraintsBloonSmallPreset = {
+  "crossAxisCount": 2,
+  "crossAxisCountBoss": 1,
+  "childAspectRatio": 1.95,
+  "childAspectRatioBoss": 3.45,
+  "titleFontSize": 16.0,
+  "imageWidth": 29.0,
+  "textStyleBoss": bolderNormalStyle,
+};
+
+const Map<String, dynamic> constraintsBloonNormalPreset = {
+  "crossAxisCount": 2,
+  "crossAxisCountBoss": 1,
+  "childAspectRatio": 2.1,
+  "childAspectRatioBoss": 4.05,
+  "titleFontSize": 19.0,
+  "imageWidth": 34.5,
+  "textStyleBoss": smallTitleStyle,
+};
+
+const Map<String, dynamic> constraintsBloonWidePreset = {
+  "crossAxisCount": 2,
+  "crossAxisCountBoss": 1,
+  "childAspectRatio": 2.075,
+  "childAspectRatioBoss": 4.2,
+  "titleFontSize": 19.0,
+  "imageWidth": 42.0,
+  "textStyleBoss": smallTitleStyle,
+};
+
+const Map<String, dynamic> constraintsBloonUWPreset = {
+  "crossAxisCount": 3,
+  "crossAxisCountBoss": 2,
+  "childAspectRatio": 2.2,
+  "childAspectRatioBoss": 3.5,
+  "titleFontSize": 22.0,
+  "imageWidth": 56.0,
+  "textStyleBoss": titleStyle,
+};

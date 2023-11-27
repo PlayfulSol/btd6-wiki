@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:auto_size_text/auto_size_text.dart';
 import '/models/towers/tower.dart';
+import '/presentation/widgets/image_outline.dart';
 import '/presentation/screens/tower/single_tower.dart';
-import '/presentation/widgets/loader.dart';
-import '/utilities/constants.dart';
-import '/../analytics/analytics.dart';
-import '/utilities/global_state.dart';
+import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
+import '/utilities/global_state.dart';
 import '/utilities/utils.dart';
 
 class Towers extends StatefulWidget {
@@ -22,6 +22,8 @@ class Towers extends StatefulWidget {
 
 class _TowersState extends State<Towers>
     with AutomaticKeepAliveClientMixin<Towers> {
+  Map<String, dynamic> constraintsValues = {};
+
   String getPageTitle() {
     if (GlobalState.currentTowerType != '') {
       return GlobalState.currentTowerType;
@@ -47,140 +49,88 @@ class _TowersState extends State<Towers>
               ),
               title: Text(getPageTitle()),
               actions: [
-                DropdownButton<String>(
-                  value: GlobalState.currentTowerType,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  iconSize: 24,
-                  elevation: 16,
-                  style: const TextStyle(color: Colors.black),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.black,
-                  ),
-                  onChanged: (String? newValue) {
+                DropdownMenu<String>(
+                  initialSelection: GlobalState.currentTowerType,
+                  onSelected: (String? newValue) {
                     setState(() {
                       GlobalState.currentTowerType = newValue!;
                       GlobalState.currentTitle = newValue;
                     });
                   },
-                  items: GlobalState.towerTypes
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
+                  dropdownMenuEntries: GlobalState.towerTypes
+                      .map<DropdownMenuEntry<String>>((String value) {
+                    return DropdownMenuEntry<String>(
                       value: value,
-                      child: Text(value,
-                          style: const TextStyle(color: Colors.blue)),
+                      label: value,
                     );
                   }).toList(),
                 ),
               ],
             )
           : null,
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: FutureBuilder(
-          future: Future.value(filterTowers()),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.data == null) {
-              return const Loader();
-            } else {
-              return LayoutBuilder(builder: (context, constraints) {
-                int crossAxisCount = 2;
-                double childAspectRatio = 1.5;
-                double cardHeight = 130;
-                double titleFontSize = 15;
-                double subtitleFontSize = 13;
-                int rowsToShow = 2;
-
-                if (constraints.maxWidth < 450) {
-                  crossAxisCount = 1;
-                  titleFontSize = 18;
-                  subtitleFontSize = 15;
-                  cardHeight = 100;
-                  rowsToShow = 2;
-                } else if (constraints.maxWidth < 1200) {
-                  crossAxisCount = 2;
-                  childAspectRatio = 1;
-                  titleFontSize = 20;
-                  subtitleFontSize = 16;
-                  rowsToShow = 3;
-                } else {
-                  crossAxisCount = 3;
-                  childAspectRatio = 0.75;
-                  titleFontSize = 24;
-                  subtitleFontSize = 18;
-                  rowsToShow = 2;
-                }
-
-                return GridView.builder(
-                    itemCount: snapshot.data.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      childAspectRatio: childAspectRatio,
-                      mainAxisSpacing: 7,
-                      crossAxisSpacing: 7,
-                      mainAxisExtent: cardHeight,
+      body: LayoutBuilder(builder: (context, constraints) {
+        constraintsValues = calculateConstraints(constraints);
+        List<TowerModel> towers = filterTowers();
+        return GridView.builder(
+            itemCount: towers.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: constraintsValues["crossAxisCount"],
+              childAspectRatio: constraintsValues["childAspectRatio"],
+            ),
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              return Card(
+                margin: const EdgeInsets.all(10),
+                child: Center(
+                  child: ListTile(
+                    leading: ImageOutliner(
+                      imageName: towers[index].image,
+                      imagePath: towerImage(towers[index].image),
                     ),
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        elevation: 5,
-                        shadowColor: Colors.black87,
-                        child: ListTile(
-                          mouseCursor: SystemMouseCursors.click,
-                          dense: false,
-                          leading: CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            child: Image(
-                              semanticLabel: snapshot.data[index].name,
-                              image: AssetImage(
-                                  towerImage(snapshot.data[index].image)),
-                            ),
-                          ),
-                          title: AutoSizeText(
-                            snapshot.data[index].name,
-                            maxLines: 1,
-                            style: titleStyle.copyWith(fontSize: titleFontSize),
-                          ),
-                          subtitle: AutoSizeText(
-                              snapshot.data[index].inGameDesc,
-                              wrapWords: false,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: rowsToShow,
-                              style: subtitleStyle.copyWith(
-                                  fontSize: subtitleFontSize),
-                              minFontSize: subtitleFontSize,
-                              maxFontSize: subtitleFontSize),
-                          onTap: () async {
-                            if (!GlobalState.isLoading) {
-                              GlobalState.currentTitle =
-                                  snapshot.data[index].name;
-                              var id = snapshot.data[index].id;
-                              var path = '${towerDataPath + id}.json';
-                              final data = await rootBundle.loadString(path);
-                              var jsonData = json.decode(data);
-                              logInnerPageView(snapshot.data[index].name);
-                              SingleTowerModel towerData =
-                                  SingleTowerModel.fromJson(jsonData);
+                    title: AutoSizeText(
+                      towers[index].name,
+                      maxLines: 1,
+                      style: titleStyle.copyWith(
+                        fontSize: constraintsValues["titleFontSize"],
+                      ),
+                    ),
+                    subtitle: AutoSizeText(
+                      towers[index].inGameDesc,
+                      wrapWords: false,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: constraintsValues["rowsToShow"],
+                      style: subtitleStyle.copyWith(
+                          fontSize: constraintsValues["subtitleFontSize"]),
+                      minFontSize: constraintsValues["subtitleFontSize"],
+                      maxFontSize: constraintsValues["subtitleFontSize"],
+                    ),
+                    onTap: () async {
+                      if (!GlobalState.isLoading) {
+                        GlobalState.currentTitle = towers[index].name;
+                        var id = towers[index].id;
+                        var path = '${towerDataPath + id}.json';
+                        final data = await rootBundle.loadString(path);
+                        var jsonData = json.decode(data);
+                        logPageView(towers[index].name);
+                        SingleTowerModel towerData =
+                            SingleTowerModel.fromJson(jsonData);
 
-                              // ignore: use_build_context_synchronously
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      SingleTower(towerData: towerData),
-                                ),
-                              );
-                              GlobalState.currentTitle = towerData.name;
-                            }
-                          },
-                        ),
-                      );
-                    });
-              });
-            }
-          },
-        ),
-      ),
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                SingleTower(towerData: towerData),
+                          ),
+                        );
+                        GlobalState.currentTitle = towerData.name;
+                      }
+                    },
+                  ),
+                ),
+              );
+            });
+      }),
     );
   }
 

@@ -11,11 +11,6 @@ class AboutUsPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      style: ButtonStyle(
-        iconColor: MaterialStateProperty.all(Colors.white),
-        foregroundColor: MaterialStateProperty.all(Colors.white),
-        backgroundColor: MaterialStateProperty.all(Colors.teal),
-      ),
       onPressed: () {
         logEvent('about_us', 'opened');
         showDialog(
@@ -37,9 +32,13 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text(
+      backgroundColor: Theme.of(context).colorScheme.background,
+      title: Text(
         'About Us',
         textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Theme.of(context).colorScheme.onBackground,
+        ),
       ),
       titleTextStyle: bigTitleStyle,
       contentPadding: const EdgeInsets.fromLTRB(15, 15, 15, 25),
@@ -49,11 +48,6 @@ class AboutUs extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ElevatedButton(
-            style: ButtonStyle(
-              iconColor: MaterialStateProperty.all(Colors.white),
-              foregroundColor: MaterialStateProperty.all(Colors.white),
-              backgroundColor: MaterialStateProperty.all(Colors.teal),
-            ),
             onPressed: () => {
               logEvent('contact_us', 'opened'),
               openMail('Playfulsols@gamil.com'),
@@ -72,11 +66,6 @@ class AboutUs extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            style: ButtonStyle(
-              iconColor: MaterialStateProperty.all(Colors.white),
-              foregroundColor: MaterialStateProperty.all(Colors.white),
-              backgroundColor: MaterialStateProperty.all(Colors.teal),
-            ),
             onPressed: () => {
               logEvent('github', 'opened'),
               openUrl('https://github.com/PlayfulSol/flutter-btd6-wiki'),
@@ -109,22 +98,21 @@ class AboutUs extends StatelessWidget {
           ),
           const DeveloperInfo(
             name: 'Shai Holczer',
-            email: 'Shaitnto@gmail.com',
+            email: 'shaitnto@gmail.com',
             githubUrl: 'https://github.com/namelessto',
             linkedinUrl: 'https://www.linkedin.com/in/shai-holczer/',
           ),
         ],
       ),
       actions: [
-        TextButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all(Colors.teal),
-          ),
+        ElevatedButton(
           onPressed: () {
             logEvent('about_us', 'closed');
             Navigator.of(context).pop();
           },
-          child: const Text('Close', style: TextStyle(color: Colors.white)),
+          child: const Text(
+            'Close',
+          ),
         ),
       ],
     );

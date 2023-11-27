@@ -21,8 +21,7 @@ class DeveloperInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
-      color: Colors.white38,
+      color: Theme.of(context).colorScheme.primaryContainer,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 9),
         child: Row(
@@ -31,15 +30,16 @@ class DeveloperInfo extends StatelessWidget {
           children: [
             Flexible(
               flex: 4,
-              child: Text(name,
-                  textAlign: TextAlign.center, style: bolderNormalStyle),
+              child: Text(
+                name,
+                textAlign: TextAlign.center,
+                style: bolderNormalStyle.copyWith(
+                    color: Theme.of(context).colorScheme.onBackground),
+              ),
             ),
             Flexible(
               child: IconButton(
                 icon: const Icon(Icons.email),
-                style: ButtonStyle(
-                  iconColor: MaterialStateProperty.all(Colors.white),
-                ),
                 onPressed: () =>
                     {logEvent('email_personal', name), openMail(email)},
               ),
@@ -47,9 +47,6 @@ class DeveloperInfo extends StatelessWidget {
             Flexible(
               child: IconButton(
                 icon: const FaIcon(FontAwesomeIcons.github),
-                style: ButtonStyle(
-                  iconColor: MaterialStateProperty.all(Colors.white),
-                ),
                 onPressed: () =>
                     {logEvent('github_personal', name), openUrl(githubUrl)},
               ),
@@ -57,9 +54,6 @@ class DeveloperInfo extends StatelessWidget {
             Flexible(
               child: IconButton(
                 icon: const FaIcon(FontAwesomeIcons.linkedin),
-                style: ButtonStyle(
-                  iconColor: MaterialStateProperty.all(Colors.white),
-                ),
                 onPressed: () =>
                     {logEvent('linkedin_personal', name), openUrl(linkedinUrl)},
               ),

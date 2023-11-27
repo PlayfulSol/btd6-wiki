@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/models/maps/map.dart';
 import '/models/towers/common.dart';
 import '/models/towers/tower.dart';
 import '/utilities/global_state.dart';
+import 'constants.dart';
 
 String formatBigNumber(int number) {
   if (number < 1000) {
@@ -140,5 +142,27 @@ Future<void> openMail(String mailString) async {
   );
   if (!await launchUrl(emailLaunchUri)) {
     throw 'Could not launch $emailLaunchUri';
+  }
+}
+
+Map<String, dynamic> calculateConstraints(BoxConstraints constraints) {
+  if (constraints.maxWidth < 450) {
+    return constraintsNormalPreset;
+  } else if (constraints.maxWidth < 1200) {
+    return constraintsWidePreset;
+  } else {
+    return constraintsUWPreset;
+  }
+}
+
+Map<String, dynamic> calculateConstraintsBloons(BoxConstraints constraints) {
+  if (constraints.maxWidth < 350) {
+    return constraintsBloonSmallPreset;
+  } else if (constraints.maxWidth < 400) {
+    return constraintsBloonNormalPreset;
+  } else if (constraints.maxWidth < 470) {
+    return constraintsBloonWidePreset;
+  } else {
+    return constraintsBloonUWPreset;
   }
 }

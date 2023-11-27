@@ -79,7 +79,7 @@ Widget generateMinion(Relative relative, BuildContext context) {
               var path = '${minionsDataPath + id}.json';
               final data = await rootBundle.loadString(path);
               var jsonData = json.decode(data);
-              logInnerPageView(relative.name);
+              logPageView(relative.name);
               MinionBloon bloonData = MinionBloon.fromJson(jsonData);
               GlobalState.currentTitle = bloonData.name;
               // ignore: use_build_context_synchronously
@@ -109,6 +109,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
       value: data[index]['value'],
     );
     Card card = Card(
+      shadowColor: Colors.black87,
       child: ListTile(
         leading: Image(
           semanticLabel: relative.name,
