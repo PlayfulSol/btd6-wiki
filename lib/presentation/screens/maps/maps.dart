@@ -77,6 +77,7 @@ class _MapsState extends State<Maps> {
               actions: [
                 DropdownMenu<String>(
                   initialSelection: GlobalState.currentMapDifficulty,
+                  width: 140,
                   onSelected: (String? newValue) {
                     setState(() {
                       GlobalState.currentMapDifficulty = newValue!;
@@ -84,12 +85,14 @@ class _MapsState extends State<Maps> {
                     });
                   },
                   dropdownMenuEntries: GlobalState.mapDifficulties
-                      .map<DropdownMenuEntry<String>>((String value) {
-                    return DropdownMenuEntry<String>(
-                      value: value,
-                      label: value,
-                    );
-                  }).toList(),
+                      .map<DropdownMenuEntry<String>>(
+                    (String value) {
+                      return DropdownMenuEntry<String>(
+                        value: value,
+                        label: value,
+                      );
+                    },
+                  ).toList(),
                 ),
               ],
             )
