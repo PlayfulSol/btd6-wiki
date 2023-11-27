@@ -24,6 +24,7 @@ class Maps extends StatefulWidget {
 
 class _MapsState extends State<Maps> {
   late final TextEditingController _searchController;
+  Map<String, dynamic> constraintsValues = {};
   String query = '';
 
   @override
@@ -94,106 +95,92 @@ class _MapsState extends State<Maps> {
               ],
             )
           : null,
-      body: FutureBuilder(
-        future: Future.value(filterMaps(query)),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.data == null) {
-            return const Loader();
-          } else {
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: const InputDecoration(
-                      hintText: 'Search maps',
-                    ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          print('Query - $query');
+          List<MapModel> maps = filterMaps(query);
+          return ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _searchController,
+                  decoration: const InputDecoration(
+                    hintText: 'Search maps',
                   ),
                 ),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: LayoutBuilder(builder: (context, constraints) {
-                    return GridView.builder(
-                        itemCount: snapshot.data.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 1.4,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: GestureDetector(
-                              onTap: () async {
-                                GlobalState.currentTitle =
-                                    snapshot.data[index].name;
-                                final singleMap = await rootBundle.loadString(
-                                    'assets/data/maps/${snapshot.data[index].id}.json');
-                                final parsedMap = jsonDecode(singleMap);
-                                logPageView(snapshot.data[index].name);
-                                // ignore: use_build_context_synchronously
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SingleMap(
-                                      map: MapModel.fromJson(parsedMap),
-                                    ),
-                                  ),
-                                );
-                              },
-                              child: Card(
-                                elevation: 5,
-                                shadowColor: Colors.black87,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Expanded(
-                                      child: Image(
-                                        semanticLabel:
-                                            snapshot.data[index].name,
-                                        image: AssetImage(mapImage(
-                                            snapshot.data[index].image)),
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (BuildContext context,
-                                            Object exception,
-                                            StackTrace? stackTrace) {
-                                          return const Icon(Icons.error);
-                                        },
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          AutoSizeText(
-                                            capitalizeEveryWord(
-                                                snapshot.data[index].name),
-                                            maxLines: 1,
-                                            style: bolderNormalStyle,
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Text(snapshot.data[index].difficulty,
-                                              style: subtitleStyle),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
+              ),
+              GridView.builder(
+                itemCount: maps.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.4,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                ),
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: GestureDetector(
+                      onTap: () async {
+                        GlobalState.currentTitle = maps[index].name;
+                        final singleMap = await rootBundle.loadString(
+                            'assets/data/maps/${maps[index].id}.json');
+                        final parsedMap = jsonDecode(singleMap);
+                        logPageView(maps[index].name);
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SingleMap(
+                              map: MapModel.fromJson(parsedMap),
+                            ),
+                          ),
+                        );
+                      },
+                      child: Card(
+                        elevation: 5,
+                        shadowColor: Colors.black87,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Expanded(
+                              child: Image(
+                                semanticLabel: maps[index].name,
+                                image: AssetImage(mapImage(maps[index].image)),
+                                fit: BoxFit.cover,
+                                errorBuilder: (BuildContext context,
+                                    Object exception, StackTrace? stackTrace) {
+                                  return const Icon(Icons.error);
+                                },
                               ),
                             ),
-                          );
-                        });
-                  }),
-                ),
-              ],
-            );
-          }
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AutoSizeText(
+                                    capitalizeEveryWord(maps[index].name),
+                                    maxLines: 1,
+                                    style: bolderNormalStyle,
+                                  ),
+                                  const SizedBox(height: 5),
+                                  Text(maps[index].difficulty,
+                                      style: subtitleStyle),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
         },
       ),
     );
