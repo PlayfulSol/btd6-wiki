@@ -75,28 +75,19 @@ class _MapsState extends State<Maps> {
               ),
               title: Text(getPageTitle()),
               actions: [
-                DropdownButton<String>(
-                  value: GlobalState.currentMapDifficulty,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  iconSize: 24,
-                  elevation: 16,
-                  style: const TextStyle(color: Colors.black),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.black,
-                  ),
-                  onChanged: (String? newValue) {
+                DropdownMenu<String>(
+                  initialSelection: GlobalState.currentMapDifficulty,
+                  onSelected: (String? newValue) {
                     setState(() {
                       GlobalState.currentMapDifficulty = newValue!;
                       GlobalState.currentTitle = newValue;
                     });
                   },
-                  items: GlobalState.mapDifficulties
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
+                  dropdownMenuEntries: GlobalState.mapDifficulties
+                      .map<DropdownMenuEntry<String>>((String value) {
+                    return DropdownMenuEntry<String>(
                       value: value,
-                      child: Text(value,
-                          style: const TextStyle(color: Colors.blue)),
+                      label: value,
                     );
                   }).toList(),
                 ),
@@ -111,10 +102,13 @@ class _MapsState extends State<Maps> {
           } else {
             return Column(
               children: [
-                TextField(
-                  controller: _searchController,
-                  decoration: const InputDecoration(
-                    hintText: 'Search maps',
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: const InputDecoration(
+                      hintText: 'Search maps',
+                    ),
                   ),
                 ),
                 const SizedBox(height: 10),

@@ -154,9 +154,9 @@ const Map<String, dynamic> constraintsBloonNormalPreset = {
   "crossAxisCount": 2,
   "crossAxisCountBoss": 1,
   "childAspectRatio": 2.1,
-  "childAspectRatioBoss": 4.2,
+  "childAspectRatioBoss": 4.05,
   "titleFontSize": 19.0,
-  "imageWidth": 40.0,
+  "imageWidth": 34.5,
   "textStyleBoss": smallTitleStyle,
 };
 
