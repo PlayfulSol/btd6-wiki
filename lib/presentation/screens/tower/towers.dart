@@ -68,10 +68,11 @@ class _TowersState extends State<Towers>
               ],
             )
           : null,
-      body: LayoutBuilder(builder: (context, constraints) {
-        constraintsValues = calculateConstraints(constraints);
-        List<TowerModel> towers = filterTowers();
-        return GridView.builder(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          constraintsValues = calculateConstraints(constraints);
+          List<TowerModel> towers = filterTowers();
+          return GridView.builder(
             itemCount: towers.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: constraintsValues["crossAxisCount"],
@@ -129,8 +130,10 @@ class _TowersState extends State<Towers>
                   ),
                 ),
               );
-            });
-      }),
+            },
+          );
+        },
+      ),
     );
   }
 

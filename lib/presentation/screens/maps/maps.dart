@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import '/models/maps/map.dart';
 import '/presentation/screens/maps/single_map.dart';
-import '/presentation/widgets/loader.dart';
 import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/strings.dart';
@@ -97,7 +96,6 @@ class _MapsState extends State<Maps> {
           : null,
       body: LayoutBuilder(
         builder: (context, constraints) {
-          print('Query - $query');
           List<MapModel> maps = filterMaps(query);
           return ListView(
             children: [
@@ -115,10 +113,10 @@ class _MapsState extends State<Maps> {
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 1.4,
-                  crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -140,8 +138,6 @@ class _MapsState extends State<Maps> {
                         );
                       },
                       child: Card(
-                        elevation: 5,
-                        shadowColor: Colors.black87,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
