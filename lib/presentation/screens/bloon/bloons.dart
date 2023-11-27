@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../widgets/image_outline.dart';
@@ -51,16 +52,17 @@ class _BloonsState extends State<Bloons> {
                       margin: const EdgeInsets.all(10),
                       child: Center(
                         child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 10, horizontal: 7),
                           horizontalTitleGap: 10,
                           leading: ImageOutliner(
                             imageName: GlobalState.bloons[index].image,
                             imagePath:
                                 bloonImage(GlobalState.bloons[index].image),
                           ),
-                          title: Text(
+                          title: AutoSizeText(
                             GlobalState.bloons[index].name,
+                            maxLines: 1,
+                            minFontSize: smallTitleStyle.fontSize! - 2,
+                            maxFontSize: smallTitleStyle.fontSize!,
                             style: smallTitleStyle,
                           ),
                           onTap: () async {

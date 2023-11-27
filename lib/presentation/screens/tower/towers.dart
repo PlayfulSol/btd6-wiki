@@ -65,34 +65,6 @@ class _TowersState extends State<Towers>
                     );
                   }).toList(),
                 ),
-                DropdownButton<String>(
-                  value: GlobalState.currentTowerType,
-                  icon: const Icon(Icons.arrow_drop_down),
-                  iconSize: 24,
-                  elevation: 16,
-                  style: const TextStyle(color: Colors.black),
-                  underline: Container(
-                    height: 2,
-                    color: Colors.black,
-                  ),
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      GlobalState.currentTowerType = newValue!;
-                      GlobalState.currentTitle = newValue;
-                    });
-                  },
-                  items: GlobalState.towerTypes.map<DropdownMenuItem<String>>(
-                    (String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(
-                          value,
-                          style: const TextStyle(color: Colors.blue),
-                        ),
-                      );
-                    },
-                  ).toList(),
-                ),
               ],
             )
           : null,

@@ -143,15 +143,15 @@ const Map<String, dynamic> constraintsUWPreset = {
 const Map<String, dynamic> constraintsBloonSmallPreset = {
   "crossAxisCount": 2,
   "crossAxisCountBoss": 1,
-  "childAspectRatio": 2.1,
-  "childAspectRatioBoss": 4.3,
+  "childAspectRatio": 2.0,
+  "childAspectRatioBoss": 4.1,
   "subtitleFontSize": 16.0,
 };
 
 const Map<String, dynamic> constraintsBloonNormalPreset = {
   "crossAxisCount": 2,
   "crossAxisCountBoss": 1,
-  "childAspectRatio": 2.1,
+  "childAspectRatio": 2.05,
   "childAspectRatioBoss": 4.3,
   "subtitleFontSize": 16.0,
 };
