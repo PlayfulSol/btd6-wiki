@@ -51,11 +51,6 @@ class _TowersState extends State<Towers>
               actions: [
                 DropdownMenu<String>(
                   initialSelection: GlobalState.currentTowerType,
-                  // requestFocusOnTap is enabled/disabled by platforms when it is null.
-                  // On mobile platforms, this is false by default. Setting this to true will
-                  // trigger focus request on the text field and virtual keyboard will appear
-                  // afterward. On desktop platforms however, this defaults to true.
-                  requestFocusOnTap: false,
                   onSelected: (String? newValue) {
                     setState(() {
                       GlobalState.currentTowerType = newValue!;
@@ -67,10 +62,6 @@ class _TowersState extends State<Towers>
                     return DropdownMenuEntry<String>(
                       value: value,
                       label: value,
-
-                      // style: MenuItemButton.styleFrom(
-                      //   foregroundColor: color.color,
-                      // ),
                     );
                   }).toList(),
                 ),

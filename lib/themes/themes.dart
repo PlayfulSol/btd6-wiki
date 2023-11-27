@@ -73,5 +73,14 @@ class Themes {
     iconTheme: IconThemeData(
       color: lightColorScheme.onBackground,
     ),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      menuStyle: MenuStyle(
+          backgroundColor: MaterialStateProperty.all(
+        lightColorScheme.background,
+      )),
+      inputDecorationTheme: InputDecorationTheme(
+        border: InputBorder.none,
+      ),
+    ),
   );
 }

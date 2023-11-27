@@ -71,6 +71,7 @@ class _DrawerContentState extends State<DrawerContent> {
                             GlobalState.towerTypes[index];
                         GlobalState.currentTitle =
                             GlobalState.towerTypes[index];
+                        print(' this is - ${GlobalState.currentTitle}');
                         Navigator.push(
                             context,
                             MaterialPageRoute(
