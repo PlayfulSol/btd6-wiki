@@ -49,7 +49,10 @@ class _BloonsState extends State<Bloons> {
                   primary: false,
                   itemBuilder: (context, index) {
                     return Card(
-                      margin: const EdgeInsets.all(10),
+                      margin: const EdgeInsets.symmetric(
+                        vertical: 10,
+                        horizontal: 7,
+                      ),
                       child: Center(
                         child: ListTile(
                           horizontalTitleGap: 10,
@@ -57,13 +60,14 @@ class _BloonsState extends State<Bloons> {
                             imageName: GlobalState.bloons[index].image,
                             imagePath:
                                 bloonImage(GlobalState.bloons[index].image),
+                            width: constraintsValues["imageWidth"],
                           ),
-                          title: AutoSizeText(
+                          title: Text(
                             GlobalState.bloons[index].name,
                             maxLines: 1,
-                            minFontSize: smallTitleStyle.fontSize! - 2,
-                            maxFontSize: smallTitleStyle.fontSize!,
-                            style: smallTitleStyle,
+                            style: smallTitleStyle.copyWith(
+                              fontSize: constraintsValues["titleFontSize"],
+                            ),
                           ),
                           onTap: () async {
                             if (!GlobalState.isLoading) {
@@ -117,7 +121,7 @@ class _BloonsState extends State<Bloons> {
                         ),
                         title: Text(
                           GlobalState.bosses[index].name,
-                          style: smallTitleStyle,
+                          style: constraintsValues["textStyleBoss"],
                         ),
                         onTap: () async {
                           if (!GlobalState.isLoading) {

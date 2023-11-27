@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 class ImageOutliner extends StatelessWidget {
   final String imageName;
   final String imagePath;
+  final double? width;
   const ImageOutliner(
-      {super.key, required this.imageName, required this.imagePath});
+      {super.key,
+      required this.imageName,
+      required this.imagePath,
+      this.width});
 
   @override
   Widget build(BuildContext context) {
-    double maxWidth = 65;
+    double maxWidth = width ?? 65;
     double maxHeight = 90;
     return SizedBox(
       width: maxWidth,

@@ -156,11 +156,13 @@ Map<String, dynamic> calculateConstraints(BoxConstraints constraints) {
 }
 
 Map<String, dynamic> calculateConstraintsBloons(BoxConstraints constraints) {
-  if (constraints.maxWidth < 370) {
+  if (constraints.maxWidth < 350) {
     return constraintsBloonSmallPreset;
-  } else if (constraints.maxWidth < 450) {
+  } else if (constraints.maxWidth < 400) {
     return constraintsBloonNormalPreset;
-  } else {
+  } else if (constraints.maxWidth < 470) {
     return constraintsBloonWidePreset;
+  } else {
+    return constraintsBloonUWPreset;
   }
 }

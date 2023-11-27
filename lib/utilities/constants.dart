@@ -143,24 +143,39 @@ const Map<String, dynamic> constraintsUWPreset = {
 const Map<String, dynamic> constraintsBloonSmallPreset = {
   "crossAxisCount": 2,
   "crossAxisCountBoss": 1,
-  "childAspectRatio": 2.0,
-  "childAspectRatioBoss": 4.1,
-  "subtitleFontSize": 16.0,
+  "childAspectRatio": 1.95,
+  "childAspectRatioBoss": 3.45,
+  "titleFontSize": 16.0,
+  "imageWidth": 29.0,
+  "textStyleBoss": bolderNormalStyle,
 };
 
 const Map<String, dynamic> constraintsBloonNormalPreset = {
   "crossAxisCount": 2,
   "crossAxisCountBoss": 1,
-  "childAspectRatio": 2.05,
-  "childAspectRatioBoss": 4.3,
-  "subtitleFontSize": 16.0,
+  "childAspectRatio": 2.1,
+  "childAspectRatioBoss": 4.2,
+  "titleFontSize": 19.0,
+  "imageWidth": 40.0,
+  "textStyleBoss": smallTitleStyle,
 };
 
 const Map<String, dynamic> constraintsBloonWidePreset = {
+  "crossAxisCount": 2,
+  "crossAxisCountBoss": 1,
+  "childAspectRatio": 2.075,
+  "childAspectRatioBoss": 4.2,
+  "titleFontSize": 19.0,
+  "imageWidth": 42.0,
+  "textStyleBoss": smallTitleStyle,
+};
+
+const Map<String, dynamic> constraintsBloonUWPreset = {
   "crossAxisCount": 3,
   "crossAxisCountBoss": 2,
   "childAspectRatio": 2.2,
-  "childAspectRatioBoss": 2.8,
-  "titleFontSize": 24.0,
-  "subtitleFontSize": 15.0,
+  "childAspectRatioBoss": 3.5,
+  "titleFontSize": 22.0,
+  "imageWidth": 56.0,
+  "textStyleBoss": titleStyle,
 };
