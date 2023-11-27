@@ -30,6 +30,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    logEvent(
+        'device_width', MediaQuery.of(context).size.width.toStringAsFixed(1));
+
     return AdaptiveTheme(
         light: Themes.lightTheme,
         dark: Themes.darkTheme,
