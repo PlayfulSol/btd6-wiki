@@ -1,18 +1,18 @@
 import '/models/base_model.dart';
 
-class BaseTower extends BaseModel {
-  late final String inGameDesc;
+class BaseMap extends BaseModel {
+  late final String difficulty;
 
-  BaseTower(
+  BaseMap(
     super.id,
     super.name,
     super.image,
     super.type,
-    this.inGameDesc,
+    this.difficulty,
   );
 
-  BaseTower.fromJson(Map<String, dynamic> json)
-      : inGameDesc = json["inGameDesc"] as String,
+  BaseMap.fromJson(Map<String, dynamic> json)
+      : difficulty = json["difficulty"] as String,
         super(
           json["id"] as String,
           json["name"] as String,

@@ -8,17 +8,17 @@ class Stats {
   late final String towerboosts;
   late final String incomeboosts;
 
-  Stats({
-    required damage,
-    required pierce,
-    required attackSpeed,
-    required range,
-    required type,
-    required camo,
-    required statuseffects,
-    required towerboosts,
-    required incomeboosts,
-  });
+  Stats(
+    damage,
+    pierce,
+    attackSpeed,
+    range,
+    type,
+    camo,
+    statuseffects,
+    towerboosts,
+    incomeboosts,
+  );
 
   Stats.fromJson(Map<String, dynamic> json) {
     damage = json['damage'];
@@ -36,26 +36,14 @@ class Stats {
   }
 }
 
-class Cost {
-  late final String easy;
-  late final String medium;
-  late final String hard;
-  late final String impoppable;
+class HeroStats {
+  late final dynamic data;
 
-  Cost({required easy, required medium, required hard, required impoppable});
+  HeroStats(
+    this.data,
+  );
 
-  Cost.fromJson(dynamic json) {
-    try {
-      easy = json['easy'];
-      medium = json['medium'];
-      hard = json['hard'];
-      impoppable = json['impoppable'];
-    } catch (e) {
-      // Handle the exception or provide default values
-      easy = json;
-      medium = json;
-      hard = json;
-      impoppable = json;
-    }
+  HeroStats.fromJson(dynamic json) {
+    data = json;
   }
 }

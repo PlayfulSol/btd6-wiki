@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/models/maps/map.dart';
 import '/models/towers/common.dart';
-import '/models/towers/tower.dart';
+import '../models/towers/tower/tower.dart';
 import '/utilities/global_state.dart';
 import 'constants.dart';
 

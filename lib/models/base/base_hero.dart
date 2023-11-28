@@ -1,4 +1,4 @@
-import 'package:btd6wiki/models/base_model.dart';
+import '/models/base_model.dart';
 
 class BaseHero extends BaseModel {
   late final String inGameDesc;

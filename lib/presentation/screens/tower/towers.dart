@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:auto_size_text/auto_size_text.dart';
-import '/models/towers/tower.dart';
+import '../../../models/towers/tower/tower.dart';
 import '/presentation/widgets/image_outline.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/analytics/analytics.dart';

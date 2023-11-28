@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/models/towers/tower.dart';
+import '../../../models/towers/tower/tower.dart';
 import '/presentation/widgets/path.dart';
 import '/utilities/global_state.dart';
 import '/utilities/utils.dart';

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
 import '/models/maps/map.dart';
 import '/models/towers/hero.dart';
-import '/models/towers/tower.dart';
+import '../models/towers/tower/tower.dart';
 import '../models/base/basic_bloon.dart';
 import '/utilities/global_state.dart';
 import 'constants.dart';
