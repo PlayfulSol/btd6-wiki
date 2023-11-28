@@ -54,6 +54,20 @@ const Map<String, String> pathsDictionary = {
   'paragon': 'Paragon',
 };
 
+const List<String> mapDifficulties = [
+  'Beginner',
+  'Intermediate',
+  'Advanced',
+  'Expert'
+];
+
+const List<String> towerTypes = [
+  'Primary',
+  'Military',
+  'Magic',
+  'Support',
+];
+
 const Map<String, Map<String, String>> mapDifficultyToReward = {
   'Beginner': {
     'easy': '75\$',
