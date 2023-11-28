@@ -165,7 +165,6 @@ class _DrawerContentState extends State<DrawerContent> {
                           MaterialPageRoute(
                             builder: (context) => Maps(
                               mapDifficulty: GlobalState.mapDifficulties[index],
-                              key: UniqueKey(),
                             ),
                           ),
                         );
@@ -174,7 +173,7 @@ class _DrawerContentState extends State<DrawerContent> {
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
         Expanded(
