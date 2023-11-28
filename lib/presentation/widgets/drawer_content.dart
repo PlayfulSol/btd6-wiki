@@ -159,7 +159,6 @@ class _DrawerContentState extends State<DrawerContent> {
                             GlobalState.mapDifficulties[index];
                         GlobalState.currentTitle =
                             GlobalState.mapDifficulties[index];
-                        GlobalState.currentPageIndex = 3;
                         Navigator.push(
                           context,
                           MaterialPageRoute(

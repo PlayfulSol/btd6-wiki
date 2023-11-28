@@ -41,8 +41,8 @@ class _MapsState extends State<Maps> {
 
   @override
   void dispose() {
-    _searchController.dispose();
     super.dispose();
+    _searchController.dispose();
   }
 
   void _loadJsonData() async {
@@ -69,6 +69,8 @@ class _MapsState extends State<Maps> {
                 onPressed: () {
                   setState(() {
                     GlobalState.currentMapDifficulty = '';
+                    GlobalState.currentTitle =
+                        titles[GlobalState.currentPageIndex];
                   });
                   Navigator.pop(context);
                 },
@@ -122,7 +124,6 @@ class _MapsState extends State<Maps> {
                     mainAxisSpacing: 10,
                   ),
                   shrinkWrap: true,
-                  // physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
