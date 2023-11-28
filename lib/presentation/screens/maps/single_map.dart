@@ -13,7 +13,7 @@ class SingleMap extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(GlobalState.currentTitle),
+          title: Text(map.name),
         ),
         body: SingleChildScrollView(
           child: Padding(

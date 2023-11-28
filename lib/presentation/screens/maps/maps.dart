@@ -130,7 +130,6 @@ class _MapsState extends State<Maps> {
                       padding: const EdgeInsets.all(5.0),
                       child: GestureDetector(
                         onTap: () async {
-                          GlobalState.currentTitle = maps[index].name;
                           final singleMap = await rootBundle.loadString(
                               'assets/data/maps/${maps[index].id}.json');
                           final parsedMap = jsonDecode(singleMap);
