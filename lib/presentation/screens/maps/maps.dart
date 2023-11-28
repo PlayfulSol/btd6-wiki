@@ -43,6 +43,7 @@ class _MapsState extends State<Maps> {
   void dispose() {
     super.dispose();
     _searchController.dispose();
+    GlobalState.currentTitle = titles[GlobalState.currentPageIndex];
   }
 
   void _loadJsonData() async {
