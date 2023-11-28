@@ -127,7 +127,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         child: BottomNavigationBar(
-            elevation: 0,
             selectedLabelStyle: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 18,
