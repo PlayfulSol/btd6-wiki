@@ -20,6 +20,13 @@ const List<String> drawrTitles = [
   'Maps',
 ];
 
+const List<Icon> icons = [
+  Icon(Icons.cell_tower),
+  Icon(Icons.person),
+  Icon(Icons.nature),
+  Icon(Icons.map_outlined),
+];
+
 List<Widget> pages = [
   const Towers(key: PageStorageKey<String>('Towers'), towerType: ''),
   const Heroes(key: PageStorageKey<String>('Heroes')),

@@ -1,9 +1,9 @@
+import 'package:btd6wiki/models/base/base_map.dart';
+import 'package:btd6wiki/models/base/base_tower.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '/models/maps/map.dart';
-import '/models/towers/common.dart';
-import '../models/towers/tower/tower.dart';
-import '/utilities/global_state.dart';
+import '/models/towers/common/cost_class.dart';
+import '/models/towers/common/stats_class.dart';
 import 'constants.dart';
 
 String formatBigNumber(int number) {
@@ -45,42 +45,35 @@ String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
-String getAppTitle() {
-  return GlobalState.currentTitle;
+List<BaseTower> filterTowers(List<BaseTower> towers, String option) {
+  if (option == '') {
+    return towers;
+  } else {
+    return towers.where((tower) => tower.type == option).toList();
+  }
 }
 
-List<TowerModel> filterTowers() {
-  if (GlobalState.currentTowerType == '') {
-    return GlobalState.towers;
+List<BaseMap> filterMaps(List<BaseMap> maps, String option, String query) {
+  if (option == '') {
+    return maps;
   } else {
-    return GlobalState.towers
-        .where((tower) => tower.type == GlobalState.currentTowerType)
+    return maps.where((map) => map.difficulty == option).toList();
+  }
+}
+
+List<BaseMap> mapsFromSearch(List<BaseMap> maps, String option, String query) {
+  query = query.toLowerCase();
+  if (option == '') {
+    return maps.where((map) => map.name.toLowerCase().contains(query)).toList();
+  } else {
+    return maps
+        .where((map) =>
+            map.name.toLowerCase().contains(query) && map.difficulty == option)
         .toList();
   }
 }
 
-List<MapModel> filterMaps(query) {
-  if (query != '') {
-    if (GlobalState.currentMapDifficulty == '') {
-      return GlobalState.maps
-          .where((map) => map.name.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    } else {
-      return GlobalState.maps
-          .where((map) =>
-              map.name.toLowerCase().contains(query.toLowerCase()) &&
-              map.difficulty == GlobalState.currentMapDifficulty)
-          .toList();
-    }
-  }
-  if (GlobalState.currentMapDifficulty == '') {
-    return GlobalState.maps;
-  } else {
-    return GlobalState.maps
-        .where((map) => map.difficulty == GlobalState.currentMapDifficulty)
-        .toList();
-  }
-}
+// TODO: add filters for bloons
 
 List<String> separateString(String stringToSeparate) {
   if (stringToSeparate.contains(':')) {
