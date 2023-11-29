@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '/presentation/widgets/bloon_aid_widget.dart';
-import '/models/bloons/single_bloon.dart';
+import '../../../models/bloons/bloon/bloon.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 import '/utilities/global_state.dart';

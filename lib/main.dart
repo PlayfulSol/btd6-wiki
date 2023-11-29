@@ -10,6 +10,9 @@ import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import 'analytics/analytics.dart';
 import '/themes/themes.dart';
+import 'models/base/base_hero.dart';
+import 'models/base/base_map.dart';
+import 'models/base/base_tower.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,16 +71,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  bool isDarkThemeEnabled = true;
-
-  final PageStorageBucket bucket = PageStorageBucket();
+  // bool isDarkThemeEnabled = true;
+  // final PageStorageBucket bucket = PageStorageBucket();
+  List<BaseTower> baseTowers = [];
+  List<BaseHero> baseTowers = [];
+  List<BaseMap> baseTowers = [];
+  List<BaseBloon> baseTowers = [];
 
   setLoading() async {
-    setState(() {
-      GlobalState.currentTitle = 'BTD6 wiki';
-      GlobalState.isLoading = true;
-    });
-
     Future.wait([getTowers(), getBloonsData(), getMaps(), getHeroes()])
         .then((_) => setState(() {
               logPageView(titles[GlobalState.currentPageIndex]);
@@ -96,7 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    setLoading();
   }
 
   @override

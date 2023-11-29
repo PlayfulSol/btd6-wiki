@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '/models/bloons/boss_bloon.dart';
+import '../../../models/bloons/boss/boss_bloon.dart';
 import '/presentation/widgets/bloon_aid_widget.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';

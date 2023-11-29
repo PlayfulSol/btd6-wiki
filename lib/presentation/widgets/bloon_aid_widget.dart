@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '/models/bloons/single_bloon.dart';
-import '/models/bloons/minion_bloon.dart';
+import '../../models/bloons/bloon/bloon.dart';
+import '../../models/bloons/boss/minion_bloon.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/minion_bloon.dart';
 import '/utilities/constants.dart';
