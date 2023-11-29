@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:provider/provider.dart';
 import '/presentation/widgets/drawer_content.dart';
-import '/presentation/widgets/loader.dart';
 import '/utilities/requests.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
@@ -15,6 +14,7 @@ import '/themes/themes.dart';
 import 'models/base/base_hero.dart';
 import 'models/base/base_map.dart';
 import 'models/base/base_tower.dart';
+import 'utilities/utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,18 +76,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<BaseTower> baseTowers = [];
-  List<BaseHero> baseHeroes = [];
-  List<BaseMap> baseMaps = [];
-  List<BaseModel> baseBloons = [];
-  List<BaseModel> baseBosses = [];
+  Map<String, dynamic> baseEntities = {
+    'towers': <BaseTower>[],
+    'heroes': <BaseHero>[],
+    'maps': <BaseMap>[],
+    'bloons': <BaseModel>[],
+    'bosses': <BaseModel>[],
+  };
 
   loadBaseData() async {
-    baseTowers = await loadBaseTowers();
-    baseHeroes = await loadBaseHeroes();
-    baseMaps = await loadBaseMaps();
-    baseBloons = await loadBaseBloons();
-    baseBosses = await loadBaseBosses();
+    baseEntities[towers] = await loadBaseTowers();
+    baseEntities[heroes] = await loadBaseHeroes();
+    baseEntities[maps] = await loadBaseMaps();
+    baseEntities[bloons] = await loadBaseBloons();
+    baseEntities[bosses] = await loadBaseBosses();
   }
 
   // Future<void> _logCurrentScreen() async {
@@ -114,23 +116,23 @@ class _MyHomePageState extends State<MyHomePage> {
             return Text(globalState.currentTitle);
           },
         ),
-        actions: const [
-          // DropdownMenu<String>(
-          //   initialSelection: GlobalState.currentTowerType,
-          //   onSelected: (String? newValue) {
-          //     setState(() {
-          //       GlobalState.currentTowerType = newValue!;
-          //       GlobalState.currentTitle = newValue;
-          //     });
-          //   },
-          //   dropdownMenuEntries: GlobalState.towerTypes
-          //       .map<DropdownMenuEntry<String>>((String value) {
-          //     return DropdownMenuEntry<String>(
-          //       value: value,
-          //       label: value,
-          //     );
-          //   }).toList(),
-          // ),
+        actions: [
+          Consumer<GlobalState>(builder: (context, globalState, child) {
+            return DropdownMenu<String>(
+              leadingIcon: const Icon(Icons.filter_list),
+              onSelected: (String? newValue) {
+                globalState.updateCurrentOptionSelected(newValue!);
+                //TODO - filter the current page
+              },
+              dropdownMenuEntries: dropmenuOptions(globalState.currentPageIndex)
+                  .map<DropdownMenuEntry<String>>((String value) {
+                return DropdownMenuEntry<String>(
+                  value: value,
+                  label: value,
+                );
+              }).toList(),
+            );
+          }),
         ],
       ),
       body: PageView(

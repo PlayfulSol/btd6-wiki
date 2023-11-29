@@ -6,6 +6,20 @@ import '/presentation/screens/tower/towers.dart';
 
 String configDirectory = 'assets/data/config';
 
+String towers = 'towers';
+String heroes = 'heroes';
+String maps = 'maps';
+String bloons = 'bloons';
+String bosses = 'bosses';
+
+const List<String> entityTypes = [
+  'towers',
+  'heroes',
+  'maps',
+  'bloons',
+  'bosses',
+];
+
 const List<String> titles = [
   'Towers',
   'Heroes',
@@ -28,14 +42,15 @@ const List<Icon> icons = [
 ];
 
 List<Widget> pages = [
-  const Towers(key: PageStorageKey<String>('Towers'), towerType: ''),
-  const Heroes(key: PageStorageKey<String>('Heroes')),
-  const Bloons(key: PageStorageKey<String>('Bloons')),
-  const Maps(key: PageStorageKey<String>('Maps'), mapDifficulty: ''),
+  // const Towers(key: PageStorageKey<String>('Towers'), towerType: ''),
+  // const Heroes(key: PageStorageKey<String>('Heroes')),
+  // const Bloons(key: PageStorageKey<String>('Bloons')),
+  // const Maps(key: PageStorageKey<String>('Maps'), mapDifficulty: ''),
 ];
 
 const towerDataPath = 'assets/data/towers/';
 const heroDataPath = 'assets/data/heroes/';
+const mapDataPath = 'assets/data/maps/';
 const bloonsDataPath = 'assets/data/bloons/';
 const minionsDataPath = 'assets/data/minions/';
 const bossesDataPath = 'assets/data/bosses/';
@@ -62,6 +77,7 @@ const Map<String, String> pathsDictionary = {
 };
 
 const List<String> mapDifficulties = [
+  'All',
   'Beginner',
   'Intermediate',
   'Advanced',
@@ -69,10 +85,18 @@ const List<String> mapDifficulties = [
 ];
 
 const List<String> towerTypes = [
+  'All',
   'Primary',
   'Military',
   'Magic',
   'Support',
+];
+
+const List<String> bloonTypes = [
+  'All',
+  'Bloon',
+  'Blimp',
+  'Boss',
 ];
 
 const Map<String, Map<String, String>> mapDifficultyToReward = {

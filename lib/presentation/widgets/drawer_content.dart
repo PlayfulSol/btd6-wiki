@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/screens/tower/towers.dart';
 import '/presentation/widgets/about_us.dart';
@@ -24,6 +25,12 @@ class _DrawerContentState extends State<DrawerContent> {
 
   @override
   Widget build(BuildContext context) {
+    GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
+    int towersPage = 0;
+    int heroesPage = 1;
+    int bloonsPage = 2;
+    int mapsPage = 3;
+
     return Drawer(
         child: Column(
       children: [
@@ -54,30 +61,22 @@ class _DrawerContentState extends State<DrawerContent> {
               padding: const EdgeInsets.only(left: 10),
               child: ListView.builder(
                 padding: EdgeInsets.zero,
-                itemCount: GlobalState.towerTypes.length,
+                itemCount: towerTypes.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(
-                      GlobalState.towerTypes[index],
+                      towerTypes[index],
                       style: bolderNormalStyle,
                     ),
                     onTap: () {
-                      logEvent(
-                          'menu_tower_type', GlobalState.towerTypes[index]);
-                      if (!GlobalState.isLoading) {
-                        Navigator.pop(context);
-                        GlobalState.currentTowerType =
-                            GlobalState.towerTypes[index];
-                        GlobalState.currentTitle =
-                            GlobalState.towerTypes[index];
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Towers(
-                                      towerType: GlobalState.towerTypes[index],
-                                    )));
-                      }
+                      logEvent('menu_tower_type', towerTypes[index]);
+                      Navigator.pop(context);
+                      globalState
+                          .updateCurrentOptionSelected(towerTypes[index]);
+                      globalState.updateCurrentTitle(titles[towersPage]);
+                      globalState.updateCurrentPageIndex(towersPage);
+                      pageController.jumpToPage(towersPage);
                     },
                   );
                 },
@@ -92,18 +91,10 @@ class _DrawerContentState extends State<DrawerContent> {
             ),
             onTap: () {
               logEvent(drawrConst, 'heroes');
-              if (!GlobalState.isLoading) {
-                Navigator.pop(context);
-                GlobalState.currentPageIndex = 1;
-                GlobalState.currentTowerType = '';
-                GlobalState.currentMapDifficulty = '';
-                GlobalState.currentTitle = titles[1];
-                pageController.animateToPage(
-                  GlobalState.currentPageIndex,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                );
-              }
+              Navigator.pop(context);
+              globalState.updateCurrentTitle(titles[heroesPage]);
+              globalState.updateCurrentPageIndex(heroesPage);
+              pageController.jumpToPage(heroesPage);
             }),
         ListTile(
             title: Text(
@@ -112,18 +103,10 @@ class _DrawerContentState extends State<DrawerContent> {
             ),
             onTap: () {
               logEvent(drawrConst, 'bloons');
-              if (!GlobalState.isLoading) {
-                Navigator.pop(context);
-                GlobalState.currentPageIndex = 2;
-                GlobalState.currentTowerType = '';
-                GlobalState.currentMapDifficulty = '';
-                GlobalState.currentTitle = titles[2];
-                pageController.animateToPage(
-                  GlobalState.currentPageIndex,
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.easeInOut,
-                );
-              }
+              Navigator.pop(context);
+              globalState.updateCurrentTitle(titles[bloonsPage]);
+              globalState.updateCurrentPageIndex(bloonsPage);
+              pageController.jumpToPage(bloonsPage);
             }),
         ExpansionTile(
           controller: _mapsExpansionTileController,
@@ -142,34 +125,22 @@ class _DrawerContentState extends State<DrawerContent> {
               padding: const EdgeInsets.only(left: 10),
               child: ListView.builder(
                 padding: EdgeInsets.zero,
-                itemCount: GlobalState.mapDifficulties.length,
+                itemCount: mapDifficulties.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   return ListTile(
                     title: Text(
-                      GlobalState.mapDifficulties[index],
+                      mapDifficulties[index],
                       style: bolderNormalStyle,
                     ),
                     onTap: () {
-                      logEvent('menu_map_difficulty',
-                          GlobalState.mapDifficulties[index]);
-                      if (!GlobalState.isLoading) {
-                        Navigator.pop(context);
-                        GlobalState.currentMapDifficulty =
-                            GlobalState.mapDifficulties[index];
-                        GlobalState.currentTitle =
-                            GlobalState.mapDifficulties[index];
-                        GlobalState.currentPageIndex = 3;
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Maps(
-                              mapDifficulty: GlobalState.mapDifficulties[index],
-                              key: UniqueKey(),
-                            ),
-                          ),
-                        );
-                      }
+                      logEvent('menu_map_difficulty', mapDifficulties[index]);
+                      Navigator.pop(context);
+                      globalState
+                          .updateCurrentOptionSelected(mapDifficulties[index]);
+                      globalState.updateCurrentTitle(titles[mapsPage]);
+                      globalState.updateCurrentPageIndex(mapsPage);
+                      pageController.jumpToPage(mapsPage);
                     },
                   );
                 },
@@ -177,9 +148,7 @@ class _DrawerContentState extends State<DrawerContent> {
             )
           ],
         ),
-        Expanded(
-          child: Container(),
-        ),
+        const Spacer(),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [

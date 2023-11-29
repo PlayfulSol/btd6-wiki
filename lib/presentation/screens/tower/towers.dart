@@ -1,139 +1,93 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 import 'package:auto_size_text/auto_size_text.dart';
-import '../../../models/towers/tower/tower.dart';
+import 'package:provider/provider.dart';
+import '../../../utilities/global_state.dart';
+import '/models/base/base_tower.dart';
 import '/presentation/widgets/image_outline.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
-import '/utilities/global_state.dart';
 import '/utilities/utils.dart';
 
 class Towers extends StatefulWidget {
-  const Towers({super.key, required String towerType});
+  const Towers({
+    super.key,
+    required this.towers,
+  });
 
-  final String? towerType = '';
+  final List<BaseTower> towers;
 
   @override
   State<Towers> createState() => _TowersState();
 }
 
-class _TowersState extends State<Towers>
-    with AutomaticKeepAliveClientMixin<Towers> {
+class _TowersState extends State<Towers> {
   Map<String, dynamic> constraintsValues = {};
-
-  String getPageTitle() {
-    if (GlobalState.currentTowerType != '') {
-      return GlobalState.currentTowerType;
-    } else {
-      return titles[GlobalState.currentPageIndex];
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
-      appBar: GlobalState.currentTowerType != ''
-          ? AppBar(
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  setState(() {
-                    GlobalState.currentTowerType = '';
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              title: Text(getPageTitle()),
-              actions: [
-                DropdownMenu<String>(
-                  initialSelection: GlobalState.currentTowerType,
-                  onSelected: (String? newValue) {
-                    setState(() {
-                      GlobalState.currentTowerType = newValue!;
-                      GlobalState.currentTitle = newValue;
-                    });
-                  },
-                  dropdownMenuEntries: GlobalState.towerTypes
-                      .map<DropdownMenuEntry<String>>((String value) {
-                    return DropdownMenuEntry<String>(
-                      value: value,
-                      label: value,
-                    );
-                  }).toList(),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          constraintsValues = calculateConstraints(constraints);
+          return Consumer<GlobalState>(
+            builder: (context, globalState, child) {
+              List<BaseTower> filteredTowers = filterTowers(
+                  widget.towers, globalState.currentOptionSelected);
+              return GridView.builder(
+                itemCount: filteredTowers.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: constraintsValues["crossAxisCount"],
+                  childAspectRatio: constraintsValues["childAspectRatio"],
                 ),
-              ],
-            )
-          : null,
-      body: LayoutBuilder(builder: (context, constraints) {
-        constraintsValues = calculateConstraints(constraints);
-        List<TowerModel> towers = filterTowers();
-        return GridView.builder(
-            itemCount: towers.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: constraintsValues["crossAxisCount"],
-              childAspectRatio: constraintsValues["childAspectRatio"],
-            ),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Card(
-                margin: const EdgeInsets.all(10),
-                child: Center(
-                  child: ListTile(
-                    leading: ImageOutliner(
-                      imageName: towers[index].image,
-                      imagePath: towerImage(towers[index].image),
-                    ),
-                    title: AutoSizeText(
-                      towers[index].name,
-                      maxLines: 1,
-                      style: titleStyle.copyWith(
-                        fontSize: constraintsValues["titleFontSize"],
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    child: Center(
+                      child: ListTile(
+                        leading: ImageOutliner(
+                          imageName: filteredTowers[index].image,
+                          imagePath: towerImage(filteredTowers[index].image),
+                        ),
+                        title: AutoSizeText(
+                          filteredTowers[index].name,
+                          maxLines: 1,
+                          style: titleStyle.copyWith(
+                            fontSize: constraintsValues["titleFontSize"],
+                          ),
+                        ),
+                        subtitle: AutoSizeText(
+                          filteredTowers[index].inGameDesc,
+                          wrapWords: false,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: constraintsValues["rowsToShow"],
+                          style: subtitleStyle.copyWith(
+                              fontSize: constraintsValues["subtitleFontSize"]),
+                          minFontSize: constraintsValues["subtitleFontSize"],
+                          maxFontSize: constraintsValues["subtitleFontSize"],
+                        ),
+                        onTap: () {
+                          logPageView(filteredTowers[index].name);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SingleTower(
+                                towerId: filteredTowers[index].id,
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
-                    subtitle: AutoSizeText(
-                      towers[index].inGameDesc,
-                      wrapWords: false,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: constraintsValues["rowsToShow"],
-                      style: subtitleStyle.copyWith(
-                          fontSize: constraintsValues["subtitleFontSize"]),
-                      minFontSize: constraintsValues["subtitleFontSize"],
-                      maxFontSize: constraintsValues["subtitleFontSize"],
-                    ),
-                    onTap: () async {
-                      if (!GlobalState.isLoading) {
-                        GlobalState.currentTitle = towers[index].name;
-                        var id = towers[index].id;
-                        var path = '${towerDataPath + id}.json';
-                        final data = await rootBundle.loadString(path);
-                        var jsonData = json.decode(data);
-                        logPageView(towers[index].name);
-                        SingleTowerModel towerData =
-                            SingleTowerModel.fromJson(jsonData);
-
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SingleTower(towerData: towerData),
-                          ),
-                        );
-                        GlobalState.currentTitle = towerData.name;
-                      }
-                    },
-                  ),
-                ),
+                  );
+                },
               );
-            });
-      }),
+            },
+          );
+        },
+      ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

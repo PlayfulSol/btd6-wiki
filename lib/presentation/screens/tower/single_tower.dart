@@ -1,37 +1,56 @@
+import 'dart:convert';
+import 'package:btd6wiki/presentation/screens/tower/towers.dart';
 import 'package:flutter/material.dart';
-import '../../../models/towers/tower/tower.dart';
+import 'package:flutter/services.dart';
+import '/models/towers/tower/tower.dart';
 import '/presentation/widgets/path.dart';
 import '/utilities/global_state.dart';
 import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 
-class SingleTower extends StatelessWidget {
-  final SingleTowerModel towerData;
+class SingleTower extends StatefulWidget {
+  final String towerId;
 
-  const SingleTower({super.key, required this.towerData});
+  const SingleTower({super.key, required this.towerId});
+
+  @override
+  State<SingleTower> createState() => _SingleTowerState();
+}
+
+class _SingleTowerState extends State<SingleTower> {
+  late TowerModel tower;
 
   MonkeyPath _buildPath(int index) {
-    var hasParagon = towerData.paths.paragon != null;
+    var hasParagon = tower.paths.paragon != null;
     return MonkeyPath(
         path: index == 0
-            ? towerData.paths.path1
+            ? tower.paths.path1
             : index == 1
-                ? towerData.paths.path2
+                ? tower.paths.path2
                 : index == 2
-                    ? towerData.paths.path3
+                    ? tower.paths.path3
                     : hasParagon
-                        ? [towerData.paths.paragon!]
+                        ? [tower.paths.paragon!]
                         : [],
         pathKey: getPathKeyFromIndex(index),
-        monkeyId: towerData.id);
+        monkeyId: tower.id);
+  }
+
+  @override
+  void initState() async {
+    super.initState();
+    var path = '${towerDataPath + widget.towerId}.json';
+    final data = await rootBundle.loadString(path);
+    var jsonData = json.decode(data);
+    tower = TowerModel.fromJson(jsonData);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(GlobalState.currentTitle),
+        title: Text(tower.name),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -42,27 +61,27 @@ class SingleTower extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image(
-                  semanticLabel: towerData.name,
-                  image: AssetImage(towerImage(towerData.image)),
+                  semanticLabel: tower.name,
+                  image: AssetImage(towerImage(tower.image)),
                   width: 200,
                   fit: BoxFit.fill,
                 ),
                 const BetterDivider(),
                 Text(
-                  towerData.inGameDesc,
+                  tower.inGameDesc,
                   textAlign: TextAlign.left,
                   style: normalStyle,
                 ),
                 const BetterDivider(),
                 Text(
-                  'Class - ${towerData.type}',
+                  'Class - ${tower.type}',
                   style: smallTitleStyle,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Text(
-                  costToString(towerData.cost),
+                  costToString(tower.cost),
                   textAlign: TextAlign.center,
                   style: normalStyle,
                 ),
@@ -70,7 +89,7 @@ class SingleTower extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  statsToString(towerData.stats),
+                  statsToString(tower.stats),
                   textAlign: TextAlign.center,
                   style: normalStyle,
                 ),
@@ -78,7 +97,7 @@ class SingleTower extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  extraStatsToString(towerData.stats),
+                  extraStatsToString(tower.stats),
                   textAlign: TextAlign.center,
                   style: normalStyle,
                 ),
@@ -86,7 +105,7 @@ class SingleTower extends StatelessWidget {
                 ListView.builder(
                   primary: false,
                   shrinkWrap: true,
-                  itemCount: towerData.paths.paragon != null ? 4 : 3,
+                  itemCount: tower.paths.paragon != null ? 4 : 3,
                   itemBuilder: (context, index) => Column(
                     children: [
                       _buildPath(index),

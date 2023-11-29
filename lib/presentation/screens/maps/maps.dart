@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:btd6wiki/models/base/base_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import '/models/maps/map.dart';
@@ -14,9 +15,12 @@ import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 
 class Maps extends StatefulWidget {
-  const Maps({required Key key, required String mapDifficulty})
-      : super(key: key);
-  final String? mapDifficulty = '';
+  const Maps({
+    super.key,
+    required this.maps,
+  });
+
+  final List<BaseMap> maps;
 
   @override
   State<Maps> createState() => _MapsState();
@@ -29,7 +33,7 @@ class _MapsState extends State<Maps> {
   @override
   void initState() {
     super.initState();
-    _loadJsonData();
+    // _loadJsonData();
     _searchController = TextEditingController();
     _searchController.addListener(() {
       logEvent('search', 'searching for map ${_searchController.text}');
@@ -45,155 +49,106 @@ class _MapsState extends State<Maps> {
     super.dispose();
   }
 
-  Future<void> _loadJsonData() async {
-    GlobalState.maps.sort((a, b) =>
-        GlobalState.mapDifficulties.indexOf(a.difficulty) -
-        GlobalState.mapDifficulties.indexOf(b.difficulty));
-  }
-
-  String getPageTitle() {
-    if (GlobalState.currentMapDifficulty != '') {
-      return GlobalState.currentMapDifficulty;
-    } else {
-      return titles[GlobalState.currentPageIndex];
-    }
-  }
+  // Future<void> _loadJsonData() async {
+  //   widget.maps.sort((a, b) =>
+  //       GlobalState.mapDifficulties.indexOf(a.difficulty) -
+  //       GlobalState.mapDifficulties.indexOf(b.difficulty));
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GlobalState.currentMapDifficulty != ''
-          ? AppBar(
-              leading: IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  setState(() {
-                    GlobalState.currentMapDifficulty = '';
-                  });
-                  Navigator.pop(context);
-                },
-              ),
-              title: Text(getPageTitle()),
-              actions: [
-                DropdownMenu<String>(
-                  initialSelection: GlobalState.currentMapDifficulty,
-                  onSelected: (String? newValue) {
-                    setState(() {
-                      GlobalState.currentMapDifficulty = newValue!;
-                      GlobalState.currentTitle = newValue;
-                    });
-                  },
-                  dropdownMenuEntries: GlobalState.mapDifficulties
-                      .map<DropdownMenuEntry<String>>((String value) {
-                    return DropdownMenuEntry<String>(
-                      value: value,
-                      label: value,
-                    );
-                  }).toList(),
-                ),
-              ],
-            )
-          : null,
-      body: FutureBuilder(
-        future: Future.value(filterMaps(query)),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.data == null) {
-            return const Loader();
-          } else {
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: const InputDecoration(
-                      hintText: 'Search maps',
-                    ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: _searchController,
+                  decoration: const InputDecoration(
+                    hintText: 'Search maps',
                   ),
                 ),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: LayoutBuilder(builder: (context, constraints) {
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
                     return GridView.builder(
-                        itemCount: snapshot.data.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                childAspectRatio: 1.4,
-                                crossAxisSpacing: 10,
-                                mainAxisSpacing: 10),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: GestureDetector(
-                              onTap: () async {
-                                GlobalState.currentTitle =
-                                    snapshot.data[index].name;
-                                final singleMap = await rootBundle.loadString(
-                                    'assets/data/maps/${snapshot.data[index].id}.json');
-                                final parsedMap = jsonDecode(singleMap);
-                                logPageView(snapshot.data[index].name);
-                                // ignore: use_build_context_synchronously
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SingleMap(
-                                      map: MapModel.fromJson(parsedMap),
+                      itemCount: widget.maps.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 1.4,
+                              crossAxisSpacing: 10,
+                              mainAxisSpacing: 10),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              logPageView(widget.maps[index].name);
+
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SingleMap(
+                                    mapId: widget.maps[index].id,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Card(
+                              elevation: 5,
+                              shadowColor: Colors.black87,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Expanded(
+                                    child: Image(
+                                      semanticLabel: widget.maps[index].name,
+                                      image: AssetImage(
+                                          mapImage(widget.maps[index].image)),
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (BuildContext context,
+                                          Object exception,
+                                          StackTrace? stackTrace) {
+                                        return const Icon(Icons.error);
+                                      },
                                     ),
                                   ),
-                                );
-                              },
-                              child: Card(
-                                elevation: 5,
-                                shadowColor: Colors.black87,
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Expanded(
-                                      child: Image(
-                                        semanticLabel:
-                                            snapshot.data[index].name,
-                                        image: AssetImage(mapImage(
-                                            snapshot.data[index].image)),
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (BuildContext context,
-                                            Object exception,
-                                            StackTrace? stackTrace) {
-                                          return const Icon(Icons.error);
-                                        },
-                                      ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        AutoSizeText(
+                                          capitalizeEveryWord(
+                                              widget.maps[index].name),
+                                          maxLines: 1,
+                                          style: bolderNormalStyle,
+                                        ),
+                                        const SizedBox(height: 5),
+                                        Text(widget.maps[index].difficulty,
+                                            style: subtitleStyle),
+                                      ],
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          AutoSizeText(
-                                            capitalizeEveryWord(
-                                                snapshot.data[index].name),
-                                            maxLines: 1,
-                                            style: bolderNormalStyle,
-                                          ),
-                                          const SizedBox(height: 5),
-                                          Text(snapshot.data[index].difficulty,
-                                              style: subtitleStyle),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                          );
-                        });
-                  }),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
-              ],
-            );
-          }
+              ),
+            ],
+          );
         },
       ),
     );

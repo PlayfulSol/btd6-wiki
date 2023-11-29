@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../../models/bloons/bloon/bloon.dart';
 import '../../models/bloons/boss/minion_bloon.dart';
+import '../../models/bloons/common/relative_class.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/minion_bloon.dart';
 import '/utilities/constants.dart';
@@ -81,7 +82,7 @@ Widget generateMinion(Relative relative, BuildContext context) {
               var jsonData = json.decode(data);
               logPageView(relative.name);
               MinionBloon bloonData = MinionBloon.fromJson(jsonData);
-              GlobalState.currentTitle = bloonData.name;
+
               // ignore: use_build_context_synchronously
               Navigator.push(
                 context,
