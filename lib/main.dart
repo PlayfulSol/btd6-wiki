@@ -18,6 +18,7 @@ import '/themes/themes.dart';
 import 'models/base/base_hero.dart';
 import 'models/base/base_map.dart';
 import 'models/base/base_tower.dart';
+import 'utilities/strings.dart';
 import 'utilities/utils.dart';
 
 Future<void> main() async {
@@ -123,20 +124,28 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: [
           Consumer<GlobalState>(builder: (context, globalState, child) {
-            return DropdownMenu<String>(
-              leadingIcon: const Icon(Icons.filter_list),
-              onSelected: (String? newValue) {
-                globalState.updateCurrentOptionSelected(newValue!);
-                //TODO - filter the current page
-              },
-              dropdownMenuEntries: dropmenuOptions(globalState.currentPageIndex)
-                  .map<DropdownMenuEntry<String>>((String value) {
-                return DropdownMenuEntry<String>(
-                  value: value,
-                  label: value,
-                );
-              }).toList(),
-            );
+            List<String> options =
+                dropmenuOptions(globalState.currentPageIndex);
+            String category = titles[globalState.currentPageIndex];
+            return options.isNotEmpty
+                ? DropdownMenu<String>(
+                    leadingIcon: const Icon(Icons.filter_list),
+                    initialSelection:
+                        globalState.currentOptionSelected[category],
+                    onSelected: (String? newValue) {
+                      globalState.updateCurrentOptionSelected(
+                          category, newValue!);
+                      //TODO - filter the current page
+                    },
+                    dropdownMenuEntries:
+                        options.map<DropdownMenuEntry<String>>((String value) {
+                      return DropdownMenuEntry<String>(
+                        value: value,
+                        label: value,
+                      );
+                    }).toList(),
+                  )
+                : Container();
           }),
         ],
       ),
@@ -150,7 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
         onPageChanged: (index) {
           globalState.updateCurrentPageIndex(index);
-          globalState.updateCurrentTitle(titles[index]);
+          globalState.updateCurrentPage(capitalize(titles[index]));
         },
       ),
       bottomNavigationBar: Container(
@@ -182,7 +191,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onTap: (index) {
             logEvent('bottom_navigation', titles[index]);
             globalState.updateCurrentPageIndex(index);
-            globalState.updateCurrentTitle(titles[index]);
+            globalState.updateCurrentPage(titles[index]);
             pageController.animateToPage(index,
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut);

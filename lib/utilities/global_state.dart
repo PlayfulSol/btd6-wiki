@@ -1,21 +1,32 @@
+import 'package:btd6wiki/utilities/strings.dart';
 import 'package:flutter/material.dart';
+
+import 'constants.dart';
 
 class GlobalState with ChangeNotifier {
   String _currentTitle = 'BTD6 Wiki';
-  String _currentOptionSelected = 'All';
+  String _activeCategory = towers;
+  // ignore: prefer_final_fields
+  Map<String, String> _currentOptionSelected = {
+    towers: 'All',
+    bloons: 'All',
+    maps: 'All',
+  };
   int _currentPageIndex = 0;
 
   String get currentTitle => _currentTitle;
-  String get currentOptionSelected => _currentOptionSelected;
+  String get activeCategory => _activeCategory;
+  Map<String, String> get currentOptionSelected => _currentOptionSelected;
   int get currentPageIndex => _currentPageIndex;
 
-  void updateCurrentTitle(String title) {
-    _currentTitle = title;
+  void updateCurrentPage(String pageName) {
+    _currentTitle = capitalize(pageName);
+    _activeCategory = pageName;
     notifyListeners();
   }
 
-  void updateCurrentOptionSelected(String option) {
-    _currentOptionSelected = option;
+  void updateCurrentOptionSelected(String category, String option) {
+    _currentOptionSelected[category] = option;
     notifyListeners();
   }
 
@@ -24,8 +35,8 @@ class GlobalState with ChangeNotifier {
     notifyListeners();
   }
 
-  void resetOption() {
-    _currentOptionSelected = 'All';
+  void resetOption(String category) {
+    _currentOptionSelected[category] = 'All';
     notifyListeners();
   }
 

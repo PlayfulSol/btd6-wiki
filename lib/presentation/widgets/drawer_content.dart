@@ -70,9 +70,9 @@ class _DrawerContentState extends State<DrawerContent> {
                     onTap: () {
                       logEvent('menu_tower_type', towerTypes[index]);
                       Navigator.pop(context);
-                      globalState
-                          .updateCurrentOptionSelected(towerTypes[index]);
-                      globalState.updateCurrentTitle(titles[towersPage]);
+                      globalState.updateCurrentOptionSelected(
+                          towers, towerTypes[index]);
+                      globalState.updateCurrentPage(titles[towersPage]);
                       globalState.updateCurrentPageIndex(towersPage);
                       pageController.jumpToPage(towersPage);
                     },
@@ -90,7 +90,7 @@ class _DrawerContentState extends State<DrawerContent> {
             onTap: () {
               logEvent(drawrConst, 'heroes');
               Navigator.pop(context);
-              globalState.updateCurrentTitle(titles[heroesPage]);
+              globalState.updateCurrentPage(titles[heroesPage]);
               globalState.updateCurrentPageIndex(heroesPage);
               pageController.jumpToPage(heroesPage);
             }),
@@ -102,7 +102,7 @@ class _DrawerContentState extends State<DrawerContent> {
             onTap: () {
               logEvent(drawrConst, 'bloons');
               Navigator.pop(context);
-              globalState.updateCurrentTitle(titles[bloonsPage]);
+              globalState.updateCurrentPage(titles[bloonsPage]);
               globalState.updateCurrentPageIndex(bloonsPage);
               pageController.jumpToPage(bloonsPage);
             }),
@@ -134,9 +134,9 @@ class _DrawerContentState extends State<DrawerContent> {
                     onTap: () {
                       logEvent('menu_map_difficulty', mapDifficulties[index]);
                       Navigator.pop(context);
-                      globalState
-                          .updateCurrentOptionSelected(mapDifficulties[index]);
-                      globalState.updateCurrentTitle(titles[mapsPage]);
+                      globalState.updateCurrentOptionSelected(
+                          maps, mapDifficulties[index]);
+                      globalState.updateCurrentPage(titles[mapsPage]);
                       globalState.updateCurrentPageIndex(mapsPage);
                       pageController.jumpToPage(mapsPage);
                     },

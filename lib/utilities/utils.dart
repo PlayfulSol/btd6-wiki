@@ -1,5 +1,6 @@
 import 'package:btd6wiki/models/base/base_map.dart';
 import 'package:btd6wiki/models/base/base_tower.dart';
+import 'package:btd6wiki/models/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/models/towers/common/cost_class.dart';
@@ -45,18 +46,11 @@ String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
-List<dynamic> filterItems(List<dynamic> items, String listType, String option) {
+List<BaseModel> filterbloons(List<BaseModel> bloons, String option) {
   if (option == 'All') {
-    return items;
-  } else if (listType == towers) {
-    return List<BaseTower>.from(
-        items.where((tower) => tower.type == option).toList());
-  } else if (listType == maps) {
-    return items.where((map) => map.difficulty == option).toList();
-  } else if (listType == bloons) {
-    return items.where((bloon) => bloon.type == option).toList();
+    return bloons;
   } else {
-    return ['oops'];
+    return bloons.where((bloon) => bloon.type == option.toLowerCase()).toList();
   }
 }
 
@@ -89,7 +83,7 @@ List<String> dropmenuOptions(int pageIndex) {
   } else if (pageIndex == 3) {
     return mapDifficulties;
   } else {
-    return ['Wow', 'such', 'empty'];
+    return [];
   }
 }
 

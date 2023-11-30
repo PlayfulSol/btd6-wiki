@@ -7,6 +7,7 @@ String heroes = 'heroes';
 String maps = 'maps';
 String bloons = 'bloons';
 String bosses = 'bosses';
+String blimps = 'blimps';
 
 const List<String> entityTypes = [
   'towers',
@@ -17,10 +18,10 @@ const List<String> entityTypes = [
 ];
 
 const List<String> titles = [
-  'Towers',
-  'Heroes',
-  'Bloons',
-  'Maps',
+  'towers',
+  'heroes',
+  'bloons',
+  'maps',
 ];
 
 const List<String> drawrTitles = [
@@ -83,9 +84,9 @@ const List<String> towerTypes = [
 
 const List<String> bloonTypes = [
   'All',
-  'Bloon',
-  'Blimp',
-  'Boss',
+  'Bloons',
+  'Blimps',
+  'Bosses',
 ];
 
 const Map<String, Map<String, String>> mapDifficultyToReward = {

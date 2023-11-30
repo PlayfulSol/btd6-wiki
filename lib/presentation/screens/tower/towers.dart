@@ -34,7 +34,7 @@ class _TowersState extends State<Towers> {
           return Consumer<GlobalState>(
             builder: (context, globalState, child) {
               List<BaseTower> filteredTowers = filterTowers(
-                  widget.towers, globalState.currentOptionSelected);
+                  widget.towers, globalState.currentOptionSelected[towers]!);
               return GridView.builder(
                 itemCount: filteredTowers.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

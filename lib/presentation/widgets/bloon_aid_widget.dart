@@ -18,7 +18,7 @@ class BloonAidWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String? typeCheck = extractItemTypeFromList(data);
     if (typeCheck == 'obj') {
-      return listObject(data, title, context);
+      return listObject(data as List<Relative>, title, context);
     } else if (typeCheck == 'str') {
       List<String> newData = data.cast<String>();
       return listString(newData, title);
@@ -28,19 +28,23 @@ class BloonAidWidget extends StatelessWidget {
   }
 }
 
-Widget listObject(List<dynamic> data, String title, BuildContext context) {
-  return ExpansionTile(
-    initiallyExpanded: title == 'Children',
-    title: Text(
-      title,
-      style: smallTitleStyle.copyWith(color: Colors.teal),
-    ),
-    onExpansionChanged: (value) {
-      logEvent(bloonAidConst, 'expand_children');
-    },
-    childrenPadding: const EdgeInsets.symmetric(vertical: 10),
-    children: generateChildren(data, context),
-  );
+Widget listObject(List<Relative> data, String title, BuildContext context) {
+  if (data[0].id != 'none') {
+    return ExpansionTile(
+      initiallyExpanded: title == 'Children',
+      title: Text(
+        title,
+        style: smallTitleStyle.copyWith(color: Colors.teal),
+      ),
+      onExpansionChanged: (value) {
+        logEvent(bloonAidConst, 'expand_children');
+      },
+      childrenPadding: const EdgeInsets.symmetric(vertical: 10),
+      children: generateChildren(data, context),
+    );
+  } else {
+    return Container();
+  }
 }
 
 Widget generateMinion(Relative relative, BuildContext context) {
@@ -129,7 +133,7 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
     );
     items.add(card);
   }
-
+  print('items len ${items.length}');
   return items;
 }
 
