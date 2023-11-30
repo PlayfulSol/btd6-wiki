@@ -1,5 +1,9 @@
 import 'package:btd6wiki/firebase_options.dart';
 import 'package:btd6wiki/models/base_model.dart';
+import 'package:btd6wiki/presentation/screens/bloon/bloons.dart';
+import 'package:btd6wiki/presentation/screens/hero/heroes.dart';
+import 'package:btd6wiki/presentation/screens/maps/maps.dart';
+import 'package:btd6wiki/presentation/screens/tower/towers.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +141,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: PageView(
         controller: pageController,
-        children: pages,
+        children: [
+          Towers(towers: baseEntities[towers]),
+          Heroes(heroes: baseEntities[heroes]),
+          Bloons(bloons: baseEntities[bloons], bosses: baseEntities[bosses]),
+          Maps(maps: baseEntities[maps])
+        ],
         onPageChanged: (index) {
           globalState.updateCurrentPageIndex(index);
           globalState.updateCurrentTitle(titles[index]);

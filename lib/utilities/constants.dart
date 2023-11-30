@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import '/presentation/screens/maps/maps.dart';
-import '/presentation/screens/hero/heroes.dart';
-import '/presentation/screens/bloon/bloons.dart';
-import '/presentation/screens/tower/towers.dart';
 
 String configDirectory = 'assets/data/config';
 
@@ -39,13 +35,6 @@ const List<Icon> icons = [
   Icon(Icons.person),
   Icon(Icons.nature),
   Icon(Icons.map_outlined),
-];
-
-List<Widget> pages = [
-  // const Towers(key: PageStorageKey<String>('Towers'), towerType: ''),
-  // const Heroes(key: PageStorageKey<String>('Heroes')),
-  // const Bloons(key: PageStorageKey<String>('Bloons')),
-  // const Maps(key: PageStorageKey<String>('Maps'), mapDifficulty: ''),
 ];
 
 const towerDataPath = 'assets/data/towers/';

@@ -1,13 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '../../models/bloons/bloon/bloon.dart';
-import '../../models/bloons/boss/minion_bloon.dart';
 import '../../models/bloons/common/relative_class.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/minion_bloon.dart';
 import '/utilities/constants.dart';
-import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 import '/analytics/analytics.dart';
@@ -75,19 +70,14 @@ Widget generateMinion(Relative relative, BuildContext context) {
               'Spawn ${relative.value}',
               style: normalStyle,
             ),
-            onTap: () async {
-              var id = relative.id;
-              var path = '${minionsDataPath + id}.json';
-              final data = await rootBundle.loadString(path);
-              var jsonData = json.decode(data);
+            onTap: () {
               logPageView(relative.name);
-              MinionBloon bloonData = MinionBloon.fromJson(jsonData);
-
-              // ignore: use_build_context_synchronously
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MinionBloonPage(minion: bloonData),
+                  builder: (context) => MinionBloonPage(
+                    minionId: relative.id,
+                  ),
                 ),
               );
             },
@@ -124,19 +114,14 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
           'Spawn ${relative.value}',
           style: normalStyle,
         ),
-        onTap: () async {
-          var id = relative.id;
-          var path = '${bloonsDataPath + id}.json';
-          final data = await rootBundle.loadString(path);
-          var jsonData = json.decode(data);
-          SingleBloonModel bloonData = SingleBloonModel.fromJson(jsonData);
-          GlobalState.currentTitle = bloonData.name;
+        onTap: () {
           logPageView(relative.name);
-          // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => SingleBloon(bloon: bloonData),
+              builder: (context) => SingleBloon(
+                bloonId: relative.id,
+              ),
             ),
           );
         },

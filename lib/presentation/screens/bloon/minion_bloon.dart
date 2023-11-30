@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '../../../models/bloons/boss/minion_bloon.dart';
 import '/presentation/widgets/bloon_aid_widget.dart';
@@ -7,32 +10,40 @@ import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 
 class MinionBloonPage extends StatefulWidget {
-  final MinionBloon minion;
+  const MinionBloonPage({
+    super.key,
+    required this.minionId,
+  });
 
-  const MinionBloonPage({super.key, required this.minion});
-
+  final String minionId;
   @override
   State<MinionBloonPage> createState() => _MinionBloonPageState();
 }
 
 class _MinionBloonPageState extends State<MinionBloonPage> {
   final controller = CarouselController();
+  late final MinionBloon minion;
   List<String> images = [];
   List<String> imageKeys = [];
   int activeIndex = 0;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    images = List.from(widget.minion.images.values);
-    imageKeys = List.from(widget.minion.images.keys);
+
+    var path = '${mapDataPath + widget.minionId}.json';
+    final data = await rootBundle.loadString(path);
+    var jsonData = json.decode(data);
+    minion = MinionBloon.fromJson(jsonData);
+    images = List.from(minion.images.values);
+    imageKeys = List.from(minion.images.keys);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.minion.name),
+        title: Text(minion.name),
       ),
       body: SingleChildScrollView(
           child: Padding(
@@ -91,7 +102,7 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
             ),
             const SizedBox(height: 10),
             Text(
-              widget.minion.name,
+              minion.name,
               style: bigTitleStyle,
               textAlign: TextAlign.center,
             ),
@@ -110,11 +121,11 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Absolute: ${widget.minion.speed.absolute}",
+                  "Absolute: ${minion.speed.absolute}",
                   style: normalStyle,
                 ),
                 Text(
-                  "Relative (to red bloon): ${widget.minion.speed.relative}",
+                  "Relative (to red bloon): ${minion.speed.relative}",
                   style: normalStyle,
                 ),
               ],
@@ -149,9 +160,9 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
                   child: ListView.builder(
                     primary: false,
                     shrinkWrap: true,
-                    itemCount: widget.minion.health["normal"].length,
+                    itemCount: minion.health["normal"].length,
                     itemBuilder: ((context, index) {
-                      String health = widget.minion.health["normal"][index];
+                      String health = minion.health["normal"][index];
                       List<String> parts = health.split(", ");
                       return ListTile(
                         dense: true,
@@ -176,9 +187,9 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
                     primary: false,
                     shrinkWrap: true,
                     padding: EdgeInsets.zero,
-                    itemCount: widget.minion.health["elite"].length,
+                    itemCount: minion.health["elite"].length,
                     itemBuilder: ((context, index) {
-                      String health = widget.minion.health["elite"][index];
+                      String health = minion.health["elite"][index];
                       List<String> parts = health.split(", ");
                       return ListTile(
                         dense: true,
@@ -212,17 +223,17 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
             const SizedBox(height: 5),
             gimmicks(
               "General Properties",
-              List<String>.from(widget.minion.gimmicks["general"]),
+              List<String>.from(minion.gimmicks["general"]),
               true,
             ),
             gimmicks(
               "Normal Gimmicks",
-              List<String>.from(widget.minion.gimmicks["normal"]),
+              List<String>.from(minion.gimmicks["normal"]),
               false,
             ),
             gimmicks(
               "Elite Gimmicks",
-              List<String>.from(widget.minion.gimmicks["elite"]),
+              List<String>.from(minion.gimmicks["elite"]),
               false,
             ),
           ],

@@ -1,18 +1,11 @@
-import 'dart:convert';
-import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:btd6wiki/models/base/base_map.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import '/models/maps/map.dart';
 import '/presentation/screens/maps/single_map.dart';
-import '/presentation/widgets/loader.dart';
 import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/strings.dart';
-import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
-import '/utilities/utils.dart';
 
 class Maps extends StatefulWidget {
   const Maps({

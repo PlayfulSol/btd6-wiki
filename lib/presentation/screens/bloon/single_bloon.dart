@@ -1,35 +1,41 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '/presentation/widgets/bloon_aid_widget.dart';
-import '../../../models/bloons/bloon/bloon.dart';
+import '/models/bloons/bloon/bloon.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
-import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
 
 class SingleBloon extends StatefulWidget {
-  final SingleBloonModel bloon;
-
-  const SingleBloon({super.key, required this.bloon});
+  const SingleBloon({
+    super.key,
+    required this.bloonId,
+  });
+  final String bloonId;
 
   @override
   State<SingleBloon> createState() => _SingleBloonState();
 }
 
 class _SingleBloonState extends State<SingleBloon> {
-  late String currentTitle;
+  late final BloonModel bloon;
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    currentTitle = GlobalState.currentTitle;
+    var path = '${bloonsDataPath + widget.bloonId}.json';
+    final data = await rootBundle.loadString(path);
+    var jsonData = json.decode(data);
+    bloon = BloonModel.fromJson(jsonData);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(currentTitle),
+        title: Text(bloon.fullName),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -39,14 +45,14 @@ class _SingleBloonState extends State<SingleBloon> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image(
-                semanticLabel: widget.bloon.fullName,
-                image: AssetImage(bloonImage(widget.bloon.image)),
+                semanticLabel: bloon.fullName,
+                image: AssetImage(bloonImage(bloon.image)),
                 width: MediaQuery.of(context).size.width * 0.3,
                 height: MediaQuery.of(context).size.width * 0.35,
                 filterQuality: FilterQuality.high,
               ),
               Text(
-                widget.bloon.fullName,
+                bloon.fullName,
                 style: bigTitleStyle,
                 textAlign: TextAlign.center,
               ),
@@ -57,7 +63,7 @@ class _SingleBloonState extends State<SingleBloon> {
               ),
               const SizedBox(height: 15),
               BloonAidWidget(
-                data: widget.bloon.rbe,
+                data: bloon.rbe,
                 title: "RBE (Red Bloon Equivalent)",
               ),
               const SizedBox(height: 15),
@@ -67,12 +73,12 @@ class _SingleBloonState extends State<SingleBloon> {
               ),
               const SizedBox(height: 5),
               Text(
-                "Relative (to red bloon): ${widget.bloon.speed.relative}",
+                "Relative (to red bloon): ${bloon.speed.relative}",
                 style: normalStyle,
               ),
               const SizedBox(height: 5),
               Text(
-                "Absolute units: ${widget.bloon.speed.absolute}",
+                "Absolute units: ${bloon.speed.absolute}",
                 style: normalStyle,
               ),
               const SizedBox(height: 10),
@@ -82,15 +88,15 @@ class _SingleBloonState extends State<SingleBloon> {
               ),
               const SizedBox(height: 10),
               BloonAidWidget(
-                data: widget.bloon.children,
+                data: bloon.children,
                 title: "Children",
               ),
               const SizedBox(height: 10),
               BloonAidWidget(
-                data: widget.bloon.parents,
+                data: bloon.parents,
                 title: "Parents",
               ),
-              if (widget.bloon.variants.isNotEmpty) ...[
+              if (bloon.variants.isNotEmpty) ...[
                 const SizedBox(height: 10),
                 ExpansionTile(
                     title: Text(
@@ -100,7 +106,7 @@ class _SingleBloonState extends State<SingleBloon> {
                     onExpansionChanged: (value) {
                       logEvent(bloonConst, 'variants');
                     },
-                    children: widget.bloon.variants
+                    children: bloon.variants
                         .map((e) => Padding(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: ListTile(
@@ -134,7 +140,7 @@ class _SingleBloonState extends State<SingleBloon> {
                 onExpansionChanged: (value) {
                   logEvent(bloonConst, 'rounds');
                 },
-                children: widget.bloon.rounds.normal
+                children: bloon.rounds.normal
                     .map((e) => ListTile(
                           title: RichText(
                             text: TextSpan(
@@ -162,7 +168,7 @@ class _SingleBloonState extends State<SingleBloon> {
                 onExpansionChanged: (value) {
                   logEvent(bloonConst, 'ABR');
                 },
-                children: widget.bloon.rounds.abr
+                children: bloon.rounds.abr
                     .map((e) => ListTile(
                           title: RichText(
                             text: TextSpan(

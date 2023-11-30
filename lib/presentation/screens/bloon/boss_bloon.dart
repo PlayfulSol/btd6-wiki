@@ -1,42 +1,51 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import '../../../models/bloons/boss/boss_bloon.dart';
+import '/models/bloons/boss/boss_bloon.dart';
+import '/models/bloons/boss/boss_health_class.dart';
 import '/presentation/widgets/bloon_aid_widget.dart';
-import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/images_url.dart';
 import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
 
 class BossBloon extends StatefulWidget {
-  final BossBloonModel bloon;
+  const BossBloon({
+    super.key,
+    required this.bossId,
+  });
 
-  const BossBloon({super.key, required this.bloon});
+  final String bossId;
 
   @override
   State<BossBloon> createState() => _BossBloonState();
 }
 
 class _BossBloonState extends State<BossBloon> {
+  late final BossBloonModel boss;
   final controller = CarouselController();
   List<String> images = [];
   List<String> imageKeys = [];
-
   int activeIndex = 0;
 
   @override
-  void initState() {
+  Future<void> initState() async {
     super.initState();
-    images = List.from(widget.bloon.images.values);
-    imageKeys = List.from(widget.bloon.images.keys);
+    var path = '${mapDataPath + widget.bossId}.json';
+    final data = await rootBundle.loadString(path);
+    var jsonData = json.decode(data);
+    boss = BossBloonModel.fromJson(jsonData);
+    images = List.from(boss.images.values);
+    imageKeys = List.from(boss.images.keys);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(GlobalState.currentTitle),
+          title: Text(boss.name),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -95,7 +104,7 @@ class _BossBloonState extends State<BossBloon> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    widget.bloon.name,
+                    boss.name,
                     style: bigTitleStyle,
                     textAlign: TextAlign.center,
                   ),
@@ -105,7 +114,7 @@ class _BossBloonState extends State<BossBloon> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    widget.bloon.description.trimLeft(),
+                    boss.description.trimLeft(),
                     style: normalStyle,
                   ),
                   const SizedBox(height: 10),
@@ -124,11 +133,11 @@ class _BossBloonState extends State<BossBloon> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        "Normal: ${widget.bloon.skullCount['normal']}",
+                        "Normal: ${boss.skullCount['normal']}",
                         style: normalStyle,
                       ),
                       Text(
-                        "Elite: ${widget.bloon.skullCount['elite']}",
+                        "Elite: ${boss.skullCount['elite']}",
                         style: normalStyle,
                       ),
                     ],
@@ -142,10 +151,10 @@ class _BossBloonState extends State<BossBloon> {
                     "Each additional player adds 20%",
                     style: subtitleStyle,
                   ),
-                  bossHealth("Normal", widget.bloon.health.base),
-                  bossHealth("Elite", widget.bloon.health.elite),
+                  bossHealth("Normal", boss.health.base),
+                  bossHealth("Elite", boss.health.elite),
                   const SizedBox(height: 10),
-                  generateMinion(widget.bloon.children, context),
+                  generateMinion(boss.children, context),
                   Divider(
                     thickness: 2,
                     color: Colors.grey[600],
@@ -158,17 +167,17 @@ class _BossBloonState extends State<BossBloon> {
                   const SizedBox(height: 5),
                   gimmicks(
                     "General Properties",
-                    List<String>.from(widget.bloon.gimmicks["general"]),
+                    List<String>.from(boss.gimmicks["general"]),
                     true,
                   ),
                   gimmicks(
                     "Normal Gimmicks",
-                    List<String>.from(widget.bloon.gimmicks["normal"]),
+                    List<String>.from(boss.gimmicks["normal"]),
                     false,
                   ),
                   gimmicks(
                     "Elite Gimmicks",
-                    List<String>.from(widget.bloon.gimmicks["elite"]),
+                    List<String>.from(boss.gimmicks["elite"]),
                     false,
                   ),
                   const SizedBox(height: 10),
@@ -185,7 +194,7 @@ class _BossBloonState extends State<BossBloon> {
                     onExpansionChanged: (bool expanded) {
                       logEvent(bossBloonConst, 'general_immunities');
                     },
-                    children: widget.bloon.immunities
+                    children: boss.immunities
                         .map<Widget>(
                           (item) => ListTile(
                             title: Text("- $item", style: normalStyle),
