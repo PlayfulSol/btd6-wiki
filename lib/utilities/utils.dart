@@ -1,6 +1,5 @@
 import 'package:btd6wiki/models/base/base_map.dart';
 import 'package:btd6wiki/models/base/base_tower.dart';
-import 'package:btd6wiki/models/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/models/towers/common/cost_class.dart';

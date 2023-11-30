@@ -1,6 +1,5 @@
 import 'package:btd6wiki/models/towers/common/upgrade_info_class.dart';
 import 'package:flutter/material.dart';
-import '../../models/towers/tower/tower.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 import '/utilities/images_url.dart';

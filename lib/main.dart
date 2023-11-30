@@ -94,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
     baseEntities[maps] = await loadBaseMaps();
     baseEntities[bloons] = await loadBaseBloons();
     baseEntities[bosses] = await loadBaseBosses();
+    setState(() {});
   }
 
   // Future<void> _logCurrentScreen() async {

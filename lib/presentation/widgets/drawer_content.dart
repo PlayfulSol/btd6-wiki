@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import '/presentation/screens/maps/maps.dart';
-import '/presentation/screens/tower/towers.dart';
 import '/presentation/widgets/about_us.dart';
 import '/utilities/utils.dart';
 import '/utilities/constants.dart';

@@ -37,7 +37,7 @@ class HeroModel extends BaseHero {
         super(
           json["id"] as String,
           json["name"] as String,
-          json["images"]["normal"] as String,
+          json["image"] as String,
           json['type'] as String,
           json["inGameDesc"] as String,
         );

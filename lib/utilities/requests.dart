@@ -27,8 +27,7 @@ Future<List<BaseHero>> loadBaseHeroes() async {
 
 // ---- Maps ----
 Future<List<BaseMap>> loadBaseMaps() async {
-  final jsonConfig =
-      await rootBundle.loadString('$configDirectory/heroes.json');
+  final jsonConfig = await rootBundle.loadString('$configDirectory/maps.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
 
   return parsedConfig.map((e) => BaseMap.fromJson(e)).toList();
@@ -37,7 +36,7 @@ Future<List<BaseMap>> loadBaseMaps() async {
 // ---- Bloons ----
 Future<List<BaseModel>> loadBaseBloons() async {
   final jsonConfig =
-      await rootBundle.loadString('$configDirectory/heroes.json');
+      await rootBundle.loadString('$configDirectory/bloons.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
 
   return parsedConfig.map((e) => BaseModel.fromJson(e)).toList();
@@ -46,7 +45,7 @@ Future<List<BaseModel>> loadBaseBloons() async {
 // ---- Bosses ----
 Future<List<BaseModel>> loadBaseBosses() async {
   final jsonConfig =
-      await rootBundle.loadString('$configDirectory/heroes.json');
+      await rootBundle.loadString('$configDirectory/bosses.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
 
   return parsedConfig.map((e) => BaseModel.fromJson(e)).toList();
