@@ -63,8 +63,8 @@ List<BaseTower> filterTowers(List<BaseTower> towers, String option) {
   }
 }
 
-List<BaseMap> filterMaps(List<BaseMap> maps, String option, String query) {
-  if (option == '') {
+List<BaseMap> filterMaps(List<BaseMap> maps, String option) {
+  if (option == 'All') {
     return maps;
   } else {
     return maps.where((map) => map.difficulty == option).toList();

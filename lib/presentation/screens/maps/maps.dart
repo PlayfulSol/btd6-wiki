@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:btd6wiki/models/base/base_map.dart';
+import 'package:btd6wiki/utilities/global_state.dart';
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
@@ -21,12 +24,16 @@ class Maps extends StatefulWidget {
 
 class _MapsState extends State<Maps> {
   late final TextEditingController _searchController;
+  late List<BaseMap> filteredMaps;
   String query = '';
 
   @override
   void initState() {
     super.initState();
-    // _loadJsonData();
+    _loadJsonData();
+    GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
+    filteredMaps =
+        filterMaps(widget.maps, globalState.currentOptionSelected[maps]!);
     _searchController = TextEditingController();
     _searchController.addListener(() {
       logEvent('search', 'searching for map ${_searchController.text}');
@@ -42,11 +49,11 @@ class _MapsState extends State<Maps> {
     super.dispose();
   }
 
-  // Future<void> _loadJsonData() async {
-  //   widget.maps.sort((a, b) =>
-  //       GlobalState.mapDifficulties.indexOf(a.difficulty) -
-  //       GlobalState.mapDifficulties.indexOf(b.difficulty));
-  // }
+  Future<void> _loadJsonData() async {
+    widget.maps.sort((a, b) =>
+        mapDifficulties.indexOf(a.difficulty) -
+        mapDifficulties.indexOf(b.difficulty));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,10 +73,13 @@ class _MapsState extends State<Maps> {
               ),
               const SizedBox(height: 10),
               Expanded(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
+                child: Consumer<GlobalState>(
+                  builder: (context, globalState, child) {
+                    filteredMaps = filterMaps(
+                        widget.maps, globalState.currentOptionSelected[maps]!);
+                    filteredMaps = mapsFromSearch(filteredMaps, query);
                     return GridView.builder(
-                      itemCount: widget.maps.length,
+                      itemCount: filteredMaps.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
@@ -82,13 +92,13 @@ class _MapsState extends State<Maps> {
                           padding: const EdgeInsets.all(5.0),
                           child: GestureDetector(
                             onTap: () {
-                              logPageView(widget.maps[index].name);
+                              logPageView(filteredMaps[index].name);
 
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SingleMap(
-                                    mapId: widget.maps[index].id,
+                                    mapId: filteredMaps[index].id,
                                   ),
                                 ),
                               );
@@ -101,9 +111,9 @@ class _MapsState extends State<Maps> {
                                 children: [
                                   Expanded(
                                     child: Image(
-                                      semanticLabel: widget.maps[index].name,
+                                      semanticLabel: filteredMaps[index].name,
                                       image: AssetImage(
-                                          mapImage(widget.maps[index].image)),
+                                          mapImage(filteredMaps[index].image)),
                                       fit: BoxFit.cover,
                                       errorBuilder: (BuildContext context,
                                           Object exception,
@@ -120,12 +130,12 @@ class _MapsState extends State<Maps> {
                                       children: [
                                         AutoSizeText(
                                           capitalizeEveryWord(
-                                              widget.maps[index].name),
+                                              filteredMaps[index].name),
                                           maxLines: 1,
                                           style: bolderNormalStyle,
                                         ),
                                         const SizedBox(height: 5),
-                                        Text(widget.maps[index].difficulty,
+                                        Text(filteredMaps[index].difficulty,
                                             style: subtitleStyle),
                                       ],
                                     ),
