@@ -135,7 +135,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     onSelected: (String? newValue) {
                       globalState.updateCurrentOptionSelected(
                           category, newValue!);
-                      //TODO - filter the current page
                     },
                     dropdownMenuEntries:
                         options.map<DropdownMenuEntry<String>>((String value) {
