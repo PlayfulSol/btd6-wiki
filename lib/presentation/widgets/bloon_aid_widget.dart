@@ -40,7 +40,7 @@ Widget listObject(List<Relative> data, String title, BuildContext context) {
         logEvent(bloonAidConst, 'expand_children');
       },
       childrenPadding: const EdgeInsets.symmetric(vertical: 10),
-      children: generateChildren(data, context),
+      children: generateRelatives(data, context),
     );
   } else {
     return Container();
@@ -93,38 +93,32 @@ Widget generateMinion(Relative relative, BuildContext context) {
   }
 }
 
-List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
+List<Widget> generateRelatives(List<Relative> data, BuildContext context) {
   List<Widget> items = [];
 
   for (int index = 0; index < data.length; index++) {
-    Relative relative = Relative(
-      id: data[index]['id'],
-      name: data[index]['name'],
-      image: data[index]['image'],
-      value: data[index]['value'],
-    );
     Card card = Card(
       shadowColor: Colors.black87,
       child: ListTile(
         leading: Image(
-          semanticLabel: relative.name,
-          image: AssetImage(bloonImage(relative.image)),
+          semanticLabel: data[index].name,
+          image: AssetImage(bloonImage(data[index].image)),
         ),
         title: Text(
-          relative.name,
+          data[index].name,
           style: normalStyle.copyWith(fontWeight: FontWeight.w600),
         ),
         subtitle: Text(
-          'Spawn ${relative.value}',
+          'Spawn ${data[index].value}',
           style: normalStyle,
         ),
         onTap: () {
-          logPageView(relative.name);
+          logPageView(data[index].name);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => SingleBloon(
-                bloonId: relative.id,
+                bloonId: data[index].id,
               ),
             ),
           );
@@ -133,7 +127,6 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
     );
     items.add(card);
   }
-  print('items len ${items.length}');
   return items;
 }
 

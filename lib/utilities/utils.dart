@@ -1,6 +1,7 @@
 import 'package:btd6wiki/models/base/base_map.dart';
 import 'package:btd6wiki/models/base/base_tower.dart';
 import 'package:btd6wiki/models/base_model.dart';
+import 'package:btd6wiki/models/bloons/common/relative_class.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '/models/towers/common/cost_class.dart';
@@ -108,7 +109,7 @@ dynamic extractItemTypeFromList(List<dynamic> data) {
   for (int i = 0; i < data.length; i++) {
     if (data[i] is String && data[i] != 'None') {
       isString = true;
-    } else if (data[i] is Map<String, dynamic>) {
+    } else if (data[i] is Relative) {
       // Assuming objects are Map<String, dynamic>, you can adjust the type check as needed
       isObject = true;
     }

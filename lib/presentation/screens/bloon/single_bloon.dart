@@ -54,12 +54,12 @@ class _SingleBloonState extends State<SingleBloon> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    // ignore: avoid_print
                     Image(
                       semanticLabel: bloon.fullName,
                       image: AssetImage(bloonImage(bloon.image)),
                       width: MediaQuery.of(context).size.width * 0.3,
                       height: MediaQuery.of(context).size.width * 0.35,
-                      filterQuality: FilterQuality.high,
                     ),
                     Text(
                       bloon.fullName,
