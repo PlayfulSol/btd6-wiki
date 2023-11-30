@@ -249,7 +249,7 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
                 ),
               ),
             )
-          : Container(),
+          : const CircularProgressIndicator(),
     );
   }
 }

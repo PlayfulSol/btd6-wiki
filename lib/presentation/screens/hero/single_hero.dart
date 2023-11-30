@@ -23,6 +23,7 @@ class SingleHero extends StatefulWidget {
 class _SingleHeroState extends State<SingleHero> {
   late final HeroModel singleHero;
   bool loading = true;
+
   HeroLevel _buildHeroLevel(UpgradeInfo level) {
     var shouldShowLevelImage = false;
     if (singleHero.skinChange.keys.contains('level_${level.name}') ||

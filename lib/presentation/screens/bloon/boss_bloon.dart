@@ -219,7 +219,7 @@ class _BossBloonState extends State<BossBloon> {
                 ),
               ),
             )
-          : Container(),
+          : const CircularProgressIndicator(),
     );
   }
 
