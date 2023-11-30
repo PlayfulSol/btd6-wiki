@@ -7,17 +7,18 @@ import '/presentation/widgets/image_outline.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
+import 'boss_bloon.dart';
 import 'single_bloon.dart';
 
 class Bloons extends StatefulWidget {
   const Bloons({
     super.key,
-    required this.bloons,
-    required this.bosses,
+    required this.bloonsList,
+    required this.bossesList,
   });
 
-  final List<BaseModel> bloons;
-  final List<BaseModel> bosses;
+  final List<BaseModel> bloonsList;
+  final List<BaseModel> bossesList;
 
   @override
   State<Bloons> createState() => _BloonsState();
@@ -36,7 +37,7 @@ class _BloonsState extends State<Bloons> {
           constraintsValues = calculateConstraintsBloons(constraints);
           return Consumer<GlobalState>(
             builder: (context, globalState, child) {
-              List<BaseModel> filteredBloons = widget.bloons;
+              List<BaseModel> filteredBloons = widget.bloonsList;
               if (globalState.currentOptionSelected[bloons]!.toLowerCase() ==
                       bloons ||
                   globalState.currentOptionSelected[bloons]!.toLowerCase() ==
@@ -84,7 +85,7 @@ class _BloonsState extends State<Bloons> {
                             const SizedBox(height: 15),
                             BossesGrid(
                               constraintsValues: constraintsValues,
-                              widget: widget,
+                              bossesList: widget.bossesList,
                             ),
                           ],
                         )
@@ -103,11 +104,11 @@ class BossesGrid extends StatefulWidget {
   const BossesGrid({
     super.key,
     required this.constraintsValues,
-    required this.widget,
+    required this.bossesList,
   });
 
   final Map<String, dynamic> constraintsValues;
-  final Bloons widget;
+  final List<BaseModel> bossesList;
 
   @override
   State<BossesGrid> createState() => _BossesGridState();
@@ -123,7 +124,7 @@ class _BossesGridState extends State<BossesGrid> {
       ),
       physics: const NeverScrollableScrollPhysics(),
       primary: false,
-      itemCount: widget.widget.bosses.length,
+      itemCount: widget.bossesList.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
         return Card(
@@ -132,32 +133,22 @@ class _BossesGridState extends State<BossesGrid> {
             child: ListTile(
               mouseCursor: SystemMouseCursors.click,
               leading: ImageOutliner(
-                imageName: widget.widget.bosses[index].image,
-                imagePath: bossImage(widget.widget.bosses[index].image),
+                imageName: widget.bossesList[index].image,
+                imagePath: bossImage(widget.bossesList[index].image),
               ),
               title: Text(
-                widget.widget.bosses[index].name,
+                widget.bossesList[index].name,
                 style: widget.constraintsValues["textStyleBoss"],
               ),
-              onTap: () async {
-                // if (!GlobalState.isLoading) {
-                //   var id = GlobalState.bosses[index].id;
-                //   var path = '${bossesDataPath + id}.json';
-                //   final data = await rootBundle.loadString(path);
-                //   var jsonData = json.decode(data);
-                //   logPageView(GlobalState.bosses[index].name);
-                //   BossBloonModel bossData =
-                //       BossBloonModel.fromJson(jsonData);
-                //   // ignore: use_build_context_synchronously
-                //   Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) =>
-                //           BossBloon(bloon: bossData),
-                //     ),
-                //   );
-                //   GlobalState.currentTitle = bossData.name;
-                // }
+              onTap: () {
+                logPageView(widget.bossesList[index].name);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        BossBloon(bossId: widget.bossesList[index].id),
+                  ),
+                );
               },
             ),
           ),

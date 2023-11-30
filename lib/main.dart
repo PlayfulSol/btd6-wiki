@@ -154,7 +154,9 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Towers(towers: baseEntities[towers]),
           Heroes(heroes: baseEntities[heroes]),
-          Bloons(bloons: baseEntities[bloons], bosses: baseEntities[bosses]),
+          Bloons(
+              bloonsList: baseEntities[bloons],
+              bossesList: baseEntities[bosses]),
           Maps(maps: baseEntities[maps])
         ],
         onPageChanged: (index) {
