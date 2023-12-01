@@ -45,8 +45,8 @@ class _MapsState extends State<Maps> {
 
   @override
   void dispose() {
-    _searchController.dispose();
     super.dispose();
+    _searchController.dispose();
   }
 
   Future<void> _loadJsonData() async {

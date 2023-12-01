@@ -143,7 +143,7 @@ class _DrawerContentState extends State<DrawerContent> {
                   );
                 },
               ),
-            )
+            ),
           ],
         ),
         const Spacer(),
