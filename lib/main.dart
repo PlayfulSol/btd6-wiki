@@ -6,6 +6,7 @@ import 'package:btd6wiki/presentation/screens/maps/maps.dart';
 import 'package:btd6wiki/presentation/screens/tower/towers.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:provider/provider.dart';
@@ -40,17 +41,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logEvent(
-        'device_width', MediaQuery.of(context).size.width.toStringAsFixed(1));
-
+    String screenWidth = MediaQuery.of(context).size.width.toStringAsFixed(1);
+    logEvent('device_width', screenWidth);
     return AdaptiveTheme(
         light: Themes.lightTheme,
         dark: Themes.darkTheme,
         initial: AdaptiveThemeMode.system,
         builder: (theme, darkTheme) => MaterialApp(
-              navigatorObservers: <NavigatorObserver>[
-                observer,
-              ],
+              navigatorObservers: !kDebugMode
+                  ? <NavigatorObserver>[
+                      observer,
+                    ]
+                  : [],
               theme: theme,
               darkTheme: darkTheme,
               title: 'BTD6 Wiki',
@@ -98,16 +100,17 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {});
   }
 
-  // Future<void> _logCurrentScreen() async {
-  //   await widget.analytics.setCurrentScreen(
-  //     screenName: titles[GlobalState.currentPageIndex],
-  //     screenClassOverride: titles[GlobalState.currentPageIndex],
-  //   );
-  // }
+  Future<void> _logCurrentScreen(int pageIndex) async {
+    await widget.analytics.setCurrentScreen(
+      screenName: titles[pageIndex],
+      screenClassOverride: titles[pageIndex],
+    );
+  }
 
   @override
   void initState() {
     super.initState();
+
     loadBaseData();
   }
 
@@ -161,6 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPageChanged: (index) {
           globalState.updateCurrentPageIndex(index);
           globalState.updateCurrentPage(capitalize(titles[index]));
+          _logCurrentScreen(index);
         },
       ),
       bottomNavigationBar: Container(
