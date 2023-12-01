@@ -1,5 +1,5 @@
+import 'package:btd6wiki/models/towers/common/upgrade_info_class.dart';
 import 'package:flutter/material.dart';
-import '/models/towers/tower.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
@@ -7,7 +7,7 @@ import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
 
 class MonkeyPath extends StatelessWidget {
-  final List<MonkeyPathModel> path;
+  final List<UpgradeInfo> path;
   final String pathKey;
   final String monkeyId;
 

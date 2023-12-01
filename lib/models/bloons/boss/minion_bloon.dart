@@ -1,5 +1,6 @@
+import '/models/bloons/common/relative_class.dart';
+import '/models/bloons/common/speed_class.dart';
 import '/models/base_model.dart';
-import '/models/bloons/single_bloon.dart';
 
 class MinionBloon extends BaseModel {
   late final Map<String, dynamic> images;

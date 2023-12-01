@@ -1,12 +1,8 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import '/models/bloons/single_bloon.dart';
-import '/models/bloons/minion_bloon.dart';
+import '../../models/bloons/common/relative_class.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/minion_bloon.dart';
 import '/utilities/constants.dart';
-import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/utils.dart';
 import '/analytics/analytics.dart';
@@ -22,7 +18,7 @@ class BloonAidWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String? typeCheck = extractItemTypeFromList(data);
     if (typeCheck == 'obj') {
-      return listObject(data, title, context);
+      return listObject(data as List<Relative>, title, context);
     } else if (typeCheck == 'str') {
       List<String> newData = data.cast<String>();
       return listString(newData, title);
@@ -32,19 +28,23 @@ class BloonAidWidget extends StatelessWidget {
   }
 }
 
-Widget listObject(List<dynamic> data, String title, BuildContext context) {
-  return ExpansionTile(
-    initiallyExpanded: title == 'Children',
-    title: Text(
-      title,
-      style: smallTitleStyle.copyWith(color: Colors.teal),
-    ),
-    onExpansionChanged: (value) {
-      logEvent(bloonAidConst, 'expand_children');
-    },
-    childrenPadding: const EdgeInsets.symmetric(vertical: 10),
-    children: generateChildren(data, context),
-  );
+Widget listObject(List<Relative> data, String title, BuildContext context) {
+  if (data[0].id != 'none') {
+    return ExpansionTile(
+      initiallyExpanded: title == 'Children',
+      title: Text(
+        title,
+        style: smallTitleStyle.copyWith(color: Colors.teal),
+      ),
+      onExpansionChanged: (value) {
+        logEvent(bloonAidConst, 'expand_children');
+      },
+      childrenPadding: const EdgeInsets.symmetric(vertical: 10),
+      children: generateRelatives(data, context),
+    );
+  } else {
+    return Container();
+  }
 }
 
 Widget generateMinion(Relative relative, BuildContext context) {
@@ -74,19 +74,14 @@ Widget generateMinion(Relative relative, BuildContext context) {
               'Spawn ${relative.value}',
               style: normalStyle,
             ),
-            onTap: () async {
-              var id = relative.id;
-              var path = '${minionsDataPath + id}.json';
-              final data = await rootBundle.loadString(path);
-              var jsonData = json.decode(data);
+            onTap: () {
               logPageView(relative.name);
-              MinionBloon bloonData = MinionBloon.fromJson(jsonData);
-              GlobalState.currentTitle = bloonData.name;
-              // ignore: use_build_context_synchronously
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => MinionBloonPage(minion: bloonData),
+                  builder: (context) => MinionBloonPage(
+                    minionId: relative.id,
+                  ),
                 ),
               );
             },
@@ -98,44 +93,33 @@ Widget generateMinion(Relative relative, BuildContext context) {
   }
 }
 
-List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
+List<Widget> generateRelatives(List<Relative> data, BuildContext context) {
   List<Widget> items = [];
 
   for (int index = 0; index < data.length; index++) {
-    Relative relative = Relative(
-      id: data[index]['id'],
-      name: data[index]['name'],
-      image: data[index]['image'],
-      value: data[index]['value'],
-    );
     Card card = Card(
       shadowColor: Colors.black87,
       child: ListTile(
         leading: Image(
-          semanticLabel: relative.name,
-          image: AssetImage(bloonImage(relative.image)),
+          semanticLabel: data[index].name,
+          image: AssetImage(bloonImage(data[index].image)),
         ),
         title: Text(
-          relative.name,
+          data[index].name,
           style: normalStyle.copyWith(fontWeight: FontWeight.w600),
         ),
         subtitle: Text(
-          'Spawn ${relative.value}',
+          'Spawn ${data[index].value}',
           style: normalStyle,
         ),
-        onTap: () async {
-          var id = relative.id;
-          var path = '${bloonsDataPath + id}.json';
-          final data = await rootBundle.loadString(path);
-          var jsonData = json.decode(data);
-          SingleBloonModel bloonData = SingleBloonModel.fromJson(jsonData);
-          GlobalState.currentTitle = bloonData.name;
-          logPageView(relative.name);
-          // ignore: use_build_context_synchronously
+        onTap: () {
+          logPageView(data[index].name);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => SingleBloon(bloon: bloonData),
+              builder: (context) => SingleBloon(
+                bloonId: data[index].id,
+              ),
             ),
           );
         },
@@ -143,7 +127,6 @@ List<Widget> generateChildren(List<dynamic> data, BuildContext context) {
     );
     items.add(card);
   }
-
   return items;
 }
 

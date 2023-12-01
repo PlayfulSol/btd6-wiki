@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
-import '/presentation/screens/maps/maps.dart';
-import '/presentation/screens/hero/heroes.dart';
-import '/presentation/screens/bloon/bloons.dart';
-import '/presentation/screens/tower/towers.dart';
 
 String configDirectory = 'assets/data/config';
 
+String towers = 'towers';
+String heroes = 'heroes';
+String maps = 'maps';
+String bloons = 'bloons';
+String bosses = 'bosses';
+String blimps = 'blimps';
+
+const List<String> entityTypes = [
+  'towers',
+  'heroes',
+  'maps',
+  'bloons',
+  'bosses',
+];
+
 const List<String> titles = [
-  'Towers',
-  'Heroes',
-  'Bloons',
-  'Maps',
+  'towers',
+  'heroes',
+  'bloons',
+  'maps',
 ];
 
 const List<String> drawrTitles = [
@@ -20,15 +31,16 @@ const List<String> drawrTitles = [
   'Maps',
 ];
 
-List<Widget> pages = [
-  const Towers(key: PageStorageKey<String>('Towers'), towerType: ''),
-  const Heroes(key: PageStorageKey<String>('Heroes')),
-  const Bloons(key: PageStorageKey<String>('Bloons')),
-  const Maps(key: PageStorageKey<String>('Maps'), mapDifficulty: ''),
+const List<Icon> icons = [
+  Icon(Icons.cell_tower),
+  Icon(Icons.person),
+  Icon(Icons.nature),
+  Icon(Icons.map_outlined),
 ];
 
 const towerDataPath = 'assets/data/towers/';
 const heroDataPath = 'assets/data/heroes/';
+const mapDataPath = 'assets/data/maps/';
 const bloonsDataPath = 'assets/data/bloons/';
 const minionsDataPath = 'assets/data/minions/';
 const bossesDataPath = 'assets/data/bosses/';
@@ -53,6 +65,29 @@ const Map<String, String> pathsDictionary = {
   'path3': 'Bottom Path',
   'paragon': 'Paragon',
 };
+
+const List<String> mapDifficulties = [
+  'All',
+  'Beginner',
+  'Intermediate',
+  'Advanced',
+  'Expert'
+];
+
+const List<String> towerTypes = [
+  'All',
+  'Primary',
+  'Military',
+  'Magic',
+  'Support',
+];
+
+const List<String> bloonTypes = [
+  'All',
+  'Bloons',
+  'Blimps',
+  'Bosses',
+];
 
 const Map<String, Map<String, String>> mapDifficultyToReward = {
   'Beginner': {

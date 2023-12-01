@@ -1,9 +1,11 @@
+import 'package:btd6wiki/models/base/base_map.dart';
+import 'package:btd6wiki/models/base/base_tower.dart';
+import 'package:btd6wiki/models/base_model.dart';
+import 'package:btd6wiki/models/bloons/common/relative_class.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '/models/maps/map.dart';
-import '/models/towers/common.dart';
-import '/models/towers/tower.dart';
-import '/utilities/global_state.dart';
+import '/models/towers/common/cost_class.dart';
+import '/models/towers/common/stats_class.dart';
 import 'constants.dart';
 
 String formatBigNumber(int number) {
@@ -45,40 +47,44 @@ String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
-String getAppTitle() {
-  return GlobalState.currentTitle;
-}
-
-List<TowerModel> filterTowers() {
-  if (GlobalState.currentTowerType == '') {
-    return GlobalState.towers;
+List<BaseModel> filterbloons(List<BaseModel> bloons, String option) {
+  if (option == 'All') {
+    return bloons;
   } else {
-    return GlobalState.towers
-        .where((tower) => tower.type == GlobalState.currentTowerType)
-        .toList();
+    return bloons.where((bloon) => bloon.type == option.toLowerCase()).toList();
   }
 }
 
-List<MapModel> filterMaps(query) {
-  if (query != '') {
-    if (GlobalState.currentMapDifficulty == '') {
-      return GlobalState.maps
-          .where((map) => map.name.toLowerCase().contains(query.toLowerCase()))
-          .toList();
-    } else {
-      return GlobalState.maps
-          .where((map) =>
-              map.name.toLowerCase().contains(query.toLowerCase()) &&
-              map.difficulty == GlobalState.currentMapDifficulty)
-          .toList();
-    }
-  }
-  if (GlobalState.currentMapDifficulty == '') {
-    return GlobalState.maps;
+List<BaseTower> filterTowers(List<BaseTower> towers, String option) {
+  if (option == 'All') {
+    return towers;
   } else {
-    return GlobalState.maps
-        .where((map) => map.difficulty == GlobalState.currentMapDifficulty)
-        .toList();
+    return towers.where((tower) => tower.type == option).toList();
+  }
+}
+
+List<BaseMap> filterMaps(List<BaseMap> maps, String option) {
+  if (option == 'All') {
+    return maps;
+  } else {
+    return maps.where((map) => map.difficulty == option).toList();
+  }
+}
+
+List<BaseMap> mapsFromSearch(List<BaseMap> maps, String query) {
+  query = query.toLowerCase();
+  return maps.where((map) => map.name.toLowerCase().contains(query)).toList();
+}
+
+List<String> dropmenuOptions(int pageIndex) {
+  if (pageIndex == 0) {
+    return towerTypes;
+  } else if (pageIndex == 2) {
+    return bloonTypes;
+  } else if (pageIndex == 3) {
+    return mapDifficulties;
+  } else {
+    return [];
   }
 }
 
@@ -103,7 +109,7 @@ dynamic extractItemTypeFromList(List<dynamic> data) {
   for (int i = 0; i < data.length; i++) {
     if (data[i] is String && data[i] != 'None') {
       isString = true;
-    } else if (data[i] is Map<String, dynamic>) {
+    } else if (data[i] is Relative) {
       // Assuming objects are Map<String, dynamic>, you can adjust the type check as needed
       isObject = true;
     }
