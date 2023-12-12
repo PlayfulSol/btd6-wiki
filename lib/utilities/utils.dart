@@ -59,7 +59,7 @@ List<BaseTower> filterTowers(List<BaseTower> towers, String option) {
   if (option == 'All') {
     return towers;
   } else {
-    return towers.where((tower) => tower.type == option).toList();
+    return towers.where((tower) => tower.classType == option).toList();
   }
 }
 

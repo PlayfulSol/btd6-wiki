@@ -132,7 +132,8 @@ class _MyHomePageState extends State<MyHomePage> {
             String category = titles[globalState.currentPageIndex];
             return options.isNotEmpty
                 ? DropdownMenu<String>(
-                    leadingIcon: const Icon(Icons.filter_list),
+                    // leadingIcon: const Icon(Icons.filter_list),
+                    // label: Text('hello'),
                     initialSelection:
                         globalState.currentOptionSelected[category],
                     onSelected: (String? newValue) {

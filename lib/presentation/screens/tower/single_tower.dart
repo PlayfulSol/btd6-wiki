@@ -81,7 +81,7 @@ class _SingleTowerState extends State<SingleTower> {
                       ),
                       const BetterDivider(),
                       Text(
-                        'Class - ${tower.type}',
+                        'Class - ${tower.classType}',
                         style: smallTitleStyle,
                       ),
                       const SizedBox(
