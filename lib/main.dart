@@ -1,4 +1,3 @@
-import 'package:btd6wiki/presentation/widgets/loader.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -16,6 +15,7 @@ import '/presentation/screens/tower/towers.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/maps/maps.dart';
+import '/presentation/widgets/loader.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
@@ -130,41 +130,47 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
         actions: [
+          Consumer<GlobalState>(
+            builder: (context, globalState, child) {
+              List<String> options =
+                  dropMenuOptions(globalState.currentPageIndex);
+              return options.isNotEmpty
+                  ? PopupMenuButton<String>(
+                      icon: const Icon(Icons.filter_list),
+                      onSelected: (String? newValue) {
+                        if (newValue != null) {
+                          globalState.updateCurrentOptionSelected(
+                              globalState.activeCategory, newValue);
+                        }
+                      },
+                      itemBuilder: (context) =>
+                          options.map<PopupMenuItem<String>>((String value) {
+                        return PopupMenuItem<String>(
+                          padding: const EdgeInsets.only(left: 16),
+                          value: value,
+                          child: Text(
+                            value,
+                          ),
+                        );
+                      }).toList(),
+                      position: PopupMenuPosition.under,
+                      offset: const Offset(30, 7),
+                    )
+                  : Container();
+            },
+          ),
           Consumer<GlobalState>(builder: (context, globalState, child) {
-            List<String> options =
-                dropMenuOptions(globalState.currentPageIndex);
-            return options.isNotEmpty
-                ? PopupMenuButton<String>(
-                    icon: const Icon(Icons.filter_list),
-                    onSelected: (String? newValue) {
-                      if (newValue != null) {
-                        globalState.updateCurrentOptionSelected(
-                            globalState.activeCategory, newValue);
-                      }
-                    },
-                    itemBuilder: (context) =>
-                        options.map<PopupMenuItem<String>>((String value) {
-                      return PopupMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    position: PopupMenuPosition.under,
-                    offset: const Offset(0, 15),
-                  )
-                : Container();
-          }),
-          IconButton(
+            return IconButton(
               onPressed: () {
-                var state = Provider.of<GlobalState>(context, listen: false);
-                state.switchSearch();
-                if (state.isSearchEnabled) {
-                  logEvent('search', state.activeCategory);
-                } else {
-                  state.updateCurrentQuery('');
+                globalState.switchSearch();
+                if (globalState.isSearchEnabled) {
+                  logEvent('search', globalState.activeCategory);
                 }
               },
-              icon: const Icon(Icons.search))
+              icon: Icon(
+                  !globalState.isSearchEnabled ? Icons.search : Icons.close),
+            );
+          })
         ],
       ),
       body: !isLoading
@@ -179,9 +185,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 Maps(maps: baseEntities[kMaps])
               ],
               onPageChanged: (index) {
+                FocusScope.of(context).unfocus();
                 globalState.updateCurrentPage(titles[index], index);
                 _logCurrentScreen(index);
-                FocusScope.of(context).unfocus();
               },
             )
           : const Loader(),

@@ -10,15 +10,13 @@ class SearchBarWidget extends StatefulWidget {
 }
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
-  final TextEditingController searchController = TextEditingController();
+  late TextEditingController searchController;
 
   @override
   void initState() {
     super.initState();
-    searchController.addListener(() {
-      Provider.of<GlobalState>(context, listen: false)
-          .updateCurrentQuery(searchController.text);
-    });
+    searchController = TextEditingController();
+    searchController.addListener(() {});
   }
 
   @override
@@ -29,13 +27,19 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final globalState = Provider.of<GlobalState>(context, listen: false);
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 5, 25, 15),
       child: TextField(
         controller: searchController,
+        autofocus: true,
         decoration: const InputDecoration(
           hintText: 'Search...',
         ),
+        onChanged: (String text) {
+          globalState.updateCurrentQuery(text);
+        },
       ),
     );
   }
