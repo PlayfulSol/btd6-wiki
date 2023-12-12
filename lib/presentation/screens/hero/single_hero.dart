@@ -1,15 +1,15 @@
 import 'dart:convert';
-import 'package:btd6wiki/models/towers/common/upgrade_info_class.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '/models/towers/common/upgrade_info_class.dart';
 import '/models/towers/hero/hero.dart';
 import '/presentation/widgets/hero_stats.dart';
 import '/presentation/widgets/hero_level.dart';
-import '/utilities/images_url.dart';
-import '/utilities/utils.dart';
-import '/utilities/constants.dart';
-import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
+import '/utilities/images_url.dart';
+import '/analytics/analytics.dart';
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class SingleHero extends StatefulWidget {
   final String heroId;

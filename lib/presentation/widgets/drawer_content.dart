@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import '/presentation/widgets/about_us.dart';
-import '/utilities/utils.dart';
-import '/utilities/constants.dart';
-import '/utilities/global_state.dart';
-import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
+import '/utilities/global_state.dart';
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class DrawerContent extends StatefulWidget {
   const DrawerContent({super.key});

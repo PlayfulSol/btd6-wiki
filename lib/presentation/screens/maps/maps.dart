@@ -1,15 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:btd6wiki/models/base/base_map.dart';
-import 'package:btd6wiki/utilities/global_state.dart';
-import 'package:btd6wiki/utilities/utils.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import '/models/base/base_map.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/analytics/analytics.dart';
+import '/utilities/global_state.dart';
+import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/strings.dart';
-import '/utilities/images_url.dart';
+import '/utilities/utils.dart';
 
 class Maps extends StatefulWidget {
   const Maps({

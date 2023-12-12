@@ -1,15 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import '/models/base/base_hero.dart';
+import '/presentation/screens/hero/single_hero.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
-import '/presentation/screens/hero/single_hero.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
-import '/utilities/utils.dart';
-import '/utilities/constants.dart';
 import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class Heroes extends StatefulWidget {
   const Heroes({

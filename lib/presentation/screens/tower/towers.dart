@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import '/models/base/base_tower.dart';
+import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
-import '/presentation/screens/tower/single_tower.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';

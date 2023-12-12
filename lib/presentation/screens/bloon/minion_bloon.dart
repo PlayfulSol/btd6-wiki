@@ -1,10 +1,9 @@
 import 'dart:convert';
-
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '../../../models/bloons/boss/minion_bloon.dart';
+import '/models/bloons/boss/minion_bloon.dart';
 import '/presentation/widgets/bloon_aid_widget.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';

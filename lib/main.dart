@@ -1,26 +1,27 @@
-import 'package:btd6wiki/firebase_options.dart';
-import 'package:btd6wiki/models/base_model.dart';
-import 'package:btd6wiki/presentation/screens/bloon/bloons.dart';
-import 'package:btd6wiki/presentation/screens/hero/heroes.dart';
-import 'package:btd6wiki/presentation/screens/maps/maps.dart';
-import 'package:btd6wiki/presentation/screens/tower/towers.dart';
-import 'package:btd6wiki/utilities/strings.dart';
+import 'package:btd6wiki/presentation/widgets/loader.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import '/analytics/analytics.dart';
+import '/firebase_options.dart';
+import '/models/base/base_tower.dart';
+import '/models/base/base_hero.dart';
+import '/models/base/base_map.dart';
+import '/models/base_model.dart';
 import '/presentation/widgets/drawer_content.dart';
-import '/utilities/requests.dart';
+import '/presentation/screens/tower/towers.dart';
+import '/presentation/screens/bloon/bloons.dart';
+import '/presentation/screens/hero/heroes.dart';
+import '/presentation/screens/maps/maps.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
-import 'analytics/analytics.dart';
+import '/utilities/requests.dart';
+import '/utilities/strings.dart';
+import '/utilities/utils.dart';
 import '/themes/themes.dart';
-import 'models/base/base_hero.dart';
-import 'models/base/base_map.dart';
-import 'models/base/base_tower.dart';
-import 'utilities/utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -183,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 FocusScope.of(context).unfocus();
               },
             )
-          : const Center(child: CircularProgressIndicator.adaptive()),
+          : const Loader(),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -214,7 +215,7 @@ class _MyHomePageState extends State<MyHomePage> {
             logEvent('bottom_navigation', titles[index]);
             globalState.updateCurrentPage(titles[index], index);
             pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 550),
+                duration: const Duration(milliseconds: 300),
                 curve: Curves.easeInOut);
           },
         ),

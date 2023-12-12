@@ -1,12 +1,12 @@
-import 'package:btd6wiki/models/base/base_hero.dart';
-import 'package:btd6wiki/models/base/base_map.dart';
-import 'package:btd6wiki/models/base/base_tower.dart';
-import 'package:btd6wiki/models/base_model.dart';
-import 'package:btd6wiki/models/bloons/common/relative_class.dart';
-import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '/models/towers/common/cost_class.dart';
+import 'package:flutter/material.dart';
+import '/models/bloons/common/relative_class.dart';
 import '/models/towers/common/stats_class.dart';
+import '/models/towers/common/cost_class.dart';
+import '/models/base/base_tower.dart';
+import '/models/base/base_hero.dart';
+import '/models/base/base_map.dart';
+import '/models/base_model.dart';
 import 'constants.dart';
 
 String formatBigNumber(int number) {
@@ -51,13 +51,9 @@ String extraStatsToString(Stats stats) {
 List<BaseModel> filterAndSearchBloons(
     List<BaseModel> bloons, String query, String option) {
   query = query.toLowerCase();
-
-  // Filter bloons based on the selected option
   bloons = option == 'All'
       ? bloons
       : bloons.where((bloon) => bloon.type == option.toLowerCase()).toList();
-
-  // Search within the filtered bloons based on the query
   return bloons
       .where((bloon) => bloon.name.toLowerCase().contains(query))
       .toList();
@@ -66,13 +62,9 @@ List<BaseModel> filterAndSearchBloons(
 List<BaseTower> filterAndSearchTowers(
     List<BaseTower> towers, String query, String option) {
   query = query.toLowerCase();
-
-  // Filter towers based on the selected option
   towers = option == 'All'
       ? towers
       : towers.where((tower) => tower.classType == option).toList();
-
-  // Search within the filtered towers based on the query
   return towers
       .where((tower) => tower.name.toLowerCase().contains(query))
       .toList();
@@ -81,13 +73,9 @@ List<BaseTower> filterAndSearchTowers(
 List<BaseMap> filterAndSearchMaps(
     List<BaseMap> maps, String query, String option) {
   query = query.toLowerCase();
-
-  // Filter maps based on the selected option
   maps = option == 'All'
       ? maps
       : maps.where((map) => map.difficulty == option).toList();
-
-  // Search within the filtered maps based on the query
   return maps.where((map) => map.name.toLowerCase().contains(query)).toList();
 }
 
@@ -125,14 +113,13 @@ dynamic extractItemTypeFromList(List<dynamic> data) {
   bool isObject = false;
 
   if (data.isEmpty) {
-    return null; // Return null for an empty list (or handle it differently if needed)
+    return null;
   }
 
   for (int i = 0; i < data.length; i++) {
     if (data[i] is String && data[i] != 'None') {
       isString = true;
     } else if (data[i] is Relative) {
-      // Assuming objects are Map<String, dynamic>, you can adjust the type check as needed
       isObject = true;
     }
   }
