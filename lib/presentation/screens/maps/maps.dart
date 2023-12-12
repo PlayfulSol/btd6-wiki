@@ -5,6 +5,7 @@ import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/presentation/screens/maps/single_map.dart';
+import '/presentation/widgets/search_widget.dart';
 import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/strings.dart';
@@ -23,7 +24,6 @@ class Maps extends StatefulWidget {
 }
 
 class _MapsState extends State<Maps> {
-  late final TextEditingController _searchController;
   late List<BaseMap> filteredMaps;
   String query = '';
 
@@ -31,21 +31,11 @@ class _MapsState extends State<Maps> {
   void initState() {
     super.initState();
     _loadJsonData();
-    GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
-    filteredMaps = filterMaps(widget.maps, globalState.currentOption);
-    _searchController = TextEditingController();
-    _searchController.addListener(() {
-      logEvent('search', 'searching for map ${_searchController.text}');
-      setState(() {
-        query = _searchController.text;
-      });
-    });
   }
 
   @override
   void dispose() {
     super.dispose();
-    _searchController.dispose();
   }
 
   Future<void> _loadJsonData() async {
@@ -61,22 +51,18 @@ class _MapsState extends State<Maps> {
         builder: (context, constraints) {
           return Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: _searchController,
-                  decoration: const InputDecoration(
-                    hintText: 'Search maps',
-                  ),
-                ),
+              Consumer<GlobalState>(
+                builder: (context, globalState, child) {
+                  return globalState.isSearchEnabled
+                      ? const SearchBarWidget()
+                      : Container();
+                },
               ),
-              const SizedBox(height: 10),
               Expanded(
                 child: Consumer<GlobalState>(
                   builder: (context, globalState, child) {
-                    filteredMaps =
-                        filterMaps(widget.maps, globalState.currentOption);
-                    filteredMaps = mapsFromSearch(filteredMaps, query);
+                    filteredMaps = filterAndSearchMaps(widget.maps,
+                        globalState.currentQuery, globalState.currentOption);
                     return GridView.builder(
                       itemCount: filteredMaps.length,
                       gridDelegate:

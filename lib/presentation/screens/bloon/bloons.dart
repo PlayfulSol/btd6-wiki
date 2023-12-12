@@ -2,6 +2,7 @@ import 'package:btd6wiki/models/base_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/analytics/analytics.dart';
+import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
@@ -26,6 +27,8 @@ class Bloons extends StatefulWidget {
 
 class _BloonsState extends State<Bloons> {
   Map<String, dynamic> constraintsValues = {};
+  List<BaseModel> filteredBloons = [];
+  List<BaseModel> filteredBosses = [];
   bool showBloons = true;
   bool showBosses = true;
 
@@ -43,60 +46,75 @@ class _BloonsState extends State<Bloons> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           constraintsValues = calculateConstraintsBloons(constraints);
-          return Consumer<GlobalState>(
-            builder: (context, globalState, child) {
-              List<BaseModel> filteredBloons = widget.bloonsList;
-              if (globalState.currentOption.toLowerCase() == kBloons ||
-                  globalState.currentOption.toLowerCase() == kBlimps) {
-                filteredBloons =
-                    filterbloons(filteredBloons, globalState.currentOption);
-                showBosses = false;
-                showBloons = true;
-              } else if (globalState.currentOption.toLowerCase() == kBosses) {
-                showBloons = false;
-                showBosses = true;
-              } else {
-                showBloons = true;
-                showBosses = true;
-              }
-              return ListView(
-                children: [
-                  showBloons
-                      ? Column(
-                          children: [
-                            const Text(
-                              "Bloons",
-                              style: bigTitleStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 15),
-                            BloonsGrid(
-                              bloons: filteredBloons,
-                              constraintsValues: constraintsValues,
-                            ),
-                            const SizedBox(height: 30),
-                          ],
-                        )
-                      : Container(),
-                  showBosses
-                      ? Column(
-                          children: [
-                            const Text(
-                              "Bosses",
-                              style: bigTitleStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 15),
-                            BossesGrid(
-                              constraintsValues: constraintsValues,
-                              bossesList: widget.bossesList,
-                            ),
-                          ],
-                        )
-                      : Container(),
-                ],
-              );
-            },
+          return Column(
+            children: [
+              Consumer<GlobalState>(
+                builder: (context, globalState, child) {
+                  return globalState.isSearchEnabled
+                      ? const SearchBarWidget()
+                      : Container();
+                },
+              ),
+              Expanded(
+                child: Consumer<GlobalState>(
+                  builder: (context, globalState, child) {
+                    filteredBloons = filterAndSearchBloons(widget.bloonsList,
+                        globalState.currentQuery, globalState.currentOption);
+                    filteredBosses = filterAndSearchBloons(widget.bossesList,
+                        globalState.currentQuery, globalState.currentOption);
+                    if (globalState.currentOption.toLowerCase() == kBloons ||
+                        globalState.currentOption.toLowerCase() == kBlimps) {
+                      showBosses = false;
+                      showBloons = true;
+                    } else if (globalState.currentOption.toLowerCase() ==
+                        kBosses) {
+                      showBloons = false;
+                      showBosses = true;
+                    } else {
+                      showBloons = true;
+                      showBosses = true;
+                    }
+                    return ListView(
+                      children: [
+                        showBloons
+                            ? Column(
+                                children: [
+                                  const Text(
+                                    "Bloons",
+                                    style: bigTitleStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 15),
+                                  BloonsGrid(
+                                    bloons: filteredBloons,
+                                    constraintsValues: constraintsValues,
+                                  ),
+                                  const SizedBox(height: 30),
+                                ],
+                              )
+                            : Container(),
+                        showBosses
+                            ? Column(
+                                children: [
+                                  const Text(
+                                    "Bosses",
+                                    style: bigTitleStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  const SizedBox(height: 15),
+                                  BossesGrid(
+                                    constraintsValues: constraintsValues,
+                                    bossesList: widget.bossesList,
+                                  ),
+                                ],
+                              )
+                            : Container(),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            ],
           );
         },
       ),

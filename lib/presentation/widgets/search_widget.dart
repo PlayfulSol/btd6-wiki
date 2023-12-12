@@ -1,25 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 
-class SearchBarWidget extends StatelessWidget {
+class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final TextEditingController searchController = TextEditingController();
+  State<SearchBarWidget> createState() => _SearchBarWidgetState();
+}
+
+class _SearchBarWidgetState extends State<SearchBarWidget> {
+  final TextEditingController searchController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
     searchController.addListener(() {
       Provider.of<GlobalState>(context, listen: false)
           .updateCurrentQuery(searchController.text);
-      // logEvent('search', 'searching for map ${_searchController.text}');
       // setState(() {
       //   query = _searchController.text;
       // });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    searchController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: TextField(
         controller: searchController,
+        autofocus: true,
         decoration: const InputDecoration(
           hintText: 'Search...',
         ),

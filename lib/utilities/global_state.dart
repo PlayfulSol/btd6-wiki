@@ -1,8 +1,7 @@
 // ignore_for_file: prefer_final_fields
-
-import 'package:btd6wiki/utilities/strings.dart';
 import 'package:flutter/material.dart';
-
+import '/analytics/analytics.dart';
+import '/utilities/strings.dart';
 import 'constants.dart';
 
 class GlobalState with ChangeNotifier {
@@ -39,7 +38,11 @@ class GlobalState with ChangeNotifier {
 
   void switchSearch() {
     _isSearchEnabled = !_isSearchEnabled;
-    !_isSearchEnabled ? _currentQuery[_activeCategory] = '' : null;
+    if (_isSearchEnabled) {
+      logEvent('search', _activeCategory);
+    } else {
+      _currentQuery[_activeCategory] = '';
+    }
     notifyListeners();
   }
 

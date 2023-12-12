@@ -1,3 +1,4 @@
+import 'package:btd6wiki/models/base/base_hero.dart';
 import 'package:btd6wiki/models/base/base_map.dart';
 import 'package:btd6wiki/models/base/base_tower.dart';
 import 'package:btd6wiki/models/base_model.dart';
@@ -47,12 +48,19 @@ String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
-List<BaseModel> filterbloons(List<BaseModel> bloons, String option) {
-  if (option == 'All') {
-    return bloons;
-  } else {
-    return bloons.where((bloon) => bloon.type == option.toLowerCase()).toList();
-  }
+List<BaseModel> filterAndSearchBloons(
+    List<BaseModel> bloons, String query, String option) {
+  query = query.toLowerCase();
+
+  // Filter bloons based on the selected option
+  bloons = option == 'All'
+      ? bloons
+      : bloons.where((bloon) => bloon.type == option.toLowerCase()).toList();
+
+  // Search within the filtered bloons based on the query
+  return bloons
+      .where((bloon) => bloon.name.toLowerCase().contains(query))
+      .toList();
 }
 
 List<BaseTower> filterAndSearchTowers(
@@ -70,32 +78,24 @@ List<BaseTower> filterAndSearchTowers(
       .toList();
 }
 
-List<BaseTower> filterTowers(List<BaseTower> towers, String option) {
-  if (option == 'All') {
-    return towers;
-  } else {
-    return towers.where((tower) => tower.classType == option).toList();
-  }
-}
-
-List<BaseMap> filterMaps(List<BaseMap> maps, String option) {
-  if (option == 'All') {
-    return maps;
-  } else {
-    return maps.where((map) => map.difficulty == option).toList();
-  }
-}
-
-List<BaseTower> towersFromSearch(List<BaseTower> towers, String query) {
+List<BaseMap> filterAndSearchMaps(
+    List<BaseMap> maps, String query, String option) {
   query = query.toLowerCase();
-  return towers
-      .where((tower) => tower.name.toLowerCase().contains(query))
-      .toList();
-}
 
-List<BaseMap> mapsFromSearch(List<BaseMap> maps, String query) {
-  query = query.toLowerCase();
+  // Filter maps based on the selected option
+  maps = option == 'All'
+      ? maps
+      : maps.where((map) => map.difficulty == option).toList();
+
+  // Search within the filtered maps based on the query
   return maps.where((map) => map.name.toLowerCase().contains(query)).toList();
+}
+
+List<BaseHero> heroesFromSearch(List<BaseHero> heroes, String query) {
+  query = query.toLowerCase();
+  return heroes
+      .where((hero) => hero.name.toLowerCase().contains(query))
+      .toList();
 }
 
 List<String> dropMenuOptions(int pageIndex) {
