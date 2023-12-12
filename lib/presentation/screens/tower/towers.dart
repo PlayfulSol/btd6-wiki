@@ -1,3 +1,4 @@
+import 'package:btd6wiki/presentation/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
@@ -23,24 +24,8 @@ class Towers extends StatefulWidget {
 }
 
 class _TowersState extends State<Towers> {
-  late final TextEditingController _searchController;
-
   Map<String, dynamic> constraintsValues = {};
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
-    _searchController = TextEditingController();
-
-    // _searchController.addListener(() {
-    //   // logEvent('search', 'searching for map ${_searchController.text}');
-    //   // setState(() {
-    //   //   query = _searchController.text;
-    //   // });
-    // });
-  }
+  List<BaseTower> filteredTowers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -52,22 +37,18 @@ class _TowersState extends State<Towers> {
             children: [
               Consumer<GlobalState>(
                 builder: (context, globalState, child) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      controller: _searchController,
-                      decoration: const InputDecoration(
-                        hintText: 'Search maps',
-                      ),
-                    ),
-                  );
+                  return globalState.isSearchEnabled
+                      ? const SearchBarWidget()
+                      : Container();
                 },
               ),
               Expanded(
                 child: Consumer<GlobalState>(
                   builder: (context, globalState, child) {
-                    List<BaseTower> filteredTowers =
+                    filteredTowers =
                         filterTowers(widget.towers, globalState.currentOption);
+                    filteredTowers = towersFromSearch(
+                        filteredTowers, globalState.currentQuery);
                     return GridView.builder(
                       itemCount: filteredTowers.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

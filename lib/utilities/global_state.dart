@@ -20,8 +20,9 @@ class GlobalState with ChangeNotifier {
   String get currentOption => _currentOptionSelected[_activeCategory] ?? 'All';
   String get currentQuery => _currentQuery[_activeCategory] ?? '';
 
-  void updateCurrentPage(String pageName) {
+  void updateCurrentPage(String pageName, int index) {
     _currentTitle = capitalize(pageName);
+    _currentPageIndex = index;
     _activeCategory = pageName;
     notifyListeners();
   }
@@ -31,13 +32,8 @@ class GlobalState with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateCurrentQuery(String category, String query) {
-    _currentQuery[category] = query;
-    notifyListeners();
-  }
-
-  void updateCurrentPageIndex(int index) {
-    _currentPageIndex = index;
+  void updateCurrentQuery(String query) {
+    _currentQuery[_activeCategory] = query;
     notifyListeners();
   }
 

@@ -4,6 +4,7 @@ import 'package:btd6wiki/presentation/screens/bloon/bloons.dart';
 import 'package:btd6wiki/presentation/screens/hero/heroes.dart';
 import 'package:btd6wiki/presentation/screens/maps/maps.dart';
 import 'package:btd6wiki/presentation/screens/tower/towers.dart';
+import 'package:btd6wiki/utilities/strings.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -19,7 +20,6 @@ import '/themes/themes.dart';
 import 'models/base/base_hero.dart';
 import 'models/base/base_map.dart';
 import 'models/base/base_tower.dart';
-import 'utilities/strings.dart';
 import 'utilities/utils.dart';
 
 Future<void> main() async {
@@ -83,6 +83,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isLoading = true;
   Map<String, dynamic> baseEntities = {
     'towers': <BaseTower>[],
     'heroes': <BaseHero>[],
@@ -97,7 +98,9 @@ class _MyHomePageState extends State<MyHomePage> {
     baseEntities[kMaps] = await loadBaseMaps();
     baseEntities[kBloons] = await loadBaseBloons();
     baseEntities[kBosses] = await loadBaseBosses();
-    setState(() {});
+    setState(() {
+      isLoading = false;
+    });
   }
 
   Future<void> _logCurrentScreen(int pageIndex) async {
@@ -128,7 +131,7 @@ class _MyHomePageState extends State<MyHomePage> {
         actions: [
           Consumer<GlobalState>(builder: (context, globalState, child) {
             List<String> options =
-                dropmenuOptions(globalState.currentPageIndex);
+                dropMenuOptions(globalState.currentPageIndex);
             return options.isNotEmpty
                 ? PopupMenuButton<String>(
                     icon: const Icon(Icons.filter_list),
@@ -157,22 +160,23 @@ class _MyHomePageState extends State<MyHomePage> {
               icon: const Icon(Icons.search))
         ],
       ),
-      body: PageView(
-        controller: pageController,
-        children: [
-          Towers(towers: baseEntities[kTowers]),
-          Heroes(heroes: baseEntities[kHeroes]),
-          Bloons(
-              bloonsList: baseEntities[kBloons],
-              bossesList: baseEntities[kBosses]),
-          Maps(maps: baseEntities[kMaps])
-        ],
-        onPageChanged: (index) {
-          globalState.updateCurrentPageIndex(index);
-          globalState.updateCurrentPage(capitalize(titles[index]));
-          _logCurrentScreen(index);
-        },
-      ),
+      body: !isLoading
+          ? PageView(
+              controller: pageController,
+              children: [
+                Towers(towers: baseEntities[kTowers]),
+                Heroes(heroes: baseEntities[kHeroes]),
+                Bloons(
+                    bloonsList: baseEntities[kBloons],
+                    bossesList: baseEntities[kBosses]),
+                Maps(maps: baseEntities[kMaps])
+              ],
+              onPageChanged: (index) {
+                globalState.updateCurrentPage(titles[index], index);
+                _logCurrentScreen(index);
+              },
+            )
+          : const Center(child: CircularProgressIndicator.adaptive()),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -194,17 +198,16 @@ class _MyHomePageState extends State<MyHomePage> {
             for (int i = 0; i < titles.length; i++)
               BottomNavigationBarItem(
                 icon: icons[i],
-                label: titles[i],
+                label: capitalize(titles[i]),
                 tooltip: titles[i],
               ),
           ],
           currentIndex: globalState.currentPageIndex,
           onTap: (index) {
             logEvent('bottom_navigation', titles[index]);
-            globalState.updateCurrentPageIndex(index);
-            globalState.updateCurrentPage(titles[index]);
+            globalState.updateCurrentPage(titles[index], index);
             pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 550),
                 curve: Curves.easeInOut);
           },
         ),

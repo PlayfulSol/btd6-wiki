@@ -83,7 +83,7 @@ List<BaseMap> mapsFromSearch(List<BaseMap> maps, String query) {
   return maps.where((map) => map.name.toLowerCase().contains(query)).toList();
 }
 
-List<String> dropmenuOptions(int pageIndex) {
+List<String> dropMenuOptions(int pageIndex) {
   if (pageIndex == 0) {
     return towerTypes;
   } else if (pageIndex == 2) {
