@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 
 class SearchBarWidget extends StatefulWidget {
@@ -16,13 +15,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   void initState() {
     super.initState();
-
     searchController.addListener(() {
       Provider.of<GlobalState>(context, listen: false)
           .updateCurrentQuery(searchController.text);
-      // setState(() {
-      //   query = _searchController.text;
-      // });
     });
   }
 
@@ -35,10 +30,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.fromLTRB(25, 5, 25, 15),
       child: TextField(
         controller: searchController,
-        autofocus: true,
         decoration: const InputDecoration(
           hintText: 'Search...',
         ),

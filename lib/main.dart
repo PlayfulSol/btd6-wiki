@@ -155,7 +155,13 @@ class _MyHomePageState extends State<MyHomePage> {
           }),
           IconButton(
               onPressed: () {
-                Provider.of<GlobalState>(context, listen: false).switchSearch();
+                var state = Provider.of<GlobalState>(context, listen: false);
+                state.switchSearch();
+                if (state.isSearchEnabled) {
+                  logEvent('search', state.activeCategory);
+                } else {
+                  state.updateCurrentQuery('');
+                }
               },
               icon: const Icon(Icons.search))
         ],
@@ -174,6 +180,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPageChanged: (index) {
                 globalState.updateCurrentPage(titles[index], index);
                 _logCurrentScreen(index);
+                FocusScope.of(context).unfocus();
               },
             )
           : const Center(child: CircularProgressIndicator.adaptive()),

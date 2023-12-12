@@ -32,14 +32,6 @@ class _BloonsState extends State<Bloons> {
   bool showBloons = true;
   bool showBosses = true;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
-  //   globalState.initializeCurrentOption(bloons);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +52,10 @@ class _BloonsState extends State<Bloons> {
                   builder: (context, globalState, child) {
                     filteredBloons = filterAndSearchBloons(widget.bloonsList,
                         globalState.currentQuery, globalState.currentOption);
+
                     filteredBosses = filterAndSearchBloons(widget.bossesList,
                         globalState.currentQuery, globalState.currentOption);
+
                     if (globalState.currentOption.toLowerCase() == kBloons ||
                         globalState.currentOption.toLowerCase() == kBlimps) {
                       showBosses = false;
@@ -104,7 +98,7 @@ class _BloonsState extends State<Bloons> {
                                   const SizedBox(height: 15),
                                   BossesGrid(
                                     constraintsValues: constraintsValues,
-                                    bossesList: widget.bossesList,
+                                    bossesList: filteredBosses,
                                   ),
                                 ],
                               )

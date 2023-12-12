@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_final_fields
 import 'package:flutter/material.dart';
-import '/analytics/analytics.dart';
 import '/utilities/strings.dart';
 import 'constants.dart';
 
@@ -8,12 +7,12 @@ class GlobalState with ChangeNotifier {
   int _currentPageIndex = 0;
   String _currentTitle = 'BTD6 Wiki';
   String _activeCategory = kTowers;
-  bool _isSearchEnabled = false;
+  Map<String, bool> _isSearchEnabled = {};
   Map<String, String> _currentOptionSelected = {};
   Map<String, String> _currentQuery = {};
 
   int get currentPageIndex => _currentPageIndex;
-  bool get isSearchEnabled => _isSearchEnabled;
+  bool get isSearchEnabled => _isSearchEnabled[_activeCategory] ?? false;
   String get currentTitle => _currentTitle;
   String get activeCategory => _activeCategory;
   String get currentOption => _currentOptionSelected[_activeCategory] ?? 'All';
@@ -37,11 +36,10 @@ class GlobalState with ChangeNotifier {
   }
 
   void switchSearch() {
-    _isSearchEnabled = !_isSearchEnabled;
-    if (_isSearchEnabled) {
-      logEvent('search', _activeCategory);
+    if (_isSearchEnabled[_activeCategory] == null) {
+      _isSearchEnabled[_activeCategory] = true;
     } else {
-      _currentQuery[_activeCategory] = '';
+      _isSearchEnabled[_activeCategory] = !_isSearchEnabled[_activeCategory]!;
     }
     notifyListeners();
   }
