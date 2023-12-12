@@ -39,6 +39,7 @@ class GlobalState with ChangeNotifier {
 
   void switchSearch() {
     _isSearchEnabled = !_isSearchEnabled;
+    !_isSearchEnabled ? _currentQuery[_activeCategory] = '' : null;
     notifyListeners();
   }
 

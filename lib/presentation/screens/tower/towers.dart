@@ -45,10 +45,8 @@ class _TowersState extends State<Towers> {
               Expanded(
                 child: Consumer<GlobalState>(
                   builder: (context, globalState, child) {
-                    filteredTowers =
-                        filterTowers(widget.towers, globalState.currentOption);
-                    filteredTowers = towersFromSearch(
-                        filteredTowers, globalState.currentQuery);
+                    filteredTowers = filterAndSearchTowers(widget.towers,
+                        globalState.currentQuery, globalState.currentOption);
                     return GridView.builder(
                       itemCount: filteredTowers.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

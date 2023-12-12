@@ -55,6 +55,21 @@ List<BaseModel> filterbloons(List<BaseModel> bloons, String option) {
   }
 }
 
+List<BaseTower> filterAndSearchTowers(
+    List<BaseTower> towers, String query, String option) {
+  query = query.toLowerCase();
+
+  // Filter towers based on the selected option
+  towers = option == 'All'
+      ? towers
+      : towers.where((tower) => tower.classType == option).toList();
+
+  // Search within the filtered towers based on the query
+  return towers
+      .where((tower) => tower.name.toLowerCase().contains(query))
+      .toList();
+}
+
 List<BaseTower> filterTowers(List<BaseTower> towers, String option) {
   if (option == 'All') {
     return towers;
