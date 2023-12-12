@@ -32,8 +32,7 @@ class _MapsState extends State<Maps> {
     super.initState();
     _loadJsonData();
     GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
-    filteredMaps =
-        filterMaps(widget.maps, globalState.currentOptionSelected[maps]!);
+    filteredMaps = filterMaps(widget.maps, globalState.currentOption);
     _searchController = TextEditingController();
     _searchController.addListener(() {
       logEvent('search', 'searching for map ${_searchController.text}');
@@ -75,8 +74,8 @@ class _MapsState extends State<Maps> {
               Expanded(
                 child: Consumer<GlobalState>(
                   builder: (context, globalState, child) {
-                    filteredMaps = filterMaps(
-                        widget.maps, globalState.currentOptionSelected[maps]!);
+                    filteredMaps =
+                        filterMaps(widget.maps, globalState.currentOption);
                     filteredMaps = mapsFromSearch(filteredMaps, query);
                     return GridView.builder(
                       itemCount: filteredMaps.length,

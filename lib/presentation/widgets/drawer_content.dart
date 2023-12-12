@@ -71,7 +71,7 @@ class _DrawerContentState extends State<DrawerContent> {
                       logEvent('menu_tower_type', towerTypes[index]);
                       Navigator.pop(context);
                       globalState.updateCurrentOptionSelected(
-                          towers, towerTypes[index]);
+                          kTowers, towerTypes[index]);
                       globalState.updateCurrentPage(titles[towersPage]);
                       globalState.updateCurrentPageIndex(towersPage);
                       pageController.jumpToPage(towersPage);
@@ -135,7 +135,7 @@ class _DrawerContentState extends State<DrawerContent> {
                       logEvent('menu_map_difficulty', mapDifficulties[index]);
                       Navigator.pop(context);
                       globalState.updateCurrentOptionSelected(
-                          maps, mapDifficulties[index]);
+                          kMaps, mapDifficulties[index]);
                       globalState.updateCurrentPage(titles[mapsPage]);
                       globalState.updateCurrentPageIndex(mapsPage);
                       pageController.jumpToPage(mapsPage);

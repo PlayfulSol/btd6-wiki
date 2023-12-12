@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 String configDirectory = 'assets/data/config';
 
-String towers = 'towers';
-String heroes = 'heroes';
-String maps = 'maps';
-String bloons = 'bloons';
-String bosses = 'bosses';
-String blimps = 'blimps';
+String kTowers = 'towers';
+String kHeroes = 'heroes';
+String kMaps = 'maps';
+String kBloons = 'bloons';
+String kBlimps = 'blimps';
+String kBosses = 'bosses';
 
 const List<String> entityTypes = [
   'towers',

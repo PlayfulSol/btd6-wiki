@@ -92,11 +92,11 @@ class _MyHomePageState extends State<MyHomePage> {
   };
 
   loadBaseData() async {
-    baseEntities[towers] = await loadBaseTowers();
-    baseEntities[heroes] = await loadBaseHeroes();
-    baseEntities[maps] = await loadBaseMaps();
-    baseEntities[bloons] = await loadBaseBloons();
-    baseEntities[bosses] = await loadBaseBosses();
+    baseEntities[kTowers] = await loadBaseTowers();
+    baseEntities[kHeroes] = await loadBaseHeroes();
+    baseEntities[kMaps] = await loadBaseMaps();
+    baseEntities[kBloons] = await loadBaseBloons();
+    baseEntities[kBosses] = await loadBaseBosses();
     setState(() {});
   }
 
@@ -129,38 +129,43 @@ class _MyHomePageState extends State<MyHomePage> {
           Consumer<GlobalState>(builder: (context, globalState, child) {
             List<String> options =
                 dropmenuOptions(globalState.currentPageIndex);
-            String category = titles[globalState.currentPageIndex];
             return options.isNotEmpty
-                ? DropdownMenu<String>(
-                    // leadingIcon: const Icon(Icons.filter_list),
-                    // label: Text('hello'),
-                    initialSelection:
-                        globalState.currentOptionSelected[category],
+                ? PopupMenuButton<String>(
+                    icon: const Icon(Icons.filter_list),
                     onSelected: (String? newValue) {
-                      globalState.updateCurrentOptionSelected(
-                          category, newValue!);
+                      if (newValue != null) {
+                        globalState.updateCurrentOptionSelected(
+                            globalState.activeCategory, newValue);
+                      }
                     },
-                    dropdownMenuEntries:
-                        options.map<DropdownMenuEntry<String>>((String value) {
-                      return DropdownMenuEntry<String>(
+                    itemBuilder: (context) =>
+                        options.map<PopupMenuItem<String>>((String value) {
+                      return PopupMenuItem<String>(
                         value: value,
-                        label: value,
+                        child: Text(value),
                       );
                     }).toList(),
+                    position: PopupMenuPosition.under,
+                    offset: const Offset(0, 15),
                   )
                 : Container();
           }),
+          IconButton(
+              onPressed: () {
+                Provider.of<GlobalState>(context, listen: false).switchSearch();
+              },
+              icon: const Icon(Icons.search))
         ],
       ),
       body: PageView(
         controller: pageController,
         children: [
-          Towers(towers: baseEntities[towers]),
-          Heroes(heroes: baseEntities[heroes]),
+          Towers(towers: baseEntities[kTowers]),
+          Heroes(heroes: baseEntities[kHeroes]),
           Bloons(
-              bloonsList: baseEntities[bloons],
-              bossesList: baseEntities[bosses]),
-          Maps(maps: baseEntities[maps])
+              bloonsList: baseEntities[kBloons],
+              bossesList: baseEntities[kBosses]),
+          Maps(maps: baseEntities[kMaps])
         ],
         onPageChanged: (index) {
           globalState.updateCurrentPageIndex(index);

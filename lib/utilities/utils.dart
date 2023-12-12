@@ -71,6 +71,13 @@ List<BaseMap> filterMaps(List<BaseMap> maps, String option) {
   }
 }
 
+List<BaseTower> towersFromSearch(List<BaseTower> towers, String query) {
+  query = query.toLowerCase();
+  return towers
+      .where((tower) => tower.name.toLowerCase().contains(query))
+      .toList();
+}
+
 List<BaseMap> mapsFromSearch(List<BaseMap> maps, String query) {
   query = query.toLowerCase();
   return maps.where((map) => map.name.toLowerCase().contains(query)).toList();
