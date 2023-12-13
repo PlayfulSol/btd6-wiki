@@ -160,24 +160,24 @@ Future<void> openMail(String mailString) async {
   }
 }
 
-Map<String, dynamic> calculateConstraints(Size size) {
-  if (size.width < 450) {
-    return constraintsNormalPreset;
-  } else if (size.width < 1200) {
-    return constraintsWidePreset;
+Map<String, dynamic> calculateConstraints(String category, Size size) {
+  if (category == kBloons) {
+    if (size.width < 350) {
+      return constraintsBloonSmallPreset;
+    } else if (size.width < 400) {
+      return constraintsBloonNormalPreset;
+    } else if (size.width < 470) {
+      return constraintsBloonWidePreset;
+    } else {
+      return constraintsBloonUWPreset;
+    }
   } else {
-    return constraintsUWPreset;
-  }
-}
-
-Map<String, dynamic> calculateConstraintsBloons(BoxConstraints constraints) {
-  if (constraints.maxWidth < 350) {
-    return constraintsBloonSmallPreset;
-  } else if (constraints.maxWidth < 400) {
-    return constraintsBloonNormalPreset;
-  } else if (constraints.maxWidth < 470) {
-    return constraintsBloonWidePreset;
-  } else {
-    return constraintsBloonUWPreset;
+    if (size.width < 450) {
+      return constraintsNormalPreset;
+    } else if (size.width < 1200) {
+      return constraintsWidePreset;
+    } else {
+      return constraintsUWPreset;
+    }
   }
 }

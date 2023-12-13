@@ -21,7 +21,8 @@ class Towers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = calculateConstraints(MediaQuery.of(context).size);
+    final constraintsValues =
+        calculateConstraints(kTowers, MediaQuery.of(context).size);
 
     return Scaffold(
       body: Column(

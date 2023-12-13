@@ -22,6 +22,7 @@ class Heroes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final constraintsValues = calculateConstraints(
+      kHeroes,
       MediaQuery.of(context).size,
     );
 
