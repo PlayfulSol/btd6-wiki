@@ -114,10 +114,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    // pageController.addListener(() {
-    //   var _currentPage = pageController.page!.round();
-    //   print(_currentPage);
-    // });
     loadBaseData();
   }
 
