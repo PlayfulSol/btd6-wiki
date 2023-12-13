@@ -160,10 +160,10 @@ Future<void> openMail(String mailString) async {
   }
 }
 
-Map<String, dynamic> calculateConstraints(BoxConstraints constraints) {
-  if (constraints.maxWidth < 450) {
+Map<String, dynamic> calculateConstraints(Size size) {
+  if (size.width < 450) {
     return constraintsNormalPreset;
-  } else if (constraints.maxWidth < 1200) {
+  } else if (size.width < 1200) {
     return constraintsWidePreset;
   } else {
     return constraintsUWPreset;

@@ -165,6 +165,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 globalState.switchSearch();
                 if (globalState.isSearchEnabled) {
                   logEvent('search', globalState.activeCategory);
+                } else {
+                  globalState.updateCurrentQuery('');
                 }
               },
               icon: Icon(
