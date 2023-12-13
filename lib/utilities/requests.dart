@@ -1,6 +1,6 @@
-import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
 import 'dart:async';
+import 'package:flutter/services.dart' show rootBundle;
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';

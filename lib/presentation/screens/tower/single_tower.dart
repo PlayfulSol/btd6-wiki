@@ -1,11 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'dart:convert';
 import '/models/towers/tower/tower.dart';
 import '/presentation/widgets/path.dart';
-import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class SingleTower extends StatefulWidget {
   final String towerId;
