@@ -1,14 +1,17 @@
-import 'package:btd6wiki/models/base/base_hero.dart';
-import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import '/presentation/widgets/image_outline.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import '/models/base/base_hero.dart';
 import '/presentation/screens/hero/single_hero.dart';
+import '/presentation/widgets/search_widget.dart';
+import '/presentation/widgets/image_outline.dart';
 import '/analytics/analytics.dart';
-import '/utilities/utils.dart';
-import '/utilities/constants.dart';
+import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
-class Heroes extends StatefulWidget {
+class Heroes extends StatelessWidget {
   const Heroes({
     super.key,
     required this.heroes,
@@ -17,68 +20,79 @@ class Heroes extends StatefulWidget {
   final List<BaseHero> heroes;
 
   @override
-  State<Heroes> createState() => _HeroesState();
-}
-
-class _HeroesState extends State<Heroes> {
-  Map<String, dynamic> constraintsValues = {};
-
-  @override
   Widget build(BuildContext context) {
+    final constraintsValues = calculateConstraints(
+      kHeroes,
+      MediaQuery.of(context).size,
+    );
+
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          constraintsValues = calculateConstraints(constraints);
-          return GridView.builder(
-            itemCount: widget.heroes.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: constraintsValues["crossAxisCount"],
-              childAspectRatio: constraintsValues["childAspectRatio"],
-            ),
-            shrinkWrap: true,
-            itemBuilder: (context, index) {
-              return Card(
-                margin: const EdgeInsets.all(10),
-                child: Center(
-                  child: ListTile(
-                    mouseCursor: SystemMouseCursors.click,
-                    leading: ImageOutliner(
-                      imageName: widget.heroes[index].image,
-                      imagePath: heroImage(widget.heroes[index].image),
-                    ),
-                    title: AutoSizeText(widget.heroes[index].name,
-                        wrapWords: false,
-                        style: titleStyle.copyWith(
-                            fontSize: constraintsValues["titleFontSize"])),
-                    subtitle: AutoSizeText(
-                      widget.heroes[index].inGameDesc,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: constraintsValues["rowsToShow"],
-                      minFontSize: constraintsValues["subtitleFontSize"],
-                      maxFontSize: constraintsValues["subtitleFontSize"],
-                      wrapWords: false,
-                      style: TextStyle(
-                          fontSize: constraintsValues["subtitleFontSize"]),
-                    ),
-                    onTap: () {
-                      logPageView(widget.heroes[index].name);
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) {
-                            return SingleHero(
-                              heroId: widget.heroes[index].id,
-                            );
-                          },
-                        ),
-                      );
-                    },
+      body: Column(
+        children: [
+          Consumer<GlobalState>(
+            builder: (context, globalState, child) =>
+                globalState.isSearchEnabled
+                    ? SearchBarWidget(queryText: globalState.currentQuery)
+                    : Container(),
+          ),
+          Expanded(
+            child: Consumer<GlobalState>(
+              builder: (context, globalState, child) {
+                final filteredHeroes =
+                    heroesFromSearch(heroes, globalState.currentQuery);
+                return GridView.builder(
+                  itemCount: filteredHeroes.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: constraintsValues["crossAxisCount"],
+                    childAspectRatio: constraintsValues["childAspectRatio"],
                   ),
-                ),
-              );
-            },
-          );
-        },
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final hero = filteredHeroes[index];
+
+                    return Card(
+                      margin: const EdgeInsets.all(10),
+                      child: ListTile(
+                        mouseCursor: SystemMouseCursors.click,
+                        leading: ImageOutliner(
+                          imageName: hero.image,
+                          imagePath: heroImage(hero.image),
+                        ),
+                        title: AutoSizeText(
+                          hero.name,
+                          wrapWords: false,
+                          style: titleStyle.copyWith(
+                            fontSize: constraintsValues["titleFontSize"],
+                          ),
+                        ),
+                        subtitle: AutoSizeText(
+                          hero.inGameDesc,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: constraintsValues["rowsToShow"],
+                          minFontSize: constraintsValues["subtitleFontSize"],
+                          maxFontSize: constraintsValues["subtitleFontSize"],
+                          wrapWords: false,
+                          style: TextStyle(
+                            fontSize: constraintsValues["subtitleFontSize"],
+                          ),
+                        ),
+                        onTap: () {
+                          logPageView(hero.name);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SingleHero(heroId: hero.id),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

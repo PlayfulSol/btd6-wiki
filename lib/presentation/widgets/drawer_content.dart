@@ -1,12 +1,12 @@
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import '/presentation/widgets/about_us.dart';
-import '/utilities/utils.dart';
-import '/utilities/constants.dart';
-import '/utilities/global_state.dart';
-import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
+import '/utilities/global_state.dart';
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class DrawerContent extends StatefulWidget {
   const DrawerContent({super.key});
@@ -24,10 +24,10 @@ class _DrawerContentState extends State<DrawerContent> {
   @override
   Widget build(BuildContext context) {
     GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
-    int towersPage = 0;
-    int heroesPage = 1;
-    int bloonsPage = 2;
-    int mapsPage = 3;
+    int towersIndex = 0;
+    int heroesIndex = 1;
+    int bloonsIndex = 2;
+    int mapsIndex = 3;
 
     return Drawer(
         child: Column(
@@ -71,10 +71,10 @@ class _DrawerContentState extends State<DrawerContent> {
                       logEvent('menu_tower_type', towerTypes[index]);
                       Navigator.pop(context);
                       globalState.updateCurrentOptionSelected(
-                          towers, towerTypes[index]);
-                      globalState.updateCurrentPage(titles[towersPage]);
-                      globalState.updateCurrentPageIndex(towersPage);
-                      pageController.jumpToPage(towersPage);
+                          kTowers, towerTypes[index]);
+                      globalState.updateCurrentPage(
+                          titles[towersIndex], towersIndex);
+                      pageController.jumpToPage(towersIndex);
                     },
                   );
                 },
@@ -90,9 +90,8 @@ class _DrawerContentState extends State<DrawerContent> {
             onTap: () {
               logEvent(drawrConst, 'heroes');
               Navigator.pop(context);
-              globalState.updateCurrentPage(titles[heroesPage]);
-              globalState.updateCurrentPageIndex(heroesPage);
-              pageController.jumpToPage(heroesPage);
+              globalState.updateCurrentPage(titles[heroesIndex], heroesIndex);
+              pageController.jumpToPage(heroesIndex);
             }),
         ListTile(
             title: Text(
@@ -102,9 +101,8 @@ class _DrawerContentState extends State<DrawerContent> {
             onTap: () {
               logEvent(drawrConst, 'bloons');
               Navigator.pop(context);
-              globalState.updateCurrentPage(titles[bloonsPage]);
-              globalState.updateCurrentPageIndex(bloonsPage);
-              pageController.jumpToPage(bloonsPage);
+              globalState.updateCurrentPage(titles[bloonsIndex], bloonsIndex);
+              pageController.jumpToPage(bloonsIndex);
             }),
         ExpansionTile(
           controller: _mapsExpansionTileController,
@@ -135,10 +133,10 @@ class _DrawerContentState extends State<DrawerContent> {
                       logEvent('menu_map_difficulty', mapDifficulties[index]);
                       Navigator.pop(context);
                       globalState.updateCurrentOptionSelected(
-                          maps, mapDifficulties[index]);
-                      globalState.updateCurrentPage(titles[mapsPage]);
-                      globalState.updateCurrentPageIndex(mapsPage);
-                      pageController.jumpToPage(mapsPage);
+                          kMaps, mapDifficulties[index]);
+                      globalState.updateCurrentPage(
+                          titles[mapsIndex], mapsIndex);
+                      pageController.jumpToPage(mapsIndex);
                     },
                   );
                 },

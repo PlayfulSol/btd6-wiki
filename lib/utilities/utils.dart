@@ -1,11 +1,12 @@
-import 'package:btd6wiki/models/base/base_map.dart';
-import 'package:btd6wiki/models/base/base_tower.dart';
-import 'package:btd6wiki/models/base_model.dart';
-import 'package:btd6wiki/models/bloons/common/relative_class.dart';
-import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '/models/towers/common/cost_class.dart';
+import 'package:flutter/material.dart';
+import '/models/bloons/common/relative_class.dart';
 import '/models/towers/common/stats_class.dart';
+import '/models/towers/common/cost_class.dart';
+import '/models/base/base_tower.dart';
+import '/models/base/base_hero.dart';
+import '/models/base/base_map.dart';
+import '/models/base_model.dart';
 import 'constants.dart';
 
 String formatBigNumber(int number) {
@@ -47,36 +48,45 @@ String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
-List<BaseModel> filterbloons(List<BaseModel> bloons, String option) {
-  if (option == 'All') {
-    return bloons;
-  } else {
-    return bloons.where((bloon) => bloon.type == option.toLowerCase()).toList();
-  }
-}
-
-List<BaseTower> filterTowers(List<BaseTower> towers, String option) {
-  if (option == 'All') {
-    return towers;
-  } else {
-    return towers.where((tower) => tower.type == option).toList();
-  }
-}
-
-List<BaseMap> filterMaps(List<BaseMap> maps, String option) {
-  if (option == 'All') {
-    return maps;
-  } else {
-    return maps.where((map) => map.difficulty == option).toList();
-  }
-}
-
-List<BaseMap> mapsFromSearch(List<BaseMap> maps, String query) {
+List<BaseModel> filterAndSearchBloons(
+    List<BaseModel> bloons, String query, String option) {
   query = query.toLowerCase();
+  bloons = option == 'All'
+      ? bloons
+      : bloons.where((bloon) => bloon.type == option.toLowerCase()).toList();
+  return bloons
+      .where((bloon) => bloon.name.toLowerCase().contains(query))
+      .toList();
+}
+
+List<BaseTower> filterAndSearchTowers(
+    List<BaseTower> towers, String query, String option) {
+  query = query.toLowerCase();
+  towers = option == 'All'
+      ? towers
+      : towers.where((tower) => tower.classType == option).toList();
+  return towers
+      .where((tower) => tower.name.toLowerCase().contains(query))
+      .toList();
+}
+
+List<BaseMap> filterAndSearchMaps(
+    List<BaseMap> maps, String query, String option) {
+  query = query.toLowerCase();
+  maps = option == 'All'
+      ? maps
+      : maps.where((map) => map.difficulty == option).toList();
   return maps.where((map) => map.name.toLowerCase().contains(query)).toList();
 }
 
-List<String> dropmenuOptions(int pageIndex) {
+List<BaseHero> heroesFromSearch(List<BaseHero> heroes, String query) {
+  query = query.toLowerCase();
+  return heroes
+      .where((hero) => hero.name.toLowerCase().contains(query))
+      .toList();
+}
+
+List<String> dropMenuOptions(int pageIndex) {
   if (pageIndex == 0) {
     return towerTypes;
   } else if (pageIndex == 2) {
@@ -103,14 +113,13 @@ dynamic extractItemTypeFromList(List<dynamic> data) {
   bool isObject = false;
 
   if (data.isEmpty) {
-    return null; // Return null for an empty list (or handle it differently if needed)
+    return null;
   }
 
   for (int i = 0; i < data.length; i++) {
     if (data[i] is String && data[i] != 'None') {
       isString = true;
     } else if (data[i] is Relative) {
-      // Assuming objects are Map<String, dynamic>, you can adjust the type check as needed
       isObject = true;
     }
   }
@@ -151,24 +160,24 @@ Future<void> openMail(String mailString) async {
   }
 }
 
-Map<String, dynamic> calculateConstraints(BoxConstraints constraints) {
-  if (constraints.maxWidth < 450) {
-    return constraintsNormalPreset;
-  } else if (constraints.maxWidth < 1200) {
-    return constraintsWidePreset;
+Map<String, dynamic> calculateConstraints(String category, Size size) {
+  if (category == kBloons) {
+    if (size.width < 350) {
+      return constraintsBloonSmallPreset;
+    } else if (size.width < 400) {
+      return constraintsBloonNormalPreset;
+    } else if (size.width < 470) {
+      return constraintsBloonWidePreset;
+    } else {
+      return constraintsBloonUWPreset;
+    }
   } else {
-    return constraintsUWPreset;
-  }
-}
-
-Map<String, dynamic> calculateConstraintsBloons(BoxConstraints constraints) {
-  if (constraints.maxWidth < 350) {
-    return constraintsBloonSmallPreset;
-  } else if (constraints.maxWidth < 400) {
-    return constraintsBloonNormalPreset;
-  } else if (constraints.maxWidth < 470) {
-    return constraintsBloonWidePreset;
-  } else {
-    return constraintsBloonUWPreset;
+    if (size.width < 450) {
+      return constraintsNormalPreset;
+    } else if (size.width < 1200) {
+      return constraintsWidePreset;
+    } else {
+      return constraintsUWPreset;
+    }
   }
 }

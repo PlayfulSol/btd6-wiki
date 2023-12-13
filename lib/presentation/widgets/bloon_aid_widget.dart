@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import '../../models/bloons/common/relative_class.dart';
+import '/models/bloons/common/relative_class.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/minion_bloon.dart';
-import '/utilities/constants.dart';
-import '/utilities/images_url.dart';
-import '/utilities/utils.dart';
-import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
+import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class BloonAidWidget extends StatelessWidget {
   const BloonAidWidget({super.key, required this.data, required this.title});

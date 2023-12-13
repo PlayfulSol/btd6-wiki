@@ -1,10 +1,10 @@
-import 'dart:async';
 import 'dart:convert';
-import 'package:btd6wiki/models/base/base_map.dart';
-import 'package:btd6wiki/models/base_model.dart';
+import 'dart:async';
 import 'package:flutter/services.dart' show rootBundle;
-import '/models/base/base_hero.dart';
 import '/models/base/base_tower.dart';
+import '/models/base/base_hero.dart';
+import '/models/base/base_map.dart';
+import '/models/base_model.dart';
 import 'constants.dart';
 
 // ---- Towers ----

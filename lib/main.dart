@@ -1,26 +1,27 @@
-import 'package:btd6wiki/firebase_options.dart';
-import 'package:btd6wiki/models/base_model.dart';
-import 'package:btd6wiki/presentation/screens/bloon/bloons.dart';
-import 'package:btd6wiki/presentation/screens/hero/heroes.dart';
-import 'package:btd6wiki/presentation/screens/maps/maps.dart';
-import 'package:btd6wiki/presentation/screens/tower/towers.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import '/firebase_options.dart';
+import '/models/base/base_tower.dart';
+import '/models/base/base_hero.dart';
+import '/models/base/base_map.dart';
+import '/models/base_model.dart';
 import '/presentation/widgets/drawer_content.dart';
-import '/utilities/requests.dart';
+import '/presentation/screens/tower/towers.dart';
+import '/presentation/screens/bloon/bloons.dart';
+import '/presentation/screens/hero/heroes.dart';
+import '/presentation/screens/maps/maps.dart';
+import '/presentation/widgets/loader.dart';
+import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
-import 'analytics/analytics.dart';
+import '/utilities/requests.dart';
+import '/utilities/strings.dart';
+import '/utilities/utils.dart';
 import '/themes/themes.dart';
-import 'models/base/base_hero.dart';
-import 'models/base/base_map.dart';
-import 'models/base/base_tower.dart';
-import 'utilities/strings.dart';
-import 'utilities/utils.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -83,6 +84,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  bool isLoading = true;
   Map<String, dynamic> baseEntities = {
     'towers': <BaseTower>[],
     'heroes': <BaseHero>[],
@@ -92,12 +94,14 @@ class _MyHomePageState extends State<MyHomePage> {
   };
 
   loadBaseData() async {
-    baseEntities[towers] = await loadBaseTowers();
-    baseEntities[heroes] = await loadBaseHeroes();
-    baseEntities[maps] = await loadBaseMaps();
-    baseEntities[bloons] = await loadBaseBloons();
-    baseEntities[bosses] = await loadBaseBosses();
-    setState(() {});
+    baseEntities[kTowers] = await loadBaseTowers();
+    baseEntities[kHeroes] = await loadBaseHeroes();
+    baseEntities[kMaps] = await loadBaseMaps();
+    baseEntities[kBloons] = await loadBaseBloons();
+    baseEntities[kBosses] = await loadBaseBosses();
+    setState(() {
+      isLoading = false;
+    });
   }
 
   Future<void> _logCurrentScreen(int pageIndex) async {
@@ -110,7 +114,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
     loadBaseData();
   }
 
@@ -126,47 +129,69 @@ class _MyHomePageState extends State<MyHomePage> {
           },
         ),
         actions: [
+          Consumer<GlobalState>(
+            builder: (context, globalState, child) {
+              List<String> options =
+                  dropMenuOptions(globalState.currentPageIndex);
+              return options.isNotEmpty
+                  ? PopupMenuButton<String>(
+                      icon: const Icon(Icons.filter_list),
+                      onSelected: (String? newValue) {
+                        if (newValue != null) {
+                          globalState.updateCurrentOptionSelected(
+                              globalState.activeCategory, newValue);
+                        }
+                      },
+                      itemBuilder: (context) =>
+                          options.map<PopupMenuItem<String>>((String value) {
+                        return PopupMenuItem<String>(
+                          padding: const EdgeInsets.only(left: 16),
+                          value: value,
+                          child: Text(
+                            value,
+                          ),
+                        );
+                      }).toList(),
+                      position: PopupMenuPosition.under,
+                      offset: const Offset(30, 7),
+                    )
+                  : Container();
+            },
+          ),
           Consumer<GlobalState>(builder: (context, globalState, child) {
-            List<String> options =
-                dropmenuOptions(globalState.currentPageIndex);
-            String category = titles[globalState.currentPageIndex];
-            return options.isNotEmpty
-                ? DropdownMenu<String>(
-                    leadingIcon: const Icon(Icons.filter_list),
-                    initialSelection:
-                        globalState.currentOptionSelected[category],
-                    onSelected: (String? newValue) {
-                      globalState.updateCurrentOptionSelected(
-                          category, newValue!);
-                    },
-                    dropdownMenuEntries:
-                        options.map<DropdownMenuEntry<String>>((String value) {
-                      return DropdownMenuEntry<String>(
-                        value: value,
-                        label: value,
-                      );
-                    }).toList(),
-                  )
-                : Container();
-          }),
+            return IconButton(
+              onPressed: () {
+                globalState.switchSearch();
+                if (globalState.isSearchEnabled) {
+                  logEvent('search', globalState.activeCategory);
+                } else {
+                  globalState.updateCurrentQuery('');
+                }
+              },
+              icon: Icon(
+                  !globalState.isSearchEnabled ? Icons.search : Icons.close),
+            );
+          })
         ],
       ),
-      body: PageView(
-        controller: pageController,
-        children: [
-          Towers(towers: baseEntities[towers]),
-          Heroes(heroes: baseEntities[heroes]),
-          Bloons(
-              bloonsList: baseEntities[bloons],
-              bossesList: baseEntities[bosses]),
-          Maps(maps: baseEntities[maps])
-        ],
-        onPageChanged: (index) {
-          globalState.updateCurrentPageIndex(index);
-          globalState.updateCurrentPage(capitalize(titles[index]));
-          _logCurrentScreen(index);
-        },
-      ),
+      body: !isLoading
+          ? PageView(
+              controller: pageController,
+              children: [
+                Towers(towers: baseEntities[kTowers]),
+                Heroes(heroes: baseEntities[kHeroes]),
+                Bloons(
+                    bloonsList: baseEntities[kBloons],
+                    bossesList: baseEntities[kBosses]),
+                Maps(maps: baseEntities[kMaps])
+              ],
+              onPageChanged: (index) {
+                FocusScope.of(context).unfocus();
+                globalState.updateCurrentPage(titles[index], index);
+                _logCurrentScreen(index);
+              },
+            )
+          : const Loader(),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -188,18 +213,15 @@ class _MyHomePageState extends State<MyHomePage> {
             for (int i = 0; i < titles.length; i++)
               BottomNavigationBarItem(
                 icon: icons[i],
-                label: titles[i],
+                label: capitalize(titles[i]),
                 tooltip: titles[i],
               ),
           ],
           currentIndex: globalState.currentPageIndex,
           onTap: (index) {
             logEvent('bottom_navigation', titles[index]);
-            globalState.updateCurrentPageIndex(index);
-            globalState.updateCurrentPage(titles[index]);
-            pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut);
+            globalState.updateCurrentPage(titles[index], index);
+            pageController.jumpToPage(index);
           },
         ),
       ),

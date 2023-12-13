@@ -14,6 +14,7 @@ class TowerModel extends BaseTower {
     super.name,
     super.image,
     super.type,
+    super.classType,
     super.inGameDesc,
     this.cost,
     this.stats,
@@ -29,6 +30,7 @@ class TowerModel extends BaseTower {
           json["name"] as String,
           json["image"] as String,
           json["type"] as String,
+          json["classType"] as String,
           json["inGameDesc"] as String,
         );
 }

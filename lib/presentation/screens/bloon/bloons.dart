@@ -1,16 +1,17 @@
-import 'package:btd6wiki/models/base_model.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '/analytics/analytics.dart';
+import 'package:flutter/material.dart';
+import '/models/base_model.dart';
+import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
+import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
-import 'boss_bloon.dart';
 import 'single_bloon.dart';
+import 'boss_bloon.dart';
 
-class Bloons extends StatefulWidget {
+class Bloons extends StatelessWidget {
   const Bloons({
     super.key,
     required this.bloonsList,
@@ -21,86 +22,93 @@ class Bloons extends StatefulWidget {
   final List<BaseModel> bossesList;
 
   @override
-  State<Bloons> createState() => _BloonsState();
-}
-
-class _BloonsState extends State<Bloons> {
-  Map<String, dynamic> constraintsValues = {};
-  bool showBloons = true;
-  bool showBosses = true;
-
-  @override
   Widget build(BuildContext context) {
+    final constraintsValues = calculateConstraints(
+      kBloons,
+      MediaQuery.of(context).size,
+    );
+
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          constraintsValues = calculateConstraintsBloons(constraints);
-          return Consumer<GlobalState>(
-            builder: (context, globalState, child) {
-              List<BaseModel> filteredBloons = widget.bloonsList;
-              if (globalState.currentOptionSelected[bloons]!.toLowerCase() ==
-                      bloons ||
-                  globalState.currentOptionSelected[bloons]!.toLowerCase() ==
-                      blimps) {
-                filteredBloons = filterbloons(
-                    filteredBloons, globalState.currentOptionSelected[bloons]!);
-                showBosses = false;
-                showBloons = true;
-              } else if (globalState.currentOptionSelected[bloons]!
-                      .toLowerCase() ==
-                  bosses) {
-                showBloons = false;
-                showBosses = true;
-              } else {
-                showBloons = true;
-                showBosses = true;
-              }
-              return ListView(
-                children: [
-                  showBloons
-                      ? Column(
-                          children: [
-                            const Text(
-                              "Bloons",
-                              style: bigTitleStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 15),
-                            BloonsGrid(
-                              bloons: filteredBloons,
-                              constraintsValues: constraintsValues,
-                            ),
-                            const SizedBox(height: 30),
-                          ],
-                        )
-                      : Container(),
-                  showBosses
-                      ? Column(
-                          children: [
-                            const Text(
-                              "Bosses",
-                              style: bigTitleStyle,
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(height: 15),
-                            BossesGrid(
-                              constraintsValues: constraintsValues,
-                              bossesList: widget.bossesList,
-                            ),
-                          ],
-                        )
-                      : Container(),
-                ],
-              );
-            },
-          );
-        },
+      body: Column(
+        children: [
+          Consumer<GlobalState>(
+            builder: (context, globalState, child) =>
+                globalState.isSearchEnabled
+                    ? SearchBarWidget(queryText: globalState.currentQuery)
+                    : Container(),
+          ),
+          Expanded(
+            child: Consumer<GlobalState>(
+              builder: (context, globalState, child) {
+                final filteredBloons = filterAndSearchBloons(
+                  bloonsList,
+                  globalState.currentQuery,
+                  globalState.currentOption,
+                );
+
+                final filteredBosses = filterAndSearchBloons(
+                  bossesList,
+                  globalState.currentQuery,
+                  globalState.currentOption,
+                );
+
+                bool showBloons = true;
+                bool showBosses = true;
+
+                if (globalState.currentOption.toLowerCase() == kBloons ||
+                    globalState.currentOption.toLowerCase() == kBlimps) {
+                  showBosses = false;
+                  showBloons = true;
+                } else if (globalState.currentOption.toLowerCase() == kBosses) {
+                  showBloons = false;
+                  showBosses = true;
+                }
+
+                return ListView(
+                  children: [
+                    if (showBloons)
+                      Column(
+                        children: [
+                          const Text(
+                            "Bloons",
+                            style: bigTitleStyle,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 15),
+                          BloonsGrid(
+                            bloons: filteredBloons,
+                            constraintsValues: constraintsValues,
+                          ),
+                          const SizedBox(height: 30),
+                        ],
+                      ),
+                    if (showBosses)
+                      Column(
+                        children: [
+                          const Text(
+                            "Bosses",
+                            style: bigTitleStyle,
+                            textAlign: TextAlign.center,
+                          ),
+                          const SizedBox(height: 15),
+                          BossesGrid(
+                            constraintsValues: constraintsValues,
+                            bossesList: filteredBosses,
+                          ),
+                        ],
+                      ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
 }
 
-class BossesGrid extends StatefulWidget {
+class BossesGrid extends StatelessWidget {
   const BossesGrid({
     super.key,
     required this.constraintsValues,
@@ -111,46 +119,40 @@ class BossesGrid extends StatefulWidget {
   final List<BaseModel> bossesList;
 
   @override
-  State<BossesGrid> createState() => _BossesGridState();
-}
-
-class _BossesGridState extends State<BossesGrid> {
-  @override
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: widget.constraintsValues["crossAxisCountBoss"],
-        childAspectRatio: widget.constraintsValues["childAspectRatioBoss"],
+        crossAxisCount: constraintsValues["crossAxisCountBoss"],
+        childAspectRatio: constraintsValues["childAspectRatioBoss"],
       ),
       physics: const NeverScrollableScrollPhysics(),
       primary: false,
-      itemCount: widget.bossesList.length,
+      itemCount: bossesList.length,
       shrinkWrap: true,
       itemBuilder: (context, index) {
+        final boss = bossesList[index];
+
         return Card(
           margin: const EdgeInsets.all(8.5),
-          child: Center(
-            child: ListTile(
-              mouseCursor: SystemMouseCursors.click,
-              leading: ImageOutliner(
-                imageName: widget.bossesList[index].image,
-                imagePath: bossImage(widget.bossesList[index].image),
-              ),
-              title: Text(
-                widget.bossesList[index].name,
-                style: widget.constraintsValues["textStyleBoss"],
-              ),
-              onTap: () {
-                logPageView(widget.bossesList[index].name);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        BossBloon(bossId: widget.bossesList[index].id),
-                  ),
-                );
-              },
+          child: ListTile(
+            contentPadding: const EdgeInsets.all(10),
+            leading: ImageOutliner(
+              imageName: boss.image,
+              imagePath: bossImage(boss.image),
             ),
+            title: Text(
+              boss.name,
+              style: constraintsValues["textStyleBoss"],
+            ),
+            onTap: () {
+              logPageView(boss.name);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BossBloon(bossId: boss.id),
+                ),
+              );
+            },
           ),
         );
       },
@@ -158,7 +160,7 @@ class _BossesGridState extends State<BossesGrid> {
   }
 }
 
-class BloonsGrid extends StatefulWidget {
+class BloonsGrid extends StatelessWidget {
   const BloonsGrid({
     super.key,
     required this.bloons,
@@ -169,53 +171,47 @@ class BloonsGrid extends StatefulWidget {
   final Map<String, dynamic> constraintsValues;
 
   @override
-  State<BloonsGrid> createState() => _BloonsGridState();
-}
-
-class _BloonsGridState extends State<BloonsGrid> {
-  @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      itemCount: widget.bloons.length,
+      itemCount: bloons.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: widget.constraintsValues["crossAxisCount"],
-        childAspectRatio: widget.constraintsValues["childAspectRatio"],
+        crossAxisCount: constraintsValues["crossAxisCount"],
+        childAspectRatio: constraintsValues["childAspectRatio"],
       ),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       primary: false,
       itemBuilder: (context, index) {
+        final bloon = bloons[index];
         return Card(
           margin: const EdgeInsets.symmetric(
             vertical: 10,
             horizontal: 7,
           ),
-          child: Center(
-            child: ListTile(
-              horizontalTitleGap: 10,
-              leading: ImageOutliner(
-                imageName: widget.bloons[index].image,
-                imagePath: bloonImage(widget.bloons[index].image),
-                width: widget.constraintsValues["imageWidth"],
-              ),
-              title: Text(
-                widget.bloons[index].name,
-                maxLines: 1,
-                style: smallTitleStyle.copyWith(
-                  fontSize: widget.constraintsValues["titleFontSize"],
-                ),
-              ),
-              onTap: () {
-                logPageView(widget.bloons[index].name);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        SingleBloon(bloonId: widget.bloons[index].id),
-                  ),
-                );
-              },
+          child: ListTile(
+            horizontalTitleGap: 10,
+            contentPadding: const EdgeInsets.all(10),
+            leading: ImageOutliner(
+              imageName: bloon.image,
+              imagePath: bloonImage(bloon.image),
+              width: constraintsValues["imageWidth"],
             ),
+            title: Text(
+              bloon.name,
+              maxLines: 1,
+              style: smallTitleStyle.copyWith(
+                fontSize: constraintsValues["titleFontSize"],
+              ),
+            ),
+            onTap: () {
+              logPageView(bloon.name);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SingleBloon(bloonId: bloon.id),
+                ),
+              );
+            },
           ),
         );
       },

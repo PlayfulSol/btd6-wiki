@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/towers/tower/tower.dart';
 import '/presentation/widgets/path.dart';
-import '/utilities/utils.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class SingleTower extends StatefulWidget {
   final String towerId;
@@ -81,7 +81,7 @@ class _SingleTowerState extends State<SingleTower> {
                       ),
                       const BetterDivider(),
                       Text(
-                        'Class - ${tower.type}',
+                        'Class - ${tower.classType}',
                         style: smallTitleStyle,
                       ),
                       const SizedBox(
