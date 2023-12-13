@@ -54,7 +54,7 @@ class _MapsState extends State<Maps> {
               Consumer<GlobalState>(
                 builder: (context, globalState, child) {
                   return globalState.isSearchEnabled
-                      ? const SearchBarWidget()
+                      ? SearchBarWidget(queryText: globalState.currentQuery)
                       : Container();
                 },
               ),

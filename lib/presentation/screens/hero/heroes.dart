@@ -32,7 +32,7 @@ class Heroes extends StatelessWidget {
           Consumer<GlobalState>(
             builder: (context, globalState, child) =>
                 globalState.isSearchEnabled
-                    ? const SearchBarWidget()
+                    ? SearchBarWidget(queryText: globalState.currentQuery)
                     : Container(),
           ),
           Expanded(

@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
 
-String configDirectory = 'assets/data/config';
-
 String kTowers = 'towers';
 String kHeroes = 'heroes';
-String kMaps = 'maps';
 String kBloons = 'bloons';
 String kBlimps = 'blimps';
 String kBosses = 'bosses';
-
-const List<String> entityTypes = [
-  'towers',
-  'heroes',
-  'maps',
-  'bloons',
-  'bosses',
-];
+String kMaps = 'maps';
 
 const List<String> titles = [
   'towers',
@@ -38,12 +28,13 @@ const List<Icon> icons = [
   Icon(Icons.map_outlined),
 ];
 
+const configDirectory = 'assets/data/config';
 const towerDataPath = 'assets/data/towers/';
 const heroDataPath = 'assets/data/heroes/';
 const mapDataPath = 'assets/data/maps/';
 const bloonsDataPath = 'assets/data/bloons/';
-const minionsDataPath = 'assets/data/minions/';
 const bossesDataPath = 'assets/data/bosses/';
+const minionsDataPath = 'assets/data/minions/';
 
 PageController pageController = PageController(initialPage: 0);
 

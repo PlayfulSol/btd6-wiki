@@ -114,7 +114,10 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-
+    // pageController.addListener(() {
+    //   var _currentPage = pageController.page!.round();
+    //   print(_currentPage);
+    // });
     loadBaseData();
   }
 
@@ -222,9 +225,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onTap: (index) {
             logEvent('bottom_navigation', titles[index]);
             globalState.updateCurrentPage(titles[index], index);
-            pageController.animateToPage(index,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut);
+            pageController.jumpToPage(index);
           },
         ),
       ),

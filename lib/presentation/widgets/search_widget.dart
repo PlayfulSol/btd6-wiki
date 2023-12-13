@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import '/utilities/global_state.dart';
 
 class SearchBarWidget extends StatefulWidget {
-  const SearchBarWidget({super.key});
+  final String queryText;
+
+  const SearchBarWidget({super.key, required this.queryText});
 
   @override
   State<SearchBarWidget> createState() => _SearchBarWidgetState();
@@ -15,8 +17,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   void initState() {
     super.initState();
-    searchController = TextEditingController();
-    searchController.addListener(() {});
+    searchController = TextEditingController(text: widget.queryText);
   }
 
   @override
@@ -27,18 +28,20 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final globalState = Provider.of<GlobalState>(context, listen: false);
-
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 5, 25, 15),
-      child: TextField(
-        controller: searchController,
-        autofocus: true,
-        decoration: const InputDecoration(
-          hintText: 'Search...',
-        ),
-        onChanged: (String text) {
-          globalState.updateCurrentQuery(text);
+      child: Consumer<GlobalState>(
+        builder: (context, globalState, child) {
+          return TextField(
+            controller: searchController,
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: globalState.currentQuery.isEmpty ? 'Search...' : null,
+            ),
+            onChanged: (String text) {
+              globalState.updateCurrentQuery(text);
+            },
+          );
         },
       ),
     );
