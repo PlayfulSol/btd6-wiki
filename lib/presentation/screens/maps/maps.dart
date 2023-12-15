@@ -1,11 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_map.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';

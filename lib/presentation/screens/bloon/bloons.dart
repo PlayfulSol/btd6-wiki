@@ -1,10 +1,10 @@
-import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base_model.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
 import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';

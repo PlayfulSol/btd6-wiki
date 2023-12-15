@@ -1,5 +1,4 @@
-import 'package:btd6wiki/models/base/base_hero.dart';
-
+import '/models/base/base_hero.dart';
 import '/models/towers/common/cost_class.dart';
 import '/models/towers/common/stats_class.dart';
 import '/models/towers/common/upgrade_info_class.dart';

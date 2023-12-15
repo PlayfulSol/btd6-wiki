@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_tower.dart';
@@ -7,6 +6,7 @@ import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
 import '/analytics/analytics.dart';
+import '/analytics/analytics_constants.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -60,6 +60,8 @@ class Towers extends StatelessWidget {
                     return Card(
                       margin: const EdgeInsets.all(10),
                       child: ListTile(
+                        // contentPadding: const EdgeInsets.symmetric(
+                        //     vertical: 10, horizontal: 16),
                         leading: ImageOutliner(
                           imageName: tower.image,
                           imagePath: towerImage(tower.image),

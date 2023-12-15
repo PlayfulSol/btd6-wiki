@@ -1,6 +1,5 @@
-import 'package:btd6wiki/models/base_model.dart';
-
 import 'boss_health_class.dart';
+import '/models/base_model.dart';
 import '../common/relative_class.dart';
 
 class BossBloonModel extends BaseModel {
