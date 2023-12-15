@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_hero.dart';
@@ -25,6 +26,10 @@ class Heroes extends StatelessWidget {
       kHeroes,
       MediaQuery.of(context).size,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      logPageView(heroesPageConst);
+    });
 
     return Scaffold(
       body: Column(

@@ -1,3 +1,4 @@
+import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base_model.dart';
@@ -27,6 +28,10 @@ class Bloons extends StatelessWidget {
       kBloons,
       MediaQuery.of(context).size,
     );
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      logPageView(bloonsPageConst);
+    });
 
     return Scaffold(
       body: Column(

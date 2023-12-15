@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_tower.dart';
@@ -23,6 +24,10 @@ class Towers extends StatelessWidget {
   Widget build(BuildContext context) {
     final constraintsValues =
         calculateConstraints(kTowers, MediaQuery.of(context).size);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      logPageView(towersPageConst);
+    });
 
     return Scaffold(
       body: Column(

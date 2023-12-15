@@ -9,3 +9,13 @@ const String heroConst = 'single_hero';
 const String drawrConst = 'menu';
 
 const String towerConst = 'single_tower';
+
+const String mapConst = 'single_map';
+
+const String mapsPageConst = 'maps';
+
+const String towersPageConst = 'towers';
+
+const String heroesPageConst = 'heroes';
+
+const String bloonsPageConst = 'bloons';

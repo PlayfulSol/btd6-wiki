@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_map.dart';
@@ -30,6 +31,7 @@ class _MapsState extends State<Maps> {
   @override
   void initState() {
     super.initState();
+    logPageView(mapsPageConst);
     _loadJsonData();
   }
 

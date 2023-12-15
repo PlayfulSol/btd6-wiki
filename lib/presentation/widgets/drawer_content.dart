@@ -20,6 +20,8 @@ class _DrawerContentState extends State<DrawerContent> {
       ExpansionTileController();
   final ExpansionTileController _mapsExpansionTileController =
       ExpansionTileController();
+  final ExpansionTileController _bloonsExpansionTileControleer =
+      ExpansionTileController();
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class _DrawerContentState extends State<DrawerContent> {
             setState(() {
               if (expended) {
                 _mapsExpansionTileController.collapse();
+                _bloonsExpansionTileControleer.collapse();
               }
             });
           },
@@ -93,17 +96,47 @@ class _DrawerContentState extends State<DrawerContent> {
               globalState.updateCurrentPage(titles[heroesIndex], heroesIndex);
               pageController.jumpToPage(heroesIndex);
             }),
-        ListTile(
-            title: Text(
-              drawrTitles[2],
-              style: titleStyle,
+        ExpansionTile(
+          controller: _bloonsExpansionTileControleer,
+          title: Text(drawrTitles[2],
+              style: titleStyle.copyWith(color: Colors.teal)),
+          onExpansionChanged: (bool expended) {
+            logEvent(drawrConst, 'bloons_expanded');
+            setState(() {
+              if (expended) {
+                _towersExpansionTileController.collapse();
+                _mapsExpansionTileController.collapse();
+              }
+            });
+          },
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: ListView.builder(
+                padding: EdgeInsets.zero,
+                itemCount: bloonTypes.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return ListTile(
+                    title: Text(
+                      bloonTypes[index],
+                      style: bolderNormalStyle,
+                    ),
+                    onTap: () {
+                      logEvent('bloon_type', bloonTypes[index]);
+                      Navigator.pop(context);
+                      globalState.updateCurrentOptionSelected(
+                          kBloons, bloonTypes[index]);
+                      globalState.updateCurrentPage(
+                          titles[bloonsIndex], bloonsIndex);
+                      pageController.jumpToPage(bloonsIndex);
+                    },
+                  );
+                },
+              ),
             ),
-            onTap: () {
-              logEvent(drawrConst, 'bloons');
-              Navigator.pop(context);
-              globalState.updateCurrentPage(titles[bloonsIndex], bloonsIndex);
-              pageController.jumpToPage(bloonsIndex);
-            }),
+          ],
+        ),
         ExpansionTile(
           controller: _mapsExpansionTileController,
           title: Text(drawrTitles[3],
@@ -112,6 +145,7 @@ class _DrawerContentState extends State<DrawerContent> {
             logEvent(drawrConst, 'maps_expanded');
             setState(() {
               if (expended) {
+                _bloonsExpansionTileControleer.collapse();
                 _towersExpansionTileController.collapse();
               }
             });

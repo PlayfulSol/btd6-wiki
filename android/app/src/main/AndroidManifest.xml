@@ -3,6 +3,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="BTD6 Wiki"
+        android:enableOnBackInvokedCallback="true"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true">
