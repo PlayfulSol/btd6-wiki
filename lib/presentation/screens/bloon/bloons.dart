@@ -113,58 +113,6 @@ class Bloons extends StatelessWidget {
   }
 }
 
-class BossesGrid extends StatelessWidget {
-  const BossesGrid({
-    super.key,
-    required this.constraintsValues,
-    required this.bossesList,
-  });
-
-  final Map<String, dynamic> constraintsValues;
-  final List<BaseModel> bossesList;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: constraintsValues["crossAxisCountBoss"],
-        childAspectRatio: constraintsValues["childAspectRatioBoss"],
-      ),
-      physics: const NeverScrollableScrollPhysics(),
-      primary: false,
-      itemCount: bossesList.length,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        final boss = bossesList[index];
-
-        return Card(
-          margin: const EdgeInsets.all(8.5),
-          child: ListTile(
-            contentPadding: const EdgeInsets.all(10),
-            leading: ImageOutliner(
-              imageName: boss.image,
-              imagePath: bossImage(boss.image),
-            ),
-            title: Text(
-              boss.name,
-              style: constraintsValues["textStyleBoss"],
-            ),
-            onTap: () {
-              logPageView(boss.name);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => BossBloon(bossId: boss.id),
-                ),
-              );
-            },
-          ),
-        );
-      },
-    );
-  }
-}
-
 class BloonsGrid extends StatelessWidget {
   const BloonsGrid({
     super.key,
@@ -193,30 +141,85 @@ class BloonsGrid extends StatelessWidget {
             vertical: 10,
             horizontal: 7,
           ),
-          child: ListTile(
-            horizontalTitleGap: 10,
-            contentPadding: const EdgeInsets.all(10),
-            leading: ImageOutliner(
-              imageName: bloon.image,
-              imagePath: bloonImage(bloon.image),
-              width: constraintsValues["imageWidth"],
-            ),
-            title: Text(
-              bloon.name,
-              maxLines: 1,
-              style: smallTitleStyle.copyWith(
-                fontSize: constraintsValues["titleFontSize"],
+          child: Center(
+            child: ListTile(
+              horizontalTitleGap: 10,
+              leading: ImageOutliner(
+                imageName: bloon.image,
+                imagePath: bloonImage(bloon.image),
+                width: constraintsValues["imageWidth"],
               ),
-            ),
-            onTap: () {
-              logPageView(bloon.name);
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => SingleBloon(bloonId: bloon.id),
+              title: Text(
+                bloon.name,
+                maxLines: 1,
+                style: smallTitleStyle.copyWith(
+                  fontSize: constraintsValues["titleFontSize"],
                 ),
-              );
-            },
+              ),
+              onTap: () {
+                logPageView(bloon.name);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SingleBloon(bloonId: bloon.id),
+                  ),
+                );
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class BossesGrid extends StatelessWidget {
+  const BossesGrid({
+    super.key,
+    required this.constraintsValues,
+    required this.bossesList,
+  });
+
+  final Map<String, dynamic> constraintsValues;
+  final List<BaseModel> bossesList;
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: constraintsValues["crossAxisCountBoss"],
+        childAspectRatio: constraintsValues["childAspectRatioBoss"],
+      ),
+      physics: const NeverScrollableScrollPhysics(),
+      primary: false,
+      itemCount: bossesList.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        final boss = bossesList[index];
+
+        return Card(
+          margin: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
+          child: Center(
+            child: ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              leading: ImageOutliner(
+                imageName: boss.image,
+                imagePath: bossImage(boss.image),
+              ),
+              title: Text(
+                boss.name,
+                style: constraintsValues["textStyleBoss"],
+              ),
+              onTap: () {
+                logPageView(boss.name);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => BossBloon(bossId: boss.id),
+                  ),
+                );
+              },
+            ),
           ),
         );
       },

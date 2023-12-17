@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_tower.dart';
@@ -39,13 +38,10 @@ class Towers extends StatelessWidget {
                     : Container(),
           ),
           Expanded(
-            child: Builder(
-              builder: (context) {
-                final filteredTowers = filterAndSearchTowers(
-                  towers,
-                  Provider.of<GlobalState>(context).currentQuery,
-                  Provider.of<GlobalState>(context).currentOption,
-                );
+            child: Consumer<GlobalState>(
+              builder: (context, globalState, child) {
+                final filteredTowers = filterAndSearchTowers(towers,
+                    globalState.currentQuery, globalState.currentOption);
 
                 return GridView.builder(
                   itemCount: filteredTowers.length,
@@ -58,42 +54,42 @@ class Towers extends StatelessWidget {
                     final tower = filteredTowers[index];
 
                     return Card(
-                      margin: const EdgeInsets.all(10),
-                      child: ListTile(
-                        // contentPadding: const EdgeInsets.symmetric(
-                        //     vertical: 10, horizontal: 16),
-                        leading: ImageOutliner(
-                          imageName: tower.image,
-                          imagePath: towerImage(tower.image),
-                        ),
-                        title: AutoSizeText(
-                          tower.name,
-                          maxLines: 1,
-                          style: titleStyle.copyWith(
-                            fontSize: constraintsValues["titleFontSize"],
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 13, vertical: 8),
+                      child: Center(
+                        child: ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 8),
+                          horizontalTitleGap: 8,
+                          leading: ImageOutliner(
+                            imageName: tower.image,
+                            imagePath: towerImage(tower.image),
                           ),
-                        ),
-                        subtitle: AutoSizeText(
-                          tower.inGameDesc,
-                          wrapWords: false,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: constraintsValues["rowsToShow"],
-                          style: subtitleStyle.copyWith(
-                            fontSize: constraintsValues["subtitleFontSize"],
-                          ),
-                          minFontSize: constraintsValues["subtitleFontSize"],
-                          maxFontSize: constraintsValues["subtitleFontSize"],
-                        ),
-                        onTap: () {
-                          logPageView(tower.name);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  SingleTower(towerId: tower.id),
+                          title: Text(
+                            tower.name,
+                            style: titleStyle.copyWith(
+                              fontSize: constraintsValues["titleFontSize"],
                             ),
-                          );
-                        },
+                          ),
+                          subtitle: Text(
+                            tower.inGameDesc,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: constraintsValues["rowsToShow"],
+                            style: subtitleStyle.copyWith(
+                              fontSize: constraintsValues["subtitleFontSize"],
+                            ),
+                          ),
+                          onTap: () {
+                            logPageView(tower.name);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    SingleTower(towerId: tower.id),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     );
                   },

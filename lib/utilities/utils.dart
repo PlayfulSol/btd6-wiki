@@ -162,19 +162,21 @@ Future<void> openMail(String mailString) async {
 
 Map<String, dynamic> calculateConstraints(String category, Size size) {
   if (category == kBloons) {
-    if (size.width < 350) {
+    if (size.width < 380) {
       return constraintsBloonSmallPreset;
-    } else if (size.width < 400) {
+    } else if (size.width < 480) {
       return constraintsBloonNormalPreset;
-    } else if (size.width < 470) {
+    } else if (size.width < 1000) {
       return constraintsBloonWidePreset;
     } else {
       return constraintsBloonUWPreset;
     }
   } else {
-    if (size.width < 450) {
+    if (size.width < 380) {
+      return constraintsSmallPreset;
+    } else if (size.width < 480) {
       return constraintsNormalPreset;
-    } else if (size.width < 1200) {
+    } else if (size.width < 1000) {
       return constraintsWidePreset;
     } else {
       return constraintsUWPreset;

@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_hero.dart';
@@ -56,40 +55,42 @@ class Heroes extends StatelessWidget {
                     final hero = filteredHeroes[index];
 
                     return Card(
-                      margin: const EdgeInsets.all(10),
-                      child: ListTile(
-                        mouseCursor: SystemMouseCursors.click,
-                        leading: ImageOutliner(
-                          imageName: hero.image,
-                          imagePath: heroImage(hero.image),
-                        ),
-                        title: AutoSizeText(
-                          hero.name,
-                          wrapWords: false,
-                          style: titleStyle.copyWith(
-                            fontSize: constraintsValues["titleFontSize"],
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 13, vertical: 8),
+                      child: Center(
+                        child: ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 8),
+                          horizontalTitleGap: 8,
+                          leading: ImageOutliner(
+                            imageName: hero.image,
+                            imagePath: heroImage(hero.image),
                           ),
-                        ),
-                        subtitle: AutoSizeText(
-                          hero.inGameDesc,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: constraintsValues["rowsToShow"],
-                          minFontSize: constraintsValues["subtitleFontSize"],
-                          maxFontSize: constraintsValues["subtitleFontSize"],
-                          wrapWords: false,
-                          style: TextStyle(
-                            fontSize: constraintsValues["subtitleFontSize"],
-                          ),
-                        ),
-                        onTap: () {
-                          logPageView(hero.name);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SingleHero(heroId: hero.id),
+                          title: Text(
+                            hero.name,
+                            style: titleStyle.copyWith(
+                              fontSize: constraintsValues["titleFontSize"],
                             ),
-                          );
-                        },
+                          ),
+                          subtitle: Text(
+                            hero.inGameDesc,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: constraintsValues["rowsToShow"],
+                            style: TextStyle(
+                              fontSize: constraintsValues["subtitleFontSize"],
+                            ),
+                          ),
+                          onTap: () {
+                            logPageView(hero.name);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    SingleHero(heroId: hero.id),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     );
                   },

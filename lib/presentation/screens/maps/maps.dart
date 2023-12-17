@@ -69,10 +69,10 @@ class _MapsState extends State<Maps> {
                       itemCount: filteredMaps.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 1.4,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10),
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.4,
+                        mainAxisSpacing: 4,
+                      ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Padding(
