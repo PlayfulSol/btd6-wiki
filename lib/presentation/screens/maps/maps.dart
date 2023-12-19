@@ -31,7 +31,7 @@ class _MapsState extends State<Maps> {
   void initState() {
     super.initState();
     widget.analyticsHelper.logScreenView(
-      screenClass: kMainPageClass,
+      screenClass: kMainPagesClass,
       screenName: kMaps,
     );
     _loadJsonData();

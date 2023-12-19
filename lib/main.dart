@@ -68,6 +68,8 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late final AnalyticsHelper analyticsHelper;
+  final PageController pageController = PageController(initialPage: 0);
+
   bool isLoading = true;
   Map<String, dynamic> baseEntities = {
     'towers': <BaseTower>[],
@@ -99,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var globalState = context.watch<GlobalState>();
     return Scaffold(
-      drawer: const Drawer(child: DrawerContent()),
+      drawer: Drawer(child: DrawerContent(pageController: pageController)),
       appBar: AppBar(
         title: Consumer<GlobalState>(
           builder: (context, globalState, child) {
@@ -197,11 +199,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           type: BottomNavigationBarType.fixed,
           items: [
-            for (int i = 0; i < titles.length; i++)
+            for (int i = 0; i < bottomNavTitles.length; i++)
               BottomNavigationBarItem(
                 icon: icons[i],
-                label: capitalize(titles[i]),
-                tooltip: titles[i],
+                label: capitalizeEveryWord(bottomNavTitles[i]),
+                tooltip: bottomNavTitles[i],
               ),
           ],
           currentIndex: globalState.currentPageIndex,

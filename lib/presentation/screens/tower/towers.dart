@@ -31,7 +31,7 @@ class _TowersState extends State<Towers> {
     super.initState();
 
     widget.analyticsHelper.logScreenView(
-      screenClass: kMainPageClass,
+      screenClass: kMainPagesClass,
       screenName: kTowers,
     );
   }

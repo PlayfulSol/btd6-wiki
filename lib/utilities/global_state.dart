@@ -4,8 +4,8 @@ import '/utilities/strings.dart';
 import 'constants.dart';
 
 class GlobalState with ChangeNotifier {
-  int _currentPageIndex = 0;
-  String _currentTitle = 'BTD6 Wiki';
+  int _currentPageIndex = kTowersIndex;
+  String _currentTitle = titles[kTowersIndex];
   String _activeCategory = kTowers;
   Map<String, bool> _isSearchEnabled = {};
   Map<String, String> _currentOptionSelected = {};

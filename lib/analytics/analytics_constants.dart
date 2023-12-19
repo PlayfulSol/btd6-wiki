@@ -20,4 +20,9 @@
 
 // const String bloonsPageConst = 'bloons';
 
-const String kMainPageClass = 'main_page';
+const String kMainPagesClass = 'main_pages';
+const String kTowerPagesClass = 'tower_pages';
+const String kHeroPagesClass = 'hero_pages';
+const String kBloonPagesClass = 'bloon_pages';
+const String kBossPagesClass = 'boss_pages';
+const String kMapPagesClass = 'maps_pages';

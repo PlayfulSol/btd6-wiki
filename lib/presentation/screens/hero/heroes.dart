@@ -30,7 +30,7 @@ class _HeroesState extends State<Heroes> {
   void initState() {
     super.initState();
     widget.analyticsHelper.logScreenView(
-      screenClass: kMainPageClass,
+      screenClass: kMainPagesClass,
       screenName: kHeroes,
     );
   }

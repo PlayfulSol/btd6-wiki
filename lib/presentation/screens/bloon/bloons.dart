@@ -33,7 +33,7 @@ class _BloonsState extends State<Bloons> {
   void initState() {
     super.initState();
     widget.analyticsHelper.logScreenView(
-      screenClass: kMainPageClass,
+      screenClass: kMainPagesClass,
       screenName: kBloons,
     );
   }
