@@ -94,12 +94,13 @@ class _TowersState extends State<Towers> {
                             ),
                           ),
                           onTap: () {
-                            // logPageView(tower.name);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    SingleTower(towerId: tower.id),
+                                builder: (context) => SingleTower(
+                                  towerId: tower.id,
+                                  analyticsHelper: widget.analyticsHelper,
+                                ),
                               ),
                             );
                           },

@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 
-String kTowers = 'towers';
-String kHeroes = 'heroes';
-String kBloons = 'bloons';
-String kBlimps = 'blimps';
-String kBosses = 'bosses';
-String kMaps = 'maps';
+const String kTowers = 'towers';
+const String kHeroes = 'heroes';
+const String kBloons = 'bloons';
+const String kBlimps = 'blimps';
+const String kBosses = 'bosses';
+const String kMaps = 'maps';
 
+const int kTowersIndex = 0;
+const int kHeroesIndex = 1;
+const int kBloonsIndex = 2;
+const int kMapsIndex = 3;
 
 const List<String> titles = [
-  'towers',
-  'heroes',
-  'bloons',
-  'maps',
-];
-
-const List<String> drawrTitles = [
   'Towers',
   'Heroes',
   'Bloons & Bosses',
+  'Maps',
+];
+
+const List<String> bottomNavTitles = [
+  'Towers',
+  'Heroes',
+  'Bloons',
   'Maps',
 ];
 
@@ -36,8 +40,6 @@ const mapDataPath = 'assets/data/maps/';
 const bloonsDataPath = 'assets/data/bloons/';
 const bossesDataPath = 'assets/data/bosses/';
 const minionsDataPath = 'assets/data/minions/';
-
-PageController pageController = PageController(initialPage: 0);
 
 const Map<String, String> statsDictionary = {
   'damage': 'Damage',
