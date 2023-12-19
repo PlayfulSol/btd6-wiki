@@ -12,8 +12,10 @@ import '/utilities/utils.dart';
 class SingleBloon extends StatefulWidget {
   const SingleBloon({
     super.key,
+    required this.analyticsHelper,
     required this.bloonId,
   });
+  final AnalyticsHelper analyticsHelper;
   final String bloonId;
 
   @override
@@ -37,6 +39,10 @@ class _SingleBloonState extends State<SingleBloon> {
   @override
   void initState() {
     super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kBloonPagesClass,
+      screenName: widget.bloonId,
+    );
     loadBloon();
   }
 
@@ -54,7 +60,6 @@ class _SingleBloonState extends State<SingleBloon> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    // ignore: avoid_print
                     Image(
                       semanticLabel: bloon.fullName,
                       image: AssetImage(bloonImage(bloon.image)),
@@ -73,6 +78,7 @@ class _SingleBloonState extends State<SingleBloon> {
                     ),
                     const SizedBox(height: 15),
                     BloonAidWidget(
+                      analyticsHelper: widget.analyticsHelper,
                       data: bloon.rbe,
                       title: "RBE (Red Bloon Equivalent)",
                     ),
@@ -98,11 +104,13 @@ class _SingleBloonState extends State<SingleBloon> {
                     ),
                     const SizedBox(height: 10),
                     BloonAidWidget(
+                      analyticsHelper: widget.analyticsHelper,
                       data: bloon.children,
                       title: "Children",
                     ),
                     const SizedBox(height: 10),
                     BloonAidWidget(
+                      analyticsHelper: widget.analyticsHelper,
                       data: bloon.parents,
                       title: "Parents",
                     ),
@@ -114,7 +122,7 @@ class _SingleBloonState extends State<SingleBloon> {
                             style: smallTitleStyle.copyWith(color: Colors.teal),
                           ),
                           onExpansionChanged: (value) {
-                            logEvent(bloonConst, 'variants');
+                            // logEvent(bloonConst, 'variants');
                           },
                           children: bloon.variants
                               .map((e) => Padding(
@@ -149,7 +157,7 @@ class _SingleBloonState extends State<SingleBloon> {
                         style: smallTitleStyle.copyWith(color: Colors.teal),
                       ),
                       onExpansionChanged: (value) {
-                        logEvent(bloonConst, 'rounds');
+                        // logEvent(bloonConst, 'rounds');
                       },
                       children: bloon.rounds.normal
                           .map((e) => ListTile(
@@ -177,7 +185,7 @@ class _SingleBloonState extends State<SingleBloon> {
                         style: smallTitleStyle.copyWith(color: Colors.teal),
                       ),
                       onExpansionChanged: (value) {
-                        logEvent(bloonConst, 'ABR');
+                        // logEvent(bloonConst, 'ABR');
                       },
                       children: bloon.rounds.abr
                           .map((e) => ListTile(

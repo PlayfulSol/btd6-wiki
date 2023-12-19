@@ -14,9 +14,11 @@ import '/utilities/constants.dart';
 class BossBloon extends StatefulWidget {
   const BossBloon({
     super.key,
+    required this.analyticsHelper,
     required this.bossId,
   });
 
+  final AnalyticsHelper analyticsHelper;
   final String bossId;
 
   @override
@@ -46,6 +48,10 @@ class _BossBloonState extends State<BossBloon> {
   @override
   void initState() {
     super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kBossPagesClass,
+      screenName: widget.bossId,
+    );
     loadBoss();
   }
 
@@ -166,7 +172,8 @@ class _BossBloonState extends State<BossBloon> {
                       bossHealth("Normal", boss.health.base),
                       bossHealth("Elite", boss.health.elite),
                       const SizedBox(height: 10),
-                      generateMinion(boss.children, context),
+                      generateMinion(
+                          boss.children, context, widget.analyticsHelper),
                       Divider(
                         thickness: 2,
                         color: Colors.grey[600],
@@ -204,7 +211,7 @@ class _BossBloonState extends State<BossBloon> {
                           style: smallTitleStyle.copyWith(color: Colors.teal),
                         ),
                         onExpansionChanged: (bool expanded) {
-                          logEvent(bossBloonConst, 'general_immunities');
+                          // logEvent(bossBloonConst, 'general_immunities');
                         },
                         children: boss.immunities
                             .map<Widget>(
@@ -230,7 +237,7 @@ class _BossBloonState extends State<BossBloon> {
         style: smallTitleStyle.copyWith(color: Colors.teal),
       ),
       onExpansionChanged: (bool expanded) {
-        logEvent(bossBloonConst, 'health_$title');
+        // logEvent(bossBloonConst, 'health_$title');
       },
       children: healthTiers
           .map(

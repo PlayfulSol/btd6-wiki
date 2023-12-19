@@ -92,6 +92,7 @@ class _BloonsState extends State<Bloons> {
                           ),
                           const SizedBox(height: 15),
                           BloonsGrid(
+                            analyticsHelper: widget.analyticsHelper,
                             bloons: filteredBloons,
                             constraintsValues: constraintsValues,
                           ),
@@ -108,8 +109,9 @@ class _BloonsState extends State<Bloons> {
                           ),
                           const SizedBox(height: 15),
                           BossesGrid(
-                            constraintsValues: constraintsValues,
+                            analyticsHelper: widget.analyticsHelper,
                             bossesList: filteredBosses,
+                            constraintsValues: constraintsValues,
                           ),
                         ],
                       ),
@@ -127,10 +129,12 @@ class _BloonsState extends State<Bloons> {
 class BloonsGrid extends StatelessWidget {
   const BloonsGrid({
     super.key,
+    required this.analyticsHelper,
     required this.bloons,
     required this.constraintsValues,
   });
 
+  final AnalyticsHelper analyticsHelper;
   final List<BaseModel> bloons;
   final Map<String, dynamic> constraintsValues;
 
@@ -172,7 +176,10 @@ class BloonsGrid extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => SingleBloon(bloonId: bloon.id),
+                    builder: (context) => SingleBloon(
+                      analyticsHelper: analyticsHelper,
+                      bloonId: bloon.id,
+                    ),
                   ),
                 );
               },
@@ -187,12 +194,13 @@ class BloonsGrid extends StatelessWidget {
 class BossesGrid extends StatelessWidget {
   const BossesGrid({
     super.key,
-    required this.constraintsValues,
+    required this.analyticsHelper,
     required this.bossesList,
+    required this.constraintsValues,
   });
-
-  final Map<String, dynamic> constraintsValues;
+  final AnalyticsHelper analyticsHelper;
   final List<BaseModel> bossesList;
+  final Map<String, dynamic> constraintsValues;
 
   @override
   Widget build(BuildContext context) {
@@ -226,7 +234,10 @@ class BossesGrid extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BossBloon(bossId: boss.id),
+                    builder: (context) => BossBloon(
+                      analyticsHelper: analyticsHelper,
+                      bossId: boss.id,
+                    ),
                   ),
                 );
               },
