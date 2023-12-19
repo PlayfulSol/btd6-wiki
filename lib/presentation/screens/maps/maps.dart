@@ -76,12 +76,11 @@ class _MapsState extends State<Maps> {
                           padding: const EdgeInsets.all(5.0),
                           child: GestureDetector(
                             onTap: () {
-                              // logPageView(filteredMaps[index].name);
-
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SingleMap(
+                                    analyticsHelper: widget.analyticsHelper,
                                     mapId: filteredMaps[index].id,
                                   ),
                                 ),

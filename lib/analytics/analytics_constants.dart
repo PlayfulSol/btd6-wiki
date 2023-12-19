@@ -25,4 +25,4 @@ const String kTowerPagesClass = 'tower_pages';
 const String kHeroPagesClass = 'hero_pages';
 const String kBloonPagesClass = 'bloon_pages';
 const String kBossPagesClass = 'boss_pages';
-const String kMapPagesClass = 'maps_pages';
+const String kMapPagesClass = 'map_pages';

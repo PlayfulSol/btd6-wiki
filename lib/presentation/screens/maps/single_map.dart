@@ -1,16 +1,20 @@
 import 'dart:convert';
+import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/maps/map.dart';
+import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 
 class SingleMap extends StatefulWidget {
   const SingleMap({
     super.key,
+    required this.analyticsHelper,
     required this.mapId,
   });
 
+  final AnalyticsHelper analyticsHelper;
   final String mapId;
 
   @override
@@ -34,6 +38,10 @@ class _SingleMapState extends State<SingleMap> {
   @override
   void initState() {
     super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kMapPagesClass,
+      screenName: widget.mapId,
+    );
     loadMap();
   }
 
