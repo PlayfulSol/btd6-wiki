@@ -1,7 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/firebase_options.dart';
@@ -28,44 +27,31 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  final savedThemeMode = await AdaptiveTheme.getThemeMode();
-  logEvent('theme_used', savedThemeMode.toString());
-  runApp(const MyApp());
+  final analytics = FirebaseAnalytics.instance;
+
+  runApp(MyApp(analytics: analytics));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  static FirebaseAnalyticsObserver observer =
-      FirebaseAnalyticsObserver(analytics: analytics);
-
+  const MyApp({super.key, required this.analytics});
+  final FirebaseAnalytics analytics;
   @override
   Widget build(BuildContext context) {
-    String screenWidth = MediaQuery.of(context).size.width.toStringAsFixed(1);
-    logEvent('device_width', screenWidth);
-    return AdaptiveTheme(
-        light: Themes.lightTheme,
-        dark: Themes.darkTheme,
-        initial: AdaptiveThemeMode.system,
-        builder: (theme, darkTheme) => MaterialApp(
-              navigatorObservers: !kDebugMode
-                  ? <NavigatorObserver>[
-                      observer,
-                    ]
-                  : [],
-              theme: theme,
-              darkTheme: darkTheme,
-              title: 'BTD6 Wiki',
-              home: ChangeNotifierProvider(
-                create: (BuildContext context) => GlobalState(),
-                child: MyHomePage(
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => GlobalState(),
+      child: AdaptiveTheme(
+          light: Themes.lightTheme,
+          dark: Themes.darkTheme,
+          initial: AdaptiveThemeMode.system,
+          builder: (theme, darkTheme) => MaterialApp(
+                theme: theme,
+                darkTheme: darkTheme,
+                home: MyHomePage(
                   analytics: analytics,
-                  observer: observer,
                 ),
-              ),
-              debugShowCheckedModeBanner: false,
-            ));
+                debugShowCheckedModeBanner: false,
+              )),
+    );
   }
 }
 
@@ -73,17 +59,15 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({
     super.key,
     required this.analytics,
-    required this.observer,
   });
-
   final FirebaseAnalytics analytics;
-  final FirebaseAnalyticsObserver observer;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late final AnalyticsHelper analyticsHelper;
   bool isLoading = true;
   Map<String, dynamic> baseEntities = {
     'towers': <BaseTower>[],
@@ -104,17 +88,11 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future<void> _logCurrentScreen(int pageIndex) async {
-    await widget.analytics.setCurrentScreen(
-      screenName: titles[pageIndex],
-      screenClassOverride: titles[pageIndex],
-    );
-  }
-
   @override
   void initState() {
     super.initState();
     loadBaseData();
+    analyticsHelper = AnalyticsHelper(widget.analytics);
   }
 
   @override
@@ -163,7 +141,6 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 globalState.switchSearch();
                 if (globalState.isSearchEnabled) {
-                  logEvent('search', globalState.activeCategory);
                 } else {
                   globalState.updateCurrentQuery('');
                 }
@@ -178,17 +155,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ? PageView(
               controller: pageController,
               children: [
-                Towers(towers: baseEntities[kTowers]),
-                Heroes(heroes: baseEntities[kHeroes]),
+                Towers(
+                  analyticsHelper: analyticsHelper,
+                  towers: baseEntities[kTowers],
+                ),
+                Heroes(
+                  analyticsHelper: analyticsHelper,
+                  heroes: baseEntities[kHeroes],
+                ),
                 Bloons(
-                    bloonsList: baseEntities[kBloons],
-                    bossesList: baseEntities[kBosses]),
-                Maps(maps: baseEntities[kMaps])
+                  analyticsHelper: analyticsHelper,
+                  bloonsList: baseEntities[kBloons],
+                  bossesList: baseEntities[kBosses],
+                ),
+                Maps(
+                  analyticsHelper: analyticsHelper,
+                  maps: baseEntities[kMaps],
+                )
               ],
               onPageChanged: (index) {
                 FocusScope.of(context).unfocus();
                 globalState.updateCurrentPage(titles[index], index);
-                _logCurrentScreen(index);
               },
             )
           : const Loader(),
@@ -219,7 +206,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           currentIndex: globalState.currentPageIndex,
           onTap: (index) {
-            logEvent('bottom_navigation', titles[index]);
             globalState.updateCurrentPage(titles[index], index);
             pageController.jumpToPage(index);
           },

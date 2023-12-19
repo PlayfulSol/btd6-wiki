@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '/models/base_model.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
-import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -12,27 +12,38 @@ import '/utilities/utils.dart';
 import 'single_bloon.dart';
 import 'boss_bloon.dart';
 
-class Bloons extends StatelessWidget {
+class Bloons extends StatefulWidget {
   const Bloons({
     super.key,
+    required this.analyticsHelper,
     required this.bloonsList,
     required this.bossesList,
   });
 
+  final AnalyticsHelper analyticsHelper;
   final List<BaseModel> bloonsList;
   final List<BaseModel> bossesList;
 
   @override
+  State<Bloons> createState() => _BloonsState();
+}
+
+class _BloonsState extends State<Bloons> {
+  @override
+  void initState() {
+    super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kMainPageClass,
+      screenName: kBloons,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final constraintsValues = calculateConstraints(
+    final constraintsValues = selectSizePreset(
       kBloons,
       MediaQuery.of(context).size,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      logPageView(bloonsPageConst);
-    });
-
     return Scaffold(
       body: Column(
         children: [
@@ -46,13 +57,13 @@ class Bloons extends StatelessWidget {
             child: Consumer<GlobalState>(
               builder: (context, globalState, child) {
                 final filteredBloons = filterAndSearchBloons(
-                  bloonsList,
+                  widget.bloonsList,
                   globalState.currentQuery,
                   globalState.currentOption,
                 );
 
                 final filteredBosses = filterAndSearchBloons(
-                  bossesList,
+                  widget.bossesList,
                   globalState.currentQuery,
                   globalState.currentOption,
                 );
@@ -157,7 +168,7 @@ class BloonsGrid extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                logPageView(bloon.name);
+                // logPageView(bloon.name);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -211,7 +222,7 @@ class BossesGrid extends StatelessWidget {
                 style: constraintsValues["textStyleBoss"],
               ),
               onTap: () {
-                logPageView(boss.name);
+                // logPageView(boss.name);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

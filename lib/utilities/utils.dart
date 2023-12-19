@@ -160,7 +160,7 @@ Future<void> openMail(String mailString) async {
   }
 }
 
-Map<String, dynamic> calculateConstraints(String category, Size size) {
+Map<String, dynamic> selectSizePreset(String category, Size size) {
   if (category == kBloons) {
     if (size.width < 380) {
       return constraintsBloonSmallPreset;

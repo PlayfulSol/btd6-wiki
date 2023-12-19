@@ -4,30 +4,44 @@ import '/models/base/base_tower.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
-import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
-class Towers extends StatelessWidget {
+class Towers extends StatefulWidget {
   const Towers({
     super.key,
+    required this.analyticsHelper,
     required this.towers,
   });
 
+  final AnalyticsHelper analyticsHelper;
   final List<BaseTower> towers;
 
   @override
+  State<Towers> createState() => _TowersState();
+}
+
+class _TowersState extends State<Towers> {
+  @override
+  void initState() {
+    super.initState();
+
+    widget.analyticsHelper.logScreenView(
+      screenClass: kMainPageClass,
+      screenName: kTowers,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final constraintsValues =
-        calculateConstraints(kTowers, MediaQuery.of(context).size);
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      logPageView(towersPageConst);
-    });
-
+    final constraintsValues = selectSizePreset(
+      kTowers,
+      MediaQuery.of(context).size,
+    );
     return Scaffold(
       body: Column(
         children: [
@@ -40,7 +54,7 @@ class Towers extends StatelessWidget {
           Expanded(
             child: Consumer<GlobalState>(
               builder: (context, globalState, child) {
-                final filteredTowers = filterAndSearchTowers(towers,
+                final filteredTowers = filterAndSearchTowers(widget.towers,
                     globalState.currentQuery, globalState.currentOption);
 
                 return GridView.builder(
@@ -80,7 +94,7 @@ class Towers extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            logPageView(tower.name);
+                            // logPageView(tower.name);
                             Navigator.push(
                               context,
                               MaterialPageRoute(

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '/models/base/base_map.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/search_widget.dart';
-import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -15,9 +15,11 @@ import '/utilities/utils.dart';
 class Maps extends StatefulWidget {
   const Maps({
     super.key,
+    required this.analyticsHelper,
     required this.maps,
   });
 
+  final AnalyticsHelper analyticsHelper;
   final List<BaseMap> maps;
 
   @override
@@ -25,19 +27,14 @@ class Maps extends StatefulWidget {
 }
 
 class _MapsState extends State<Maps> {
-  late List<BaseMap> filteredMaps;
-  String query = '';
-
   @override
   void initState() {
     super.initState();
-    logPageView(mapsPageConst);
+    widget.analyticsHelper.logScreenView(
+      screenClass: kMainPageClass,
+      screenName: kMaps,
+    );
     _loadJsonData();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   Future<void> _loadJsonData() async {
@@ -63,7 +60,7 @@ class _MapsState extends State<Maps> {
               Expanded(
                 child: Consumer<GlobalState>(
                   builder: (context, globalState, child) {
-                    filteredMaps = filterAndSearchMaps(widget.maps,
+                    final filteredMaps = filterAndSearchMaps(widget.maps,
                         globalState.currentQuery, globalState.currentOption);
                     return GridView.builder(
                       itemCount: filteredMaps.length,
@@ -79,7 +76,7 @@ class _MapsState extends State<Maps> {
                           padding: const EdgeInsets.all(5.0),
                           child: GestureDetector(
                             onTap: () {
-                              logPageView(filteredMaps[index].name);
+                              // logPageView(filteredMaps[index].name);
 
                               Navigator.push(
                                 context,

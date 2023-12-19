@@ -1,17 +1,20 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-Future<void> logPageView(String pageName) async {
-  await FirebaseAnalytics.instance
-      .logScreenView(screenName: pageName, screenClass: pageName);
-}
+class AnalyticsHelper {
+  final FirebaseAnalytics analytics;
 
-Future<void> logEvent(String eventName, String eventValue) async {
-  await FirebaseAnalytics.instance.logEvent(
-    name: eventName,
-    parameters: <String, dynamic>{
-      'eventValue': eventValue,
-      'timestamp': DateTime.now().toString(),
-      'value': eventValue
-    },
-  );
+  const AnalyticsHelper(this.analytics);
+
+  void logScreenView(
+      {required String screenClass, required String screenName}) {
+    analytics.logScreenView(screenClass: screenClass, screenName: screenName);
+  }
+
+  void logEvent({required String name, Map<String, dynamic>? parameters}) {
+    analytics.logEvent(name: name, parameters: parameters);
+  }
+
+  void logSelectContent({required String contentType, required String itemId}) {
+    analytics.logSelectContent(contentType: contentType, itemId: itemId);
+  }
 }

@@ -43,14 +43,4 @@ class GlobalState with ChangeNotifier {
     }
     notifyListeners();
   }
-
-  void resetTitle() {
-    _currentTitle = 'BTD6 Wiki';
-    notifyListeners();
-  }
-
-  void resetPageIndex() {
-    _currentPageIndex = 0;
-    notifyListeners();
-  }
 }

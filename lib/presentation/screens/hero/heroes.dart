@@ -4,32 +4,43 @@ import '/models/base/base_hero.dart';
 import '/presentation/screens/hero/single_hero.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
-import '/analytics/analytics.dart';
 import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
-class Heroes extends StatelessWidget {
+class Heroes extends StatefulWidget {
   const Heroes({
     super.key,
+    required this.analyticsHelper,
     required this.heroes,
   });
 
+  final AnalyticsHelper analyticsHelper;
   final List<BaseHero> heroes;
 
   @override
+  State<Heroes> createState() => _HeroesState();
+}
+
+class _HeroesState extends State<Heroes> {
+  @override
+  void initState() {
+    super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kMainPageClass,
+      screenName: kHeroes,
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final constraintsValues = calculateConstraints(
+    final constraintsValues = selectSizePreset(
       kHeroes,
       MediaQuery.of(context).size,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      logPageView(heroesPageConst);
-    });
-
     return Scaffold(
       body: Column(
         children: [
@@ -43,7 +54,7 @@ class Heroes extends StatelessWidget {
             child: Consumer<GlobalState>(
               builder: (context, globalState, child) {
                 final filteredHeroes =
-                    heroesFromSearch(heroes, globalState.currentQuery);
+                    heroesFromSearch(widget.heroes, globalState.currentQuery);
                 return GridView.builder(
                   itemCount: filteredHeroes.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -81,7 +92,7 @@ class Heroes extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            logPageView(hero.name);
+                            // logPageView(hero.name);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
