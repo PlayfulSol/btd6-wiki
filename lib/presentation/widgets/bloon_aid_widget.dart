@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import '/models/bloons/common/relative_class.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/minion_bloon.dart';
-import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
 class BloonAidWidget extends StatelessWidget {
-  const BloonAidWidget({super.key, required this.data, required this.title});
+  const BloonAidWidget({
+    super.key,
+    required this.analyticsHelper,
+    required this.data,
+    required this.title,
+  });
 
+  final AnalyticsHelper analyticsHelper;
   final dynamic data;
   final String title;
 
@@ -18,7 +23,8 @@ class BloonAidWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     String? typeCheck = extractItemTypeFromList(data);
     if (typeCheck == 'obj') {
-      return listObject(data as List<Relative>, title, context);
+      return listObject(
+          data as List<Relative>, title, context, analyticsHelper);
     } else if (typeCheck == 'str') {
       List<String> newData = data.cast<String>();
       return listString(newData, title);
@@ -28,7 +34,8 @@ class BloonAidWidget extends StatelessWidget {
   }
 }
 
-Widget listObject(List<Relative> data, String title, BuildContext context) {
+Widget listObject(List<Relative> data, String title, BuildContext context,
+    AnalyticsHelper analyticsHelper) {
   if (data[0].id != 'none') {
     return ExpansionTile(
       initiallyExpanded: title == 'Children',
@@ -37,17 +44,18 @@ Widget listObject(List<Relative> data, String title, BuildContext context) {
         style: smallTitleStyle.copyWith(color: Colors.teal),
       ),
       onExpansionChanged: (value) {
-        logEvent(bloonAidConst, 'expand_children');
+        // logEvent(bloonAidConst, 'expand_children');
       },
       childrenPadding: const EdgeInsets.symmetric(vertical: 10),
-      children: generateRelatives(data, context),
+      children: generateRelatives(context, data, analyticsHelper),
     );
   } else {
     return Container();
   }
 }
 
-Widget generateMinion(Relative relative, BuildContext context) {
+Widget generateMinion(
+    Relative relative, BuildContext context, AnalyticsHelper analyticsHelper) {
   if (relative.id == "N/A") {
     return Container();
   } else {
@@ -75,11 +83,12 @@ Widget generateMinion(Relative relative, BuildContext context) {
               style: normalStyle,
             ),
             onTap: () {
-              logPageView(relative.name);
+              // logPageView(relative.name);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MinionBloonPage(
+                    analyticsHelper: analyticsHelper,
                     minionId: relative.id,
                   ),
                 ),
@@ -93,7 +102,8 @@ Widget generateMinion(Relative relative, BuildContext context) {
   }
 }
 
-List<Widget> generateRelatives(List<Relative> data, BuildContext context) {
+List<Widget> generateRelatives(BuildContext context, List<Relative> data,
+    AnalyticsHelper analyticsHelper) {
   List<Widget> items = [];
 
   for (int index = 0; index < data.length; index++) {
@@ -113,11 +123,11 @@ List<Widget> generateRelatives(List<Relative> data, BuildContext context) {
           style: normalStyle,
         ),
         onTap: () {
-          logPageView(data[index].name);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => SingleBloon(
+                analyticsHelper: analyticsHelper,
                 bloonId: data[index].id,
               ),
             ),
@@ -164,7 +174,7 @@ ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
       style: smallTitleStyle.copyWith(color: Colors.teal),
     ),
     onExpansionChanged: (value) {
-      logEvent(bloonAidConst, 'expand_gimmicks');
+      // logEvent(bloonAidConst, 'expand_gimmicks');
     },
     children: gimmicks
         .map<Widget>(
