@@ -172,7 +172,6 @@ class BloonsGrid extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                // logPageView(bloon.name);
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -230,7 +229,6 @@ class BossesGrid extends StatelessWidget {
                 style: constraintsValues["textStyleBoss"],
               ),
               onTap: () {
-                // logPageView(boss.name);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

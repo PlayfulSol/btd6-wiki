@@ -9,9 +9,15 @@ import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
 class DrawerContent extends StatefulWidget {
-  const DrawerContent({super.key, required this.pageController});
+  const DrawerContent({
+    super.key,
+    required this.analyticsHelper,
+    required this.pageController,
+  });
 
+  final AnalyticsHelper analyticsHelper;
   final PageController pageController;
+
   @override
   State<DrawerContent> createState() => _DrawerContentState();
 }
@@ -23,6 +29,34 @@ class _DrawerContentState extends State<DrawerContent> {
       ExpansionTileController();
   final ExpansionTileController _bloonsExpansionTileControleer =
       ExpansionTileController();
+
+  @override
+  void initState() {
+    super.initState();
+    var parameters = {
+      'screen': drawer,
+      'widget': drawer,
+      'value': drawerOpened,
+    };
+    widget.analyticsHelper.logEvent(
+      name: widgetEngagement,
+      parameters: parameters,
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    var parameters = {
+      'screen': drawer,
+      'widget': drawer,
+      'value': drawerClosed,
+    };
+    widget.analyticsHelper.logEvent(
+      name: widgetEngagement,
+      parameters: parameters,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +77,18 @@ class _DrawerContentState extends State<DrawerContent> {
           ),
           ExpansionTile(
             controller: _towersExpansionTileController,
-            title: Text(titles[kTowersIndex],
+            title: Text(capTitles[kTowersIndex],
                 style: titleStyle.copyWith(color: Colors.teal)),
             onExpansionChanged: (bool expended) {
-              // logEvent(drawrConst, 'towers_expanded');
+              var parameters = {
+                'screen': drawer,
+                'widget': expanstionTile,
+                'value': '${kTowers}_$expended',
+              };
+              widget.analyticsHelper.logEvent(
+                name: widgetEngagement,
+                parameters: parameters,
+              );
               setState(
                 () {
                   if (expended) {
@@ -73,9 +115,11 @@ class _DrawerContentState extends State<DrawerContent> {
                         // logEvent('menu_tower_type', towerTypes[index]);
                         Navigator.pop(context);
                         globalState.updateCurrentOptionSelected(
-                            kTowers, towerTypes[index]);
+                          category: kTowers,
+                          option: towerTypes[index],
+                        );
                         globalState.updateCurrentPage(
-                            titles[kTowersIndex], kTowersIndex);
+                            simpleTitles[kTowersIndex], kTowersIndex);
                         widget.pageController.jumpToPage(kTowersIndex);
                       },
                     );
@@ -86,22 +130,31 @@ class _DrawerContentState extends State<DrawerContent> {
           ),
           ListTile(
             title: Text(
-              titles[kHeroesIndex],
+              capTitles[kHeroesIndex],
               style: titleStyle,
             ),
             onTap: () {
               // logEvent(drawrConst, 'heroes');
               Navigator.pop(context);
-              globalState.updateCurrentPage(titles[kHeroesIndex], kHeroesIndex);
+              globalState.updateCurrentPage(
+                  simpleTitles[kHeroesIndex], kHeroesIndex);
               widget.pageController.jumpToPage(kHeroesIndex);
             },
           ),
           ExpansionTile(
             controller: _bloonsExpansionTileControleer,
-            title: Text(titles[kBloonsIndex],
+            title: Text(capTitles[kBloonsIndex],
                 style: titleStyle.copyWith(color: Colors.teal)),
             onExpansionChanged: (bool expended) {
-              // logEvent(drawrConst, 'bloons_expanded');
+              var parameters = {
+                'screen': drawer,
+                'widget': expanstionTile,
+                'value': '${kBloons}_$expended',
+              };
+              widget.analyticsHelper.logEvent(
+                name: widgetEngagement,
+                parameters: parameters,
+              );
               setState(
                 () {
                   if (expended) {
@@ -128,9 +181,11 @@ class _DrawerContentState extends State<DrawerContent> {
                         // logEvent('bloon_type', bloonTypes[index]);
                         Navigator.pop(context);
                         globalState.updateCurrentOptionSelected(
-                            kBloons, bloonTypes[index]);
+                          category: kBloons,
+                          option: bloonTypes[index],
+                        );
                         globalState.updateCurrentPage(
-                            titles[kBloonsIndex], kBloonsIndex);
+                            simpleTitles[kBloonsIndex], kBloonsIndex);
                         widget.pageController.jumpToPage(kBloonsIndex);
                       },
                     );
@@ -141,10 +196,18 @@ class _DrawerContentState extends State<DrawerContent> {
           ),
           ExpansionTile(
             controller: _mapsExpansionTileController,
-            title: Text(titles[kMapsIndex],
+            title: Text(capTitles[kMapsIndex],
                 style: titleStyle.copyWith(color: Colors.teal)),
             onExpansionChanged: (bool expended) {
-              // logEvent(drawrConst, 'maps_expanded');
+              var parameters = {
+                'screen': drawer,
+                'widget': expanstionTile,
+                'value': '${kMaps}_$expended',
+              };
+              widget.analyticsHelper.logEvent(
+                name: widgetEngagement,
+                parameters: parameters,
+              );
               setState(
                 () {
                   if (expended) {
@@ -171,9 +234,11 @@ class _DrawerContentState extends State<DrawerContent> {
                         // logEvent('menu_map_difficulty', mapDifficulties[index]);
                         Navigator.pop(context);
                         globalState.updateCurrentOptionSelected(
-                            kMaps, mapDifficulties[index]);
+                          category: kMaps,
+                          option: mapDifficulties[index],
+                        );
                         globalState.updateCurrentPage(
-                            titles[kMapsIndex], kMapsIndex);
+                            simpleTitles[kMapsIndex], kMapsIndex);
                         widget.pageController.jumpToPage(kMapsIndex);
                       },
                     );

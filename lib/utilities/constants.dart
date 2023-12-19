@@ -12,18 +12,18 @@ const int kHeroesIndex = 1;
 const int kBloonsIndex = 2;
 const int kMapsIndex = 3;
 
-const List<String> titles = [
+const List<String> capTitles = [
   'Towers',
   'Heroes',
   'Bloons & Bosses',
   'Maps',
 ];
 
-const List<String> bottomNavTitles = [
-  'Towers',
-  'Heroes',
-  'Bloons',
-  'Maps',
+const List<String> simpleTitles = [
+  'towers',
+  'heroes',
+  'bloons',
+  'maps',
 ];
 
 const List<Icon> icons = [

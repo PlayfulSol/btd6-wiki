@@ -14,6 +14,7 @@ import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/widgets/loader.dart';
+import 'analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
@@ -68,7 +69,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late final AnalyticsHelper analyticsHelper;
-  final PageController pageController = PageController(initialPage: 0);
+  late final PageController pageController;
 
   bool isLoading = true;
   Map<String, dynamic> baseEntities = {
@@ -95,13 +96,18 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
     loadBaseData();
     analyticsHelper = AnalyticsHelper(widget.analytics);
+    pageController = PageController(initialPage: 0);
   }
 
   @override
   Widget build(BuildContext context) {
     var globalState = context.watch<GlobalState>();
     return Scaffold(
-      drawer: Drawer(child: DrawerContent(pageController: pageController)),
+      drawer: Drawer(
+          child: DrawerContent(
+        analyticsHelper: analyticsHelper,
+        pageController: pageController,
+      )),
       appBar: AppBar(
         title: Consumer<GlobalState>(
           builder: (context, globalState, child) {
@@ -119,7 +125,16 @@ class _MyHomePageState extends State<MyHomePage> {
                       onSelected: (String? newValue) {
                         if (newValue != null) {
                           globalState.updateCurrentOptionSelected(
-                              globalState.activeCategory, newValue);
+                              option: newValue);
+                          var parameters = {
+                            'screen': globalState.activeCategory,
+                            'widget': appBarFilter,
+                            'value': newValue,
+                          };
+                          analyticsHelper.logEvent(
+                            name: widgetEngagement,
+                            parameters: parameters,
+                          );
                         }
                       },
                       itemBuilder: (context) =>
@@ -142,10 +157,22 @@ class _MyHomePageState extends State<MyHomePage> {
             return IconButton(
               onPressed: () {
                 globalState.switchSearch();
+                String value;
                 if (globalState.isSearchEnabled) {
+                  value = searchOn;
                 } else {
                   globalState.updateCurrentQuery('');
+                  value = searchOff;
                 }
+                var parameters = {
+                  'screen': globalState.activeCategory,
+                  'widget': searchButton,
+                  'value': value,
+                };
+                analyticsHelper.logEvent(
+                  name: widgetEngagement,
+                  parameters: parameters,
+                );
               },
               icon: Icon(
                   !globalState.isSearchEnabled ? Icons.search : Icons.close),
@@ -177,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
               onPageChanged: (index) {
                 FocusScope.of(context).unfocus();
-                globalState.updateCurrentPage(titles[index], index);
+                globalState.updateCurrentPage(simpleTitles[index], index);
               },
             )
           : const Loader(),
@@ -199,16 +226,25 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           type: BottomNavigationBarType.fixed,
           items: [
-            for (int i = 0; i < bottomNavTitles.length; i++)
+            for (int i = 0; i < simpleTitles.length; i++)
               BottomNavigationBarItem(
                 icon: icons[i],
-                label: capitalizeEveryWord(bottomNavTitles[i]),
-                tooltip: bottomNavTitles[i],
+                label: capitalize(simpleTitles[i]),
+                tooltip: simpleTitles[i],
               ),
           ],
           currentIndex: globalState.currentPageIndex,
           onTap: (index) {
-            globalState.updateCurrentPage(titles[index], index);
+            var parameters = {
+              'screen': globalState.activeCategory,
+              'widget': bottomNavBar,
+              'value': simpleTitles[index],
+            };
+            analyticsHelper.logEvent(
+              name: widgetEngagement,
+              parameters: parameters,
+            );
+            globalState.updateCurrentPage(simpleTitles[index], index);
             pageController.jumpToPage(index);
           },
         ),

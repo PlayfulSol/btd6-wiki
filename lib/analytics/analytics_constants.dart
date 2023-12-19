@@ -1,28 +1,30 @@
-// const String bossBloonConst = 'boss_bloon';
-
-// const String bloonConst = 'single_bloon';
-
-// const String bloonAidConst = 'bloon_aid';
-
-// const String heroConst = 'single_hero';
-
-// const String drawrConst = 'menu';
-
-// const String towerConst = 'single_tower';
-
-// const String mapConst = 'single_map';
-
-// const String mapsPageConst = 'maps';
-
-// const String towersPageConst = 'towers';
-
-// const String heroesPageConst = 'heroes';
-
-// const String bloonsPageConst = 'bloons';
-
+// ------- Consts for screen_view -------
 const String kMainPagesClass = 'main_pages';
 const String kTowerPagesClass = 'tower_pages';
 const String kHeroPagesClass = 'hero_pages';
 const String kBloonPagesClass = 'bloon_pages';
 const String kBossPagesClass = 'boss_pages';
 const String kMapPagesClass = 'map_pages';
+
+// ------- Consts for widget_engagement -------
+const String widgetEngagement = 'widget_engagement';
+
+// ---- Main ----
+const String appBarFilter = 'appbar_filter';
+const String searchButton = 'appbar_search_button';
+const String searchOn = 'search_on';
+const String searchOff = 'search_off';
+const String bottomNavBar = 'bottom_nav_bar';
+
+// ---- Drawer ----
+const String drawer = 'drawer';
+const String drawerOpened = 'drawer_opened';
+const String drawerClosed = 'drawer_closed';
+
+// ---- About Us ----
+const String aboutUs = 'about_us';
+const String aboutUsOpened = 'about_us_opened';
+const String aboutUsClosed = 'about_us_closed';
+
+// ---- General ----
+const String expanstionTile = 'expanstion_tile';
