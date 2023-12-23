@@ -5,9 +5,16 @@ import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 
 class StatsList extends StatelessWidget {
+  final String heroId;
   final HeroStats heroStats;
+  final AnalyticsHelper analyticsHelper;
 
-  const StatsList({super.key, required this.heroStats});
+  const StatsList({
+    super.key,
+    required this.heroId,
+    required this.heroStats,
+    required this.analyticsHelper,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +46,16 @@ class StatsList extends StatelessWidget {
             return ExpansionTile(
               title:
                   Text(statsDictionary[heroStats.data.keys.toList()[index]]!),
-              onExpansionChanged: (value) {
-                logEvent(heroConst,
-                    'expand_stats_${heroStats.data.keys.toList()[index]}');
+              onExpansionChanged: (bool value) {
+                String stat = heroStats.data.keys.toList()[index];
+                analyticsHelper.logEvent(
+                  name: widgetEngagement,
+                  parameters: {
+                    'screen': heroId,
+                    'widget': expanstionTile,
+                    'value': '${stat}_$value',
+                  },
+                );
               },
               children: [
                 for (final dynamicItemValue in dynamicItem)

@@ -33,28 +33,26 @@ class _DrawerContentState extends State<DrawerContent> {
   @override
   void initState() {
     super.initState();
-    var parameters = {
-      'screen': drawer,
-      'widget': drawer,
-      'value': drawerOpened,
-    };
     widget.analyticsHelper.logEvent(
       name: widgetEngagement,
-      parameters: parameters,
+      parameters: {
+        'screen': drawer,
+        'widget': drawer,
+        'value': drawerOpened,
+      },
     );
   }
 
   @override
   void dispose() {
     super.dispose();
-    var parameters = {
-      'screen': drawer,
-      'widget': drawer,
-      'value': drawerClosed,
-    };
     widget.analyticsHelper.logEvent(
       name: widgetEngagement,
-      parameters: parameters,
+      parameters: {
+        'screen': drawer,
+        'widget': drawer,
+        'value': drawerClosed,
+      },
     );
   }
 
@@ -79,19 +77,18 @@ class _DrawerContentState extends State<DrawerContent> {
             controller: _towersExpansionTileController,
             title: Text(capTitles[kTowersIndex],
                 style: titleStyle.copyWith(color: Colors.teal)),
-            onExpansionChanged: (bool expended) {
-              var parameters = {
-                'screen': drawer,
-                'widget': expanstionTile,
-                'value': '${kTowers}_$expended',
-              };
+            onExpansionChanged: (bool value) {
               widget.analyticsHelper.logEvent(
                 name: widgetEngagement,
-                parameters: parameters,
+                parameters: {
+                  'screen': drawer,
+                  'widget': expanstionTile,
+                  'value': '${kTowers}_$value',
+                },
               );
               setState(
                 () {
-                  if (expended) {
+                  if (value) {
                     _mapsExpansionTileController.collapse();
                     _bloonsExpansionTileControleer.collapse();
                   }
@@ -112,8 +109,15 @@ class _DrawerContentState extends State<DrawerContent> {
                         style: bolderNormalStyle,
                       ),
                       onTap: () {
-                        // logEvent('menu_tower_type', towerTypes[index]);
                         Navigator.pop(context);
+                        widget.analyticsHelper.logEvent(
+                          name: widgetEngagement,
+                          parameters: {
+                            'screen': drawer,
+                            'widget': listTile,
+                            'value': '${kTowers}_${towerTypes[index]}',
+                          },
+                        );
                         globalState.updateCurrentOptionSelected(
                           category: kTowers,
                           option: towerTypes[index],
@@ -134,8 +138,15 @@ class _DrawerContentState extends State<DrawerContent> {
               style: titleStyle,
             ),
             onTap: () {
-              // logEvent(drawrConst, 'heroes');
               Navigator.pop(context);
+              widget.analyticsHelper.logEvent(
+                name: widgetEngagement,
+                parameters: {
+                  'screen': drawer,
+                  'widget': listTile,
+                  'value': kHeroes,
+                },
+              );
               globalState.updateCurrentPage(
                   simpleTitles[kHeroesIndex], kHeroesIndex);
               widget.pageController.jumpToPage(kHeroesIndex);
@@ -145,19 +156,18 @@ class _DrawerContentState extends State<DrawerContent> {
             controller: _bloonsExpansionTileControleer,
             title: Text(capTitles[kBloonsIndex],
                 style: titleStyle.copyWith(color: Colors.teal)),
-            onExpansionChanged: (bool expended) {
-              var parameters = {
-                'screen': drawer,
-                'widget': expanstionTile,
-                'value': '${kBloons}_$expended',
-              };
+            onExpansionChanged: (bool value) {
               widget.analyticsHelper.logEvent(
                 name: widgetEngagement,
-                parameters: parameters,
+                parameters: {
+                  'screen': drawer,
+                  'widget': expanstionTile,
+                  'value': '${kBloons}_$value',
+                },
               );
               setState(
                 () {
-                  if (expended) {
+                  if (value) {
                     _towersExpansionTileController.collapse();
                     _mapsExpansionTileController.collapse();
                   }
@@ -178,8 +188,15 @@ class _DrawerContentState extends State<DrawerContent> {
                         style: bolderNormalStyle,
                       ),
                       onTap: () {
-                        // logEvent('bloon_type', bloonTypes[index]);
                         Navigator.pop(context);
+                        widget.analyticsHelper.logEvent(
+                          name: widgetEngagement,
+                          parameters: {
+                            'screen': drawer,
+                            'widget': listTile,
+                            'value': '${kBloons}_${bloonTypes[index]}',
+                          },
+                        );
                         globalState.updateCurrentOptionSelected(
                           category: kBloons,
                           option: bloonTypes[index],
@@ -198,19 +215,18 @@ class _DrawerContentState extends State<DrawerContent> {
             controller: _mapsExpansionTileController,
             title: Text(capTitles[kMapsIndex],
                 style: titleStyle.copyWith(color: Colors.teal)),
-            onExpansionChanged: (bool expended) {
-              var parameters = {
-                'screen': drawer,
-                'widget': expanstionTile,
-                'value': '${kMaps}_$expended',
-              };
+            onExpansionChanged: (bool value) {
               widget.analyticsHelper.logEvent(
                 name: widgetEngagement,
-                parameters: parameters,
+                parameters: {
+                  'screen': drawer,
+                  'widget': expanstionTile,
+                  'value': '${kMaps}_$value',
+                },
               );
               setState(
                 () {
-                  if (expended) {
+                  if (value) {
                     _bloonsExpansionTileControleer.collapse();
                     _towersExpansionTileController.collapse();
                   }
@@ -231,8 +247,15 @@ class _DrawerContentState extends State<DrawerContent> {
                         style: bolderNormalStyle,
                       ),
                       onTap: () {
-                        // logEvent('menu_map_difficulty', mapDifficulties[index]);
                         Navigator.pop(context);
+                        widget.analyticsHelper.logEvent(
+                          name: widgetEngagement,
+                          parameters: {
+                            'screen': drawer,
+                            'widget': listTile,
+                            'value': '${kMaps}_${mapDifficulties[index]}',
+                          },
+                        );
                         globalState.updateCurrentOptionSelected(
                           category: kMaps,
                           option: mapDifficulties[index],
@@ -251,12 +274,18 @@ class _DrawerContentState extends State<DrawerContent> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const AboutUsPopup(),
+              AboutUsPopup(analyticsHelper: widget.analyticsHelper),
               ElevatedButton.icon(
-                onPressed: () => {
-                  // logEvent('rate_us', 'rate_us'),
-                  openUrl(
-                      'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki')
+                onPressed: () {
+                  widget.analyticsHelper.logEvent(
+                    name: buttonPress,
+                    parameters: {
+                      'screen': drawer,
+                      'button': rateUsButton,
+                      'value': buttonOpen,
+                    },
+                  );
+                  openUrl(googleLink);
                 },
                 icon: const FaIcon(FontAwesomeIcons.googlePlay),
                 label: const Text('Rate Us'),

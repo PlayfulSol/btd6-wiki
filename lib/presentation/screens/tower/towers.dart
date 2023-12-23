@@ -94,6 +94,14 @@ class _TowersState extends State<Towers> {
                             ),
                           ),
                           onTap: () {
+                            widget.analyticsHelper.logEvent(
+                              name: widgetEngagement,
+                              parameters: {
+                                'screen': kTowerPagesClass,
+                                'widget': listTile,
+                                'value': tower.id,
+                              },
+                            );
                             Navigator.push(
                               context,
                               MaterialPageRoute(

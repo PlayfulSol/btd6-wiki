@@ -92,12 +92,21 @@ class _HeroesState extends State<Heroes> {
                             ),
                           ),
                           onTap: () {
-                            // logPageView(hero.name);
+                            widget.analyticsHelper.logEvent(
+                              name: widgetEngagement,
+                              parameters: {
+                                'screen': kHeroPagesClass,
+                                'widget': listTile,
+                                'value': hero.id,
+                              },
+                            );
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    SingleHero(heroId: hero.id),
+                                builder: (context) => SingleHero(
+                                  heroId: hero.id,
+                                  analyticsHelper: widget.analyticsHelper,
+                                ),
                               ),
                             );
                           },

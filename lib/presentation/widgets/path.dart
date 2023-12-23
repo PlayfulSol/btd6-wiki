@@ -10,21 +10,30 @@ class MonkeyPath extends StatelessWidget {
   final List<UpgradeInfo> path;
   final String pathKey;
   final String monkeyId;
+  final AnalyticsHelper analyticsHelper;
 
-  const MonkeyPath(
-      {super.key,
-      required this.path,
-      required this.pathKey,
-      required this.monkeyId});
+  const MonkeyPath({
+    super.key,
+    required this.path,
+    required this.pathKey,
+    required this.monkeyId,
+    required this.analyticsHelper,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Text(pathsDictionary[pathKey]!,
           style: titleStyle.copyWith(color: Colors.teal)),
-      onExpansionChanged: (value) {
-        logEvent(
-            towerConst, 'tower_${monkeyId}_path_${pathsDictionary[pathKey]}');
+      onExpansionChanged: (bool value) {
+        analyticsHelper.logEvent(
+          name: widgetEngagement,
+          parameters: {
+            'screen': monkeyId,
+            'widget': expanstionTile,
+            'value': '${pathKey}_$value',
+          },
+        );
       },
       children: [
         ListView.builder(

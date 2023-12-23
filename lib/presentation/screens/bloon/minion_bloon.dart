@@ -237,16 +237,22 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
                     ),
                     const SizedBox(height: 5),
                     gimmicks(
+                      widget.analyticsHelper,
+                      minion.id,
                       "General Properties",
                       List<String>.from(minion.gimmicks["general"]),
                       true,
                     ),
                     gimmicks(
+                      widget.analyticsHelper,
+                      minion.id,
                       "Normal Gimmicks",
                       List<String>.from(minion.gimmicks["normal"]),
                       false,
                     ),
                     gimmicks(
+                      widget.analyticsHelper,
+                      minion.id,
                       "Elite Gimmicks",
                       List<String>.from(minion.gimmicks["elite"]),
                       false,

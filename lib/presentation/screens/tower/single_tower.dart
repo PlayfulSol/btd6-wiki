@@ -29,17 +29,19 @@ class _SingleTowerState extends State<SingleTower> {
   MonkeyPath _buildPath(int index) {
     var hasParagon = tower.paths.paragon != null;
     return MonkeyPath(
-        path: index == 0
-            ? tower.paths.path1
-            : index == 1
-                ? tower.paths.path2
-                : index == 2
-                    ? tower.paths.path3
-                    : hasParagon
-                        ? [tower.paths.paragon!]
-                        : [],
-        pathKey: getPathKeyFromIndex(index),
-        monkeyId: tower.id);
+      path: index == 0
+          ? tower.paths.path1
+          : index == 1
+              ? tower.paths.path2
+              : index == 2
+                  ? tower.paths.path3
+                  : hasParagon
+                      ? [tower.paths.paragon!]
+                      : [],
+      pathKey: getPathKeyFromIndex(index),
+      monkeyId: tower.id,
+      analyticsHelper: widget.analyticsHelper,
+    );
   }
 
   void loadTower() async {

@@ -6,8 +6,9 @@ const String kBloonPagesClass = 'bloon_pages';
 const String kBossPagesClass = 'boss_pages';
 const String kMapPagesClass = 'map_pages';
 
-// ------- Consts for widget_engagement -------
+// ------- Consts for event names -------
 const String widgetEngagement = 'widget_engagement';
+const String buttonPress = 'button_press';
 
 // ---- Main ----
 const String appBarFilter = 'appbar_filter';
@@ -23,8 +24,11 @@ const String drawerClosed = 'drawer_closed';
 
 // ---- About Us ----
 const String aboutUs = 'about_us';
-const String aboutUsOpened = 'about_us_opened';
-const String aboutUsClosed = 'about_us_closed';
+const String aboutUsButton = 'about_us_button';
+const String rateUsButton = 'rate_us_button';
 
 // ---- General ----
 const String expanstionTile = 'expanstion_tile';
+const String listTile = 'list_tile';
+const String buttonOpen = 'opened';
+const String buttonClose = 'closed';

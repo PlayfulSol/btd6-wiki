@@ -216,3 +216,29 @@ const Map<String, dynamic> constraintsBloonUWPreset = {
   "imageWidth": 56.0,
   "textStyleBoss": titleStyle,
 };
+
+const String googleLink =
+    'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki';
+
+const String playfulEmail = 'Playfulsols@gamil.com';
+const String playfulGitRepo = 'https://github.com/PlayfulSol/flutter-btd6-wiki';
+
+const String name = 'name';
+const String email = 'email';
+const String gitRepo = 'git_repo';
+const String git = 'git';
+const String linkedin = 'linkedin';
+
+const Map<String, String> asaf = {
+  name: 'Asaf Hadad',
+  email: 'asaf147369@gmail.com',
+  git: 'https://github.com/asaf147369',
+  linkedin: 'https://www.linkedin.com/in/asaf-hadad/',
+};
+
+const Map<String, String> shai = {
+  name: 'Shai Holczer',
+  email: 'shaitnto@gmail.com',
+  git: 'https://github.com/namelessto',
+  linkedin: 'https://www.linkedin.com/in/shai-holczer/',
+};

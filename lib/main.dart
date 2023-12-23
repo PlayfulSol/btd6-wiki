@@ -126,14 +126,13 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (newValue != null) {
                           globalState.updateCurrentOptionSelected(
                               option: newValue);
-                          var parameters = {
-                            'screen': globalState.activeCategory,
-                            'widget': appBarFilter,
-                            'value': newValue,
-                          };
                           analyticsHelper.logEvent(
                             name: widgetEngagement,
-                            parameters: parameters,
+                            parameters: {
+                              'screen': globalState.activeCategory,
+                              'widget': appBarFilter,
+                              'value': newValue,
+                            },
                           );
                         }
                       },
@@ -164,14 +163,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   globalState.updateCurrentQuery('');
                   value = searchOff;
                 }
-                var parameters = {
-                  'screen': globalState.activeCategory,
-                  'widget': searchButton,
-                  'value': value,
-                };
                 analyticsHelper.logEvent(
                   name: widgetEngagement,
-                  parameters: parameters,
+                  parameters: {
+                    'screen': globalState.activeCategory,
+                    'widget': searchButton,
+                    'value': value,
+                  },
                 );
               },
               icon: Icon(
@@ -235,14 +233,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
           currentIndex: globalState.currentPageIndex,
           onTap: (index) {
-            var parameters = {
-              'screen': globalState.activeCategory,
-              'widget': bottomNavBar,
-              'value': simpleTitles[index],
-            };
             analyticsHelper.logEvent(
               name: widgetEngagement,
-              parameters: parameters,
+              parameters: {
+                'screen': globalState.activeCategory,
+                'widget': bottomNavBar,
+                'value': simpleTitles[index],
+              },
             );
             globalState.updateCurrentPage(simpleTitles[index], index);
             pageController.jumpToPage(index);

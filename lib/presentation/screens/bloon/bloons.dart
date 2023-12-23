@@ -172,6 +172,14 @@ class BloonsGrid extends StatelessWidget {
                 ),
               ),
               onTap: () {
+                analyticsHelper.logEvent(
+                  name: widgetEngagement,
+                  parameters: {
+                    'screen': kBloonPagesClass,
+                    'widget': listTile,
+                    'value': bloon.id,
+                  },
+                );
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -229,6 +237,14 @@ class BossesGrid extends StatelessWidget {
                 style: constraintsValues["textStyleBoss"],
               ),
               onTap: () {
+                analyticsHelper.logEvent(
+                  name: widgetEngagement,
+                  parameters: {
+                    'screen': kBossPagesClass,
+                    'widget': listTile,
+                    'value': boss.id,
+                  },
+                );
                 Navigator.push(
                   context,
                   MaterialPageRoute(

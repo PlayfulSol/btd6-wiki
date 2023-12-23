@@ -5,7 +5,7 @@ import 'constants.dart';
 
 class GlobalState with ChangeNotifier {
   int _currentPageIndex = kTowersIndex;
-  String _currentTitle = titles[kTowersIndex];
+  String _currentTitle = capTitles[kTowersIndex];
   String _activeCategory = kTowers;
   Map<String, bool> _isSearchEnabled = {};
   Map<String, String> _currentOptionSelected = {};
@@ -25,8 +25,8 @@ class GlobalState with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateCurrentOptionSelected(String category, String option) {
-    _currentOptionSelected[category] = option;
+  void updateCurrentOptionSelected({String? category, required String option}) {
+    _currentOptionSelected[category ?? _activeCategory] = option;
     notifyListeners();
   }
 

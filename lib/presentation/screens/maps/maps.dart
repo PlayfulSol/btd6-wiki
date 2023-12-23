@@ -76,6 +76,14 @@ class _MapsState extends State<Maps> {
                           padding: const EdgeInsets.all(5.0),
                           child: GestureDetector(
                             onTap: () {
+                              widget.analyticsHelper.logEvent(
+                                name: widgetEngagement,
+                                parameters: {
+                                  'screen': kMapPagesClass,
+                                  'widget': listTile,
+                                  'value': filteredMaps[index].id,
+                                },
+                              );
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
