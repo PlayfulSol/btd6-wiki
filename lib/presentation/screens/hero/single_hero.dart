@@ -31,9 +31,12 @@ class _SingleHeroState extends State<SingleHero> {
 
   HeroLevel _buildHeroLevel(UpgradeInfo level) {
     var shouldShowLevelImage = false;
-    if (singleHero.skinChange.keys.contains('level_${level.name}') ||
-        singleHero.skinChange.keys
-            .any((e) => e.contains('level_${level.name}_'))) {
+    // if (singleHero.skinChange.keys.contains('level_${level.name}') ||
+    //     singleHero.skinChange.keys
+    //         .any((e) => e.contains('level_${level.name}_'))) {
+    //   shouldShowLevelImage = true;
+    // }
+    if (singleHero.skinChange.contains('level_${level.name}')) {
       shouldShowLevelImage = true;
     }
     return HeroLevel(
