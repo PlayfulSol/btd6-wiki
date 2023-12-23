@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/bloons/boss/minion_bloon.dart';
 import '/presentation/widgets/bloon_aid_widget.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';

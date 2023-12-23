@@ -1,6 +1,6 @@
-import 'boss_health_class.dart';
+import '/models/bloons/common/relative_class.dart';
 import '/models/base_model.dart';
-import '../common/relative_class.dart';
+import 'boss_health_class.dart';
 
 class BossBloonModel extends BaseModel {
   late final String description;

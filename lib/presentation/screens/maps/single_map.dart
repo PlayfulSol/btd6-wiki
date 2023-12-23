@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/maps/map.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
