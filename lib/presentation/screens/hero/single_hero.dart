@@ -1,7 +1,10 @@
 import 'dart:convert';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '/models/towers/common/upgrade_info_class.dart';
+import '/models/towers/hero/hero_skins.dart';
 import '/models/towers/hero/hero.dart';
 import '/presentation/widgets/hero_stats.dart';
 import '/presentation/widgets/hero_level.dart';
@@ -27,26 +30,41 @@ class SingleHero extends StatefulWidget {
 
 class _SingleHeroState extends State<SingleHero> {
   late final HeroModel singleHero;
+  final controller = CarouselController();
+  List<String> skinsFirstImages = [];
+  List<String> skinsNames = [];
+  int activeIndex = 0;
   bool loading = true;
 
   HeroLevel _buildHeroLevel(UpgradeInfo level) {
-    var shouldShowLevelImage = false;
-    // if (singleHero.skinChange.keys.contains('level_${level.name}') ||
-    //     singleHero.skinChange.keys
-    //         .any((e) => e.contains('level_${level.name}_'))) {
-    //   shouldShowLevelImage = true;
-    // }
-    if (singleHero.skinChange.contains('level_${level.name}')) {
+    List<String> skinsImages = [];
+    bool shouldShowLevelImage = false;
+    int indexOfLevel;
+
+    if (singleHero.skinChange.contains(level.name)) {
       shouldShowLevelImage = true;
+      indexOfLevel = singleHero.skinChange.indexOf(level.name);
+      var skinNamesAndImages = getSkinNamesAndImages(indexOfLevel);
+      skinsImages = skinNamesAndImages[1];
     }
     return HeroLevel(
       heroId: widget.heroId,
       level: level,
       shouldShowLevelImage: shouldShowLevelImage,
-      heroImage: singleHero.image,
+      heroImages: skinsImages,
       heroName: singleHero.name,
       analyticsHelper: widget.analyticsHelper,
     );
+  }
+
+  List<List<String>> getSkinNamesAndImages(int levelIndex) {
+    List<String> names = [];
+    List<String> images = [];
+    for (var skin in singleHero.skins) {
+      names.add(skin.name);
+      images.add(skin.value[levelIndex]);
+    }
+    return [names, images];
   }
 
   void loadHero() async {
@@ -56,6 +74,9 @@ class _SingleHeroState extends State<SingleHero> {
     singleHero = HeroModel.fromJson(jsonData);
     setState(() {
       loading = false;
+      var skinNamesAndImages = getSkinNamesAndImages(0);
+      skinsNames = skinNamesAndImages[0];
+      skinsFirstImages = skinNamesAndImages[1];
     });
   }
 
@@ -84,12 +105,57 @@ class _SingleHeroState extends State<SingleHero> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image(
-                        image: AssetImage(heroImage(singleHero.image)),
-                        width: 200,
-                        fit: BoxFit.fill,
-                        semanticLabel: singleHero.name,
+                      Column(
+                        children: [
+                          CarouselSlider.builder(
+                            carouselController: controller,
+                            options: CarouselOptions(
+                              viewportFraction: 0.64,
+                              initialPage: 0,
+                              height: MediaQuery.of(context).size.width * 0.5,
+                              enableInfiniteScroll: false,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  activeIndex = index;
+                                });
+                              },
+                            ),
+                            itemCount: singleHero.skins.length,
+                            itemBuilder: ((context, index, realIndex) => Image(
+                                  image: AssetImage(
+                                      heroImage(skinsFirstImages[index])),
+                                  filterQuality: FilterQuality.high,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.56,
+                                )),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            skinsNames[activeIndex],
+                            style: smallTitleStyle,
+                          ),
+                          const SizedBox(height: 10),
+                          AnimatedSmoothIndicator(
+                            activeIndex: activeIndex,
+                            count: singleHero.skins.length,
+                            onDotClicked: (index) =>
+                                controller.jumpToPage(index),
+                            effect: const ScrollingDotsEffect(
+                              activeDotScale: 1.25,
+                              spacing: 11,
+                              dotHeight: 9,
+                              dotWidth: 9,
+                              activeDotColor: Colors.teal,
+                            ),
+                          ),
+                        ],
                       ),
+                      // Image(
+                      //   image: AssetImage(heroImage(singleHero.image)),
+                      //   width: 200,
+                      //   fit: BoxFit.fill,
+                      //   semanticLabel: singleHero.name,
+                      // ),
                       const SizedBox(height: 10),
                       Text(singleHero.inGameDesc,
                           textAlign: TextAlign.center, style: normalStyle),
