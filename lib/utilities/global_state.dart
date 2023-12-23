@@ -4,8 +4,8 @@ import '/utilities/strings.dart';
 import 'constants.dart';
 
 class GlobalState with ChangeNotifier {
-  int _currentPageIndex = 0;
-  String _currentTitle = 'BTD6 Wiki';
+  int _currentPageIndex = kTowersIndex;
+  String _currentTitle = capTitles[kTowersIndex];
   String _activeCategory = kTowers;
   Map<String, bool> _isSearchEnabled = {};
   Map<String, String> _currentOptionSelected = {};
@@ -25,8 +25,8 @@ class GlobalState with ChangeNotifier {
     notifyListeners();
   }
 
-  void updateCurrentOptionSelected(String category, String option) {
-    _currentOptionSelected[category] = option;
+  void updateCurrentOptionSelected({String? category, required String option}) {
+    _currentOptionSelected[category ?? _activeCategory] = option;
     notifyListeners();
   }
 
@@ -41,16 +41,6 @@ class GlobalState with ChangeNotifier {
     } else {
       _isSearchEnabled[_activeCategory] = !_isSearchEnabled[_activeCategory]!;
     }
-    notifyListeners();
-  }
-
-  void resetTitle() {
-    _currentTitle = 'BTD6 Wiki';
-    notifyListeners();
-  }
-
-  void resetPageIndex() {
-    _currentPageIndex = 0;
     notifyListeners();
   }
 }

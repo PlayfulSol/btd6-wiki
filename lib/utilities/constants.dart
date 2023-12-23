@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 
-String kTowers = 'towers';
-String kHeroes = 'heroes';
-String kBloons = 'bloons';
-String kBlimps = 'blimps';
-String kBosses = 'bosses';
-String kMaps = 'maps';
+const String kTowers = 'towers';
+const String kHeroes = 'heroes';
+const String kBloons = 'bloons';
+const String kBlimps = 'blimps';
+const String kBosses = 'bosses';
+const String kMaps = 'maps';
 
-const List<String> titles = [
-  'towers',
-  'heroes',
-  'bloons',
-  'maps',
-];
+const int kTowersIndex = 0;
+const int kHeroesIndex = 1;
+const int kBloonsIndex = 2;
+const int kMapsIndex = 3;
 
-const List<String> drawrTitles = [
+const List<String> capTitles = [
   'Towers',
   'Heroes',
   'Bloons & Bosses',
   'Maps',
+];
+
+const List<String> simpleTitles = [
+  'towers',
+  'heroes',
+  'bloons',
+  'maps',
 ];
 
 const List<Icon> icons = [
@@ -35,8 +40,6 @@ const mapDataPath = 'assets/data/maps/';
 const bloonsDataPath = 'assets/data/bloons/';
 const bossesDataPath = 'assets/data/bosses/';
 const minionsDataPath = 'assets/data/minions/';
-
-PageController pageController = PageController(initialPage: 0);
 
 const Map<String, String> statsDictionary = {
   'damage': 'Damage',
@@ -142,10 +145,18 @@ const TextStyle bigTitleStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const Map<String, dynamic> constraintsSmallPreset = {
+  "crossAxisCount": 1,
+  "rowsToShow": 2,
+  "childAspectRatio": 3.1,
+  "titleFontSize": 17.0,
+  "subtitleFontSize": 15.0,
+};
+
 const Map<String, dynamic> constraintsNormalPreset = {
   "crossAxisCount": 1,
   "rowsToShow": 2,
-  "childAspectRatio": 3.15,
+  "childAspectRatio": 3.7,
   "titleFontSize": 18.0,
   "subtitleFontSize": 15.0,
 };
@@ -179,18 +190,18 @@ const Map<String, dynamic> constraintsBloonSmallPreset = {
 const Map<String, dynamic> constraintsBloonNormalPreset = {
   "crossAxisCount": 2,
   "crossAxisCountBoss": 1,
-  "childAspectRatio": 2.1,
+  "childAspectRatio": 2.3,
   "childAspectRatioBoss": 4.05,
   "titleFontSize": 19.0,
-  "imageWidth": 34.5,
+  "imageWidth": 35.0,
   "textStyleBoss": smallTitleStyle,
 };
 
 const Map<String, dynamic> constraintsBloonWidePreset = {
-  "crossAxisCount": 2,
-  "crossAxisCountBoss": 1,
-  "childAspectRatio": 2.075,
-  "childAspectRatioBoss": 4.2,
+  "crossAxisCount": 3,
+  "crossAxisCountBoss": 2,
+  "childAspectRatio": 2.2,
+  "childAspectRatioBoss": 3.5,
   "titleFontSize": 19.0,
   "imageWidth": 42.0,
   "textStyleBoss": smallTitleStyle,
@@ -204,4 +215,30 @@ const Map<String, dynamic> constraintsBloonUWPreset = {
   "titleFontSize": 22.0,
   "imageWidth": 56.0,
   "textStyleBoss": titleStyle,
+};
+
+const String googleLink =
+    'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki';
+
+const String playfulEmail = 'Playfulsols@gamil.com';
+const String playfulGitRepo = 'https://github.com/PlayfulSol/flutter-btd6-wiki';
+
+const String name = 'name';
+const String email = 'email';
+const String gitRepo = 'git_repo';
+const String git = 'git';
+const String linkedin = 'linkedin';
+
+const Map<String, String> asaf = {
+  name: 'Asaf Hadad',
+  email: 'asaf147369@gmail.com',
+  git: 'https://github.com/asaf147369',
+  linkedin: 'https://www.linkedin.com/in/asaf-hadad/',
+};
+
+const Map<String, String> shai = {
+  name: 'Shai Holczer',
+  email: 'shaitnto@gmail.com',
+  git: 'https://github.com/namelessto',
+  linkedin: 'https://www.linkedin.com/in/shai-holczer/',
 };

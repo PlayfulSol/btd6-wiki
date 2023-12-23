@@ -12,9 +12,14 @@ import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
 class SingleHero extends StatefulWidget {
+  final AnalyticsHelper analyticsHelper;
   final String heroId;
 
-  const SingleHero({super.key, required this.heroId});
+  const SingleHero({
+    super.key,
+    required this.heroId,
+    required this.analyticsHelper,
+  });
 
   @override
   State<SingleHero> createState() => _SingleHeroState();
@@ -37,6 +42,7 @@ class _SingleHeroState extends State<SingleHero> {
       shouldShowLevelImage: shouldShowLevelImage,
       heroImage: singleHero.image,
       heroName: singleHero.name,
+      analyticsHelper: widget.analyticsHelper,
     );
   }
 
@@ -53,6 +59,10 @@ class _SingleHeroState extends State<SingleHero> {
   @override
   void initState() {
     super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kTowerPagesClass,
+      screenName: widget.heroId,
+    );
     loadHero();
   }
 
@@ -86,11 +96,22 @@ class _SingleHeroState extends State<SingleHero> {
                       const SizedBox(height: 10),
                       ExpansionTile(
                         title: const Text("Advanced Stats"),
-                        onExpansionChanged: (value) {
-                          logEvent(heroConst, 'Stats');
+                        onExpansionChanged: (bool value) {
+                          widget.analyticsHelper.logEvent(
+                            name: widgetEngagement,
+                            parameters: {
+                              'screen': singleHero.id,
+                              'widget': expanstionTile,
+                              'value': 'hero_stats_$value',
+                            },
+                          );
                         },
                         children: [
-                          StatsList(heroStats: singleHero.stats),
+                          StatsList(
+                            heroId: singleHero.id,
+                            heroStats: singleHero.stats,
+                            analyticsHelper: widget.analyticsHelper,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 10),

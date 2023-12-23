@@ -9,7 +9,14 @@ import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
 class DrawerContent extends StatefulWidget {
-  const DrawerContent({super.key});
+  const DrawerContent({
+    super.key,
+    required this.analyticsHelper,
+    required this.pageController,
+  });
+
+  final AnalyticsHelper analyticsHelper;
+  final PageController pageController;
 
   @override
   State<DrawerContent> createState() => _DrawerContentState();
@@ -20,150 +27,276 @@ class _DrawerContentState extends State<DrawerContent> {
       ExpansionTileController();
   final ExpansionTileController _mapsExpansionTileController =
       ExpansionTileController();
+  final ExpansionTileController _bloonsExpansionTileControleer =
+      ExpansionTileController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.analyticsHelper.logEvent(
+      name: widgetEngagement,
+      parameters: {
+        'screen': drawer,
+        'widget': drawer,
+        'value': drawerOpened,
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    widget.analyticsHelper.logEvent(
+      name: widgetEngagement,
+      parameters: {
+        'screen': drawer,
+        'widget': drawer,
+        'value': drawerClosed,
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
-    int towersIndex = 0;
-    int heroesIndex = 1;
-    int bloonsIndex = 2;
-    int mapsIndex = 3;
 
     return Drawer(
-        child: Column(
-      children: [
-        const Padding(
-          padding: EdgeInsets.fromLTRB(15, 50, 0, 10),
-          child: SizedBox(
-            width: double.infinity,
-            child: Text(
-              'Bloons TD 6 Wiki',
-              style: bigTitleStyle,
+      child: Column(
+        children: [
+          const Padding(
+            padding: EdgeInsets.fromLTRB(15, 50, 0, 10),
+            child: SizedBox(
+              width: double.infinity,
+              child: Text(
+                'Bloons TD 6 Wiki',
+                style: bigTitleStyle,
+              ),
             ),
           ),
-        ),
-        ExpansionTile(
-          controller: _towersExpansionTileController,
-          title: Text(drawrTitles[0],
-              style: titleStyle.copyWith(color: Colors.teal)),
-          onExpansionChanged: (bool expended) {
-            logEvent(drawrConst, 'towers_expanded');
-            setState(() {
-              if (expended) {
-                _mapsExpansionTileController.collapse();
-              }
-            });
-          },
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: towerTypes.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      towerTypes[index],
-                      style: bolderNormalStyle,
-                    ),
-                    onTap: () {
-                      logEvent('menu_tower_type', towerTypes[index]);
-                      Navigator.pop(context);
-                      globalState.updateCurrentOptionSelected(
-                          kTowers, towerTypes[index]);
-                      globalState.updateCurrentPage(
-                          titles[towersIndex], towersIndex);
-                      pageController.jumpToPage(towersIndex);
-                    },
-                  );
+          ExpansionTile(
+            controller: _towersExpansionTileController,
+            title: Text(capTitles[kTowersIndex],
+                style: titleStyle.copyWith(color: Colors.teal)),
+            onExpansionChanged: (bool value) {
+              widget.analyticsHelper.logEvent(
+                name: widgetEngagement,
+                parameters: {
+                  'screen': drawer,
+                  'widget': expanstionTile,
+                  'value': '${kTowers}_$value',
                 },
+              );
+              setState(
+                () {
+                  if (value) {
+                    _mapsExpansionTileController.collapse();
+                    _bloonsExpansionTileControleer.collapse();
+                  }
+                },
+              );
+            },
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: towerTypes.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        towerTypes[index],
+                        style: bolderNormalStyle,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        widget.analyticsHelper.logEvent(
+                          name: widgetEngagement,
+                          parameters: {
+                            'screen': drawer,
+                            'widget': listTile,
+                            'value': '${kTowers}_${towerTypes[index]}',
+                          },
+                        );
+                        globalState.updateCurrentOptionSelected(
+                          category: kTowers,
+                          option: towerTypes[index],
+                        );
+                        globalState.updateCurrentPage(
+                            simpleTitles[kTowersIndex], kTowersIndex);
+                        widget.pageController.jumpToPage(kTowersIndex);
+                      },
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
-        ListTile(
+            ],
+          ),
+          ListTile(
             title: Text(
-              drawrTitles[1],
+              capTitles[kHeroesIndex],
               style: titleStyle,
             ),
             onTap: () {
-              logEvent(drawrConst, 'heroes');
               Navigator.pop(context);
-              globalState.updateCurrentPage(titles[heroesIndex], heroesIndex);
-              pageController.jumpToPage(heroesIndex);
-            }),
-        ListTile(
-            title: Text(
-              drawrTitles[2],
-              style: titleStyle,
-            ),
-            onTap: () {
-              logEvent(drawrConst, 'bloons');
-              Navigator.pop(context);
-              globalState.updateCurrentPage(titles[bloonsIndex], bloonsIndex);
-              pageController.jumpToPage(bloonsIndex);
-            }),
-        ExpansionTile(
-          controller: _mapsExpansionTileController,
-          title: Text(drawrTitles[3],
-              style: titleStyle.copyWith(color: Colors.teal)),
-          onExpansionChanged: (bool expended) {
-            logEvent(drawrConst, 'maps_expanded');
-            setState(() {
-              if (expended) {
-                _towersExpansionTileController.collapse();
-              }
-            });
-          },
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: mapDifficulties.length,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text(
-                      mapDifficulties[index],
-                      style: bolderNormalStyle,
-                    ),
-                    onTap: () {
-                      logEvent('menu_map_difficulty', mapDifficulties[index]);
-                      Navigator.pop(context);
-                      globalState.updateCurrentOptionSelected(
-                          kMaps, mapDifficulties[index]);
-                      globalState.updateCurrentPage(
-                          titles[mapsIndex], mapsIndex);
-                      pageController.jumpToPage(mapsIndex);
+              widget.analyticsHelper.logEvent(
+                name: widgetEngagement,
+                parameters: {
+                  'screen': drawer,
+                  'widget': listTile,
+                  'value': kHeroes,
+                },
+              );
+              globalState.updateCurrentPage(
+                  simpleTitles[kHeroesIndex], kHeroesIndex);
+              widget.pageController.jumpToPage(kHeroesIndex);
+            },
+          ),
+          ExpansionTile(
+            controller: _bloonsExpansionTileControleer,
+            title: Text(capTitles[kBloonsIndex],
+                style: titleStyle.copyWith(color: Colors.teal)),
+            onExpansionChanged: (bool value) {
+              widget.analyticsHelper.logEvent(
+                name: widgetEngagement,
+                parameters: {
+                  'screen': drawer,
+                  'widget': expanstionTile,
+                  'value': '${kBloons}_$value',
+                },
+              );
+              setState(
+                () {
+                  if (value) {
+                    _towersExpansionTileController.collapse();
+                    _mapsExpansionTileController.collapse();
+                  }
+                },
+              );
+            },
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: bloonTypes.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        bloonTypes[index],
+                        style: bolderNormalStyle,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        widget.analyticsHelper.logEvent(
+                          name: widgetEngagement,
+                          parameters: {
+                            'screen': drawer,
+                            'widget': listTile,
+                            'value': '${kBloons}_${bloonTypes[index]}',
+                          },
+                        );
+                        globalState.updateCurrentOptionSelected(
+                          category: kBloons,
+                          option: bloonTypes[index],
+                        );
+                        globalState.updateCurrentPage(
+                            simpleTitles[kBloonsIndex], kBloonsIndex);
+                        widget.pageController.jumpToPage(kBloonsIndex);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          ExpansionTile(
+            controller: _mapsExpansionTileController,
+            title: Text(capTitles[kMapsIndex],
+                style: titleStyle.copyWith(color: Colors.teal)),
+            onExpansionChanged: (bool value) {
+              widget.analyticsHelper.logEvent(
+                name: widgetEngagement,
+                parameters: {
+                  'screen': drawer,
+                  'widget': expanstionTile,
+                  'value': '${kMaps}_$value',
+                },
+              );
+              setState(
+                () {
+                  if (value) {
+                    _bloonsExpansionTileControleer.collapse();
+                    _towersExpansionTileController.collapse();
+                  }
+                },
+              );
+            },
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: mapDifficulties.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(
+                        mapDifficulties[index],
+                        style: bolderNormalStyle,
+                      ),
+                      onTap: () {
+                        Navigator.pop(context);
+                        widget.analyticsHelper.logEvent(
+                          name: widgetEngagement,
+                          parameters: {
+                            'screen': drawer,
+                            'widget': listTile,
+                            'value': '${kMaps}_${mapDifficulties[index]}',
+                          },
+                        );
+                        globalState.updateCurrentOptionSelected(
+                          category: kMaps,
+                          option: mapDifficulties[index],
+                        );
+                        globalState.updateCurrentPage(
+                            simpleTitles[kMapsIndex], kMapsIndex);
+                        widget.pageController.jumpToPage(kMapsIndex);
+                      },
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              AboutUsPopup(analyticsHelper: widget.analyticsHelper),
+              ElevatedButton.icon(
+                onPressed: () {
+                  widget.analyticsHelper.logEvent(
+                    name: buttonPress,
+                    parameters: {
+                      'screen': drawer,
+                      'button': rateUsButton,
+                      'value': buttonOpen,
                     },
                   );
+                  openUrl(googleLink);
                 },
+                icon: const FaIcon(FontAwesomeIcons.googlePlay),
+                label: const Text('Rate Us'),
               ),
-            ),
-          ],
-        ),
-        const Spacer(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const AboutUsPopup(),
-            ElevatedButton.icon(
-              onPressed: () => {
-                logEvent('rate_us', 'rate_us'),
-                openUrl(
-                    'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki')
-              },
-              icon: const FaIcon(FontAwesomeIcons.googlePlay),
-              label: const Text('Rate Us'),
-            ),
-          ],
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-      ],
-    ));
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
   }
 }

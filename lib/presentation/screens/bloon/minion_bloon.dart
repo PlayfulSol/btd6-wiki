@@ -5,15 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/bloons/boss/minion_bloon.dart';
 import '/presentation/widgets/bloon_aid_widget.dart';
+import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 
 class MinionBloonPage extends StatefulWidget {
   const MinionBloonPage({
     super.key,
+    required this.analyticsHelper,
     required this.minionId,
   });
-
+  final AnalyticsHelper analyticsHelper;
   final String minionId;
   @override
   State<MinionBloonPage> createState() => _MinionBloonPageState();
@@ -42,6 +45,10 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
   @override
   void initState() {
     super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kBossPagesClass,
+      screenName: widget.minionId,
+    );
     loadMinion();
   }
 
@@ -230,16 +237,22 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
                     ),
                     const SizedBox(height: 5),
                     gimmicks(
+                      widget.analyticsHelper,
+                      minion.id,
                       "General Properties",
                       List<String>.from(minion.gimmicks["general"]),
                       true,
                     ),
                     gimmicks(
+                      widget.analyticsHelper,
+                      minion.id,
                       "Normal Gimmicks",
                       List<String>.from(minion.gimmicks["normal"]),
                       false,
                     ),
                     gimmicks(
+                      widget.analyticsHelper,
+                      minion.id,
                       "Elite Gimmicks",
                       List<String>.from(minion.gimmicks["elite"]),
                       false,

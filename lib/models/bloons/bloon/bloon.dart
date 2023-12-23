@@ -1,7 +1,7 @@
-import 'package:btd6wiki/models/bloons/common/relative_class.dart';
 import '/models/base_model.dart';
 import '/models/bloons/common/speed_class.dart';
 import '/models/bloons/common/variant_class.dart';
+import '/models/bloons/common/relative_class.dart';
 import 'rounds_class.dart';
 
 class BloonModel extends BaseModel {

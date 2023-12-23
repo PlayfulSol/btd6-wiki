@@ -1,5 +1,6 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
@@ -9,6 +10,7 @@ class DeveloperInfo extends StatelessWidget {
   final String email;
   final String githubUrl;
   final String linkedinUrl;
+  final AnalyticsHelper analyticsHelper;
 
   const DeveloperInfo({
     super.key,
@@ -16,6 +18,7 @@ class DeveloperInfo extends StatelessWidget {
     required this.email,
     required this.githubUrl,
     required this.linkedinUrl,
+    required this.analyticsHelper,
   });
 
   @override
@@ -40,22 +43,49 @@ class DeveloperInfo extends StatelessWidget {
             Flexible(
               child: IconButton(
                 icon: const Icon(Icons.email),
-                onPressed: () =>
-                    {logEvent('email_personal', name), openMail(email)},
+                onPressed: () {
+                  analyticsHelper.logEvent(
+                    name: buttonPress,
+                    parameters: {
+                      'screen': aboutUs,
+                      'button': '${email}_$name',
+                      'value': buttonOpen,
+                    },
+                  );
+                  openMail(email);
+                },
               ),
             ),
             Flexible(
               child: IconButton(
                 icon: const FaIcon(FontAwesomeIcons.github),
-                onPressed: () =>
-                    {logEvent('github_personal', name), openUrl(githubUrl)},
+                onPressed: () {
+                  analyticsHelper.logEvent(
+                    name: buttonPress,
+                    parameters: {
+                      'screen': aboutUs,
+                      'button': '${gitRepo}_$name',
+                      'value': buttonOpen,
+                    },
+                  );
+                  openUrl(githubUrl);
+                },
               ),
             ),
             Flexible(
               child: IconButton(
                 icon: const FaIcon(FontAwesomeIcons.linkedin),
-                onPressed: () =>
-                    {logEvent('linkedin_personal', name), openUrl(linkedinUrl)},
+                onPressed: () {
+                  analyticsHelper.logEvent(
+                    name: buttonPress,
+                    parameters: {
+                      'screen': aboutUs,
+                      'button': '${linkedin}_$name',
+                      'value': buttonOpen,
+                    },
+                  );
+                  openUrl(linkedinUrl);
+                },
               ),
             ),
           ],

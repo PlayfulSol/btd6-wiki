@@ -11,22 +11,32 @@ class HeroLevel extends StatelessWidget {
   final String heroId;
   final UpgradeInfo level;
   final bool shouldShowLevelImage;
+  final AnalyticsHelper analyticsHelper;
 
-  const HeroLevel(
-      {super.key,
-      required this.heroId,
-      required this.level,
-      required this.shouldShowLevelImage,
-      required this.heroImage,
-      required this.heroName});
+  const HeroLevel({
+    super.key,
+    required this.heroId,
+    required this.level,
+    required this.shouldShowLevelImage,
+    required this.heroImage,
+    required this.heroName,
+    required this.analyticsHelper,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
       title: Text("Level ${level.name}",
           style: titleStyle.copyWith(color: Colors.teal)),
-      onExpansionChanged: (value) {
-        logEvent(heroConst, 'expand_level_${level.name}');
+      onExpansionChanged: (bool value) {
+        analyticsHelper.logEvent(
+          name: widgetEngagement,
+          parameters: {
+            'screen': heroId,
+            'widget': expanstionTile,
+            'value': 'hero_${level.name}_$value',
+          },
+        );
       },
       children: [
         const SizedBox(height: 15),

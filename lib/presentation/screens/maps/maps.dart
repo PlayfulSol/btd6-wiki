@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '/models/base/base_map.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/search_widget.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
@@ -14,9 +15,11 @@ import '/utilities/utils.dart';
 class Maps extends StatefulWidget {
   const Maps({
     super.key,
+    required this.analyticsHelper,
     required this.maps,
   });
 
+  final AnalyticsHelper analyticsHelper;
   final List<BaseMap> maps;
 
   @override
@@ -24,18 +27,14 @@ class Maps extends StatefulWidget {
 }
 
 class _MapsState extends State<Maps> {
-  late List<BaseMap> filteredMaps;
-  String query = '';
-
   @override
   void initState() {
     super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kMainPagesClass,
+      screenName: kMaps,
+    );
     _loadJsonData();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   Future<void> _loadJsonData() async {
@@ -61,28 +60,35 @@ class _MapsState extends State<Maps> {
               Expanded(
                 child: Consumer<GlobalState>(
                   builder: (context, globalState, child) {
-                    filteredMaps = filterAndSearchMaps(widget.maps,
+                    final filteredMaps = filterAndSearchMaps(widget.maps,
                         globalState.currentQuery, globalState.currentOption);
                     return GridView.builder(
                       itemCount: filteredMaps.length,
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 1.4,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10),
+                        crossAxisCount: 2,
+                        childAspectRatio: 1.4,
+                        mainAxisSpacing: 4,
+                      ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: GestureDetector(
                             onTap: () {
-                              logPageView(filteredMaps[index].name);
-
+                              widget.analyticsHelper.logEvent(
+                                name: widgetEngagement,
+                                parameters: {
+                                  'screen': kMapPagesClass,
+                                  'widget': listTile,
+                                  'value': filteredMaps[index].id,
+                                },
+                              );
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => SingleMap(
+                                    analyticsHelper: widget.analyticsHelper,
                                     mapId: filteredMaps[index].id,
                                   ),
                                 ),

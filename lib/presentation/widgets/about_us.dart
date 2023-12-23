@@ -1,22 +1,35 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
 import '/presentation/widgets/developer_info.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
 class AboutUsPopup extends StatelessWidget {
-  const AboutUsPopup({super.key});
+  const AboutUsPopup({
+    super.key,
+    required this.analyticsHelper,
+  });
+
+  final AnalyticsHelper analyticsHelper;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () {
-        logEvent('about_us', 'opened');
+        analyticsHelper.logEvent(
+          name: buttonPress,
+          parameters: {
+            'screen': drawer,
+            'button': aboutUsButton,
+            'value': buttonOpen,
+          },
+        );
         showDialog(
           context: context,
           builder: (BuildContext context) {
-            return const AboutUs();
+            return AboutUs(analyticsHelper: analyticsHelper);
           },
         );
       },
@@ -27,7 +40,11 @@ class AboutUsPopup extends StatelessWidget {
 }
 
 class AboutUs extends StatelessWidget {
-  const AboutUs({super.key});
+  const AboutUs({
+    super.key,
+    required this.analyticsHelper,
+  });
+  final AnalyticsHelper analyticsHelper;
 
   @override
   Widget build(BuildContext context) {
@@ -48,9 +65,16 @@ class AboutUs extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ElevatedButton(
-            onPressed: () => {
-              logEvent('contact_us', 'opened'),
-              openMail('Playfulsols@gamil.com'),
+            onPressed: () {
+              analyticsHelper.logEvent(
+                name: buttonPress,
+                parameters: {
+                  'screen': aboutUs,
+                  'button': '${email}_playful',
+                  'value': buttonOpen,
+                },
+              );
+              openMail(playfulEmail);
             },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -66,9 +90,16 @@ class AboutUs extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: () => {
-              logEvent('github', 'opened'),
-              openUrl('https://github.com/PlayfulSol/flutter-btd6-wiki'),
+            onPressed: () {
+              analyticsHelper.logEvent(
+                name: buttonPress,
+                parameters: {
+                  'screen': aboutUs,
+                  'button': gitRepo,
+                  'value': buttonOpen,
+                },
+              );
+              openUrl(playfulGitRepo);
             },
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -90,24 +121,33 @@ class AboutUs extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 15),
-          const DeveloperInfo(
-            name: 'Asaf Hadad',
-            email: 'asaf147369@gmail.com',
-            githubUrl: 'https://github.com/asaf147369',
-            linkedinUrl: 'https://www.linkedin.com/in/asaf-hadad/',
+          DeveloperInfo(
+            analyticsHelper: analyticsHelper,
+            name: asaf[name]!,
+            email: asaf[email]!,
+            githubUrl: asaf[git]!,
+            linkedinUrl: asaf[linkedin]!,
           ),
-          const DeveloperInfo(
-            name: 'Shai Holczer',
-            email: 'shaitnto@gmail.com',
-            githubUrl: 'https://github.com/namelessto',
-            linkedinUrl: 'https://www.linkedin.com/in/shai-holczer/',
+          DeveloperInfo(
+            analyticsHelper: analyticsHelper,
+            name: shai[name]!,
+            email: shai[email]!,
+            githubUrl: shai[git]!,
+            linkedinUrl: shai[linkedin]!,
           ),
         ],
       ),
       actions: [
         ElevatedButton(
           onPressed: () {
-            logEvent('about_us', 'closed');
+            analyticsHelper.logEvent(
+              name: buttonPress,
+              parameters: {
+                'screen': aboutUs,
+                'button': aboutUsButton,
+                'value': buttonClose,
+              },
+            );
             Navigator.of(context).pop();
           },
           child: const Text(

@@ -1,7 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/firebase_options.dart';
@@ -15,6 +14,7 @@ import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/widgets/loader.dart';
+import 'analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
@@ -28,44 +28,31 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  final savedThemeMode = await AdaptiveTheme.getThemeMode();
-  logEvent('theme_used', savedThemeMode.toString());
-  runApp(const MyApp());
+  final analytics = FirebaseAnalytics.instance;
+
+  runApp(MyApp(analytics: analytics));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  static FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  static FirebaseAnalyticsObserver observer =
-      FirebaseAnalyticsObserver(analytics: analytics);
-
+  const MyApp({super.key, required this.analytics});
+  final FirebaseAnalytics analytics;
   @override
   Widget build(BuildContext context) {
-    String screenWidth = MediaQuery.of(context).size.width.toStringAsFixed(1);
-    logEvent('device_width', screenWidth);
-    return AdaptiveTheme(
-        light: Themes.lightTheme,
-        dark: Themes.darkTheme,
-        initial: AdaptiveThemeMode.system,
-        builder: (theme, darkTheme) => MaterialApp(
-              navigatorObservers: !kDebugMode
-                  ? <NavigatorObserver>[
-                      observer,
-                    ]
-                  : [],
-              theme: theme,
-              darkTheme: darkTheme,
-              title: 'BTD6 Wiki',
-              home: ChangeNotifierProvider(
-                create: (BuildContext context) => GlobalState(),
-                child: MyHomePage(
+    return ChangeNotifierProvider(
+      create: (BuildContext context) => GlobalState(),
+      child: AdaptiveTheme(
+          light: Themes.lightTheme,
+          dark: Themes.darkTheme,
+          initial: AdaptiveThemeMode.system,
+          builder: (theme, darkTheme) => MaterialApp(
+                theme: theme,
+                darkTheme: darkTheme,
+                home: MyHomePage(
                   analytics: analytics,
-                  observer: observer,
                 ),
-              ),
-              debugShowCheckedModeBanner: false,
-            ));
+                debugShowCheckedModeBanner: false,
+              )),
+    );
   }
 }
 
@@ -73,17 +60,17 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({
     super.key,
     required this.analytics,
-    required this.observer,
   });
-
   final FirebaseAnalytics analytics;
-  final FirebaseAnalyticsObserver observer;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late final AnalyticsHelper analyticsHelper;
+  late final PageController pageController;
+
   bool isLoading = true;
   Map<String, dynamic> baseEntities = {
     'towers': <BaseTower>[],
@@ -104,24 +91,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  Future<void> _logCurrentScreen(int pageIndex) async {
-    await widget.analytics.setCurrentScreen(
-      screenName: titles[pageIndex],
-      screenClassOverride: titles[pageIndex],
-    );
-  }
-
   @override
   void initState() {
     super.initState();
     loadBaseData();
+    analyticsHelper = AnalyticsHelper(widget.analytics);
+    pageController = PageController(initialPage: 0);
   }
 
   @override
   Widget build(BuildContext context) {
     var globalState = context.watch<GlobalState>();
     return Scaffold(
-      drawer: const Drawer(child: DrawerContent()),
+      drawer: Drawer(
+          child: DrawerContent(
+        analyticsHelper: analyticsHelper,
+        pageController: pageController,
+      )),
       appBar: AppBar(
         title: Consumer<GlobalState>(
           builder: (context, globalState, child) {
@@ -139,7 +125,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       onSelected: (String? newValue) {
                         if (newValue != null) {
                           globalState.updateCurrentOptionSelected(
-                              globalState.activeCategory, newValue);
+                              option: newValue);
+                          analyticsHelper.logEvent(
+                            name: widgetEngagement,
+                            parameters: {
+                              'screen': globalState.activeCategory,
+                              'widget': appBarFilter,
+                              'value': newValue,
+                            },
+                          );
                         }
                       },
                       itemBuilder: (context) =>
@@ -162,11 +156,21 @@ class _MyHomePageState extends State<MyHomePage> {
             return IconButton(
               onPressed: () {
                 globalState.switchSearch();
+                String value;
                 if (globalState.isSearchEnabled) {
-                  logEvent('search', globalState.activeCategory);
+                  value = searchOn;
                 } else {
                   globalState.updateCurrentQuery('');
+                  value = searchOff;
                 }
+                analyticsHelper.logEvent(
+                  name: widgetEngagement,
+                  parameters: {
+                    'screen': globalState.activeCategory,
+                    'widget': searchButton,
+                    'value': value,
+                  },
+                );
               },
               icon: Icon(
                   !globalState.isSearchEnabled ? Icons.search : Icons.close),
@@ -178,17 +182,27 @@ class _MyHomePageState extends State<MyHomePage> {
           ? PageView(
               controller: pageController,
               children: [
-                Towers(towers: baseEntities[kTowers]),
-                Heroes(heroes: baseEntities[kHeroes]),
+                Towers(
+                  analyticsHelper: analyticsHelper,
+                  towers: baseEntities[kTowers],
+                ),
+                Heroes(
+                  analyticsHelper: analyticsHelper,
+                  heroes: baseEntities[kHeroes],
+                ),
                 Bloons(
-                    bloonsList: baseEntities[kBloons],
-                    bossesList: baseEntities[kBosses]),
-                Maps(maps: baseEntities[kMaps])
+                  analyticsHelper: analyticsHelper,
+                  bloonsList: baseEntities[kBloons],
+                  bossesList: baseEntities[kBosses],
+                ),
+                Maps(
+                  analyticsHelper: analyticsHelper,
+                  maps: baseEntities[kMaps],
+                )
               ],
               onPageChanged: (index) {
                 FocusScope.of(context).unfocus();
-                globalState.updateCurrentPage(titles[index], index);
-                _logCurrentScreen(index);
+                globalState.updateCurrentPage(simpleTitles[index], index);
               },
             )
           : const Loader(),
@@ -210,17 +224,24 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           type: BottomNavigationBarType.fixed,
           items: [
-            for (int i = 0; i < titles.length; i++)
+            for (int i = 0; i < simpleTitles.length; i++)
               BottomNavigationBarItem(
                 icon: icons[i],
-                label: capitalize(titles[i]),
-                tooltip: titles[i],
+                label: capitalize(simpleTitles[i]),
+                tooltip: simpleTitles[i],
               ),
           ],
           currentIndex: globalState.currentPageIndex,
           onTap: (index) {
-            logEvent('bottom_navigation', titles[index]);
-            globalState.updateCurrentPage(titles[index], index);
+            analyticsHelper.logEvent(
+              name: widgetEngagement,
+              parameters: {
+                'screen': globalState.activeCategory,
+                'widget': bottomNavBar,
+                'value': simpleTitles[index],
+              },
+            );
+            globalState.updateCurrentPage(simpleTitles[index], index);
             pageController.jumpToPage(index);
           },
         ),

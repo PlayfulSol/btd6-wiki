@@ -9,16 +9,30 @@ import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
 class BloonAidWidget extends StatelessWidget {
-  const BloonAidWidget({super.key, required this.data, required this.title});
+  const BloonAidWidget({
+    super.key,
+    required this.bloonId,
+    required this.analyticsHelper,
+    required this.data,
+    required this.title,
+  });
 
+  final AnalyticsHelper analyticsHelper;
   final dynamic data;
   final String title;
+  final String bloonId;
 
   @override
   Widget build(BuildContext context) {
     String? typeCheck = extractItemTypeFromList(data);
     if (typeCheck == 'obj') {
-      return listObject(data as List<Relative>, title, context);
+      return listObject(
+        bloonId,
+        data as List<Relative>,
+        title,
+        context,
+        analyticsHelper,
+      );
     } else if (typeCheck == 'str') {
       List<String> newData = data.cast<String>();
       return listString(newData, title);
@@ -28,7 +42,8 @@ class BloonAidWidget extends StatelessWidget {
   }
 }
 
-Widget listObject(List<Relative> data, String title, BuildContext context) {
+Widget listObject(String bloonId, List<Relative> data, String title,
+    BuildContext context, AnalyticsHelper analyticsHelper) {
   if (data[0].id != 'none') {
     return ExpansionTile(
       initiallyExpanded: title == 'Children',
@@ -36,18 +51,26 @@ Widget listObject(List<Relative> data, String title, BuildContext context) {
         title,
         style: smallTitleStyle.copyWith(color: Colors.teal),
       ),
-      onExpansionChanged: (value) {
-        logEvent(bloonAidConst, 'expand_children');
+      onExpansionChanged: (bool value) {
+        analyticsHelper.logEvent(
+          name: widgetEngagement,
+          parameters: {
+            'screen': bloonId,
+            'widget': expanstionTile,
+            'value': 'children_$value',
+          },
+        );
       },
       childrenPadding: const EdgeInsets.symmetric(vertical: 10),
-      children: generateRelatives(data, context),
+      children: generateRelatives(context, data, analyticsHelper),
     );
   } else {
     return Container();
   }
 }
 
-Widget generateMinion(Relative relative, BuildContext context) {
+Widget generateMinion(
+    Relative relative, BuildContext context, AnalyticsHelper analyticsHelper) {
   if (relative.id == "N/A") {
     return Container();
   } else {
@@ -75,11 +98,11 @@ Widget generateMinion(Relative relative, BuildContext context) {
               style: normalStyle,
             ),
             onTap: () {
-              logPageView(relative.name);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => MinionBloonPage(
+                    analyticsHelper: analyticsHelper,
                     minionId: relative.id,
                   ),
                 ),
@@ -93,7 +116,8 @@ Widget generateMinion(Relative relative, BuildContext context) {
   }
 }
 
-List<Widget> generateRelatives(List<Relative> data, BuildContext context) {
+List<Widget> generateRelatives(BuildContext context, List<Relative> data,
+    AnalyticsHelper analyticsHelper) {
   List<Widget> items = [];
 
   for (int index = 0; index < data.length; index++) {
@@ -113,11 +137,11 @@ List<Widget> generateRelatives(List<Relative> data, BuildContext context) {
           style: normalStyle,
         ),
         onTap: () {
-          logPageView(data[index].name);
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => SingleBloon(
+                analyticsHelper: analyticsHelper,
                 bloonId: data[index].id,
               ),
             ),
@@ -156,15 +180,23 @@ Widget listString(List<String> data, String title) {
   );
 }
 
-ExpansionTile gimmicks(String title, List<String> gimmicks, bool expand) {
+ExpansionTile gimmicks(AnalyticsHelper analyticsHelper, String id, String title,
+    List<String> gimmicks, bool expand) {
   return ExpansionTile(
     initiallyExpanded: expand,
     title: Text(
       title,
       style: smallTitleStyle.copyWith(color: Colors.teal),
     ),
-    onExpansionChanged: (value) {
-      logEvent(bloonAidConst, 'expand_gimmicks');
+    onExpansionChanged: (bool value) {
+      analyticsHelper.logEvent(
+        name: widgetEngagement,
+        parameters: {
+          'screen': id,
+          'widget': expanstionTile,
+          'value': 'gimmicks_$value',
+        },
+      );
     },
     children: gimmicks
         .map<Widget>(

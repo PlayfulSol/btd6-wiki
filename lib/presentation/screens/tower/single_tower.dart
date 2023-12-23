@@ -3,15 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/towers/tower/tower.dart';
 import '/presentation/widgets/path.dart';
+import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
 class SingleTower extends StatefulWidget {
+  const SingleTower({
+    super.key,
+    required this.analyticsHelper,
+    required this.towerId,
+  });
+
+  final AnalyticsHelper analyticsHelper;
   final String towerId;
-
-  const SingleTower({super.key, required this.towerId});
-
   @override
   State<SingleTower> createState() => _SingleTowerState();
 }
@@ -23,17 +29,19 @@ class _SingleTowerState extends State<SingleTower> {
   MonkeyPath _buildPath(int index) {
     var hasParagon = tower.paths.paragon != null;
     return MonkeyPath(
-        path: index == 0
-            ? tower.paths.path1
-            : index == 1
-                ? tower.paths.path2
-                : index == 2
-                    ? tower.paths.path3
-                    : hasParagon
-                        ? [tower.paths.paragon!]
-                        : [],
-        pathKey: getPathKeyFromIndex(index),
-        monkeyId: tower.id);
+      path: index == 0
+          ? tower.paths.path1
+          : index == 1
+              ? tower.paths.path2
+              : index == 2
+                  ? tower.paths.path3
+                  : hasParagon
+                      ? [tower.paths.paragon!]
+                      : [],
+      pathKey: getPathKeyFromIndex(index),
+      monkeyId: tower.id,
+      analyticsHelper: widget.analyticsHelper,
+    );
   }
 
   void loadTower() async {
@@ -49,6 +57,10 @@ class _SingleTowerState extends State<SingleTower> {
   @override
   void initState() {
     super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kTowerPagesClass,
+      screenName: widget.towerId,
+    );
     loadTower();
   }
 
