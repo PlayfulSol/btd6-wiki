@@ -56,7 +56,7 @@ Widget listObject(String bloonId, List<Relative> data, String title,
           name: widgetEngagement,
           parameters: {
             'screen': bloonId,
-            'widget': expanstionTile,
+            'widget': expansionTile,
             'value': 'children_$value',
           },
         );
@@ -193,7 +193,7 @@ ExpansionTile gimmicks(AnalyticsHelper analyticsHelper, String id, String title,
         name: widgetEngagement,
         parameters: {
           'screen': id,
-          'widget': expanstionTile,
+          'widget': expansionTile,
           'value': 'gimmicks_$value',
         },
       );

@@ -82,7 +82,7 @@ class _DrawerContentState extends State<DrawerContent> {
                 name: widgetEngagement,
                 parameters: {
                   'screen': drawer,
-                  'widget': expanstionTile,
+                  'widget': expansionTile,
                   'value': '${kTowers}_$value',
                 },
               );
@@ -161,7 +161,7 @@ class _DrawerContentState extends State<DrawerContent> {
                 name: widgetEngagement,
                 parameters: {
                   'screen': drawer,
-                  'widget': expanstionTile,
+                  'widget': expansionTile,
                   'value': '${kBloons}_$value',
                 },
               );
@@ -220,7 +220,7 @@ class _DrawerContentState extends State<DrawerContent> {
                 name: widgetEngagement,
                 parameters: {
                   'screen': drawer,
-                  'widget': expanstionTile,
+                  'widget': expansionTile,
                   'value': '${kMaps}_$value',
                 },
               );

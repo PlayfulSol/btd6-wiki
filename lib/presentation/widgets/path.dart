@@ -30,7 +30,7 @@ class MonkeyPath extends StatelessWidget {
           name: widgetEngagement,
           parameters: {
             'screen': monkeyId,
-            'widget': expanstionTile,
+            'widget': expansionTile,
             'value': '${pathKey}_$value',
           },
         );

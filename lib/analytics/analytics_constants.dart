@@ -28,7 +28,7 @@ const String aboutUsButton = 'about_us_button';
 const String rateUsButton = 'rate_us_button';
 
 // ---- General ----
-const String expanstionTile = 'expanstion_tile';
+const String expansionTile = 'expansion_tile';
 const String listTile = 'list_tile';
 const String buttonOpen = 'opened';
 const String buttonClose = 'closed';

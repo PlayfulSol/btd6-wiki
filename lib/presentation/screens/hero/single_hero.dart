@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '/models/towers/common/upgrade_info_class.dart';
-import '/models/towers/hero/hero_skins.dart';
 import '/models/towers/hero/hero.dart';
 import '/presentation/widgets/hero_stats.dart';
 import '/presentation/widgets/hero_level.dart';
@@ -13,6 +12,7 @@ import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
+import 'hero_skins.dart';
 
 class SingleHero extends StatefulWidget {
   final AnalyticsHelper analyticsHelper;
@@ -37,32 +37,37 @@ class _SingleHeroState extends State<SingleHero> {
   bool loading = true;
 
   HeroLevel _buildHeroLevel(UpgradeInfo level) {
-    List<String> skinsImages = [];
+    List<String> lvlSkinsImages = [];
     bool shouldShowLevelImage = false;
-    int indexOfLevel;
 
     if (singleHero.skinChange.contains(level.name)) {
       shouldShowLevelImage = true;
-      indexOfLevel = singleHero.skinChange.indexOf(level.name);
-      var skinNamesAndImages = getSkinNamesAndImages(indexOfLevel);
-      skinsImages = skinNamesAndImages[1];
+      var skinNamesAndImages = getSkinNamesAndImages(level.name);
+      lvlSkinsImages = skinNamesAndImages[1];
     }
     return HeroLevel(
       heroId: widget.heroId,
       level: level,
       shouldShowLevelImage: shouldShowLevelImage,
-      heroImages: skinsImages,
+      heroImages: lvlSkinsImages,
       heroName: singleHero.name,
       analyticsHelper: widget.analyticsHelper,
     );
   }
 
-  List<List<String>> getSkinNamesAndImages(int levelIndex) {
+  List<List<String>> getSkinNamesAndImages(String lvl) {
     List<String> names = [];
     List<String> images = [];
     for (var skin in singleHero.skins) {
-      names.add(skin.name);
-      images.add(skin.value[levelIndex]);
+      int lvlIndex =
+          skin.value.indexWhere((image) => image.contains('$lvl.png'));
+      if (lvlIndex != -1) {
+        names.add(skin.name);
+        images.add(skin.value[lvlIndex]);
+      } else if (lvl == '1') {
+        names.add(skin.name);
+        images.add(skin.value[0]);
+      }
     }
     return [names, images];
   }
@@ -74,7 +79,7 @@ class _SingleHeroState extends State<SingleHero> {
     singleHero = HeroModel.fromJson(jsonData);
     setState(() {
       loading = false;
-      var skinNamesAndImages = getSkinNamesAndImages(0);
+      var skinNamesAndImages = getSkinNamesAndImages("1");
       skinsNames = skinNamesAndImages[0];
       skinsFirstImages = skinNamesAndImages[1];
     });
@@ -150,12 +155,7 @@ class _SingleHeroState extends State<SingleHero> {
                           ),
                         ],
                       ),
-                      // Image(
-                      //   image: AssetImage(heroImage(singleHero.image)),
-                      //   width: 200,
-                      //   fit: BoxFit.fill,
-                      //   semanticLabel: singleHero.name,
-                      // ),
+
                       const SizedBox(height: 10),
                       Text(singleHero.inGameDesc,
                           textAlign: TextAlign.center, style: normalStyle),
@@ -170,7 +170,7 @@ class _SingleHeroState extends State<SingleHero> {
                             name: widgetEngagement,
                             parameters: {
                               'screen': singleHero.id,
-                              'widget': expanstionTile,
+                              'widget': expansionTile,
                               'value': 'hero_stats_$value',
                             },
                           );
@@ -185,21 +185,20 @@ class _SingleHeroState extends State<SingleHero> {
                       ),
                       const SizedBox(height: 10),
                       // if has skins, render a button that will take to a new page that shows the skins
-                      // if (singleHero.skins.isNotEmpty)
-                      //   ElevatedButton(
-                      //     child: const Text("Skins"),
-                      //     onPressed: () => Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //         builder: (context) => HeroSkins(
-                      //           heroId: heroId,
-                      //           heroSkins: singleHero.skins,
-                      //           skinChange: singleHero.skinChange,
-                      //           heroName: singleHero.name,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
+                      if (singleHero.skins.isNotEmpty)
+                        ElevatedButton(
+                          child: const Text("Skins"),
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HeroSkins(
+                                heroId: singleHero.id,
+                                heroSkins: singleHero.skins,
+                                heroName: singleHero.name,
+                              ),
+                            ),
+                          ),
+                        ),
                       const SizedBox(height: 10),
                       ListView.builder(
                         primary: false,

@@ -1,55 +1,51 @@
-// import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import '/models/towers/hero/hero_skins.dart';
+import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
 
-// import '/models/hero.dart';
+class HeroSkins extends StatelessWidget {
+  final String heroId;
+  final List<Skins> heroSkins;
+  final String heroName;
 
-// import '/presentation/widgets/hero_skin.dart';
+  const HeroSkins(
+      {super.key,
+      required this.heroId,
+      required this.heroSkins,
+      required this.heroName});
 
-// import '/utilities/global_state.dart';
-
-// class HeroSkins extends StatelessWidget {
-//   final String heroId;
-//   final List<Skins> heroSkins;
-//   final String skinChange;
-//   final String heroName;
-
-//   const HeroSkins(
-//       {super.key,
-//       required this.heroId,
-//       required this.heroSkins,
-//       required this.skinChange,
-//       required this.heroName});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(GlobalState.currentTitle),
-//       ),
-//       body: SingleChildScrollView(
-//         child: Padding(
-//           padding: const EdgeInsets.all(10.0),
-//           child: Column(children: [
-//             const SizedBox(height: 10),
-//             Center(
-//               child: Column(
-//                 children: [
-//                   const SizedBox(height: 15),
-//                   ListView.builder(
-//                       primary: false,
-//                       itemCount: heroSkins.length,
-//                       shrinkWrap: true,
-//                       itemBuilder: (context, index) => HeroSkin(
-//                           heroId: heroId,
-//                           skinId: heroSkins[index].id,
-//                           skinName: heroSkins[index].name,
-//                           skinChange: skinChange)),
-//                   const SizedBox(height: 30),
-//                 ],
-//               ),
-//             ),
-//           ]),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('$heroName - Skins'),
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: ListView.builder(
+            primary: false,
+            shrinkWrap: true,
+            itemCount: heroSkins.length,
+            itemBuilder: (context, index) {
+              return ExpansionTile(
+                title: Text(
+                  heroSkins[index].name,
+                  style: titleStyle.copyWith(color: Colors.teal),
+                ),
+                children: [
+                  for (var value in heroSkins[index].value)
+                    Image(
+                      image: AssetImage(heroImage(value)),
+                      filterQuality: FilterQuality.high,
+                      width: MediaQuery.of(context).size.width * 0.4,
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}

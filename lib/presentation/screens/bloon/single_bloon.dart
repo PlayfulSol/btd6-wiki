@@ -129,7 +129,7 @@ class _SingleBloonState extends State<SingleBloon> {
                               name: widgetEngagement,
                               parameters: {
                                 'screen': bloon.id,
-                                'widget': expanstionTile,
+                                'widget': expansionTile,
                                 'value': 'variants_$value',
                               },
                             );
@@ -171,7 +171,7 @@ class _SingleBloonState extends State<SingleBloon> {
                           name: widgetEngagement,
                           parameters: {
                             'screen': bloon.id,
-                            'widget': expanstionTile,
+                            'widget': expansionTile,
                             'value': 'normal_rounds_$value',
                           },
                         );
@@ -206,7 +206,7 @@ class _SingleBloonState extends State<SingleBloon> {
                           name: widgetEngagement,
                           parameters: {
                             'screen': bloon.id,
-                            'widget': expanstionTile,
+                            'widget': expansionTile,
                             'value': 'abr_rounds_$value',
                           },
                         );

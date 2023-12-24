@@ -52,7 +52,7 @@ class StatsList extends StatelessWidget {
                   name: widgetEngagement,
                   parameters: {
                     'screen': heroId,
-                    'widget': expanstionTile,
+                    'widget': expansionTile,
                     'value': '${stat}_$value',
                   },
                 );

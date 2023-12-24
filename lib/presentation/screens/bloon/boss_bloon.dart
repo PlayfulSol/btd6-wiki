@@ -221,7 +221,7 @@ class _BossBloonState extends State<BossBloon> {
                             name: widgetEngagement,
                             parameters: {
                               'screen': boss.id,
-                              'widget': expanstionTile,
+                              'widget': expansionTile,
                               'value': 'general_immunities_$value',
                             },
                           );
@@ -254,7 +254,7 @@ class _BossBloonState extends State<BossBloon> {
           name: widgetEngagement,
           parameters: {
             'screen': boss.id,
-            'widget': expanstionTile,
+            'widget': expansionTile,
             'value': 'health_${title}_$value',
           },
         );
@@ -268,8 +268,8 @@ class _BossBloonState extends State<BossBloon> {
                 style: normalStyle.copyWith(fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
-                "1 Palyer: ${tierHealth.normal}, 2 Palyers: ${tierHealth.coop2}"
-                "\n3 Palyers: ${tierHealth.coop3}, 4 Palyers: ${tierHealth.coop4}",
+                "1 Player: ${tierHealth.normal}, 2 Players: ${tierHealth.coop2}"
+                "\n3 Players: ${tierHealth.coop3}, 4 Players: ${tierHealth.coop4}",
                 style: normalStyle.copyWith(color: Colors.white),
               ),
             ),

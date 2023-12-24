@@ -36,14 +36,16 @@ class _HeroLevelState extends State<HeroLevel> {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      title: Text("Level ${widget.level.name}",
-          style: titleStyle.copyWith(color: Colors.teal)),
+      title: Text(
+        "Level ${widget.level.name}",
+        style: titleStyle.copyWith(color: Colors.teal),
+      ),
       onExpansionChanged: (bool value) {
         widget.analyticsHelper.logEvent(
           name: widgetEngagement,
           parameters: {
             'screen': widget.heroId,
-            'widget': expanstionTile,
+            'widget': expansionTile,
             'value': 'hero_${widget.level.name}_$value',
           },
         );
