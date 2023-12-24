@@ -27,6 +27,9 @@ const String aboutUs = 'about_us';
 const String aboutUsButton = 'about_us_button';
 const String rateUsButton = 'rate_us_button';
 
+// ---- Hero ----
+const String kHeroSkinsPage = 'hero_skins_page';
+
 // ---- General ----
 const String expansionTile = 'expansion_tile';
 const String listTile = 'list_tile';

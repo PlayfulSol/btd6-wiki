@@ -195,6 +195,7 @@ class _SingleHeroState extends State<SingleHero> {
                                 heroId: singleHero.id,
                                 heroSkins: singleHero.skins,
                                 heroName: singleHero.name,
+                                analyticsHelper: widget.analyticsHelper,
                               ),
                             ),
                           ),
