@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../analytics/analytics_constants.dart';
 import '/models/towers/hero/hero_skins.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
