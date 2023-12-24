@@ -1,4 +1,4 @@
-// ------- Consts for screen_view -------
+// ------- Const for screen_view -------
 const String kMainPagesClass = 'main_pages';
 const String kTowerPagesClass = 'tower_pages';
 const String kHeroPagesClass = 'hero_pages';
@@ -6,7 +6,7 @@ const String kBloonPagesClass = 'bloon_pages';
 const String kBossPagesClass = 'boss_pages';
 const String kMapPagesClass = 'map_pages';
 
-// ------- Consts for event names -------
+// ------- Const for event names -------
 const String widgetEngagement = 'widget_engagement';
 const String buttonPress = 'button_press';
 

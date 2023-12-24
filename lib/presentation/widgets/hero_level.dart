@@ -98,7 +98,7 @@ class _HeroLevelState extends State<HeroLevel> {
         const SizedBox(height: 10),
         if (widget.level.name != '1') ...[
           Text(
-            "Cost: ${widget.level.cost}",
+            "Cost: ${widget.level.cost.medium}",
             textAlign: TextAlign.center,
             style: normalStyle,
           ),

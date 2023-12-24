@@ -155,7 +155,6 @@ class _SingleHeroState extends State<SingleHero> {
                           ),
                         ],
                       ),
-
                       const SizedBox(height: 10),
                       Text(singleHero.inGameDesc,
                           textAlign: TextAlign.center, style: normalStyle),
@@ -184,7 +183,6 @@ class _SingleHeroState extends State<SingleHero> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      // if has skins, render a button that will take to a new page that shows the skins
                       if (singleHero.skins.isNotEmpty)
                         ElevatedButton(
                           child: const Text("Skins"),
