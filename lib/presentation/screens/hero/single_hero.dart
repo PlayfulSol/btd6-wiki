@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '/models/towers/common/upgrade_info_class.dart';
 import '/models/towers/hero/hero.dart';
 import '/presentation/widgets/hero_stats.dart';
@@ -10,6 +12,7 @@ import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
+import 'hero_skins.dart';
 
 class SingleHero extends StatefulWidget {
   final AnalyticsHelper analyticsHelper;
@@ -27,23 +30,46 @@ class SingleHero extends StatefulWidget {
 
 class _SingleHeroState extends State<SingleHero> {
   late final HeroModel singleHero;
+  final controller = CarouselController();
+  List<String> skinsFirstImages = [];
+  List<String> skinsNames = [];
+  int activeIndex = 0;
   bool loading = true;
 
   HeroLevel _buildHeroLevel(UpgradeInfo level) {
-    var shouldShowLevelImage = false;
-    if (singleHero.skinChange.keys.contains('level_${level.name}') ||
-        singleHero.skinChange.keys
-            .any((e) => e.contains('level_${level.name}_'))) {
+    List<String> lvlSkinsImages = [];
+    bool shouldShowLevelImage = false;
+
+    if (singleHero.skinChange.contains(level.name)) {
       shouldShowLevelImage = true;
+      var skinNamesAndImages = getSkinNamesAndImages(level.name);
+      lvlSkinsImages = skinNamesAndImages[1];
     }
     return HeroLevel(
       heroId: widget.heroId,
       level: level,
       shouldShowLevelImage: shouldShowLevelImage,
-      heroImage: singleHero.image,
+      heroImages: lvlSkinsImages,
       heroName: singleHero.name,
       analyticsHelper: widget.analyticsHelper,
     );
+  }
+
+  List<List<String>> getSkinNamesAndImages(String lvl) {
+    List<String> names = [];
+    List<String> images = [];
+    for (var skin in singleHero.skins) {
+      int lvlIndex =
+          skin.value.indexWhere((image) => image.contains('$lvl.png'));
+      if (lvlIndex != -1) {
+        names.add(skin.name);
+        images.add(skin.value[lvlIndex]);
+      } else if (lvl == '1') {
+        names.add(skin.name);
+        images.add(skin.value[0]);
+      }
+    }
+    return [names, images];
   }
 
   void loadHero() async {
@@ -53,6 +79,9 @@ class _SingleHeroState extends State<SingleHero> {
     singleHero = HeroModel.fromJson(jsonData);
     setState(() {
       loading = false;
+      var skinNamesAndImages = getSkinNamesAndImages("1");
+      skinsNames = skinNamesAndImages[0];
+      skinsFirstImages = skinNamesAndImages[1];
     });
   }
 
@@ -81,11 +110,50 @@ class _SingleHeroState extends State<SingleHero> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image(
-                        image: AssetImage(heroImage(singleHero.image)),
-                        width: 200,
-                        fit: BoxFit.fill,
-                        semanticLabel: singleHero.name,
+                      Column(
+                        children: [
+                          CarouselSlider.builder(
+                            carouselController: controller,
+                            options: CarouselOptions(
+                              viewportFraction: 0.64,
+                              initialPage: 0,
+                              height: MediaQuery.of(context).size.width * 0.5,
+                              enableInfiniteScroll: false,
+                              onPageChanged: (index, reason) {
+                                setState(() {
+                                  activeIndex = index;
+                                });
+                              },
+                            ),
+                            itemCount: singleHero.skins.length,
+                            itemBuilder: ((context, index, realIndex) => Image(
+                                  image: AssetImage(
+                                      heroImage(skinsFirstImages[index])),
+                                  filterQuality: FilterQuality.high,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.56,
+                                )),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            skinsNames[activeIndex],
+                            style: smallTitleStyle,
+                          ),
+                          const SizedBox(height: 10),
+                          AnimatedSmoothIndicator(
+                            activeIndex: activeIndex,
+                            count: singleHero.skins.length,
+                            onDotClicked: (index) =>
+                                controller.jumpToPage(index),
+                            effect: const ScrollingDotsEffect(
+                              activeDotScale: 1.25,
+                              spacing: 11,
+                              dotHeight: 9,
+                              dotWidth: 9,
+                              activeDotColor: Colors.teal,
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(height: 10),
                       Text(singleHero.inGameDesc,
@@ -95,13 +163,16 @@ class _SingleHeroState extends State<SingleHero> {
                           textAlign: TextAlign.center),
                       const SizedBox(height: 10),
                       ExpansionTile(
-                        title: const Text("Advanced Stats"),
+                        title: Text(
+                          "Advanced Stats",
+                          style: titleStyle.copyWith(color: Colors.teal),
+                        ),
                         onExpansionChanged: (bool value) {
                           widget.analyticsHelper.logEvent(
                             name: widgetEngagement,
                             parameters: {
                               'screen': singleHero.id,
-                              'widget': expanstionTile,
+                              'widget': expansionTile,
                               'value': 'hero_stats_$value',
                             },
                           );
@@ -115,22 +186,21 @@ class _SingleHeroState extends State<SingleHero> {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      // if has skins, render a button that will take to a new page that shows the skins
-                      // if (singleHero.skins.isNotEmpty)
-                      //   ElevatedButton(
-                      //     child: const Text("Skins"),
-                      //     onPressed: () => Navigator.push(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //         builder: (context) => HeroSkins(
-                      //           heroId: heroId,
-                      //           heroSkins: singleHero.skins,
-                      //           skinChange: singleHero.skinChange,
-                      //           heroName: singleHero.name,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //   ),
+                      if (singleHero.skins.isNotEmpty)
+                        ElevatedButton(
+                          child: const Text("Skins"),
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => HeroSkins(
+                                heroId: singleHero.id,
+                                heroSkins: singleHero.skins,
+                                heroName: singleHero.name,
+                                analyticsHelper: widget.analyticsHelper,
+                              ),
+                            ),
+                          ),
+                        ),
                       const SizedBox(height: 10),
                       ListView.builder(
                         primary: false,
