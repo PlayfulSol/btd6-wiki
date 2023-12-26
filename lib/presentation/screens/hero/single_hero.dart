@@ -163,7 +163,10 @@ class _SingleHeroState extends State<SingleHero> {
                           textAlign: TextAlign.center),
                       const SizedBox(height: 10),
                       ExpansionTile(
-                        title: const Text("Advanced Stats"),
+                        title: Text(
+                          "Advanced Stats",
+                          style: titleStyle.copyWith(color: Colors.teal),
+                        ),
                         onExpansionChanged: (bool value) {
                           widget.analyticsHelper.logEvent(
                             name: widgetEngagement,

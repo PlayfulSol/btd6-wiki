@@ -4,6 +4,7 @@ import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
+import '/utilities/utils.dart';
 
 class HeroSkins extends StatefulWidget {
   final String heroId;
@@ -24,6 +25,14 @@ class HeroSkins extends StatefulWidget {
 }
 
 class _HeroSkinsState extends State<HeroSkins> {
+  String extractLevel(String value) {
+    RegExp regex = RegExp(r'\d+');
+    RegExpMatch? firstMatch = regex.firstMatch(value);
+
+    // Use the null-aware operator to check for no match
+    return firstMatch?.group(0) ?? '1';
+  }
+
   @override
   void initState() {
     super.initState();
@@ -35,6 +44,10 @@ class _HeroSkinsState extends State<HeroSkins> {
 
   @override
   Widget build(BuildContext context) {
+    final constraintsValues = selectSizePreset(
+      kBloons,
+      MediaQuery.of(context).size,
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text('${widget.heroName} - Skins'),
@@ -64,12 +77,47 @@ class _HeroSkinsState extends State<HeroSkins> {
                   );
                 },
                 children: [
-                  for (var value in widget.heroSkins[index].value)
-                    Image(
-                      image: AssetImage(heroImage(value)),
-                      filterQuality: FilterQuality.high,
-                      width: MediaQuery.of(context).size.width * 0.4,
+                  GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: constraintsValues["crossAxisCount"],
+                      childAspectRatio: 0.75,
                     ),
+                    itemCount: widget.heroSkins[index].value.length,
+                    itemBuilder: (context, imageIndex) {
+                      return Card(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Expanded(
+                              flex: 10,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 10,
+                                  horizontal: 15,
+                                ),
+                                child: Image(
+                                  image: AssetImage(
+                                    heroImage(
+                                      widget.heroSkins[index].value[imageIndex],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                'Level ${extractLevel(widget.heroSkins[index].value[imageIndex])}',
+                                style: titleStyle,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ],
               );
             },
