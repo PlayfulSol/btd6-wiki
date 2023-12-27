@@ -21,8 +21,13 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.x.x'  # Replace with the desired Flutter version
+
       - name: Build Flutter web app
-        run: flutter build web
+        run: flutter build web --release
 
       - name: Deploy to Firebase Hosting
         run: |
