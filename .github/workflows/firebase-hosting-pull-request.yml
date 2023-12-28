@@ -4,14 +4,38 @@
 name: Deploy to Firebase Hosting on PR
 'on': pull_request
 jobs:
-  build_and_preview:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+  build_web:
+    name: Build Flutter (Web)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: flutter build web --release && firebase deploy --only hosting
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: actions/checkout@v1
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '3.10.4' # Replace with your project's version of Flutter.
+          channel: 'stable'
+      - run: flutter pub get
+      - run: flutter config --enable-web
+      - run: flutter build web
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: web-build
+          path: build/web
+  deploy:
+    needs: build_web
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: web-build
+          path: build/web
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BTD6_WIKI }}'
-          projectId: btd6-wiki
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYPROJECT }}'
+          channelId: live
+          projectId: projectName
