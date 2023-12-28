@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        env:
+          GIT_CREDENTIALS: username:${{ secrets.PAT_ACCESS_TOKEN }} 
         with:
           submodules: true
           ssh-key: ${{ secrets.DEPLOY_KEY }}
