@@ -4,15 +4,12 @@ on: pull_request
 
 jobs:
   build_web:
-    name: Build Flutter (Web)
-    runs-on: ubuntu-latest
-    env:
-      GIT_CREDENTIALS: username:${{ secrets.PAT_ACCESS_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
-          ssh-key: ${{ secrets.DEPLOY_KEY }}
+          ssh-key: ${{ secrets.DEPLOY_KEY }}  # If using SSH key
+          token: ${{ secrets.PAT_ACCESS_TOKEN }}  # For authentication with PAT
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.16.4'
