@@ -27,6 +27,8 @@ jobs:
   deploy:
     needs: build_web
     runs-on: ubuntu-latest
+    env:
+      GIT_CREDENTIALS: username:${{ secrets.PAT_ACCESS_TOKEN }} 
     steps:
       - name: checkout
         uses: actions/checkout@v1
