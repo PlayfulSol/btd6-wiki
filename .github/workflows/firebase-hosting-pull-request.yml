@@ -39,3 +39,4 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYPROJECT }}'
           channelId: live
           projectId: projectName
+          
