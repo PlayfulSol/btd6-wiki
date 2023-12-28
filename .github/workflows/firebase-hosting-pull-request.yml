@@ -8,7 +8,10 @@ jobs:
     name: Build Flutter (Web)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.16.4'
@@ -36,7 +39,7 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYPROJECT }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BTD6_WIKI }}'
+          projectId: btd6-wiki
           channelId: live
-          projectId: projectName
           
