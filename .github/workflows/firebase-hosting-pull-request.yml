@@ -14,6 +14,7 @@ jobs:
         with:
           submodules: true
           ssh-key: ${{ secrets.DEPLOY_KEY }}
+          GIT_CREDENTIALS: username:${{ secrets.PAT_ACCESS_TOKEN }} 
       - uses: subosito/flutter-action@v1
         with:
           flutter-version: '3.16.4'
