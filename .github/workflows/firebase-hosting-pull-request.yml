@@ -4,6 +4,8 @@ on: pull_request
 
 jobs:
   build_web:
+    name: Build Flutter (Web)
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
