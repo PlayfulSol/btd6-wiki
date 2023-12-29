@@ -178,8 +178,10 @@ Map<String, dynamic> selectSizePreset(String category, Size size) {
       return constraintsNormalPreset;
     } else if (size.width < 1000) {
       return constraintsWidePreset;
-    } else {
+    } else if (size.width < 1400) {
       return constraintsUWPreset;
+    } else {
+      return constraintsWebPreset;
     }
   }
 }

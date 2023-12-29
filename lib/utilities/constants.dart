@@ -177,6 +177,14 @@ const Map<String, dynamic> constraintsUWPreset = {
   "subtitleFontSize": 15.0,
 };
 
+const Map<String, dynamic> constraintsWebPreset = {
+  "crossAxisCount": 4,
+  "rowsToShow": 3,
+  "childAspectRatio": 1.8,
+  "titleFontSize": 24.0,
+  "subtitleFontSize": 15.0,
+};
+
 const Map<String, dynamic> constraintsBloonSmallPreset = {
   "crossAxisCount": 2,
   "crossAxisCountBoss": 1,

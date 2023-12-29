@@ -43,6 +43,10 @@ class _MapsState extends State<Maps> {
 
   @override
   Widget build(BuildContext context) {
+    final constraintsValues = selectSizePreset(
+      kMaps,
+      MediaQuery.of(context).size,
+    );
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -62,11 +66,9 @@ class _MapsState extends State<Maps> {
                         globalState.currentQuery, globalState.currentOption);
                     return GridView.builder(
                       itemCount: filteredMaps.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        childAspectRatio: 1.4,
-                        mainAxisSpacing: 4,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: constraintsValues["crossAxisCount"],
+                        childAspectRatio: constraintsValues["childAspectRatio"],
                       ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
