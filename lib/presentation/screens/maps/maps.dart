@@ -1,15 +1,13 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_map.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/search_widget.dart';
+import '/presentation/widgets/maps/map_card.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
-import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
-import '/utilities/strings.dart';
 import '/utilities/utils.dart';
 
 class Maps extends StatefulWidget {
@@ -94,46 +92,47 @@ class _MapsState extends State<Maps> {
                                 ),
                               );
                             },
-                            child: Card(
-                              elevation: 5,
-                              shadowColor: Colors.black87,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Expanded(
-                                    child: Image(
-                                      semanticLabel: filteredMaps[index].name,
-                                      image: AssetImage(
-                                          mapImage(filteredMaps[index].image)),
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                        return const Icon(Icons.error);
-                                      },
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        AutoSizeText(
-                                          capitalizeEveryWord(
-                                              filteredMaps[index].name),
-                                          maxLines: 1,
-                                          style: bolderNormalStyle,
-                                        ),
-                                        const SizedBox(height: 5),
-                                        Text(filteredMaps[index].difficulty,
-                                            style: subtitleStyle),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            child: MapCard(singleMap: filteredMaps[index]),
+                            // Card(
+                            //   elevation: 5,
+                            //   shadowColor: Colors.black87,
+                            //   child: Column(
+                            //     crossAxisAlignment: CrossAxisAlignment.stretch,
+                            //     children: [
+                            //       Expanded(
+                            //         child: Image(
+                            //           semanticLabel: filteredMaps[index].name,
+                            //           image: AssetImage(
+                            //               mapImage(filteredMaps[index].image)),
+                            //           fit: BoxFit.cover,
+                            //           errorBuilder: (BuildContext context,
+                            //               Object exception,
+                            //               StackTrace? stackTrace) {
+                            //             return const Icon(Icons.error);
+                            //           },
+                            //         ),
+                            //       ),
+                            //       Padding(
+                            //         padding: const EdgeInsets.all(8.0),
+                            //         child: Column(
+                            //           crossAxisAlignment:
+                            //               CrossAxisAlignment.start,
+                            //           children: [
+                            //             AutoSizeText(
+                            //               capitalizeEveryWord(
+                            //                   filteredMaps[index].name),
+                            //               maxLines: 1,
+                            //               style: bolderNormalStyle,
+                            //             ),
+                            //             const SizedBox(height: 5),
+                            //             Text(filteredMaps[index].difficulty,
+                            //                 style: subtitleStyle),
+                            //           ],
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ),
                         );
                       },
