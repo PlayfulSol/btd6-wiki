@@ -8,6 +8,7 @@ import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base_model.dart';
 import 'constants.dart';
+import 'layout_presets.dart';
 
 String formatBigNumber(int number) {
   if (number < 1000) {
@@ -162,26 +163,46 @@ Future<void> openMail(String mailString) async {
 
 Map<String, dynamic> selectSizePreset(String category, Size size) {
   if (category == kBloons) {
-    if (size.width < 380) {
-      return constraintsBloonSmallPreset;
-    } else if (size.width < 480) {
-      return constraintsBloonNormalPreset;
-    } else if (size.width < 1000) {
-      return constraintsBloonWidePreset;
-    } else {
-      return constraintsBloonUWPreset;
-    }
+    return _getBloonsSizePreset(size);
+  } else if (category == kMaps) {
+    return _getMapsSizePreset(size);
   } else {
-    if (size.width < 380) {
-      return constraintsSmallPreset;
-    } else if (size.width < 480) {
-      return constraintsNormalPreset;
-    } else if (size.width < 1000) {
-      return constraintsWidePreset;
-    } else if (size.width < 1400) {
-      return constraintsUWPreset;
-    } else {
-      return constraintsWebPreset;
-    }
+    return _getDefaultSizePreset(size);
+  }
+}
+
+Map<String, dynamic> _getBloonsSizePreset(Size size) {
+  if (size.width < 380) {
+    return constraintsBloonSmallPreset;
+  } else if (size.width < 480) {
+    return constraintsBloonNormalPreset;
+  } else if (size.width < 850) {
+    return constraintsBloonWidePreset;
+  } else {
+    return constraintsBloonUWPreset;
+  }
+}
+
+Map<String, dynamic> _getMapsSizePreset(Size size) {
+  if (size.width < 380) {
+    return constraintsMapsSmallPreset;
+  } else if (size.width < 480) {
+    return constraintsMapsNormalPreset;
+  } else if (size.width < 850) {
+    return constraintsMapsWidePreset;
+  } else {
+    return constraintsMapsUWPreset;
+  }
+}
+
+Map<String, dynamic> _getDefaultSizePreset(Size size) {
+  if (size.width < 380) {
+    return constraintsSmallPreset;
+  } else if (size.width < 480) {
+    return constraintsNormalPreset;
+  } else if (size.width < 850) {
+    return constraintsWidePreset;
+  } else {
+    return constraintsUWPreset;
   }
 }

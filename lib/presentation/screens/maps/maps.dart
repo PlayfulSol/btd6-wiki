@@ -69,6 +69,8 @@ class _MapsState extends State<Maps> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: constraintsValues["crossAxisCount"],
                         childAspectRatio: constraintsValues["childAspectRatio"],
+                        mainAxisSpacing: constraintsValues["mainAxisSpacing"],
+                        crossAxisSpacing: constraintsValues["crossAxisSpacing"],
                       ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
