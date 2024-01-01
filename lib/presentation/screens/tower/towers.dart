@@ -38,8 +38,7 @@ class _TowersState extends State<Towers> {
 
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = selectSizePreset(
-      kTowers,
+    final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
     return Scaffold(
@@ -60,8 +59,8 @@ class _TowersState extends State<Towers> {
                 return GridView.builder(
                   itemCount: filteredTowers.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: constraintsValues["crossAxisCount"],
-                    childAspectRatio: constraintsValues["childAspectRatio"],
+                    crossAxisCount: constraintsValues[towerCrossCount],
+                    childAspectRatio: constraintsValues[towerAspectRatio],
                   ),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -82,15 +81,16 @@ class _TowersState extends State<Towers> {
                           title: Text(
                             tower.name,
                             style: titleStyle.copyWith(
-                              fontSize: constraintsValues["titleFontSize"],
+                              fontSize: constraintsValues[towerTitleFontSize],
                             ),
                           ),
                           subtitle: Text(
                             tower.inGameDesc,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: constraintsValues["rowsToShow"],
+                            maxLines: constraintsValues[towerSubtitleRows],
                             style: subtitleStyle.copyWith(
-                              fontSize: constraintsValues["subtitleFontSize"],
+                              fontSize:
+                                  constraintsValues[towerSubtitleFontSize],
                             ),
                           ),
                           onTap: () {

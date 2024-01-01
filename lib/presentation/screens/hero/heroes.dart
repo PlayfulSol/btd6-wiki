@@ -37,8 +37,7 @@ class _HeroesState extends State<Heroes> {
 
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = selectSizePreset(
-      kHeroes,
+    final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
     return Scaffold(
@@ -58,8 +57,8 @@ class _HeroesState extends State<Heroes> {
                 return GridView.builder(
                   itemCount: filteredHeroes.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: constraintsValues["crossAxisCount"],
-                    childAspectRatio: constraintsValues["childAspectRatio"],
+                    crossAxisCount: constraintsValues[heroCrossCount],
+                    childAspectRatio: constraintsValues[heroAspectRatio],
                   ),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -80,15 +79,15 @@ class _HeroesState extends State<Heroes> {
                           title: Text(
                             hero.name,
                             style: titleStyle.copyWith(
-                              fontSize: constraintsValues["titleFontSize"],
+                              fontSize: constraintsValues[heroTitleFontSize],
                             ),
                           ),
                           subtitle: Text(
                             hero.inGameDesc,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: constraintsValues["rowsToShow"],
+                            maxLines: constraintsValues[heroSubtitleRows],
                             style: TextStyle(
-                              fontSize: constraintsValues["subtitleFontSize"],
+                              fontSize: constraintsValues[heroSubtitleFontSize],
                             ),
                           ),
                           onTap: () {

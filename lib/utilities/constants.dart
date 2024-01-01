@@ -170,3 +170,32 @@ const Map<String, String> shai = {
   git: 'https://github.com/namelessto',
   linkedin: 'https://www.linkedin.com/in/shai-holczer/',
 };
+
+const String towerCrossCount = 'towerCrossAxisCount';
+const String towerAspectRatio = 'towerChildAspectRatio';
+const String towerTitleFontSize = 'towerTitleFontSize';
+const String towerSubtitleFontSize = 'towerSubtitleFontSize';
+const String towerSubtitleRows = 'towerSubtitleMaxRows';
+
+const String heroCrossCount = 'heroCrossAxisCount';
+const String heroAspectRatio = 'heroChildAspectRatio';
+const String heroTitleFontSize = 'heroTitleFontSize';
+const String heroSubtitleFontSize = 'heroSubtitleFontSize';
+const String heroSubtitleRows = 'heroSubtitleMaxRows';
+const String skinCrossCount = 'skinCrossAxisCount';
+const String skinAspectRatio = 'skinChildAspectRatio';
+
+const String bloonCrossCount = 'bloonCrossAxisCount';
+const String bloonAspectRatio = 'bloonChildAspectRatio';
+const String bloonTitleFontSize = 'bloonTitleFontSize';
+const String bloonImageWidth = 'bloonImageWidth';
+
+const String bossCrossCount = 'bossCrossAxisCount';
+const String bossAspectRatio = 'bossChildAspectRatio';
+const String bossTitleFontSize = 'bossTitleFontSize';
+const String bossSubtitleFontSize = 'bossSubtitleFontSize';
+
+const String mapCrossCount = 'mapCrossAxisCount';
+const String mapAspectRatio = 'mapChildAspectRatio';
+const String mapTitleFontSize = 'mapTitleFontSize';
+const String mapSubtitleFontSize = 'mapSubtitleFontSize';

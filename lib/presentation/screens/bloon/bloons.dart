@@ -40,8 +40,7 @@ class _BloonsState extends State<Bloons> {
 
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = selectSizePreset(
-      kBloons,
+    final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
     return Scaffold(
@@ -143,32 +142,36 @@ class BloonsGrid extends StatelessWidget {
     return GridView.builder(
       itemCount: bloons.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: constraintsValues["crossAxisCount"],
-        childAspectRatio: constraintsValues["childAspectRatio"],
+        crossAxisCount: constraintsValues[bloonCrossCount],
+        childAspectRatio: constraintsValues[bloonAspectRatio],
       ),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       primary: false,
       itemBuilder: (context, index) {
         final bloon = bloons[index];
-        return Card(
-          margin: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 7,
-          ),
-          child: Center(
+        return Center(
+          child: Card(
+            margin: const EdgeInsets.symmetric(
+              vertical: 3,
+              horizontal: 7,
+            ),
             child: ListTile(
-              horizontalTitleGap: 10,
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: 5,
+                horizontal: 15,
+              ),
+              titleAlignment: ListTileTitleAlignment.center,
               leading: ImageOutliner(
                 imageName: bloon.image,
                 imagePath: bloonImage(bloon.image),
-                width: constraintsValues["imageWidth"],
+                width: constraintsValues[bloonImageWidth],
               ),
               title: Text(
                 bloon.name,
                 maxLines: 1,
                 style: smallTitleStyle.copyWith(
-                  fontSize: constraintsValues["titleFontSize"],
+                  fontSize: constraintsValues[bloonTitleFontSize],
                 ),
               ),
               onTap: () {
@@ -213,8 +216,8 @@ class BossesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: constraintsValues["crossAxisCountBoss"],
-        childAspectRatio: constraintsValues["childAspectRatioBoss"],
+        crossAxisCount: constraintsValues[bossCrossCount],
+        childAspectRatio: constraintsValues[bossAspectRatio],
       ),
       physics: const NeverScrollableScrollPhysics(),
       primary: false,
@@ -234,7 +237,7 @@ class BossesGrid extends StatelessWidget {
               ),
               title: Text(
                 boss.name,
-                style: constraintsValues["textStyleBoss"],
+                // style: constraintsValues["textStyleBoss"],
               ),
               onTap: () {
                 analyticsHelper.logEvent(

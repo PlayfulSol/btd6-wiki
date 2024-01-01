@@ -161,48 +161,66 @@ Future<void> openMail(String mailString) async {
   }
 }
 
-Map<String, dynamic> selectSizePreset(String category, Size size) {
-  if (category == kBloons) {
-    return _getBloonsSizePreset(size);
-  } else if (category == kMaps) {
-    return _getMapsSizePreset(size);
-  } else {
-    return _getDefaultSizePreset(size);
-  }
-}
+// Map<String, dynamic> selectSizePreset(String category, Size size) {
+//   if (category == kBloons) {
+//     return _getBloonsSizePreset(size);
+//   } else if (category == kMaps) {
+//     return _getMapsSizePreset(size);
+//   } else {
+//     return _getDefaultSizePreset(size);
+//   }
+// }
 
-Map<String, dynamic> _getBloonsSizePreset(Size size) {
-  if (size.width < 380) {
-    return constraintsBloonSmallPreset;
-  } else if (size.width < 480) {
-    return constraintsBloonNormalPreset;
-  } else if (size.width < 850) {
-    return constraintsBloonWidePreset;
-  } else {
-    return constraintsBloonUWPreset;
-  }
-}
+// Map<String, dynamic> _getBloonsSizePreset(Size size) {
+//   if (size.width < 380) {
+//     return constraintsBloonSmallPreset;
+//   } else if (size.width < 480) {
+//     return constraintsBloonNormalPreset;
+//   } else if (size.width < 850) {
+//     return constraintsBloonWidePreset;
+//   } else {
+//     return constraintsBloonUWPreset;
+//   }
+// }
 
-Map<String, dynamic> _getMapsSizePreset(Size size) {
-  if (size.width < 380) {
-    return constraintsMapsSmallPreset;
-  } else if (size.width < 480) {
-    return constraintsMapsNormalPreset;
-  } else if (size.width < 850) {
-    return constraintsMapsWidePreset;
-  } else {
-    return constraintsMapsUWPreset;
-  }
-}
+// Map<String, dynamic> _getMapsSizePreset(Size size) {
+//   if (size.width < 380) {
+//     return constraintsMapsSmallPreset;
+//   } else if (size.width < 480) {
+//     return constraintsMapsNormalPreset;
+//   } else if (size.width < 850) {
+//     return constraintsMapsWidePreset;
+//   } else {
+//     return constraintsMapsUWPreset;
+//   }
+// }
 
-Map<String, dynamic> _getDefaultSizePreset(Size size) {
-  if (size.width < 380) {
-    return constraintsSmallPreset;
-  } else if (size.width < 480) {
-    return constraintsNormalPreset;
-  } else if (size.width < 850) {
-    return constraintsWidePreset;
+// Map<String, dynamic> _getDefaultSizePreset(Size size) {
+//   if (size.width < 380) {
+//     return constraintsSmallPreset;
+//   } else if (size.width < 480) {
+//     return constraintsNormalPreset;
+//   } else if (size.width < 850) {
+//     return constraintsWidePreset;
+//   } else {
+//     return constraintsUWPreset;
+//   }
+// }
+
+Map<String, dynamic> getPreset(Size size) {
+  if (size.width < 310) {
+    return presetUS;
+  } else if (size.width < 576) {
+    return presetXS;
+  } else if (size.width < 768) {
+    return presetSM;
+  } else if (size.width < 992) {
+    return presetMD;
+  } else if (size.width < 1200) {
+    return presetLG;
+  } else if (size.width < 2000) {
+    return presetXL;
   } else {
-    return constraintsUWPreset;
+    return presetUL;
   }
 }
