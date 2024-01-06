@@ -150,17 +150,13 @@ class BloonsGrid extends StatelessWidget {
       primary: false,
       itemBuilder: (context, index) {
         final bloon = bloons[index];
-        return Center(
-          child: Card(
-            margin: const EdgeInsets.symmetric(
-              vertical: 3,
-              horizontal: 7,
-            ),
+        return Card(
+          margin: const EdgeInsets.symmetric(
+            vertical: 3,
+            horizontal: 7,
+          ),
+          child: Center(
             child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 5,
-                horizontal: 15,
-              ),
               titleAlignment: ListTileTitleAlignment.center,
               leading: ImageOutliner(
                 imageName: bloon.image,
@@ -225,10 +221,9 @@ class BossesGrid extends StatelessWidget {
         final boss = bossesList[index];
 
         return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
           child: Center(
             child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              titleAlignment: ListTileTitleAlignment.center,
               leading: ImageOutliner(
                 imageName: boss.image,
                 imagePath: bossImage(boss.image),

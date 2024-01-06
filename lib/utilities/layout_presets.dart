@@ -11,23 +11,23 @@ Map<String, dynamic> presetUS = {
   // heroes
   heroCrossCount: 1,
   heroAspectRatio: 3.5,
-  heroTitleStyle: titleStyle.copyWith(fontSize: 12),
+  heroTitleStyle: titleStyle.copyWith(fontSize: 12.0),
   heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 12.0),
   heroSubtitleRows: 2,
   skinCrossCount: 1,
   skinAspectRatio: 1.0,
   // bloons
   bloonCrossCount: 2,
-  bloonAspectRatio: 2.0,
+  bloonAspectRatio: 2.85,
   bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
   bloonImageWidth: 28.0,
   // bosses
   bossCrossCount: 1,
-  bossAspectRatio: 3.0,
-  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  bossAspectRatio: 4.3,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 16.0),
   // maps
   mapCrossCount: 1,
-  mapAspectRatio: 1.5,
+  mapAspectRatio: 1.3,
 };
 Map<String, dynamic> presetXS = {
   // towers
@@ -48,16 +48,16 @@ Map<String, dynamic> presetXS = {
   skinAspectRatio: 1.0,
   // bloons
   bloonCrossCount: 2,
-  bloonAspectRatio: 2.0,
-  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonAspectRatio: 2.7,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 15.0),
   bloonImageWidth: 28.0,
   // bosses
   bossCrossCount: 1,
-  bossAspectRatio: 3.0,
-  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  bossAspectRatio: 4.3,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 16.0),
   // maps
   mapCrossCount: 1,
-  mapAspectRatio: 1.5,
+  mapAspectRatio: 1.3,
 };
 Map<String, dynamic> presetSM = {
   // towers
@@ -78,16 +78,16 @@ Map<String, dynamic> presetSM = {
   skinAspectRatio: 1.0,
   // bloons
   bloonCrossCount: 2,
-  bloonAspectRatio: 2.0,
-  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
-  bloonImageWidth: 28.0,
+  bloonAspectRatio: 2.7,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 14.5),
+  bloonImageWidth: 35.0,
   // bosses
   bossCrossCount: 1,
-  bossAspectRatio: 3.0,
-  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  bossAspectRatio: 4.3,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 18.0),
   // maps
   mapCrossCount: 1,
-  mapAspectRatio: 1.5,
+  mapAspectRatio: 1.3,
 };
 Map<String, dynamic> presetMD = {
   // towers
@@ -108,16 +108,16 @@ Map<String, dynamic> presetMD = {
   skinAspectRatio: 1.0,
   // bloons
   bloonCrossCount: 2,
-  bloonAspectRatio: 2.0,
-  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
-  bloonImageWidth: 28.0,
+  bloonAspectRatio: 2.75,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 17.0),
+  bloonImageWidth: 50.0,
   // bosses
   bossCrossCount: 1,
-  bossAspectRatio: 3.0,
-  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  bossAspectRatio: 4.3,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 20),
   // maps
-  mapCrossCount: 1,
-  mapAspectRatio: 1.5,
+  mapCrossCount: 2,
+  mapAspectRatio: 1.3,
 };
 Map<String, dynamic> presetLG = {
   // towers
@@ -138,16 +138,16 @@ Map<String, dynamic> presetLG = {
   skinAspectRatio: 1.0,
   // bloons
   bloonCrossCount: 2,
-  bloonAspectRatio: 2.0,
-  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
-  bloonImageWidth: 28.0,
+  bloonAspectRatio: 2.75,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 16.0),
+  bloonImageWidth: 50.0,
   // bosses
   bossCrossCount: 1,
-  bossAspectRatio: 3.0,
-  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  bossAspectRatio: 4.5,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 22.0),
   // maps
-  mapCrossCount: 1,
-  mapAspectRatio: 1.5,
+  mapCrossCount: 2,
+  mapAspectRatio: 1.3,
 };
 Map<String, dynamic> presetXL = {
   // towers
@@ -167,17 +167,17 @@ Map<String, dynamic> presetXL = {
   skinCrossCount: 2,
   skinAspectRatio: 1.0,
   // bloons
-  bloonCrossCount: 2,
-  bloonAspectRatio: 2.0,
-  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonCrossCount: 3,
+  bloonAspectRatio: 2.7,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 14.5),
   bloonImageWidth: 28.0,
   // bosses
   bossCrossCount: 1,
-  bossAspectRatio: 3.0,
-  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  bossAspectRatio: 5.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 22.0),
   // maps
-  mapCrossCount: 1,
-  mapAspectRatio: 1.5,
+  mapCrossCount: 2,
+  mapAspectRatio: 1.3,
 };
 Map<String, dynamic> presetXXL = {
   // towers
@@ -197,17 +197,17 @@ Map<String, dynamic> presetXXL = {
   skinCrossCount: 3,
   skinAspectRatio: 1.0,
   // bloons
-  bloonCrossCount: 2,
-  bloonAspectRatio: 2.0,
-  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonCrossCount: 4,
+  bloonAspectRatio: 2.95,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 16.0),
   bloonImageWidth: 28.0,
   // bosses
-  bossCrossCount: 1,
-  bossAspectRatio: 3.0,
-  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  bossCrossCount: 2,
+  bossAspectRatio: 4.2,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 20.0),
   // maps
-  mapCrossCount: 1,
-  mapAspectRatio: 1.5,
+  mapCrossCount: 2,
+  mapAspectRatio: 1.3,
 };
 Map<String, dynamic> presetXXXL = {
   // towers
@@ -227,15 +227,15 @@ Map<String, dynamic> presetXXXL = {
   skinCrossCount: 5,
   skinAspectRatio: 1.0,
   // bloons
-  bloonCrossCount: 2,
-  bloonAspectRatio: 2.0,
-  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
-  bloonImageWidth: 28.0,
+  bloonCrossCount: 5,
+  bloonAspectRatio: 3.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 16.0),
+  bloonImageWidth: 35.0,
   // bosses
-  bossCrossCount: 1,
-  bossAspectRatio: 3.0,
-  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  bossCrossCount: 3,
+  bossAspectRatio: 3.4,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 20.0),
   // maps
-  mapCrossCount: 1,
-  mapAspectRatio: 1.5,
+  mapCrossCount: 3,
+  mapAspectRatio: 1.3,
 };
