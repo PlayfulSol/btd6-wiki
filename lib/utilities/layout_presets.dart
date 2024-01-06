@@ -1,120 +1,5 @@
 import '/utilities/constants.dart';
 
-// // ----- Towers and Heroes -----
-// const Map<String, dynamic> constraintsSmallPreset = {
-//   "crossAxisCount": 1,
-//   "rowsToShow": 2,
-//   "childAspectRatio": 3.1,
-//   "titleFontSize": 17.0,
-//   "subtitleFontSize": 15.0,
-// };
-
-// const Map<String, dynamic> constraintsNormalPreset = {
-//   "crossAxisCount": 1,
-//   "rowsToShow": 2,
-//   "childAspectRatio": 3.7,
-//   "titleFontSize": 18.0,
-//   "subtitleFontSize": 15.0,
-// };
-
-// const Map<String, dynamic> constraintsWidePreset = {
-//   "crossAxisCount": 2,
-//   "rowsToShow": 3,
-//   "childAspectRatio": 2.4,
-//   "titleFontSize": 20.0,
-//   "subtitleFontSize": 16.0,
-// };
-
-// const Map<String, dynamic> constraintsUWPreset = {
-//   "crossAxisCount": 3,
-//   "rowsToShow": 3,
-//   "childAspectRatio": 2.0,
-//   "titleFontSize": 24.0,
-//   "subtitleFontSize": 15.0,
-// };
-
-// // ----- Bloons -----
-// const Map<String, dynamic> constraintsBloonSmallPreset = {
-//   "crossAxisCount": 2,
-//   "crossAxisCountBoss": 1,
-//   "childAspectRatio": 1.95,
-//   "childAspectRatioBoss": 3.45,
-//   "titleFontSize": 16.0,
-//   "imageWidth": 29.0,
-//   "textStyleBoss": bolderNormalStyle,
-// };
-
-// const Map<String, dynamic> constraintsBloonNormalPreset = {
-//   "crossAxisCount": 2,
-//   "crossAxisCountBoss": 1,
-//   "childAspectRatio": 2.3,
-//   "childAspectRatioBoss": 4.05,
-//   "titleFontSize": 19.0,
-//   "imageWidth": 35.0,
-//   "textStyleBoss": smallTitleStyle,
-// };
-
-// const Map<String, dynamic> constraintsBloonWidePreset = {
-//   "crossAxisCount": 3,
-//   "crossAxisCountBoss": 2,
-//   "childAspectRatio": 2.2,
-//   "childAspectRatioBoss": 3.5,
-//   "titleFontSize": 19.0,
-//   "imageWidth": 42.0,
-//   "textStyleBoss": smallTitleStyle,
-// };
-
-// const Map<String, dynamic> constraintsBloonUWPreset = {
-//   "crossAxisCount": 3,
-//   "crossAxisCountBoss": 2,
-//   "childAspectRatio": 2.2,
-//   "childAspectRatioBoss": 3.5,
-//   "titleFontSize": 22.0,
-//   "imageWidth": 56.0,
-//   "textStyleBoss": titleStyle,
-// };
-
-// // ----- Maps -----
-// const Map<String, dynamic> constraintsMapsSmallPreset = {
-//   "crossAxisCount": 2,
-//   "rowsToShow": 2,
-//   "childAspectRatio": 0.95,
-//   "titleFontSize": 17.0,
-//   "subtitleFontSize": 15.0,
-//   "mainAxisSpacing": 0.0,
-//   "crossAxisSpacing": 0.0,
-// };
-
-// const Map<String, dynamic> constraintsMapsNormalPreset = {
-//   "crossAxisCount": 2,
-//   "rowsToShow": 3,
-//   "childAspectRatio": 1,
-//   "titleFontSize": 24.0,
-//   "subtitleFontSize": 15.0,
-//   "mainAxisSpacing": 3.0,
-//   "crossAxisSpacing": 3.0
-// };
-
-// const Map<String, dynamic> constraintsMapsWidePreset = {
-//   "crossAxisCount": 3,
-//   "rowsToShow": 3,
-//   "childAspectRatio": 0.9,
-//   "titleFontSize": 24.0,
-//   "subtitleFontSize": 15.0,
-//   "mainAxisSpacing": 7.5,
-//   "crossAxisSpacing": 7.5,
-// };
-
-// const Map<String, dynamic> constraintsMapsUWPreset = {
-//   "crossAxisCount": 4,
-//   "rowsToShow": 3,
-//   "childAspectRatio": 0.9,
-//   "titleFontSize": 24.0,
-//   "subtitleFontSize": 15.0,
-//   "mainAxisSpacing": 12.0,
-//   "crossAxisSpacing": 8.0
-// };
-
 Map<String, dynamic> presetUS = {
   // towers
   towerCrossCount: 1,
@@ -122,6 +7,7 @@ Map<String, dynamic> presetUS = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 12.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 12.0),
   towerSubtitleRows: 2,
+  towerImageWidth: 50,
   // heroes
   heroCrossCount: 1,
   heroAspectRatio: 3.5,
@@ -143,9 +29,213 @@ Map<String, dynamic> presetUS = {
   mapCrossCount: 1,
   mapAspectRatio: 1.5,
 };
-const Map<String, dynamic> presetXS = {};
-const Map<String, dynamic> presetSM = {};
-const Map<String, dynamic> presetMD = {};
-const Map<String, dynamic> presetLG = {};
-const Map<String, dynamic> presetXL = {};
-const Map<String, dynamic> presetUL = {};
+Map<String, dynamic> presetXS = {
+  // towers
+  towerCrossCount: 1,
+  towerAspectRatio: 3.55,
+  towerTitleStyle: titleStyle.copyWith(fontSize: 15.0),
+  towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 13.0),
+  towerSubtitleRows: 2,
+  towerImageWidth: 55,
+
+  // heroes
+  heroCrossCount: 1,
+  heroAspectRatio: 3.5,
+  heroTitleStyle: titleStyle.copyWith(fontSize: 15.0),
+  heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 13.0),
+  heroSubtitleRows: 2,
+  skinCrossCount: 1,
+  skinAspectRatio: 1.0,
+  // bloons
+  bloonCrossCount: 2,
+  bloonAspectRatio: 2.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonImageWidth: 28.0,
+  // bosses
+  bossCrossCount: 1,
+  bossAspectRatio: 3.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  // maps
+  mapCrossCount: 1,
+  mapAspectRatio: 1.5,
+};
+Map<String, dynamic> presetSM = {
+  // towers
+  towerCrossCount: 1,
+  towerAspectRatio: 3.55,
+  towerTitleStyle: titleStyle.copyWith(fontSize: 17.0),
+  towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
+  towerSubtitleRows: 2,
+  towerImageWidth: 65,
+
+  // heroes
+  heroCrossCount: 1,
+  heroAspectRatio: 3.5,
+  heroTitleStyle: titleStyle.copyWith(fontSize: 18.0),
+  heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 15.0),
+  heroSubtitleRows: 2,
+  skinCrossCount: 1,
+  skinAspectRatio: 1.0,
+  // bloons
+  bloonCrossCount: 2,
+  bloonAspectRatio: 2.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonImageWidth: 28.0,
+  // bosses
+  bossCrossCount: 1,
+  bossAspectRatio: 3.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  // maps
+  mapCrossCount: 1,
+  mapAspectRatio: 1.5,
+};
+Map<String, dynamic> presetMD = {
+  // towers
+  towerCrossCount: 1,
+  towerAspectRatio: 3.7,
+  towerTitleStyle: titleStyle.copyWith(fontSize: 18.0),
+  towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.5),
+  towerSubtitleRows: 3,
+  towerImageWidth: 70,
+
+  // heroes
+  heroCrossCount: 1,
+  heroAspectRatio: 3.5,
+  heroTitleStyle: titleStyle.copyWith(fontSize: 20),
+  heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 16.0),
+  heroSubtitleRows: 2,
+  skinCrossCount: 1,
+  skinAspectRatio: 1.0,
+  // bloons
+  bloonCrossCount: 2,
+  bloonAspectRatio: 2.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonImageWidth: 28.0,
+  // bosses
+  bossCrossCount: 1,
+  bossAspectRatio: 3.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  // maps
+  mapCrossCount: 1,
+  mapAspectRatio: 1.5,
+};
+Map<String, dynamic> presetLG = {
+  // towers
+  towerCrossCount: 1,
+  towerAspectRatio: 4.0,
+  towerTitleStyle: titleStyle.copyWith(fontSize: 20.0),
+  towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 15),
+  towerSubtitleRows: 2,
+  towerImageWidth: 90,
+
+  // heroes
+  heroCrossCount: 1,
+  heroAspectRatio: 4.3,
+  heroTitleStyle: titleStyle.copyWith(fontSize: 20),
+  heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 16.0),
+  heroSubtitleRows: 2,
+  skinCrossCount: 1,
+  skinAspectRatio: 1.0,
+  // bloons
+  bloonCrossCount: 2,
+  bloonAspectRatio: 2.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonImageWidth: 28.0,
+  // bosses
+  bossCrossCount: 1,
+  bossAspectRatio: 3.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  // maps
+  mapCrossCount: 1,
+  mapAspectRatio: 1.5,
+};
+Map<String, dynamic> presetXL = {
+  // towers
+  towerCrossCount: 2,
+  towerAspectRatio: 2.9,
+  towerTitleStyle: titleStyle.copyWith(fontSize: 16.0),
+  towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
+  towerSubtitleRows: 2,
+  towerImageWidth: 50,
+
+  // heroes
+  heroCrossCount: 2,
+  heroAspectRatio: 3.0,
+  heroTitleStyle: titleStyle.copyWith(fontSize: 16),
+  heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
+  heroSubtitleRows: 2,
+  skinCrossCount: 2,
+  skinAspectRatio: 1.0,
+  // bloons
+  bloonCrossCount: 2,
+  bloonAspectRatio: 2.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonImageWidth: 28.0,
+  // bosses
+  bossCrossCount: 1,
+  bossAspectRatio: 3.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  // maps
+  mapCrossCount: 1,
+  mapAspectRatio: 1.5,
+};
+Map<String, dynamic> presetXXL = {
+  // towers
+  towerCrossCount: 3,
+  towerAspectRatio: 2.15,
+  towerTitleStyle: titleStyle.copyWith(fontSize: 16.0),
+  towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
+  towerSubtitleRows: 2,
+  towerImageWidth: 65,
+
+  // heroes
+  heroCrossCount: 2,
+  heroAspectRatio: 3.5,
+  heroTitleStyle: titleStyle.copyWith(fontSize: 20),
+  heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 16.0),
+  heroSubtitleRows: 2,
+  skinCrossCount: 3,
+  skinAspectRatio: 1.0,
+  // bloons
+  bloonCrossCount: 2,
+  bloonAspectRatio: 2.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonImageWidth: 28.0,
+  // bosses
+  bossCrossCount: 1,
+  bossAspectRatio: 3.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  // maps
+  mapCrossCount: 1,
+  mapAspectRatio: 1.5,
+};
+Map<String, dynamic> presetXXXL = {
+  // towers
+  towerCrossCount: 3,
+  towerAspectRatio: 2.2,
+  towerTitleStyle: titleStyle.copyWith(fontSize: 18.0),
+  towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.5),
+  towerSubtitleRows: 3,
+  towerImageWidth: 90,
+
+  // heroes
+  heroCrossCount: 3,
+  heroAspectRatio: 2.5,
+  heroTitleStyle: titleStyle.copyWith(fontSize: 20),
+  heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 16.0),
+  heroSubtitleRows: 3,
+  skinCrossCount: 5,
+  skinAspectRatio: 1.0,
+  // bloons
+  bloonCrossCount: 2,
+  bloonAspectRatio: 2.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
+  bloonImageWidth: 28.0,
+  // bosses
+  bossCrossCount: 1,
+  bossAspectRatio: 3.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
+  // maps
+  mapCrossCount: 1,
+  mapAspectRatio: 1.5,
+};

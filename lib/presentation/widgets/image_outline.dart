@@ -4,19 +4,23 @@ class ImageOutliner extends StatelessWidget {
   final String imageName;
   final String imagePath;
   final double? width;
-  const ImageOutliner(
-      {super.key,
-      required this.imageName,
-      required this.imagePath,
-      this.width});
+  final double? height;
+
+  const ImageOutliner({
+    super.key,
+    required this.imageName,
+    required this.imagePath,
+    this.width,
+    this.height,
+  });
 
   @override
   Widget build(BuildContext context) {
     double maxWidth = width ?? 65;
-    double maxHeight = 90;
+    double maxHeight = height ?? 90;
     return SizedBox(
       width: maxWidth,
-      height: maxHeight,
+      // height: maxHeight,
       child: Stack(
         alignment: AlignmentDirectional.center,
         fit: StackFit.loose,

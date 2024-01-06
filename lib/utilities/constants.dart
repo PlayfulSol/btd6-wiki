@@ -176,6 +176,7 @@ const String towerAspectRatio = 'towerChildAspectRatio';
 const String towerTitleStyle = 'towerTitleStyle';
 const String towerSubtitleStyle = 'towerSubtitleStyle';
 const String towerSubtitleRows = 'towerSubtitleMaxRows';
+const String towerImageWidth = 'towerImageWidth';
 
 const String heroCrossCount = 'heroCrossAxisCount';
 const String heroAspectRatio = 'heroChildAspectRatio';

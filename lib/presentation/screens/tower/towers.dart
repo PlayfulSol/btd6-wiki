@@ -74,9 +74,11 @@ class _TowersState extends State<Towers> {
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 8),
                           horizontalTitleGap: 8,
+                          minVerticalPadding: -4,
                           leading: ImageOutliner(
                             imageName: tower.image,
                             imagePath: towerImage(tower.image),
+                            width: constraintsValues[towerImageWidth],
                           ),
                           title: Text(
                             tower.name,
