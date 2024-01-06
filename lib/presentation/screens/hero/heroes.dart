@@ -78,17 +78,13 @@ class _HeroesState extends State<Heroes> {
                           ),
                           title: Text(
                             hero.name,
-                            style: titleStyle.copyWith(
-                              fontSize: constraintsValues[heroTitleFontSize],
-                            ),
+                            style: constraintsValues[heroTitleStyle],
                           ),
                           subtitle: Text(
                             hero.inGameDesc,
                             overflow: TextOverflow.ellipsis,
+                            style: constraintsValues[heroSubtitleStyle],
                             maxLines: constraintsValues[heroSubtitleRows],
-                            style: TextStyle(
-                              fontSize: constraintsValues[heroSubtitleFontSize],
-                            ),
                           ),
                           onTap: () {
                             widget.analyticsHelper.logEvent(

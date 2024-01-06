@@ -115,36 +115,33 @@ import '/utilities/constants.dart';
 //   "crossAxisSpacing": 8.0
 // };
 
-const Map<String, dynamic> presetUS = {
+Map<String, dynamic> presetUS = {
   // towers
   towerCrossCount: 1,
   towerAspectRatio: 3.5,
-  towerTitleFontSize: 12.0,
-  towerSubtitleFontSize: 12.0,
+  towerTitleStyle: titleStyle.copyWith(fontSize: 12.0),
+  towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 12.0),
   towerSubtitleRows: 2,
   // heroes
   heroCrossCount: 1,
   heroAspectRatio: 3.5,
-  heroTitleFontSize: 12.0,
-  heroSubtitleFontSize: 12.0,
+  heroTitleStyle: titleStyle.copyWith(fontSize: 12),
+  heroSubtitleStyle: subtitleStyle.copyWith(fontSize: 12.0),
   heroSubtitleRows: 2,
   skinCrossCount: 1,
   skinAspectRatio: 1.0,
   // bloons
   bloonCrossCount: 2,
   bloonAspectRatio: 2.0,
-  bloonTitleFontSize: 12.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
   bloonImageWidth: 28.0,
   // bosses
   bossCrossCount: 1,
   bossAspectRatio: 3.0,
-  bossTitleFontSize: 12.0,
-  bossSubtitleFontSize: 12.0,
+  bossTitleStyle: titleStyle.copyWith(fontSize: 12),
   // maps
   mapCrossCount: 1,
   mapAspectRatio: 1.5,
-  mapTitleFontSize: 12.0,
-  mapSubtitleFontSize: 12.0,
 };
 const Map<String, dynamic> presetXS = {};
 const Map<String, dynamic> presetSM = {};

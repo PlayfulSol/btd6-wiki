@@ -80,18 +80,13 @@ class _TowersState extends State<Towers> {
                           ),
                           title: Text(
                             tower.name,
-                            style: titleStyle.copyWith(
-                              fontSize: constraintsValues[towerTitleFontSize],
-                            ),
+                            style: constraintsValues[towerTitleStyle],
                           ),
                           subtitle: Text(
                             tower.inGameDesc,
                             overflow: TextOverflow.ellipsis,
                             maxLines: constraintsValues[towerSubtitleRows],
-                            style: subtitleStyle.copyWith(
-                              fontSize:
-                                  constraintsValues[towerSubtitleFontSize],
-                            ),
+                            style: constraintsValues[towerSubtitleStyle],
                           ),
                           onTap: () {
                             widget.analyticsHelper.logEvent(

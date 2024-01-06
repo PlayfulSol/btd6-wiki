@@ -170,9 +170,7 @@ class BloonsGrid extends StatelessWidget {
               title: Text(
                 bloon.name,
                 maxLines: 1,
-                style: smallTitleStyle.copyWith(
-                  fontSize: constraintsValues[bloonTitleFontSize],
-                ),
+                style: constraintsValues[bloonTitleStyle],
               ),
               onTap: () {
                 analyticsHelper.logEvent(
@@ -237,7 +235,7 @@ class BossesGrid extends StatelessWidget {
               ),
               title: Text(
                 boss.name,
-                // style: constraintsValues["textStyleBoss"],
+                style: constraintsValues[bossTitleStyle],
               ),
               onTap: () {
                 analyticsHelper.logEvent(
