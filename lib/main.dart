@@ -111,8 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Consumer<GlobalState>(
           builder: (context, globalState, child) {
-            // return Text(globalState.currentTitle);
-            return Text(MediaQuery.of(context).size.width.toString());
+            return Text(globalState.currentTitle);
           },
         ),
         actions: [

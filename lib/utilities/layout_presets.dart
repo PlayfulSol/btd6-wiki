@@ -7,7 +7,7 @@ Map<String, dynamic> presetUS = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 12.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 12.0),
   towerSubtitleRows: 2,
-  towerImageWidth: 50,
+  towerImageWidth: 50.0,
   // heroes
   heroCrossCount: 1,
   heroAspectRatio: 3.5,
@@ -36,7 +36,7 @@ Map<String, dynamic> presetXS = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 15.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 13.0),
   towerSubtitleRows: 2,
-  towerImageWidth: 55,
+  towerImageWidth: 55.0,
 
   // heroes
   heroCrossCount: 1,
@@ -66,7 +66,7 @@ Map<String, dynamic> presetSM = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 17.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
   towerSubtitleRows: 2,
-  towerImageWidth: 65,
+  towerImageWidth: 65.0,
 
   // heroes
   heroCrossCount: 1,
@@ -96,7 +96,7 @@ Map<String, dynamic> presetMD = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 18.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.5),
   towerSubtitleRows: 3,
-  towerImageWidth: 70,
+  towerImageWidth: 70.0,
 
   // heroes
   heroCrossCount: 1,
@@ -126,7 +126,7 @@ Map<String, dynamic> presetLG = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 20.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 15),
   towerSubtitleRows: 2,
-  towerImageWidth: 90,
+  towerImageWidth: 90.0,
 
   // heroes
   heroCrossCount: 1,
@@ -156,7 +156,7 @@ Map<String, dynamic> presetXL = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 16.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
   towerSubtitleRows: 2,
-  towerImageWidth: 50,
+  towerImageWidth: 50.0,
 
   // heroes
   heroCrossCount: 2,
@@ -186,7 +186,7 @@ Map<String, dynamic> presetXXL = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 16.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
   towerSubtitleRows: 2,
-  towerImageWidth: 65,
+  towerImageWidth: 65.0,
 
   // heroes
   heroCrossCount: 2,
@@ -216,7 +216,7 @@ Map<String, dynamic> presetXXXL = {
   towerTitleStyle: titleStyle.copyWith(fontSize: 18.0),
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.5),
   towerSubtitleRows: 3,
-  towerImageWidth: 90,
+  towerImageWidth: 90.0,
 
   // heroes
   heroCrossCount: 3,
