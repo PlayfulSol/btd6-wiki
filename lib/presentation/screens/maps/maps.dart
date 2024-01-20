@@ -68,8 +68,6 @@ class _MapsState extends State<Maps> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: constraintsValues[mapCrossCount],
                         childAspectRatio: constraintsValues[mapAspectRatio],
-                        // mainAxisSpacing: constraintsValues["mainAxisSpacing"],
-                        // crossAxisSpacing: constraintsValues["crossAxisSpacing"],
                       ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
@@ -96,46 +94,6 @@ class _MapsState extends State<Maps> {
                               );
                             },
                             child: MapCard(singleMap: filteredMaps[index]),
-                            // Card(
-                            //   elevation: 5,
-                            //   shadowColor: Colors.black87,
-                            //   child: Column(
-                            //     crossAxisAlignment: CrossAxisAlignment.stretch,
-                            //     children: [
-                            //       Expanded(
-                            //         child: Image(
-                            //           semanticLabel: filteredMaps[index].name,
-                            //           image: AssetImage(
-                            //               mapImage(filteredMaps[index].image)),
-                            //           fit: BoxFit.cover,
-                            //           errorBuilder: (BuildContext context,
-                            //               Object exception,
-                            //               StackTrace? stackTrace) {
-                            //             return const Icon(Icons.error);
-                            //           },
-                            //         ),
-                            //       ),
-                            //       Padding(
-                            //         padding: const EdgeInsets.all(8.0),
-                            //         child: Column(
-                            //           crossAxisAlignment:
-                            //               CrossAxisAlignment.start,
-                            //           children: [
-                            //             AutoSizeText(
-                            //               capitalizeEveryWord(
-                            //                   filteredMaps[index].name),
-                            //               maxLines: 1,
-                            //               style: bolderNormalStyle,
-                            //             ),
-                            //             const SizedBox(height: 5),
-                            //             Text(filteredMaps[index].difficulty,
-                            //                 style: subtitleStyle),
-                            //           ],
-                            //         ),
-                            //       ),
-                            //     ],
-                            //   ),
-                            // ),
                           ),
                         );
                       },
