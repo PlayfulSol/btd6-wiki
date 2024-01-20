@@ -1,3 +1,4 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import '/models/bloons/common/relative_class.dart';
@@ -47,6 +48,22 @@ String statsToString(Stats stats) {
 
 String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
+}
+
+Future<bool> handleFavorite(String category, String id) async {
+  bool isFavorite;
+  var favoriteBox = await Hive.openBox('favorite');
+  List favoriteList = favoriteBox.get(category, defaultValue: []);
+  if (favoriteList.contains(id)) {
+    favoriteList.remove(id);
+    isFavorite = false;
+  } else {
+    favoriteList.add(id);
+    isFavorite = true;
+  }
+  favoriteBox.put(kTowers, favoriteList);
+  print(favoriteList);
+  return isFavorite;
 }
 
 List<BaseModel> filterAndSearchBloons(

@@ -184,8 +184,8 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             onPressed: () async {
               var favBox = await Hive.openBox('favorite');
-              // favBox.deleteFromDisk();
-              print(favBox.get(kTowers));
+              favBox.deleteFromDisk();
+              // print(favBox.get(kTowers));
             },
             icon: const Icon(Icons.favorite),
           ),

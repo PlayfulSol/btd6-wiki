@@ -41,6 +41,7 @@ class _TowersState extends State<Towers> {
     final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
+    bool isFavorite = false;
     return Scaffold(
       body: Column(
         children: [
@@ -67,16 +68,10 @@ class _TowersState extends State<Towers> {
                     final tower = filteredTowers[index];
 
                     return InkWell(
+                      borderRadius: BorderRadius.circular(20),
                       onLongPress: () async {
-                        var favBox = await Hive.openBox('favorite');
-                        List favList = favBox.get(kTowers, defaultValue: []);
-                        if (favList.contains(tower.id)) {
-                          favList.remove(tower.id);
-                        } else {
-                          favList.add(tower.id);
-                        }
-                        favBox.put(kTowers, favList);
-                        print(favList);
+                        isFavorite = await handleFavorite(kTowers, tower.id);
+                        setState(() {});
                       },
                       onTap: () {
                         widget.analyticsHelper.logEvent(
@@ -97,32 +92,45 @@ class _TowersState extends State<Towers> {
                           ),
                         );
                       },
-                      child: Card(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 13, vertical: 8),
-                        child: Center(
-                          child: ListTile(
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 8),
-                            horizontalTitleGap: 8,
-                            minVerticalPadding: -4,
-                            leading: ImageOutliner(
-                              imageName: tower.image,
-                              imagePath: towerImage(tower.image),
-                              width: constraintsValues[towerImageWidth],
-                            ),
-                            title: Text(
-                              tower.name,
-                              style: constraintsValues[towerTitleStyle],
-                            ),
-                            subtitle: Text(
-                              tower.inGameDesc,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: constraintsValues[towerSubtitleRows],
-                              style: constraintsValues[towerSubtitleStyle],
+                      child: Stack(
+                        alignment: AlignmentDirectional.topEnd,
+                        children: [
+                          Card(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 13, vertical: 8),
+                            child: Center(
+                              child: ListTile(
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                horizontalTitleGap: 8,
+                                minVerticalPadding: -4,
+                                leading: ImageOutliner(
+                                  imageName: tower.image,
+                                  imagePath: towerImage(tower.image),
+                                  width: constraintsValues[towerImageWidth],
+                                ),
+                                title: Text(
+                                  tower.name,
+                                  style: constraintsValues[towerTitleStyle],
+                                ),
+                                subtitle: Text(
+                                  tower.inGameDesc,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines:
+                                      constraintsValues[towerSubtitleRows],
+                                  style: constraintsValues[towerSubtitleStyle],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          Positioned(
+                            top: 17,
+                            right: 25,
+                            child: isFavorite
+                                ? Icon(Icons.star)
+                                : Icon(Icons.star_border_outlined),
+                          ),
+                        ],
                       ),
                     );
                   },
