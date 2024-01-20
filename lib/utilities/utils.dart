@@ -8,6 +8,7 @@ import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base_model.dart';
 import 'constants.dart';
+import 'layout_presets.dart';
 
 String formatBigNumber(int number) {
   if (number < 1000) {
@@ -160,26 +161,22 @@ Future<void> openMail(String mailString) async {
   }
 }
 
-Map<String, dynamic> selectSizePreset(String category, Size size) {
-  if (category == kBloons) {
-    if (size.width < 380) {
-      return constraintsBloonSmallPreset;
-    } else if (size.width < 480) {
-      return constraintsBloonNormalPreset;
-    } else if (size.width < 1000) {
-      return constraintsBloonWidePreset;
-    } else {
-      return constraintsBloonUWPreset;
-    }
+Map<String, dynamic> getPreset(Size size) {
+  if (size.width < 310) {
+    return presetUS;
+  } else if (size.width < 360) {
+    return presetXS;
+  } else if (size.width < 415) {
+    return presetSM;
+  } else if (size.width < 450) {
+    return presetMD;
+  } else if (size.width < 550) {
+    return presetLG;
+  } else if (size.width < 750) {
+    return presetXL;
+  } else if (size.width < 1000) {
+    return presetXXL;
   } else {
-    if (size.width < 380) {
-      return constraintsSmallPreset;
-    } else if (size.width < 480) {
-      return constraintsNormalPreset;
-    } else if (size.width < 1000) {
-      return constraintsWidePreset;
-    } else {
-      return constraintsUWPreset;
-    }
+    return presetXXXL;
   }
 }

@@ -145,78 +145,6 @@ const TextStyle bigTitleStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const Map<String, dynamic> constraintsSmallPreset = {
-  "crossAxisCount": 1,
-  "rowsToShow": 2,
-  "childAspectRatio": 3.1,
-  "titleFontSize": 17.0,
-  "subtitleFontSize": 15.0,
-};
-
-const Map<String, dynamic> constraintsNormalPreset = {
-  "crossAxisCount": 1,
-  "rowsToShow": 2,
-  "childAspectRatio": 3.7,
-  "titleFontSize": 18.0,
-  "subtitleFontSize": 15.0,
-};
-
-const Map<String, dynamic> constraintsWidePreset = {
-  "crossAxisCount": 2,
-  "rowsToShow": 3,
-  "childAspectRatio": 2.4,
-  "titleFontSize": 20.0,
-  "subtitleFontSize": 16.0,
-};
-
-const Map<String, dynamic> constraintsUWPreset = {
-  "crossAxisCount": 3,
-  "rowsToShow": 3,
-  "childAspectRatio": 2.0,
-  "titleFontSize": 24.0,
-  "subtitleFontSize": 15.0,
-};
-
-const Map<String, dynamic> constraintsBloonSmallPreset = {
-  "crossAxisCount": 2,
-  "crossAxisCountBoss": 1,
-  "childAspectRatio": 1.95,
-  "childAspectRatioBoss": 3.45,
-  "titleFontSize": 16.0,
-  "imageWidth": 29.0,
-  "textStyleBoss": bolderNormalStyle,
-};
-
-const Map<String, dynamic> constraintsBloonNormalPreset = {
-  "crossAxisCount": 2,
-  "crossAxisCountBoss": 1,
-  "childAspectRatio": 2.3,
-  "childAspectRatioBoss": 4.05,
-  "titleFontSize": 19.0,
-  "imageWidth": 35.0,
-  "textStyleBoss": smallTitleStyle,
-};
-
-const Map<String, dynamic> constraintsBloonWidePreset = {
-  "crossAxisCount": 3,
-  "crossAxisCountBoss": 2,
-  "childAspectRatio": 2.2,
-  "childAspectRatioBoss": 3.5,
-  "titleFontSize": 19.0,
-  "imageWidth": 42.0,
-  "textStyleBoss": smallTitleStyle,
-};
-
-const Map<String, dynamic> constraintsBloonUWPreset = {
-  "crossAxisCount": 3,
-  "crossAxisCountBoss": 2,
-  "childAspectRatio": 2.2,
-  "childAspectRatioBoss": 3.5,
-  "titleFontSize": 22.0,
-  "imageWidth": 56.0,
-  "textStyleBoss": titleStyle,
-};
-
 const String googleLink =
     'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki';
 
@@ -242,3 +170,33 @@ const Map<String, String> shai = {
   git: 'https://github.com/namelessto',
   linkedin: 'https://www.linkedin.com/in/shai-holczer/',
 };
+
+const String towerCrossCount = 'towerCrossAxisCount';
+const String towerAspectRatio = 'towerChildAspectRatio';
+const String towerTitleStyle = 'towerTitleStyle';
+const String towerSubtitleStyle = 'towerSubtitleStyle';
+const String towerSubtitleRows = 'towerSubtitleMaxRows';
+const String towerImageWidth = 'towerImageWidth';
+
+const String heroCrossCount = 'heroCrossAxisCount';
+const String heroAspectRatio = 'heroChildAspectRatio';
+const String heroTitleStyle = 'heroTitleStyle';
+const String heroSubtitleStyle = 'heroSubtitleStyle';
+const String heroSubtitleRows = 'heroSubtitleMaxRows';
+const String skinCrossCount = 'skinCrossAxisCount';
+const String skinAspectRatio = 'skinChildAspectRatio';
+
+const String bloonCrossCount = 'bloonCrossAxisCount';
+const String bloonAspectRatio = 'bloonChildAspectRatio';
+const String bloonTitleStyle = 'bloonTitleStyle';
+const String bloonImageWidth = 'bloonImageWidth';
+
+const String bossCrossCount = 'bossCrossAxisCount';
+const String bossAspectRatio = 'bossChildAspectRatio';
+const String bossTitleStyle = 'bossTitleStyle';
+const String bossSubtitleStyle = 'bossSubtitleStyle';
+
+const String mapCrossCount = 'mapCrossAxisCount';
+const String mapAspectRatio = 'mapChildAspectRatio';
+const String mapTitleStyle = 'mapTitleStyle';
+const String mapSubtitleStyle = 'mapSubtitleStyle';

@@ -40,8 +40,7 @@ class _BloonsState extends State<Bloons> {
 
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = selectSizePreset(
-      kBloons,
+    final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
     return Scaffold(
@@ -143,8 +142,8 @@ class BloonsGrid extends StatelessWidget {
     return GridView.builder(
       itemCount: bloons.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: constraintsValues["crossAxisCount"],
-        childAspectRatio: constraintsValues["childAspectRatio"],
+        crossAxisCount: constraintsValues[bloonCrossCount],
+        childAspectRatio: constraintsValues[bloonAspectRatio],
       ),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -153,23 +152,21 @@ class BloonsGrid extends StatelessWidget {
         final bloon = bloons[index];
         return Card(
           margin: const EdgeInsets.symmetric(
-            vertical: 10,
+            vertical: 3,
             horizontal: 7,
           ),
           child: Center(
             child: ListTile(
-              horizontalTitleGap: 10,
+              titleAlignment: ListTileTitleAlignment.center,
               leading: ImageOutliner(
                 imageName: bloon.image,
                 imagePath: bloonImage(bloon.image),
-                width: constraintsValues["imageWidth"],
+                width: constraintsValues[bloonImageWidth],
               ),
               title: Text(
                 bloon.name,
                 maxLines: 1,
-                style: smallTitleStyle.copyWith(
-                  fontSize: constraintsValues["titleFontSize"],
-                ),
+                style: constraintsValues[bloonTitleStyle],
               ),
               onTap: () {
                 analyticsHelper.logEvent(
@@ -213,8 +210,8 @@ class BossesGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: constraintsValues["crossAxisCountBoss"],
-        childAspectRatio: constraintsValues["childAspectRatioBoss"],
+        crossAxisCount: constraintsValues[bossCrossCount],
+        childAspectRatio: constraintsValues[bossAspectRatio],
       ),
       physics: const NeverScrollableScrollPhysics(),
       primary: false,
@@ -224,17 +221,16 @@ class BossesGrid extends StatelessWidget {
         final boss = bossesList[index];
 
         return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 13, vertical: 8),
           child: Center(
             child: ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 8),
+              titleAlignment: ListTileTitleAlignment.center,
               leading: ImageOutliner(
                 imageName: boss.image,
                 imagePath: bossImage(boss.image),
               ),
               title: Text(
                 boss.name,
-                style: constraintsValues["textStyleBoss"],
+                style: constraintsValues[bossTitleStyle],
               ),
               onTap: () {
                 analyticsHelper.logEvent(

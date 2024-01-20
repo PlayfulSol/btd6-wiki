@@ -38,8 +38,7 @@ class _TowersState extends State<Towers> {
 
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = selectSizePreset(
-      kTowers,
+    final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
     return Scaffold(
@@ -60,8 +59,8 @@ class _TowersState extends State<Towers> {
                 return GridView.builder(
                   itemCount: filteredTowers.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: constraintsValues["crossAxisCount"],
-                    childAspectRatio: constraintsValues["childAspectRatio"],
+                    crossAxisCount: constraintsValues[towerCrossCount],
+                    childAspectRatio: constraintsValues[towerAspectRatio],
                   ),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
@@ -75,23 +74,21 @@ class _TowersState extends State<Towers> {
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 8),
                           horizontalTitleGap: 8,
+                          minVerticalPadding: -4,
                           leading: ImageOutliner(
                             imageName: tower.image,
                             imagePath: towerImage(tower.image),
+                            width: constraintsValues[towerImageWidth],
                           ),
                           title: Text(
                             tower.name,
-                            style: titleStyle.copyWith(
-                              fontSize: constraintsValues["titleFontSize"],
-                            ),
+                            style: constraintsValues[towerTitleStyle],
                           ),
                           subtitle: Text(
                             tower.inGameDesc,
                             overflow: TextOverflow.ellipsis,
-                            maxLines: constraintsValues["rowsToShow"],
-                            style: subtitleStyle.copyWith(
-                              fontSize: constraintsValues["subtitleFontSize"],
-                            ),
+                            maxLines: constraintsValues[towerSubtitleRows],
+                            style: constraintsValues[towerSubtitleStyle],
                           ),
                           onTap: () {
                             widget.analyticsHelper.logEvent(

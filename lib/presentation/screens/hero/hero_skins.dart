@@ -44,8 +44,7 @@ class _HeroSkinsState extends State<HeroSkins> {
 
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = selectSizePreset(
-      kBloons,
+    final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
     return Scaffold(
@@ -81,8 +80,8 @@ class _HeroSkinsState extends State<HeroSkins> {
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: constraintsValues["crossAxisCount"],
-                      childAspectRatio: 0.75,
+                      crossAxisCount: constraintsValues[skinCrossCount],
+                      childAspectRatio: constraintsValues[skinAspectRatio],
                     ),
                     itemCount: widget.heroSkins[index].value.length,
                     itemBuilder: (context, imageIndex) {
