@@ -1,9 +1,10 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+
 import '/firebase_options.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
@@ -30,7 +31,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final analytics = FirebaseAnalytics.instance;
-  final favBox = Hive.box('favorite');
+  await Hive.initFlutter();
 
   runApp(MyApp(analytics: analytics));
 }
@@ -154,30 +155,40 @@ class _MyHomePageState extends State<MyHomePage> {
                   : Container();
             },
           ),
-          Consumer<GlobalState>(builder: (context, globalState, child) {
-            return IconButton(
-              onPressed: () {
-                globalState.switchSearch();
-                String value;
-                if (globalState.isSearchEnabled) {
-                  value = searchOn;
-                } else {
-                  globalState.updateCurrentQuery('');
-                  value = searchOff;
-                }
-                analyticsHelper.logEvent(
-                  name: widgetEngagement,
-                  parameters: {
-                    'screen': globalState.activeCategory,
-                    'widget': searchButton,
-                    'value': value,
-                  },
-                );
-              },
-              icon: Icon(
-                  !globalState.isSearchEnabled ? Icons.search : Icons.close),
-            );
-          })
+          Consumer<GlobalState>(
+            builder: (context, globalState, child) {
+              return IconButton(
+                onPressed: () {
+                  globalState.switchSearch();
+                  String value;
+                  if (globalState.isSearchEnabled) {
+                    value = searchOn;
+                  } else {
+                    globalState.updateCurrentQuery('');
+                    value = searchOff;
+                  }
+                  analyticsHelper.logEvent(
+                    name: widgetEngagement,
+                    parameters: {
+                      'screen': globalState.activeCategory,
+                      'widget': searchButton,
+                      'value': value,
+                    },
+                  );
+                },
+                icon: Icon(
+                    !globalState.isSearchEnabled ? Icons.search : Icons.close),
+              );
+            },
+          ),
+          IconButton(
+            onPressed: () async {
+              var favBox = await Hive.openBox('favorite');
+              // favBox.deleteFromDisk();
+              print(favBox.get(kTowers));
+            },
+            icon: const Icon(Icons.favorite),
+          ),
         ],
       ),
       body: !isLoading
