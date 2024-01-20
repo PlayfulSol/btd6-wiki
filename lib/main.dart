@@ -3,6 +3,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import '/firebase_options.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
@@ -29,6 +30,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final analytics = FirebaseAnalytics.instance;
+  final favBox = Hive.box('favorite');
 
   runApp(MyApp(analytics: analytics));
 }
