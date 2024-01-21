@@ -50,9 +50,25 @@ String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
 }
 
-Future<bool> handleFavorite(String category, String id) async {
+// Future<List> handleFavorite(String category, String id) async {
+//   bool isFavorite;
+
+//   List favoriteList = favoriteBox.get(category, defaultValue: []);
+//   if (favoriteList.contains(id)) {
+//     favoriteList.remove(id);
+//     isFavorite = false;
+//   } else {
+//     favoriteList.add(id);
+//     isFavorite = true;
+//   }
+//   favoriteBox.put(kTowers, favoriteList);
+//   print(favoriteList);
+//   return isFavorite;
+// }
+
+bool handleFavorite(String category, String id) {
   bool isFavorite;
-  var favoriteBox = await Hive.openBox('favorite');
+  var favoriteBox = Hive.box('favorite');
   List favoriteList = favoriteBox.get(category, defaultValue: []);
   if (favoriteList.contains(id)) {
     favoriteList.remove(id);

@@ -1,4 +1,5 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:btd6wiki/models/base_model.dart';
+import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_tower.dart';
@@ -41,6 +42,9 @@ class _TowersState extends State<Towers> {
     final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
+    FavoriteState favoriteState =
+        Provider.of<FavoriteState>(context, listen: false);
+    favoriteState.fillList(kTowers, widget.towers);
     bool isFavorite = false;
     return Scaffold(
       body: Column(
@@ -69,9 +73,19 @@ class _TowersState extends State<Towers> {
 
                     return InkWell(
                       borderRadius: BorderRadius.circular(20),
-                      onLongPress: () async {
-                        isFavorite = await handleFavorite(kTowers, tower.id);
-                        setState(() {});
+                      onLongPress: () {
+                        isFavorite = handleFavorite(kTowers, tower.id);
+                        if (isFavorite) {
+                          BaseModel favoriteTower = BaseModel(
+                            tower.id,
+                            tower.name,
+                            tower.image,
+                            tower.type,
+                          );
+                          favoriteState.addFavoriteTower(favoriteTower);
+                        } else {
+                          favoriteState.removeFavoriteTower(tower.id);
+                        }
                       },
                       onTap: () {
                         widget.analyticsHelper.logEvent(
@@ -123,12 +137,16 @@ class _TowersState extends State<Towers> {
                               ),
                             ),
                           ),
-                          Positioned(
-                            top: 17,
-                            right: 25,
-                            child: isFavorite
-                                ? Icon(Icons.star)
-                                : Icon(Icons.star_border_outlined),
+                          Consumer<FavoriteState>(
+                            builder: (context, favoriteState, child) {
+                              return Positioned(
+                                top: 17,
+                                right: 25,
+                                child: favoriteState.isFavoriteTower(tower.id)
+                                    ? const Icon(Icons.star)
+                                    : const Icon(Icons.star_border_outlined),
+                              );
+                            },
                           ),
                         ],
                       ),

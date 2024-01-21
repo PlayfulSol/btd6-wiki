@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-
 import '/firebase_options.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
@@ -16,8 +15,9 @@ import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/maps/maps.dart';
 import '/presentation/widgets/loader.dart';
-import 'analytics/analytics_constants.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
@@ -32,29 +32,38 @@ Future<void> main() async {
   );
   final analytics = FirebaseAnalytics.instance;
   await Hive.initFlutter();
-
+  await Hive.openBox('favorite');
   runApp(MyApp(analytics: analytics));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.analytics});
   final FirebaseAnalytics analytics;
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => GlobalState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GlobalState>(
+          create: (BuildContext context) => GlobalState(),
+        ),
+        ChangeNotifierProvider<FavoriteState>(
+          create: (BuildContext context) => FavoriteState(),
+        ),
+      ],
       child: AdaptiveTheme(
-          light: Themes.lightTheme,
-          dark: Themes.darkTheme,
-          initial: AdaptiveThemeMode.system,
-          builder: (theme, darkTheme) => MaterialApp(
-                theme: theme,
-                darkTheme: darkTheme,
-                home: MyHomePage(
-                  analytics: analytics,
-                ),
-                debugShowCheckedModeBanner: false,
-              )),
+        light: Themes.lightTheme,
+        dark: Themes.darkTheme,
+        initial: AdaptiveThemeMode.system,
+        builder: (theme, darkTheme) => MaterialApp(
+          theme: theme,
+          darkTheme: darkTheme,
+          home: MyHomePage(
+            analytics: analytics,
+          ),
+          debugShowCheckedModeBanner: false,
+        ),
+      ),
     );
   }
 }
@@ -184,10 +193,10 @@ class _MyHomePageState extends State<MyHomePage> {
           IconButton(
             onPressed: () async {
               var favBox = await Hive.openBox('favorite');
-              favBox.deleteFromDisk();
-              // print(favBox.get(kTowers));
+              // favBox.deleteFromDisk();
+              print(favBox.get(kTowers));
             },
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.star),
           ),
         ],
       ),
