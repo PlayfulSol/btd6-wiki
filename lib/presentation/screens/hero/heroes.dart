@@ -1,11 +1,13 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_hero.dart';
+import '/models/base_model.dart';
 import '/presentation/screens/hero/single_hero.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -40,6 +42,11 @@ class _HeroesState extends State<Heroes> {
     final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
+
+    FavoriteState favoriteState =
+        Provider.of<FavoriteState>(context, listen: false);
+    favoriteState.fillList(kHeroes, widget.heroes);
+    bool isFavorite = false;
     return Scaffold(
       body: Column(
         children: [
@@ -64,48 +71,82 @@ class _HeroesState extends State<Heroes> {
                   itemBuilder: (context, index) {
                     final hero = filteredHeroes[index];
 
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 13, vertical: 8),
-                      child: Center(
-                        child: ListTile(
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 8),
-                          horizontalTitleGap: 8,
-                          leading: ImageOutliner(
-                            imageName: hero.image,
-                            imagePath: heroImage(hero.image),
-                          ),
-                          title: Text(
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onLongPress: () {
+                        isFavorite = handleFavorite(kHeroes, hero.id);
+                        if (isFavorite) {
+                          BaseModel favoriteHero = BaseModel(
+                            hero.id,
                             hero.name,
-                            style: constraintsValues[heroTitleStyle],
+                            hero.image,
+                            hero.type,
+                          );
+                          favoriteState.addFavorite(kHeroes, favoriteHero);
+                        } else {
+                          favoriteState.removeFavorite(kHeroes, hero.id);
+                        }
+                        print(favoriteState.favoriteBox.get(kHeroes));
+                      },
+                      onTap: () {
+                        widget.analyticsHelper.logEvent(
+                          name: widgetEngagement,
+                          parameters: {
+                            'screen': kHeroPagesClass,
+                            'widget': listTile,
+                            'value': hero.id,
+                          },
+                        );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SingleHero(
+                              heroId: hero.id,
+                              analyticsHelper: widget.analyticsHelper,
+                            ),
                           ),
-                          subtitle: Text(
-                            hero.inGameDesc,
-                            overflow: TextOverflow.ellipsis,
-                            style: constraintsValues[heroSubtitleStyle],
-                            maxLines: constraintsValues[heroSubtitleRows],
-                          ),
-                          onTap: () {
-                            widget.analyticsHelper.logEvent(
-                              name: widgetEngagement,
-                              parameters: {
-                                'screen': kHeroPagesClass,
-                                'widget': listTile,
-                                'value': hero.id,
-                              },
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SingleHero(
-                                  heroId: hero.id,
-                                  analyticsHelper: widget.analyticsHelper,
+                        );
+                      },
+                      child: Stack(
+                        children: [
+                          Card(
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 13, vertical: 8),
+                            child: Center(
+                              child: ListTile(
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                horizontalTitleGap: 8,
+                                leading: ImageOutliner(
+                                  imageName: hero.image,
+                                  imagePath: heroImage(hero.image),
+                                ),
+                                title: Text(
+                                  hero.name,
+                                  style: constraintsValues[heroTitleStyle],
+                                ),
+                                subtitle: Text(
+                                  hero.inGameDesc,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: constraintsValues[heroSubtitleStyle],
+                                  maxLines: constraintsValues[heroSubtitleRows],
                                 ),
                               ),
-                            );
-                          },
-                        ),
+                            ),
+                          ),
+                          Consumer<FavoriteState>(
+                            builder: (context, favoriteState, child) {
+                              return Positioned(
+                                top: 17,
+                                right: 25,
+                                child: favoriteState.isInFavorites(
+                                        kHeroes, hero.id)
+                                    ? const Icon(Icons.star)
+                                    : const Icon(Icons.star_border_outlined),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     );
                   },

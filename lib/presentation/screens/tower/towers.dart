@@ -1,13 +1,13 @@
-import 'package:btd6wiki/models/base_model.dart';
-import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_tower.dart';
+import '/models/base_model.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/search_widget.dart';
 import '/presentation/widgets/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -82,9 +82,9 @@ class _TowersState extends State<Towers> {
                             tower.image,
                             tower.type,
                           );
-                          favoriteState.addFavoriteTower(favoriteTower);
+                          favoriteState.addFavorite(kTowers, favoriteTower);
                         } else {
-                          favoriteState.removeFavoriteTower(tower.id);
+                          favoriteState.removeFavorite(kTowers, tower.id);
                         }
                       },
                       onTap: () {
@@ -142,7 +142,8 @@ class _TowersState extends State<Towers> {
                               return Positioned(
                                 top: 17,
                                 right: 25,
-                                child: favoriteState.isFavoriteTower(tower.id)
+                                child: favoriteState.isInFavorites(
+                                        kTowers, tower.id)
                                     ? const Icon(Icons.star)
                                     : const Icon(Icons.star_border_outlined),
                               );

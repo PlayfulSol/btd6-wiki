@@ -66,6 +66,11 @@ String extraStatsToString(Stats stats) {
 //   return isFavorite;
 // }
 
+void setEmptyFavorites() {
+  var favoriteBox = Hive.box('favorite');
+  favoriteBox.get(kTowers, defaultValue: []);
+}
+
 bool handleFavorite(String category, String id) {
   bool isFavorite;
   var favoriteBox = Hive.box('favorite');
@@ -77,8 +82,7 @@ bool handleFavorite(String category, String id) {
     favoriteList.add(id);
     isFavorite = true;
   }
-  favoriteBox.put(kTowers, favoriteList);
-  print(favoriteList);
+  favoriteBox.put(category, favoriteList);
   return isFavorite;
 }
 

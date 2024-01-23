@@ -107,6 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     loadBaseData();
+    setEmptyFavorites();
     analyticsHelper = AnalyticsHelper(widget.analytics);
     pageController = PageController(initialPage: 0);
   }
@@ -192,9 +193,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           IconButton(
             onPressed: () async {
-              var favBox = await Hive.openBox('favorite');
-              // favBox.deleteFromDisk();
-              print(favBox.get(kTowers));
+              var favBox = Hive.box('favorite');
+              await favBox.deleteFromDisk();
+              favBox = await Hive.openBox('favorite');
+              print(favBox.values);
+              // print(favBox.get(kTowers));
             },
             icon: const Icon(Icons.star),
           ),
