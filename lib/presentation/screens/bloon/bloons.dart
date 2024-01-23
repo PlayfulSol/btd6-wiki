@@ -1,8 +1,8 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base_model.dart';
-import '/presentation/widgets/search_widget.dart';
-import '/presentation/widgets/image_outline.dart';
+import '../../widgets/misc/search_widget.dart';
+import '../../widgets/misc/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';

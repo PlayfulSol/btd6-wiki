@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/bloons/boss/boss_health_class.dart';
 import '/models/bloons/boss/boss_bloon.dart';
-import '/presentation/widgets/bloon_aid_widget.dart';
+import '../../widgets/bloons/bloon_aid_widget.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
