@@ -1,5 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import '../../widgets/bloons/bloons_grid.dart';
+import '../../widgets/bloons/bosses_grid.dart';
 import '/models/base_model.dart';
 import '../../widgets/misc/search_widget.dart';
 import '../../widgets/misc/image_outline.dart';
@@ -121,140 +123,6 @@ class _BloonsState extends State<Bloons> {
           ),
         ],
       ),
-    );
-  }
-}
-
-class BloonsGrid extends StatelessWidget {
-  const BloonsGrid({
-    super.key,
-    required this.analyticsHelper,
-    required this.bloons,
-    required this.constraintsValues,
-  });
-
-  final AnalyticsHelper analyticsHelper;
-  final List<BaseModel> bloons;
-  final Map<String, dynamic> constraintsValues;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      itemCount: bloons.length,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: constraintsValues[bloonCrossCount],
-        childAspectRatio: constraintsValues[bloonAspectRatio],
-      ),
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      primary: false,
-      itemBuilder: (context, index) {
-        final bloon = bloons[index];
-        return Card(
-          margin: const EdgeInsets.symmetric(
-            vertical: 3,
-            horizontal: 7,
-          ),
-          child: Center(
-            child: ListTile(
-              titleAlignment: ListTileTitleAlignment.center,
-              leading: ImageOutliner(
-                imageName: bloon.image,
-                imagePath: bloonImage(bloon.image),
-                width: constraintsValues[bloonImageWidth],
-              ),
-              title: Text(
-                bloon.name,
-                maxLines: 1,
-                style: constraintsValues[bloonTitleStyle],
-              ),
-              onTap: () {
-                analyticsHelper.logEvent(
-                  name: widgetEngagement,
-                  parameters: {
-                    'screen': kBloonPagesClass,
-                    'widget': listTile,
-                    'value': bloon.id,
-                  },
-                );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SingleBloon(
-                      analyticsHelper: analyticsHelper,
-                      bloonId: bloon.id,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        );
-      },
-    );
-  }
-}
-
-class BossesGrid extends StatelessWidget {
-  const BossesGrid({
-    super.key,
-    required this.analyticsHelper,
-    required this.bossesList,
-    required this.constraintsValues,
-  });
-  final AnalyticsHelper analyticsHelper;
-  final List<BaseModel> bossesList;
-  final Map<String, dynamic> constraintsValues;
-
-  @override
-  Widget build(BuildContext context) {
-    return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: constraintsValues[bossCrossCount],
-        childAspectRatio: constraintsValues[bossAspectRatio],
-      ),
-      physics: const NeverScrollableScrollPhysics(),
-      primary: false,
-      itemCount: bossesList.length,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        final boss = bossesList[index];
-
-        return Card(
-          child: Center(
-            child: ListTile(
-              titleAlignment: ListTileTitleAlignment.center,
-              leading: ImageOutliner(
-                imageName: boss.image,
-                imagePath: bossImage(boss.image),
-              ),
-              title: Text(
-                boss.name,
-                style: constraintsValues[bossTitleStyle],
-              ),
-              onTap: () {
-                analyticsHelper.logEvent(
-                  name: widgetEngagement,
-                  parameters: {
-                    'screen': kBossPagesClass,
-                    'widget': listTile,
-                    'value': boss.id,
-                  },
-                );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BossBloon(
-                      analyticsHelper: analyticsHelper,
-                      bossId: boss.id,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
-        );
-      },
     );
   }
 }
