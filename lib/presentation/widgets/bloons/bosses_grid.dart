@@ -4,8 +4,10 @@ import 'package:btd6wiki/models/base_model.dart';
 import 'package:btd6wiki/presentation/screens/bloon/boss_bloon.dart';
 import 'package:btd6wiki/presentation/widgets/misc/image_outline.dart';
 import 'package:btd6wiki/utilities/constants.dart';
+import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:btd6wiki/utilities/images_url.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class BossesGrid extends StatelessWidget {
   const BossesGrid({
@@ -31,19 +33,12 @@ class BossesGrid extends StatelessWidget {
       shrinkWrap: true,
       itemBuilder: (context, index) {
         final boss = bossesList[index];
-
-        return Card(
-          child: Center(
-            child: ListTile(
-              titleAlignment: ListTileTitleAlignment.center,
-              leading: ImageOutliner(
-                imageName: boss.image,
-                imagePath: bossImage(boss.image),
-              ),
-              title: Text(
-                boss.name,
-                style: constraintsValues[bossTitleStyle],
-              ),
+        return Consumer<FavoriteState>(
+          builder: (context, favoriteState, child) {
+            return InkWell(
+              onLongPress: () {
+                favoriteState.toggleFavorite(boss);
+              },
               onTap: () {
                 analyticsHelper.logEvent(
                   name: widgetEngagement,
@@ -63,8 +58,26 @@ class BossesGrid extends StatelessWidget {
                   ),
                 );
               },
-            ),
-          ),
+              child: Card(
+                child: Center(
+                  child: ListTile(
+                    titleAlignment: ListTileTitleAlignment.center,
+                    leading: ImageOutliner(
+                      imageName: boss.image,
+                      imagePath: bossImage(boss.image),
+                    ),
+                    title: Text(
+                      boss.name,
+                      style: constraintsValues[bossTitleStyle],
+                    ),
+                    trailing: favoriteState.isFavorite(boss.type, boss.id)
+                        ? const Icon(Icons.star)
+                        : const Icon(Icons.star_border_outlined),
+                  ),
+                ),
+              ),
+            );
+          },
         );
       },
     );

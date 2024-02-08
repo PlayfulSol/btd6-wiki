@@ -59,37 +59,29 @@ class BloonsGrid extends StatelessWidget {
                   ),
                 );
               },
-              child: Stack(
-                children: [
-                  Card(
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 3,
-                      horizontal: 7,
+              child: Card(
+                margin: const EdgeInsets.symmetric(
+                  vertical: 3,
+                  horizontal: 7,
+                ),
+                child: Center(
+                  child: ListTile(
+                    titleAlignment: ListTileTitleAlignment.center,
+                    leading: ImageOutliner(
+                      imageName: bloon.image,
+                      imagePath: bloonImage(bloon.image),
+                      width: constraintsValues[bloonImageWidth],
                     ),
-                    child: Center(
-                      child: ListTile(
-                        titleAlignment: ListTileTitleAlignment.center,
-                        leading: ImageOutliner(
-                          imageName: bloon.image,
-                          imagePath: bloonImage(bloon.image),
-                          width: constraintsValues[bloonImageWidth],
-                        ),
-                        title: Text(
-                          bloon.name,
-                          maxLines: 1,
-                          style: constraintsValues[bloonTitleStyle],
-                        ),
-                      ),
+                    title: Text(
+                      bloon.name,
+                      maxLines: 1,
+                      style: constraintsValues[bloonTitleStyle],
                     ),
-                  ),
-                  Positioned(
-                    top: 17,
-                    right: 25,
-                    child: favoriteState.isFavorite(bloon.type, bloon.id)
+                    trailing: favoriteState.isFavorite(bloon.type, bloon.id)
                         ? const Icon(Icons.star)
                         : const Icon(Icons.star_border_outlined),
                   ),
-                ],
+                ),
               ),
             );
           },

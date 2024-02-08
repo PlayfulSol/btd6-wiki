@@ -4,19 +4,20 @@ import '/hive/favorite_model.dart';
 import '/utilities/constants.dart';
 
 class FavoriteState extends ChangeNotifier {
-  late Box<List<FavoriteModel>> _favoriteBox;
+  late Box<List<dynamic>> _favoriteBox;
 
   FavoriteState() {
-    _favoriteBox = Hive.box<List<FavoriteModel>>(kFavorite);
+    _favoriteBox = Hive.box<List<dynamic>>(kFavorite);
   }
 
   void toggleFavorite(var item) {
     FavoriteModel favItem = _createFavoriteItem(item);
 
     if (!_favoriteBox.containsKey(favItem.type)) {
-      _favoriteBox.put(favItem.type, <FavoriteModel>[favItem]);
+      _favoriteBox.put(favItem.type, [favItem]);
     } else {
-      List<FavoriteModel> typeList = _favoriteBox.get(favItem.type)!;
+      List<FavoriteModel> typeList =
+          List<FavoriteModel>.from(_favoriteBox.get(favItem.type)!);
       if (isFavorite(favItem.type, favItem.id)) {
         typeList.removeWhere((element) => element.id == favItem.id);
       } else {
@@ -29,7 +30,8 @@ class FavoriteState extends ChangeNotifier {
 
   bool isFavorite(String type, String id) {
     if (!_favoriteBox.containsKey(type)) return false;
-    List<FavoriteModel> typeList = _favoriteBox.get(type)!;
+    List<FavoriteModel> typeList =
+        List<FavoriteModel>.from(_favoriteBox.get(type)!);
     for (FavoriteModel item in typeList) {
       if (item.id == id) return true;
     }

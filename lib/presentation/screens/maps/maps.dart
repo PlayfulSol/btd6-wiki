@@ -1,11 +1,12 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_map.dart';
+import '/presentation/widgets/misc/search_widget.dart';
 import '/presentation/screens/maps/single_map.dart';
-import '../../widgets/misc/search_widget.dart';
 import '/presentation/widgets/maps/map_card.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
@@ -59,8 +60,8 @@ class _MapsState extends State<Maps> {
                 },
               ),
               Expanded(
-                child: Consumer<GlobalState>(
-                  builder: (context, globalState, child) {
+                child: Consumer2<GlobalState, FavoriteState>(
+                  builder: (context, globalState, favoriteState, child) {
                     final filteredMaps = filterAndSearchMaps(widget.maps,
                         globalState.currentQuery, globalState.currentOption);
                     return GridView.builder(
@@ -71,16 +72,19 @@ class _MapsState extends State<Maps> {
                       ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
+                        BaseMap map = filteredMaps[index];
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: GestureDetector(
+                            onLongPress: () {
+                              favoriteState.toggleFavorite(map);
+                            },
                             onTap: () {
                               widget.analyticsHelper.logEvent(
                                 name: widgetEngagement,
                                 parameters: {
                                   'screen': kMapPagesClass,
-                                  'widget': listTile,
-                                  'value': filteredMaps[index].id,
+                                  'widget': map.id,
                                 },
                               );
                               Navigator.push(
@@ -88,12 +92,12 @@ class _MapsState extends State<Maps> {
                                 MaterialPageRoute(
                                   builder: (context) => SingleMap(
                                     analyticsHelper: widget.analyticsHelper,
-                                    mapId: filteredMaps[index].id,
+                                    mapId: map.id,
                                   ),
                                 ),
                               );
                             },
-                            child: MapCard(singleMap: filteredMaps[index]),
+                            child: MapCard(singleMap: map),
                           ),
                         );
                       },

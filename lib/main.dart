@@ -33,10 +33,10 @@ Future<void> main() async {
   );
   final analytics = FirebaseAnalytics.instance;
   await Hive.initFlutter();
-  // await Hive.deleteBoxFromDisk(kFavorite);
+  // await Hive.deleteFromDisk();
   Hive.registerAdapter(FavoriteModelAdapter());
   // Removed redundant opening
-  await Hive.openBox<List<FavoriteModel>>(kFavorite);
+  await Hive.openBox<List<dynamic>>(kFavorite);
   // print(Hive.box<FavoriteModel>(kFavorite).toMap());
 
   runApp(MyApp(analytics: analytics));
@@ -200,7 +200,12 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () async {
               // await favBox.deleteFromDisk();
               // favBox = await Hive.openBox('favorite');
-              print(Hive.box<List<FavoriteModel>>(kFavorite).toMap());
+              try {
+                print(Hive.box<List<dynamic>>(kFavorite).toMap());
+              } catch (e) {
+                print(e);
+                await Hive.openBox(kFavorite);
+              }
 
               // print(favBox.get(kTowers));
             },
