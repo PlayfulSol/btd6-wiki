@@ -10,6 +10,16 @@ class FavoriteState extends ChangeNotifier {
     _favoriteBox = Hive.box<List<dynamic>>(kFavorite);
   }
 
+  Box<List<dynamic>> get favoriteBox => _favoriteBox;
+
+  List<FavoriteModel> getListOfType(String type) {
+    if (_favoriteBox.containsKey(type)) {
+      return List<FavoriteModel>.from(_favoriteBox.get(type)!);
+    }
+
+    return [];
+  }
+
   void toggleFavorite(var item) {
     FavoriteModel favItem = _createFavoriteItem(item);
 

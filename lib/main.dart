@@ -1,3 +1,5 @@
+import 'package:btd6wiki/presentation/screens/misc/favorite_screen.dart';
+import 'package:btd6wiki/presentation/widgets/misc/orderable_grid.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -129,7 +131,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Consumer<GlobalState>(
           builder: (context, globalState, child) {
-            return Text(globalState.currentTitle);
+            return Text(MediaQuery.of(context).size.width.toString());
+            // return Text(globalState.currentTitle);
           },
         ),
         actions: [
@@ -200,13 +203,27 @@ class _MyHomePageState extends State<MyHomePage> {
             onPressed: () async {
               // await favBox.deleteFromDisk();
               // favBox = await Hive.openBox('favorite');
-              try {
-                print(Hive.box<List<dynamic>>(kFavorite).toMap());
-              } catch (e) {
-                print(e);
-                await Hive.openBox(kFavorite);
-              }
-
+              // try {
+              //   print(Hive.box<List<dynamic>>(kFavorite).toMap());
+              // } catch (e) {
+              //   print(e);
+              //   await Hive.openBox(kFavorite);
+              // }
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const FavoriteScreen()),
+              // );
+              FavoriteState favS =
+                  Provider.of<FavoriteState>(context, listen: false);
+              var list = favS.getListOfType('tower');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => OrderableGrid(
+                          favoriteItems: list,
+                          gridKey: GlobalKey(),
+                        )),
+              );
               // print(favBox.get(kTowers));
             },
             icon: const Icon(Icons.star),

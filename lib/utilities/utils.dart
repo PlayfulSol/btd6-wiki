@@ -162,7 +162,7 @@ Future<void> openMail(String mailString) async {
 }
 
 Map<String, dynamic> getPreset(Size size) {
-  if (size.width < 310) {
+  if (size.width < 321) {
     return presetUS;
   } else if (size.width < 360) {
     return presetXS;
