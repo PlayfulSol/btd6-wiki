@@ -1,106 +1,63 @@
-import 'package:btd6wiki/utilities/constants.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter/material.dart';
-import '/models/base_model.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import '/hive/favorite_model.dart';
+import '/utilities/constants.dart';
 
-class FavoriteState with ChangeNotifier {
-  var favoriteBox;
+class FavoriteState extends ChangeNotifier {
+  late Box<List<FavoriteModel>> _favoriteBox;
 
-  List<BaseModel> towers = [];
-  List<BaseModel> heroes = [];
-  List<BaseModel> bloons = [];
-  List<BaseModel> bosses = [];
-  List<BaseModel> maps = [];
-
-  void loadFavoriteBox() {
-    favoriteBox = Hive.box('favorite');
+  FavoriteState() {
+    _favoriteBox = Hive.box<List<FavoriteModel>>(kFavorite);
   }
 
-  void fillList(String category, List<BaseModel> baseObjects) {
-    loadFavoriteBox();
-    if (favoriteBox.get(category.toString()) != null) {
-      List favoritesIds = favoriteBox.get(category.toString());
+  void toggleFavorite(var item) {
+    FavoriteModel favItem = _createFavoriteItem(item);
 
-      for (var baseObj in baseObjects) {
-        if (favoritesIds.contains(baseObj.id)) {
-          BaseModel item = BaseModel(
-            baseObj.id,
-            baseObj.name,
-            baseObj.image,
-            baseObj.type,
-          );
-          _addToList(category, item);
-        }
-      }
+    if (!_favoriteBox.containsKey(favItem.type)) {
+      _favoriteBox.put(favItem.type, <FavoriteModel>[favItem]);
     } else {
-      print('$category is empty');
-      favoriteBox.get(category.toString(), defaultValue: []);
+      List<FavoriteModel> typeList = _favoriteBox.get(favItem.type)!;
+      if (isFavorite(favItem.type, favItem.id)) {
+        typeList.removeWhere((element) => element.id == favItem.id);
+      } else {
+        typeList.add(favItem);
+      }
+      _favoriteBox.put(favItem.type, typeList);
     }
+    notifyListeners();
   }
 
-  bool isInFavorites(String category, String itemId) {
-    switch (category) {
-      case kTowers:
-        return towers.any((tower) => tower.id == itemId);
-      case kHeroes:
-        return heroes.any((hero) => hero.id == itemId);
-      case kBloons:
-        return bloons.any((bloon) => bloon.id == itemId);
-      case kBosses:
-        return bosses.any((boss) => boss.id == itemId);
-      case kMaps:
-        return maps.any((map) => map.id == itemId);
+  bool isFavorite(String type, String id) {
+    if (!_favoriteBox.containsKey(type)) return false;
+    List<FavoriteModel> typeList = _favoriteBox.get(type)!;
+    for (FavoriteModel item in typeList) {
+      if (item.id == id) return true;
     }
+
     return false;
   }
 
-  void _addToList(String category, BaseModel item) {
-    switch (category) {
-      case kTowers:
-        towers.add(item);
-        break;
-      case kHeroes:
-        heroes.add(item);
-        break;
-      case kBloons:
-        bloons.add(item);
-        break;
-      case kBosses:
-        bosses.add(item);
-        break;
-      case kMaps:
-        maps.add(item);
-        break;
+  int _getLastIndexOfType(String type) {
+    if (!_favoriteBox.containsKey(type)) {
+      return 0;
+    } else {
+      var favorites = _favoriteBox.get(type)!;
+      return favorites.length;
     }
-    notifyListeners();
   }
 
-  void _removeFromList(String category, String itemId) {
-    switch (category) {
-      case kTowers:
-        towers.removeWhere((tower) => tower.id == itemId);
-        break;
-      case kHeroes:
-        heroes.removeWhere((hero) => hero.id == itemId);
-        break;
-      case kBloons:
-        bloons.removeWhere((bloon) => bloon.id == itemId);
-        break;
-      case kBosses:
-        bosses.removeWhere((boss) => boss.id == itemId);
-        break;
-      case kMaps:
-        maps.removeWhere((map) => map.id == itemId);
-        break;
-    }
-    notifyListeners();
+  FavoriteModel _createFavoriteItem(var item) {
+    return FavoriteModel(
+      item.id,
+      item.name,
+      item.image,
+      item.type,
+      _getLastIndexOfType(item.type),
+    );
   }
 
-  void addFavorite(String category, BaseModel item) {
-    _addToList(category, item);
-  }
-
-  void removeFavorite(String category, String itemId) {
-    _removeFromList(category, itemId);
+  void _updateLastIndexes() {
+    // TODO implement updating indexes of all the items of the type
+    // this comes after implementing moveable grid to show the items and change their order
   }
 }

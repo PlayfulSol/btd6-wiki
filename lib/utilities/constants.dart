@@ -12,6 +12,8 @@ const int kHeroesIndex = 1;
 const int kBloonsIndex = 2;
 const int kMapsIndex = 3;
 
+const String kFavorite = 'favorite';
+
 const List<String> capTitles = [
   'Towers',
   'Heroes',

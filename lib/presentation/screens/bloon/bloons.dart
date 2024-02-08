@@ -1,18 +1,14 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/bloons/bloons_grid.dart';
-import '../../widgets/bloons/bosses_grid.dart';
 import '/models/base_model.dart';
-import '../../widgets/misc/search_widget.dart';
-import '../../widgets/misc/image_outline.dart';
+import '/presentation/widgets/bloons/bloons_grid.dart';
+import '/presentation/widgets/bloons/bosses_grid.dart';
+import '/presentation/widgets/misc/search_widget.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
-import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
-import 'single_bloon.dart';
-import 'boss_bloon.dart';
 
 class Bloons extends StatefulWidget {
   const Bloons({

@@ -5,16 +5,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/firebase_options.dart';
+import '/hive/favorite_model.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base_model.dart';
-import 'presentation/widgets/misc/drawer_content.dart';
+import '/presentation/widgets/misc/drawer_content.dart';
 import '/presentation/screens/tower/towers.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/maps/maps.dart';
-import 'presentation/widgets/misc/loader.dart';
+import '/presentation/widgets/misc/loader.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
@@ -32,7 +33,12 @@ Future<void> main() async {
   );
   final analytics = FirebaseAnalytics.instance;
   await Hive.initFlutter();
-  await Hive.openBox('favorite');
+  // await Hive.deleteBoxFromDisk(kFavorite);
+  Hive.registerAdapter(FavoriteModelAdapter());
+  // Removed redundant opening
+  await Hive.openBox<List<FavoriteModel>>(kFavorite);
+  // print(Hive.box<FavoriteModel>(kFavorite).toMap());
+
   runApp(MyApp(analytics: analytics));
 }
 
@@ -107,7 +113,6 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     loadBaseData();
-    setEmptyFavorites();
     analyticsHelper = AnalyticsHelper(widget.analytics);
     pageController = PageController(initialPage: 0);
   }
@@ -193,13 +198,23 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           IconButton(
             onPressed: () async {
-              var favBox = Hive.box('favorite');
-              await favBox.deleteFromDisk();
-              favBox = await Hive.openBox('favorite');
-              print(favBox.values);
+              // await favBox.deleteFromDisk();
+              // favBox = await Hive.openBox('favorite');
+              print(Hive.box<List<FavoriteModel>>(kFavorite).toMap());
+
               // print(favBox.get(kTowers));
             },
             icon: const Icon(Icons.star),
+          ),
+          IconButton(
+            onPressed: () async {
+              await Hive.deleteFromDisk();
+              // favBox = await Hive.openBox('favorite');
+              // print(Hive.box<FavoriteModel>(kFavorite).toMap());
+
+              // print(favBox.get(kTowers));
+            },
+            icon: const Icon(Icons.remove),
           ),
         ],
       ),

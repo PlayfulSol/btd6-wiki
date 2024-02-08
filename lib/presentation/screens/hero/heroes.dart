@@ -1,10 +1,9 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_hero.dart';
-import '/models/base_model.dart';
+import '/presentation/widgets/misc/search_widget.dart';
+import '/presentation/widgets/misc/image_outline.dart';
 import '/presentation/screens/hero/single_hero.dart';
-import '../../widgets/misc/search_widget.dart';
-import '../../widgets/misc/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
@@ -43,10 +42,6 @@ class _HeroesState extends State<Heroes> {
       MediaQuery.of(context).size,
     );
 
-    FavoriteState favoriteState =
-        Provider.of<FavoriteState>(context, listen: false);
-    favoriteState.fillList(kHeroes, widget.heroes);
-    bool isFavorite = false;
     return Scaffold(
       body: Column(
         children: [
@@ -57,8 +52,8 @@ class _HeroesState extends State<Heroes> {
                     : Container(),
           ),
           Expanded(
-            child: Consumer<GlobalState>(
-              builder: (context, globalState, child) {
+            child: Consumer2<GlobalState, FavoriteState>(
+              builder: (context, globalState, favoriteState, child) {
                 final filteredHeroes =
                     heroesFromSearch(widget.heroes, globalState.currentQuery);
                 return GridView.builder(
@@ -74,19 +69,7 @@ class _HeroesState extends State<Heroes> {
                     return InkWell(
                       borderRadius: BorderRadius.circular(20),
                       onLongPress: () {
-                        isFavorite = handleFavorite(kHeroes, hero.id);
-                        if (isFavorite) {
-                          BaseModel favoriteHero = BaseModel(
-                            hero.id,
-                            hero.name,
-                            hero.image,
-                            hero.type,
-                          );
-                          favoriteState.addFavorite(kHeroes, favoriteHero);
-                        } else {
-                          favoriteState.removeFavorite(kHeroes, hero.id);
-                        }
-                        print(favoriteState.favoriteBox.get(kHeroes));
+                        favoriteState.toggleFavorite(hero);
                       },
                       onTap: () {
                         widget.analyticsHelper.logEvent(
@@ -134,17 +117,12 @@ class _HeroesState extends State<Heroes> {
                               ),
                             ),
                           ),
-                          Consumer<FavoriteState>(
-                            builder: (context, favoriteState, child) {
-                              return Positioned(
-                                top: 17,
-                                right: 25,
-                                child: favoriteState.isInFavorites(
-                                        kHeroes, hero.id)
-                                    ? const Icon(Icons.star)
-                                    : const Icon(Icons.star_border_outlined),
-                              );
-                            },
+                          Positioned(
+                            top: 17,
+                            right: 25,
+                            child: favoriteState.isFavorite(hero.type, hero.id)
+                                ? const Icon(Icons.star)
+                                : const Icon(Icons.star_border_outlined),
                           ),
                         ],
                       ),
