@@ -8,6 +8,26 @@ class FavoriteState extends ChangeNotifier {
 
   FavoriteState() {
     _favoriteBox = Hive.box<List<dynamic>>(kFavorite);
+    final tempBuffer = <String, List<dynamic>>{};
+
+// Example desired order: towers, heroes, bloons, bosses, maps, blimps
+    for (final categoryKey in [
+      'towers',
+      'heroes',
+      'bloons',
+      'bosses',
+      'maps',
+      'blimps'
+    ]) {
+      final values = _favoriteBox.get(categoryKey)??[];
+      tempBuffer[categoryKey] = values;
+    }
+
+    _favoriteBox.clear();
+
+    for (final entry in tempBuffer.entries) {
+      _favoriteBox.put(entry.key, entry.value);
+    }
   }
 
   Box<List<dynamic>> get favoriteBox => _favoriteBox;

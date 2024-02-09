@@ -13,43 +13,31 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
-  final _scrollController = ScrollController();
-  final _gridViewKey = GlobalKey();
-  final _fruits = <String>["apple", "banana", "strawberry"];
-
   @override
   Widget build(BuildContext context) {
+    FavoriteState favoriteState =
+        Provider.of<FavoriteState>(context, listen: false);
+    print(favoriteState.favoriteBox.keys.toList());
+    List<String> categories =
+        List<String>.from(favoriteState.favoriteBox.keys.toList());
     final generatedChildren = List.generate(
-      _fruits.length,
-      (index) => Container(
-        key: Key(_fruits.elementAt(index)),
-        color: Colors.lightBlue,
-        child: Text(
-          _fruits.elementAt(index),
-        ),
+      categories.length,
+      (index) => OrderableGrid(
+        gridKey: GlobalKey(),
+        favoriteItems: favoriteState.getListOfType(categories[index]),
+        typeName: categories[index],
       ),
     );
-
+    print(categories);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorites'),
       ),
       body: Consumer<FavoriteState>(
         builder: (context, favoriteState, child) {
-          List<String> categories =
-              List<String>.from(favoriteState.favoriteBox.keys.toList());
-          return ListView.builder(
+          return ListView(
             shrinkWrap: true,
-            itemCount: categories.length,
-            itemBuilder: (BuildContext context, int index) {
-              return categories[index].isNotEmpty
-                  ? OrderableGrid(
-                      gridKey: GlobalKey(),
-                      favoriteItems:
-                          favoriteState.getListOfType(categories[index]),
-                    )
-                  : Container();
-            },
+            children: generatedChildren,
           );
         },
       ),

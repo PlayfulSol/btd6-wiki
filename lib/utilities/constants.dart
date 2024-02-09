@@ -5,6 +5,7 @@ const String kHeroes = 'heroes';
 const String kBloons = 'bloons';
 const String kBlimps = 'blimps';
 const String kBosses = 'bosses';
+const String kMinions = 'minions';
 const String kMaps = 'maps';
 
 const int kTowersIndex = 0;

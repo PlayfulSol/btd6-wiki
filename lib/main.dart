@@ -38,7 +38,8 @@ Future<void> main() async {
   // await Hive.deleteFromDisk();
   Hive.registerAdapter(FavoriteModelAdapter());
   // Removed redundant opening
-  await Hive.openBox<List<dynamic>>(kFavorite);
+  await Hive.openBox<List<dynamic>>(kFavorite,
+      keyComparator: desiredCategoryOrder);
   // print(Hive.box<FavoriteModel>(kFavorite).toMap());
 
   runApp(MyApp(analytics: analytics));
@@ -209,21 +210,22 @@ class _MyHomePageState extends State<MyHomePage> {
               //   print(e);
               //   await Hive.openBox(kFavorite);
               // }
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const FavoriteScreen()),
-              // );
-              FavoriteState favS =
-                  Provider.of<FavoriteState>(context, listen: false);
-              var list = favS.getListOfType('tower');
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => OrderableGrid(
-                          favoriteItems: list,
-                          gridKey: GlobalKey(),
-                        )),
+                MaterialPageRoute(builder: (context) => const FavoriteScreen()),
               );
+              // FavoriteState favS =
+              //     Provider.of<FavoriteState>(context, listen: false);
+              // var list = favS.getListOfType(kTowers);
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //       builder: (context) => OrderableGrid(
+              //             favoriteItems: list,
+              //             typeName: kTowers,
+              //             gridKey: GlobalKey(),
+              //           )),
+              // );
               // print(favBox.get(kTowers));
             },
             icon: const Icon(Icons.star),

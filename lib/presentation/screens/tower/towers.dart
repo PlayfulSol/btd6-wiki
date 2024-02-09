@@ -88,6 +88,7 @@ class _TowersState extends State<Towers> {
                               towerId: tower.id,
                               analyticsHelper: widget.analyticsHelper,
                             ),
+                            
                           ),
                         );
                       },

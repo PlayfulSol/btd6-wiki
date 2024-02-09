@@ -8,7 +8,34 @@ import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base_model.dart';
 import 'constants.dart';
+import 'images_url.dart';
 import 'layout_presets.dart';
+
+
+int desiredCategoryOrder(dynamic key1, dynamic key2) {
+  // Define the desired order as a list of category keys
+  final desiredOrder = ['towers', 'heroes', 'bloons', 'bosses', 'maps', 'blimps'];
+
+  // Get the category names from the keys
+  final category1 = key1.split(':')[0];
+  final category2 = key2.split(':')[0];
+
+  // Find the indices of the categories in the desired order
+  final index1 = desiredOrder.indexOf(category1);
+  final index2 = desiredOrder.indexOf(category2);
+
+  // Compare the indices to determine the order
+  if (index1 == -1 || index2 == -1) {
+    // Handle unexpected categories (not in desiredOrder)
+    return 0; // Or throw an error if preferred
+  } else if (index1 < index2) {
+    return -1; // Category1 comes before Category2
+  } else if (index1 > index2) {
+    return 1; // Category1 comes after Category2
+  } else {
+    return 0; // Categories have the same desired order (shouldn't happen)
+  }
+}
 
 String formatBigNumber(int number) {
   if (number < 1000) {
@@ -47,6 +74,24 @@ String statsToString(Stats stats) {
 
 String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
+}
+
+String assetImagePath(String type, String imageName) {
+  if (type == kTowers) {
+    return towerImage(imageName);
+  } else if (type == kHeroes) {
+    return heroImage(imageName);
+  } else if (type == kBloons || type == kBlimps) {
+    return bloonImage(imageName);
+  } else if (type == kBosses) {
+    return bossImage(imageName);
+  } else if (type == kMinions) {
+    return minionImage(imageName);
+  } else if (type == kMaps) {
+    return mapImage(imageName);
+  } else {
+    throw Exception('Unsupported image type - $type');
+  }
 }
 
 List<BaseModel> filterAndSearchBloons(
