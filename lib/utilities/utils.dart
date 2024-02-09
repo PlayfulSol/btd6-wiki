@@ -11,10 +11,16 @@ import 'constants.dart';
 import 'images_url.dart';
 import 'layout_presets.dart';
 
-
 int desiredCategoryOrder(dynamic key1, dynamic key2) {
   // Define the desired order as a list of category keys
-  final desiredOrder = ['towers', 'heroes', 'bloons', 'bosses', 'maps', 'blimps'];
+  final desiredOrder = [
+    'towers',
+    'heroes',
+    'bloons',
+    'bosses',
+    'maps',
+    'blimps'
+  ];
 
   // Get the category names from the keys
   final category1 = key1.split(':')[0];

@@ -69,8 +69,6 @@ class FavoriteState extends ChangeNotifier {
   }
 
   void updateIndexes(String type, List items) {
-    // TODO implement updating indexes of all the items of the type
-    // this comes after implementing moveable grid to show the items and change their order
     _favoriteBox.put(type, items);
   }
 }

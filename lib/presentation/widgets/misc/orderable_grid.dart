@@ -54,17 +54,12 @@ class _OrderableGridState extends State<OrderableGrid> {
       children: [
         Text(widget.typeName),
         ReorderableBuilder(
-          children: generatedChildren,
           scrollController: _scrollController,
           onReorder: (List<OrderUpdateEntity> orderUpdateEntities) {
-            print(orderUpdateEntities);
             for (final orderUpdateEntity in orderUpdateEntities) {
               final favItem =
                   widget.favoriteItems.removeAt(orderUpdateEntity.oldIndex);
               widget.favoriteItems.insert(orderUpdateEntity.newIndex, favItem);
-            }
-            for (var name in widget.favoriteItems) {
-              print(name.name);
             }
             Provider.of<FavoriteState>(context, listen: false)
                 .updateIndexes(widget.typeName, widget.favoriteItems);
@@ -74,14 +69,15 @@ class _OrderableGridState extends State<OrderableGrid> {
               key: widget.gridKey,
               controller: _scrollController,
               shrinkWrap: true,
-              children: children,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 mainAxisSpacing: 4,
                 crossAxisSpacing: 8,
               ),
+              children: children,
             );
           },
+          children: generatedChildren,
         ),
       ],
     );

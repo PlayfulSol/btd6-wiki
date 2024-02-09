@@ -1,8 +1,6 @@
 import 'package:btd6wiki/presentation/widgets/misc/orderable_grid.dart';
 import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_reorderable_grid_view/entities/order_update_entity.dart';
-import 'package:flutter_reorderable_grid_view/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -17,7 +15,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   Widget build(BuildContext context) {
     FavoriteState favoriteState =
         Provider.of<FavoriteState>(context, listen: false);
-    print(favoriteState.favoriteBox.keys.toList());
     List<String> categories =
         List<String>.from(favoriteState.favoriteBox.keys.toList());
     final generatedChildren = List.generate(
@@ -28,7 +25,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         typeName: categories[index],
       ),
     );
-    print(categories);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorites'),
