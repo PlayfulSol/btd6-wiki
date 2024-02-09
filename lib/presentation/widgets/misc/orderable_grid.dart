@@ -57,11 +57,17 @@ class _OrderableGridState extends State<OrderableGrid> {
           children: generatedChildren,
           scrollController: _scrollController,
           onReorder: (List<OrderUpdateEntity> orderUpdateEntities) {
+            print(orderUpdateEntities);
             for (final orderUpdateEntity in orderUpdateEntities) {
-              final fruit =
+              final favItem =
                   widget.favoriteItems.removeAt(orderUpdateEntity.oldIndex);
-              widget.favoriteItems.insert(orderUpdateEntity.newIndex, fruit);
+              widget.favoriteItems.insert(orderUpdateEntity.newIndex, favItem);
             }
+            for (var name in widget.favoriteItems) {
+              print(name.name);
+            }
+            Provider.of<FavoriteState>(context, listen: false)
+                .updateIndexes(widget.typeName, widget.favoriteItems);
           },
           builder: (children) {
             return GridView(
