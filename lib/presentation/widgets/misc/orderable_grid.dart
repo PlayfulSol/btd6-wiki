@@ -1,10 +1,10 @@
-import 'package:btd6wiki/analytics/analytics.dart';
-import 'package:btd6wiki/analytics/analytics_constants.dart';
 import 'package:flutter_reorderable_grid_view/entities/order_update_entity.dart';
 import 'package:flutter_reorderable_grid_view/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/hive/favorite_model.dart';
+import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
 import '/utilities/utils.dart';
 

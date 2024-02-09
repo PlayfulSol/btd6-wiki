@@ -1,8 +1,8 @@
-import 'package:btd6wiki/analytics/analytics.dart';
-import 'package:btd6wiki/presentation/widgets/misc/orderable_grid.dart';
-import 'package:btd6wiki/utilities/favorite_state.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import '/analytics/analytics.dart';
+import '/presentation/widgets/misc/orderable_grid.dart';
+import '/utilities/favorite_state.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key, required this.analyticsHelper});

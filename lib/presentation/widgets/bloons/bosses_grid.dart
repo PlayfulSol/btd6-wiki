@@ -1,13 +1,13 @@
-import 'package:btd6wiki/analytics/analytics.dart';
-import 'package:btd6wiki/analytics/analytics_constants.dart';
-import 'package:btd6wiki/models/base_model.dart';
-import 'package:btd6wiki/presentation/screens/bloon/boss_bloon.dart';
-import 'package:btd6wiki/presentation/widgets/misc/image_outline.dart';
-import 'package:btd6wiki/utilities/constants.dart';
-import 'package:btd6wiki/utilities/favorite_state.dart';
-import 'package:btd6wiki/utilities/images_url.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
+import '/models/base_model.dart';
+import '/presentation/widgets/misc/image_outline.dart';
+import '/presentation/screens/bloon/boss_bloon.dart';
+import '/utilities/favorite_state.dart';
+import '/utilities/images_url.dart';
+import '/utilities/constants.dart';
 
 class BossesGrid extends StatelessWidget {
   const BossesGrid({

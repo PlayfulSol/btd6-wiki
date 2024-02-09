@@ -1,4 +1,3 @@
-import 'package:btd6wiki/presentation/screens/misc/favorite_screen.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +10,7 @@ import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base_model.dart';
+import '/presentation/screens/misc/favorite_screen.dart';
 import '/presentation/widgets/misc/drawer_content.dart';
 import '/presentation/screens/tower/towers.dart';
 import '/presentation/screens/bloon/bloons.dart';
@@ -34,13 +34,11 @@ Future<void> main() async {
   );
   final analytics = FirebaseAnalytics.instance;
   await Hive.initFlutter();
-  // await Hive.deleteFromDisk();
   Hive.registerAdapter(FavoriteModelAdapter());
-  // Removed redundant opening
-  await Hive.openBox<List<dynamic>>(kFavorite,
-      keyComparator: desiredCategoryOrder);
-  // print(Hive.box<FavoriteModel>(kFavorite).toMap());
-
+  await Hive.openBox<List<dynamic>>(
+    kFavorite,
+    keyComparator: desiredCategoryOrder,
+  );
   runApp(MyApp(analytics: analytics));
 }
 
@@ -131,7 +129,6 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Consumer<GlobalState>(
           builder: (context, globalState, child) {
-            // return Text(MediaQuery.of(context).size.width.toString());
             return Text(globalState.currentTitle);
           },
         ),
