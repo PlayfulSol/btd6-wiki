@@ -1,3 +1,10 @@
+import 'package:btd6wiki/analytics/analytics.dart';
+import 'package:btd6wiki/analytics/analytics_constants.dart';
+import 'package:btd6wiki/presentation/screens/bloon/boss_bloon.dart';
+import 'package:btd6wiki/presentation/screens/bloon/single_bloon.dart';
+import 'package:btd6wiki/presentation/screens/hero/single_hero.dart';
+import 'package:btd6wiki/presentation/screens/maps/single_map.dart';
+import 'package:btd6wiki/presentation/screens/tower/single_tower.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import '/models/bloons/common/relative_class.dart';
@@ -17,9 +24,9 @@ int desiredCategoryOrder(dynamic key1, dynamic key2) {
     'towers',
     'heroes',
     'bloons',
+    'blimps',
     'bosses',
     'maps',
-    'blimps'
   ];
 
   // Get the category names from the keys
@@ -41,6 +48,51 @@ int desiredCategoryOrder(dynamic key1, dynamic key2) {
   } else {
     return 0; // Categories have the same desired order (shouldn't happen)
   }
+}
+
+void navigateToPage(BuildContext context, var item,
+    AnalyticsHelper analyticsHelper, String originScreen, String originWidget) {
+  analyticsHelper.logEvent(
+    name: widgetEngagement,
+    parameters: {
+      'screen': originScreen,
+      'widget': originWidget,
+      'value': item.id,
+    },
+  );
+
+  Map<String, Widget> destinations = {
+    kTowers: SingleTower(
+      towerId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kHeroes: SingleHero(
+      heroId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kBloons: SingleBloon(
+      bloonId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kBlimps: SingleBloon(
+      bloonId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kBosses: BossBloon(
+      bossId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kMaps: SingleMap(
+      mapId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+  };
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => destinations[item.type]!,
+    ),
+  );
 }
 
 String formatBigNumber(int number) {

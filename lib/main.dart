@@ -131,8 +131,8 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Consumer<GlobalState>(
           builder: (context, globalState, child) {
-            return Text(MediaQuery.of(context).size.width.toString());
-            // return Text(globalState.currentTitle);
+            // return Text(MediaQuery.of(context).size.width.toString());
+            return Text(globalState.currentTitle);
           },
         ),
         actions: [
@@ -201,41 +201,20 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           IconButton(
             onPressed: () async {
-              // await favBox.deleteFromDisk();
-              // favBox = await Hive.openBox('favorite');
-              // try {
-              //   print(Hive.box<List<dynamic>>(kFavorite).toMap());
-              // } catch (e) {
-              //   print(e);
-              //   await Hive.openBox(kFavorite);
-              // }
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const FavoriteScreen()),
+                MaterialPageRoute(
+                  builder: (context) => FavoriteScreen(
+                    analyticsHelper: analyticsHelper,
+                  ),
+                ),
               );
-              // FavoriteState favS =
-              //     Provider.of<FavoriteState>(context, listen: false);
-              // var list = favS.getListOfType(kTowers);
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //       builder: (context) => OrderableGrid(
-              //             favoriteItems: list,
-              //             typeName: kTowers,
-              //             gridKey: GlobalKey(),
-              //           )),
-              // );
-              // print(favBox.get(kTowers));
             },
             icon: const Icon(Icons.star),
           ),
           IconButton(
             onPressed: () async {
               await Hive.deleteFromDisk();
-              // favBox = await Hive.openBox('favorite');
-              // print(Hive.box<FavoriteModel>(kFavorite).toMap());
-
-              // print(favBox.get(kTowers));
             },
             icon: const Icon(Icons.remove),
           ),
