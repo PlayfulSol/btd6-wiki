@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/models/base_model.dart';
-import '/presentation/widgets/misc/image_outline.dart';
+import '/presentation/widgets/common/image_outline.dart';
 import '/presentation/screens/bloon/boss_bloon.dart';
 import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '/models/base/base_tower.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/misc/search_widget.dart';
-import '/presentation/widgets/misc/image_outline.dart';
+import '/presentation/widgets/common/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';

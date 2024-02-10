@@ -16,7 +16,7 @@ import '/presentation/screens/tower/towers.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/maps/maps.dart';
-import '/presentation/widgets/misc/loader.dart';
+import 'presentation/widgets/common/loader.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';

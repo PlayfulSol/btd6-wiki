@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/models/base_model.dart';
-import '/presentation/widgets/misc/image_outline.dart';
+import '/presentation/widgets/common/image_outline.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';

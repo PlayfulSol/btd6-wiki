@@ -2,7 +2,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_hero.dart';
 import '/presentation/widgets/misc/search_widget.dart';
-import '/presentation/widgets/misc/image_outline.dart';
+import '/presentation/widgets/common/image_outline.dart';
 import '/presentation/screens/hero/single_hero.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
