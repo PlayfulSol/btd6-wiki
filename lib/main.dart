@@ -196,24 +196,37 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           ),
-          IconButton(
-            onPressed: () async {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FavoriteScreen(
-                    analyticsHelper: analyticsHelper,
-                  ),
+          Consumer<FavoriteState>(
+            builder: (context, favoriteState, child) {
+              IconData favIcon =
+                  favoriteState.multiSelect ? Icons.add_task_sharp : Icons.star;
+              return GestureDetector(
+                onLongPress: () {
+                  favoriteState.toggleMultiSelect();
+                },
+                child: IconButton(
+                  onPressed: () {
+                    if (!favoriteState.multiSelect) {
+                      analyticsHelper.logScreenView(
+                        screenClass: kFavoritesClass,
+                        screenName: kFavoritesClass,
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FavoriteScreen(
+                            analyticsHelper: analyticsHelper,
+                          ),
+                        ),
+                      );
+                    } else {
+                      favoriteState.toggleMultiSelect();
+                    }
+                  },
+                  icon: Icon(favIcon),
                 ),
               );
             },
-            icon: const Icon(Icons.star),
-          ),
-          IconButton(
-            onPressed: () async {
-              await Hive.deleteFromDisk();
-            },
-            icon: const Icon(Icons.remove),
           ),
         ],
       ),

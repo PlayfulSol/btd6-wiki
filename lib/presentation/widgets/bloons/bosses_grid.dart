@@ -40,23 +40,27 @@ class BossesGrid extends StatelessWidget {
               onLongPress: () =>
                   toggleFavoriteFunc(context, favoriteState, boss),
               onTap: () {
-                analyticsHelper.logEvent(
-                  name: widgetEngagement,
-                  parameters: {
-                    'screen': kBossPagesClass,
-                    'widget': listTile,
-                    'value': boss.id,
-                  },
-                );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => BossBloon(
-                      analyticsHelper: analyticsHelper,
-                      bossId: boss.id,
+                if (!favoriteState.multiSelect) {
+                  analyticsHelper.logEvent(
+                    name: widgetEngagement,
+                    parameters: {
+                      'screen': kBossPagesClass,
+                      'widget': listTile,
+                      'value': boss.id,
+                    },
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BossBloon(
+                        analyticsHelper: analyticsHelper,
+                        bossId: boss.id,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  toggleFavoriteFunc(context, favoriteState, boss);
+                }
               },
               child: Card(
                 child: Center(

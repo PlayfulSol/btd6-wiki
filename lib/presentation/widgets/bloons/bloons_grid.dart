@@ -41,23 +41,27 @@ class BloonsGrid extends StatelessWidget {
               onLongPress: () =>
                   toggleFavoriteFunc(context, favoriteState, bloon),
               onTap: () {
-                analyticsHelper.logEvent(
-                  name: widgetEngagement,
-                  parameters: {
-                    'screen': kBloonPagesClass,
-                    'widget': listTile,
-                    'value': bloon.id,
-                  },
-                );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SingleBloon(
-                      analyticsHelper: analyticsHelper,
-                      bloonId: bloon.id,
+                if (!favoriteState.multiSelect) {
+                  analyticsHelper.logEvent(
+                    name: widgetEngagement,
+                    parameters: {
+                      'screen': kBloonPagesClass,
+                      'widget': listTile,
+                      'value': bloon.id,
+                    },
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => SingleBloon(
+                        analyticsHelper: analyticsHelper,
+                        bloonId: bloon.id,
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  toggleFavoriteFunc(context, favoriteState, bloon);
+                }
               },
               child: Card(
                 margin: const EdgeInsets.symmetric(

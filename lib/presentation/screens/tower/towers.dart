@@ -72,23 +72,27 @@ class _TowersState extends State<Towers> {
                       onLongPress: () =>
                           toggleFavoriteFunc(context, favoriteState, tower),
                       onTap: () {
-                        widget.analyticsHelper.logEvent(
-                          name: widgetEngagement,
-                          parameters: {
-                            'screen': kTowerPagesClass,
-                            'widget': listTile,
-                            'value': tower.id,
-                          },
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SingleTower(
-                              towerId: tower.id,
-                              analyticsHelper: widget.analyticsHelper,
+                        if (!favoriteState.multiSelect) {
+                          widget.analyticsHelper.logEvent(
+                            name: widgetEngagement,
+                            parameters: {
+                              'screen': kTowerPagesClass,
+                              'widget': listTile,
+                              'value': tower.id,
+                            },
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SingleTower(
+                                towerId: tower.id,
+                                analyticsHelper: widget.analyticsHelper,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          toggleFavoriteFunc(context, favoriteState, tower);
+                        }
                       },
                       child: Stack(
                         alignment: AlignmentDirectional.topEnd,

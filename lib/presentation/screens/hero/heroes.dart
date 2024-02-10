@@ -71,23 +71,27 @@ class _HeroesState extends State<Heroes> {
                       onLongPress: () =>
                           toggleFavoriteFunc(context, favoriteState, hero),
                       onTap: () {
-                        widget.analyticsHelper.logEvent(
-                          name: widgetEngagement,
-                          parameters: {
-                            'screen': kHeroPagesClass,
-                            'widget': listTile,
-                            'value': hero.id,
-                          },
-                        );
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SingleHero(
-                              heroId: hero.id,
-                              analyticsHelper: widget.analyticsHelper,
+                        if (!favoriteState.multiSelect) {
+                          widget.analyticsHelper.logEvent(
+                            name: widgetEngagement,
+                            parameters: {
+                              'screen': kHeroPagesClass,
+                              'widget': listTile,
+                              'value': hero.id,
+                            },
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SingleHero(
+                                heroId: hero.id,
+                                analyticsHelper: widget.analyticsHelper,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          toggleFavoriteFunc(context, favoriteState, hero);
+                        }
                       },
                       child: Stack(
                         children: [

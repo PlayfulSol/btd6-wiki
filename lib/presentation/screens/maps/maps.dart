@@ -79,22 +79,26 @@ class _MapsState extends State<Maps> {
                             onLongPress: () =>
                                 toggleFavoriteFunc(context, favoriteState, map),
                             onTap: () {
-                              widget.analyticsHelper.logEvent(
-                                name: widgetEngagement,
-                                parameters: {
-                                  'screen': kMapPagesClass,
-                                  'widget': map.id,
-                                },
-                              );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SingleMap(
-                                    analyticsHelper: widget.analyticsHelper,
-                                    mapId: map.id,
+                              if (!favoriteState.multiSelect) {
+                                widget.analyticsHelper.logEvent(
+                                  name: widgetEngagement,
+                                  parameters: {
+                                    'screen': kMapPagesClass,
+                                    'widget': map.id,
+                                  },
+                                );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SingleMap(
+                                      analyticsHelper: widget.analyticsHelper,
+                                      mapId: map.id,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              } else {
+                                toggleFavoriteFunc(context, favoriteState, map);
+                              }
                             },
                             child: MapCard(singleMap: map),
                           ),

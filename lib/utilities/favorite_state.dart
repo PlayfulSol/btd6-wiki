@@ -6,11 +6,14 @@ import '/utilities/constants.dart';
 class FavoriteState extends ChangeNotifier {
   late Box<List<dynamic>> _favoriteBox;
 
+  bool _multiSelect = false;
+
   FavoriteState() {
     _favoriteBox = Hive.box<List<dynamic>>(kFavorite);
   }
 
   Box<List<dynamic>> get favoriteBox => _favoriteBox;
+  bool get multiSelect => _multiSelect;
 
   List<FavoriteModel> getListOfType(String type) {
     if (_favoriteBox.containsKey(type)) {
@@ -18,6 +21,11 @@ class FavoriteState extends ChangeNotifier {
     }
 
     return [];
+  }
+
+  void toggleMultiSelect() {
+    _multiSelect = !_multiSelect;
+    notifyListeners();
   }
 
   String toggleFavorite(var item) {
