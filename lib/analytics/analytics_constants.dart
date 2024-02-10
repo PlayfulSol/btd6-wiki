@@ -5,6 +5,7 @@ const String kHeroPagesClass = 'hero_pages';
 const String kBloonPagesClass = 'bloon_pages';
 const String kBossPagesClass = 'boss_pages';
 const String kMapPagesClass = 'map_pages';
+const String kFavoritesClass = 'favorites_page';
 
 // ------- Const for event names -------
 const String widgetEngagement = 'widget_engagement';
@@ -33,5 +34,6 @@ const String kHeroSkinsPage = 'hero_skins_page';
 // ---- General ----
 const String expansionTile = 'expansion_tile';
 const String listTile = 'list_tile';
+const String card = 'card';
 const String buttonOpen = 'opened';
 const String buttonClose = 'closed';

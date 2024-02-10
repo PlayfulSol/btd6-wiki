@@ -2,10 +2,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_tower.dart';
 import '/presentation/screens/tower/single_tower.dart';
-import '/presentation/widgets/search_widget.dart';
-import '/presentation/widgets/image_outline.dart';
+import '/presentation/widgets/misc/search_widget.dart';
+import '/presentation/widgets/common/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -29,7 +30,6 @@ class _TowersState extends State<Towers> {
   @override
   void initState() {
     super.initState();
-
     widget.analyticsHelper.logScreenView(
       screenClass: kMainPagesClass,
       screenName: kTowers,
@@ -41,6 +41,7 @@ class _TowersState extends State<Towers> {
     final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
+
     return Scaffold(
       body: Column(
         children: [
@@ -51,8 +52,8 @@ class _TowersState extends State<Towers> {
                     : Container(),
           ),
           Expanded(
-            child: Consumer<GlobalState>(
-              builder: (context, globalState, child) {
+            child: Consumer2<GlobalState, FavoriteState>(
+              builder: (context, globalState, favoriteState, child) {
                 final filteredTowers = filterAndSearchTowers(widget.towers,
                     globalState.currentQuery, globalState.currentOption);
 
@@ -66,49 +67,62 @@ class _TowersState extends State<Towers> {
                   itemBuilder: (context, index) {
                     final tower = filteredTowers[index];
 
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 13, vertical: 8),
-                      child: Center(
-                        child: ListTile(
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 8),
-                          horizontalTitleGap: 8,
-                          minVerticalPadding: -4,
-                          leading: ImageOutliner(
-                            imageName: tower.image,
-                            imagePath: towerImage(tower.image),
-                            width: constraintsValues[towerImageWidth],
-                          ),
-                          title: Text(
-                            tower.name,
-                            style: constraintsValues[towerTitleStyle],
-                          ),
-                          subtitle: Text(
-                            tower.inGameDesc,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: constraintsValues[towerSubtitleRows],
-                            style: constraintsValues[towerSubtitleStyle],
-                          ),
-                          onTap: () {
-                            widget.analyticsHelper.logEvent(
-                              name: widgetEngagement,
-                              parameters: {
-                                'screen': kTowerPagesClass,
-                                'widget': listTile,
-                                'value': tower.id,
-                              },
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SingleTower(
-                                  towerId: tower.id,
-                                  analyticsHelper: widget.analyticsHelper,
-                                ),
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onLongPress: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, tower),
+                      onTap: () {
+                        if (!favoriteState.multiSelect) {
+                          widget.analyticsHelper.logEvent(
+                            name: widgetEngagement,
+                            parameters: {
+                              'screen': kTowerPagesClass,
+                              'widget': listTile,
+                              'value': tower.id,
+                            },
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SingleTower(
+                                towerId: tower.id,
+                                analyticsHelper: widget.analyticsHelper,
                               ),
-                            );
-                          },
+                            ),
+                          );
+                        } else {
+                          favoriteState.toggleFavoriteFunc(
+                              context, favoriteState, tower);
+                        }
+                      },
+                      child: Card(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 13, vertical: 8),
+                        child: Center(
+                          child: ListTile(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 8),
+                            horizontalTitleGap: 8,
+                            leading: ImageOutliner(
+                              imageName: tower.image,
+                              imagePath: towerImage(tower.image),
+                              width: constraintsValues[towerImageWidth],
+                            ),
+                            title: Text(
+                              tower.name,
+                              style: constraintsValues[towerTitleStyle],
+                            ),
+                            subtitle: Text(
+                              tower.inGameDesc,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: constraintsValues[towerSubtitleRows],
+                              style: constraintsValues[towerSubtitleStyle],
+                            ),
+                            trailing:
+                                favoriteState.isFavorite(tower.type, tower.id)
+                                    ? const Icon(Icons.star)
+                                    : const Icon(Icons.star_border_outlined),
+                          ),
                         ),
                       ),
                     );

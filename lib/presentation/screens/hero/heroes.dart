@@ -1,11 +1,12 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/models/base/base_hero.dart';
+import '/presentation/widgets/misc/search_widget.dart';
+import '/presentation/widgets/common/image_outline.dart';
 import '/presentation/screens/hero/single_hero.dart';
-import '/presentation/widgets/search_widget.dart';
-import '/presentation/widgets/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -40,6 +41,7 @@ class _HeroesState extends State<Heroes> {
     final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
+
     return Scaffold(
       body: Column(
         children: [
@@ -50,8 +52,8 @@ class _HeroesState extends State<Heroes> {
                     : Container(),
           ),
           Expanded(
-            child: Consumer<GlobalState>(
-              builder: (context, globalState, child) {
+            child: Consumer2<GlobalState, FavoriteState>(
+              builder: (context, globalState, favoriteState, child) {
                 final filteredHeroes =
                     heroesFromSearch(widget.heroes, globalState.currentQuery);
                 return GridView.builder(
@@ -64,47 +66,61 @@ class _HeroesState extends State<Heroes> {
                   itemBuilder: (context, index) {
                     final hero = filteredHeroes[index];
 
-                    return Card(
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 13, vertical: 8),
-                      child: Center(
-                        child: ListTile(
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 8),
-                          horizontalTitleGap: 8,
-                          leading: ImageOutliner(
-                            imageName: hero.image,
-                            imagePath: heroImage(hero.image),
-                          ),
-                          title: Text(
-                            hero.name,
-                            style: constraintsValues[heroTitleStyle],
-                          ),
-                          subtitle: Text(
-                            hero.inGameDesc,
-                            overflow: TextOverflow.ellipsis,
-                            style: constraintsValues[heroSubtitleStyle],
-                            maxLines: constraintsValues[heroSubtitleRows],
-                          ),
-                          onTap: () {
-                            widget.analyticsHelper.logEvent(
-                              name: widgetEngagement,
-                              parameters: {
-                                'screen': kHeroPagesClass,
-                                'widget': listTile,
-                                'value': hero.id,
-                              },
-                            );
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SingleHero(
-                                  heroId: hero.id,
-                                  analyticsHelper: widget.analyticsHelper,
-                                ),
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(20),
+                      onLongPress: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, hero),
+                      onTap: () {
+                        if (!favoriteState.multiSelect) {
+                          widget.analyticsHelper.logEvent(
+                            name: widgetEngagement,
+                            parameters: {
+                              'screen': kHeroPagesClass,
+                              'widget': listTile,
+                              'value': hero.id,
+                            },
+                          );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SingleHero(
+                                heroId: hero.id,
+                                analyticsHelper: widget.analyticsHelper,
                               ),
-                            );
-                          },
+                            ),
+                          );
+                        } else {
+                          favoriteState.toggleFavoriteFunc(
+                              context, favoriteState, hero);
+                        }
+                      },
+                      child: Card(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 13, vertical: 8),
+                        child: Center(
+                          child: ListTile(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 8),
+                            horizontalTitleGap: 8,
+                            leading: ImageOutliner(
+                              imageName: hero.image,
+                              imagePath: heroImage(hero.image),
+                            ),
+                            title: Text(
+                              hero.name,
+                              style: constraintsValues[heroTitleStyle],
+                            ),
+                            subtitle: Text(
+                              hero.inGameDesc,
+                              overflow: TextOverflow.ellipsis,
+                              style: constraintsValues[heroSubtitleStyle],
+                              maxLines: constraintsValues[heroSubtitleRows],
+                            ),
+                            trailing:
+                                favoriteState.isFavorite(hero.type, hero.id)
+                                    ? const Icon(Icons.star)
+                                    : const Icon(Icons.star_border_outlined),
+                          ),
                         ),
                       ),
                     );

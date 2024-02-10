@@ -1,21 +1,25 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/firebase_options.dart';
+import '/hive/favorite_model.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base_model.dart';
-import '/presentation/widgets/drawer_content.dart';
+import '/presentation/screens/misc/favorite_screen.dart';
+import '/presentation/widgets/misc/drawer_content.dart';
 import '/presentation/screens/tower/towers.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/hero/heroes.dart';
 import '/presentation/screens/maps/maps.dart';
-import '/presentation/widgets/loader.dart';
-import 'analytics/analytics_constants.dart';
+import 'presentation/widgets/common/loader.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
@@ -29,29 +33,43 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final analytics = FirebaseAnalytics.instance;
-
+  await Hive.initFlutter();
+  Hive.registerAdapter(FavoriteModelAdapter());
+  await Hive.openBox<List<dynamic>>(
+    kFavorite,
+    keyComparator: desiredCategoryOrder,
+  );
   runApp(MyApp(analytics: analytics));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.analytics});
   final FirebaseAnalytics analytics;
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => GlobalState(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<GlobalState>(
+          create: (BuildContext context) => GlobalState(),
+        ),
+        ChangeNotifierProvider<FavoriteState>(
+          create: (BuildContext context) => FavoriteState(),
+        ),
+      ],
       child: AdaptiveTheme(
-          light: Themes.lightTheme,
-          dark: Themes.darkTheme,
-          initial: AdaptiveThemeMode.system,
-          builder: (theme, darkTheme) => MaterialApp(
-                theme: theme,
-                darkTheme: darkTheme,
-                home: MyHomePage(
-                  analytics: analytics,
-                ),
-                debugShowCheckedModeBanner: false,
-              )),
+        light: Themes.lightTheme,
+        dark: Themes.darkTheme,
+        initial: AdaptiveThemeMode.system,
+        builder: (theme, darkTheme) => MaterialApp(
+          theme: theme,
+          darkTheme: darkTheme,
+          home: MyHomePage(
+            analytics: analytics,
+          ),
+          debugShowCheckedModeBanner: false,
+        ),
+      ),
     );
   }
 }
@@ -152,30 +170,64 @@ class _MyHomePageState extends State<MyHomePage> {
                   : Container();
             },
           ),
-          Consumer<GlobalState>(builder: (context, globalState, child) {
-            return IconButton(
-              onPressed: () {
-                globalState.switchSearch();
-                String value;
-                if (globalState.isSearchEnabled) {
-                  value = searchOn;
-                } else {
-                  globalState.updateCurrentQuery('');
-                  value = searchOff;
-                }
-                analyticsHelper.logEvent(
-                  name: widgetEngagement,
-                  parameters: {
-                    'screen': globalState.activeCategory,
-                    'widget': searchButton,
-                    'value': value,
+          Consumer<GlobalState>(
+            builder: (context, globalState, child) {
+              return IconButton(
+                onPressed: () {
+                  globalState.switchSearch();
+                  String value;
+                  if (globalState.isSearchEnabled) {
+                    value = searchOn;
+                  } else {
+                    globalState.updateCurrentQuery('');
+                    value = searchOff;
+                  }
+                  analyticsHelper.logEvent(
+                    name: widgetEngagement,
+                    parameters: {
+                      'screen': globalState.activeCategory,
+                      'widget': searchButton,
+                      'value': value,
+                    },
+                  );
+                },
+                icon: Icon(
+                    !globalState.isSearchEnabled ? Icons.search : Icons.close),
+              );
+            },
+          ),
+          Consumer<FavoriteState>(
+            builder: (context, favoriteState, child) {
+              IconData favIcon =
+                  favoriteState.multiSelect ? Icons.add_task_sharp : Icons.star;
+              return GestureDetector(
+                onLongPress: () {
+                  favoriteState.toggleMultiSelect();
+                },
+                child: IconButton(
+                  onPressed: () {
+                    if (!favoriteState.multiSelect) {
+                      analyticsHelper.logScreenView(
+                        screenClass: kFavoritesClass,
+                        screenName: kFavoritesClass,
+                      );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FavoriteScreen(
+                            analyticsHelper: analyticsHelper,
+                          ),
+                        ),
+                      );
+                    } else {
+                      favoriteState.toggleMultiSelect();
+                    }
                   },
-                );
-              },
-              icon: Icon(
-                  !globalState.isSearchEnabled ? Icons.search : Icons.close),
-            );
-          })
+                  icon: Icon(favIcon),
+                ),
+              );
+            },
+          ),
         ],
       ),
       body: !isLoading

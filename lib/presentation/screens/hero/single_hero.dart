@@ -2,13 +2,15 @@ import 'dart:convert';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '/models/towers/common/upgrade_info_class.dart';
 import '/models/towers/hero/hero.dart';
-import '/presentation/widgets/hero_stats.dart';
-import '/presentation/widgets/hero_level.dart';
+import '/presentation/widgets/heroes/hero_stats.dart';
+import '/presentation/widgets/heroes/hero_level.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
@@ -98,9 +100,25 @@ class _SingleHeroState extends State<SingleHero> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(!loading ? singleHero.name : ''),
-      ),
+      appBar: !loading
+          ? AppBar(
+              title: Text(singleHero.name),
+              actions: [
+                Consumer<FavoriteState>(
+                  builder: (context, favoriteState, child) {
+                    return IconButton(
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, singleHero),
+                      icon: favoriteState.isFavorite(
+                              singleHero.type, singleHero.id)
+                          ? const Icon(Icons.star)
+                          : const Icon(Icons.star_border_outlined),
+                    );
+                  },
+                ),
+              ],
+            )
+          : AppBar(),
       body: !loading
           ? SingleChildScrollView(
               child: Padding(

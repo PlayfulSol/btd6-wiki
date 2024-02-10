@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '/models/towers/tower/tower.dart';
-import '/presentation/widgets/path.dart';
+import '/presentation/widgets/towers/path.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
@@ -67,9 +69,24 @@ class _SingleTowerState extends State<SingleTower> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(!loading ? tower.name : ""),
-      ),
+      appBar: !loading
+          ? AppBar(
+              title: Text(tower.name),
+              actions: [
+                Consumer<FavoriteState>(
+                  builder: (context, favoriteState, child) {
+                    return IconButton(
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, tower),
+                      icon: favoriteState.isFavorite(tower.type, tower.id)
+                          ? const Icon(Icons.star)
+                          : const Icon(Icons.star_border_outlined),
+                    );
+                  },
+                ),
+              ],
+            )
+          : AppBar(),
       body: !loading
           ? SingleChildScrollView(
               child: Padding(

@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '/models/bloons/bloon/bloon.dart';
-import '/presentation/widgets/bloon_aid_widget.dart';
+import '/presentation/widgets/bloons/bloon_aid_widget.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
@@ -49,9 +51,24 @@ class _SingleBloonState extends State<SingleBloon> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(!loading ? bloon.fullName : ''),
-      ),
+      appBar: !loading
+          ? AppBar(
+              title: Text(bloon.fullName),
+              actions: [
+                Consumer<FavoriteState>(
+                  builder: (context, favoriteState, child) {
+                    return IconButton(
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, bloon),
+                      icon: favoriteState.isFavorite(bloon.type, bloon.id)
+                          ? const Icon(Icons.star)
+                          : const Icon(Icons.star_border_outlined),
+                    );
+                  },
+                ),
+              ],
+            )
+          : AppBar(),
       body: !loading
           ? SingleChildScrollView(
               child: Padding(

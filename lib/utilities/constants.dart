@@ -5,12 +5,17 @@ const String kHeroes = 'heroes';
 const String kBloons = 'bloons';
 const String kBlimps = 'blimps';
 const String kBosses = 'bosses';
+const String kMinions = 'minions';
 const String kMaps = 'maps';
 
 const int kTowersIndex = 0;
 const int kHeroesIndex = 1;
 const int kBloonsIndex = 2;
 const int kMapsIndex = 3;
+
+const String kFavorite = 'favorite';
+
+const Duration snackBarDuration = Duration(seconds: 2);
 
 const List<String> capTitles = [
   'Towers',
@@ -200,3 +205,9 @@ const String mapCrossCount = 'mapCrossAxisCount';
 const String mapAspectRatio = 'mapChildAspectRatio';
 const String mapTitleStyle = 'mapTitleStyle';
 const String mapSubtitleStyle = 'mapSubtitleStyle';
+
+const String favItemCrossCount = 'favItemCrossCount';
+const String favItemAspectRatio = 'favItemAspectRatio';
+const String favItemSubtitleStyle = 'favItemSubtitleStyle';
+const String favItemImageFlex = 'favItemImageFlex';
+const String favItemTextFlex = 'favItemTextFlex';

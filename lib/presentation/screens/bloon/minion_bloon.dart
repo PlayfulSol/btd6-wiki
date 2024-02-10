@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/bloons/boss/minion_bloon.dart';
-import '/presentation/widgets/bloon_aid_widget.dart';
+import '/presentation/widgets/bloons/bloon_aid_widget.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';

@@ -1,13 +1,15 @@
 import 'dart:convert';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/models/bloons/boss/boss_health_class.dart';
 import '/models/bloons/boss/boss_bloon.dart';
-import '/presentation/widgets/bloon_aid_widget.dart';
+import '/presentation/widgets/bloons/bloon_aid_widget.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 
@@ -58,9 +60,24 @@ class _BossBloonState extends State<BossBloon> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(!loading ? boss.name : ''),
-      ),
+      appBar: !loading
+          ? AppBar(
+              title: Text(boss.name),
+              actions: [
+                Consumer<FavoriteState>(
+                  builder: (context, favoriteState, child) {
+                    return IconButton(
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, boss),
+                      icon: favoriteState.isFavorite(boss.type, boss.id)
+                          ? const Icon(Icons.star)
+                          : const Icon(Icons.star_border_outlined),
+                    );
+                  },
+                ),
+              ],
+            )
+          : AppBar(),
       body: !loading
           ? SingleChildScrollView(
               child: Padding(

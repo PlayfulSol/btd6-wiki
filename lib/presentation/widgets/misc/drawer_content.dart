@@ -1,7 +1,7 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import '/presentation/widgets/about_us.dart';
+import 'about_us.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/global_state.dart';
@@ -27,7 +27,7 @@ class _DrawerContentState extends State<DrawerContent> {
       ExpansionTileController();
   final ExpansionTileController _mapsExpansionTileController =
       ExpansionTileController();
-  final ExpansionTileController _bloonsExpansionTileControleer =
+  final ExpansionTileController _bloonsExpansionTileController =
       ExpansionTileController();
 
   @override
@@ -90,7 +90,7 @@ class _DrawerContentState extends State<DrawerContent> {
                 () {
                   if (value) {
                     _mapsExpansionTileController.collapse();
-                    _bloonsExpansionTileControleer.collapse();
+                    _bloonsExpansionTileController.collapse();
                   }
                 },
               );
@@ -153,7 +153,7 @@ class _DrawerContentState extends State<DrawerContent> {
             },
           ),
           ExpansionTile(
-            controller: _bloonsExpansionTileControleer,
+            controller: _bloonsExpansionTileController,
             title: Text(capTitles[kBloonsIndex],
                 style: titleStyle.copyWith(color: Colors.teal)),
             onExpansionChanged: (bool value) {
@@ -227,7 +227,7 @@ class _DrawerContentState extends State<DrawerContent> {
               setState(
                 () {
                   if (value) {
-                    _bloonsExpansionTileControleer.collapse();
+                    _bloonsExpansionTileController.collapse();
                     _towersExpansionTileController.collapse();
                   }
                 },

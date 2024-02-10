@@ -1,5 +1,9 @@
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+import '/hive/favorite_model.dart';
+import '/analytics/analytics_constants.dart';
+import '/analytics/analytics.dart';
 import '/models/bloons/common/relative_class.dart';
 import '/models/towers/common/stats_class.dart';
 import '/models/towers/common/cost_class.dart';
@@ -7,8 +11,92 @@ import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base_model.dart';
-import 'constants.dart';
+import '/presentation/screens/tower/single_tower.dart';
+import '/presentation/screens/bloon/single_bloon.dart';
+import '/presentation/screens/bloon/boss_bloon.dart';
+import '/presentation/screens/hero/single_hero.dart';
+import '/presentation/screens/maps/single_map.dart';
+import '/utilities/favorite_state.dart';
 import 'layout_presets.dart';
+import 'images_url.dart';
+import 'constants.dart';
+
+int desiredCategoryOrder(dynamic key1, dynamic key2) {
+  // Define the desired order as a list of category keys
+  final desiredOrder = [
+    'towers',
+    'heroes',
+    'bloons',
+    'blimps',
+    'bosses',
+    'maps',
+  ];
+
+  // Get the category names from the keys
+  final category1 = key1.split(':')[0];
+  final category2 = key2.split(':')[0];
+
+  // Find the indices of the categories in the desired order
+  final index1 = desiredOrder.indexOf(category1);
+  final index2 = desiredOrder.indexOf(category2);
+
+  // Compare the indices to determine the order
+  if (index1 == -1 || index2 == -1) {
+    // Handle unexpected categories (not in desiredOrder)
+    return 0; // Or throw an error if preferred
+  } else if (index1 < index2) {
+    return -1; // Category1 comes before Category2
+  } else if (index1 > index2) {
+    return 1; // Category1 comes after Category2
+  } else {
+    return 0; // Categories have the same desired order (shouldn't happen)
+  }
+}
+
+void navigateToPage(BuildContext context, var item,
+    AnalyticsHelper analyticsHelper, String originScreen, String originWidget) {
+  analyticsHelper.logEvent(
+    name: widgetEngagement,
+    parameters: {
+      'screen': originScreen,
+      'widget': originWidget,
+      'value': item.id,
+    },
+  );
+
+  Map<String, Widget> destinations = {
+    kTowers: SingleTower(
+      towerId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kHeroes: SingleHero(
+      heroId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kBloons: SingleBloon(
+      bloonId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kBlimps: SingleBloon(
+      bloonId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kBosses: BossBloon(
+      bossId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+    kMaps: SingleMap(
+      mapId: item.id,
+      analyticsHelper: analyticsHelper,
+    ),
+  };
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => destinations[item.type]!,
+    ),
+  );
+}
 
 String formatBigNumber(int number) {
   if (number < 1000) {
@@ -20,6 +108,74 @@ String formatBigNumber(int number) {
   } else {
     return "${(number / 1000000000).toStringAsFixed(1)}B";
   }
+}
+
+List<Widget> generateGridChildren(
+    List<dynamic> favoriteItems,
+    AnalyticsHelper analyticsHelper,
+    String typeName,
+    Map<String, dynamic> constraintsValues) {
+  return List.generate(
+    favoriteItems.length,
+    (index) {
+      FavoriteModel favItem = favoriteItems.elementAt(index);
+      return Consumer<FavoriteState>(
+        key: Key(favItem.id),
+        builder: (context, favoriteState, child) {
+          return InkWell(
+            onLongPress: () {
+              favoriteState.toggleFavoriteFunc(context, favoriteState, favItem);
+              favoriteItems.removeWhere((item) => item.id == favItem.id);
+            },
+            onTap: () {
+              if (!favoriteState.multiSelect) {
+                navigateToPage(
+                  context,
+                  favItem,
+                  analyticsHelper,
+                  kFavoritesClass,
+                  card,
+                );
+              } else {
+                favoriteState.toggleFavoriteFunc(
+                    context, favoriteState, favItem);
+                favoriteItems.removeWhere((item) => item.id == favItem.id);
+              }
+            },
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: constraintsValues[favItemImageFlex],
+                      child: Image(
+                        image:
+                            AssetImage(assetImagePath(typeName, favItem.image)),
+                      ),
+                    ),
+                    Flexible(
+                      flex: constraintsValues[favItemTextFlex],
+                      child: Center(
+                        child: Text(
+                          favItem.name,
+                          textAlign: TextAlign.center,
+                          style: constraintsValues[favItemSubtitleStyle],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    },
+  );
 }
 
 String getPathKeyFromIndex(int index) {
@@ -47,6 +203,24 @@ String statsToString(Stats stats) {
 
 String extraStatsToString(Stats stats) {
   return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
+}
+
+String assetImagePath(String type, String imageName) {
+  if (type == kTowers) {
+    return towerImage(imageName);
+  } else if (type == kHeroes) {
+    return heroImage(imageName);
+  } else if (type == kBloons || type == kBlimps) {
+    return bloonImage(imageName);
+  } else if (type == kBosses) {
+    return bossImage(imageName);
+  } else if (type == kMinions) {
+    return minionImage(imageName);
+  } else if (type == kMaps) {
+    return mapImage(imageName);
+  } else {
+    throw Exception('Unsupported image type - $type');
+  }
 }
 
 List<BaseModel> filterAndSearchBloons(
@@ -162,7 +336,7 @@ Future<void> openMail(String mailString) async {
 }
 
 Map<String, dynamic> getPreset(Size size) {
-  if (size.width < 310) {
+  if (size.width < 321) {
     return presetUS;
   } else if (size.width < 360) {
     return presetXS;
