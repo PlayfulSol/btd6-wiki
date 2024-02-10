@@ -20,22 +20,27 @@ class FavoriteState extends ChangeNotifier {
     return [];
   }
 
-  void toggleFavorite(var item) {
+  String toggleFavorite(var item) {
+    bool addedToFavorites = false;
     FavoriteModel favItem = _createFavoriteItem(item);
 
     if (!_favoriteBox.containsKey(favItem.type)) {
       _favoriteBox.put(favItem.type, [favItem]);
+      addedToFavorites = true;
     } else {
       List<FavoriteModel> typeList =
           List<FavoriteModel>.from(_favoriteBox.get(favItem.type)!);
       if (isFavorite(favItem.type, favItem.id)) {
         typeList.removeWhere((element) => element.id == favItem.id);
+        addedToFavorites = false;
       } else {
         typeList.add(favItem);
+        addedToFavorites = true;
       }
       _favoriteBox.put(favItem.type, typeList);
     }
     notifyListeners();
+    return addedToFavorites ? 'Added to favorites!' : 'Remove from favorites.';
   }
 
   bool isFavorite(String type, String id) {

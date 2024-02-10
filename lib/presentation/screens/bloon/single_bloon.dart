@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '/models/bloons/bloon/bloon.dart';
 import '../../widgets/bloons/bloon_aid_widget.dart';
 import '/analytics/analytics_constants.dart';
@@ -49,9 +51,32 @@ class _SingleBloonState extends State<SingleBloon> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(!loading ? bloon.fullName : ''),
-      ),
+      appBar: !loading
+          ? AppBar(
+              title: Text(bloon.fullName),
+              actions: [
+                Consumer<FavoriteState>(
+                  builder: (context, favoriteState, child) {
+                    return IconButton(
+                      onPressed: () {
+                        String msg = favoriteState.toggleFavorite(bloon);
+                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Center(child: Text(msg)),
+                            duration: const Duration(milliseconds: 400),
+                          ),
+                        );
+                      },
+                      icon: favoriteState.isFavorite(bloon.type, bloon.id)
+                          ? const Icon(Icons.star)
+                          : const Icon(Icons.star_border_outlined),
+                    );
+                  },
+                ),
+              ],
+            )
+          : AppBar(),
       body: !loading
           ? SingleChildScrollView(
               child: Padding(

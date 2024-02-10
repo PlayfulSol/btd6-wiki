@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import '/models/towers/common/upgrade_info_class.dart';
 import '/models/towers/hero/hero.dart';
@@ -98,9 +100,33 @@ class _SingleHeroState extends State<SingleHero> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(!loading ? singleHero.name : ''),
-      ),
+      appBar: !loading
+          ? AppBar(
+              title: Text(singleHero.name),
+              actions: [
+                Consumer<FavoriteState>(
+                  builder: (context, favoriteState, child) {
+                    return IconButton(
+                      onPressed: () {
+                        String msg = favoriteState.toggleFavorite(singleHero);
+                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Center(child: Text(msg)),
+                            duration: const Duration(milliseconds: 400),
+                          ),
+                        );
+                      },
+                      icon: favoriteState.isFavorite(
+                              singleHero.type, singleHero.id)
+                          ? const Icon(Icons.star)
+                          : const Icon(Icons.star_border_outlined),
+                    );
+                  },
+                ),
+              ],
+            )
+          : AppBar(),
       body: !loading
           ? SingleChildScrollView(
               child: Padding(

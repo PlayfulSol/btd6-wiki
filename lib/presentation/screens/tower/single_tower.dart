@@ -1,6 +1,8 @@
 import 'dart:convert';
+import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import '/models/towers/tower/tower.dart';
 import '../../widgets/towers/path.dart';
 import '/analytics/analytics_constants.dart';
@@ -67,9 +69,32 @@ class _SingleTowerState extends State<SingleTower> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(!loading ? tower.name : ""),
-      ),
+      appBar: !loading
+          ? AppBar(
+              title: Text(tower.name),
+              actions: [
+                Consumer<FavoriteState>(
+                  builder: (context, favoriteState, child) {
+                    return IconButton(
+                      onPressed: () {
+                        String msg = favoriteState.toggleFavorite(tower);
+                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Center(child: Text(msg)),
+                            duration: const Duration(milliseconds: 400),
+                          ),
+                        );
+                      },
+                      icon: favoriteState.isFavorite(tower.type, tower.id)
+                          ? const Icon(Icons.star)
+                          : const Icon(Icons.star_border_outlined),
+                    );
+                  },
+                ),
+              ],
+            )
+          : AppBar(),
       body: !loading
           ? SingleChildScrollView(
               child: Padding(
