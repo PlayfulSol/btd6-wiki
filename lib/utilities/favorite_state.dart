@@ -91,7 +91,6 @@ class FavoriteState extends ChangeNotifier {
       item.name,
       item.image,
       item.type,
-      _getLastIndexOfType(item.type),
     );
   }
 

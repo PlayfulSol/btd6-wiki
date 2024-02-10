@@ -50,6 +50,7 @@ class _OrderableGridState extends State<OrderableGrid> {
                   style: bigTitleStyle,
                 ),
                 ReorderableBuilder(
+                  enableLongPress: false,
                   scrollController: _scrollController,
                   onReorder: (List<OrderUpdateEntity> orderUpdateEntities) {
                     for (final orderUpdateEntity in orderUpdateEntities) {

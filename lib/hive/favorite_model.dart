@@ -16,8 +16,5 @@ class FavoriteModel extends HiveObject {
   @HiveField(3)
   late final String type;
 
-  @HiveField(4)
-  late int itemIndex;
-
-  FavoriteModel(this.id, this.name, this.image, this.type, this.itemIndex);
+  FavoriteModel(this.id, this.name, this.image, this.type);
 }

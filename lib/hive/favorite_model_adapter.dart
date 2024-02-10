@@ -8,11 +8,14 @@ class FavoriteModelBoxAdapter extends TypeAdapter<FavoriteModel> {
   @override
   FavoriteModel read(BinaryReader reader) {
     return FavoriteModel(
+      // id
       reader.readString(),
+      // name
       reader.readString(),
+      // image
       reader.readString(),
+      // type
       reader.readString(),
-      reader.readInt(),
     );
   }
 
@@ -22,6 +25,5 @@ class FavoriteModelBoxAdapter extends TypeAdapter<FavoriteModel> {
     writer.writeString(obj.name);
     writer.writeString(obj.image);
     writer.writeString(obj.type);
-    writer.writeInt(obj.itemIndex);
   }
 }
