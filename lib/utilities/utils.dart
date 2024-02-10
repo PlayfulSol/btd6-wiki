@@ -120,6 +120,10 @@ List<Widget> generateGridChildren(List<dynamic> favoriteItems,
         key: Key(favItem.id),
         builder: (context, favoriteState, child) {
           return InkWell(
+            onLongPress: () {
+              favoriteState.toggleFavoriteFunc(context, favoriteState, favItem);
+              favoriteItems.removeWhere((item) => item.id == favItem.id);
+            },
             onTap: () {
               if (!favoriteState.multiSelect) {
                 navigateToPage(

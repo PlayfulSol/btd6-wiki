@@ -36,6 +36,7 @@ class FavoriteState extends ChangeNotifier {
       SnackBar(
         content: Center(child: Text(msg)),
         duration: snackBarDuration,
+        dismissDirection: DismissDirection.horizontal,
       ),
     );
     notifyListeners();
