@@ -17,10 +17,10 @@ Map<String, dynamic> presetUS = {
   skinCrossCount: 1,
   skinAspectRatio: 1.0,
   // bloons
-  bloonCrossCount: 1,
-  bloonAspectRatio: 5.5,
+  bloonCrossCount: 2,
+  bloonAspectRatio: 3.0,
   bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 12.0),
-  bloonImageWidth: 28.0,
+  bloonImageWidth: 18.5,
   // bosses
   bossCrossCount: 1,
   bossAspectRatio: 4.3,
@@ -53,9 +53,9 @@ Map<String, dynamic> presetXS = {
   skinAspectRatio: 1.0,
   // bloons
   bloonCrossCount: 2,
-  bloonAspectRatio: 2.7,
-  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 15.0),
-  bloonImageWidth: 28.0,
+  bloonAspectRatio: 3.0,
+  bloonTitleStyle: smallTitleStyle.copyWith(fontSize: 13.0),
+  bloonImageWidth: 18.5,
   // bosses
   bossCrossCount: 1,
   bossAspectRatio: 4.3,

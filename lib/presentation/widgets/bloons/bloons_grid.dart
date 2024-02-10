@@ -71,6 +71,7 @@ class BloonsGrid extends StatelessWidget {
                 child: Center(
                   child: ListTile(
                     titleAlignment: ListTileTitleAlignment.center,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 8.5),
                     leading: ImageOutliner(
                       imageName: bloon.image,
                       imagePath: bloonImage(bloon.image),
