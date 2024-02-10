@@ -32,14 +32,23 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Favorites'),
+        actions: [
+          Consumer<FavoriteState>(
+            builder: (context, favoriteState, child) {
+              return IconButton(
+                onPressed: () {
+                  favoriteState.toggleMultiSelect();
+                },
+                icon: Icon(
+                    !favoriteState.multiSelect ? Icons.delete : Icons.close),
+              );
+            },
+          ),
+        ],
       ),
-      body: Consumer<FavoriteState>(
-        builder: (context, favoriteState, child) {
-          return ListView(
-            shrinkWrap: true,
-            children: generatedChildren,
-          );
-        },
+      body: ListView(
+        shrinkWrap: true,
+        children: generatedChildren,
       ),
     );
   }

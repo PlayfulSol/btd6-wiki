@@ -1,4 +1,6 @@
+import 'package:btd6wiki/hive/favorite_model.dart';
 import 'package:btd6wiki/utilities/favorite_state.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import '/analytics/analytics_constants.dart';
@@ -96,18 +98,6 @@ void navigateToPage(BuildContext context, var item,
   );
 }
 
-void toggleFavoriteFunc(
-    BuildContext context, FavoriteState favoriteState, var item) {
-  String msg = favoriteState.toggleFavorite(item);
-  ScaffoldMessenger.of(context).removeCurrentSnackBar();
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Center(child: Text(msg)),
-      duration: snackBarDuration,
-    ),
-  );
-}
-
 String formatBigNumber(int number) {
   if (number < 1000) {
     return number.toString();
@@ -118,6 +108,65 @@ String formatBigNumber(int number) {
   } else {
     return "${(number / 1000000000).toStringAsFixed(1)}B";
   }
+}
+
+List<Widget> generateGridChildren(List<dynamic> favoriteItems,
+    AnalyticsHelper analyticsHelper, String typeName) {
+  return List.generate(
+    favoriteItems.length,
+    (index) {
+      FavoriteModel favItem = favoriteItems.elementAt(index);
+      return Consumer<FavoriteState>(
+        key: Key(favItem.id),
+        builder: (context, favoriteState, child) {
+          return InkWell(
+            onTap: () {
+              if (!favoriteState.multiSelect) {
+                navigateToPage(
+                  context,
+                  favItem,
+                  analyticsHelper,
+                  kFavoritesClass,
+                  card,
+                );
+              } else {
+                favoriteState.toggleFavoriteFunc(
+                    context, favoriteState, favItem);
+                favoriteItems.removeWhere((item) => item.id == favItem.id);
+              }
+            },
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(8),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Image(
+                        image:
+                            AssetImage(assetImagePath(typeName, favItem.image)),
+                      ),
+                    ),
+                    Flexible(
+                      flex: 1,
+                      child: Center(
+                          child: Text(
+                        favItem.name,
+                        textAlign: TextAlign.center,
+                      )),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+      );
+    },
+  );
 }
 
 String getPathKeyFromIndex(int index) {

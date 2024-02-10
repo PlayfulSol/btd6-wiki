@@ -28,6 +28,19 @@ class FavoriteState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void toggleFavoriteFunc(
+      BuildContext context, FavoriteState favoriteState, var item) {
+    String msg = favoriteState.toggleFavorite(item);
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(child: Text(msg)),
+        duration: snackBarDuration,
+      ),
+    );
+    notifyListeners();
+  }
+
   String toggleFavorite(var item) {
     bool addedToFavorites = false;
     FavoriteModel favItem = _createFavoriteItem(item);

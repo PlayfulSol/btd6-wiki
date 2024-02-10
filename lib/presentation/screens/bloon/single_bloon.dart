@@ -58,8 +58,8 @@ class _SingleBloonState extends State<SingleBloon> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () =>
-                          toggleFavoriteFunc(context, favoriteState, bloon),
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, bloon),
                       icon: favoriteState.isFavorite(bloon.type, bloon.id)
                           ? const Icon(Icons.star)
                           : const Icon(Icons.star_border_outlined),

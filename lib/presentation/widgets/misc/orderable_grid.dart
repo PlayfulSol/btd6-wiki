@@ -1,3 +1,5 @@
+import 'package:btd6wiki/utilities/constants.dart';
+import 'package:btd6wiki/utilities/strings.dart';
 import 'package:flutter_reorderable_grid_view/entities/order_update_entity.dart';
 import 'package:flutter_reorderable_grid_view/widgets/widgets.dart';
 import 'package:provider/provider.dart';
@@ -30,87 +32,54 @@ class _OrderableGridState extends State<OrderableGrid> {
   final _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    final generatedChildren = List.generate(
-      widget.favoriteItems.length,
-      (index) {
-        FavoriteModel favItem = widget.favoriteItems.elementAt(index);
-        return InkWell(
-          key: Key(favItem.id),
-          onTap: () {
-            navigateToPage(
-              context,
-              favItem,
-              widget.analyticsHelper,
-              kFavoritesClass,
-              card,
-            );
-          },
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    flex: 3,
-                    child: Image(
-                      image: AssetImage(
-                          assetImagePath(widget.typeName, favItem.image)),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Center(
-                        child: Text(
-                      favItem.name,
-                      textAlign: TextAlign.center,
-                    )),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
-    );
-
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Text(widget.typeName),
-          ReorderableBuilder(
-            scrollController: _scrollController,
-            onReorder: (List<OrderUpdateEntity> orderUpdateEntities) {
-              for (final orderUpdateEntity in orderUpdateEntities) {
-                final favItem =
-                    widget.favoriteItems.removeAt(orderUpdateEntity.oldIndex);
-                widget.favoriteItems
-                    .insert(orderUpdateEntity.newIndex, favItem);
-              }
-              Provider.of<FavoriteState>(context, listen: false)
-                  .updateIndexes(widget.typeName, widget.favoriteItems);
-            },
-            builder: (children) {
-              return GridView(
-                key: widget.gridKey,
-                controller: _scrollController,
-                shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisSpacing: 15,
-                  crossAxisSpacing: 10,
-                  crossAxisCount: 3,
-                  childAspectRatio: 0.70,
+    return Consumer<FavoriteState>(
+      builder: (context, favoriteState, child) {
+        List<Widget> generatedChildren = generateGridChildren(
+            widget.favoriteItems, widget.analyticsHelper, widget.typeName);
+        if (generatedChildren.isNotEmpty) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(
+                  capitalizeEveryWord(widget.typeName),
+                  style: bigTitleStyle,
                 ),
-                children: children,
-              );
-            },
-            children: generatedChildren,
-          ),
-        ],
-      ),
+                ReorderableBuilder(
+                  scrollController: _scrollController,
+                  onReorder: (List<OrderUpdateEntity> orderUpdateEntities) {
+                    for (final orderUpdateEntity in orderUpdateEntities) {
+                      final favItem = widget.favoriteItems
+                          .removeAt(orderUpdateEntity.oldIndex);
+                      widget.favoriteItems
+                          .insert(orderUpdateEntity.newIndex, favItem);
+                    }
+                    favoriteState.updateIndexes(
+                        widget.typeName, widget.favoriteItems);
+                  },
+                  builder: (children) {
+                    return GridView(
+                      key: widget.gridKey,
+                      controller: _scrollController,
+                      shrinkWrap: true,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        mainAxisSpacing: 15,
+                        crossAxisSpacing: 10,
+                        crossAxisCount: 3,
+                        childAspectRatio: 0.70,
+                      ),
+                      children: children,
+                    );
+                  },
+                  children: generatedChildren,
+                ),
+              ],
+            ),
+          );
+        }
+        return Container();
+      },
     );
   }
 }

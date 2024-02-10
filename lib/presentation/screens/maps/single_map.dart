@@ -58,8 +58,8 @@ class _SingleMapState extends State<SingleMap> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () =>
-                          toggleFavoriteFunc(context, favoriteState, map),
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, map),
                       icon: favoriteState.isFavorite(map.type, map.id)
                           ? const Icon(Icons.star)
                           : const Icon(Icons.star_border_outlined),

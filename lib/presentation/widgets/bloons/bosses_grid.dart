@@ -37,8 +37,8 @@ class BossesGrid extends StatelessWidget {
         return Consumer<FavoriteState>(
           builder: (context, favoriteState, child) {
             return InkWell(
-              onLongPress: () =>
-                  toggleFavoriteFunc(context, favoriteState, boss),
+              onLongPress: () => favoriteState.toggleFavoriteFunc(
+                  context, favoriteState, boss),
               onTap: () {
                 if (!favoriteState.multiSelect) {
                   analyticsHelper.logEvent(
@@ -59,7 +59,8 @@ class BossesGrid extends StatelessWidget {
                     ),
                   );
                 } else {
-                  toggleFavoriteFunc(context, favoriteState, boss);
+                  favoriteState.toggleFavoriteFunc(
+                      context, favoriteState, boss);
                 }
               },
               child: Card(

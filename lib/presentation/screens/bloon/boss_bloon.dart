@@ -68,8 +68,8 @@ class _BossBloonState extends State<BossBloon> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () =>
-                          toggleFavoriteFunc(context, favoriteState, boss),
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, boss),
                       icon: favoriteState.isFavorite(boss.type, boss.id)
                           ? const Icon(Icons.star)
                           : const Icon(Icons.star_border_outlined),

@@ -76,8 +76,8 @@ class _SingleTowerState extends State<SingleTower> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () =>
-                          toggleFavoriteFunc(context, favoriteState, tower),
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
+                          context, favoriteState, tower),
                       icon: favoriteState.isFavorite(tower.type, tower.id)
                           ? const Icon(Icons.star)
                           : const Icon(Icons.star_border_outlined),

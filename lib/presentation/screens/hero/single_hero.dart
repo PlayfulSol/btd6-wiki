@@ -107,7 +107,7 @@ class _SingleHeroState extends State<SingleHero> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () => toggleFavoriteFunc(
+                      onPressed: () => favoriteState.toggleFavoriteFunc(
                           context, favoriteState, singleHero),
                       icon: favoriteState.isFavorite(
                               singleHero.type, singleHero.id)

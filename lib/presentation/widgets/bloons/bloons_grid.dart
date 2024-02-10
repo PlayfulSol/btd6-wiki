@@ -38,8 +38,8 @@ class BloonsGrid extends StatelessWidget {
         return Consumer<FavoriteState>(
           builder: (context, favoriteState, child) {
             return InkWell(
-              onLongPress: () =>
-                  toggleFavoriteFunc(context, favoriteState, bloon),
+              onLongPress: () => favoriteState.toggleFavoriteFunc(
+                  context, favoriteState, bloon),
               onTap: () {
                 if (!favoriteState.multiSelect) {
                   analyticsHelper.logEvent(
@@ -60,7 +60,8 @@ class BloonsGrid extends StatelessWidget {
                     ),
                   );
                 } else {
-                  toggleFavoriteFunc(context, favoriteState, bloon);
+                  favoriteState.toggleFavoriteFunc(
+                      context, favoriteState, bloon);
                 }
               },
               child: Card(
