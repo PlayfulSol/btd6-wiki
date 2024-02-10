@@ -94,41 +94,34 @@ class _HeroesState extends State<Heroes> {
                               context, favoriteState, hero);
                         }
                       },
-                      child: Stack(
-                        children: [
-                          Card(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 13, vertical: 8),
-                            child: Center(
-                              child: ListTile(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                horizontalTitleGap: 8,
-                                leading: ImageOutliner(
-                                  imageName: hero.image,
-                                  imagePath: heroImage(hero.image),
-                                ),
-                                title: Text(
-                                  hero.name,
-                                  style: constraintsValues[heroTitleStyle],
-                                ),
-                                subtitle: Text(
-                                  hero.inGameDesc,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: constraintsValues[heroSubtitleStyle],
-                                  maxLines: constraintsValues[heroSubtitleRows],
-                                ),
-                              ),
+                      child: Card(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 13, vertical: 8),
+                        child: Center(
+                          child: ListTile(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 8),
+                            horizontalTitleGap: 8,
+                            leading: ImageOutliner(
+                              imageName: hero.image,
+                              imagePath: heroImage(hero.image),
                             ),
+                            title: Text(
+                              hero.name,
+                              style: constraintsValues[heroTitleStyle],
+                            ),
+                            subtitle: Text(
+                              hero.inGameDesc,
+                              overflow: TextOverflow.ellipsis,
+                              style: constraintsValues[heroSubtitleStyle],
+                              maxLines: constraintsValues[heroSubtitleRows],
+                            ),
+                            trailing:
+                                favoriteState.isFavorite(hero.type, hero.id)
+                                    ? const Icon(Icons.star)
+                                    : const Icon(Icons.star_border_outlined),
                           ),
-                          Positioned(
-                            top: 17,
-                            right: 25,
-                            child: favoriteState.isFavorite(hero.type, hero.id)
-                                ? const Icon(Icons.star)
-                                : const Icon(Icons.star_border_outlined),
-                          ),
-                        ],
+                        ),
                       ),
                     );
                   },

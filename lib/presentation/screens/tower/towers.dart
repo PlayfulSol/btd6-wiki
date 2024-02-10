@@ -95,46 +95,33 @@ class _TowersState extends State<Towers> {
                               context, favoriteState, tower);
                         }
                       },
-                      child: Stack(
-                        alignment: AlignmentDirectional.topEnd,
-                        children: [
-                          Card(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: 13, vertical: 8),
-                            child: Center(
-                              child: ListTile(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                horizontalTitleGap: 8,
-                                minVerticalPadding: -4,
-                                leading: ImageOutliner(
-                                  imageName: tower.image,
-                                  imagePath: towerImage(tower.image),
-                                  width: constraintsValues[towerImageWidth],
-                                ),
-                                title: Text(
-                                  tower.name,
-                                  style: constraintsValues[towerTitleStyle],
-                                ),
-                                subtitle: Text(
-                                  tower.inGameDesc,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines:
-                                      constraintsValues[towerSubtitleRows],
-                                  style: constraintsValues[towerSubtitleStyle],
-                                ),
-                              ),
-                            ),
+                      child: Card(
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 13, vertical: 8),
+                        child: ListTile(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 8),
+                          horizontalTitleGap: 8,
+                          leading: ImageOutliner(
+                            imageName: tower.image,
+                            imagePath: towerImage(tower.image),
+                            width: constraintsValues[towerImageWidth],
                           ),
-                          Positioned(
-                            top: 17,
-                            right: 25,
-                            child:
-                                favoriteState.isFavorite(tower.type, tower.id)
-                                    ? const Icon(Icons.star)
-                                    : const Icon(Icons.star_border_outlined),
+                          title: Text(
+                            tower.name,
+                            style: constraintsValues[towerTitleStyle],
                           ),
-                        ],
+                          subtitle: Text(
+                            tower.inGameDesc,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: constraintsValues[towerSubtitleRows],
+                            style: constraintsValues[towerSubtitleStyle],
+                          ),
+                          trailing:
+                              favoriteState.isFavorite(tower.type, tower.id)
+                                  ? const Icon(Icons.star)
+                                  : const Icon(Icons.star_border_outlined),
+                        ),
                       ),
                     );
                   },

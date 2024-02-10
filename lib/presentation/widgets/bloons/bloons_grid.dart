@@ -37,6 +37,7 @@ class BloonsGrid extends StatelessWidget {
         return Consumer<FavoriteState>(
           builder: (context, favoriteState, child) {
             return InkWell(
+              borderRadius: BorderRadius.circular(20),
               onLongPress: () => favoriteState.toggleFavoriteFunc(
                   context, favoriteState, bloon),
               onTap: () {
@@ -68,23 +69,29 @@ class BloonsGrid extends StatelessWidget {
                   vertical: 3,
                   horizontal: 7,
                 ),
-                child: Center(
-                  child: ListTile(
-                    titleAlignment: ListTileTitleAlignment.center,
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 8.5),
-                    leading: ImageOutliner(
-                      imageName: bloon.image,
-                      imagePath: bloonImage(bloon.image),
-                      width: constraintsValues[bloonImageWidth],
-                    ),
-                    title: Text(
-                      bloon.name,
-                      maxLines: 1,
-                      style: constraintsValues[bloonTitleStyle],
-                    ),
-                    trailing: favoriteState.isFavorite(bloon.type, bloon.id)
-                        ? const Icon(Icons.star)
-                        : const Icon(Icons.star_border_outlined),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ImageOutliner(
+                        imageName: bloon.image,
+                        imagePath: bloonImage(bloon.image),
+                        width: constraintsValues[bloonImageWidth],
+                      ),
+                      Center(
+                        child: Text(
+                          bloon.name,
+                          style: constraintsValues[bloonTitleStyle],
+                        ),
+                      ),
+                      Icon(
+                        favoriteState.isFavorite(bloon.type, bloon.id)
+                            ? Icons.star
+                            : Icons.star_border_outlined,
+                      ),
+                    ],
                   ),
                 ),
               ),
