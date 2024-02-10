@@ -62,7 +62,7 @@ class FavoriteState extends ChangeNotifier {
       _favoriteBox.put(favItem.type, typeList);
     }
     notifyListeners();
-    return addedToFavorites ? 'Added to favorites!' : 'Remove from favorites.';
+    return addedToFavorites ? 'Added to favorites!' : 'Removed from favorites.';
   }
 
   bool isFavorite(String type, String id) {
