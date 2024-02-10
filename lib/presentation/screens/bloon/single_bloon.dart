@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '/models/bloons/bloon/bloon.dart';
-import '../../widgets/bloons/bloon_aid_widget.dart';
+import '/presentation/widgets/bloons/bloon_aid_widget.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';

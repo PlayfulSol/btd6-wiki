@@ -1,8 +1,7 @@
-import 'package:btd6wiki/hive/favorite_model.dart';
-import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+import '/hive/favorite_model.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/models/bloons/common/relative_class.dart';
@@ -17,6 +16,7 @@ import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/boss_bloon.dart';
 import '/presentation/screens/hero/single_hero.dart';
 import '/presentation/screens/maps/single_map.dart';
+import '/utilities/favorite_state.dart';
 import 'layout_presets.dart';
 import 'images_url.dart';
 import 'constants.dart';

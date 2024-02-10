@@ -1,12 +1,12 @@
 import 'dart:convert';
-import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '/models/towers/tower/tower.dart';
-import '../../widgets/towers/path.dart';
+import '/presentation/widgets/towers/path.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
