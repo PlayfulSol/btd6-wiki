@@ -68,9 +68,8 @@ class _HeroesState extends State<Heroes> {
 
                     return InkWell(
                       borderRadius: BorderRadius.circular(20),
-                      onLongPress: () {
-                        favoriteState.toggleFavorite(hero);
-                      },
+                      onLongPress: () =>
+                          toggleFavoriteFunc(context, favoriteState, hero),
                       onTap: () {
                         widget.analyticsHelper.logEvent(
                           name: widgetEngagement,

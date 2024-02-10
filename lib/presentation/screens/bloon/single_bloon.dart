@@ -58,16 +58,8 @@ class _SingleBloonState extends State<SingleBloon> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () {
-                        String msg = favoriteState.toggleFavorite(bloon);
-                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Center(child: Text(msg)),
-                            duration: const Duration(milliseconds: 400),
-                          ),
-                        );
-                      },
+                      onPressed: () =>
+                          toggleFavoriteFunc(context, favoriteState, bloon),
                       icon: favoriteState.isFavorite(bloon.type, bloon.id)
                           ? const Icon(Icons.star)
                           : const Icon(Icons.star_border_outlined),

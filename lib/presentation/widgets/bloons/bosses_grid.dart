@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/analytics/analytics_constants.dart';
@@ -36,9 +37,8 @@ class BossesGrid extends StatelessWidget {
         return Consumer<FavoriteState>(
           builder: (context, favoriteState, child) {
             return InkWell(
-              onLongPress: () {
-                favoriteState.toggleFavorite(boss);
-              },
+              onLongPress: () =>
+                  toggleFavoriteFunc(context, favoriteState, boss),
               onTap: () {
                 analyticsHelper.logEvent(
                   name: widgetEngagement,

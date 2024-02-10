@@ -76,16 +76,8 @@ class _SingleTowerState extends State<SingleTower> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () {
-                        String msg = favoriteState.toggleFavorite(tower);
-                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Center(child: Text(msg)),
-                            duration: const Duration(milliseconds: 400),
-                          ),
-                        );
-                      },
+                      onPressed: () =>
+                          toggleFavoriteFunc(context, favoriteState, tower),
                       icon: favoriteState.isFavorite(tower.type, tower.id)
                           ? const Icon(Icons.star)
                           : const Icon(Icons.star_border_outlined),

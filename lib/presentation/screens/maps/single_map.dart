@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:btd6wiki/utilities/favorite_state.dart';
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -50,23 +51,15 @@ class _SingleMapState extends State<SingleMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-            appBar: !loading
+      appBar: !loading
           ? AppBar(
               title: Text(map.name),
               actions: [
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () {
-                        String msg = favoriteState.toggleFavorite(map);
-                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Center(child: Text(msg)),
-                            duration: const Duration(milliseconds: 400),
-                          ),
-                        );
-                      },
+                      onPressed: () =>
+                          toggleFavoriteFunc(context, favoriteState, map),
                       icon: favoriteState.isFavorite(map.type, map.id)
                           ? const Icon(Icons.star)
                           : const Icon(Icons.star_border_outlined),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:btd6wiki/utilities/favorite_state.dart';
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -67,16 +68,8 @@ class _BossBloonState extends State<BossBloon> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () {
-                        String msg = favoriteState.toggleFavorite(boss);
-                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Center(child: Text(msg)),
-                            duration: const Duration(milliseconds: 400),
-                          ),
-                        );
-                      },
+                      onPressed: () =>
+                          toggleFavoriteFunc(context, favoriteState, boss),
                       icon: favoriteState.isFavorite(boss.type, boss.id)
                           ? const Icon(Icons.star)
                           : const Icon(Icons.star_border_outlined),

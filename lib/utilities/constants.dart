@@ -15,6 +15,8 @@ const int kMapsIndex = 3;
 
 const String kFavorite = 'favorite';
 
+const Duration snackBarDuration = Duration(milliseconds: 850);
+
 const List<String> capTitles = [
   'Towers',
   'Heroes',

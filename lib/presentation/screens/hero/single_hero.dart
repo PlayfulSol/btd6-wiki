@@ -107,16 +107,8 @@ class _SingleHeroState extends State<SingleHero> {
                 Consumer<FavoriteState>(
                   builder: (context, favoriteState, child) {
                     return IconButton(
-                      onPressed: () {
-                        String msg = favoriteState.toggleFavorite(singleHero);
-                        ScaffoldMessenger.of(context).removeCurrentSnackBar();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Center(child: Text(msg)),
-                            duration: const Duration(milliseconds: 400),
-                          ),
-                        );
-                      },
+                      onPressed: () => toggleFavoriteFunc(
+                          context, favoriteState, singleHero),
                       icon: favoriteState.isFavorite(
                               singleHero.type, singleHero.id)
                           ? const Icon(Icons.star)

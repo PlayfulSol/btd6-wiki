@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/favorite_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import '/analytics/analytics_constants.dart';
@@ -91,6 +92,18 @@ void navigateToPage(BuildContext context, var item,
     context,
     MaterialPageRoute(
       builder: (context) => destinations[item.type]!,
+    ),
+  );
+}
+
+void toggleFavoriteFunc(
+    BuildContext context, FavoriteState favoriteState, var item) {
+  String msg = favoriteState.toggleFavorite(item);
+  ScaffoldMessenger.of(context).removeCurrentSnackBar();
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      content: Center(child: Text(msg)),
+      duration: snackBarDuration,
     ),
   );
 }

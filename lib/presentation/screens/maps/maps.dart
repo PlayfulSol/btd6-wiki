@@ -76,9 +76,8 @@ class _MapsState extends State<Maps> {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: GestureDetector(
-                            onLongPress: () {
-                              favoriteState.toggleFavorite(map);
-                            },
+                            onLongPress: () =>
+                                toggleFavoriteFunc(context, favoriteState, map),
                             onTap: () {
                               widget.analyticsHelper.logEvent(
                                 name: widgetEngagement,

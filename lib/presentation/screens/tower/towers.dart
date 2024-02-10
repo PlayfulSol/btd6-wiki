@@ -69,9 +69,8 @@ class _TowersState extends State<Towers> {
 
                     return InkWell(
                       borderRadius: BorderRadius.circular(20),
-                      onLongPress: () {
-                        favoriteState.toggleFavorite(tower);
-                      },
+                      onLongPress: () =>
+                          toggleFavoriteFunc(context, favoriteState, tower),
                       onTap: () {
                         widget.analyticsHelper.logEvent(
                           name: widgetEngagement,
@@ -88,7 +87,6 @@ class _TowersState extends State<Towers> {
                               towerId: tower.id,
                               analyticsHelper: widget.analyticsHelper,
                             ),
-                            
                           ),
                         );
                       },

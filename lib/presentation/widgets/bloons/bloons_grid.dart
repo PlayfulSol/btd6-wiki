@@ -1,3 +1,4 @@
+import 'package:btd6wiki/utilities/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/models/base_model.dart';
@@ -37,9 +38,8 @@ class BloonsGrid extends StatelessWidget {
         return Consumer<FavoriteState>(
           builder: (context, favoriteState, child) {
             return InkWell(
-              onLongPress: () {
-                favoriteState.toggleFavorite(bloon);
-              },
+              onLongPress: () =>
+                  toggleFavoriteFunc(context, favoriteState, bloon),
               onTap: () {
                 analyticsHelper.logEvent(
                   name: widgetEngagement,
