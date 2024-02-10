@@ -28,6 +28,12 @@ Map<String, dynamic> presetUS = {
   // maps
   mapCrossCount: 1,
   mapAspectRatio: 1.3,
+  // favorites
+  favItemCrossCount: 2,
+  favItemAspectRatio: 0.6,
+  favItemImageFlex: 5,
+  favItemTextFlex: 2,
+  favItemSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
 };
 Map<String, dynamic> presetXS = {
   // towers
@@ -37,7 +43,6 @@ Map<String, dynamic> presetXS = {
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 13.0),
   towerSubtitleRows: 2,
   towerImageWidth: 55.0,
-
   // heroes
   heroCrossCount: 1,
   heroAspectRatio: 3.5,
@@ -58,6 +63,12 @@ Map<String, dynamic> presetXS = {
   // maps
   mapCrossCount: 1,
   mapAspectRatio: 1.3,
+  // favorites
+  favItemCrossCount: 3,
+  favItemAspectRatio: 0.60,
+  favItemImageFlex: 9,
+  favItemTextFlex: 4,
+  favItemSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
 };
 Map<String, dynamic> presetSM = {
   // towers
@@ -67,7 +78,6 @@ Map<String, dynamic> presetSM = {
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
   towerSubtitleRows: 2,
   towerImageWidth: 65.0,
-
   // heroes
   heroCrossCount: 1,
   heroAspectRatio: 3.5,
@@ -88,6 +98,12 @@ Map<String, dynamic> presetSM = {
   // maps
   mapCrossCount: 1,
   mapAspectRatio: 1.3,
+  // favorites
+  favItemCrossCount: 3,
+  favItemAspectRatio: 0.65,
+  favItemImageFlex: 7,
+  favItemTextFlex: 3,
+  favItemSubtitleStyle: subtitleStyle.copyWith(fontSize: 16.5),
 };
 Map<String, dynamic> presetMD = {
   // towers
@@ -97,7 +113,6 @@ Map<String, dynamic> presetMD = {
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.5),
   towerSubtitleRows: 3,
   towerImageWidth: 70.0,
-
   // heroes
   heroCrossCount: 1,
   heroAspectRatio: 3.5,
@@ -118,6 +133,12 @@ Map<String, dynamic> presetMD = {
   // maps
   mapCrossCount: 2,
   mapAspectRatio: 1.3,
+  // favorites
+  favItemCrossCount: 3,
+  favItemAspectRatio: 0.65,
+  favItemImageFlex: 7,
+  favItemTextFlex: 3,
+  favItemSubtitleStyle: subtitleStyle.copyWith(fontSize: 16.5),
 };
 Map<String, dynamic> presetLG = {
   // towers
@@ -127,7 +148,6 @@ Map<String, dynamic> presetLG = {
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 15),
   towerSubtitleRows: 2,
   towerImageWidth: 90.0,
-
   // heroes
   heroCrossCount: 1,
   heroAspectRatio: 4.3,
@@ -148,6 +168,12 @@ Map<String, dynamic> presetLG = {
   // maps
   mapCrossCount: 2,
   mapAspectRatio: 1.3,
+  // favorites
+  favItemCrossCount: 4,
+  favItemAspectRatio: 0.62,
+  favItemImageFlex: 7,
+  favItemTextFlex: 3,
+  favItemSubtitleStyle: subtitleStyle.copyWith(fontSize: 15.5),
 };
 Map<String, dynamic> presetXL = {
   // towers
@@ -157,7 +183,6 @@ Map<String, dynamic> presetXL = {
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
   towerSubtitleRows: 2,
   towerImageWidth: 50.0,
-
   // heroes
   heroCrossCount: 2,
   heroAspectRatio: 3.0,
@@ -178,6 +203,12 @@ Map<String, dynamic> presetXL = {
   // maps
   mapCrossCount: 2,
   mapAspectRatio: 1.3,
+  // favorites
+  favItemCrossCount: 5,
+  favItemAspectRatio: 0.62,
+  favItemImageFlex: 7,
+  favItemTextFlex: 3,
+  favItemSubtitleStyle: subtitleStyle.copyWith(fontSize: 15.5),
 };
 Map<String, dynamic> presetXXL = {
   // towers
@@ -187,7 +218,6 @@ Map<String, dynamic> presetXXL = {
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.0),
   towerSubtitleRows: 2,
   towerImageWidth: 65.0,
-
   // heroes
   heroCrossCount: 2,
   heroAspectRatio: 3.5,
@@ -208,6 +238,12 @@ Map<String, dynamic> presetXXL = {
   // maps
   mapCrossCount: 2,
   mapAspectRatio: 1.3,
+  // favorites
+  favItemCrossCount: 6,
+  favItemAspectRatio: 0.60,
+  favItemImageFlex: 7,
+  favItemTextFlex: 4,
+  favItemSubtitleStyle: subtitleStyle.copyWith(fontSize: 15.0),
 };
 Map<String, dynamic> presetXXXL = {
   // towers
@@ -217,7 +253,6 @@ Map<String, dynamic> presetXXXL = {
   towerSubtitleStyle: subtitleStyle.copyWith(fontSize: 14.5),
   towerSubtitleRows: 3,
   towerImageWidth: 90.0,
-
   // heroes
   heroCrossCount: 3,
   heroAspectRatio: 2.5,
@@ -238,4 +273,10 @@ Map<String, dynamic> presetXXXL = {
   // maps
   mapCrossCount: 3,
   mapAspectRatio: 1.3,
+  // favorites
+  favItemCrossCount: 6,
+  favItemAspectRatio: 0.60,
+  favItemImageFlex: 7,
+  favItemTextFlex: 3,
+  favItemSubtitleStyle: subtitleStyle.copyWith(fontSize: 15.0),
 };

@@ -110,8 +110,11 @@ String formatBigNumber(int number) {
   }
 }
 
-List<Widget> generateGridChildren(List<dynamic> favoriteItems,
-    AnalyticsHelper analyticsHelper, String typeName) {
+List<Widget> generateGridChildren(
+    List<dynamic> favoriteItems,
+    AnalyticsHelper analyticsHelper,
+    String typeName,
+    Map<String, dynamic> constraintsValues) {
   return List.generate(
     favoriteItems.length,
     (index) {
@@ -148,19 +151,21 @@ List<Widget> generateGridChildren(List<dynamic> favoriteItems,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Expanded(
-                      flex: 3,
+                      flex: constraintsValues[favItemImageFlex],
                       child: Image(
                         image:
                             AssetImage(assetImagePath(typeName, favItem.image)),
                       ),
                     ),
                     Flexible(
-                      flex: 1,
+                      flex: constraintsValues[favItemTextFlex],
                       child: Center(
-                          child: Text(
-                        favItem.name,
-                        textAlign: TextAlign.center,
-                      )),
+                        child: Text(
+                          favItem.name,
+                          textAlign: TextAlign.center,
+                          style: constraintsValues[favItemSubtitleStyle],
+                        ),
+                      ),
                     ),
                   ],
                 ),

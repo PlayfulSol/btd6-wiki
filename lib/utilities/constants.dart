@@ -205,3 +205,9 @@ const String mapCrossCount = 'mapCrossAxisCount';
 const String mapAspectRatio = 'mapChildAspectRatio';
 const String mapTitleStyle = 'mapTitleStyle';
 const String mapSubtitleStyle = 'mapSubtitleStyle';
+
+const String favItemCrossCount = 'favItemCrossCount';
+const String favItemAspectRatio = 'favItemAspectRatio';
+const String favItemSubtitleStyle = 'favItemSubtitleStyle';
+const String favItemImageFlex = 'favItemImageFlex';
+const String favItemTextFlex = 'favItemTextFlex';

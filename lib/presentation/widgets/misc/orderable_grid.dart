@@ -30,10 +30,16 @@ class _OrderableGridState extends State<OrderableGrid> {
   final _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
+    final constraintsValues = getPreset(
+      MediaQuery.of(context).size,
+    );
     return Consumer<FavoriteState>(
       builder: (context, favoriteState, child) {
         List<Widget> generatedChildren = generateGridChildren(
-            widget.favoriteItems, widget.analyticsHelper, widget.typeName);
+            widget.favoriteItems,
+            widget.analyticsHelper,
+            widget.typeName,
+            constraintsValues);
         if (generatedChildren.isNotEmpty) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -60,12 +66,9 @@ class _OrderableGridState extends State<OrderableGrid> {
                       key: widget.gridKey,
                       controller: _scrollController,
                       shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisSpacing: 15,
-                        crossAxisSpacing: 10,
-                        crossAxisCount: 3,
-                        childAspectRatio: 0.70,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: constraintsValues[favItemCrossCount],
+                        childAspectRatio: constraintsValues[favItemAspectRatio],
                       ),
                       children: children,
                     );

@@ -31,7 +31,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorites'),
+        // title: const Text('Favorites'),
+        title: Text(MediaQuery.of(context).size.width.toString()),
+
         actions: [
           Consumer<FavoriteState>(
             builder: (context, favoriteState, child) {
