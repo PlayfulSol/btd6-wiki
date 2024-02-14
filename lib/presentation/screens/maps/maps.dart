@@ -79,7 +79,7 @@ class _MapsState extends State<Maps> {
                             onLongPress: () => favoriteState.toggleFavoriteFunc(
                                 context, favoriteState, map),
                             onTap: () {
-                              if (!favoriteState.multiSelect) {
+                              if (!favoriteState.isMultiSelectMode) {
                                 widget.analyticsHelper.logEvent(
                                   name: widgetEngagement,
                                   parameters: {

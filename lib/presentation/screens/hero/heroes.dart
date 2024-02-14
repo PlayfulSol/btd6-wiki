@@ -71,7 +71,7 @@ class _HeroesState extends State<Heroes> {
                       onLongPress: () => favoriteState.toggleFavoriteFunc(
                           context, favoriteState, hero),
                       onTap: () {
-                        if (!favoriteState.multiSelect) {
+                        if (!favoriteState.isMultiSelectMode) {
                           widget.analyticsHelper.logEvent(
                             name: widgetEngagement,
                             parameters: {

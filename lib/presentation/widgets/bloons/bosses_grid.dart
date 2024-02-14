@@ -39,7 +39,7 @@ class BossesGrid extends StatelessWidget {
               onLongPress: () => favoriteState.toggleFavoriteFunc(
                   context, favoriteState, boss),
               onTap: () {
-                if (!favoriteState.multiSelect) {
+                if (!favoriteState.isMultiSelectMode) {
                   analyticsHelper.logEvent(
                     name: widgetEngagement,
                     parameters: {

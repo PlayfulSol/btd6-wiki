@@ -14,6 +14,8 @@ class FavoriteScreen extends StatefulWidget {
 }
 
 class _FavoriteScreenState extends State<FavoriteScreen> {
+  final scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     FavoriteState favoriteState =
@@ -27,6 +29,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         favoriteItems: favoriteState.getListOfType(categories[index]),
         typeName: categories[index],
         analyticsHelper: widget.analyticsHelper,
+        scrollController: scrollController,
       ),
     );
     return Scaffold(
@@ -39,8 +42,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                 onPressed: () {
                   favoriteState.toggleMultiSelect();
                 },
-                icon: Icon(
-                    !favoriteState.multiSelect ? Icons.delete : Icons.close),
+                icon: Icon(!favoriteState.isMultiSelectMode
+                    ? Icons.delete
+                    : Icons.close),
               );
             },
           ),
@@ -48,6 +52,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       ),
       body: ListView(
         shrinkWrap: true,
+        controller: scrollController,
         children: generatedChildren,
       ),
     );

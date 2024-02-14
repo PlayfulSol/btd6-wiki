@@ -198,15 +198,16 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Consumer<FavoriteState>(
             builder: (context, favoriteState, child) {
-              IconData favIcon =
-                  favoriteState.multiSelect ? Icons.add_task_sharp : Icons.star;
+              IconData favIcon = favoriteState.isMultiSelectMode
+                  ? Icons.add_task_sharp
+                  : Icons.star;
               return GestureDetector(
                 onLongPress: () {
                   favoriteState.toggleMultiSelect();
                 },
                 child: IconButton(
                   onPressed: () {
-                    if (!favoriteState.multiSelect) {
+                    if (!favoriteState.isMultiSelectMode) {
                       analyticsHelper.logScreenView(
                         screenClass: kFavoritesClass,
                         screenName: kFavoritesClass,

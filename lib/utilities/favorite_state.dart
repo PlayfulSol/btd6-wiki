@@ -6,14 +6,15 @@ import '/utilities/constants.dart';
 class FavoriteState extends ChangeNotifier {
   late Box<List<dynamic>> _favoriteBox;
 
-  bool _multiSelect = false;
+  bool _isMultiSelectMode = false;
+  bool draggableMode = false;
 
   FavoriteState() {
     _favoriteBox = Hive.box<List<dynamic>>(kFavorite);
   }
 
   Box<List<dynamic>> get favoriteBox => _favoriteBox;
-  bool get multiSelect => _multiSelect;
+  bool get isMultiSelectMode => _isMultiSelectMode;
 
   List<FavoriteModel> getListOfType(String type) {
     if (_favoriteBox.containsKey(type)) {
@@ -24,7 +25,12 @@ class FavoriteState extends ChangeNotifier {
   }
 
   void toggleMultiSelect() {
-    _multiSelect = !_multiSelect;
+    _isMultiSelectMode = !_isMultiSelectMode;
+    notifyListeners();
+  }
+
+  void toggleDrag() {
+    draggableMode = !draggableMode;
     notifyListeners();
   }
 
@@ -74,15 +80,6 @@ class FavoriteState extends ChangeNotifier {
     }
 
     return false;
-  }
-
-  int _getLastIndexOfType(String type) {
-    if (!_favoriteBox.containsKey(type)) {
-      return 0;
-    } else {
-      var favorites = _favoriteBox.get(type)!;
-      return favorites.length;
-    }
   }
 
   FavoriteModel _createFavoriteItem(var item) {

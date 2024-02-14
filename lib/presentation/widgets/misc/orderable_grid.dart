@@ -1,3 +1,5 @@
+import 'package:btd6wiki/hive/favorite_model.dart';
+import 'package:btd6wiki/presentation/widgets/misc/favorite_card.dart';
 import 'package:flutter_reorderable_grid_view/entities/order_update_entity.dart';
 import 'package:flutter_reorderable_grid_view/widgets/widgets.dart';
 import 'package:provider/provider.dart';
@@ -15,19 +17,27 @@ class OrderableGrid extends StatefulWidget {
     required this.typeName,
     required this.favoriteItems,
     required this.analyticsHelper,
+    required this.scrollController,
   });
 
   final GlobalKey gridKey;
   final String typeName;
   final List<dynamic> favoriteItems;
   final AnalyticsHelper analyticsHelper;
+  final ScrollController scrollController;
 
   @override
   State<OrderableGrid> createState() => _OrderableGridState();
 }
 
 class _OrderableGridState extends State<OrderableGrid> {
-  final _scrollController = ScrollController();
+  // @override
+  // void dispose() {
+  //   // TODO: implement dispose
+  //   widget.scrollController.detach();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
     final constraintsValues = getPreset(
@@ -35,11 +45,19 @@ class _OrderableGridState extends State<OrderableGrid> {
     );
     return Consumer<FavoriteState>(
       builder: (context, favoriteState, child) {
-        List<Widget> generatedChildren = generateGridChildren(
-            widget.favoriteItems,
-            widget.analyticsHelper,
-            widget.typeName,
-            constraintsValues);
+        List<Widget> generatedChildren = List.generate(
+          widget.favoriteItems.length,
+          (index) {
+            FavoriteModel favItem = widget.favoriteItems.elementAt(index);
+            return FavoriteCard(
+                key: Key(favItem.id),
+                favItem: favItem,
+                favoriteItems: widget.favoriteItems,
+                analyticsHelper: widget.analyticsHelper,
+                typeName: widget.typeName,
+                constraintsValues: constraintsValues);
+          },
+        );
         if (generatedChildren.isNotEmpty) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -51,7 +69,7 @@ class _OrderableGridState extends State<OrderableGrid> {
                 ),
                 ReorderableBuilder(
                   enableLongPress: false,
-                  scrollController: _scrollController,
+                  scrollController: ScrollController(),
                   onReorder: (List<OrderUpdateEntity> orderUpdateEntities) {
                     for (final orderUpdateEntity in orderUpdateEntities) {
                       final favItem = widget.favoriteItems
@@ -65,8 +83,8 @@ class _OrderableGridState extends State<OrderableGrid> {
                   builder: (children) {
                     return GridView(
                       key: widget.gridKey,
-                      controller: _scrollController,
                       shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: constraintsValues[favItemCrossCount],
                         childAspectRatio: constraintsValues[favItemAspectRatio],

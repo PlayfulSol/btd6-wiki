@@ -41,7 +41,7 @@ class BloonsGrid extends StatelessWidget {
               onLongPress: () => favoriteState.toggleFavoriteFunc(
                   context, favoriteState, bloon),
               onTap: () {
-                if (!favoriteState.multiSelect) {
+                if (!favoriteState.isMultiSelectMode) {
                   analyticsHelper.logEvent(
                     name: widgetEngagement,
                     parameters: {
