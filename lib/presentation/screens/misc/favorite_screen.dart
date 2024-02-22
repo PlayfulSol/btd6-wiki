@@ -1,59 +1,55 @@
+import 'package:context_menus/context_menus.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '/analytics/analytics.dart';
 import '/presentation/widgets/misc/orderable_grid.dart';
 import '/utilities/favorite_state.dart';
+import '/utilities/utils.dart';
 
-class FavoriteScreen extends StatefulWidget {
-  const FavoriteScreen({super.key, required this.analyticsHelper});
-
+class FavoriteScreen extends StatelessWidget {
+  FavoriteScreen({super.key, required this.analyticsHelper});
   final AnalyticsHelper analyticsHelper;
-
-  @override
-  State<FavoriteScreen> createState() => _FavoriteScreenState();
-}
-
-class _FavoriteScreenState extends State<FavoriteScreen> {
-  final scrollController = ScrollController();
+  final PageController pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
-    FavoriteState favoriteState =
-        Provider.of<FavoriteState>(context, listen: false);
-    List<String> categories =
-        List<String>.from(favoriteState.favoriteBox.keys.toList());
-    final generatedChildren = List.generate(
-      categories.length,
-      (index) => OrderableGrid(
-        gridKey: GlobalKey(),
-        favoriteItems: favoriteState.getListOfType(categories[index]),
-        typeName: categories[index],
-        analyticsHelper: widget.analyticsHelper,
-        scrollController: scrollController,
-      ),
-    );
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Favorites'),
-        actions: [
-          Consumer<FavoriteState>(
-            builder: (context, favoriteState, child) {
-              return IconButton(
-                onPressed: () {
-                  favoriteState.toggleMultiSelect();
+    final constraintsValues = getPreset(MediaQuery.of(context).size);
+    return ContextMenuOverlay(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Favorites'),
+        ),
+        body: Consumer<FavoriteState>(
+          builder: (context, favoriteState, child) {
+            List<String> categories =
+                List<String>.from(favoriteState.favoriteBox.keys.toList());
+
+            return Scrollbar(
+              thumbVisibility: true,
+              thickness: 10,
+              scrollbarOrientation: ScrollbarOrientation.top,
+              radius: const Radius.circular(20),
+              controller: pageController,
+              child: PageView.builder(
+                itemCount: categories.length,
+                scrollDirection: Axis.horizontal,
+                controller: pageController,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: OrderableGrid(
+                      items: favoriteState.getListOfType(categories[index]),
+                      categoryType: categories[index],
+                      globalKeyGridView: GlobalKey(),
+                      constraints: constraintsValues,
+                      analyticsHelper: analyticsHelper,
+                    ),
+                  );
                 },
-                icon: Icon(!favoriteState.isMultiSelectMode
-                    ? Icons.delete
-                    : Icons.close),
-              );
-            },
-          ),
-        ],
-      ),
-      body: ListView(
-        shrinkWrap: true,
-        controller: scrollController,
-        children: generatedChildren,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

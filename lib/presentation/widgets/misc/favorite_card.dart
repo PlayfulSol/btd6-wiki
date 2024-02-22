@@ -28,10 +28,6 @@ class FavoriteCard extends StatelessWidget {
     return Consumer<FavoriteState>(
       builder: (context, favoriteState, child) {
         return InkWell(
-          onLongPress: () {
-            favoriteState.toggleFavoriteFunc(context, favoriteState, favItem);
-            favoriteItems.removeWhere((item) => item.id == favItem.id);
-          },
           onTap: () {
             if (!favoriteState.isMultiSelectMode) {
               navigateToPage(
