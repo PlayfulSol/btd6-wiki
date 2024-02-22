@@ -50,30 +50,37 @@ class _OrderableGridState extends State<OrderableGrid> {
     );
     return Consumer<FavoriteState>(
       builder: (context, favoriteState, child) {
-        return ReorderableWrap(
-          spacing: MediaQuery.of(context).size.width * 0.02,
-          runSpacing: MediaQuery.of(context).size.width * 0.02,
-          reorderAnimationDuration: const Duration(milliseconds: 0),
-          scrollAnimationDuration: const Duration(milliseconds: 200),
-          controller: scrollController,
-          padding: const EdgeInsets.all(12),
-          onNoReorder: (index) {
-            context.contextMenuOverlay.show(
-              DraggablePopMenu(
-                items: widget.items,
-                selectedItem: widget.items[index],
-              ),
-            );
-          },
-          onReorder: (oldIndex, newIndex) {
-            setState(() {
-              final favItem = widget.items.removeAt(oldIndex);
-              widget.items.insert(newIndex, favItem);
-            });
-            favoriteState.updateIndexes(widget.categoryType, widget.items);
-          },
-          children: orderedItems,
-        );
+        if (orderedItems.isNotEmpty) {
+          return ReorderableWrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            alignment: WrapAlignment.center,
+            spacing: MediaQuery.of(context).size.width * 0.02,
+            runSpacing: MediaQuery.of(context).size.width * 0.02,
+            reorderAnimationDuration: const Duration(milliseconds: 0),
+            scrollAnimationDuration: const Duration(milliseconds: 200),
+            controller: scrollController,
+            padding: const EdgeInsets.all(12),
+            onNoReorder: (index) {
+              context.contextMenuOverlay.show(
+                DraggablePopMenu(
+                  items: widget.items,
+                  selectedItem: widget.items[index],
+                ),
+              );
+            },
+            onReorder: (oldIndex, newIndex) {
+              setState(() {
+                final favItem = widget.items.removeAt(oldIndex);
+                widget.items.insert(newIndex, favItem);
+              });
+              favoriteState.updateIndexes(widget.categoryType, widget.items);
+            },
+            children: orderedItems,
+          );
+        } else {
+          print('wow such empty');
+          return Container();
+        }
       },
     );
   }

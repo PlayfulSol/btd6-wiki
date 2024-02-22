@@ -24,8 +24,31 @@ class FavoriteState extends ChangeNotifier {
     return [];
   }
 
-  void toggleMultiSelect() {
+  List<String> getActiveCategories() {
+    List<String> categories = List<String>.from(_favoriteBox.keys.toList());
+    List<String> nonEmptyCategories = categories.where((category) {
+      List<FavoriteModel> items = getListOfType(category);
+      return items.isNotEmpty;
+    }).toList();
+    return nonEmptyCategories;
+  }
+
+  void toggleMultiSelect(BuildContext context) {
     _isMultiSelectMode = !_isMultiSelectMode;
+    String msg;
+    if (_isMultiSelectMode) {
+      msg = 'Multi-Select mode is enabled.';
+    } else {
+      msg = 'Multi-Select mode is disabled.';
+    }
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(child: Text(msg)),
+        duration: snackBarDuration,
+        dismissDirection: DismissDirection.horizontal,
+      ),
+    );
     notifyListeners();
   }
 

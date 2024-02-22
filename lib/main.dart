@@ -203,7 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   : Icons.star;
               return GestureDetector(
                 onLongPress: () {
-                  favoriteState.toggleMultiSelect();
+                  favoriteState.toggleMultiSelect(context);
                 },
                 child: IconButton(
                   onPressed: () {
@@ -221,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       );
                     } else {
-                      favoriteState.toggleMultiSelect();
+                      favoriteState.toggleMultiSelect(context);
                     }
                   },
                   icon: Icon(favIcon),
