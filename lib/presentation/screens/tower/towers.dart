@@ -72,7 +72,7 @@ class _TowersState extends State<Towers> {
                       onLongPress: () => favoriteState.toggleFavoriteFunc(
                           context, favoriteState, tower),
                       onTap: () {
-                        if (!favoriteState.multiSelect) {
+                        if (!favoriteState.isMultiSelectMode) {
                           widget.analyticsHelper.logEvent(
                             name: widgetEngagement,
                             parameters: {

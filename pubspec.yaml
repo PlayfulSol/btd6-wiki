@@ -48,7 +48,8 @@ dependencies:
   provider: ^6.1.1
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  flutter_reorderable_grid_view: ^4.0.0
+  reorderables: ^0.6.0
+  context_menus: ^1.0.2
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1

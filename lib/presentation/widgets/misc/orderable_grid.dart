@@ -1,86 +1,86 @@
-import 'package:flutter_reorderable_grid_view/entities/order_update_entity.dart';
-import 'package:flutter_reorderable_grid_view/widgets/widgets.dart';
+import 'package:context_menus/context_menus.dart';
+import 'package:reorderables/reorderables.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import '/hive/favorite_model.dart';
 import '/analytics/analytics.dart';
+import '/presentation/widgets/misc/favorite_card.dart';
 import '/utilities/favorite_state.dart';
-import '/utilities/constants.dart';
-import '/utilities/strings.dart';
-import '/utilities/utils.dart';
+
+import 'draggable_pop_menu.dart';
 
 class OrderableGrid extends StatefulWidget {
   const OrderableGrid({
     super.key,
-    required this.gridKey,
-    required this.typeName,
-    required this.favoriteItems,
+    required this.items,
+    required this.categoryType,
+    required this.globalKeyGridView,
+    required this.constraints,
     required this.analyticsHelper,
   });
-
-  final GlobalKey gridKey;
-  final String typeName;
-  final List<dynamic> favoriteItems;
+  final List<FavoriteModel> items;
   final AnalyticsHelper analyticsHelper;
+
+  final String categoryType;
+  final GlobalKey globalKeyGridView;
+  final Map<String, dynamic> constraints;
 
   @override
   State<OrderableGrid> createState() => _OrderableGridState();
 }
 
 class _OrderableGridState extends State<OrderableGrid> {
-  final _scrollController = ScrollController();
+  final ScrollController scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = getPreset(
-      MediaQuery.of(context).size,
+    List<Widget> orderedItems = List.generate(
+      widget.items.length,
+      (index) => SizedBox(
+        width: 120,
+        height: 185,
+        child: FavoriteCard(
+          favItem: widget.items[index],
+          favoriteItems: widget.items,
+          analyticsHelper: widget.analyticsHelper,
+          typeName: widget.categoryType,
+          constraintsValues: widget.constraints,
+        ),
+      ),
     );
     return Consumer<FavoriteState>(
       builder: (context, favoriteState, child) {
-        List<Widget> generatedChildren = generateGridChildren(
-            widget.favoriteItems,
-            widget.analyticsHelper,
-            widget.typeName,
-            constraintsValues);
-        if (generatedChildren.isNotEmpty) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Text(
-                  capitalizeEveryWord(widget.typeName),
-                  style: bigTitleStyle,
+        if (orderedItems.isNotEmpty) {
+          return ReorderableWrap(
+            crossAxisAlignment: WrapCrossAlignment.center,
+            alignment: WrapAlignment.center,
+            spacing: MediaQuery.of(context).size.width * 0.02,
+            runSpacing: MediaQuery.of(context).size.width * 0.02,
+            reorderAnimationDuration: const Duration(milliseconds: 0),
+            scrollAnimationDuration: const Duration(milliseconds: 200),
+            controller: scrollController,
+            padding: const EdgeInsets.all(12),
+            onNoReorder: (index) {
+              context.contextMenuOverlay.show(
+                DraggablePopMenu(
+                  items: widget.items,
+                  selectedItem: widget.items[index],
                 ),
-                ReorderableBuilder(
-                  enableLongPress: false,
-                  scrollController: _scrollController,
-                  onReorder: (List<OrderUpdateEntity> orderUpdateEntities) {
-                    for (final orderUpdateEntity in orderUpdateEntities) {
-                      final favItem = widget.favoriteItems
-                          .removeAt(orderUpdateEntity.oldIndex);
-                      widget.favoriteItems
-                          .insert(orderUpdateEntity.newIndex, favItem);
-                    }
-                    favoriteState.updateIndexes(
-                        widget.typeName, widget.favoriteItems);
-                  },
-                  builder: (children) {
-                    return GridView(
-                      key: widget.gridKey,
-                      controller: _scrollController,
-                      shrinkWrap: true,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: constraintsValues[favItemCrossCount],
-                        childAspectRatio: constraintsValues[favItemAspectRatio],
-                      ),
-                      children: children,
-                    );
-                  },
-                  children: generatedChildren,
-                ),
-              ],
-            ),
+              );
+            },
+            onReorder: (oldIndex, newIndex) {
+              setState(() {
+                final favItem = widget.items.removeAt(oldIndex);
+                widget.items.insert(newIndex, favItem);
+              });
+              favoriteState.updateIndexes(widget.categoryType, widget.items);
+            },
+            children: orderedItems,
           );
+        } else {
+          print('wow such empty');
+          return Container();
         }
-        return Container();
       },
     );
   }

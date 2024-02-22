@@ -6,14 +6,15 @@ import '/utilities/constants.dart';
 class FavoriteState extends ChangeNotifier {
   late Box<List<dynamic>> _favoriteBox;
 
-  bool _multiSelect = false;
+  bool _isMultiSelectMode = false;
+  bool draggableMode = false;
 
   FavoriteState() {
     _favoriteBox = Hive.box<List<dynamic>>(kFavorite);
   }
 
   Box<List<dynamic>> get favoriteBox => _favoriteBox;
-  bool get multiSelect => _multiSelect;
+  bool get isMultiSelectMode => _isMultiSelectMode;
 
   List<FavoriteModel> getListOfType(String type) {
     if (_favoriteBox.containsKey(type)) {
@@ -23,8 +24,38 @@ class FavoriteState extends ChangeNotifier {
     return [];
   }
 
-  void toggleMultiSelect() {
-    _multiSelect = !_multiSelect;
+  List<String> getActiveCategories() {
+    List<String> categories = List<String>.from(_favoriteBox.keys.toList());
+    List<String> nonEmptyCategories = categories.where((category) {
+      List<FavoriteModel> items = getListOfType(category);
+      return items.isNotEmpty;
+    }).toList();
+    return nonEmptyCategories;
+  }
+
+  void toggleMultiSelect(BuildContext context) {
+    _isMultiSelectMode = !_isMultiSelectMode;
+    String msg;
+    if (_isMultiSelectMode) {
+      msg = 'Multi-Select mode is enabled.';
+    } else {
+      msg = 'Multi-Select mode is disabled.';
+    }
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Center(child: Text(msg)),
+        duration: snackBarDuration,
+        dismissDirection: DismissDirection.horizontal,
+      ),
+    );
+    notifyListeners();
+  }
+
+  void toggleDrag(bool dragStatus) {
+    print('drag mode started as $draggableMode');
+    print('drag mode changing to $dragStatus');
+    draggableMode = dragStatus;
     notifyListeners();
   }
 
@@ -74,15 +105,6 @@ class FavoriteState extends ChangeNotifier {
     }
 
     return false;
-  }
-
-  int _getLastIndexOfType(String type) {
-    if (!_favoriteBox.containsKey(type)) {
-      return 0;
-    } else {
-      var favorites = _favoriteBox.get(type)!;
-      return favorites.length;
-    }
   }
 
   FavoriteModel _createFavoriteItem(var item) {
