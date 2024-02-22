@@ -20,7 +20,7 @@ class DraggablePopMenu extends StatelessWidget {
         return GenericContextMenu(
           buttonConfigs: [
             ContextMenuButtonConfig(
-              "Remove from favorites",
+              "Remove",
               icon: const Icon(Icons.delete),
               onPressed: () {
                 favoriteState.toggleFavoriteFunc(

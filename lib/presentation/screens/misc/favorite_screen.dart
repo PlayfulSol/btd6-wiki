@@ -15,6 +15,10 @@ class FavoriteScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final constraintsValues = getPreset(MediaQuery.of(context).size);
     return ContextMenuOverlay(
+      cardBuilder: (context, children) => Card(
+        elevation: 10,
+        child: Column(children: children),
+      ),
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Favorites'),
@@ -36,7 +40,7 @@ class FavoriteScreen extends StatelessWidget {
                 controller: pageController,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                     child: OrderableGrid(
                       items: favoriteState.getListOfType(categories[index]),
                       categoryType: categories[index],

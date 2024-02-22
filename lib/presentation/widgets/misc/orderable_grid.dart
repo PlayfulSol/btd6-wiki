@@ -37,8 +37,8 @@ class _OrderableGridState extends State<OrderableGrid> {
     List<Widget> orderedItems = List.generate(
       widget.items.length,
       (index) => SizedBox(
-        width: MediaQuery.of(context).size.width * 0.25,
-        height: MediaQuery.of(context).size.width * 0.25,
+        width: 120,
+        height: 185,
         child: FavoriteCard(
           favItem: widget.items[index],
           favoriteItems: widget.items,
@@ -51,17 +51,19 @@ class _OrderableGridState extends State<OrderableGrid> {
     return Consumer<FavoriteState>(
       builder: (context, favoriteState, child) {
         return ReorderableWrap(
-          spacing: MediaQuery.of(context).size.width * 0.04,
-          runSpacing: MediaQuery.of(context).size.width * 0.04,
+          spacing: MediaQuery.of(context).size.width * 0.02,
+          runSpacing: MediaQuery.of(context).size.width * 0.02,
           reorderAnimationDuration: const Duration(milliseconds: 0),
-          scrollAnimationDuration: const Duration(milliseconds: 100),
+          scrollAnimationDuration: const Duration(milliseconds: 200),
           controller: scrollController,
           padding: const EdgeInsets.all(12),
           onNoReorder: (index) {
-            context.contextMenuOverlay.show(DraggablePopMenu(
-              items: widget.items,
-              selectedItem: widget.items[index],
-            ));
+            context.contextMenuOverlay.show(
+              DraggablePopMenu(
+                items: widget.items,
+                selectedItem: widget.items[index],
+              ),
+            );
           },
           onReorder: (oldIndex, newIndex) {
             setState(() {
