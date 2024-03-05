@@ -76,6 +76,7 @@ flutter:
     - assets/data/bosses/
     - assets/data/minions/
     - assets/data/maps/
+    - assets/images/
     - assets/images/towers/
     - assets/images/heroes/
     - assets/images/bloons/
