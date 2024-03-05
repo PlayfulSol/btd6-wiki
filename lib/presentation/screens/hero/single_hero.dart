@@ -44,8 +44,8 @@ class _SingleHeroState extends State<SingleHero> {
 
     if (singleHero.skinChange.contains(level.name)) {
       shouldShowLevelImage = true;
-      var skinNamesAndImages = getSkinNamesAndImages(level.name);
-      lvlSkinsImages = skinNamesAndImages[1];
+      var skinNamesAndImages = getSkinsImages(level.name);
+      lvlSkinsImages = skinNamesAndImages;
     }
     return HeroLevel(
       heroId: widget.heroId,
@@ -57,21 +57,26 @@ class _SingleHeroState extends State<SingleHero> {
     );
   }
 
-  List<List<String>> getSkinNamesAndImages(String lvl) {
-    List<String> names = [];
-    List<String> images = [];
+  List<String> getSkinsImages(String lvl) {
+    List<String> sameLvlImages = [];
+
     for (var skin in singleHero.skins) {
-      int lvlIndex =
-          skin.value.indexWhere((image) => image.contains('$lvl.png'));
-      if (lvlIndex != -1) {
-        names.add(skin.name);
-        images.add(skin.value[lvlIndex]);
-      } else if (lvl == '1') {
-        names.add(skin.name);
-        images.add(skin.value[0]);
+      if (skin.images[lvl] != null) {
+        sameLvlImages.add(skin.images[lvl]!);
       }
     }
-    return [names, images];
+
+    return sameLvlImages;
+  }
+
+  List<String> getSkinNames() {
+    List<String> skinsNames = [];
+
+    for (var skin in singleHero.skins) {
+      skinsNames.add(skin.name);
+    }
+
+    return skinsNames;
   }
 
   void loadHero() async {
@@ -81,9 +86,8 @@ class _SingleHeroState extends State<SingleHero> {
     singleHero = HeroModel.fromJson(jsonData);
     setState(() {
       loading = false;
-      var skinNamesAndImages = getSkinNamesAndImages("1");
-      skinsNames = skinNamesAndImages[0];
-      skinsFirstImages = skinNamesAndImages[1];
+      skinsNames = getSkinNames();
+      skinsFirstImages = getSkinsImages("1");
     });
   }
 

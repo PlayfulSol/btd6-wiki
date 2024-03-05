@@ -1,17 +1,17 @@
 class Skins {
   late final String id;
   late final String name;
-  late final List<String> value;
+  late final Map<String, String> images;
 
   Skins(
     this.id,
     this.name,
-    this.value,
+    this.images,
   );
 
   Skins.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    value = List<String>.from(json['value']);
+    images = (json['images'] as Map<String, dynamic>).cast<String, String>();
   }
 }
