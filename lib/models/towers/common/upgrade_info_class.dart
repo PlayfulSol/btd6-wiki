@@ -16,7 +16,7 @@ class UpgradeInfo {
   UpgradeInfo.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     image = json["image"];
-    upgradeBody = json['upgradeBody'] ?? json['levelBody'];
+    upgradeBody = json['upgradeBody'] ?? json['body'];
     cost = Cost.fromJson(json['cost']);
   }
 }

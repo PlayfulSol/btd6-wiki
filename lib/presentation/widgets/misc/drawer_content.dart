@@ -295,6 +295,10 @@ class _DrawerContentState extends State<DrawerContent> {
           const SizedBox(
             height: 10,
           ),
+          const Text('Updated to game version: $gameVersion'),
+          const SizedBox(
+            height: 20,
+          ),
         ],
       ),
     );

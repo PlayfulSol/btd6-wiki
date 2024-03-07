@@ -77,46 +77,48 @@ class _HeroSkinsState extends State<HeroSkins> {
                 },
                 children: [
                   GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: constraintsValues[skinCrossCount],
-                      childAspectRatio: constraintsValues[skinAspectRatio],
-                    ),
-                    itemCount: widget.heroSkins[index].value.length,
-                    itemBuilder: (context, imageIndex) {
-                      return Card(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Expanded(
-                              flex: 10,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 15,
-                                ),
-                                child: Image(
-                                  image: AssetImage(
-                                    heroImage(
-                                      widget.heroSkins[index].value[imageIndex],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Text(
-                                'Level ${extractLevel(widget.heroSkins[index].value[imageIndex])}',
-                                style: titleStyle,
-                              ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
+  physics: const NeverScrollableScrollPhysics(),
+  shrinkWrap: true,
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: constraintsValues[skinCrossCount],
+    childAspectRatio: constraintsValues[skinAspectRatio],
+  ),
+  itemCount: widget.heroSkins[index].images.length,
+  itemBuilder: (context, imageIndex) {
+    final entry = widget.heroSkins[index].images.entries.elementAt(imageIndex);
+    final key = entry.key;
+    final value = entry.value;
+
+    return Card(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            flex: 10,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 15,
+              ),
+              child: Image(
+                image: AssetImage(
+                  heroImage(value),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text(
+              'Level ${extractLevel(value)}',
+              style: titleStyle,
+            ),
+          ),
+        ],
+      ),
+    );
+  },
+),
                 ],
               );
             },

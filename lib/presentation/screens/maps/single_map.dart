@@ -47,6 +47,22 @@ class _SingleMapState extends State<SingleMap> {
     loadMap();
   }
 
+  Widget getImageWidget(String mapName) {
+    try {
+      return Image(
+        semanticLabel: mapName,
+        image: AssetImage(mapImage(mapName)),
+        height: 200,
+      );
+    } catch (e) {
+      return Image(
+        semanticLabel: mapName,
+        image: const AssetImage('assets/images/placeholder.png'),
+        height: 200,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,6 +97,15 @@ class _SingleMapState extends State<SingleMap> {
                         semanticLabel: map.name,
                         image: AssetImage(mapImage(map.image)),
                         height: 200,
+                        errorBuilder: (BuildContext context, Object error,
+                            StackTrace? stackTrace) {
+                          stackTrace ??= StackTrace.empty;
+
+                          return Image.asset(
+                            "assets/images/placeholder.png",
+                            width: 90,
+                          );
+                        },
                       ),
                       const SizedBox(height: 10),
                       Text(map.name,

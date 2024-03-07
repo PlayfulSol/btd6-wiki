@@ -8,6 +8,8 @@ const String kBosses = 'bosses';
 const String kMinions = 'minions';
 const String kMaps = 'maps';
 
+const int gameVersion = 41;
+
 const int kTowersIndex = 0;
 const int kHeroesIndex = 1;
 const int kBloonsIndex = 2;
