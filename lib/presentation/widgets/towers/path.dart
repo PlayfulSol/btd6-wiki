@@ -44,6 +44,7 @@ class MonkeyPath extends StatelessWidget {
           itemBuilder: (context, index) => Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 30),
               Center(
                 child: Image(
                   semanticLabel: path[index].name,
@@ -69,7 +70,6 @@ class MonkeyPath extends StatelessWidget {
               const SizedBox(height: 10),
               const Text("Cost:", style: normalStyle),
               Text(costToString(path[index].cost), style: normalStyle),
-              const SizedBox(height: 30),
             ],
           ),
         ),

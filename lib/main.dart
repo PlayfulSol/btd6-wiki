@@ -1,3 +1,5 @@
+import 'package:btd6wiki/presentation/screens/hero/heroes_web.dart';
+import 'package:btd6wiki/presentation/screens/tower/towers_web.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -235,14 +237,24 @@ class _MyHomePageState extends State<MyHomePage> {
           ? PageView(
               controller: pageController,
               children: [
-                Towers(
-                  analyticsHelper: analyticsHelper,
-                  towers: baseEntities[kTowers],
-                ),
-                Heroes(
-                  analyticsHelper: analyticsHelper,
-                  heroes: baseEntities[kHeroes],
-                ),
+                MediaQuery.of(context).size.width > 750
+                    ? TowersWeb(
+                        analyticsHelper: analyticsHelper,
+                        towers: baseEntities[kTowers],
+                      )
+                    : Towers(
+                        analyticsHelper: analyticsHelper,
+                        towers: baseEntities[kTowers],
+                      ),
+                MediaQuery.of(context).size.width > 750
+                    ? HeroesWeb(
+                        analyticsHelper: analyticsHelper,
+                        heroes: baseEntities[kHeroes],
+                      )
+                    : Heroes(
+                        analyticsHelper: analyticsHelper,
+                        heroes: baseEntities[kHeroes],
+                      ),
                 Bloons(
                   analyticsHelper: analyticsHelper,
                   bloonsList: baseEntities[kBloons],

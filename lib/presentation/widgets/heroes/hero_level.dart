@@ -58,9 +58,12 @@ class _HeroLevelState extends State<HeroLevel> {
                   CarouselSlider.builder(
                     carouselController: controller,
                     options: CarouselOptions(
-                      viewportFraction: 0.64,
                       initialPage: 0,
-                      height: MediaQuery.of(context).size.width * 0.5,
+                      viewportFraction:
+                          MediaQuery.of(context).size.width > 800 ? 0.75 : 0.64,
+                      height: MediaQuery.of(context).size.width > 800
+                          ? 700
+                          : MediaQuery.of(context).size.width * 0.5,
                       enableInfiniteScroll: false,
                       onPageChanged: (index, reason) {
                         setState(() {
