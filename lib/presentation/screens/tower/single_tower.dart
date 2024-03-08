@@ -90,70 +90,73 @@ class _SingleTowerState extends State<SingleTower> {
       body: !loading
           ? SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image(
-                        semanticLabel: tower.name,
-                        image: AssetImage(towerImage(tower.image)),
-                        width: 200,
-                        fit: BoxFit.fill,
-                      ),
-                      const BetterDivider(),
-                      Text(
-                        tower.inGameDesc,
-                        textAlign: TextAlign.left,
-                        style: normalStyle,
-                      ),
-                      const BetterDivider(),
-                      Text(
-                        'Class - ${tower.classType}',
-                        style: smallTitleStyle,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        costToString(tower.cost),
-                        textAlign: TextAlign.center,
-                        style: normalStyle,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        statsToString(tower.stats),
-                        textAlign: TextAlign.center,
-                        style: normalStyle,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        extraStatsToString(tower.stats),
-                        textAlign: TextAlign.center,
-                        style: normalStyle,
-                      ),
-                      const BetterDivider(),
-                      ListView.builder(
-                        primary: false,
-                        shrinkWrap: true,
-                        itemCount: tower.paths.paragon != null ? 4 : 3,
-                        itemBuilder: (context, index) => Column(
-                          children: [
-                            _buildPath(index),
-                            const BetterDivider(),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
+              padding: const EdgeInsets.all(14.0),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Image(
+                      semanticLabel: tower.name,
+                      image: AssetImage(towerImage(tower.image)),
+                      width: 200,
+                      fit: BoxFit.fill,
+                    ),
+                    const BetterDivider(),
+                    Text(
+                      tower.inGameDesc,
+                      textAlign: TextAlign.left,
+                      style: normalStyle,
+                    ),
+                    const BetterDivider(),
+                    Text(
+                      'Class - ${tower.classType}',
+                      style: smallTitleStyle,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      costToString(tower.cost),
+                      textAlign: TextAlign.center,
+                      style: normalStyle,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      statsToString(tower.stats),
+                      textAlign: TextAlign.center,
+                      style: normalStyle,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      extraStatsToString(tower.stats),
+                      textAlign: TextAlign.center,
+                      style: normalStyle,
+                    ),
+                    const BetterDivider(),
+                    Center(
+                      child: Container(
+                          constraints: const BoxConstraints(maxWidth: 1000),
+                          child: ListView.builder(
+                            primary: false,
+                            shrinkWrap: true,
+                            itemCount: tower.paths.paragon != null ? 4 : 3,
+                            itemBuilder: (context, index) => Column(
+                              children: [
+                                _buildPath(index),
+                                const BetterDivider(),
+                              ],
+                            ),
+                          )),
+                    ),
+                  ],
                 ),
               ),
-            )
+            ))
           : const CircularProgressIndicator(),
     );
   }
