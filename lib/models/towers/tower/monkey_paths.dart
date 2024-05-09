@@ -26,7 +26,8 @@ class MonkeyPathsModel {
       path3.add(UpgradeInfo.fromJson(path));
     });
 
-    paragon =
-        json['paragon'] != null ? UpgradeInfo.fromJson(json['paragon']) : null;
+    paragon = json['paragon'] is Map && !json['paragon'].isEmpty
+        ? UpgradeInfo.fromJson(json['paragon'])
+        : null;
   }
 }
