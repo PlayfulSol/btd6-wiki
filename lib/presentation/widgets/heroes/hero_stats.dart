@@ -96,9 +96,9 @@ class StatsList extends StatelessWidget {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             primary: false,
-                            itemCount: dynamicItemValue['value'].length,
+                            itemCount: dynamicItemValue['values'].length,
                             itemBuilder: (BuildContext context, int index) {
-                              final listData = dynamicItemValue['value'];
+                              final listData = dynamicItemValue['values'];
                               final dynamicItemValueValue = listData[index];
                               return ListTile(
                                 title: Text(
