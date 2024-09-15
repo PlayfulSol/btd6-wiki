@@ -126,116 +126,132 @@ class _SingleHeroState extends State<SingleHero> {
       body: !loading
           ? SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Column(
-                        children: [
-                          CarouselSlider.builder(
-                            carouselController: controller,
-                            options: CarouselOptions(
-                              viewportFraction: 0.64,
-                              initialPage: 0,
-                              height: MediaQuery.of(context).size.width * 0.5,
-                              enableInfiniteScroll: false,
-                              onPageChanged: (index, reason) {
-                                setState(() {
-                                  activeIndex = index;
-                                });
-                              },
+                  padding: const EdgeInsets.all(10.0),
+                  child: Center(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                        Column(
+                          children: [
+                            CarouselSlider.builder(
+                              carouselController: controller,
+                              options: CarouselOptions(
+                                viewportFraction:
+                                    MediaQuery.of(context).size.width > 800
+                                        ? 0.5
+                                        : 0.64,
+                                initialPage: 0,
+                                height: MediaQuery.of(context).size.width > 800
+                                    ? 700
+                                    : MediaQuery.of(context).size.width * 0.5,
+                                enableInfiniteScroll: false,
+                                onPageChanged: (index, reason) {
+                                  setState(() {
+                                    activeIndex = index;
+                                  });
+                                },
+                              ),
+                              itemCount: singleHero.skins.length,
+                              itemBuilder: ((context, index, realIndex) =>
+                                  Image(
+                                    image: AssetImage(
+                                        heroImage(skinsFirstImages[index])),
+                                    filterQuality: FilterQuality.high,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.56,
+                                  )),
                             ),
-                            itemCount: singleHero.skins.length,
-                            itemBuilder: ((context, index, realIndex) => Image(
-                                  image: AssetImage(
-                                      heroImage(skinsFirstImages[index])),
-                                  filterQuality: FilterQuality.high,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.56,
-                                )),
-                          ),
-                          const SizedBox(height: 10),
-                          Text(
-                            skinsNames[activeIndex],
-                            style: smallTitleStyle,
-                          ),
-                          const SizedBox(height: 10),
-                          AnimatedSmoothIndicator(
-                            activeIndex: activeIndex,
-                            count: singleHero.skins.length,
-                            onDotClicked: (index) =>
-                                controller.jumpToPage(index),
-                            effect: const ScrollingDotsEffect(
-                              activeDotScale: 1.25,
-                              spacing: 11,
-                              dotHeight: 9,
-                              dotWidth: 9,
-                              activeDotColor: Colors.teal,
+                            const SizedBox(height: 10),
+                            Text(
+                              skinsNames[activeIndex],
+                              style: smallTitleStyle,
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Text(singleHero.inGameDesc,
-                          textAlign: TextAlign.center, style: normalStyle),
-                      const SizedBox(height: 10),
-                      Text(costToString(singleHero.cost),
-                          textAlign: TextAlign.center),
-                      const SizedBox(height: 10),
-                      ExpansionTile(
-                        title: Text(
-                          "Advanced Stats",
-                          style: titleStyle.copyWith(color: Colors.teal),
-                        ),
-                        onExpansionChanged: (bool value) {
-                          widget.analyticsHelper.logEvent(
-                            name: widgetEngagement,
-                            parameters: {
-                              'screen': singleHero.id,
-                              'widget': expansionTile,
-                              'value': 'hero_stats_$value',
-                            },
-                          );
-                        },
-                        children: [
-                          StatsList(
-                            heroId: singleHero.id,
-                            heroStats: singleHero.stats,
-                            analyticsHelper: widget.analyticsHelper,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      if (singleHero.skins.isNotEmpty)
-                        ElevatedButton(
-                          child: const Text("Skins"),
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HeroSkins(
-                                heroId: singleHero.id,
-                                heroSkins: singleHero.skins,
-                                heroName: singleHero.name,
-                                analyticsHelper: widget.analyticsHelper,
+                            const SizedBox(height: 10),
+                            AnimatedSmoothIndicator(
+                              activeIndex: activeIndex,
+                              count: singleHero.skins.length,
+                              onDotClicked: (index) =>
+                                  controller.jumpToPage(index),
+                              effect: const ScrollingDotsEffect(
+                                activeDotScale: 1.25,
+                                spacing: 11,
+                                dotHeight: 9,
+                                dotWidth: 9,
+                                activeDotColor: Colors.teal,
                               ),
                             ),
+                          ],
+                        ),
+                        Center(
+                          child: Container(
+                            constraints: BoxConstraints(maxWidth: 1000),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                Text(singleHero.inGameDesc,
+                                    textAlign: TextAlign.center,
+                                    style: normalStyle),
+                                const SizedBox(height: 10),
+                                Text(costToString(singleHero.cost),
+                                    textAlign: TextAlign.center),
+                                const SizedBox(height: 10),
+                                ExpansionTile(
+                                  title: Text(
+                                    "Advanced Stats",
+                                    style:
+                                        titleStyle.copyWith(color: Colors.teal),
+                                  ),
+                                  onExpansionChanged: (bool value) {
+                                    widget.analyticsHelper.logEvent(
+                                      name: widgetEngagement,
+                                      parameters: {
+                                        'screen': singleHero.id,
+                                        'widget': expansionTile,
+                                        'value': 'hero_stats_$value',
+                                      },
+                                    );
+                                  },
+                                  children: [
+                                    StatsList(
+                                      heroId: singleHero.id,
+                                      heroStats: singleHero.stats,
+                                      analyticsHelper: widget.analyticsHelper,
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                if (singleHero.skins.isNotEmpty)
+                                  ElevatedButton(
+                                    child: const Text("Skins"),
+                                    onPressed: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => HeroSkins(
+                                          heroId: singleHero.id,
+                                          heroSkins: singleHero.skins,
+                                          heroName: singleHero.name,
+                                          analyticsHelper:
+                                              widget.analyticsHelper,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                const SizedBox(height: 10),
+                                ListView.builder(
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  itemCount: singleHero.levels.length,
+                                  itemBuilder: (context, index) =>
+                                      _buildHeroLevel(
+                                    singleHero.levels[index],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      const SizedBox(height: 10),
-                      ListView.builder(
-                        primary: false,
-                        shrinkWrap: true,
-                        itemCount: singleHero.levels.length,
-                        itemBuilder: (context, index) => _buildHeroLevel(
-                          singleHero.levels[index],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+                      ]))),
             )
           : const CircularProgressIndicator(),
     );
