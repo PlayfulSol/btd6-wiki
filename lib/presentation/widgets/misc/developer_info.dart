@@ -37,7 +37,7 @@ class DeveloperInfo extends StatelessWidget {
                 name,
                 textAlign: TextAlign.center,
                 style: bolderNormalStyle.copyWith(
-                    color: Theme.of(context).colorScheme.onBackground),
+                    color: Theme.of(context).colorScheme.onSurface),
               ),
             ),
             Flexible(

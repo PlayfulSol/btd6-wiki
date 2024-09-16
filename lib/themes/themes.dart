@@ -9,35 +9,36 @@ class Themes {
     expansionTileTheme: const ExpansionTileThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     ),
-    cardTheme: const CardTheme(
+    cardTheme: CardTheme(
       elevation: 5,
       shadowColor: Colors.black,
+      color: darkColorScheme.primaryContainer,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        elevation: MaterialStateProperty.all<double>(2),
-        iconColor: MaterialStateProperty.all(
-          darkColorScheme.onBackground,
+        elevation: WidgetStateProperty.all<double>(2),
+        iconColor: WidgetStateProperty.all(
+          darkColorScheme.onSurface,
         ),
-        foregroundColor: MaterialStateProperty.all(
-          darkColorScheme.onBackground,
+        foregroundColor: WidgetStateProperty.all(
+          darkColorScheme.onSurface,
         ),
-        backgroundColor: MaterialStateProperty.all(
+        backgroundColor: WidgetStateProperty.all(
           darkColorScheme.primaryContainer,
         ),
       ),
     ),
     iconButtonTheme: IconButtonThemeData(
       style: ButtonStyle(
-        iconColor: MaterialStateProperty.all(
-          darkColorScheme.onBackground,
+        iconColor: WidgetStateProperty.all(
+          darkColorScheme.onSurface,
         ),
       ),
     ),
     dropdownMenuTheme: DropdownMenuThemeData(
       menuStyle: MenuStyle(
-          backgroundColor: MaterialStateProperty.all(
-        darkColorScheme.background,
+          backgroundColor: WidgetStateProperty.all(
+        darkColorScheme.surface,
       )),
       inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,
@@ -52,31 +53,32 @@ class Themes {
     expansionTileTheme: const ExpansionTileThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     ),
-    cardTheme: const CardTheme(
+    cardTheme: CardTheme(
       elevation: 5,
       shadowColor: Colors.black,
+      color: lightColorScheme.primaryContainer,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-        elevation: MaterialStateProperty.all<double>(2),
-        iconColor: MaterialStateProperty.all(
-          lightColorScheme.onBackground,
+        elevation: WidgetStateProperty.all<double>(2),
+        iconColor: WidgetStateProperty.all(
+          lightColorScheme.onSurface,
         ),
-        foregroundColor: MaterialStateProperty.all(
-          lightColorScheme.onBackground,
+        foregroundColor: WidgetStateProperty.all(
+          lightColorScheme.onSurface,
         ),
-        backgroundColor: MaterialStateProperty.all(
+        backgroundColor: WidgetStateProperty.all(
           lightColorScheme.primaryContainer,
         ),
       ),
     ),
     iconTheme: IconThemeData(
-      color: lightColorScheme.onBackground,
+      color: lightColorScheme.onSurface,
     ),
     dropdownMenuTheme: DropdownMenuThemeData(
       menuStyle: MenuStyle(
-          backgroundColor: MaterialStateProperty.all(
-        lightColorScheme.background,
+          backgroundColor: WidgetStateProperty.all(
+        lightColorScheme.surface,
       )),
       inputDecorationTheme: const InputDecorationTheme(
         border: InputBorder.none,

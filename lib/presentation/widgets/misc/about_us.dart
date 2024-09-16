@@ -49,12 +49,12 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       title: Text(
         'About Us',
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: Theme.of(context).colorScheme.onBackground,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
       ),
       titleTextStyle: bigTitleStyle,
