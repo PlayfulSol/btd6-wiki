@@ -28,7 +28,7 @@ class BossBloon extends StatefulWidget {
 }
 
 class _BossBloonState extends State<BossBloon> {
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
   late final BossBloonModel boss;
   List<String> images = [];
   List<String> imageKeys = [];

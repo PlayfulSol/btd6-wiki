@@ -78,7 +78,6 @@ class _OrderableGridState extends State<OrderableGrid> {
             children: orderedItems,
           );
         } else {
-          print('wow such empty');
           return Container();
         }
       },

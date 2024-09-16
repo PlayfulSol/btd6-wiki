@@ -53,8 +53,6 @@ class FavoriteState extends ChangeNotifier {
   }
 
   void toggleDrag(bool dragStatus) {
-    print('drag mode started as $draggableMode');
-    print('drag mode changing to $dragStatus');
     draggableMode = dragStatus;
     notifyListeners();
   }
