@@ -32,7 +32,7 @@ class SingleHero extends StatefulWidget {
 
 class _SingleHeroState extends State<SingleHero> {
   late final HeroModel singleHero;
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
   List<String> skinsFirstImages = [];
   List<String> skinsNames = [];
   int activeIndex = 0;

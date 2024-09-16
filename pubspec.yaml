@@ -43,7 +43,7 @@ dependencies:
   font_awesome_flutter: ^10.6.0
   firebase_core: ^2.23.0
   firebase_analytics: ^10.7.1
-  carousel_slider: ^4.2.1
+  carousel_slider: ^5.0.0
   smooth_page_indicator: ^1.1.0
   provider: ^6.1.1
   hive: ^2.2.3
@@ -84,7 +84,7 @@ flutter:
     - assets/images/maps/
     - assets/images/minions/
 
-compileSdkVersion: 33
-buildToolsVersion: "33.0.0"
+compileSdkVersion: 35
+buildToolsVersion: "35.0.0"
 minSdkVersion: 21
-targetSdkVersion: 33
+targetSdkVersion: 35

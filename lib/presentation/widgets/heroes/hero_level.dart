@@ -30,7 +30,7 @@ class HeroLevel extends StatefulWidget {
 }
 
 class _HeroLevelState extends State<HeroLevel> {
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
   int activeIndex = 0;
 
   @override

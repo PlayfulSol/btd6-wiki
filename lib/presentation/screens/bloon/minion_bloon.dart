@@ -23,7 +23,7 @@ class MinionBloonPage extends StatefulWidget {
 }
 
 class _MinionBloonPageState extends State<MinionBloonPage> {
-  final controller = CarouselController();
+  final controller = CarouselSliderController();
   late final MinionBloon minion;
   List<String> images = [];
   List<String> imageKeys = [];
