@@ -136,10 +136,12 @@ class _SingleTowerState extends State<SingleTower> {
                     Row(
                       children: [
                         Expanded(
+                          flex: 1,
                           child: Card(
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -167,11 +169,14 @@ class _SingleTowerState extends State<SingleTower> {
                             ),
                           ),
                         ),
+                        const SizedBox(width: 8),
                         Expanded(
+                          flex: 1,
                           child: Card(
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Column(
+                                mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
@@ -189,7 +194,6 @@ class _SingleTowerState extends State<SingleTower> {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 8),
                       ],
                     ),
                     const SizedBox(height: 16),
