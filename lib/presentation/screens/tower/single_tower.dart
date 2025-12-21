@@ -90,67 +90,106 @@ class _SingleTowerState extends State<SingleTower> {
       body: !loading
           ? SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image(
-                        semanticLabel: tower.name,
-                        image: AssetImage(towerImage(tower.image)),
-                        width: 200,
-                        fit: BoxFit.fill,
-                      ),
-                      const BetterDivider(),
-                      Text(
-                        tower.inGameDesc,
-                        textAlign: TextAlign.left,
-                        style: normalStyle,
-                      ),
-                      const BetterDivider(),
-                      Text(
-                        'Class - ${tower.classType}',
-                        style: smallTitleStyle,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        costToString(tower.cost),
-                        textAlign: TextAlign.center,
-                        style: normalStyle,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        statsToString(tower.stats),
-                        textAlign: TextAlign.center,
-                        style: normalStyle,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        extraStatsToString(tower.stats),
-                        textAlign: TextAlign.center,
-                        style: normalStyle,
-                      ),
-                      const BetterDivider(),
-                      ListView.builder(
-                        primary: false,
-                        shrinkWrap: true,
-                        itemCount: tower.paths.paragon != null ? 4 : 3,
-                        itemBuilder: (context, index) => Column(
-                          children: [
-                            _buildPath(index),
-                            const BetterDivider(),
-                          ],
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image(
+                          semanticLabel: tower.name,
+                          image: AssetImage(towerImage(tower.image)),
+                          width: 120,
+                          fit: BoxFit.contain,
                         ),
-                      )
-                    ],
-                  ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                tower.name,
+                                style: bigTitleStyle,
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                'Class: ${tower.classType}',
+                                style: smallTitleStyle,
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                tower.inGameDesc,
+                                style: normalStyle,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Cost',
+                                    style: smallTitleStyle,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    costToString(tower.cost),
+                                    style: normalStyle,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Expanded(
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Stats',
+                                    style: smallTitleStyle,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    statsToString(tower.stats),
+                                    style: normalStyle,
+                                  ),
+                                  if (extraStatsToString(tower.stats).trim().isNotEmpty) ...[
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      extraStatsToString(tower.stats),
+                                      style: normalStyle,
+                                    ),
+                                  ],
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    ListView.builder(
+                      primary: false,
+                      shrinkWrap: true,
+                      itemCount: tower.paths.paragon != null ? 4 : 3,
+                      itemBuilder: (context, index) => _buildPath(index),
+                    )
+                  ],
                 ),
               ),
             )
@@ -159,17 +198,3 @@ class _SingleTowerState extends State<SingleTower> {
   }
 }
 
-class BetterDivider extends StatelessWidget {
-  const BetterDivider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 12),
-      height: 3.5,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(100),
-          color: Theme.of(context).focusColor),
-    );
-  }
-}
