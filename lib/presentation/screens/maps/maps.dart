@@ -65,17 +65,18 @@ class _MapsState extends State<Maps> {
                     final filteredMaps = filterAndSearchMaps(widget.maps,
                         globalState.currentQuery, globalState.currentOption);
                     return GridView.builder(
+                      padding: const EdgeInsets.all(12),
                       itemCount: filteredMaps.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: constraintsValues[mapCrossCount],
                         childAspectRatio: constraintsValues[mapAspectRatio],
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
                       ),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
                         BaseMap map = filteredMaps[index];
-                        return Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: GestureDetector(
+                        return GestureDetector(
                             onLongPress: () => favoriteState.toggleFavoriteFunc(
                                 context, favoriteState, map),
                             onTap: () {
@@ -102,8 +103,7 @@ class _MapsState extends State<Maps> {
                               }
                             },
                             child: MapCard(singleMap: map),
-                          ),
-                        );
+                          );
                       },
                     );
                   },

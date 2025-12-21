@@ -23,9 +23,12 @@ class BossesGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: constraintsValues[bossCrossCount],
-        childAspectRatio: constraintsValues[bossAspectRatio],
+        childAspectRatio: 0.75,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
       ),
       physics: const NeverScrollableScrollPhysics(),
       primary: false,
@@ -36,6 +39,7 @@ class BossesGrid extends StatelessWidget {
         return Consumer<FavoriteState>(
           builder: (context, favoriteState, child) {
             return InkWell(
+              borderRadius: BorderRadius.circular(12),
               onLongPress: () => favoriteState.toggleFavoriteFunc(
                   context, favoriteState, boss),
               onTap: () {
@@ -63,21 +67,68 @@ class BossesGrid extends StatelessWidget {
                 }
               },
               child: Card(
-                child: Center(
-                  child: ListTile(
-                    titleAlignment: ListTileTitleAlignment.center,
-                    leading: ImageOutliner(
-                      imageName: boss.image,
-                      imagePath: bossImage(boss.image),
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(12),
+                          ),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerHighest
+                              .withOpacity(0.2),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: ImageOutliner(
+                              imageName: boss.image,
+                              imagePath: bossImage(boss.image),
+                              width: double.infinity,
+                              height: double.infinity,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    title: Text(
-                      boss.name,
-                      style: constraintsValues[bossTitleStyle],
+                    Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 8),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                boss.name,
+                                style: constraintsValues[bossTitleStyle],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                            Icon(
+                              favoriteState.isFavorite(boss.type, boss.id)
+                                  ? Icons.star
+                                  : Icons.star_border_outlined,
+                              size: 18,
+                              color: favoriteState.isFavorite(
+                                      boss.type, boss.id)
+                                  ? Colors.amber
+                                  : null,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                    trailing: favoriteState.isFavorite(boss.type, boss.id)
-                        ? const Icon(Icons.star)
-                        : const Icon(Icons.star_border_outlined),
-                  ),
+                  ],
                 ),
               ),
             );

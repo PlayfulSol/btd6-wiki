@@ -23,12 +23,12 @@ class DrawerContent extends StatefulWidget {
 }
 
 class _DrawerContentState extends State<DrawerContent> {
-  final ExpansionTileController _towersExpansionTileController =
-      ExpansionTileController();
-  final ExpansionTileController _mapsExpansionTileController =
-      ExpansionTileController();
-  final ExpansionTileController _bloonsExpansionTileController =
-      ExpansionTileController();
+  final ExpansibleController _towersExpansionTileController =
+      ExpansibleController();
+  final ExpansibleController _mapsExpansionTileController =
+      ExpansibleController();
+  final ExpansibleController _bloonsExpansionTileController =
+      ExpansibleController();
 
   @override
   void initState() {

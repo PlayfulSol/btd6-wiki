@@ -9,7 +9,7 @@ class Themes {
     expansionTileTheme: const ExpansionTileThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 5,
       shadowColor: Colors.black,
       color: darkColorScheme.primaryContainer,
@@ -53,7 +53,7 @@ class Themes {
     expansionTileTheme: const ExpansionTileThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       elevation: 5,
       shadowColor: Colors.black,
       color: lightColorScheme.primaryContainer,

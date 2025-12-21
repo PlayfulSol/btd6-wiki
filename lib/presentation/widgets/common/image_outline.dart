@@ -18,27 +18,31 @@ class ImageOutliner extends StatelessWidget {
   Widget build(BuildContext context) {
     double maxWidth = width ?? 65;
     double maxHeight = height ?? 90;
+    final bool isLargeImage = width != null && width! > 100;
+    
     return SizedBox(
       width: maxWidth,
-      // height: maxHeight,
+      height: maxHeight,
       child: Stack(
         alignment: AlignmentDirectional.center,
-        fit: StackFit.loose,
+        fit: StackFit.expand,
         children: [
-          ColorFiltered(
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(1), // Adjust opacity for contrast effect
-              BlendMode.srcIn,
+          if (!isLargeImage)
+            ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.2),
+                BlendMode.srcIn,
+              ),
+              child: Image(
+                fit: BoxFit.fitWidth,
+                semanticLabel: imageName,
+                image: AssetImage(imagePath),
+              ),
             ),
-            child: Image(
-              fit: BoxFit.fitWidth,
-              semanticLabel: imageName,
-              image: AssetImage(imagePath),
-            ),
-          ),
           Image(
             fit: BoxFit.contain,
-            height: maxHeight * 0.606,
+            width: isLargeImage ? maxWidth * 0.95 : null,
+            height: isLargeImage ? maxHeight * 0.95 : maxHeight * 0.606,
             semanticLabel: imageName,
             image: AssetImage(imagePath),
           ),

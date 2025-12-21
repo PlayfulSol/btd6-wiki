@@ -24,10 +24,13 @@ class BloonsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       itemCount: bloons.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: constraintsValues[bloonCrossCount],
-        childAspectRatio: constraintsValues[bloonAspectRatio],
+        childAspectRatio: 0.85,
+        crossAxisSpacing: 12,
+        mainAxisSpacing: 12,
       ),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -37,7 +40,7 @@ class BloonsGrid extends StatelessWidget {
         return Consumer<FavoriteState>(
           builder: (context, favoriteState, child) {
             return InkWell(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(12),
               onLongPress: () => favoriteState.toggleFavoriteFunc(
                   context, favoriteState, bloon),
               onTap: () {
@@ -65,34 +68,70 @@ class BloonsGrid extends StatelessWidget {
                 }
               },
               child: Card(
-                margin: const EdgeInsets.symmetric(
-                  vertical: 3,
-                  horizontal: 7,
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ImageOutliner(
-                        imageName: bloon.image,
-                        imagePath: bloonImage(bloon.image),
-                        width: constraintsValues[bloonImageWidth],
-                      ),
-                      Center(
-                        child: Text(
-                          bloon.name,
-                          style: constraintsValues[bloonTitleStyle],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(12),
+                          ),
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerHighest
+                              .withOpacity(0.2),
+                        ),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: ImageOutliner(
+                              imageName: bloon.image,
+                              imagePath: bloonImage(bloon.image),
+                              width: double.infinity,
+                              height: double.infinity,
+                            ),
+                          ),
                         ),
                       ),
-                      Icon(
-                        favoriteState.isFavorite(bloon.type, bloon.id)
-                            ? Icons.star
-                            : Icons.star_border_outlined,
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 6),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                bloon.name,
+                                style: constraintsValues[bloonTitleStyle],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                            Icon(
+                              favoriteState.isFavorite(bloon.type, bloon.id)
+                                  ? Icons.star
+                                  : Icons.star_border_outlined,
+                              size: 16,
+                              color: favoriteState.isFavorite(
+                                      bloon.type, bloon.id)
+                                  ? Colors.amber
+                                  : null,
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             );
