@@ -92,40 +92,45 @@ class _SingleTowerState extends State<SingleTower> {
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Image(
-                          semanticLabel: tower.name,
-                          image: AssetImage(towerImage(tower.image)),
-                          width: 120,
-                          fit: BoxFit.contain,
+                    Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 600),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image(
+                              semanticLabel: tower.name,
+                              image: AssetImage(towerImage(tower.image)),
+                              width: 140,
+                              fit: BoxFit.contain,
+                            ),
+                            const SizedBox(width: 16),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    tower.name,
+                                    style: bigTitleStyle,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Class: ${tower.classType}',
+                                    style: smallTitleStyle,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    tower.inGameDesc,
+                                    style: normalStyle,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                tower.name,
-                                style: bigTitleStyle,
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                'Class: ${tower.classType}',
-                                style: smallTitleStyle,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                tower.inGameDesc,
-                                style: normalStyle,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Row(
@@ -135,29 +140,7 @@ class _SingleTowerState extends State<SingleTower> {
                             child: Padding(
                               padding: const EdgeInsets.all(12.0),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Cost',
-                                    style: smallTitleStyle,
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    costToString(tower.cost),
-                                    style: normalStyle,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
                                     'Stats',
@@ -167,12 +150,16 @@ class _SingleTowerState extends State<SingleTower> {
                                   Text(
                                     statsToString(tower.stats),
                                     style: normalStyle,
+                                    textAlign: TextAlign.center,
                                   ),
-                                  if (extraStatsToString(tower.stats).trim().isNotEmpty) ...[
+                                  if (extraStatsToString(tower.stats)
+                                      .trim()
+                                      .isNotEmpty) ...[
                                     const SizedBox(height: 8),
                                     Text(
                                       extraStatsToString(tower.stats),
                                       style: normalStyle,
+                                      textAlign: TextAlign.center,
                                     ),
                                   ],
                                 ],
@@ -180,6 +167,29 @@ class _SingleTowerState extends State<SingleTower> {
                             ),
                           ),
                         ),
+                        Expanded(
+                          child: Card(
+                            child: Padding(
+                              padding: const EdgeInsets.all(12.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Cost',
+                                    style: smallTitleStyle,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    costToString(tower.cost),
+                                    style: normalStyle,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -197,4 +207,3 @@ class _SingleTowerState extends State<SingleTower> {
     );
   }
 }
-
