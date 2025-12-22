@@ -1,10 +1,10 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/models/base_model.dart';
 import '/presentation/widgets/common/image_outline.dart';
-import '/presentation/screens/bloon/boss_bloon.dart';
 import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
@@ -53,15 +53,7 @@ class BossesGrid extends StatelessWidget {
                           'value': boss.id,
                         },
                       );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => BossBloon(
-                            analyticsHelper: analyticsHelper,
-                            bossId: boss.id,
-                          ),
-                        ),
-                      );
+                      context.push('/bosses/${boss.id}');
                     } else {
                       favoriteState.toggleFavoriteFunc(
                           context, favoriteState, boss);
@@ -166,15 +158,7 @@ class BossesGrid extends StatelessWidget {
                       'value': boss.id,
                     },
                   );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => BossBloon(
-                        analyticsHelper: analyticsHelper,
-                        bossId: boss.id,
-                      ),
-                    ),
-                  );
+                  context.push('/bosses/${boss.id}');
                 } else {
                   favoriteState.toggleFavoriteFunc(
                       context, favoriteState, boss);

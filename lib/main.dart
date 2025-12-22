@@ -4,13 +4,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/firebase_options.dart';
 import '/hive/favorite_model.dart';
-import '/models/base/base_tower.dart';
-import '/models/base/base_hero.dart';
-import '/models/base/base_map.dart';
-import '/models/base_model.dart';
-import '/presentation/screens/misc/favorite_screen.dart';
 import '/presentation/widgets/misc/drawer_content.dart';
 import '/presentation/screens/tower/towers.dart';
 import '/presentation/screens/bloon/bloons.dart';
@@ -25,6 +21,7 @@ import '/utilities/constants.dart';
 import '/utilities/requests.dart';
 import '/utilities/strings.dart';
 import '/utilities/utils.dart';
+import '/utilities/router.dart';
 import '/themes/themes.dart';
 
 Future<void> main() async {
@@ -42,12 +39,52 @@ Future<void> main() async {
   runApp(MyApp(analytics: analytics));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key, required this.analytics});
   final FirebaseAnalytics analytics;
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isLoading = true;
+  late Map<String, dynamic> baseEntities;
+  late AppRouter appRouter;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadBaseData();
+  }
+
+  Future<void> _loadBaseData() async {
+    baseEntities = {
+      kTowers: await loadBaseTowers(),
+      kHeroes: await loadBaseHeroes(),
+      kMaps: await loadBaseMaps(),
+      kBloons: await loadBaseBloons(),
+      kBosses: await loadBaseBosses(),
+    };
+    appRouter = AppRouter(
+      analytics: widget.analytics,
+      baseEntities: baseEntities,
+    );
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (isLoading) {
+      return MaterialApp(
+        home: Scaffold(
+          body: const Loader(),
+        ),
+      );
+    }
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<GlobalState>(
@@ -61,12 +98,10 @@ class MyApp extends StatelessWidget {
         light: Themes.lightTheme,
         dark: Themes.darkTheme,
         initial: AdaptiveThemeMode.system,
-        builder: (theme, darkTheme) => MaterialApp(
+        builder: (theme, darkTheme) => MaterialApp.router(
           theme: theme,
           darkTheme: darkTheme,
-          home: MyHomePage(
-            analytics: analytics,
-          ),
+          routerConfig: appRouter.router,
           debugShowCheckedModeBanner: false,
         ),
       ),
@@ -78,8 +113,12 @@ class MyHomePage extends StatefulWidget {
   const MyHomePage({
     super.key,
     required this.analytics,
+    required this.baseEntities,
+    required this.initialPageIndex,
   });
   final FirebaseAnalytics analytics;
+  final Map<String, dynamic> baseEntities;
+  final int initialPageIndex;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -89,32 +128,37 @@ class _MyHomePageState extends State<MyHomePage> {
   late final AnalyticsHelper analyticsHelper;
   late final PageController pageController;
 
-  bool isLoading = true;
-  Map<String, dynamic> baseEntities = {
-    'towers': <BaseTower>[],
-    'heroes': <BaseHero>[],
-    'maps': <BaseMap>[],
-    'bloons': <BaseModel>[],
-    'bosses': <BaseModel>[],
-  };
-
-  loadBaseData() async {
-    baseEntities[kTowers] = await loadBaseTowers();
-    baseEntities[kHeroes] = await loadBaseHeroes();
-    baseEntities[kMaps] = await loadBaseMaps();
-    baseEntities[kBloons] = await loadBaseBloons();
-    baseEntities[kBosses] = await loadBaseBosses();
-    setState(() {
-      isLoading = false;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    loadBaseData();
     analyticsHelper = AnalyticsHelper(widget.analytics);
-    pageController = PageController(initialPage: 0);
+    pageController = PageController(initialPage: widget.initialPageIndex);
+    final globalState = context.read<GlobalState>();
+    globalState.updateCurrentPage(
+      simpleTitles[widget.initialPageIndex],
+      widget.initialPageIndex,
+    );
+  }
+
+  @override
+  void didUpdateWidget(MyHomePage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.initialPageIndex != widget.initialPageIndex) {
+      if (pageController.hasClients) {
+        pageController.jumpToPage(widget.initialPageIndex);
+      }
+      final globalState = context.read<GlobalState>();
+      globalState.updateCurrentPage(
+        simpleTitles[widget.initialPageIndex],
+        widget.initialPageIndex,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -212,14 +256,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         screenClass: kFavoritesClass,
                         screenName: kFavoritesClass,
                       );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => FavoriteScreen(
-                            analyticsHelper: analyticsHelper,
-                          ),
-                        ),
-                      );
+                      context.push('/favorites');
                     } else {
                       favoriteState.toggleMultiSelect(context);
                     }
@@ -231,34 +268,39 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: !isLoading
-          ? PageView(
-              controller: pageController,
-              children: [
-                Towers(
-                  analyticsHelper: analyticsHelper,
-                  towers: baseEntities[kTowers],
-                ),
-                Heroes(
-                  analyticsHelper: analyticsHelper,
-                  heroes: baseEntities[kHeroes],
-                ),
-                Bloons(
-                  analyticsHelper: analyticsHelper,
-                  bloonsList: baseEntities[kBloons],
-                  bossesList: baseEntities[kBosses],
-                ),
-                Maps(
-                  analyticsHelper: analyticsHelper,
-                  maps: baseEntities[kMaps],
-                )
-              ],
+      body: PageView(
+        controller: pageController,
+        children: [
+          Towers(
+            analyticsHelper: analyticsHelper,
+            towers: widget.baseEntities[kTowers],
+          ),
+          Heroes(
+            analyticsHelper: analyticsHelper,
+            heroes: widget.baseEntities[kHeroes],
+          ),
+          Bloons(
+            analyticsHelper: analyticsHelper,
+            bloonsList: widget.baseEntities[kBloons],
+            bossesList: widget.baseEntities[kBosses],
+          ),
+          Maps(
+            analyticsHelper: analyticsHelper,
+            maps: widget.baseEntities[kMaps],
+          )
+        ],
               onPageChanged: (index) {
                 FocusScope.of(context).unfocus();
                 globalState.updateCurrentPage(simpleTitles[index], index);
+                final routes = ['/towers', '/heroes', '/bloons', '/maps'];
+                final router = GoRouter.of(context);
+                final currentLocation = router.routerDelegate.currentConfiguration.uri.path;
+                final targetRoute = routes[index];
+                if (currentLocation != targetRoute && !currentLocation.startsWith('$targetRoute/')) {
+                  router.go(targetRoute);
+                }
               },
-            )
-          : const Loader(),
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -294,8 +336,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 'value': simpleTitles[index],
               },
             );
-            globalState.updateCurrentPage(simpleTitles[index], index);
-            pageController.jumpToPage(index);
+            final routes = ['/towers', '/heroes', '/bloons', '/maps'];
+            context.go(routes[index]);
           },
         ),
       ),

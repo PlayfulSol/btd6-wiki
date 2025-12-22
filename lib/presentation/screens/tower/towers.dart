@@ -1,7 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/models/base/base_tower.dart';
-import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/widgets/misc/search_widget.dart';
 import '/presentation/widgets/common/image_outline.dart';
 import '/analytics/analytics_constants.dart';
@@ -82,15 +82,7 @@ class _TowersState extends State<Towers> {
                                   'value': tower.id,
                                 },
                               );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SingleTower(
-                                    towerId: tower.id,
-                                    analyticsHelper: widget.analyticsHelper,
-                                  ),
-                                ),
-                              );
+                              context.push('/towers/${tower.id}');
                             } else {
                               favoriteState.toggleFavoriteFunc(
                                   context, favoriteState, tower);
@@ -192,15 +184,7 @@ class _TowersState extends State<Towers> {
                               'value': tower.id,
                             },
                           );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SingleTower(
-                                towerId: tower.id,
-                                analyticsHelper: widget.analyticsHelper,
-                              ),
-                            ),
-                          );
+                          context.push('/towers/${tower.id}');
                         } else {
                           favoriteState.toggleFavoriteFunc(
                               context, favoriteState, tower);

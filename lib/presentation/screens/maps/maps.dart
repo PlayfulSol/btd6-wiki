@@ -1,8 +1,8 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/models/base/base_map.dart';
 import '/presentation/widgets/misc/search_widget.dart';
-import '/presentation/screens/maps/single_map.dart';
 import '/presentation/widgets/maps/map_card.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
@@ -91,15 +91,7 @@ class _MapsState extends State<Maps> {
                                       'widget': map.id,
                                     },
                                   );
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => SingleMap(
-                                        analyticsHelper: widget.analyticsHelper,
-                                        mapId: map.id,
-                                      ),
-                                    ),
-                                  );
+                                  context.push('/maps/${map.id}');
                                 } else {
                                   favoriteState.toggleFavoriteFunc(
                                       context, favoriteState, map);
@@ -210,15 +202,7 @@ class _MapsState extends State<Maps> {
                                     'widget': map.id,
                                   },
                                 );
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => SingleMap(
-                                      analyticsHelper: widget.analyticsHelper,
-                                      mapId: map.id,
-                                    ),
-                                  ),
-                                );
+                                context.push('/maps/${map.id}');
                               } else {
                                 favoriteState.toggleFavoriteFunc(
                                     context, favoriteState, map);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 import '/models/base_model.dart';
 import '/presentation/widgets/common/image_outline.dart';
-import '/presentation/screens/bloon/single_bloon.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
@@ -54,15 +54,7 @@ class BloonsGrid extends StatelessWidget {
                           'value': bloon.id,
                         },
                       );
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SingleBloon(
-                            analyticsHelper: analyticsHelper,
-                            bloonId: bloon.id,
-                          ),
-                        ),
-                      );
+                      context.push('/bloons/${bloon.id}');
                     } else {
                       favoriteState.toggleFavoriteFunc(
                           context, favoriteState, bloon);
@@ -168,15 +160,7 @@ class BloonsGrid extends StatelessWidget {
                       'value': bloon.id,
                     },
                   );
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => SingleBloon(
-                        analyticsHelper: analyticsHelper,
-                        bloonId: bloon.id,
-                      ),
-                    ),
-                  );
+                  context.push('/bloons/${bloon.id}');
                 } else {
                   favoriteState.toggleFavoriteFunc(
                       context, favoriteState, bloon);
