@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/material.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/screens/hero/single_hero.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
@@ -29,6 +30,11 @@ class AppRouter {
       }
       return null;
     },
+    errorBuilder: (context, state) => Scaffold(
+      body: Center(
+        child: Text('Page not found: ${state.uri.path}'),
+      ),
+    ),
     routes: [
       GoRoute(
         path: '/towers',
