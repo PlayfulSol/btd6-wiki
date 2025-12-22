@@ -86,150 +86,194 @@ class _SingleMapState extends State<SingleMap> {
           : AppBar(),
       body: !loading
           ? SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Image(
-                        semanticLabel: map.name,
-                        image: AssetImage(mapImage(map.image)),
-                        height: 200,
-                        errorBuilder: (BuildContext context, Object error,
-                            StackTrace? stackTrace) {
-                          stackTrace ??= StackTrace.empty;
-
-                          return Image.asset(
-                            "assets/images/placeholder.png",
-                            width: 90,
-                          );
-                        },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Container(
+                    width: double.infinity,
+                    constraints: const BoxConstraints(
+                      minHeight: 300,
+                      maxHeight: 400,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest
+                          .withOpacity(0.3),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Image(
+                          semanticLabel: map.name,
+                          image: AssetImage(mapImage(map.image)),
+                          fit: BoxFit.contain,
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            return Center(
+                              child: Image.asset(
+                                "assets/images/placeholder.png",
+                                width: 90,
+                              ),
+                            );
+                          },
+                        ),
                       ),
-                      const SizedBox(height: 10),
-                      Text(map.name,
-                          textAlign: TextAlign.center, style: bigTitleStyle),
-                      Divider(
-                        thickness: 2,
-                        color: Colors.grey[600],
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: 10),
-                          const Text("Difficulty:", style: titleStyle),
-                          const SizedBox(height: 5),
-                          Text(map.difficulty, style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Entrances:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.entrances ?? '', style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Exits:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.exits ?? '', style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Terrain:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.terrain ?? '', style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Water:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.water ?? '', style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Removable Objects:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.removableObject ?? '', style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Highground:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.highground ?? '', style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Sight Blocker:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.sightBlocker ?? '', style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Music:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.music ?? '', style: normalStyle),
-                          const SizedBox(height: 15),
-                          const Text('Reward for first completion:',
-                              style: titleStyle),
-                          const SizedBox(height: 5),
-                          ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount:
-                                mapDifficultyToReward[map.difficulty]?.length ??
-                                    0,
-                            itemBuilder: (context, index) {
-                              final rewards =
-                                  mapDifficultyToReward[map.difficulty];
-                              final rewardKeys = rewards?.keys.toList() ?? [];
-                              final rewardValues =
-                                  rewards?.values.toList() ?? [];
-                              return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 5),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Text(
-                                        rewardKeys[index],
-                                        style: normalStyle,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        rewardValues[index],
-                                        style: normalStyle,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 15),
-                          const Text(
-                            'Length:',
-                            style: titleStyle,
-                          ),
-                          const SizedBox(height: 5),
-                          Text(map.length ?? '', style: normalStyle),
-                        ],
-                      ),
-                    ],
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          map.name,
+                          style: bigTitleStyle,
+                        ),
+                        const SizedBox(height: 8),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 6),
+                          decoration: BoxDecoration(
+                            color: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withOpacity(0.5),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            map.difficulty,
+                            style: smallTitleStyle.copyWith(fontSize: 14),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        _buildPropertyCard(
+                          context,
+                          'Map Properties',
+                          [
+                            _buildPropertyRow('Terrain', map.terrain ?? 'N/A'),
+                            _buildPropertyRow('Water', map.water ?? 'N/A'),
+                            _buildPropertyRow(
+                                'Entrances', map.entrances ?? 'N/A'),
+                            _buildPropertyRow('Exits', map.exits ?? 'N/A'),
+                            _buildPropertyRow('Removable Objects',
+                                map.removableObject ?? 'N/A'),
+                            _buildPropertyRow(
+                                'Highground', map.highground ?? 'N/A'),
+                            _buildPropertyRow(
+                                'Sight Blocker', map.sightBlocker ?? 'N/A'),
+                          ],
+                        ),
+                        if (map.length != null && map.length!.isNotEmpty) ...[
+                          const SizedBox(height: 16),
+                          _buildPropertyCard(
+                            context,
+                            'Length',
+                            [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Text(
+                                  map.length!,
+                                  style: normalStyle,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                        if (map.music != null && map.music!.isNotEmpty) ...[
+                          const SizedBox(height: 16),
+                          _buildPropertyCard(
+                            context,
+                            'Music',
+                            [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Text(
+                                  map.music!,
+                                  style: normalStyle,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                        if (mapDifficultyToReward[map.difficulty] != null) ...[
+                          const SizedBox(height: 16),
+                          _buildPropertyCard(
+                            context,
+                            'Reward for first completion',
+                            List.generate(
+                              mapDifficultyToReward[map.difficulty]!.length,
+                              (index) {
+                                final rewards =
+                                    mapDifficultyToReward[map.difficulty];
+                                final rewardKeys = rewards?.keys.toList() ?? [];
+                                final rewardValues =
+                                    rewards?.values.toList() ?? [];
+                                return _buildPropertyRow(
+                                  rewardKeys[index],
+                                  rewardValues[index],
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ],
               ),
             )
-          : const CircularProgressIndicator(),
+          : const Center(child: CircularProgressIndicator()),
+    );
+  }
+
+  Widget _buildPropertyCard(
+      BuildContext context, String title, List<Widget> children) {
+    return Card(
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: titleStyle,
+            ),
+            const SizedBox(height: 12),
+            ...children,
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildPropertyRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 6),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: 140,
+            child: Text(
+              label,
+              style: bolderNormalStyle.copyWith(fontSize: 14),
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: normalStyle.copyWith(fontSize: 14),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

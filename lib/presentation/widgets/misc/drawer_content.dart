@@ -1,6 +1,7 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'about_us.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
@@ -122,9 +123,7 @@ class _DrawerContentState extends State<DrawerContent> {
                           category: kTowers,
                           option: towerTypes[index],
                         );
-                        globalState.updateCurrentPage(
-                            simpleTitles[kTowersIndex], kTowersIndex);
-                        widget.pageController.jumpToPage(kTowersIndex);
+                        context.go('/towers');
                       },
                     );
                   },
@@ -147,9 +146,7 @@ class _DrawerContentState extends State<DrawerContent> {
                   'value': kHeroes,
                 },
               );
-              globalState.updateCurrentPage(
-                  simpleTitles[kHeroesIndex], kHeroesIndex);
-              widget.pageController.jumpToPage(kHeroesIndex);
+              context.go('/heroes');
             },
           ),
           ExpansionTile(
@@ -201,9 +198,7 @@ class _DrawerContentState extends State<DrawerContent> {
                           category: kBloons,
                           option: bloonTypes[index],
                         );
-                        globalState.updateCurrentPage(
-                            simpleTitles[kBloonsIndex], kBloonsIndex);
-                        widget.pageController.jumpToPage(kBloonsIndex);
+                        context.go('/bloons');
                       },
                     );
                   },
@@ -260,9 +255,7 @@ class _DrawerContentState extends State<DrawerContent> {
                           category: kMaps,
                           option: mapDifficulties[index],
                         );
-                        globalState.updateCurrentPage(
-                            simpleTitles[kMapsIndex], kMapsIndex);
-                        widget.pageController.jumpToPage(kMapsIndex);
+                        context.go('/maps');
                       },
                     );
                   },

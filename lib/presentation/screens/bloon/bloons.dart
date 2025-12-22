@@ -82,11 +82,6 @@ class _BloonsState extends State<Bloons> {
                     if (showBloons)
                       Column(
                         children: [
-                          const Text(
-                            "Bloons",
-                            style: bigTitleStyle,
-                            textAlign: TextAlign.center,
-                          ),
                           const SizedBox(height: 15),
                           BloonsGrid(
                             analyticsHelper: widget.analyticsHelper,

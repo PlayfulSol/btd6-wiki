@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/models/bloons/common/relative_class.dart';
-import '/presentation/screens/bloon/single_bloon.dart';
-import '/presentation/screens/bloon/minion_bloon.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
@@ -98,15 +97,7 @@ Widget generateMinion(
               style: normalStyle,
             ),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MinionBloonPage(
-                    analyticsHelper: analyticsHelper,
-                    minionId: relative.id,
-                  ),
-                ),
-              );
+              context.push('/minions/${relative.id}');
             },
           ),
         ),
@@ -137,15 +128,7 @@ List<Widget> generateRelatives(BuildContext context, List<Relative> data,
           style: normalStyle,
         ),
         onTap: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => SingleBloon(
-                analyticsHelper: analyticsHelper,
-                bloonId: data[index].id,
-              ),
-            ),
-          );
+          context.push('/bloons/${data[index].id}');
         },
       ),
     );

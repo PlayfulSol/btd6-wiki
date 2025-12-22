@@ -17,32 +17,67 @@ class MapCard extends StatelessWidget {
     return Consumer<FavoriteState>(
       builder: (context, favoriteState, child) {
         return Card(
-          elevation: 5,
-          shadowColor: Colors.black87,
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
             children: [
               Expanded(
-                child: Image(
-                  semanticLabel: singleMap.name,
-                  image: AssetImage(mapImage(singleMap.image)),
-                  fit: BoxFit.cover,
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
-                    return const Icon(Icons.error);
-                  },
+                flex: 4,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(12),
+                  ),
+                  child: Image(
+                    semanticLabel: singleMap.name,
+                    image: AssetImage(mapImage(singleMap.image)),
+                    fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object exception,
+                        StackTrace? stackTrace) {
+                      return const Icon(Icons.error);
+                    },
+                  ),
                 ),
               ),
-              ListTile(
-                title: AutoSizeText(
-                  capitalizeEveryWord(singleMap.name),
-                  maxLines: 1,
-                  style: bolderNormalStyle,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          AutoSizeText(
+                            capitalizeEveryWord(singleMap.name),
+                            maxLines: 1,
+                            minFontSize: 10,
+                            style: bolderNormalStyle.copyWith(fontSize: 12),
+                          ),
+                          Text(
+                            singleMap.difficulty,
+                            style: subtitleStyle.copyWith(fontSize: 10),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Icon(
+                      favoriteState.isFavorite(singleMap.type, singleMap.id)
+                          ? Icons.star
+                          : Icons.star_border_outlined,
+                      size: 16,
+                      color: favoriteState.isFavorite(
+                              singleMap.type, singleMap.id)
+                          ? Colors.amber
+                          : null,
+                    ),
+                  ],
                 ),
-                subtitle: Text(singleMap.difficulty, style: subtitleStyle),
-                trailing: favoriteState.isFavorite(singleMap.type, singleMap.id)
-                    ? const Icon(Icons.star)
-                    : const Icon(Icons.star_border_outlined),
               ),
             ],
           ),

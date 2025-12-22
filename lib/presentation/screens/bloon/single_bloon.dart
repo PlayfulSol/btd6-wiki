@@ -77,11 +77,24 @@ class _SingleBloonState extends State<SingleBloon> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Image(
-                      semanticLabel: bloon.fullName,
-                      image: AssetImage(bloonImage(bloon.image)),
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      height: MediaQuery.of(context).size.width * 0.35,
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final screenWidth = MediaQuery.of(context).size.width;
+                        final maxImageWidth = 200.0;
+                        final imageWidth = screenWidth > 600
+                            ? maxImageWidth
+                            : screenWidth * 0.3;
+                        final imageHeight = screenWidth > 600
+                            ? maxImageWidth * 1.17
+                            : screenWidth * 0.35;
+
+                        return Image(
+                          semanticLabel: bloon.fullName,
+                          image: AssetImage(bloonImage(bloon.image)),
+                          width: imageWidth,
+                          height: imageHeight,
+                        );
+                      },
                     ),
                     Text(
                       bloon.fullName,
@@ -201,10 +214,12 @@ class _SingleBloonState extends State<SingleBloon> {
                                       TextSpan(
                                           text: separateString(e)[0],
                                           style: normalStyle.copyWith(
+                                              color: Colors.white,
                                               fontWeight: FontWeight.bold)),
                                       TextSpan(
                                         text: separateString(e)[1],
-                                        style: normalStyle,
+                                        style: normalStyle.copyWith(
+                                            color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -236,10 +251,12 @@ class _SingleBloonState extends State<SingleBloon> {
                                       TextSpan(
                                           text: separateString(e)[0],
                                           style: normalStyle.copyWith(
+                                              color: Colors.white,
                                               fontWeight: FontWeight.bold)),
                                       TextSpan(
                                         text: separateString(e)[1],
-                                        style: normalStyle,
+                                        style: normalStyle.copyWith(
+                                            color: Colors.white),
                                       ),
                                     ],
                                   ),

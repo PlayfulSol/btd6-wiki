@@ -1,5 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/models/bloons/common/relative_class.dart';
@@ -9,11 +10,6 @@ import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base_model.dart';
-import '/presentation/screens/tower/single_tower.dart';
-import '/presentation/screens/bloon/single_bloon.dart';
-import '/presentation/screens/bloon/boss_bloon.dart';
-import '/presentation/screens/hero/single_hero.dart';
-import '/presentation/screens/maps/single_map.dart';
 import 'layout_presets.dart';
 import 'images_url.dart';
 import 'constants.dart';
@@ -51,7 +47,7 @@ int desiredCategoryOrder(dynamic key1, dynamic key2) {
 }
 
 void navigateToPage(BuildContext context, var item,
-    AnalyticsHelper analyticsHelper, String originScreen, String originWidget) {
+AnalyticsHelper analyticsHelper, String originScreen, String originWidget) {
   analyticsHelper.logEvent(
     name: widgetEngagement,
     parameters: {
@@ -61,38 +57,15 @@ void navigateToPage(BuildContext context, var item,
     },
   );
 
-  Map<String, Widget> destinations = {
-    kTowers: SingleTower(
-      towerId: item.id,
-      analyticsHelper: analyticsHelper,
-    ),
-    kHeroes: SingleHero(
-      heroId: item.id,
-      analyticsHelper: analyticsHelper,
-    ),
-    kBloons: SingleBloon(
-      bloonId: item.id,
-      analyticsHelper: analyticsHelper,
-    ),
-    kBlimps: SingleBloon(
-      bloonId: item.id,
-      analyticsHelper: analyticsHelper,
-    ),
-    kBosses: BossBloon(
-      bossId: item.id,
-      analyticsHelper: analyticsHelper,
-    ),
-    kMaps: SingleMap(
-      mapId: item.id,
-      analyticsHelper: analyticsHelper,
-    ),
+  Map<String, String> routes = {
+    kTowers: '/towers/${item.id}',
+    kHeroes: '/heroes/${item.id}',
+    kBloons: '/bloons/${item.id}',
+    kBlimps: '/bloons/${item.id}',
+    kBosses: '/bosses/${item.id}',
+    kMaps: '/maps/${item.id}',
   };
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => destinations[item.type]!,
-    ),
-  );
+  context.push(routes[item.type]!);
 }
 
 String formatBigNumber(int number) {

@@ -1,9 +1,9 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '/models/base/base_hero.dart';
 import '/presentation/widgets/misc/search_widget.dart';
 import '/presentation/widgets/common/image_outline.dart';
-import '/presentation/screens/hero/single_hero.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
@@ -41,6 +41,9 @@ class _HeroesState extends State<Heroes> {
     final constraintsValues = getPreset(
       MediaQuery.of(context).size,
     );
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 480;
+    final crossAxisCount = isMobile ? 1 : constraintsValues[heroCrossCount];
 
     return Scaffold(
       body: Column(
@@ -56,18 +59,118 @@ class _HeroesState extends State<Heroes> {
               builder: (context, globalState, favoriteState, child) {
                 final filteredHeroes =
                     heroesFromSearch(widget.heroes, globalState.currentQuery);
+                
+                if (isMobile) {
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(12),
+                    itemCount: filteredHeroes.length,
+                    itemBuilder: (context, index) {
+                      final hero = filteredHeroes[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(12),
+                          onLongPress: () => favoriteState.toggleFavoriteFunc(
+                              context, favoriteState, hero),
+                          onTap: () {
+                            if (!favoriteState.isMultiSelectMode) {
+                              widget.analyticsHelper.logEvent(
+                                name: widgetEngagement,
+                                parameters: {
+                                  'screen': kHeroPagesClass,
+                                  'widget': listTile,
+                                  'value': hero.id,
+                                },
+                              );
+                              context.push('/heroes/${hero.id}');
+                            } else {
+                              favoriteState.toggleFavoriteFunc(
+                                  context, favoriteState, hero);
+                            }
+                          },
+                          child: Card(
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 100,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(12),
+                                      bottomLeft: Radius.circular(12),
+                                    ),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .surfaceContainerHighest
+                                        .withOpacity(0.2),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: ImageOutliner(
+                                      imageName: hero.image,
+                                      imagePath: heroImage(hero.image),
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 12, vertical: 8),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            hero.name,
+                                            style: constraintsValues[heroTitleStyle],
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        Icon(
+                                          favoriteState.isFavorite(
+                                                  hero.type, hero.id)
+                                              ? Icons.star
+                                              : Icons.star_border_outlined,
+                                          size: 18,
+                                          color: favoriteState.isFavorite(
+                                                  hero.type, hero.id)
+                                              ? Colors.amber
+                                              : null,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+
                 return GridView.builder(
+                  padding: const EdgeInsets.all(12),
                   itemCount: filteredHeroes.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: constraintsValues[heroCrossCount],
-                    childAspectRatio: constraintsValues[heroAspectRatio],
+                    crossAxisCount: crossAxisCount,
+                    childAspectRatio: 0.75,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
                   ),
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     final hero = filteredHeroes[index];
 
                     return InkWell(
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(12),
                       onLongPress: () => favoriteState.toggleFavoriteFunc(
                           context, favoriteState, hero),
                       onTap: () {
@@ -80,47 +183,82 @@ class _HeroesState extends State<Heroes> {
                               'value': hero.id,
                             },
                           );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => SingleHero(
-                                heroId: hero.id,
-                                analyticsHelper: widget.analyticsHelper,
-                              ),
-                            ),
-                          );
+                          context.push('/heroes/${hero.id}');
                         } else {
                           favoriteState.toggleFavoriteFunc(
                               context, favoriteState, hero);
                         }
                       },
                       child: Card(
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 13, vertical: 8),
-                        child: Center(
-                          child: ListTile(
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 8),
-                            horizontalTitleGap: 8,
-                            leading: ImageOutliner(
-                              imageName: hero.image,
-                              imagePath: heroImage(hero.image),
+                        elevation: 2,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Expanded(
+                              flex: 5,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(12),
+                                  ),
+                                  color: Theme.of(context)
+                                      .colorScheme
+                                      .surfaceContainerHighest
+                                      .withOpacity(0.2),
+                                ),
+                                child: Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(16),
+                                    child: ImageOutliner(
+                                      imageName: hero.image,
+                                      imagePath: heroImage(hero.image),
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                            title: Text(
-                              hero.name,
-                              style: constraintsValues[heroTitleStyle],
+                            Expanded(
+                              flex: 2,
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12, vertical: 8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            hero.name,
+                                            style: constraintsValues[heroTitleStyle],
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        Icon(
+                                          favoriteState.isFavorite(
+                                                  hero.type, hero.id)
+                                              ? Icons.star
+                                              : Icons.star_border_outlined,
+                                          size: 18,
+                                          color: favoriteState.isFavorite(
+                                                  hero.type, hero.id)
+                                              ? Colors.amber
+                                              : null,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            subtitle: Text(
-                              hero.inGameDesc,
-                              overflow: TextOverflow.ellipsis,
-                              style: constraintsValues[heroSubtitleStyle],
-                              maxLines: constraintsValues[heroSubtitleRows],
-                            ),
-                            trailing:
-                                favoriteState.isFavorite(hero.type, hero.id)
-                                    ? const Icon(Icons.star)
-                                    : const Icon(Icons.star_border_outlined),
-                          ),
+                          ],
                         ),
                       ),
                     );
