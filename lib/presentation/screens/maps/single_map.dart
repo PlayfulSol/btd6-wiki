@@ -96,7 +96,10 @@ class _SingleMapState extends State<SingleMap> {
                       maxHeight: 400,
                     ),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surfaceContainerHighest.withOpacity(0.3),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .surfaceContainerHighest
+                          .withOpacity(0.3),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -150,15 +153,34 @@ class _SingleMapState extends State<SingleMap> {
                           [
                             _buildPropertyRow('Terrain', map.terrain ?? 'N/A'),
                             _buildPropertyRow('Water', map.water ?? 'N/A'),
-                            _buildPropertyRow('Entrances', map.entrances ?? 'N/A'),
-                            _buildPropertyRow('Exits', map.exits ?? 'N/A'),
                             _buildPropertyRow(
-                                'Removable Objects', map.removableObject ?? 'N/A'),
-                            _buildPropertyRow('Highground', map.highground ?? 'N/A'),
+                                'Entrances', map.entrances ?? 'N/A'),
+                            _buildPropertyRow('Exits', map.exits ?? 'N/A'),
+                            _buildPropertyRow('Removable Objects',
+                                map.removableObject ?? 'N/A'),
+                            _buildPropertyRow(
+                                'Highground', map.highground ?? 'N/A'),
                             _buildPropertyRow(
                                 'Sight Blocker', map.sightBlocker ?? 'N/A'),
                           ],
                         ),
+                        if (map.length != null && map.length!.isNotEmpty) ...[
+                          const SizedBox(height: 16),
+                          _buildPropertyCard(
+                            context,
+                            'Length',
+                            [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Text(
+                                  map.length!,
+                                  style: normalStyle,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                         if (map.music != null && map.music!.isNotEmpty) ...[
                           const SizedBox(height: 16),
                           _buildPropertyCard(
@@ -166,7 +188,8 @@ class _SingleMapState extends State<SingleMap> {
                             'Music',
                             [
                               Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
                                 child: Text(
                                   map.music!,
                                   style: normalStyle,
@@ -194,22 +217,6 @@ class _SingleMapState extends State<SingleMap> {
                                 );
                               },
                             ),
-                          ),
-                        ],
-                        if (map.length != null && map.length!.isNotEmpty) ...[
-                          const SizedBox(height: 16),
-                          _buildPropertyCard(
-                            context,
-                            'Length',
-                            [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 4),
-                                child: Text(
-                                  map.length!,
-                                  style: normalStyle,
-                                ),
-                              ),
-                            ],
                           ),
                         ],
                       ],
