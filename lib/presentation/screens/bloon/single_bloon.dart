@@ -201,10 +201,12 @@ class _SingleBloonState extends State<SingleBloon> {
                                       TextSpan(
                                           text: separateString(e)[0],
                                           style: normalStyle.copyWith(
+                                              color: Colors.white,
                                               fontWeight: FontWeight.bold)),
                                       TextSpan(
                                         text: separateString(e)[1],
-                                        style: normalStyle,
+                                        style: normalStyle.copyWith(
+                                            color: Colors.white),
                                       ),
                                     ],
                                   ),
@@ -236,10 +238,12 @@ class _SingleBloonState extends State<SingleBloon> {
                                       TextSpan(
                                           text: separateString(e)[0],
                                           style: normalStyle.copyWith(
+                                              color: Colors.white,
                                               fontWeight: FontWeight.bold)),
                                       TextSpan(
                                         text: separateString(e)[1],
-                                        style: normalStyle,
+                                        style: normalStyle.copyWith(
+                                            color: Colors.white),
                                       ),
                                     ],
                                   ),

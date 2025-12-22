@@ -133,68 +133,143 @@ class _SingleTowerState extends State<SingleTower> {
                       ),
                     ),
                     const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Stats',
-                                    style: smallTitleStyle,
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final screenWidth = MediaQuery.of(context).size.width;
+                        final availableWidth = constraints.maxWidth;
+                        final isMobile =
+                            screenWidth < 480 || availableWidth < 480;
+                        print(
+                            'SINGLE_TOWER DEBUG - Screen width: $screenWidth, Available width: $availableWidth, isMobile: $isMobile');
+
+                        if (isMobile) {
+                          return Column(
+                            children: [
+                              Card(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Stats',
+                                        style: smallTitleStyle,
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        statsToString(tower.stats),
+                                        style: normalStyle,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      if (extraStatsToString(tower.stats)
+                                          .trim()
+                                          .isNotEmpty) ...[
+                                        const SizedBox(height: 8),
+                                        Text(
+                                          extraStatsToString(tower.stats),
+                                          style: normalStyle,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ],
                                   ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    statsToString(tower.stats),
-                                    style: normalStyle,
-                                    textAlign: TextAlign.center,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Card(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Cost',
+                                        style: smallTitleStyle,
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Text(
+                                        costToString(tower.cost),
+                                        style: normalStyle,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
                                   ),
-                                  if (extraStatsToString(tower.stats)
-                                      .trim()
-                                      .isNotEmpty) ...[
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      extraStatsToString(tower.stats),
-                                      style: normalStyle,
-                                      textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Stats',
+                                          style: smallTitleStyle,
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          statsToString(tower.stats),
+                                          style: normalStyle,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        if (extraStatsToString(tower.stats)
+                                            .trim()
+                                            .isNotEmpty) ...[
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            extraStatsToString(tower.stats),
+                                            style: normalStyle,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ],
+                                      ],
                                     ),
-                                  ],
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          flex: 1,
-                          child: Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Cost',
-                                    style: smallTitleStyle,
                                   ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    costToString(tower.cost),
-                                    style: normalStyle,
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
+                                ),
                               ),
-                            ),
-                          ),
-                        ),
-                      ],
+                              const SizedBox(width: 8),
+                              Expanded(
+                                flex: 1,
+                                child: Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Cost',
+                                          style: smallTitleStyle,
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Text(
+                                          costToString(tower.cost),
+                                          style: normalStyle,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(height: 16),
                     ListView.builder(
