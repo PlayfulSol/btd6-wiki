@@ -134,27 +134,47 @@ class _SingleHeroState extends State<SingleHero> {
                     children: [
                       Column(
                         children: [
-                          CarouselSlider.builder(
-                            carouselController: controller,
-                            options: CarouselOptions(
-                              viewportFraction: 0.64,
-                              initialPage: 0,
-                              height: MediaQuery.of(context).size.width * 0.5,
-                              enableInfiniteScroll: false,
-                              onPageChanged: (index, reason) {
-                                setState(() {
-                                  activeIndex = index;
-                                });
-                              },
-                            ),
-                            itemCount: singleHero.skins.length,
-                            itemBuilder: ((context, index, realIndex) => Image(
-                                  image: AssetImage(
-                                      heroImage(skinsFirstImages[index])),
-                                  filterQuality: FilterQuality.high,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.56,
-                                )),
+                          LayoutBuilder(
+                            builder: (context, constraints) {
+                              final screenWidth = MediaQuery.of(context).size.width;
+                              final maxImageWidth = 400.0;
+                              final imageWidth = screenWidth > 600 
+                                  ? maxImageWidth 
+                                  : screenWidth * 0.56;
+                              final carouselHeight = screenWidth > 600 
+                                  ? maxImageWidth * 0.9 
+                                  : screenWidth * 0.5;
+                              final viewportFraction = screenWidth > 600 
+                                  ? 0.8 
+                                  : 0.64;
+                              
+                              return ConstrainedBox(
+                                constraints: BoxConstraints(
+                                  maxWidth: maxImageWidth,
+                                ),
+                                child: CarouselSlider.builder(
+                                  carouselController: controller,
+                                  options: CarouselOptions(
+                                    viewportFraction: viewportFraction,
+                                    initialPage: 0,
+                                    height: carouselHeight,
+                                    enableInfiniteScroll: false,
+                                    onPageChanged: (index, reason) {
+                                      setState(() {
+                                        activeIndex = index;
+                                      });
+                                    },
+                                  ),
+                                  itemCount: singleHero.skins.length,
+                                  itemBuilder: ((context, index, realIndex) => Image(
+                                        image: AssetImage(
+                                            heroImage(skinsFirstImages[index])),
+                                        filterQuality: FilterQuality.high,
+                                        width: imageWidth,
+                                      )),
+                                ),
+                              );
+                            },
                           ),
                           const SizedBox(height: 10),
                           Text(
