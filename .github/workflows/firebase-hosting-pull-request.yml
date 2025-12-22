@@ -14,8 +14,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: recursive
-          token: ${{ secrets.SUBMODULE_TOKEN || secrets.GITHUB_TOKEN }}
+          submodules: false
+      - name: Setup SSH for submodules
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SUBMODULE_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          git config --global url."git@github.com:".insteadOf "https://github.com/"
+      - name: Checkout submodules
+        run: |
+          git submodule sync --recursive
+          git submodule update --init --recursive --depth=1
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.24.0"
