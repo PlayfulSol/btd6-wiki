@@ -9,11 +9,6 @@ class Themes {
     expansionTileTheme: const ExpansionTileThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
     ),
-    cardTheme: CardThemeData(
-      elevation: 5,
-      shadowColor: Colors.black,
-      color: darkColorScheme.primaryContainer,
-    ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         elevation: WidgetStateProperty.all<double>(2),
@@ -52,11 +47,6 @@ class Themes {
     colorScheme: lightColorScheme,
     expansionTileTheme: const ExpansionTileThemeData(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-    ),
-    cardTheme: CardThemeData(
-      elevation: 5,
-      shadowColor: Colors.black,
-      color: lightColorScheme.primaryContainer,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
