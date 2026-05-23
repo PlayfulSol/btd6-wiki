@@ -13,8 +13,15 @@ class Relative {
 
   Relative.fromJson(Map<String, dynamic> json) {
     id = json['id'] as String;
-    name = json['name'] as String;
     image = json['image'] as String;
-    value = json['value'] as String;
+    // New JSON uses 'count' (int); old format used 'value' (string)
+    final rawValue = json['value'] ?? json['count'] ?? 1;
+    value = rawValue.toString();
+    // New JSON has no 'name'; derive from id ("super_ceramic" → "Super Ceramic")
+    name = json['name'] as String? ??
+        id
+            .split('_')
+            .map((w) => w.isEmpty ? '' : '${w[0].toUpperCase()}${w.substring(1)}')
+            .join(' ');
   }
 }

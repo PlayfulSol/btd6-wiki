@@ -10,6 +10,7 @@ class MapModel extends BaseMap {
   late final dynamic removableObject;
   late final dynamic highground;
   late final String? sightBlocker;
+  late final String? coopDivision;
 
   MapModel(
     this.entrances,
@@ -21,6 +22,7 @@ class MapModel extends BaseMap {
     this.removableObject,
     this.highground,
     this.sightBlocker,
+    this.coopDivision,
     super.id,
     super.name,
     super.image,
@@ -38,6 +40,7 @@ class MapModel extends BaseMap {
         removableObject = json['removableObject'],
         highground = json['highground'],
         sightBlocker = json['sightBlocker'],
+        coopDivision = json['coopDivision'],
         super(
           json['id'] as String,
           json['name'] as String,

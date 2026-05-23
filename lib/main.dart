@@ -1,12 +1,11 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:go_router/go_router.dart';
 import '/firebase_options.dart';
-import '/hive/favorite_model.dart';
 import '/presentation/widgets/misc/drawer_content.dart';
 import '/presentation/screens/tower/towers.dart';
 import '/presentation/screens/bloon/bloons.dart';
@@ -19,8 +18,6 @@ import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
-import '/utilities/strings.dart';
-import '/utilities/utils.dart';
 import '/utilities/router.dart';
 import '/themes/themes.dart';
 
@@ -30,12 +27,6 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   final analytics = FirebaseAnalytics.instance;
-  await Hive.initFlutter();
-  Hive.registerAdapter(FavoriteModelAdapter());
-  await Hive.openBox<List<dynamic>>(
-    kFavorite,
-    keyComparator: desiredCategoryOrder,
-  );
   runApp(MyApp(analytics: analytics));
 }
 
@@ -49,8 +40,10 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isLoading = true;
+  String? loadError;
   late Map<String, dynamic> baseEntities;
   late AppRouter appRouter;
+  late SharedPreferences _prefs;
 
   @override
   void initState() {
@@ -59,17 +52,34 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _loadBaseData() async {
-    baseEntities = {
-      kTowers: await loadBaseTowers(),
-      kHeroes: await loadBaseHeroes(),
-      kMaps: await loadBaseMaps(),
-      kBloons: await loadBaseBloons(),
-      kBosses: await loadBaseBosses(),
-    };
-    appRouter = AppRouter(
-      analytics: widget.analytics,
-      baseEntities: baseEntities,
-    );
+    try {
+      final results = await Future.wait([
+        SharedPreferences.getInstance(),
+        loadBaseTowers(),
+        loadBaseHeroes(),
+        loadBaseMaps(),
+        loadBaseBloons(),
+        loadBaseBosses(),
+      ]);
+      _prefs = results[0] as SharedPreferences;
+      baseEntities = {
+        kTowers: results[1],
+        kHeroes: results[2],
+        kMaps: results[3],
+        kBloons: results[4],
+        kBosses: results[5],
+      };
+      appRouter = AppRouter(
+        analytics: widget.analytics,
+        baseEntities: baseEntities,
+      );
+    } catch (e) {
+      setState(() {
+        loadError = e.toString();
+        isLoading = false;
+      });
+      return;
+    }
     setState(() {
       isLoading = false;
     });
@@ -78,9 +88,32 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     if (isLoading) {
+      return const MaterialApp(
+        home: Scaffold(
+          body: Loader(),
+        ),
+      );
+    }
+
+    if (loadError != null) {
       return MaterialApp(
         home: Scaffold(
-          body: const Loader(),
+          body: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.error_outline, size: 48, color: Colors.red),
+                  const SizedBox(height: 16),
+                  const Text('Failed to load app data',
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 8),
+                  Text(loadError!, style: const TextStyle(fontSize: 12)),
+                ],
+              ),
+            ),
+          ),
         ),
       );
     }
@@ -91,7 +124,7 @@ class _MyAppState extends State<MyApp> {
           create: (BuildContext context) => GlobalState(),
         ),
         ChangeNotifierProvider<FavoriteState>(
-          create: (BuildContext context) => FavoriteState(),
+          create: (BuildContext context) => FavoriteState(_prefs),
         ),
       ],
       child: AdaptiveTheme(
@@ -112,11 +145,11 @@ class _MyAppState extends State<MyApp> {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
     super.key,
-    required this.analytics,
+    required this.analyticsHelper,
     required this.baseEntities,
     required this.initialPageIndex,
   });
-  final FirebaseAnalytics analytics;
+  final AnalyticsHelper analyticsHelper;
   final Map<String, dynamic> baseEntities;
   final int initialPageIndex;
 
@@ -131,13 +164,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    analyticsHelper = AnalyticsHelper(widget.analytics);
+    analyticsHelper = widget.analyticsHelper;
     pageController = PageController(initialPage: widget.initialPageIndex);
-    final globalState = context.read<GlobalState>();
-    globalState.updateCurrentPage(
-      simpleTitles[widget.initialPageIndex],
-      widget.initialPageIndex,
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+      context.read<GlobalState>().updateCurrentPage(
+        simpleTitles[widget.initialPageIndex],
+        widget.initialPageIndex,
+      );
+    });
   }
 
   @override
@@ -173,47 +208,10 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Consumer<GlobalState>(
           builder: (context, globalState, child) {
-            return Text(globalState.currentTitle);
+            return Text(globalState.displayTitle);
           },
         ),
         actions: [
-          Consumer<GlobalState>(
-            builder: (context, globalState, child) {
-              List<String> options =
-                  dropMenuOptions(globalState.currentPageIndex);
-              return options.isNotEmpty
-                  ? PopupMenuButton<String>(
-                      icon: const Icon(Icons.filter_list),
-                      onSelected: (String? newValue) {
-                        if (newValue != null) {
-                          globalState.updateCurrentOptionSelected(
-                              option: newValue);
-                          analyticsHelper.logEvent(
-                            name: widgetEngagement,
-                            parameters: {
-                              'screen': globalState.activeCategory,
-                              'widget': appBarFilter,
-                              'value': newValue,
-                            },
-                          );
-                        }
-                      },
-                      itemBuilder: (context) =>
-                          options.map<PopupMenuItem<String>>((String value) {
-                        return PopupMenuItem<String>(
-                          padding: const EdgeInsets.only(left: 16),
-                          value: value,
-                          child: Text(
-                            value,
-                          ),
-                        );
-                      }).toList(),
-                      position: PopupMenuPosition.under,
-                      offset: const Offset(30, 7),
-                    )
-                  : Container();
-            },
-          ),
           Consumer<GlobalState>(
             builder: (context, globalState, child) {
               return IconButton(
@@ -301,45 +299,42 @@ class _MyHomePageState extends State<MyHomePage> {
                 }
               },
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          border: Border(
-            top: BorderSide(
-                color: Theme.of(context).colorScheme.outline, width: 0.5),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: globalState.currentPageIndex,
+        onDestinationSelected: (index) {
+          analyticsHelper.logEvent(
+            name: widgetEngagement,
+            parameters: {
+              'screen': globalState.activeCategory,
+              'widget': bottomNavBar,
+              'value': simpleTitles[index],
+            },
+          );
+          final routes = ['/towers', '/heroes', '/bloons', '/maps'];
+          context.go(routes[index]);
+        },
+        destinations: const [
+          NavigationDestination(
+            icon: Icon(Icons.cell_tower_outlined),
+            selectedIcon: Icon(Icons.cell_tower),
+            label: 'Towers',
           ),
-        ),
-        child: BottomNavigationBar(
-          selectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
+          NavigationDestination(
+            icon: Icon(Icons.person_outline),
+            selectedIcon: Icon(Icons.person),
+            label: 'Heroes',
           ),
-          unselectedLabelStyle: const TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 15,
+          NavigationDestination(
+            icon: Icon(Icons.bubble_chart_outlined),
+            selectedIcon: Icon(Icons.bubble_chart),
+            label: 'Bloons',
           ),
-          type: BottomNavigationBarType.fixed,
-          items: [
-            for (int i = 0; i < simpleTitles.length; i++)
-              BottomNavigationBarItem(
-                icon: icons[i],
-                label: capitalize(simpleTitles[i]),
-                tooltip: simpleTitles[i],
-              ),
-          ],
-          currentIndex: globalState.currentPageIndex,
-          onTap: (index) {
-            analyticsHelper.logEvent(
-              name: widgetEngagement,
-              parameters: {
-                'screen': globalState.activeCategory,
-                'widget': bottomNavBar,
-                'value': simpleTitles[index],
-              },
-            );
-            final routes = ['/towers', '/heroes', '/bloons', '/maps'];
-            context.go(routes[index]);
-          },
-        ),
+          NavigationDestination(
+            icon: Icon(Icons.map_outlined),
+            selectedIcon: Icon(Icons.map),
+            label: 'Maps',
+          ),
+        ],
       ),
     );
   }

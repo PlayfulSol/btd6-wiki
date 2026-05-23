@@ -1,10 +1,15 @@
 import 'dart:convert';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '/presentation/widgets/common/detail_page_scaffold.dart';
+import '/presentation/widgets/common/loader.dart';
+import '/presentation/widgets/common/image_carousel.dart';
 import '/models/bloons/boss/minion_bloon.dart';
-import '/presentation/widgets/bloons/bloon_aid_widget.dart';
+import '/presentation/widgets/bloons/bloon_aid_widget.dart' show GimmicksWidget;
+import '/presentation/widgets/common/property_card.dart';
+import '/presentation/widgets/common/stat_row.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
@@ -18,6 +23,7 @@ class MinionBloonPage extends StatefulWidget {
   });
   final AnalyticsHelper analyticsHelper;
   final String minionId;
+
   @override
   State<MinionBloonPage> createState() => _MinionBloonPageState();
 }
@@ -31,10 +37,9 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
   int activeIndex = 0;
 
   void loadMinion() async {
-    var path = '${minionsDataPath + widget.minionId}.json';
+    final path = '${minionsDataPath + widget.minionId}.json';
     final data = await rootBundle.loadString(path);
-    var jsonData = json.decode(data);
-    minion = MinionBloon.fromJson(jsonData);
+    minion = MinionBloon.fromJson(json.decode(data));
     setState(() {
       loading = false;
       images = List.from(minion.images.values);
@@ -54,214 +59,183 @@ class _MinionBloonPageState extends State<MinionBloonPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(!loading ? minion.name : ''),
+    if (loading) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: const Loader(),
+      );
+    }
+
+    final colorScheme = Theme.of(context).colorScheme;
+    final sw = MediaQuery.of(context).size.width;
+    final carH = sw > 600 ? 360.0 : sw * 0.42;
+    final vf = sw > 600 ? 0.8 : 0.7;
+
+    return DetailPageScaffold(
+      title: minion.name,
+      accentColor: GameColors.danger,
+      headerContent: Padding(
+        padding: const EdgeInsets.only(top: 44),
+        child: ImageCarousel(
+          images: images,
+          pathBuilder: minionImage,
+          controller: controller,
+          activeIndex: activeIndex,
+          height: carH,
+          viewportFraction: vf,
+          accentColor: GameColors.danger,
+          onPageChanged: (i) => setState(() => activeIndex = i),
+          showIndicator: false,
+        ),
       ),
-      body: !loading
-          ? SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: CarouselSlider.builder(
-                            carouselController: controller,
-                            options: CarouselOptions(
-                              viewportFraction: 0.62,
-                              initialPage: 0,
-                              height: MediaQuery.of(context).size.width * 0.5,
-                              enableInfiniteScroll: false,
-                              onPageChanged: (index, reason) {
-                                setState(() {
-                                  activeIndex = index;
-                                });
-                              },
-                            ),
-                            itemCount: images.length,
-                            itemBuilder: ((context, index, realIndex) {
-                              return Image(
-                                image: AssetImage(minionImage(images[index])),
-                                filterQuality: FilterQuality.high,
-                                width: MediaQuery.of(context).size.width * 0.56,
-                                semanticLabel:
-                                    bossImageLabels[imageKeys[index]],
-                              );
-                            }),
-                          ),
-                        ),
-                        const SizedBox(height: 10),
-                        Text(
-                          bossImageLabels[imageKeys[activeIndex]]!,
-                          style: smallTitleStyle,
-                        ),
-                        const SizedBox(height: 10),
-                        AnimatedSmoothIndicator(
-                          activeIndex: activeIndex,
-                          count: images.length,
-                          onDotClicked: (index) => controller.jumpToPage(index),
-                          effect: const ScrollingDotsEffect(
-                            activeDotScale: 1.25,
-                            spacing: 11,
-                            dotHeight: 9,
-                            dotWidth: 9,
-                            activeDotColor: Colors.teal,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      minion.name,
-                      style: bigTitleStyle,
-                      textAlign: TextAlign.center,
-                    ),
-                    Divider(
-                      thickness: 2,
-                      color: Colors.grey[600],
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "Speed",
-                      style: bigTitleStyle,
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Absolute: ${minion.speed.absolute}",
-                          style: normalStyle,
-                        ),
-                        Text(
-                          "Relative (to red bloon): ${minion.speed.relative}",
-                          style: normalStyle,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 25),
-                    const Text(
-                      "Health",
-                      style: bigTitleStyle,
-                    ),
-                    const SizedBox(height: 15),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Normal",
-                          style: smallTitleStyle,
-                        ),
-                        Text(
-                          "Elite",
-                          style: smallTitleStyle,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 5),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Expanded(
-                          child: ListView.builder(
-                            primary: false,
-                            shrinkWrap: true,
-                            itemCount: minion.health["normal"].length,
-                            itemBuilder: ((context, index) {
-                              String health = minion.health["normal"][index];
-                              List<String> parts = health.split(", ");
-                              return ListTile(
-                                dense: true,
-                                title: Text(
-                                  parts.length > 1 ? parts[0] : health,
-                                  style: normalStyle,
-                                  textAlign: TextAlign.center,
-                                ),
-                                subtitle: parts.length > 1
-                                    ? Text(
-                                        parts[1],
-                                        textAlign: TextAlign.center,
-                                        style: normalStyle,
-                                      )
-                                    : null,
-                              );
-                            }),
-                          ),
-                        ),
-                        Expanded(
-                          child: ListView.builder(
-                            primary: false,
-                            shrinkWrap: true,
-                            padding: EdgeInsets.zero,
-                            itemCount: minion.health["elite"].length,
-                            itemBuilder: ((context, index) {
-                              String health = minion.health["elite"][index];
-                              List<String> parts = health.split(", ");
-                              return ListTile(
-                                dense: true,
-                                title: Text(
-                                  parts.length > 1 ? parts[0] : health,
-                                  style: normalStyle,
-                                  textAlign: TextAlign.center,
-                                ),
-                                subtitle: parts.length > 1
-                                    ? Text(
-                                        parts[1],
-                                        textAlign: TextAlign.center,
-                                        style: normalStyle,
-                                      )
-                                    : null,
-                              );
-                            }),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      thickness: 2,
-                      color: Colors.grey[600],
-                    ),
-                    const SizedBox(height: 10),
-                    const Text(
-                      "Properties and Gimmicks",
-                      style: titleStyle,
-                    ),
-                    const SizedBox(height: 5),
-                    gimmicks(
-                      widget.analyticsHelper,
-                      minion.id,
-                      "General Properties",
-                      List<String>.from(minion.gimmicks["general"]),
-                      true,
-                    ),
-                    gimmicks(
-                      widget.analyticsHelper,
-                      minion.id,
-                      "Normal Gimmicks",
-                      List<String>.from(minion.gimmicks["normal"]),
-                      false,
-                    ),
-                    gimmicks(
-                      widget.analyticsHelper,
-                      minion.id,
-                      "Elite Gimmicks",
-                      List<String>.from(minion.gimmicks["elite"]),
-                      false,
-                    ),
-                  ],
+      belowHeader: Padding(
+        padding: const EdgeInsets.only(top: 8),
+        child: Column(
+          children: [
+            if (images.length > 1)
+              AnimatedSmoothIndicator(
+                activeIndex: activeIndex,
+                count: images.length,
+                onDotClicked: (i) => controller.jumpToPage(i),
+                effect: ScrollingDotsEffect(
+                  activeDotScale: 1.25,
+                  spacing: 10,
+                  dotHeight: 8,
+                  dotWidth: 8,
+                  activeDotColor: GameColors.danger,
+                  dotColor: colorScheme.outline.withValues(alpha: 0.4),
                 ),
               ),
-            )
-          : const CircularProgressIndicator(),
+            if (bossImageLabels[imageKeys[activeIndex]] != null) ...[
+              const SizedBox(height: 6),
+              Text(
+                bossImageLabels[imageKeys[activeIndex]]!,
+                textAlign: TextAlign.center,
+                style: smallTitleStyle.copyWith(color: GameColors.danger),
+              ),
+            ],
+          ],
+        ),
+      ),
+      body: [
+        Chip(
+          label: const Text(
+            'Minion',
+            style: TextStyle(
+              color: GameColors.danger,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+          ),
+          backgroundColor: GameColors.danger.withValues(alpha: 0.12),
+          side: BorderSide(color: GameColors.danger.withValues(alpha: 0.4)),
+          visualDensity: VisualDensity.compact,
+        ),
+        const SizedBox(height: 12),
+
+        PropertyCard(
+          title: 'Speed',
+          children: [
+            StatRow(label: 'Absolute', value: minion.speed.absolute),
+            const SizedBox(height: 4),
+            StatRow(label: 'Relative (to red bloon)', value: minion.speed.relative),
+          ],
+        ),
+        const SizedBox(height: 12),
+
+        PropertyCard(
+          title: 'Health',
+          children: [
+            IntrinsicHeight(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text('Normal',
+                            style: bolderNormalStyle.copyWith(fontSize: 14)),
+                        const SizedBox(height: 6),
+                        ..._healthItems(minion.health['normal'] ?? []),
+                      ],
+                    ),
+                  ),
+                  VerticalDivider(color: colorScheme.outlineVariant),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        Text('Elite',
+                            style: bolderNormalStyle.copyWith(fontSize: 14)),
+                        const SizedBox(height: 6),
+                        ..._healthItems(minion.health['elite'] ?? []),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+
+        const Text('Properties & Gimmicks', style: titleStyle),
+        const SizedBox(height: 8),
+        Card(
+          child: GimmicksWidget(
+            analyticsHelper: widget.analyticsHelper,
+            id: minion.id,
+            title: 'General Properties',
+            gimmicks: List<String>.from(minion.gimmicks['general'] ?? []),
+            expand: true,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Card(
+          child: GimmicksWidget(
+            analyticsHelper: widget.analyticsHelper,
+            id: minion.id,
+            title: 'Normal Gimmicks',
+            gimmicks: List<String>.from(minion.gimmicks['normal'] ?? []),
+            expand: false,
+          ),
+        ),
+        const SizedBox(height: 8),
+        Card(
+          child: GimmicksWidget(
+            analyticsHelper: widget.analyticsHelper,
+            id: minion.id,
+            title: 'Elite Gimmicks',
+            gimmicks: List<String>.from(minion.gimmicks['elite'] ?? []),
+            expand: false,
+          ),
+        ),
+        const SizedBox(height: 24),
+      ],
     );
+  }
+
+  List<Widget> _healthItems(List<dynamic> items) {
+    return items.map<Widget>((entry) {
+      final health = entry.toString();
+      final parts = health.split(', ');
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 2),
+        child: Column(
+          children: [
+            Text(
+              parts[0],
+              style: normalStyle.copyWith(fontSize: 14),
+              textAlign: TextAlign.center,
+            ),
+            if (parts.length > 1)
+              Text(
+                parts[1],
+                style: subtitleStyle,
+                textAlign: TextAlign.center,
+              ),
+          ],
+        ),
+      );
+    }).toList();
   }
 }

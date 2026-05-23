@@ -12,21 +12,21 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "asafhadad.btd6wiki"
+    namespace = "playfulsolutions.uobtd6wiki"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_11
     }
 
     defaultConfig {
-        applicationId = "asafhadad.btd6wiki"
+        applicationId = "playfulsolutions.uobtd6wiki"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
@@ -44,6 +44,32 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.release
+
+            // Enables code shrinking, obfuscation, and optimization
+            minifyEnabled true
+
+            // Enables resource shrinking, which is performed by the Android Gradle plugin.
+            shrinkResources true
+
+            // Removes unused code, and carries out other code optimisations
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+
+        }
+    }
+
+    // Ensure App Bundle ABI splitting so Play can serve smaller per-ABI APKs
+    bundle {
+        abi {
+            enableSplit = true
+        }
+    }
+
+// Prefer modern packaging for native libs (AGP 8.5.1+ handles 16KB alignment)
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = false
         }
     }
 }

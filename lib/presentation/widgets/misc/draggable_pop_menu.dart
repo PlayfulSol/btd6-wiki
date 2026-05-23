@@ -6,12 +6,10 @@ import '/utilities/favorite_state.dart';
 
 class DraggablePopMenu extends StatelessWidget {
   const DraggablePopMenu({
-    required this.items,
     required this.selectedItem,
     super.key,
   });
   final FavoriteModel selectedItem;
-  final List<FavoriteModel> items;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +20,8 @@ class DraggablePopMenu extends StatelessWidget {
             ContextMenuButtonConfig(
               "Remove",
               icon: const Icon(Icons.delete),
-              onPressed: () {
-                favoriteState.toggleFavoriteFunc(
-                    context, favoriteState, selectedItem);
-                items.removeWhere((item) => item.id == selectedItem.id);
-              },
+              onPressed: () => favoriteState.toggleFavoriteFunc(
+                  context, favoriteState, selectedItem),
             ),
           ],
         );

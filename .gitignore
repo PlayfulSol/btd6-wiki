@@ -45,3 +45,18 @@ app.*.map.json
 
 /assets/data/**/*.json
 /assets/images/**/*.png
+
+# Local tools and binaries
+tools/
+
+# Gradle and Kotlin build caches
+.gradle/
+android/.kotlin/
+
+# Claude Code local config
+.claude/settings.local.json
+
+# Temporary audit/analysis markdown files
+DESIGN_AUDIT.md
+DETAIL_PAGES_AUDIT.md
+widget_audit.md

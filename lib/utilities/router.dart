@@ -3,6 +3,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/screens/hero/single_hero.dart';
+import '/presentation/screens/hero/hero_skins.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/boss_bloon.dart';
 import '/presentation/screens/bloon/minion_bloon.dart';
@@ -39,7 +40,7 @@ class AppRouter {
       GoRoute(
         path: '/towers',
         builder: (context, state) => MyHomePage(
-          analytics: analytics,
+          analyticsHelper: AnalyticsHelper(analytics),
           baseEntities: baseEntities,
           initialPageIndex: kTowersIndex,
         ),
@@ -59,7 +60,7 @@ class AppRouter {
       GoRoute(
         path: '/heroes',
         builder: (context, state) => MyHomePage(
-          analytics: analytics,
+          analyticsHelper: AnalyticsHelper(analytics),
           baseEntities: baseEntities,
           initialPageIndex: kHeroesIndex,
         ),
@@ -73,13 +74,25 @@ class AppRouter {
                 analyticsHelper: AnalyticsHelper(analytics),
               );
             },
+            routes: [
+              GoRoute(
+                path: 'skins',
+                builder: (context, state) {
+                  final id = state.pathParameters['id']!;
+                  return HeroSkins(
+                    heroId: id,
+                    analyticsHelper: AnalyticsHelper(analytics),
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),
       GoRoute(
         path: '/bloons',
         builder: (context, state) => MyHomePage(
-          analytics: analytics,
+          analyticsHelper: AnalyticsHelper(analytics),
           baseEntities: baseEntities,
           initialPageIndex: kBloonsIndex,
         ),
@@ -109,7 +122,7 @@ class AppRouter {
       GoRoute(
         path: '/maps',
         builder: (context, state) => MyHomePage(
-          analytics: analytics,
+          analyticsHelper: AnalyticsHelper(analytics),
           baseEntities: baseEntities,
           initialPageIndex: kMapsIndex,
         ),

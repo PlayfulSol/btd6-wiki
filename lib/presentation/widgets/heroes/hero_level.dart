@@ -1,7 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import '/models/towers/common/upgrade_info_class.dart';
+import '/models/towers_v2/common/hero_level_class.dart';
+import '/presentation/widgets/common/app_image.dart';
+import '/presentation/widgets/common/carousel_with_indicator.dart';
+import '/presentation/widgets/common/stat_row.dart';
+import '/presentation/widgets/common/stats_and_changes.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/images_url.dart';
@@ -11,7 +14,7 @@ class HeroLevel extends StatefulWidget {
   final List<String> heroImages;
   final String heroName;
   final String heroId;
-  final UpgradeInfo level;
+  final HeroLevelData level;
   final bool shouldShowLevelImage;
   final AnalyticsHelper analyticsHelper;
 
@@ -35,10 +38,14 @@ class _HeroLevelState extends State<HeroLevel> {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
+    final colorScheme = Theme.of(context).colorScheme;
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: ExpansionTile(
+      collapsedBackgroundColor: colorScheme.surfaceContainerHighest,
       title: Text(
         "Level ${widget.level.name}",
-        style: titleStyle.copyWith(color: Colors.teal),
+        style: titleStyle.copyWith(color: colorScheme.primary),
       ),
       onExpansionChanged: (bool value) {
         widget.analyticsHelper.logEvent(
@@ -51,81 +58,62 @@ class _HeroLevelState extends State<HeroLevel> {
         );
       },
       children: [
-        const SizedBox(height: 15),
-        widget.shouldShowLevelImage
-            ? Column(
-                children: [
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      final screenWidth = MediaQuery.of(context).size.width;
-                      final maxImageWidth = 400.0;
-                      final imageWidth = screenWidth > 600 
-                          ? maxImageWidth 
-                          : screenWidth * 0.56;
-                      final carouselHeight = screenWidth > 600 
-                          ? maxImageWidth * 0.9 
-                          : screenWidth * 0.5;
-                      final viewportFraction = screenWidth > 600 
-                          ? 0.8 
-                          : 0.64;
-                      
-                      return ConstrainedBox(
-                        constraints: BoxConstraints(
-                          maxWidth: maxImageWidth,
-                        ),
-                        child: CarouselSlider.builder(
-                          carouselController: controller,
-                          options: CarouselOptions(
-                            viewportFraction: viewportFraction,
-                            initialPage: 0,
-                            height: carouselHeight,
-                            enableInfiniteScroll: false,
-                            onPageChanged: (index, reason) {
-                              setState(() {
-                                activeIndex = index;
-                              });
-                            },
-                          ),
-                          itemCount: widget.heroImages.length,
-                          itemBuilder: ((context, index, realIndex) => Image(
-                                image:
-                                    AssetImage(heroImage(widget.heroImages[index])),
-                                filterQuality: FilterQuality.high,
-                                width: imageWidth,
-                              )),
-                        ),
-                      );
-                    },
+        if (widget.shouldShowLevelImage)
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final sw = MediaQuery.of(context).size.width;
+              final imgW = sw > 600 ? 400.0 : sw * 0.56;
+              final carH = sw > 600 ? 360.0 : sw * 0.5;
+              final vf = sw > 600 ? 0.8 : 0.64;
+              return CarouselWithIndicator(
+                itemCount: widget.heroImages.length,
+                controller: controller,
+                activeIndex: activeIndex,
+                height: carH,
+                viewportFraction: vf,
+                activeDotColor: colorScheme.primary,
+                dotColor: colorScheme.outline.withValues(alpha: 0.4),
+                onPageChanged: (i) => setState(() => activeIndex = i),
+                itemBuilder: (ctx, i) => AppImage(
+                  path: heroImage(widget.heroImages[i]),
+                  width: imgW,
+                ),
+              );
+            },
+          ),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(12, 10, 12, 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (widget.level.upgrade != null) ...[
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  const SizedBox(height: 10),
-                  AnimatedSmoothIndicator(
-                    activeIndex: activeIndex,
-                    count: widget.heroImages.length,
-                    onDotClicked: (index) => controller.jumpToPage(index),
-                    effect: const ScrollingDotsEffect(
-                      activeDotScale: 1.25,
-                      spacing: 11,
-                      dotHeight: 9,
-                      dotWidth: 9,
-                      activeDotColor: Colors.teal,
+                  child: Text(
+                    'Unlocks: ${widget.level.upgrade}',
+                    style: subtitleStyle.copyWith(
+                      color: colorScheme.onPrimaryContainer,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                ],
-              )
-            : Container(),
-        const SizedBox(height: 15),
-        Text(widget.level.upgradeBody,
-            textAlign: TextAlign.center, style: normalStyle),
-        const SizedBox(height: 10),
-        if (widget.level.name != '1') ...[
-          Text(
-            "Cost: ${widget.level.cost.medium}",
-            textAlign: TextAlign.center,
-            style: normalStyle,
+                ),
+                const SizedBox(height: 8),
+              ],
+              Text(widget.level.description, style: normalStyle),
+              const SizedBox(height: 10),
+              Divider(height: 1, color: colorScheme.outlineVariant),
+              const SizedBox(height: 8),
+              StatRow(label: 'XP Cost', value: widget.level.xpCost),
+              UpgradeStatsWidget(stats: widget.level.stats),
+            ],
           ),
-          const SizedBox(height: 30),
-        ],
+        ),
       ],
+    ),
     );
   }
 }

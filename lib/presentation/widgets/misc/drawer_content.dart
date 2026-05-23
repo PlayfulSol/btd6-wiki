@@ -24,12 +24,12 @@ class DrawerContent extends StatefulWidget {
 }
 
 class _DrawerContentState extends State<DrawerContent> {
-  final ExpansionTileController _towersExpansionTileController =
-      ExpansionTileController();
-  final ExpansionTileController _mapsExpansionTileController =
-      ExpansionTileController();
-  final ExpansionTileController _bloonsExpansionTileController =
-      ExpansionTileController();
+  final ExpansibleController  _towersExpansionTileController =
+      ExpansibleController();
+  final ExpansibleController _mapsExpansionTileController =
+      ExpansibleController();
+  final ExpansibleController _bloonsExpansionTileController =
+      ExpansibleController();
 
   @override
   void initState() {
@@ -61,23 +61,26 @@ class _DrawerContentState extends State<DrawerContent> {
   Widget build(BuildContext context) {
     GlobalState globalState = Provider.of<GlobalState>(context, listen: false);
 
+    final colorScheme = Theme.of(context).colorScheme;
     return Drawer(
-      child: Column(
+      child: SafeArea(
+        bottom: false,
+        child: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.fromLTRB(15, 50, 0, 10),
-            child: SizedBox(
-              width: double.infinity,
-              child: Text(
-                'Bloons TD 6 Wiki',
-                style: bigTitleStyle,
-              ),
+            padding: EdgeInsets.fromLTRB(16, 12, 16, 12),
+            child: Row(
+              children: [
+                Text('BTD6 Wiki', style: titleStyle),
+              ],
             ),
           ),
+          Divider(height: 1, thickness: 1, color: colorScheme.outlineVariant),
+          const SizedBox(height: 4),
           ExpansionTile(
             controller: _towersExpansionTileController,
             title: Text(capTitles[kTowersIndex],
-                style: titleStyle.copyWith(color: Colors.teal)),
+                style: titleStyle.copyWith(color: colorScheme.primary)),
             onExpansionChanged: (bool value) {
               widget.analyticsHelper.logEvent(
                 name: widgetEngagement,
@@ -134,7 +137,7 @@ class _DrawerContentState extends State<DrawerContent> {
           ListTile(
             title: Text(
               capTitles[kHeroesIndex],
-              style: titleStyle,
+              style: titleStyle.copyWith(color: colorScheme.primary),
             ),
             onTap: () {
               Navigator.pop(context);
@@ -152,7 +155,7 @@ class _DrawerContentState extends State<DrawerContent> {
           ExpansionTile(
             controller: _bloonsExpansionTileController,
             title: Text(capTitles[kBloonsIndex],
-                style: titleStyle.copyWith(color: Colors.teal)),
+                style: titleStyle.copyWith(color: colorScheme.primary)),
             onExpansionChanged: (bool value) {
               widget.analyticsHelper.logEvent(
                 name: widgetEngagement,
@@ -209,7 +212,7 @@ class _DrawerContentState extends State<DrawerContent> {
           ExpansionTile(
             controller: _mapsExpansionTileController,
             title: Text(capTitles[kMapsIndex],
-                style: titleStyle.copyWith(color: Colors.teal)),
+                style: titleStyle.copyWith(color: colorScheme.primary)),
             onExpansionChanged: (bool value) {
               widget.analyticsHelper.logEvent(
                 name: widgetEngagement,
@@ -264,35 +267,51 @@ class _DrawerContentState extends State<DrawerContent> {
             ],
           ),
           const Spacer(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              AboutUsPopup(analyticsHelper: widget.analyticsHelper),
-              ElevatedButton.icon(
-                onPressed: () {
-                  widget.analyticsHelper.logEvent(
-                    name: buttonPress,
-                    parameters: {
-                      'screen': drawer,
-                      'button': rateUsButton,
-                      'value': buttonOpen,
-                    },
-                  );
-                  openUrl(googleLink);
-                },
-                icon: const FaIcon(FontAwesomeIcons.googlePlay),
-                label: const Text('Rate Us'),
+          SafeArea(
+            top: false,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: AboutUsPopup(
+                            analyticsHelper: widget.analyticsHelper),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ElevatedButton.icon(
+                          onPressed: () {
+                            widget.analyticsHelper.logEvent(
+                              name: buttonPress,
+                              parameters: {
+                                'screen': drawer,
+                                'button': rateUsButton,
+                                'value': buttonOpen,
+                              },
+                            );
+                            openUrl(googleLink);
+                          },
+                          icon: const FaIcon(FontAwesomeIcons.googlePlay,
+                              size: 14),
+                          label: const Text('Rate Us'),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Game version v$gameVersion',
+                    style: subtitleStyle.copyWith(
+                        color: colorScheme.onSurface.withValues(alpha: 0.5)),
+                  ),
+                ],
               ),
-            ],
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const Text('Updated to game version: v$gameVersion'),
-          const SizedBox(
-            height: 20,
+            ),
           ),
         ],
+        ),
       ),
     );
   }

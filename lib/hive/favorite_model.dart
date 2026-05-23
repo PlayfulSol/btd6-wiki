@@ -1,20 +1,22 @@
-import 'package:hive_flutter/hive_flutter.dart';
-
-part 'favorite_model.g.dart';
-
-@HiveType(typeId: 1)
-class FavoriteModel extends HiveObject {
-  @HiveField(0)
-  late final String id;
-
-  @HiveField(1)
-  late final String name;
-
-  @HiveField(2)
-  late final String image;
-
-  @HiveField(3)
-  late final String type;
+class FavoriteModel {
+  final String id;
+  final String name;
+  final String image;
+  final String type;
 
   FavoriteModel(this.id, this.name, this.image, this.type);
+
+  factory FavoriteModel.fromJson(Map<String, dynamic> json) => FavoriteModel(
+        json['id'] as String,
+        json['name'] as String,
+        json['image'] as String,
+        json['type'] as String,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'image': image,
+        'type': type,
+      };
 }

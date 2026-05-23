@@ -2,8 +2,10 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '/models/base/base_hero.dart';
+import '/presentation/widgets/common/filter_chips_row.dart';
+import '/presentation/widgets/common/list_item_card.dart';
+import '/presentation/widgets/common/no_results_widget.dart';
 import '/presentation/widgets/misc/search_widget.dart';
-import '/presentation/widgets/common/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
@@ -36,233 +38,127 @@ class _HeroesState extends State<Heroes> {
     );
   }
 
+  String _costLabel(BaseHero hero, String option) {
+    switch (option) {
+      case 'Easy':
+        return '\$${hero.easyCost} (Easy)';
+      case 'Hard':
+        return '\$${hero.hardCost} (Hard)';
+      case 'Impop':
+        return '\$${hero.impoppableCost} (Impop)';
+      default:
+        return '\$${hero.mediumCost} (Medium)';
+    }
+  }
+
+  bool _matchesPriceFilter(BaseHero hero, String option) {
+    switch (option) {
+      case 'Easy':
+        return hero.easyCost <= 650;
+      case 'Medium':
+        return hero.mediumCost <= 650;
+      case 'Hard':
+        return hero.hardCost <= 650;
+      case 'Impop':
+        return hero.impoppableCost <= 650;
+      default:
+        return true;
+    }
+  }
+
+  void _onHeroTap(BuildContext context, BaseHero hero) {
+    widget.analyticsHelper.logEvent(
+      name: widgetEngagement,
+      parameters: {
+        'screen': kHeroPagesClass,
+        'widget': listTile,
+        'value': hero.id,
+      },
+    );
+    context.push('/heroes/${hero.id}');
+  }
+
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = getPreset(
-      MediaQuery.of(context).size,
-    );
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 480;
-    final crossAxisCount = isMobile ? 1 : constraintsValues[heroCrossCount];
+    final isTablet = screenWidth < 750;
+    // Heroes always use 2 columns on mobile/tablet, 3 on desktop —
+    // portrait images benefit from the extra vertical space.
+    final crossAxisCount = isMobile || isTablet ? 2 : 3;
+    final aspectRatio = isMobile ? 0.80 : 0.75;
 
     return Scaffold(
       body: Column(
         children: [
           Consumer<GlobalState>(
-            builder: (context, globalState, child) =>
-                globalState.isSearchEnabled
-                    ? SearchBarWidget(queryText: globalState.currentQuery)
-                    : Container(),
+            builder: (context, globalState, _) => globalState.isSearchEnabled
+                ? SearchBarWidget(queryText: globalState.currentQuery)
+                : const SizedBox.shrink(),
+          ),
+          Consumer<GlobalState>(
+            builder: (context, globalState, _) => FilterChipsRow(
+              options: heroPriceRanges,
+              selected: globalState.optionForCategory(kHeroes),
+              onSelect: (option) => globalState.updateCurrentOptionSelected(
+                  category: kHeroes, option: option),
+              colorForOption: (_, __) => GameColors.hero,
+            ),
           ),
           Expanded(
             child: Consumer2<GlobalState, FavoriteState>(
-              builder: (context, globalState, favoriteState, child) {
-                final filteredHeroes =
-                    heroesFromSearch(widget.heroes, globalState.currentQuery);
-                
-                if (isMobile) {
-                  return ListView.builder(
-                    padding: const EdgeInsets.all(12),
-                    itemCount: filteredHeroes.length,
-                    itemBuilder: (context, index) {
-                      final hero = filteredHeroes[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(12),
-                          onLongPress: () => favoriteState.toggleFavoriteFunc(
-                              context, favoriteState, hero),
-                          onTap: () {
-                            if (!favoriteState.isMultiSelectMode) {
-                              widget.analyticsHelper.logEvent(
-                                name: widgetEngagement,
-                                parameters: {
-                                  'screen': kHeroPagesClass,
-                                  'widget': listTile,
-                                  'value': hero.id,
-                                },
+              builder: (context, globalState, favoriteState, _) {
+                final filtered = heroesFromSearch(
+                        widget.heroes, globalState.currentQuery)
+                    .where((h) =>
+                        _matchesPriceFilter(h, globalState.optionForCategory(kHeroes)))
+                    .toList();
+
+                return CustomScrollView(
+                  slivers: [
+                    if (filtered.isEmpty)
+                      const SliverFillRemaining(child: NoResultsWidget()),
+
+                    if (filtered.isNotEmpty)
+                      SliverPadding(
+                        padding: const EdgeInsets.all(12),
+                        sliver: SliverGrid(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            childAspectRatio: aspectRatio,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final hero = filtered[index];
+                              final isFav =
+                                  favoriteState.isFavorite(hero.type, hero.id);
+                              return ListItemCard(
+                                imagePath: heroImage(hero.image),
+                                imageName: hero.image,
+                                name: hero.name,
+                                subtitle:
+                                    _costLabel(hero, globalState.optionForCategory(kHeroes)),
+                                accentColor: GameColors.hero,
+                                isFavorite: isFav,
+                                onTap: () => favoriteState.isMultiSelectMode
+                                    ? favoriteState.toggleFavoriteFunc(
+                                        context, favoriteState, hero)
+                                    : _onHeroTap(context, hero),
+                                onLongPress: () =>
+                                    favoriteState.toggleFavoriteFunc(
+                                        context, favoriteState, hero),
                               );
-                              context.push('/heroes/${hero.id}');
-                            } else {
-                              favoriteState.toggleFavoriteFunc(
-                                  context, favoriteState, hero);
-                            }
-                          },
-                          child: Card(
-                            elevation: 2,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(12),
-                                      bottomLeft: Radius.circular(12),
-                                    ),
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .surfaceContainerHighest
-                                        .withOpacity(0.2),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: ImageOutliner(
-                                      imageName: hero.image,
-                                      imagePath: heroImage(hero.image),
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 8),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            hero.name,
-                                            style: constraintsValues[heroTitleStyle],
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        Icon(
-                                          favoriteState.isFavorite(
-                                                  hero.type, hero.id)
-                                              ? Icons.star
-                                              : Icons.star_border_outlined,
-                                          size: 18,
-                                          color: favoriteState.isFavorite(
-                                                  hero.type, hero.id)
-                                              ? Colors.amber
-                                              : null,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            },
+                            childCount: filtered.length,
                           ),
                         ),
-                      );
-                    },
-                  );
-                }
-
-                return GridView.builder(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: filteredHeroes.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: crossAxisCount,
-                    childAspectRatio: 0.75,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                  ),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final hero = filteredHeroes[index];
-
-                    return InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onLongPress: () => favoriteState.toggleFavoriteFunc(
-                          context, favoriteState, hero),
-                      onTap: () {
-                        if (!favoriteState.isMultiSelectMode) {
-                          widget.analyticsHelper.logEvent(
-                            name: widgetEngagement,
-                            parameters: {
-                              'screen': kHeroPagesClass,
-                              'widget': listTile,
-                              'value': hero.id,
-                            },
-                          );
-                          context.push('/heroes/${hero.id}');
-                        } else {
-                          favoriteState.toggleFavoriteFunc(
-                              context, favoriteState, hero);
-                        }
-                      },
-                      child: Card(
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              flex: 5,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(12),
-                                  ),
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .surfaceContainerHighest
-                                      .withOpacity(0.2),
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: ImageOutliner(
-                                      imageName: hero.image,
-                                      imagePath: heroImage(hero.image),
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 8),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            hero.name,
-                                            style: constraintsValues[heroTitleStyle],
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        Icon(
-                                          favoriteState.isFavorite(
-                                                  hero.type, hero.id)
-                                              ? Icons.star
-                                              : Icons.star_border_outlined,
-                                          size: 18,
-                                          color: favoriteState.isFavorite(
-                                                  hero.type, hero.id)
-                                              ? Colors.amber
-                                              : null,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
-                    );
-                  },
+
+                    const SliverToBoxAdapter(child: SizedBox(height: 12)),
+                  ],
                 );
               },
             ),

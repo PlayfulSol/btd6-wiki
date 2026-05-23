@@ -8,14 +8,12 @@ const String kBosses = 'bosses';
 const String kMinions = 'minions';
 const String kMaps = 'maps';
 
-const int gameVersion = 47;
+const int gameVersion = 54;
 
 const int kTowersIndex = 0;
 const int kHeroesIndex = 1;
 const int kBloonsIndex = 2;
 const int kMapsIndex = 3;
-
-const String kFavorite = 'favorite';
 
 const Duration snackBarDuration = Duration(seconds: 2);
 
@@ -36,11 +34,11 @@ const List<String> simpleTitles = [
 const List<Icon> icons = [
   Icon(Icons.cell_tower),
   Icon(Icons.person),
-  Icon(Icons.nature),
+  Icon(Icons.bubble_chart),
   Icon(Icons.map_outlined),
 ];
 
-const configDirectory = 'assets/data/config';
+const configDirectory = 'assets/data/index';
 const towerDataPath = 'assets/data/towers/';
 const heroDataPath = 'assets/data/heroes/';
 const mapDataPath = 'assets/data/maps/';
@@ -86,8 +84,18 @@ const List<String> towerTypes = [
 const List<String> bloonTypes = [
   'All',
   'Bloons',
-  'Blimps',
+  'MOAB',
   'Bosses',
+];
+
+// All thresholds use $650 — the round 1 starting cash for each difficulty.
+// Hard and CHIMPS share prices so "CHIMPS Ready" covers both.
+const List<String> heroPriceRanges = [
+  'All',
+  'Easy',    // easy ≤ $650
+  'Medium',  // medium ≤ $650
+  'Hard',    // hard ≤ $650
+  'Impop',   // impoppable ≤ $650
 ];
 
 const Map<String, Map<String, String>> mapDifficultyToReward = {
@@ -124,6 +132,60 @@ const Map<String, String> bossImageLabels = {
   'eliteDefeated': 'Elite Defeated',
 };
 
+// ── BTD6 semantic game colors ────────────────────────────────────────────────
+class GameColors {
+  GameColors._();
+
+  /// Primary Monkeys (blue)
+  static const primary = Color(0xFF1E88E5);
+
+  /// Military Monkeys (olive green)
+  static const military = Color(0xFF6B8E23);
+
+  /// Magic Monkeys (purple)
+  static const magic = Color(0xFF8E24AA);
+
+  /// Support Monkeys (orange)
+  static const support = Color(0xFFFB8C00);
+
+  /// Upgrade / XP gold
+  static const upgrade = Color(0xFFF4BE1A);
+
+  /// Hero accent (monkey brown)
+  static const hero = Color(0xFF9C6634);
+
+  /// Red Bloon / danger
+  static const danger = Color(0xFFE53935);
+
+  /// MOAB-class bloons (dark navy)
+  static const moab = Color(0xFF0D47A1);
+
+  /// Favourite star
+  static const favourite = Colors.amber;
+
+  static Color forClass(String classType) {
+    switch (classType) {
+      case 'Primary':
+        return primary;
+      case 'Military':
+        return military;
+      case 'Magic':
+        return magic;
+      case 'Support':
+        return support;
+      default:
+        return const Color(0xFF757575); // grey for unknown
+    }
+  }
+}
+
+/// Shared title style for all SliverAppBar titles.
+const TextStyle sliverTitleStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+);
+
+// ── Text styles ───────────────────────────────────────────────────────────────
 const TextStyle subtitleStyle = TextStyle(
   fontSize: 13,
 );
@@ -153,7 +215,7 @@ const TextStyle bigTitleStyle = TextStyle(
 );
 
 const String googleLink =
-    'https://play.google.com/store/apps/details?id=asafhadad.btd6wiki';
+    'https://play.google.com/store/apps/details?id=playfulsolutions.uobtd6wiki';
 
 const String playfulEmail = 'Playfulsols@gamil.com';
 const String playfulGitRepo = 'https://github.com/PlayfulSol/flutter-btd6-wiki';

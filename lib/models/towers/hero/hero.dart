@@ -19,6 +19,10 @@ class HeroModel extends BaseHero {
     super.image,
     super.type,
     super.inGameDesc,
+    super.easyCost,
+    super.mediumCost,
+    super.hardCost,
+    super.impoppableCost,
     this.skinChange,
     this.abilities,
     this.target,
@@ -43,5 +47,9 @@ class HeroModel extends BaseHero {
           json["image"] as String,
           json['type'] as String,
           json["inGameDesc"] as String,
+          0,
+          0,
+          0,
+          0,
         );
 }

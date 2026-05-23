@@ -15,8 +15,16 @@ class GlobalState with ChangeNotifier {
   bool get isSearchEnabled => _isSearchEnabled[_activeCategory] ?? false;
   String get currentTitle => _currentTitle;
   String get currentOption => _currentOptionSelected[_activeCategory] ?? 'All';
+  String optionForCategory(String category) => _currentOptionSelected[category] ?? 'All';
   String get currentQuery => _currentQuery[_activeCategory] ?? '';
   String get activeCategory => _activeCategory;
+
+  String get displayTitle {
+    final option = currentOption;
+    if (option == 'All') return _currentTitle;
+    if (_activeCategory == kHeroes) return '$_currentTitle — $option Start';
+    return '$_currentTitle — $option';
+  }
 
   void updateCurrentPage(String pageName, int index) {
     _currentTitle = capitalize(pageName);

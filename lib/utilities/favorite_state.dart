@@ -1,46 +1,54 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '/hive/favorite_model.dart';
 import '/utilities/constants.dart';
 
+const _categoryOrder = [
+  'towers',
+  'heroes',
+  'bloons',
+  'blimps',
+  'bosses',
+  'maps',
+];
+
 class FavoriteState extends ChangeNotifier {
-  late Box<List<dynamic>> _favoriteBox;
+  final SharedPreferences _prefs;
 
   bool _isMultiSelectMode = false;
   bool draggableMode = false;
 
-  FavoriteState() {
-    _favoriteBox = Hive.box<List<dynamic>>(kFavorite);
-  }
+  FavoriteState(this._prefs);
 
-  Box<List<dynamic>> get favoriteBox => _favoriteBox;
   bool get isMultiSelectMode => _isMultiSelectMode;
 
-  List<FavoriteModel> getListOfType(String type) {
-    if (_favoriteBox.containsKey(type)) {
-      return List<FavoriteModel>.from(_favoriteBox.get(type)!);
-    }
+  String _key(String type) => 'favorites_$type';
 
-    return [];
+  List<FavoriteModel> getListOfType(String type) {
+    final json = _prefs.getString(_key(type));
+    if (json == null) return [];
+    return (jsonDecode(json) as List)
+        .map((e) => FavoriteModel.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 
   List<String> getActiveCategories() {
-    List<String> categories = List<String>.from(_favoriteBox.keys.toList());
-    List<String> nonEmptyCategories = categories.where((category) {
-      List<FavoriteModel> items = getListOfType(category);
-      return items.isNotEmpty;
-    }).toList();
-    return nonEmptyCategories;
+    return _categoryOrder
+        .where((category) => getListOfType(category).isNotEmpty)
+        .toList();
+  }
+
+  void _saveList(String type, List<FavoriteModel> items) {
+    _prefs.setString(
+        _key(type), jsonEncode(items.map((e) => e.toJson()).toList()));
   }
 
   void toggleMultiSelect(BuildContext context) {
     _isMultiSelectMode = !_isMultiSelectMode;
-    String msg;
-    if (_isMultiSelectMode) {
-      msg = 'Multi-Select mode is enabled.';
-    } else {
-      msg = 'Multi-Select mode is disabled.';
-    }
+    String msg = _isMultiSelectMode
+        ? 'Multi-Select mode is enabled.'
+        : 'Multi-Select mode is disabled.';
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -58,7 +66,7 @@ class FavoriteState extends ChangeNotifier {
   }
 
   void toggleFavoriteFunc(
-      BuildContext context, FavoriteState favoriteState, var item) {
+      BuildContext context, FavoriteState favoriteState, dynamic item) {
     String msg = favoriteState.toggleFavorite(item);
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
@@ -71,50 +79,33 @@ class FavoriteState extends ChangeNotifier {
     notifyListeners();
   }
 
-  String toggleFavorite(var item) {
-    bool addedToFavorites = false;
+  String toggleFavorite(dynamic item) {
     FavoriteModel favItem = _createFavoriteItem(item);
+    List<FavoriteModel> typeList = getListOfType(favItem.type);
+    bool addedToFavorites;
 
-    if (!_favoriteBox.containsKey(favItem.type)) {
-      _favoriteBox.put(favItem.type, [favItem]);
-      addedToFavorites = true;
+    if (isFavorite(favItem.type, favItem.id)) {
+      typeList.removeWhere((element) => element.id == favItem.id);
+      addedToFavorites = false;
     } else {
-      List<FavoriteModel> typeList =
-          List<FavoriteModel>.from(_favoriteBox.get(favItem.type)!);
-      if (isFavorite(favItem.type, favItem.id)) {
-        typeList.removeWhere((element) => element.id == favItem.id);
-        addedToFavorites = false;
-      } else {
-        typeList.add(favItem);
-        addedToFavorites = true;
-      }
-      _favoriteBox.put(favItem.type, typeList);
+      typeList.add(favItem);
+      addedToFavorites = true;
     }
+
+    _saveList(favItem.type, typeList);
     notifyListeners();
     return addedToFavorites ? 'Added to favorites!' : 'Removed from favorites.';
   }
 
   bool isFavorite(String type, String id) {
-    if (!_favoriteBox.containsKey(type)) return false;
-    List<FavoriteModel> typeList =
-        List<FavoriteModel>.from(_favoriteBox.get(type)!);
-    for (FavoriteModel item in typeList) {
-      if (item.id == id) return true;
-    }
-
-    return false;
+    return getListOfType(type).any((item) => item.id == id);
   }
 
-  FavoriteModel _createFavoriteItem(var item) {
-    return FavoriteModel(
-      item.id,
-      item.name,
-      item.image,
-      item.type,
-    );
+  FavoriteModel _createFavoriteItem(dynamic item) {
+    return FavoriteModel(item.id, item.name, item.image, item.type);
   }
 
   void updateIndexes(String type, List items) {
-    _favoriteBox.put(type, items);
+    _saveList(type, List<FavoriteModel>.from(items));
   }
 }

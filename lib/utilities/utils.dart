@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/models/bloons/common/relative_class.dart';
-import '/models/towers/common/stats_class.dart';
+import '/models/towers_v2/common/stats_class.dart';
 import '/models/towers/common/cost_class.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
@@ -13,38 +13,6 @@ import '/models/base_model.dart';
 import 'layout_presets.dart';
 import 'images_url.dart';
 import 'constants.dart';
-
-int desiredCategoryOrder(dynamic key1, dynamic key2) {
-  // Define the desired order as a list of category keys
-  final desiredOrder = [
-    'towers',
-    'heroes',
-    'bloons',
-    'blimps',
-    'bosses',
-    'maps',
-  ];
-
-  // Get the category names from the keys
-  final category1 = key1.split(':')[0];
-  final category2 = key2.split(':')[0];
-
-  // Find the indices of the categories in the desired order
-  final index1 = desiredOrder.indexOf(category1);
-  final index2 = desiredOrder.indexOf(category2);
-
-  // Compare the indices to determine the order
-  if (index1 == -1 || index2 == -1) {
-    // Handle unexpected categories (not in desiredOrder)
-    return 0; // Or throw an error if preferred
-  } else if (index1 < index2) {
-    return -1; // Category1 comes before Category2
-  } else if (index1 > index2) {
-    return 1; // Category1 comes after Category2
-  } else {
-    return 0; // Categories have the same desired order (shouldn't happen)
-  }
-}
 
 void navigateToPage(BuildContext context, var item,
 AnalyticsHelper analyticsHelper, String originScreen, String originWidget) {
@@ -100,11 +68,7 @@ String costToString(Cost cost) {
 }
 
 String statsToString(Stats stats) {
-  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} |\nCamo: ${stats.camo} ";
-}
-
-String extraStatsToString(Stats stats) {
-  return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
+  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} | Camo: ${stats.camo}\nFootprint: ${stats.footprint} | Damage Type: ${stats.damageType}";
 }
 
 String assetImagePath(String type, String imageName) {
