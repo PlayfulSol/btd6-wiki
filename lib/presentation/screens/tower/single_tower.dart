@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '/models/towers_v2/tower/tower.dart';
+import '/models/towers/tower/tower.dart';
 import '/presentation/widgets/common/app_image.dart';
 import '/presentation/widgets/common/detail_page_scaffold.dart';
 import '/presentation/widgets/common/loader.dart';

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '/models/maps/map.dart';
+import '/models/maps/map/map.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/presentation/widgets/common/app_image.dart';

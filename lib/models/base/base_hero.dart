@@ -1,4 +1,4 @@
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 
 class BaseHero extends BaseModel {
   late final String inGameDesc;

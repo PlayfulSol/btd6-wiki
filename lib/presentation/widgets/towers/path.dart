@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/models/towers_v2/common/upgrade_class.dart';
+import '/models/towers/common/upgrade_class.dart';
 import '/presentation/widgets/common/app_image.dart';
 import '/presentation/widgets/common/stat_row.dart';
 import '/presentation/widgets/common/stats_and_changes.dart';

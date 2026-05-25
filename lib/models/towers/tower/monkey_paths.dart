@@ -1,4 +1,4 @@
-import '/models/towers_v2/common/upgrade_class.dart';
+import '/models/towers/common/upgrade_class.dart';
 
 class MonkeyPathsV2 {
   final List<TowerUpgrade> path1;

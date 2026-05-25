@@ -5,7 +5,7 @@ import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
 import '/models/base/base_bloon.dart';
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 import 'constants.dart';
 
 // ---- Towers ----

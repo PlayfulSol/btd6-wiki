@@ -11,7 +11,7 @@ import 'package:btd6wiki/models/base/base_tower.dart';
 import 'package:btd6wiki/models/base/base_hero.dart';
 import 'package:btd6wiki/models/base/base_map.dart';
 import 'package:btd6wiki/models/base/base_bloon.dart';
-import 'package:btd6wiki/models/base_model.dart';
+import 'package:btd6wiki/models/base/base_model.dart';
 import '../helpers/fake_analytics.dart';
 
 // Minimal entity map — empty lists so no image loading occurs.

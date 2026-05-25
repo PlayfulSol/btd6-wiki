@@ -1,7 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 import '/models/base/base_bloon.dart';
 import '/presentation/widgets/common/filter_chips_row.dart';
 import '/presentation/widgets/common/list_item_card.dart';

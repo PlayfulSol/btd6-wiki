@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/models/towers_v2/common/stats_class.dart';
+import '/models/towers/common/stats_class.dart';
 import '/presentation/widgets/common/property_card.dart';
 import '/presentation/widgets/common/stat_row.dart';
 

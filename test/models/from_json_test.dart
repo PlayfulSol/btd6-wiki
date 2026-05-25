@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:btd6wiki/models/base_model.dart';
+import 'package:btd6wiki/models/base/base_model.dart';
 import 'package:btd6wiki/models/base/base_tower.dart';
 import 'package:btd6wiki/models/base/base_hero.dart';
 import 'package:btd6wiki/models/base/base_bloon.dart';

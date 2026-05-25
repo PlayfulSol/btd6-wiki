@@ -1,5 +1,5 @@
 import '/models/towers/common/cost_class.dart';
-import '/models/towers_v2/common/stats_class.dart';
+import '/models/towers/common/stats_class.dart';
 import 'monkey_paths.dart';
 
 class TowerModelV2 {

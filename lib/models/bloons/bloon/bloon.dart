@@ -1,4 +1,4 @@
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 import '/models/bloons/common/speed_class.dart';
 import '/models/bloons/common/variant_class.dart';
 import '/models/bloons/common/relative_class.dart';

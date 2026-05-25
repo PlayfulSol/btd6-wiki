@@ -1,4 +1,4 @@
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 
 class BaseTower extends BaseModel {
   late final String classType;

@@ -1,6 +1,6 @@
 import '/models/towers/common/cost_class.dart';
-import '/models/towers_v2/common/stats_class.dart';
-import '/models/towers_v2/common/hero_level_class.dart';
+import '/models/towers/common/stats_class.dart';
+import '/models/towers/common/hero_level_class.dart';
 import 'hero_skin.dart';
 
 class HeroModelV2 {

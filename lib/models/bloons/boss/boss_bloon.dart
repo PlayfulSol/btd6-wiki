@@ -1,4 +1,4 @@
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 import 'boss_health_class.dart';
 
 class BossBloonModel extends BaseModel {

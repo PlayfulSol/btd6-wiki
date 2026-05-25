@@ -7,7 +7,7 @@ import '/models/bloons/common/relative_class.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 import 'layout_presets.dart';
 import 'images_url.dart';
 import 'constants.dart';
