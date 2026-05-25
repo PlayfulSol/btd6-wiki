@@ -9,7 +9,7 @@ class HeroLevelData {
   final String? upgrade;
 
   HeroLevelData.fromJson(Map<String, dynamic> json)
-      : name = json['name']?.toString() ?? '',
+      : name = json['name'] as String? ?? '',
         image = json['image'],
         xpCost = json['xpCost'] ?? '0 XP',
         description = json['description'] ?? '',

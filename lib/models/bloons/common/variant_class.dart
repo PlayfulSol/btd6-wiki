@@ -33,17 +33,12 @@ class Variant {
             .split('_')
             .map((w) => w.isEmpty ? '' : '${w[0].toUpperCase()}${w.substring(1)}')
             .join(' ');
-    // Derive appearances from firstAppearance if not present
-    if (json['appearances'] != null) {
-      appearances = json['appearances'].toString();
-    } else {
-      final fa = json['firstAppearance'] as Map<String, dynamic>?;
-      final normal = fa?['normal'];
-      final alternate = fa?['alternate'];
-      final parts = <String>[];
-      if (normal != null) parts.add('Round $normal');
-      if (alternate != null) parts.add('ABR: Round $alternate');
-      appearances = parts.isEmpty ? 'N/A' : parts.join(' | ');
-    }
+    final fa = json['firstAppearance'] as Map<String, dynamic>?;
+    final normal = fa?['normal'];
+    final alternate = fa?['alternate'];
+    final parts = <String>[];
+    if (normal != null) parts.add('Round $normal');
+    if (alternate != null) parts.add('ABR: Round $alternate');
+    appearances = parts.isEmpty ? 'N/A' : parts.join(' | ');
   }
 }

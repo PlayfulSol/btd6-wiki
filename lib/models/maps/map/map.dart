@@ -5,10 +5,7 @@ class MapModel extends BaseMap {
   late final String? exits;
   late final String? length;
   late final String? music;
-  late final dynamic terrain;
   late final String? water;
-  late final dynamic removableObject;
-  late final dynamic highground;
   late final String? sightBlocker;
   late final String? coopDivision;
 
@@ -17,10 +14,7 @@ class MapModel extends BaseMap {
     this.exits,
     this.length,
     this.music,
-    this.terrain,
     this.water,
-    this.removableObject,
-    this.highground,
     this.sightBlocker,
     this.coopDivision,
     super.id,
@@ -35,10 +29,7 @@ class MapModel extends BaseMap {
         exits = json['exits'],
         length = json['length'],
         music = json['music'],
-        terrain = json['terrain'],
         water = json['water'],
-        removableObject = json['removableObject'],
-        highground = json['highground'],
         sightBlocker = json['sightBlocker'],
         coopDivision = json['coopDivision'],
         super(

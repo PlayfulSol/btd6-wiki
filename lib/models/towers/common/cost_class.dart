@@ -12,9 +12,9 @@ class Cost {
   );
 
   Cost.fromJson(Map<String, dynamic> json) {
-    easy = json['easy']?.toString() ?? '';
-    medium = json['medium']?.toString() ?? '';
-    hard = json['hard']?.toString() ?? '';
-    impoppable = json['impoppable']?.toString() ?? '';
+    easy = json['easy'] as String? ?? '';
+    medium = json['medium'] as String? ?? '';
+    hard = json['hard'] as String? ?? '';
+    impoppable = json['impoppable'] as String? ?? '';
   }
 }

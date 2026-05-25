@@ -94,20 +94,12 @@ class _SingleMapState extends State<SingleMap> {
 
         Builder(builder: (context) {
           final data = <(String, String)>[
-            if (map.terrain != null && map.terrain.toString().isNotEmpty)
-              ('Terrain', map.terrain.toString()),
             if (map.water != null && map.water!.isNotEmpty)
               ('Water', map.water!),
             if (map.entrances != null && map.entrances!.isNotEmpty)
               ('Entrances', map.entrances!),
             if (map.exits != null && map.exits!.isNotEmpty)
               ('Exits', map.exits!),
-            if (map.removableObject != null &&
-                map.removableObject.toString().isNotEmpty)
-              ('Removable Objects', map.removableObject.toString()),
-            if (map.highground != null &&
-                map.highground.toString().isNotEmpty)
-              ('Highground', map.highground.toString()),
             if (map.sightBlocker != null && map.sightBlocker!.isNotEmpty)
               ('Sight Blocker', map.sightBlocker!),
             if (map.coopDivision != null && map.coopDivision!.isNotEmpty)
