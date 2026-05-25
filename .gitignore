@@ -56,7 +56,5 @@ android/.kotlin/
 # Claude Code local config
 .claude/settings.local.json
 
-# Temporary audit/analysis markdown files
-DESIGN_AUDIT.md
-DETAIL_PAGES_AUDIT.md
-widget_audit.md
+# Work-session notes and audit docs
+notes/
