@@ -4,47 +4,13 @@ import 'package:go_router/go_router.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/models/bloons/common/relative_class.dart';
-import '/models/towers/common/stats_class.dart';
-import '/models/towers/common/cost_class.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 import 'layout_presets.dart';
 import 'images_url.dart';
 import 'constants.dart';
-
-int desiredCategoryOrder(dynamic key1, dynamic key2) {
-  // Define the desired order as a list of category keys
-  final desiredOrder = [
-    'towers',
-    'heroes',
-    'bloons',
-    'blimps',
-    'bosses',
-    'maps',
-  ];
-
-  // Get the category names from the keys
-  final category1 = key1.split(':')[0];
-  final category2 = key2.split(':')[0];
-
-  // Find the indices of the categories in the desired order
-  final index1 = desiredOrder.indexOf(category1);
-  final index2 = desiredOrder.indexOf(category2);
-
-  // Compare the indices to determine the order
-  if (index1 == -1 || index2 == -1) {
-    // Handle unexpected categories (not in desiredOrder)
-    return 0; // Or throw an error if preferred
-  } else if (index1 < index2) {
-    return -1; // Category1 comes before Category2
-  } else if (index1 > index2) {
-    return 1; // Category1 comes after Category2
-  } else {
-    return 0; // Categories have the same desired order (shouldn't happen)
-  }
-}
 
 void navigateToPage(BuildContext context, var item,
 AnalyticsHelper analyticsHelper, String originScreen, String originWidget) {
@@ -72,11 +38,11 @@ String formatBigNumber(int number) {
   if (number < 1000) {
     return number.toString();
   } else if (number < 1000000) {
-    return "${(number / 1000).toStringAsFixed(1)}K";
+    return '${(number / 1000).toStringAsFixed(1)}K';
   } else if (number < 1000000000) {
-    return "${(number / 1000000).toStringAsFixed(1)}M";
+    return '${(number / 1000000).toStringAsFixed(1)}M';
   } else {
-    return "${(number / 1000000000).toStringAsFixed(1)}B";
+    return '${(number / 1000000000).toStringAsFixed(1)}B';
   }
 }
 
@@ -95,17 +61,6 @@ String getPathKeyFromIndex(int index) {
   }
 }
 
-String costToString(Cost cost) {
-  return "Easy: ${cost.easy}, Medium: ${cost.medium}\nHard: ${cost.hard}, Impoppable: ${cost.impoppable}";
-}
-
-String statsToString(Stats stats) {
-  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} |\nCamo: ${stats.camo} ";
-}
-
-String extraStatsToString(Stats stats) {
-  return "Status Effects: ${stats.statuseffects}\nIncome Boosts: ${stats.incomeboosts}\nTower Boosts: ${stats.towerboosts}";
-}
 
 String assetImagePath(String type, String imageName) {
   if (type == kTowers) {
@@ -116,8 +71,6 @@ String assetImagePath(String type, String imageName) {
     return bloonImage(imageName);
   } else if (type == kBosses) {
     return bossImage(imageName);
-  } else if (type == kMinions) {
-    return minionImage(imageName);
   } else if (type == kMaps) {
     return mapImage(imageName);
   } else {
@@ -163,17 +116,6 @@ List<BaseHero> heroesFromSearch(List<BaseHero> heroes, String query) {
       .toList();
 }
 
-List<String> dropMenuOptions(int pageIndex) {
-  if (pageIndex == 0) {
-    return towerTypes;
-  } else if (pageIndex == 2) {
-    return bloonTypes;
-  } else if (pageIndex == 3) {
-    return mapDifficulties;
-  } else {
-    return [];
-  }
-}
 
 List<String> separateString(String stringToSeparate) {
   if (stringToSeparate.contains(':')) {
@@ -181,7 +123,7 @@ List<String> separateString(String stringToSeparate) {
     returnList[0] += ':';
     return returnList;
   } else {
-    return ["", stringToSeparate];
+    return ['', stringToSeparate];
   }
 }
 
@@ -202,13 +144,13 @@ dynamic extractItemTypeFromList(List<dynamic> data) {
   }
 
   if (isString && isObject) {
-    return "mix"; // Both strings and objects are present
+    return 'mix'; // Both strings and objects are present
   } else if (isString) {
-    return "str"; // Only strings are present
+    return 'str'; // Only strings are present
   } else if (isObject) {
-    return "obj"; // Only objects are present
+    return 'obj'; // Only objects are present
   } else {
-    return "none"; // No strings or objects found
+    return 'none'; // No strings or objects found
   }
 }
 

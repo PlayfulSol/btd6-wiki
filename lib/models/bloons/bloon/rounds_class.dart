@@ -5,7 +5,14 @@ class Rounds {
   Rounds({required this.normal, required this.abr});
 
   Rounds.fromJson(Map<String, dynamic> json) {
-    normal = List<String>.from(json['normal']);
-    abr = List<String>.from(json['abr']);
+    normal = _parseRounds(json['normal'] as Map<String, dynamic>?);
+    abr = _parseRounds(json['alternate'] as Map<String, dynamic>?);
+  }
+
+  static List<String> _parseRounds(Map<String, dynamic>? data) {
+    if (data == null) return [];
+    final entries = data.entries.toList()
+      ..sort((a, b) => (int.tryParse(a.key) ?? 0).compareTo(int.tryParse(b.key) ?? 0));
+    return entries.map((e) => 'Round ${e.key}: ${e.value}').toList();
   }
 }

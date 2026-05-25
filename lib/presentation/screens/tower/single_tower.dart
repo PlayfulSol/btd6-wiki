@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '/models/towers/tower/tower.dart';
+import '/presentation/widgets/common/app_image.dart';
+import '/presentation/widgets/common/detail_page_scaffold.dart';
+import '/presentation/widgets/common/loader.dart';
+import '/presentation/widgets/common/property_card.dart';
+import '/presentation/widgets/common/stat_row.dart';
+import '/presentation/widgets/common/stats_and_changes.dart';
 import '/presentation/widgets/towers/path.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
@@ -10,6 +16,8 @@ import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
+
+Color _classColor(String classType) => GameColors.forClass(classType);
 
 class SingleTower extends StatefulWidget {
   const SingleTower({
@@ -20,16 +28,17 @@ class SingleTower extends StatefulWidget {
 
   final AnalyticsHelper analyticsHelper;
   final String towerId;
+
   @override
   State<SingleTower> createState() => _SingleTowerState();
 }
 
 class _SingleTowerState extends State<SingleTower> {
-  late TowerModel tower;
+  late TowerModelV2 tower;
   bool loading = true;
 
   MonkeyPath _buildPath(int index) {
-    var hasParagon = tower.paths.paragon != null;
+    final hasParagon = tower.paths.paragon != null;
     return MonkeyPath(
       path: index == 0
           ? tower.paths.path1
@@ -47,13 +56,10 @@ class _SingleTowerState extends State<SingleTower> {
   }
 
   void loadTower() async {
-    var path = '${towerDataPath + widget.towerId}.json';
+    final path = '${towerDataPath + widget.towerId}.json';
     final data = await rootBundle.loadString(path);
-    var jsonData = json.decode(data);
-    tower = TowerModel.fromJson(jsonData);
-    setState(() {
-      loading = false;
-    });
+    tower = TowerModelV2.fromJson(json.decode(data));
+    setState(() => loading = false);
   }
 
   @override
@@ -68,221 +74,93 @@ class _SingleTowerState extends State<SingleTower> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: !loading
-          ? AppBar(
-              title: Text(tower.name),
-              actions: [
-                Consumer<FavoriteState>(
-                  builder: (context, favoriteState, child) {
-                    return IconButton(
-                      onPressed: () => favoriteState.toggleFavoriteFunc(
-                          context, favoriteState, tower),
-                      icon: favoriteState.isFavorite(tower.type, tower.id)
-                          ? const Icon(Icons.star)
-                          : const Icon(Icons.star_border_outlined),
-                    );
-                  },
-                ),
-              ],
-            )
-          : AppBar(),
-      body: !loading
-          ? SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 600),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Image(
-                              semanticLabel: tower.name,
-                              image: AssetImage(towerImage(tower.image)),
-                              width: 140,
-                              fit: BoxFit.contain,
-                            ),
-                            const SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    tower.name,
-                                    style: bigTitleStyle,
-                                  ),
-                                  const SizedBox(height: 4),
-                                  Text(
-                                    'Class: ${tower.classType}',
-                                    style: smallTitleStyle,
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    tower.inGameDesc,
-                                    style: normalStyle,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    LayoutBuilder(
-                      builder: (context, constraints) {
-                        final screenWidth = MediaQuery.of(context).size.width;
-                        final availableWidth = constraints.maxWidth;
-                        final isMobile =
-                            screenWidth < 480 || availableWidth < 480;
-                        print(
-                            'SINGLE_TOWER DEBUG - Screen width: $screenWidth, Available width: $availableWidth, isMobile: $isMobile');
+    if (loading) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: const Loader(),
+      );
+    }
 
-                        if (isMobile) {
-                          return Column(
-                            children: [
-                              Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Stats',
-                                        style: smallTitleStyle,
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        statsToString(tower.stats),
-                                        style: normalStyle,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      if (extraStatsToString(tower.stats)
-                                          .trim()
-                                          .isNotEmpty) ...[
-                                        const SizedBox(height: 8),
-                                        Text(
-                                          extraStatsToString(tower.stats),
-                                          style: normalStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Card(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        'Cost',
-                                        style: smallTitleStyle,
-                                      ),
-                                      const SizedBox(height: 4),
-                                      Text(
-                                        costToString(tower.cost),
-                                        style: normalStyle,
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        } else {
-                          return Row(
-                            children: [
-                              Expanded(
-                                flex: 1,
-                                child: Card(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Stats',
-                                          style: smallTitleStyle,
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          statsToString(tower.stats),
-                                          style: normalStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                        if (extraStatsToString(tower.stats)
-                                            .trim()
-                                            .isNotEmpty) ...[
-                                          const SizedBox(height: 8),
-                                          Text(
-                                            extraStatsToString(tower.stats),
-                                            style: normalStyle,
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ],
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 8),
-                              Expanded(
-                                flex: 1,
-                                child: Card(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Cost',
-                                          style: smallTitleStyle,
-                                        ),
-                                        const SizedBox(height: 4),
-                                        Text(
-                                          costToString(tower.cost),
-                                          style: normalStyle,
-                                          textAlign: TextAlign.center,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        }
-                      },
-                    ),
-                    const SizedBox(height: 16),
-                    ListView.builder(
-                      primary: false,
-                      shrinkWrap: true,
-                      itemCount: tower.paths.paragon != null ? 4 : 3,
-                      itemBuilder: (context, index) => _buildPath(index),
-                    )
-                  ],
-                ),
-              ),
-            )
-          : const CircularProgressIndicator(),
+    final classColor = _classColor(tower.classType);
+    final favoriteState = context.watch<FavoriteState>();
+    final isFav = favoriteState.isFavorite(tower.type, tower.id);
+
+    return DetailPageScaffold(
+      title: tower.name,
+      accentColor: classColor,
+      isFavorite: isFav,
+      onFavoriteToggle: () =>
+          favoriteState.toggleFavoriteFunc(context, favoriteState, tower),
+      headerContent: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 56, 24, 52),
+        child: AppImage(path: towerImage(tower.image)),
+      ),
+      body: [
+        Chip(
+          label: Text(
+            tower.classType,
+            style: TextStyle(
+              color: classColor,
+              fontWeight: FontWeight.w600,
+              fontSize: 12,
+            ),
+          ),
+          backgroundColor: classColor.withValues(alpha: 0.12),
+          side: BorderSide(color: classColor.withValues(alpha: 0.4)),
+          visualDensity: VisualDensity.compact,
+        ),
+        const SizedBox(height: 12),
+        PropertyCard(
+          title: 'Description',
+          children: [Text(tower.inGameDesc, style: normalStyle)],
+        ),
+        const SizedBox(height: 12),
+        PropertyCard(
+          title: 'Stats',
+          children: [
+            for (final e in <MapEntry<String, String>>[
+              MapEntry('Damage', tower.stats.damage),
+              MapEntry('Pierce', tower.stats.pierce),
+              MapEntry('Attack Speed', tower.stats.attackSpeed),
+              MapEntry('Range', tower.stats.range),
+              MapEntry('Camo', tower.stats.camo),
+              MapEntry('Footprint', tower.stats.footprint),
+              MapEntry('Damage Type', tower.stats.damageType),
+              MapEntry('Status Effects', tower.stats.statuseffects),
+              MapEntry('Tower Boosts', tower.stats.towerboosts),
+              MapEntry('Income Boosts', tower.stats.incomeboosts),
+            ].where((e) => e.value.isNotEmpty)) ...[
+              StatRow(label: e.key, value: e.value),
+              const SizedBox(height: 4),
+            ],
+          ],
+        ),
+        const SizedBox(height: 12),
+        PropertyCard(
+          title: 'Cost',
+          children: [
+            StatRow(label: 'Easy', value: tower.cost.easy),
+            const SizedBox(height: 4),
+            StatRow(label: 'Medium', value: tower.cost.medium),
+            const SizedBox(height: 4),
+            StatRow(label: 'Hard', value: tower.cost.hard),
+            const SizedBox(height: 4),
+            StatRow(label: 'Impoppable', value: tower.cost.impoppable),
+          ],
+        ),
+        if (tower.changes != null) ...[
+          const SizedBox(height: 8),
+          ChangesWidget(changes: tower.changes!),
+        ],
+        const SizedBox(height: 12),
+        ListView.builder(
+          primary: false,
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          itemCount: tower.paths.paragon != null ? 4 : 3,
+          itemBuilder: (_, index) => _buildPath(index),
+        ),
+      ],
     );
   }
 }

@@ -2,8 +2,11 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '/models/base/base_tower.dart';
+import '/presentation/widgets/common/filter_chips_row.dart';
+import '/presentation/widgets/common/list_item_card.dart';
+import '/presentation/widgets/common/no_results_widget.dart';
+import '/presentation/widgets/common/section_header.dart';
 import '/presentation/widgets/misc/search_widget.dart';
-import '/presentation/widgets/common/image_outline.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
@@ -11,6 +14,9 @@ import '/utilities/global_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
+
+// Class sections in canonical BTD6 order.
+const _towerSections = ['Primary', 'Military', 'Magic', 'Support'];
 
 class Towers extends StatefulWidget {
   const Towers({
@@ -36,235 +42,122 @@ class _TowersState extends State<Towers> {
     );
   }
 
+  Color _chipColor(BuildContext context, String option) {
+    if (option == 'All') return Theme.of(context).colorScheme.primary;
+    return GameColors.forClass(option);
+  }
+
+  void _onTowerTap(BuildContext context, BaseTower tower) {
+    widget.analyticsHelper.logEvent(
+      name: widgetEngagement,
+      parameters: {
+        'screen': kTowerPagesClass,
+        'widget': listTile,
+        'value': tower.id,
+      },
+    );
+    context.push('/towers/${tower.id}');
+  }
+
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = getPreset(
-      MediaQuery.of(context).size,
-    );
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 480;
-    final crossAxisCount = isMobile ? 1 : constraintsValues[towerCrossCount];
+    final isTablet = screenWidth < 750;
+    final crossAxisCount = isMobile ? 2 : (isTablet ? 3 : 4);
+    final aspectRatio = isMobile ? 0.88 : 0.80;
 
     return Scaffold(
       body: Column(
         children: [
+          // Search bar (visible when enabled)
           Consumer<GlobalState>(
-            builder: (context, globalState, child) =>
-                globalState.isSearchEnabled
-                    ? SearchBarWidget(queryText: globalState.currentQuery)
-                    : Container(),
+            builder: (context, globalState, _) => globalState.isSearchEnabled
+                ? SearchBarWidget(queryText: globalState.currentQuery)
+                : const SizedBox.shrink(),
           ),
+          // Filter chips (always visible)
+          Consumer<GlobalState>(
+            builder: (context, globalState, _) => FilterChipsRow(
+              options: towerTypes,
+              selected: globalState.optionForCategory(kTowers),
+              onSelect: (option) => globalState.updateCurrentOptionSelected(
+                  category: kTowers, option: option),
+              colorForOption: _chipColor,
+            ),
+          ),
+          // Sectioned grid
           Expanded(
             child: Consumer2<GlobalState, FavoriteState>(
-              builder: (context, globalState, favoriteState, child) {
-                final filteredTowers = filterAndSearchTowers(widget.towers,
-                    globalState.currentQuery, globalState.currentOption);
+              builder: (context, globalState, favoriteState, _) {
+                final filtered = filterAndSearchTowers(
+                  widget.towers,
+                  globalState.currentQuery,
+                  globalState.optionForCategory(kTowers),
+                );
 
-                if (isMobile) {
-                  return ListView.builder(
-                    padding: const EdgeInsets.all(12),
-                    itemCount: filteredTowers.length,
-                    itemBuilder: (context, index) {
-                      final tower = filteredTowers[index];
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(12),
-                          onLongPress: () => favoriteState.toggleFavoriteFunc(
-                              context, favoriteState, tower),
-                          onTap: () {
-                            if (!favoriteState.isMultiSelectMode) {
-                              widget.analyticsHelper.logEvent(
-                                name: widgetEngagement,
-                                parameters: {
-                                  'screen': kTowerPagesClass,
-                                  'widget': listTile,
-                                  'value': tower.id,
-                                },
-                              );
-                              context.push('/towers/${tower.id}');
-                            } else {
-                              favoriteState.toggleFavoriteFunc(
-                                  context, favoriteState, tower);
-                            }
-                          },
-                          child: Card(
-                            elevation: 2,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 100,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(12),
-                                      bottomLeft: Radius.circular(12),
-                                    ),
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .surfaceContainerHighest
-                                        .withOpacity(0.2),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8),
-                                    child: ImageOutliner(
-                                      imageName: tower.image,
-                                      imagePath: towerImage(tower.image),
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 8),
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            tower.name,
-                                            style: constraintsValues[
-                                                towerTitleStyle],
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        Icon(
-                                          favoriteState.isFavorite(
-                                                  tower.type, tower.id)
-                                              ? Icons.star
-                                              : Icons.star_border_outlined,
-                                          size: 18,
-                                          color: favoriteState.isFavorite(
-                                                  tower.type, tower.id)
-                                              ? Colors.amber
-                                              : null,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                }
+                // Group by class, keeping canonical section order.
+                final groups = {
+                  for (final cls in _towerSections)
+                    cls: filtered
+                        .where((t) => t.classType == cls)
+                        .toList()
+                };
+                final nonEmpty =
+                    groups.entries.where((e) => e.value.isNotEmpty).toList();
 
-                return GridView.builder(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: filteredTowers.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: crossAxisCount,
-                    childAspectRatio: 0.75,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                  ),
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final tower = filteredTowers[index];
+                return CustomScrollView(
+                  slivers: [
+                    if (nonEmpty.isEmpty)
+                      const SliverFillRemaining(child: NoResultsWidget()),
 
-                    return InkWell(
-                      borderRadius: BorderRadius.circular(12),
-                      onLongPress: () => favoriteState.toggleFavoriteFunc(
-                          context, favoriteState, tower),
-                      onTap: () {
-                        if (!favoriteState.isMultiSelectMode) {
-                          widget.analyticsHelper.logEvent(
-                            name: widgetEngagement,
-                            parameters: {
-                              'screen': kTowerPagesClass,
-                              'widget': listTile,
-                              'value': tower.id,
-                            },
-                          );
-                          context.push('/towers/${tower.id}');
-                        } else {
-                          favoriteState.toggleFavoriteFunc(
-                              context, favoriteState, tower);
-                        }
-                      },
-                      child: Card(
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              flex: 5,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(12),
-                                  ),
-                                  color: Theme.of(context)
-                                      .colorScheme
-                                      .surfaceContainerHighest
-                                      .withOpacity(0.2),
-                                ),
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(16),
-                                    child: ImageOutliner(
-                                      imageName: tower.image,
-                                      imagePath: towerImage(tower.image),
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 12, vertical: 8),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Expanded(
-                                          child: Text(
-                                            tower.name,
-                                            style: constraintsValues[
-                                                towerTitleStyle],
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ),
-                                        Icon(
-                                          favoriteState.isFavorite(
-                                                  tower.type, tower.id)
-                                              ? Icons.star
-                                              : Icons.star_border_outlined,
-                                          size: 18,
-                                          color: favoriteState.isFavorite(
-                                                  tower.type, tower.id)
-                                              ? Colors.amber
-                                              : null,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
+                    for (final entry in nonEmpty) ...[
+                      SliverToBoxAdapter(
+                        child: SectionHeader(
+                          title: entry.key,
+                          accentColor: GameColors.forClass(entry.key),
+                          count: entry.value.length,
                         ),
                       ),
-                    );
-                  },
+                      SliverPadding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        sliver: SliverGrid(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            childAspectRatio: aspectRatio,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final tower = entry.value[index];
+                              final isFav = favoriteState.isFavorite(
+                                  tower.type, tower.id);
+                              return ListItemCard(
+                                imagePath: towerImage(tower.image),
+                                imageName: tower.image,
+                                name: tower.name,
+                                subtitle: tower.classType,
+                                accentColor: GameColors.forClass(tower.classType),
+                                isFavorite: isFav,
+                                onTap: () => favoriteState.isMultiSelectMode
+                                    ? favoriteState.toggleFavoriteFunc(
+                                        context, favoriteState, tower)
+                                    : _onTowerTap(context, tower),
+                                onLongPress: () =>
+                                    favoriteState.toggleFavoriteFunc(
+                                        context, favoriteState, tower),
+                              );
+                            },
+                            childCount: entry.value.length,
+                          ),
+                        ),
+                      ),
+                    ],
+
+                    const SliverToBoxAdapter(child: SizedBox(height: 12)),
+                  ],
                 );
               },
             ),

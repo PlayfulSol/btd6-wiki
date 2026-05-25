@@ -49,13 +49,9 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      title: Text(
+      title: const Text(
         'About Us',
         textAlign: TextAlign.center,
-        style: TextStyle(
-          color: Theme.of(context).colorScheme.onSurface,
-        ),
       ),
       titleTextStyle: bigTitleStyle,
       contentPadding: const EdgeInsets.fromLTRB(15, 15, 15, 25),

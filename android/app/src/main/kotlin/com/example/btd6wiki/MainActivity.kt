@@ -1,4 +1,4 @@
-package asafhadad.btd6wiki
+package playfulsolutions.uobtd6wiki
 
 import io.flutter.embedding.android.FlutterActivity
 

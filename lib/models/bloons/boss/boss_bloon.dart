@@ -1,41 +1,38 @@
-import '/models/bloons/common/relative_class.dart';
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 import 'boss_health_class.dart';
 
 class BossBloonModel extends BaseModel {
-  late final String description;
-  late final Map<String, dynamic> images;
-  late final Relative children;
-  late final Health health;
-  late final Map<String, dynamic> skullCount;
-  late final List<String> immunities;
-  late final Map<String, dynamic> gimmicks;
+  final String imageDefeated;
+  final String imageElite;
+  final String imageEliteDefeated;
+  final String gimmick;
+  final Map<String, dynamic> skullCount;
+  final Map<String, dynamic> mechanics;
+  final List<BossMinion> minions;
+  final BossTiers tiers;
 
-  BossBloonModel(
-    super.id,
-    super.name,
-    super.image,
-    super.type,
-    this.description,
-    this.children,
-    this.health,
-    this.skullCount,
-    this.immunities,
-    this.gimmicks,
-  );
+  Map<String, String> get images => {
+        'normal': image,
+        'defeated': imageDefeated,
+        'elite': imageElite,
+        'eliteDefeated': imageEliteDefeated,
+      };
 
   BossBloonModel.fromJson(Map<String, dynamic> json)
-      : description = json['description'],
-        images = json["images"],
-        children = Relative.fromJson(json["children"]),
-        health = Health.fromJson(json["health"]),
-        skullCount = json['skullCount'],
-        immunities = List<String>.from(json['generalImmunities']),
-        gimmicks = json["gimmicks"],
+      : imageDefeated = json['imageDefeated'] ?? '',
+        imageElite = json['imageElite'] ?? '',
+        imageEliteDefeated = json['imageEliteDefeated'] ?? '',
+        gimmick = json['gimmick'] ?? '',
+        skullCount = Map<String, dynamic>.from(json['skullCount'] ?? {}),
+        mechanics = Map<String, dynamic>.from(json['mechanics'] ?? {}),
+        minions = (json['minions'] as List? ?? [])
+            .map((e) => BossMinion.fromJson(e))
+            .toList(),
+        tiers = BossTiers.fromJson(json['tiers']),
         super(
-          json["id"] as String,
-          json["name"] as String,
-          json["images"]["normal"] as String,
+          json['id'] as String,
+          json['name'] as String,
+          json['image'] as String,
           json['type'] as String,
         );
 }

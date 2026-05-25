@@ -3,9 +3,9 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import '/presentation/screens/tower/single_tower.dart';
 import '/presentation/screens/hero/single_hero.dart';
+import '/presentation/screens/hero/hero_skins.dart';
 import '/presentation/screens/bloon/single_bloon.dart';
 import '/presentation/screens/bloon/boss_bloon.dart';
-import '/presentation/screens/bloon/minion_bloon.dart';
 import '/presentation/screens/maps/single_map.dart';
 import '/presentation/screens/misc/favorite_screen.dart';
 import '/main.dart';
@@ -38,10 +38,13 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/towers',
-        builder: (context, state) => MyHomePage(
-          analytics: analytics,
-          baseEntities: baseEntities,
-          initialPageIndex: kTowersIndex,
+        pageBuilder: (context, state) => NoTransitionPage(
+          key: state.pageKey,
+          child: MyHomePage(
+            analyticsHelper: AnalyticsHelper(analytics),
+            baseEntities: baseEntities,
+            initialPageIndex: kTowersIndex,
+          ),
         ),
         routes: [
           GoRoute(
@@ -58,10 +61,13 @@ class AppRouter {
       ),
       GoRoute(
         path: '/heroes',
-        builder: (context, state) => MyHomePage(
-          analytics: analytics,
-          baseEntities: baseEntities,
-          initialPageIndex: kHeroesIndex,
+        pageBuilder: (context, state) => NoTransitionPage(
+          key: state.pageKey,
+          child: MyHomePage(
+            analyticsHelper: AnalyticsHelper(analytics),
+            baseEntities: baseEntities,
+            initialPageIndex: kHeroesIndex,
+          ),
         ),
         routes: [
           GoRoute(
@@ -73,15 +79,30 @@ class AppRouter {
                 analyticsHelper: AnalyticsHelper(analytics),
               );
             },
+            routes: [
+              GoRoute(
+                path: 'skins',
+                builder: (context, state) {
+                  final id = state.pathParameters['id']!;
+                  return HeroSkins(
+                    heroId: id,
+                    analyticsHelper: AnalyticsHelper(analytics),
+                  );
+                },
+              ),
+            ],
           ),
         ],
       ),
       GoRoute(
         path: '/bloons',
-        builder: (context, state) => MyHomePage(
-          analytics: analytics,
-          baseEntities: baseEntities,
-          initialPageIndex: kBloonsIndex,
+        pageBuilder: (context, state) => NoTransitionPage(
+          key: state.pageKey,
+          child: MyHomePage(
+            analyticsHelper: AnalyticsHelper(analytics),
+            baseEntities: baseEntities,
+            initialPageIndex: kBloonsIndex,
+          ),
         ),
         routes: [
           GoRoute(
@@ -108,10 +129,13 @@ class AppRouter {
       ),
       GoRoute(
         path: '/maps',
-        builder: (context, state) => MyHomePage(
-          analytics: analytics,
-          baseEntities: baseEntities,
-          initialPageIndex: kMapsIndex,
+        pageBuilder: (context, state) => NoTransitionPage(
+          key: state.pageKey,
+          child: MyHomePage(
+            analyticsHelper: AnalyticsHelper(analytics),
+            baseEntities: baseEntities,
+            initialPageIndex: kMapsIndex,
+          ),
         ),
         routes: [
           GoRoute(
@@ -131,16 +155,6 @@ class AppRouter {
         builder: (context, state) => FavoriteScreen(
           analyticsHelper: AnalyticsHelper(analytics),
         ),
-      ),
-      GoRoute(
-        path: '/minions/:id',
-        builder: (context, state) {
-          final id = state.pathParameters['id']!;
-          return MinionBloonPage(
-            minionId: id,
-            analyticsHelper: AnalyticsHelper(analytics),
-          );
-        },
       ),
     ],
   );

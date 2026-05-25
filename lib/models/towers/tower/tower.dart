@@ -1,35 +1,34 @@
-import '/models/base/base_tower.dart';
 import '/models/towers/common/cost_class.dart';
 import '/models/towers/common/stats_class.dart';
 import 'monkey_paths.dart';
 
-class TowerModel extends BaseTower {
-  late final Cost cost;
-  late final Stats stats;
-  late final MonkeyPathsModel paths;
+class TowerModelV2 {
+  final String id;
+  final String name;
+  final String type;
+  final String image;
+  final String classType;
+  final String unlock;
+  final String inGameDesc;
+  final String target;
+  final Cost cost;
+  final Stats stats;
+  final MonkeyPathsV2 paths;
+  final Map<String, String>? changes;
 
-  TowerModel(
-    super.id,
-    super.name,
-    super.image,
-    super.type,
-    super.classType,
-    super.inGameDesc,
-    this.cost,
-    this.stats,
-    this.paths,
-  );
-
-  TowerModel.fromJson(Map<String, dynamic> json)
-      : cost = Cost.fromJson(json['cost']),
+  TowerModelV2.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        name = json['name'],
+        type = json['type'],
+        image = json['image'],
+        classType = json['classType'],
+        unlock = json['unlock'] ?? '',
+        inGameDesc = json['inGameDesc'],
+        target = json['target'] ?? '',
+        cost = Cost.fromJson(json['cost']),
         stats = Stats.fromJson(json['stats']),
-        paths = MonkeyPathsModel.fromJson(json['paths']),
-        super(
-          json["id"] as String,
-          json["name"] as String,
-          json["image"] as String,
-          json["type"] as String,
-          json["classType"] as String,
-          json["inGameDesc"] as String,
-        );
+        paths = MonkeyPathsV2.fromJson(json['paths']),
+        changes = json['changes'] != null
+            ? Map<String, String>.from(json['changes'])
+            : null;
 }

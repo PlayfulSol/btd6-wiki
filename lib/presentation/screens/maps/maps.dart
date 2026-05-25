@@ -2,6 +2,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '/models/base/base_map.dart';
+import '/presentation/widgets/common/filter_chips_row.dart';
+import '/presentation/widgets/common/no_results_widget.dart';
+import '/presentation/widgets/common/section_header.dart';
 import '/presentation/widgets/misc/search_widget.dart';
 import '/presentation/widgets/maps/map_card.dart';
 import '/analytics/analytics_constants.dart';
@@ -10,8 +13,6 @@ import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
-import '/utilities/images_url.dart';
-import '/utilities/strings.dart';
 
 class Maps extends StatefulWidget {
   const Maps({
@@ -35,189 +36,117 @@ class _MapsState extends State<Maps> {
       screenClass: kMainPagesClass,
       screenName: kMaps,
     );
-    _loadJsonData();
-  }
-
-  Future<void> _loadJsonData() async {
     widget.maps.sort((a, b) =>
         mapDifficulties.indexOf(a.difficulty) -
         mapDifficulties.indexOf(b.difficulty));
   }
 
+  Color _chipColor(BuildContext context, String option) {
+    if (option == 'All') return Theme.of(context).colorScheme.primary;
+    return difficultyColor(option);
+  }
+
   @override
   Widget build(BuildContext context) {
-    final constraintsValues = getPreset(
-      MediaQuery.of(context).size,
-    );
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 480;
-    final crossAxisCount = isMobile ? 1 : constraintsValues[mapCrossCount];
-    
+    final isTablet = screenWidth < 750;
+    final crossAxisCount = isMobile ? 2 : (isTablet ? 3 : 4);
+    final aspectRatio = isMobile ? 1.1 : 1.0;
+
     return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          return Column(
-            children: [
-              Consumer<GlobalState>(
-                builder: (context, globalState, child) {
-                  return globalState.isSearchEnabled
-                      ? SearchBarWidget(queryText: globalState.currentQuery)
-                      : Container();
-                },
-              ),
-              Expanded(
-                child: Consumer2<GlobalState, FavoriteState>(
-                  builder: (context, globalState, favoriteState, child) {
-                    final filteredMaps = filterAndSearchMaps(widget.maps,
-                        globalState.currentQuery, globalState.currentOption);
-                    
-                    if (isMobile) {
-                      return ListView.builder(
-                        padding: const EdgeInsets.all(12),
-                        itemCount: filteredMaps.length,
-                        itemBuilder: (context, index) {
-                          BaseMap map = filteredMaps[index];
-                          return Padding(
-                            padding: const EdgeInsets.only(bottom: 12),
-                            child: GestureDetector(
-                              onLongPress: () => favoriteState.toggleFavoriteFunc(
-                                  context, favoriteState, map),
-                              onTap: () {
-                                if (!favoriteState.isMultiSelectMode) {
-                                  widget.analyticsHelper.logEvent(
-                                    name: widgetEngagement,
-                                    parameters: {
-                                      'screen': kMapPagesClass,
-                                      'widget': map.id,
-                                    },
-                                  );
-                                  context.push('/maps/${map.id}');
-                                } else {
-                                  favoriteState.toggleFavoriteFunc(
-                                      context, favoriteState, map);
-                                }
-                              },
-                              child: Consumer<FavoriteState>(
-                                builder: (context, favoriteState, child) {
-                                  return Card(
-                                    elevation: 2,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(12),
-                                            bottomLeft: Radius.circular(12),
-                                          ),
-                                          child: Image(
-                                            semanticLabel: map.name,
-                                            image: AssetImage(mapImage(map.image)),
-                                            width: 100,
-                                            height: 100,
-                                            fit: BoxFit.cover,
-                                            errorBuilder: (BuildContext context, Object exception,
-                                                StackTrace? stackTrace) {
-                                              return const SizedBox(
-                                                width: 100,
-                                                height: 100,
-                                                child: Icon(Icons.error),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 12, vertical: 8),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      Text(
-                                                        capitalizeEveryWord(map.name),
-                                                        style: bolderNormalStyle,
-                                                        maxLines: 2,
-                                                        overflow: TextOverflow.ellipsis,
-                                                      ),
-                                                      Text(
-                                                        map.difficulty,
-                                                        style: subtitleStyle,
-                                                        maxLines: 1,
-                                                        overflow: TextOverflow.ellipsis,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  favoriteState.isFavorite(map.type, map.id)
-                                                      ? Icons.star
-                                                      : Icons.star_border_outlined,
-                                                  size: 18,
-                                                  color: favoriteState.isFavorite(
-                                                          map.type, map.id)
-                                                      ? Colors.amber
-                                                      : null,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }
-                    
-                    return GridView.builder(
-                      padding: const EdgeInsets.all(12),
-                      itemCount: filteredMaps.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        childAspectRatio: constraintsValues[mapAspectRatio],
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
+      body: Column(
+        children: [
+          Consumer<GlobalState>(
+            builder: (context, globalState, _) => globalState.isSearchEnabled
+                ? SearchBarWidget(queryText: globalState.currentQuery)
+                : const SizedBox.shrink(),
+          ),
+          Consumer<GlobalState>(
+            builder: (context, globalState, _) => FilterChipsRow(
+              options: mapDifficulties,
+              selected: globalState.optionForCategory(kMaps),
+              onSelect: (option) => globalState.updateCurrentOptionSelected(
+                  category: kMaps, option: option),
+              colorForOption: _chipColor,
+            ),
+          ),
+          Expanded(
+            child: Consumer2<GlobalState, FavoriteState>(
+              builder: (context, globalState, favoriteState, _) {
+                final filtered = filterAndSearchMaps(
+                    widget.maps,
+                    globalState.currentQuery,
+                    globalState.optionForCategory(kMaps));
+
+                final groups = <String, List<BaseMap>>{};
+                for (final d in mapDifficulties.skip(1)) {
+                  final group =
+                      filtered.where((m) => m.difficulty == d).toList();
+                  if (group.isNotEmpty) groups[d] = group;
+                }
+
+                return CustomScrollView(
+                  slivers: [
+                    if (groups.isEmpty)
+                      const SliverFillRemaining(child: NoResultsWidget()),
+
+                    for (final entry in groups.entries) ...[
+                      SliverToBoxAdapter(
+                        child: SectionHeader(
+                          title: entry.key,
+                          accentColor: difficultyColor(entry.key),
+                          count: entry.value.length,
+                        ),
                       ),
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        BaseMap map = filteredMaps[index];
-                        return GestureDetector(
-                            onLongPress: () => favoriteState.toggleFavoriteFunc(
-                                context, favoriteState, map),
-                            onTap: () {
-                              if (!favoriteState.isMultiSelectMode) {
-                                widget.analyticsHelper.logEvent(
-                                  name: widgetEngagement,
-                                  parameters: {
-                                    'screen': kMapPagesClass,
-                                    'widget': map.id,
-                                  },
-                                );
-                                context.push('/maps/${map.id}');
-                              } else {
-                                favoriteState.toggleFavoriteFunc(
-                                    context, favoriteState, map);
-                              }
+                      SliverPadding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        sliver: SliverGrid(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            childAspectRatio: aspectRatio,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                          ),
+                          delegate: SliverChildBuilderDelegate(
+                            (context, index) {
+                              final map = entry.value[index];
+                              return MapCard(
+                                singleMap: map,
+                                isFavorite: favoriteState.isFavorite(map.type, map.id),
+                                onLongPress: () => favoriteState.toggleFavoriteFunc(
+                                    context, favoriteState, map),
+                                onTap: () {
+                                  if (!favoriteState.isMultiSelectMode) {
+                                    widget.analyticsHelper.logEvent(
+                                      name: widgetEngagement,
+                                      parameters: {
+                                        'screen': kMapPagesClass,
+                                        'widget': map.id,
+                                      },
+                                    );
+                                    context.push('/maps/${map.id}');
+                                  } else {
+                                    favoriteState.toggleFavoriteFunc(
+                                        context, favoriteState, map);
+                                  }
+                                },
+                              );
                             },
-                            child: MapCard(singleMap: map),
-                          );
-                      },
-                    );
-                  },
-                ),
-              ),
-            ],
-          );
-        },
+                            childCount: entry.value.length,
+                          ),
+                        ),
+                      ),
+                    ],
+
+                    const SliverToBoxAdapter(child: SizedBox(height: 12)),
+                  ],
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

@@ -1,49 +1,41 @@
+String _parseStat(Object? v) => v?.toString() ?? '';
+
 class Stats {
-  late final String damage;
-  late final String pierce;
-  late final String attackSpeed;
-  late final String range;
-  late final String camo;
-  late final String statuseffects;
-  late final String towerboosts;
-  late final String incomeboosts;
+  final String damage;
+  final String pierce;
+  final String attackSpeed;
+  final String range;
+  final String camo;
+  final String footprint;
+  final String damageType;
+  final String statuseffects;
+  final String towerboosts;
+  final String incomeboosts;
 
-  Stats(
-    damage,
-    pierce,
-    attackSpeed,
-    range,
-    type,
-    camo,
-    statuseffects,
-    towerboosts,
-    incomeboosts,
-  );
-
-  Stats.fromJson(Map<String, dynamic> json) {
-    damage = json['damage'];
-    pierce = json['pierce'];
-    attackSpeed = json['attackSpeed'];
-    range = json['range'];
-    camo = json["camo"];
-    if (json["statuseffects"] is bool) {
-      statuseffects = (json["statuseffects"] ? 'true' : 'false');
-    } else if (json["statuseffects"] is String) {
-      statuseffects = (json["statuseffects"]);
-    }
-    towerboosts = json["towerboosts"] ?? 'none';
-    incomeboosts = json["incomeboosts"] ?? 'none';
-  }
+  Stats.fromJson(Map<String, dynamic> json)
+      : damage = _parseStat(json['damage']),
+        pierce = _parseStat(json['pierce']),
+        attackSpeed = _parseStat(json['attackSpeed']),
+        range = _parseStat(json['range']),
+        camo = _parseStat(json['camo']),
+        footprint = _parseStat(json['footprint']),
+        damageType = _parseStat(json['damageType']),
+        statuseffects = _parseStat(json['statuseffects']),
+        towerboosts = _parseStat(json['towerboosts']),
+        incomeboosts = _parseStat(json['incomeboosts']);
 }
 
-class HeroStats {
-  late final dynamic data;
+class UpgradeStats {
+  final String damage;
+  final String pierce;
+  final String attackSpeed;
+  final String range;
+  final String camo;
 
-  HeroStats(
-    this.data,
-  );
-
-  HeroStats.fromJson(dynamic json) {
-    data = json;
-  }
+  UpgradeStats.fromJson(Map<String, dynamic> json)
+      : damage = _parseStat(json['damage']),
+        pierce = _parseStat(json['pierce']),
+        attackSpeed = _parseStat(json['attackSpeed']),
+        range = _parseStat(json['range']),
+        camo = _parseStat(json['camo']);
 }

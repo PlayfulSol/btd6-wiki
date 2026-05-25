@@ -2,15 +2,31 @@ import 'package:btd6wiki/hive/favorite_model.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/presentation/widgets/misc/orderable_grid.dart';
 import '/utilities/favorite_state.dart';
 import '/utilities/utils.dart';
 
-class FavoriteScreen extends StatelessWidget {
-  FavoriteScreen({super.key, required this.analyticsHelper});
+class FavoriteScreen extends StatefulWidget {
+  const FavoriteScreen({super.key, required this.analyticsHelper});
   final AnalyticsHelper analyticsHelper;
+
+  @override
+  State<FavoriteScreen> createState() => _FavoriteScreenState();
+}
+
+class _FavoriteScreenState extends State<FavoriteScreen> {
   final PageController pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    widget.analyticsHelper.logScreenView(
+      screenClass: kFavoritesClass,
+      screenName: kFavoritesClass,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +85,7 @@ class FavoriteScreen extends StatelessWidget {
                         categoryType: categories[index],
                         globalKeyGridView: GlobalKey(),
                         constraints: constraintsValues,
-                        analyticsHelper: analyticsHelper,
+                        analyticsHelper: widget.analyticsHelper,
                       ),
                     );
                   } else {

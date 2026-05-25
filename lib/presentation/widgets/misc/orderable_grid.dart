@@ -31,17 +31,31 @@ class OrderableGrid extends StatefulWidget {
 
 class _OrderableGridState extends State<OrderableGrid> {
   final ScrollController scrollController = ScrollController();
+  late List<FavoriteModel> _items;
+
+  @override
+  void initState() {
+    super.initState();
+    _items = List.from(widget.items);
+  }
+
+  @override
+  void didUpdateWidget(covariant OrderableGrid oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.items != widget.items) {
+      _items = List.from(widget.items);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> orderedItems = List.generate(
-      widget.items.length,
+      _items.length,
       (index) => SizedBox(
         width: 120,
         height: 185,
         child: FavoriteCard(
-          favItem: widget.items[index],
-          favoriteItems: widget.items,
+          favItem: _items[index],
           analyticsHelper: widget.analyticsHelper,
           typeName: widget.categoryType,
           constraintsValues: widget.constraints,
@@ -63,22 +77,21 @@ class _OrderableGridState extends State<OrderableGrid> {
             onNoReorder: (index) {
               context.contextMenuOverlay.show(
                 DraggablePopMenu(
-                  items: widget.items,
-                  selectedItem: widget.items[index],
+                  selectedItem: _items[index],
                 ),
               );
             },
             onReorder: (oldIndex, newIndex) {
               setState(() {
-                final favItem = widget.items.removeAt(oldIndex);
-                widget.items.insert(newIndex, favItem);
+                final favItem = _items.removeAt(oldIndex);
+                _items.insert(newIndex, favItem);
               });
-              favoriteState.updateIndexes(widget.categoryType, widget.items);
+              favoriteState.updateIndexes(widget.categoryType, _items);
             },
             children: orderedItems,
           );
         } else {
-          return Container();
+          return const SizedBox.shrink();
         }
       },
     );

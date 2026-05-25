@@ -1,4 +1,4 @@
-import '/models/base_model.dart';
+import '/models/base/base_model.dart';
 
 class BaseMap extends BaseModel {
   late final String difficulty;
@@ -12,11 +12,11 @@ class BaseMap extends BaseModel {
   );
 
   BaseMap.fromJson(Map<String, dynamic> json)
-      : difficulty = json["difficulty"] as String,
+      : difficulty = json['difficulty'] as String,
         super(
-          json["id"] as String,
-          json["name"] as String,
-          json["image"] as String,
-          json["type"] as String,
+          json['id'] as String,
+          json['name'] as String,
+          json['image'] as String,
+          json['type'] as String,
         );
 }

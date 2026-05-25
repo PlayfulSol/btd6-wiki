@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '/hive/favorite_model.dart';
+import '/presentation/widgets/common/app_image.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
@@ -11,14 +12,12 @@ class FavoriteCard extends StatelessWidget {
   const FavoriteCard({
     super.key,
     required this.favItem,
-    required this.favoriteItems,
     required this.analyticsHelper,
     required this.typeName,
     required this.constraintsValues,
   });
 
   final FavoriteModel favItem;
-  final List<dynamic> favoriteItems;
   final AnalyticsHelper analyticsHelper;
   final String typeName;
   final Map<String, dynamic> constraintsValues;
@@ -39,7 +38,6 @@ class FavoriteCard extends StatelessWidget {
               );
             } else {
               favoriteState.toggleFavoriteFunc(context, favoriteState, favItem);
-              favoriteItems.removeWhere((item) => item.id == favItem.id);
             }
           },
           child: Card(
@@ -52,9 +50,8 @@ class FavoriteCard extends StatelessWidget {
                 children: [
                   Expanded(
                     flex: constraintsValues[favItemImageFlex],
-                    child: Image(
-                      image:
-                          AssetImage(assetImagePath(typeName, favItem.image)),
+                    child: AppImage(
+                      path: assetImagePath(typeName, favItem.image),
                     ),
                   ),
                   Flexible(

@@ -4,7 +4,8 @@ import 'package:flutter/services.dart' show rootBundle;
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
-import '/models/base_model.dart';
+import '/models/base/base_bloon.dart';
+import '/models/base/base_model.dart';
 import 'constants.dart';
 
 // ---- Towers ----
@@ -34,12 +35,12 @@ Future<List<BaseMap>> loadBaseMaps() async {
 }
 
 // ---- Bloons ----
-Future<List<BaseModel>> loadBaseBloons() async {
+Future<List<BaseBloon>> loadBaseBloons() async {
   final jsonConfig =
       await rootBundle.loadString('$configDirectory/bloons.json');
   final List<dynamic> parsedConfig = json.decode(jsonConfig);
 
-  return parsedConfig.map((e) => BaseModel.fromJson(e)).toList();
+  return parsedConfig.map((e) => BaseBloon.fromJson(e)).toList();
 }
 
 // ---- Bosses ----
