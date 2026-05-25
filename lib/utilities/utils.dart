@@ -38,11 +38,11 @@ String formatBigNumber(int number) {
   if (number < 1000) {
     return number.toString();
   } else if (number < 1000000) {
-    return "${(number / 1000).toStringAsFixed(1)}K";
+    return '${(number / 1000).toStringAsFixed(1)}K';
   } else if (number < 1000000000) {
-    return "${(number / 1000000).toStringAsFixed(1)}M";
+    return '${(number / 1000000).toStringAsFixed(1)}M';
   } else {
-    return "${(number / 1000000000).toStringAsFixed(1)}B";
+    return '${(number / 1000000000).toStringAsFixed(1)}B';
   }
 }
 
@@ -123,7 +123,7 @@ List<String> separateString(String stringToSeparate) {
     returnList[0] += ':';
     return returnList;
   } else {
-    return ["", stringToSeparate];
+    return ['', stringToSeparate];
   }
 }
 
@@ -144,13 +144,13 @@ dynamic extractItemTypeFromList(List<dynamic> data) {
   }
 
   if (isString && isObject) {
-    return "mix"; // Both strings and objects are present
+    return 'mix'; // Both strings and objects are present
   } else if (isString) {
-    return "str"; // Only strings are present
+    return 'str'; // Only strings are present
   } else if (isObject) {
-    return "obj"; // Only objects are present
+    return 'obj'; // Only objects are present
   } else {
-    return "none"; // No strings or objects found
+    return 'none'; // No strings or objects found
   }
 }
 

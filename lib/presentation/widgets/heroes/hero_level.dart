@@ -44,7 +44,7 @@ class _HeroLevelState extends State<HeroLevel> {
       child: ExpansionTile(
       collapsedBackgroundColor: colorScheme.surfaceContainerHighest,
       title: Text(
-        "Level ${widget.level.name}",
+        'Level ${widget.level.name}',
         style: titleStyle.copyWith(color: colorScheme.primary),
       ),
       onExpansionChanged: (bool value) {

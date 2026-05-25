@@ -26,15 +26,15 @@ class BaseHero extends BaseModel {
   }
 
   BaseHero.fromJson(Map<String, dynamic> json)
-      : inGameDesc = json["inGameDesc"] as String,
-        easyCost = _parseCost(json["cost"]?["easy"]),
-        mediumCost = _parseCost(json["cost"]?["medium"]),
-        hardCost = _parseCost(json["cost"]?["hard"]),
-        impoppableCost = _parseCost(json["cost"]?["impoppable"]),
+      : inGameDesc = json['inGameDesc'] as String,
+        easyCost = _parseCost(json['cost']?['easy']),
+        mediumCost = _parseCost(json['cost']?['medium']),
+        hardCost = _parseCost(json['cost']?['hard']),
+        impoppableCost = _parseCost(json['cost']?['impoppable']),
         super(
-          json["id"] as String,
-          json["name"] as String,
-          json["image"] as String,
-          json["type"] as String,
+          json['id'] as String,
+          json['name'] as String,
+          json['image'] as String,
+          json['type'] as String,
         );
 }

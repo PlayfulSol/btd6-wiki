@@ -14,12 +14,12 @@ class BaseTower extends BaseModel {
   );
 
   BaseTower.fromJson(Map<String, dynamic> json)
-      : classType = json["classType"] as String,
-        inGameDesc = json["inGameDesc"] as String,
+      : classType = json['classType'] as String,
+        inGameDesc = json['inGameDesc'] as String,
         super(
-          json["id"] as String,
-          json["name"] as String,
-          json["image"] as String,
-          json["type"] as String,
+          json['id'] as String,
+          json['name'] as String,
+          json['image'] as String,
+          json['type'] as String,
         );
 }
