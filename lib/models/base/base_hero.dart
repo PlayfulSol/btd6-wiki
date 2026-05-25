@@ -1,7 +1,6 @@
 import '/models/base/base_model.dart';
 
 class BaseHero extends BaseModel {
-  late final String inGameDesc;
   late final int easyCost;
   late final int mediumCost;
   late final int hardCost;
@@ -12,7 +11,6 @@ class BaseHero extends BaseModel {
     super.name,
     super.image,
     super.type,
-    this.inGameDesc,
     this.easyCost,
     this.mediumCost,
     this.hardCost,
@@ -26,8 +24,7 @@ class BaseHero extends BaseModel {
   }
 
   BaseHero.fromJson(Map<String, dynamic> json)
-      : inGameDesc = json['inGameDesc'] as String,
-        easyCost = _parseCost(json['cost']?['easy']),
+      : easyCost = _parseCost(json['cost']?['easy']),
         mediumCost = _parseCost(json['cost']?['medium']),
         hardCost = _parseCost(json['cost']?['hard']),
         impoppableCost = _parseCost(json['cost']?['impoppable']),

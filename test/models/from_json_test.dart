@@ -45,7 +45,6 @@ void main() {
     test('parses all fields', () {
       final t = BaseTower.fromJson(json);
       expect(t.classType, 'Primary');
-      expect(t.inGameDesc, 'Shoots darts.');
     });
 
     test('throws on missing classType', () {
