@@ -4,8 +4,6 @@ import 'package:go_router/go_router.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/models/bloons/common/relative_class.dart';
-import '/models/towers_v2/common/stats_class.dart';
-import '/models/towers/common/cost_class.dart';
 import '/models/base/base_tower.dart';
 import '/models/base/base_hero.dart';
 import '/models/base/base_map.dart';
@@ -63,13 +61,6 @@ String getPathKeyFromIndex(int index) {
   }
 }
 
-String costToString(Cost cost) {
-  return "Easy: ${cost.easy}, Medium: ${cost.medium}\nHard: ${cost.hard}, Impoppable: ${cost.impoppable}";
-}
-
-String statsToString(Stats stats) {
-  return "Damage: ${stats.damage} | Pierce: ${stats.pierce} | Attack Speed: ${stats.attackSpeed}\nRange: ${stats.range} | Camo: ${stats.camo}\nFootprint: ${stats.footprint} | Damage Type: ${stats.damageType}";
-}
 
 String assetImagePath(String type, String imageName) {
   if (type == kTowers) {
@@ -80,8 +71,6 @@ String assetImagePath(String type, String imageName) {
     return bloonImage(imageName);
   } else if (type == kBosses) {
     return bossImage(imageName);
-  } else if (type == kMinions) {
-    return minionImage(imageName);
   } else if (type == kMaps) {
     return mapImage(imageName);
   } else {
@@ -127,17 +116,6 @@ List<BaseHero> heroesFromSearch(List<BaseHero> heroes, String query) {
       .toList();
 }
 
-List<String> dropMenuOptions(int pageIndex) {
-  if (pageIndex == 0) {
-    return towerTypes;
-  } else if (pageIndex == 2) {
-    return bloonTypes;
-  } else if (pageIndex == 3) {
-    return mapDifficulties;
-  } else {
-    return [];
-  }
-}
 
 List<String> separateString(String stringToSeparate) {
   if (stringToSeparate.contains(':')) {

@@ -69,7 +69,7 @@ class _SingleBloonState extends State<SingleBloon> {
     final isFav = favoriteState.isFavorite(bloon.type, bloon.id);
 
     return DetailPageScaffold(
-      title: bloon.fullName,
+      title: bloon.name,
       accentColor: accentColor,
       isFavorite: isFav,
       onFavoriteToggle: () =>

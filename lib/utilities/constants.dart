@@ -5,7 +5,6 @@ const String kHeroes = 'heroes';
 const String kBloons = 'bloons';
 const String kBlimps = 'blimps';
 const String kBosses = 'bosses';
-const String kMinions = 'minions';
 const String kMaps = 'maps';
 
 const int gameVersion = 54;
@@ -31,12 +30,6 @@ const List<String> simpleTitles = [
   'maps',
 ];
 
-const List<Icon> icons = [
-  Icon(Icons.cell_tower),
-  Icon(Icons.person),
-  Icon(Icons.bubble_chart),
-  Icon(Icons.map_outlined),
-];
 
 const configDirectory = 'assets/data/index';
 const towerDataPath = 'assets/data/towers/';
@@ -44,19 +37,7 @@ const heroDataPath = 'assets/data/heroes/';
 const mapDataPath = 'assets/data/maps/';
 const bloonsDataPath = 'assets/data/bloons/';
 const bossesDataPath = 'assets/data/bosses/';
-const minionsDataPath = 'assets/data/minions/';
 
-const Map<String, String> statsDictionary = {
-  'damage': 'Damage',
-  'pierce': 'Pierce',
-  'attackSpeed': 'Attack Speed',
-  'range': 'Range',
-  'statusEffects': 'Status Effects',
-  'towerBoosts': 'Tower Boosts',
-  'incomeBoosts': 'Income Boosts',
-  'camo': 'Camo',
-  'levelSpeed': 'Level Speed',
-};
 
 const Map<String, String> pathsDictionary = {
   'path1': 'Top Path',
@@ -240,35 +221,8 @@ const Map<String, String> shai = {
   linkedin: 'https://www.linkedin.com/in/shai-holczer/',
 };
 
-const String towerCrossCount = 'towerCrossAxisCount';
-const String towerAspectRatio = 'towerChildAspectRatio';
-const String towerTitleStyle = 'towerTitleStyle';
-const String towerSubtitleStyle = 'towerSubtitleStyle';
-const String towerSubtitleRows = 'towerSubtitleMaxRows';
-const String towerImageWidth = 'towerImageWidth';
-
-const String heroCrossCount = 'heroCrossAxisCount';
-const String heroAspectRatio = 'heroChildAspectRatio';
-const String heroTitleStyle = 'heroTitleStyle';
-const String heroSubtitleStyle = 'heroSubtitleStyle';
-const String heroSubtitleRows = 'heroSubtitleMaxRows';
 const String skinCrossCount = 'skinCrossAxisCount';
 const String skinAspectRatio = 'skinChildAspectRatio';
-
-const String bloonCrossCount = 'bloonCrossAxisCount';
-const String bloonAspectRatio = 'bloonChildAspectRatio';
-const String bloonTitleStyle = 'bloonTitleStyle';
-const String bloonImageWidth = 'bloonImageWidth';
-
-const String bossCrossCount = 'bossCrossAxisCount';
-const String bossAspectRatio = 'bossChildAspectRatio';
-const String bossTitleStyle = 'bossTitleStyle';
-const String bossSubtitleStyle = 'bossSubtitleStyle';
-
-const String mapCrossCount = 'mapCrossAxisCount';
-const String mapAspectRatio = 'mapChildAspectRatio';
-const String mapTitleStyle = 'mapTitleStyle';
-const String mapSubtitleStyle = 'mapSubtitleStyle';
 
 const String favItemCrossCount = 'favItemCrossCount';
 const String favItemAspectRatio = 'favItemAspectRatio';

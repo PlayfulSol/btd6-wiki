@@ -12,7 +12,7 @@ class HeroLevelData {
       : name = json['name']?.toString() ?? '',
         image = json['image'],
         xpCost = json['xpCost'] ?? '0 XP',
-        description = json['description'] ?? json['body'] ?? '',
+        description = json['description'] ?? '',
         stats = UpgradeStats.fromJson(json['stats'] ?? {}),
         upgrade = json['upgrade'];
 }

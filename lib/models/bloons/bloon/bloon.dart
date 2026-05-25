@@ -5,14 +5,13 @@ import '/models/bloons/common/relative_class.dart';
 import 'rounds_class.dart';
 
 class BloonModel extends BaseModel {
-  late final String fullName;
   late final bool isMoab;
   late final int health;
   late final double leakDamage;
   late final int layerNumber;
   late final List<String> tags;
   late final String firstAppearance; // formatted "Round N | ABR: Round N"
-  late final List<dynamic> rbe;
+  late final List<String> rbe;
   late final Speed speed;
   late final List<Relative> children;
   late final List<Relative> parents;
@@ -24,7 +23,6 @@ class BloonModel extends BaseModel {
     super.name,
     super.image,
     super.type,
-    this.fullName,
     this.isMoab,
     this.health,
     this.leakDamage,
@@ -40,8 +38,7 @@ class BloonModel extends BaseModel {
   );
 
   BloonModel.fromJson(Map<String, dynamic> json)
-      : fullName = json['fullName'] as String? ?? json['name'] as String,
-        isMoab = (json['isMoab'] as bool?) ?? false,
+      : isMoab = (json['isMoab'] as bool?) ?? false,
         health = (json['health'] as num?)?.toInt() ?? 0,
         leakDamage = (json['leakDamage'] as num?)?.toDouble() ?? 0.0,
         layerNumber = (json['layerNumber'] as num?)?.toInt() ?? 0,

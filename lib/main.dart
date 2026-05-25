@@ -158,13 +158,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late final AnalyticsHelper analyticsHelper;
   late final PageController pageController;
 
   @override
   void initState() {
     super.initState();
-    analyticsHelper = widget.analyticsHelper;
     pageController = PageController(initialPage: widget.initialPageIndex);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (!mounted) return;
@@ -202,7 +200,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: Drawer(
           child: DrawerContent(
-        analyticsHelper: analyticsHelper,
+        analyticsHelper: widget.analyticsHelper,
         pageController: pageController,
       )),
       appBar: AppBar(
@@ -224,7 +222,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     globalState.updateCurrentQuery('');
                     value = searchOff;
                   }
-                  analyticsHelper.logEvent(
+                  widget.analyticsHelper.logEvent(
                     name: widgetEngagement,
                     parameters: {
                       'screen': globalState.activeCategory,
@@ -250,7 +248,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: IconButton(
                   onPressed: () {
                     if (!favoriteState.isMultiSelectMode) {
-                      analyticsHelper.logScreenView(
+                      widget.analyticsHelper.logScreenView(
                         screenClass: kFavoritesClass,
                         screenName: kFavoritesClass,
                       );
@@ -270,39 +268,42 @@ class _MyHomePageState extends State<MyHomePage> {
         controller: pageController,
         children: [
           Towers(
-            analyticsHelper: analyticsHelper,
+            analyticsHelper: widget.analyticsHelper,
             towers: widget.baseEntities[kTowers],
           ),
           Heroes(
-            analyticsHelper: analyticsHelper,
+            analyticsHelper: widget.analyticsHelper,
             heroes: widget.baseEntities[kHeroes],
           ),
           Bloons(
-            analyticsHelper: analyticsHelper,
+            analyticsHelper: widget.analyticsHelper,
             bloonsList: widget.baseEntities[kBloons],
             bossesList: widget.baseEntities[kBosses],
           ),
           Maps(
-            analyticsHelper: analyticsHelper,
+            analyticsHelper: widget.analyticsHelper,
             maps: widget.baseEntities[kMaps],
           )
         ],
               onPageChanged: (index) {
                 FocusScope.of(context).unfocus();
                 globalState.updateCurrentPage(simpleTitles[index], index);
-                final routes = ['/towers', '/heroes', '/bloons', '/maps'];
-                final router = GoRouter.of(context);
-                final currentLocation = router.routerDelegate.currentConfiguration.uri.path;
-                final targetRoute = routes[index];
-                if (currentLocation != targetRoute && !currentLocation.startsWith('$targetRoute/')) {
-                  router.go(targetRoute);
-                }
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (!mounted) return;
+                  final routes = ['/towers', '/heroes', '/bloons', '/maps'];
+                  final router = GoRouter.of(context);
+                  final currentLocation = router.routerDelegate.currentConfiguration.uri.path;
+                  final targetRoute = routes[index];
+                  if (currentLocation != targetRoute && !currentLocation.startsWith('$targetRoute/')) {
+                    router.go(targetRoute);
+                  }
+                });
               },
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: globalState.currentPageIndex,
         onDestinationSelected: (index) {
-          analyticsHelper.logEvent(
+          widget.analyticsHelper.logEvent(
             name: widgetEngagement,
             parameters: {
               'screen': globalState.activeCategory,
@@ -311,6 +312,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
           );
           final routes = ['/towers', '/heroes', '/bloons', '/maps'];
+          context.read<GlobalState>().updateCurrentPage(simpleTitles[index], index);
           context.go(routes[index]);
         },
         destinations: const [

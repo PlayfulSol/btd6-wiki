@@ -14,7 +14,7 @@ class TowerUpgrade {
       : name = json['name'] ?? '',
         image = json['image'] ?? '',
         unlock = json['unlock'] ?? '0 XP',
-        upgradeBody = json['upgradeBody'] ?? json['body'] ?? '',
+        upgradeBody = json['upgradeBody'] ?? '',
         cost = Cost.fromJson(json['cost']),
         stats = json['stats'] != null
             ? UpgradeStats.fromJson(json['stats'])

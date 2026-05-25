@@ -6,12 +6,11 @@ class Rounds {
 
   Rounds.fromJson(Map<String, dynamic> json) {
     normal = _parseRounds(json['normal']);
-    abr = _parseRounds(json['alternate'] ?? json['abr']);
+    abr = _parseRounds(json['alternate']);
   }
 
   static List<String> _parseRounds(dynamic data) {
     if (data == null) return [];
-    if (data is List) return List<String>.from(data);
     if (data is Map) {
       final entries = data.entries.toList()
         ..sort((a, b) {

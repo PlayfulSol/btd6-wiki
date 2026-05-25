@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '/utilities/constants.dart';
 
-/// Shared scaffold for all detail pages (tower, hero, bloon, boss, minion, map).
+/// Shared scaffold for all detail pages (tower, hero, bloon, boss, map).
 ///
 /// Owns the [SliverAppBar] frame, the header background Stack (accent-tinted
 /// box → [headerContent] → bottom fade), the optional favourite button, and
@@ -11,7 +11,7 @@ import '/utilities/constants.dart';
 ///   Use for the hero page's dot indicator ([Positioned] at bottom: 12).
 ///
 /// [belowHeader] — widget rendered in a [SliverToBoxAdapter] between the
-///   [SliverAppBar] and the content column.  Use for boss/minion dot indicator.
+///   [SliverAppBar] and the content column.  Use for the boss dot indicator.
 ///
 /// [fadeHeight] — hero uses 80, all others use the default 60.
 class DetailPageScaffold extends StatelessWidget {
