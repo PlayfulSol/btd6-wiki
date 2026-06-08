@@ -37,7 +37,7 @@ class FavoriteCard extends StatelessWidget {
                 card,
               );
             } else {
-              favoriteState.toggleFavoriteFunc(context, favoriteState, favItem);
+              favoriteState.toggleFavoriteFunc(context, favItem);
             }
           },
           child: Card(

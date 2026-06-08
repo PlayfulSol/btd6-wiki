@@ -20,6 +20,7 @@ import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 
+
 class SingleHero extends StatefulWidget {
   final AnalyticsHelper analyticsHelper;
   final String heroId;
@@ -61,8 +62,9 @@ class _SingleHeroState extends State<SingleHero> {
 
   List<String> getSkinsImages(String lvl) {
     return singleHero.skins
-        .where((s) => s.images[lvl] != null && s.images[lvl]!.isNotEmpty)
-        .map((s) => s.images[lvl]!)
+        .expand((s) => s.portraits
+            .where((p) => p.level == lvl && p.image.isNotEmpty)
+            .map((p) => p.image))
         .toList();
   }
 
@@ -73,13 +75,13 @@ class _SingleHeroState extends State<SingleHero> {
     setState(() {
       loading = false;
       final validSkins = singleHero.skins
-          .where((s) => s.images.values.any((v) => v.isNotEmpty))
+          .where((s) => s.portraits.any((p) => p.image.isNotEmpty))
           .toList();
       skinsNames = validSkins.map((s) => s.name).toList();
       skinsFirstImages = validSkins.map((s) {
-        final lvl1 = s.images['1'];
-        if (lvl1 != null && lvl1.isNotEmpty) return lvl1;
-        return s.images.values.firstWhere((v) => v.isNotEmpty, orElse: () => '');
+        final lvl1 = s.imageForLevel('1');
+        if (lvl1 != null) return lvl1;
+        return s.portraits.firstWhere((p) => p.image.isNotEmpty, orElse: () => s.portraits.first).image;
       }).where((img) => img.isNotEmpty).toList();
     });
   }
@@ -114,7 +116,7 @@ class _SingleHeroState extends State<SingleHero> {
       fadeHeight: 80,
       isFavorite: isFav,
       onFavoriteToggle: () =>
-          favoriteState.toggleFavoriteFunc(context, favoriteState, singleHero),
+          favoriteState.toggleFavoriteFunc(context, singleHero),
       headerContent: Positioned.fill(
         bottom: 56,
         child: LayoutBuilder(
@@ -154,18 +156,38 @@ class _SingleHeroState extends State<SingleHero> {
             )
           : null,
       body: [
-        Chip(
-          label: const Text(
-            'Hero',
-            style: TextStyle(
-              color: GameColors.hero,
-              fontWeight: FontWeight.w600,
-              fontSize: 12,
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            Chip(
+              label: const Text(
+                'Hero',
+                style: TextStyle(
+                  color: GameColors.hero,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                ),
+              ),
+              backgroundColor: GameColors.hero.withValues(alpha: 0.12),
+              side: BorderSide(color: GameColors.hero.withValues(alpha: 0.4)),
+              visualDensity: VisualDensity.compact,
             ),
-          ),
-          backgroundColor: GameColors.hero.withValues(alpha: 0.12),
-          side: BorderSide(color: GameColors.hero.withValues(alpha: 0.4)),
-          visualDensity: VisualDensity.compact,
+            if (singleHero.changes != null || singleHero.versionDiff != null)
+              Chip(
+                label: Text(
+                  singleHero.changes == 'new' ? 'New' : 'Updated',
+                  style: const TextStyle(
+                    color: GameColors.danger,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
+                backgroundColor: GameColors.danger.withValues(alpha: 0.12),
+                side: BorderSide(color: GameColors.danger.withValues(alpha: 0.4)),
+                visualDensity: VisualDensity.compact,
+              ),
+          ],
         ),
         if (skinsNames.isNotEmpty) ...[
           const SizedBox(height: 8),
@@ -184,44 +206,52 @@ class _SingleHeroState extends State<SingleHero> {
 
         PropertyCard(
           title: 'Stats',
+          titleWidget: diffHasPrefix(singleHero.versionDiff, 'stats.')
+              ? cardBadgeTitle(context, 'Stats')
+              : null,
           children: [
-            for (final e in <MapEntry<String, String>>[
-              MapEntry('Damage', singleHero.stats.damage),
-              MapEntry('Pierce', singleHero.stats.pierce),
-              MapEntry('Attack Speed', singleHero.stats.attackSpeed),
-              MapEntry('Range', singleHero.stats.range),
-              MapEntry('Camo', singleHero.stats.camo),
-              MapEntry('Footprint', singleHero.stats.footprint),
-              MapEntry('Damage Type', singleHero.stats.damageType),
-              MapEntry('Status Effects', singleHero.stats.statuseffects),
-              MapEntry('Tower Boosts', singleHero.stats.towerboosts),
-              MapEntry('Income Boosts', singleHero.stats.incomeboosts),
-              if (singleHero.target.isNotEmpty)
-                MapEntry('Targeting', singleHero.target),
-            ].where((e) => e.value.isNotEmpty)) ...[
-              StatRow(label: e.key, value: e.value),
-              const SizedBox(height: 4),
+            StatTileGrid(
+              items: <(String, String)>[
+                if (singleHero.attacks.isNotEmpty) ...[
+                  ('Damage', singleHero.attacks.first.damage),
+                  ('Pierce', singleHero.attacks.first.pierce),
+                  ('Attack Speed', singleHero.attacks.first.attackSpeed),
+                  ('Range', singleHero.attacks.first.range),
+                  ('Camo', singleHero.attacks.first.camo ? 'Yes' : 'No'),
+                  if (singleHero.attacks.first.damageModifiers.isNotEmpty)
+                    ('Damage Mods', singleHero.attacks.first.damageModifiers),
+                ],
+                ('Footprint', singleHero.footprint),
+                ('Damage Type', singleHero.damageType),
+                if (singleHero.target.isNotEmpty) ('Targeting', singleHero.target),
+              ].where((e) => e.$2.isNotEmpty).toList(),
+            ),
+            if (filterDiff(singleHero.versionDiff, 'stats.') != null) ...[
+              const SizedBox(height: 8),
+              ChangesWidget(changes: filterDiff(singleHero.versionDiff, 'stats.')!),
             ],
           ],
         ),
         const SizedBox(height: 12),
         PropertyCard(
           title: 'Cost',
+          titleWidget: diffHasPrefix(singleHero.versionDiff, 'cost.')
+              ? cardBadgeTitle(context, 'Cost')
+              : null,
           children: [
-            StatRow(label: 'Easy', value: singleHero.cost.easy),
-            const SizedBox(height: 4),
-            StatRow(label: 'Medium', value: singleHero.cost.medium),
-            const SizedBox(height: 4),
-            StatRow(label: 'Hard', value: singleHero.cost.hard),
-            const SizedBox(height: 4),
-            StatRow(label: 'Impoppable', value: singleHero.cost.impoppable),
+            StatTileGrid(items: [
+              ('Easy', singleHero.cost.easy),
+              ('Medium', singleHero.cost.medium),
+              ('Hard', singleHero.cost.hard),
+              ('Impoppable', singleHero.cost.impoppable),
+            ]),
+            if (filterDiff(singleHero.versionDiff, 'cost.') != null) ...[
+              const SizedBox(height: 8),
+              ChangesWidget(changes: filterDiff(singleHero.versionDiff, 'cost.')!),
+            ],
           ],
         ),
 
-        if (singleHero.changes != null) ...[
-          const SizedBox(height: 8),
-          ChangesWidget(changes: singleHero.changes!),
-        ],
 
         if (singleHero.skins.isNotEmpty) ...[
           const SizedBox(height: 12),

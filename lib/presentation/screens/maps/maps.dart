@@ -11,6 +11,7 @@ import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
+import '/utilities/seen_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
 
@@ -29,6 +30,8 @@ class Maps extends StatefulWidget {
 }
 
 class _MapsState extends State<Maps> {
+  late final List<BaseMap> _sortedMaps;
+
   @override
   void initState() {
     super.initState();
@@ -36,13 +39,15 @@ class _MapsState extends State<Maps> {
       screenClass: kMainPagesClass,
       screenName: kMaps,
     );
-    widget.maps.sort((a, b) =>
-        mapDifficulties.indexOf(a.difficulty) -
-        mapDifficulties.indexOf(b.difficulty));
+    _sortedMaps = [...widget.maps]
+      ..sort((a, b) =>
+          mapDifficulties.indexOf(a.difficulty) -
+          mapDifficulties.indexOf(b.difficulty));
   }
 
   Color _chipColor(BuildContext context, String option) {
     if (option == 'All') return Theme.of(context).colorScheme.primary;
+    if (option == 'Changes') return GameColors.danger;
     return difficultyColor(option);
   }
 
@@ -72,30 +77,38 @@ class _MapsState extends State<Maps> {
             ),
           ),
           Expanded(
-            child: Consumer2<GlobalState, FavoriteState>(
-              builder: (context, globalState, favoriteState, _) {
+            child: Consumer3<GlobalState, FavoriteState, SeenState>(
+              builder: (context, globalState, favoriteState, seenState, _) {
+                final option = globalState.optionForCategory(kMaps);
                 final filtered = filterAndSearchMaps(
-                    widget.maps,
-                    globalState.currentQuery,
-                    globalState.optionForCategory(kMaps));
+                    _sortedMaps, globalState.currentQuery, option);
 
-                final groups = <String, List<BaseMap>>{};
-                for (final d in mapDifficulties.skip(1)) {
-                  final group =
-                      filtered.where((m) => m.difficulty == d).toList();
-                  if (group.isNotEmpty) groups[d] = group;
+                // When 'Changes' is selected, show one group without difficulty headers.
+                final Map<String, List<BaseMap>> groups;
+                if (option == 'Changes') {
+                  groups = {'Changes': filtered};
+                } else {
+                  groups = <String, List<BaseMap>>{};
+                  for (final d in mapDifficulties.skip(1)) {
+                    if (d == 'Changes') continue;
+                    final group =
+                        filtered.where((m) => m.difficulty == d).toList();
+                    if (group.isNotEmpty) groups[d] = group;
+                  }
                 }
 
                 return CustomScrollView(
                   slivers: [
-                    if (groups.isEmpty)
+                    if (groups.isEmpty || groups.values.every((l) => l.isEmpty))
                       const SliverFillRemaining(child: NoResultsWidget()),
 
                     for (final entry in groups.entries) ...[
                       SliverToBoxAdapter(
                         child: SectionHeader(
                           title: entry.key,
-                          accentColor: difficultyColor(entry.key),
+                          accentColor: option == 'Changes'
+                              ? GameColors.danger
+                              : difficultyColor(entry.key),
                           count: entry.value.length,
                         ),
                       ),
@@ -112,13 +125,17 @@ class _MapsState extends State<Maps> {
                           delegate: SliverChildBuilderDelegate(
                             (context, index) {
                               final map = entry.value[index];
+                              final showBadge = map.changes != null &&
+                                  !seenState.isSeen(map.id);
                               return MapCard(
                                 singleMap: map,
                                 isFavorite: favoriteState.isFavorite(map.type, map.id),
+                                showChangeBadge: showBadge,
                                 onLongPress: () => favoriteState.toggleFavoriteFunc(
-                                    context, favoriteState, map),
+                                    context, map),
                                 onTap: () {
                                   if (!favoriteState.isMultiSelectMode) {
+                                    seenState.markSeen(map.id);
                                     widget.analyticsHelper.logEvent(
                                       name: widgetEngagement,
                                       parameters: {
@@ -129,7 +146,7 @@ class _MapsState extends State<Maps> {
                                     context.push('/maps/${map.id}');
                                   } else {
                                     favoriteState.toggleFavoriteFunc(
-                                        context, favoriteState, map);
+                                        context, map);
                                   }
                                 },
                               );

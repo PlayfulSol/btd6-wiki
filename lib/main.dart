@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:go_router/go_router.dart';
 import '/firebase_options.dart';
 import '/presentation/widgets/misc/drawer_content.dart';
+import '/presentation/widgets/misc/onboarding_overlay.dart';
 import '/presentation/screens/tower/towers.dart';
 import '/presentation/screens/bloon/bloons.dart';
 import '/presentation/screens/hero/heroes.dart';
@@ -14,8 +15,10 @@ import '/presentation/screens/maps/maps.dart';
 import 'presentation/widgets/common/loader.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
+import '/models/base/base_tower.dart';
 import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
+import '/utilities/seen_state.dart';
 import '/utilities/constants.dart';
 import '/utilities/requests.dart';
 import '/utilities/router.dart';
@@ -126,6 +129,9 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider<FavoriteState>(
           create: (BuildContext context) => FavoriteState(_prefs),
         ),
+        ChangeNotifierProvider<SeenState>(
+          create: (BuildContext context) => SeenState(_prefs),
+        ),
       ],
       child: AdaptiveTheme(
         light: Themes.lightTheme,
@@ -159,6 +165,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late final PageController pageController;
+  final GlobalKey _firstCardKey = GlobalKey();
+  Rect? _tutorialCardRect;
+  bool _onboardingDismissedThisSession = false;
 
   @override
   void initState() {
@@ -170,7 +179,44 @@ class _MyHomePageState extends State<MyHomePage> {
         simpleTitles[widget.initialPageIndex],
         widget.initialPageIndex,
       );
+      if (widget.initialPageIndex == 0) {
+        final seen = context.read<SeenState>();
+        if (seen.shouldShowOnboarding) _resolveTutorialCardRect();
+      }
     });
+  }
+
+  void _onboardingCardLongPress() {
+    final favoriteState = context.read<FavoriteState>();
+    final towers = widget.baseEntities[kTowers] as List<BaseTower>;
+    const sections = ['Primary', 'Military', 'Magic', 'Support'];
+    BaseTower? first;
+    for (final cls in sections) {
+      final matches = towers.where((t) => t.classType == cls);
+      if (matches.isNotEmpty) {
+        first = matches.first;
+        break;
+      }
+    }
+    if (first != null) {
+      favoriteState.toggleFavoriteFunc(context, first);
+    }
+  }
+
+  void _resolveTutorialCardRect() {
+    final ro = _firstCardKey.currentContext?.findRenderObject();
+    if (ro is! RenderBox || !ro.hasSize) return;
+    if (mounted) {
+      setState(() => _tutorialCardRect = ro.localToGlobal(Offset.zero) & ro.size);
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_tutorialCardRect != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _resolveTutorialCardRect());
+    }
   }
 
   @override
@@ -197,7 +243,13 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var globalState = context.watch<GlobalState>();
-    return Scaffold(
+    final onboardingActive = context.watch<SeenState>().shouldShowOnboarding &&
+        widget.initialPageIndex == 0 &&
+        _tutorialCardRect != null &&
+        !_onboardingDismissedThisSession;
+
+    return Stack(children: [
+      Scaffold(
       drawer: Drawer(
           child: DrawerContent(
         analyticsHelper: widget.analyticsHelper,
@@ -270,6 +322,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Towers(
             analyticsHelper: widget.analyticsHelper,
             towers: widget.baseEntities[kTowers],
+            firstCardKey: _firstCardKey,
+            onboardingActive: onboardingActive,
           ),
           Heroes(
             analyticsHelper: widget.analyticsHelper,
@@ -338,6 +392,18 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-    );
+    ),
+      if (onboardingActive)
+        Positioned.fill(
+          child: OnboardingOverlay(
+            cardRect: _tutorialCardRect!,
+            onCardLongPress: _onboardingCardLongPress,
+            onDismiss: () {
+              setState(() => _onboardingDismissedThisSession = true);
+              context.read<SeenState>().markOnboardingSeen();
+            },
+          ),
+        ),
+    ]);
   }
 }

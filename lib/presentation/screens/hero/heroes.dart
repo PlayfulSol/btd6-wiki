@@ -10,6 +10,7 @@ import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
 import '/utilities/global_state.dart';
+import '/utilities/seen_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
 import '/utilities/utils.dart';
@@ -67,6 +68,7 @@ class _HeroesState extends State<Heroes> {
   }
 
   void _onHeroTap(BuildContext context, BaseHero hero) {
+    context.read<SeenState>().markSeen(hero.id);
     widget.analyticsHelper.logEvent(
       name: widgetEngagement,
       parameters: {
@@ -102,16 +104,19 @@ class _HeroesState extends State<Heroes> {
               selected: globalState.optionForCategory(kHeroes),
               onSelect: (option) => globalState.updateCurrentOptionSelected(
                   category: kHeroes, option: option),
-              colorForOption: (_, __) => GameColors.hero,
+              colorForOption: (_, opt) =>
+                  opt == 'Changes' ? GameColors.danger : GameColors.hero,
             ),
           ),
           Expanded(
-            child: Consumer2<GlobalState, FavoriteState>(
-              builder: (context, globalState, favoriteState, _) {
+            child: Consumer3<GlobalState, FavoriteState, SeenState>(
+              builder: (context, globalState, favoriteState, seenState, _) {
+                final option = globalState.optionForCategory(kHeroes);
                 final filtered = heroesFromSearch(
                         widget.heroes, globalState.currentQuery)
-                    .where((h) =>
-                        _matchesPriceFilter(h, globalState.optionForCategory(kHeroes)))
+                    .where((h) => option == 'Changes'
+                        ? h.changes != null
+                        : _matchesPriceFilter(h, option))
                     .toList();
 
                 return CustomScrollView(
@@ -135,21 +140,26 @@ class _HeroesState extends State<Heroes> {
                               final hero = filtered[index];
                               final isFav =
                                   favoriteState.isFavorite(hero.type, hero.id);
+                              final showBadge = hero.changes != null &&
+                                  !seenState.isSeen(hero.id);
                               return ListItemCard(
                                 imagePath: heroImage(hero.image),
                                 imageName: hero.image,
                                 name: hero.name,
-                                subtitle:
-                                    _costLabel(hero, globalState.optionForCategory(kHeroes)),
+                                subtitle: _costLabel(hero, option),
                                 accentColor: GameColors.hero,
                                 isFavorite: isFav,
+                                showChangeBadge: showBadge,
+                                onDismissChangeBadge: showBadge
+                                    ? () => seenState.markSeen(hero.id)
+                                    : null,
                                 onTap: () => favoriteState.isMultiSelectMode
                                     ? favoriteState.toggleFavoriteFunc(
-                                        context, favoriteState, hero)
+                                        context, hero)
                                     : _onHeroTap(context, hero),
                                 onLongPress: () =>
                                     favoriteState.toggleFavoriteFunc(
-                                        context, favoriteState, hero),
+                                        context, hero),
                               );
                             },
                             childCount: filtered.length,

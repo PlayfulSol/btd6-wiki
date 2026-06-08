@@ -15,6 +15,7 @@ const _categoryOrder = [
 
 class FavoriteState extends ChangeNotifier {
   final SharedPreferences _prefs;
+  final Map<String, List<FavoriteModel>> _cache = {};
 
   bool _isMultiSelectMode = false;
   bool draggableMode = false;
@@ -26,11 +27,13 @@ class FavoriteState extends ChangeNotifier {
   String _key(String type) => 'favorites_$type';
 
   List<FavoriteModel> getListOfType(String type) {
-    final json = _prefs.getString(_key(type));
-    if (json == null) return [];
-    return (jsonDecode(json) as List)
-        .map((e) => FavoriteModel.fromJson(e as Map<String, dynamic>))
-        .toList();
+    return _cache.putIfAbsent(type, () {
+      final json = _prefs.getString(_key(type));
+      if (json == null) return [];
+      return (jsonDecode(json) as List)
+          .map((e) => FavoriteModel.fromJson(e as Map<String, dynamic>))
+          .toList();
+    });
   }
 
   List<String> getActiveCategories() {
@@ -40,6 +43,7 @@ class FavoriteState extends ChangeNotifier {
   }
 
   void _saveList(String type, List<FavoriteModel> items) {
+    _cache[type] = items;
     _prefs.setString(
         _key(type), jsonEncode(items.map((e) => e.toJson()).toList()));
   }
@@ -65,9 +69,8 @@ class FavoriteState extends ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleFavoriteFunc(
-      BuildContext context, FavoriteState favoriteState, dynamic item) {
-    String msg = favoriteState.toggleFavorite(item);
+  void toggleFavoriteFunc(BuildContext context, dynamic item) {
+    String msg = toggleFavorite(item);
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

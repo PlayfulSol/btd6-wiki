@@ -7,7 +7,7 @@ const String kBlimps = 'blimps';
 const String kBosses = 'bosses';
 const String kMaps = 'maps';
 
-const int gameVersion = 54;
+const int gameVersion = 55;
 
 const int kTowersIndex = 0;
 const int kHeroesIndex = 1;
@@ -51,7 +51,8 @@ const List<String> mapDifficulties = [
   'Beginner',
   'Intermediate',
   'Advanced',
-  'Expert'
+  'Expert',
+  'Changes',
 ];
 
 const List<String> towerTypes = [
@@ -60,6 +61,7 @@ const List<String> towerTypes = [
   'Military',
   'Magic',
   'Support',
+  'Changes',
 ];
 
 const List<String> bloonTypes = [
@@ -67,6 +69,7 @@ const List<String> bloonTypes = [
   'Bloons',
   'MOAB',
   'Bosses',
+  'Changes',
 ];
 
 // All thresholds use $650 — the round 1 starting cash for each difficulty.
@@ -77,6 +80,7 @@ const List<String> heroPriceRanges = [
   'Medium',  // medium ≤ $650
   'Hard',    // hard ≤ $650
   'Impop',   // impoppable ≤ $650
+  'Changes',
 ];
 
 const Map<String, Map<String, String>> mapDifficultyToReward = {

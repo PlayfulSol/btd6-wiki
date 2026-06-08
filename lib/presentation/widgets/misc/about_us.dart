@@ -1,5 +1,5 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import '/utilities/brand_icons.dart';
 import 'developer_info.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
@@ -33,7 +33,7 @@ class AboutUsPopup extends StatelessWidget {
           },
         );
       },
-      icon: const FaIcon(FontAwesomeIcons.circleInfo),
+      icon: const Icon(Icons.info_outline_rounded),
       label: const Text('About Us'),
     );
   }
@@ -101,7 +101,7 @@ class AboutUs extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                FaIcon(FontAwesomeIcons.github),
+                Icon(BrandIcons.github),
                 SizedBox(width: 7),
                 Text(
                   'To Our GitHub',

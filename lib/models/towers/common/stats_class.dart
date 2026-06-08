@@ -1,4 +1,18 @@
-String _parseStat(Object? v) => v?.toString() ?? '';
+import 'dart:convert';
+
+String _parseStat(Object? v) {
+  if (v == null) return '';
+  if (v is String && v.startsWith('{')) {
+    try {
+      final map = json.decode(v) as Map<String, dynamic>;
+      return map.entries.map((e) {
+        final label = e.key[0].toUpperCase() + e.key.substring(1);
+        return '$label: ${e.value}';
+      }).join(', ');
+    } catch (_) {}
+  }
+  return v.toString();
+}
 
 class Stats {
   final String damage;

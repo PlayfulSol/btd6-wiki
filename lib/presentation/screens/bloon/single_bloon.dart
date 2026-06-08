@@ -73,7 +73,7 @@ class _SingleBloonState extends State<SingleBloon> {
       accentColor: accentColor,
       isFavorite: isFav,
       onFavoriteToggle: () =>
-          favoriteState.toggleFavoriteFunc(context, favoriteState, bloon),
+          favoriteState.toggleFavoriteFunc(context, bloon),
       headerContent: Padding(
         padding: const EdgeInsets.fromLTRB(0, 56, 0, 48),
         child: AppImage(path: bloonImage(bloon.image)),
@@ -98,13 +98,12 @@ class _SingleBloonState extends State<SingleBloon> {
         PropertyCard(
           title: 'Stats',
           children: [
-            StatRow(label: 'Health', value: '${bloon.health}'),
-            const SizedBox(height: 4),
-            StatRow(label: 'Leak Damage', value: '${bloon.leakDamage}'),
-            const SizedBox(height: 4),
-            StatRow(label: 'Layer Number', value: '${bloon.layerNumber}'),
-            const SizedBox(height: 4),
-            StatRow(label: 'First Appearance', value: bloon.firstAppearance),
+            StatTileGrid(items: [
+              ('Health', '${bloon.health}'),
+              ('Leak Damage', '${bloon.leakDamage}'),
+              ('Layer Number', '${bloon.layerNumber}'),
+              ('First Appearance', bloon.firstAppearance),
+            ]),
           ],
         ),
         const SizedBox(height: 12),
@@ -122,9 +121,10 @@ class _SingleBloonState extends State<SingleBloon> {
         PropertyCard(
           title: 'Speed',
           children: [
-            StatRow(label: 'Relative (to red bloon)', value: bloon.speed.relative),
-            const SizedBox(height: 4),
-            StatRow(label: 'Absolute (units)', value: bloon.speed.absolute),
+            StatTileGrid(items: [
+              ('Relative (to red bloon)', bloon.speed.relative),
+              ('Absolute (units)', bloon.speed.absolute),
+            ]),
           ],
         ),
         const SizedBox(height: 12),

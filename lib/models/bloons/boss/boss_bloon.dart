@@ -28,11 +28,12 @@ class BossBloonModel extends BaseModel {
         minions = (json['minions'] as List? ?? [])
             .map((e) => BossMinion.fromJson(e))
             .toList(),
-        tiers = BossTiers.fromJson(json['tiers']),
+        tiers = BossTiers.fromJson(json['tiers'] ?? {}),
         super(
           json['id'] as String,
           json['name'] as String,
           json['image'] as String,
           json['type'] as String,
+          changes: json['changes'] as String?,
         );
 }

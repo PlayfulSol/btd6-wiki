@@ -1,5 +1,5 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/material.dart';
+import '/utilities/brand_icons.dart';
 import '/analytics/analytics_constants.dart';
 import '/analytics/analytics.dart';
 import '/utilities/constants.dart';
@@ -58,7 +58,7 @@ class DeveloperInfo extends StatelessWidget {
             ),
             Flexible(
               child: IconButton(
-                icon: const FaIcon(FontAwesomeIcons.github),
+                icon: const Icon(BrandIcons.github),
                 onPressed: () {
                   analyticsHelper.logEvent(
                     name: buttonPress,
@@ -74,7 +74,7 @@ class DeveloperInfo extends StatelessWidget {
             ),
             Flexible(
               child: IconButton(
-                icon: const FaIcon(FontAwesomeIcons.linkedin),
+                icon: const Icon(BrandIcons.linkedin),
                 onPressed: () {
                   analyticsHelper.logEvent(
                     name: buttonPress,

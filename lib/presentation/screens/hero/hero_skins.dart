@@ -45,12 +45,11 @@ class _HeroSkinsState extends State<HeroSkins> {
       loading = false;
       heroName = hero.name;
       heroSkins = hero.skins
-          .where((s) => s.images.values.any((v) => v.isNotEmpty))
+          .where((s) => s.portraits.any((p) => p.image.isNotEmpty))
           .toList();
       carouselImages = heroSkins
-          .map((s) => s.images['1'])
+          .map((s) => s.imageForLevel('1'))
           .whereType<String>()
-          .where((s) => s.isNotEmpty)
           .toList();
     });
   }
@@ -161,16 +160,16 @@ class _HeroSkinsState extends State<HeroSkins> {
                                 constraintsValues[skinAspectRatio],
                           ),
                           itemCount: () {
-                            final count = skin.images.entries
-                                .where((e) => e.value.isNotEmpty)
+                            final count = skin.portraits
+                                .where((p) => p.image.isNotEmpty)
                                 .length;
                             return count > 0 ? count : 1;
                           }(),
                           itemBuilder: (context, imageIndex) {
-                            final validEntries = skin.images.entries
-                                .where((e) => e.value.isNotEmpty)
+                            final validPortraits = skin.portraits
+                                .where((p) => p.image.isNotEmpty)
                                 .toList();
-                            if (validEntries.isEmpty) {
+                            if (validPortraits.isEmpty) {
                               return const Card(
                                 child: Padding(
                                   padding: EdgeInsets.all(12),
@@ -178,7 +177,7 @@ class _HeroSkinsState extends State<HeroSkins> {
                                 ),
                               );
                             }
-                            final entry = validEntries[imageIndex];
+                            final portrait = validPortraits[imageIndex];
                             return Card(
                               child: Column(
                                 mainAxisAlignment:
@@ -192,14 +191,14 @@ class _HeroSkinsState extends State<HeroSkins> {
                                         horizontal: 15,
                                       ),
                                       child: AppImage(
-                                        path: heroImage(entry.value),
+                                        path: heroImage(portrait.image),
                                       ),
                                     ),
                                   ),
                                   Expanded(
                                     flex: 2,
                                     child: Text(
-                                      'Level ${entry.key}',
+                                      'Level ${portrait.level}',
                                       style: smallTitleStyle,
                                       textAlign: TextAlign.center,
                                     ),

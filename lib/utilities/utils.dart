@@ -34,6 +34,29 @@ AnalyticsHelper analyticsHelper, String originScreen, String originWidget) {
   context.push(routes[item.type]!);
 }
 
+String formatWithCommas(int n) {
+  final s = n.toString();
+  final buf = StringBuffer();
+  for (int i = 0; i < s.length; i++) {
+    if (i > 0 && (s.length - i) % 3 == 0) buf.write(',');
+    buf.write(s[i]);
+  }
+  return buf.toString();
+}
+
+String camelToTitle(String s) {
+  final withSpaces = s.replaceAll('_', ' ').replaceAll(':', ' ');
+  final spaced = withSpaces.replaceAllMapped(
+    RegExp(r'([a-z])([A-Z])'),
+    (m) => '${m[1]} ${m[2]}',
+  );
+  return spaced
+      .split(' ')
+      .where((w) => w.isNotEmpty)
+      .map((w) => w[0].toUpperCase() + w.substring(1))
+      .join(' ');
+}
+
 String formatBigNumber(int number) {
   if (number < 1000) {
     return number.toString();
@@ -81,9 +104,11 @@ String assetImagePath(String type, String imageName) {
 List<BaseModel> filterAndSearchBloons(
     List<BaseModel> bloons, String query, String option) {
   query = query.toLowerCase();
-  bloons = option == 'All'
-      ? bloons
-      : bloons.where((bloon) => bloon.type == option.toLowerCase()).toList();
+  bloons = switch (option) {
+    'All' => bloons,
+    'Changes' => bloons.where((b) => b.changes != null).toList(),
+    _ => bloons.where((b) => b.type == option.toLowerCase()).toList(),
+  };
   return bloons
       .where((bloon) => bloon.name.toLowerCase().contains(query))
       .toList();
@@ -92,9 +117,11 @@ List<BaseModel> filterAndSearchBloons(
 List<BaseTower> filterAndSearchTowers(
     List<BaseTower> towers, String query, String option) {
   query = query.toLowerCase();
-  towers = option == 'All'
-      ? towers
-      : towers.where((tower) => tower.classType == option).toList();
+  towers = switch (option) {
+    'All' => towers,
+    'Changes' => towers.where((t) => t.changes != null).toList(),
+    _ => towers.where((t) => t.classType == option).toList(),
+  };
   return towers
       .where((tower) => tower.name.toLowerCase().contains(query))
       .toList();
@@ -103,9 +130,11 @@ List<BaseTower> filterAndSearchTowers(
 List<BaseMap> filterAndSearchMaps(
     List<BaseMap> maps, String query, String option) {
   query = query.toLowerCase();
-  maps = option == 'All'
-      ? maps
-      : maps.where((map) => map.difficulty == option).toList();
+  maps = switch (option) {
+    'All' => maps,
+    'Changes' => maps.where((m) => m.changes != null).toList(),
+    _ => maps.where((m) => m.difficulty == option).toList(),
+  };
   return maps.where((map) => map.name.toLowerCase().contains(query)).toList();
 }
 

@@ -1,5 +1,5 @@
+import '/models/towers/common/attack_class.dart';
 import '/models/towers/common/cost_class.dart';
-import 'stats_class.dart';
 
 class TowerUpgrade {
   final String name;
@@ -7,7 +7,8 @@ class TowerUpgrade {
   final String unlock;
   final String upgradeBody;
   final Cost cost;
-  final UpgradeStats? stats;
+  final List<Attack> attacks;
+  final List<Ability> abilities;
   final Map<String, String>? changes;
 
   TowerUpgrade.fromJson(Map<String, dynamic> json)
@@ -16,10 +17,9 @@ class TowerUpgrade {
         unlock = json['unlock'] ?? '0 XP',
         upgradeBody = json['upgradeBody'] ?? '',
         cost = Cost.fromJson(json['cost']),
-        stats = json['stats'] != null
-            ? UpgradeStats.fromJson(json['stats'])
-            : null,
-        changes = json['changes'] != null
-            ? Map<String, String>.from(json['changes'])
+        attacks = parseAttacks(json['attacks']),
+        abilities = parseAbilities(json['abilities']),
+        changes = json['versionDiff'] != null
+            ? Map<String, String>.from(json['versionDiff'])
             : null;
 }

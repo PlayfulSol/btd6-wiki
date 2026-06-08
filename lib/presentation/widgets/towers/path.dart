@@ -33,9 +33,26 @@ class MonkeyPath extends StatelessWidget {
       child: ExpansionTile(
         tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
         childrenPadding: const EdgeInsets.only(bottom: 8),
-        title: Text(
-          pathsDictionary[pathKey]!,
-          style: titleStyle.copyWith(color: colorScheme.primary),
+        title: Row(
+          children: [
+            Text(
+              pathsDictionary[pathKey]!,
+              style: titleStyle.copyWith(color: colorScheme.primary),
+            ),
+            if (path.any((u) => u.changes != null)) ...[
+              const SizedBox(width: 8),
+              Container(
+                width: 10,
+                height: 10,
+                decoration: BoxDecoration(
+                  color: GameColors.danger,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                      color: colorScheme.surfaceContainerHighest, width: 1.5),
+                ),
+              ),
+            ],
+          ],
         ),
         onExpansionChanged: (bool value) {
           analyticsHelper.logEvent(
@@ -66,12 +83,31 @@ class MonkeyPath extends StatelessWidget {
                       color: colorScheme.primaryContainer,
                       padding: const EdgeInsets.symmetric(
                           horizontal: 12, vertical: 10),
-                      child: Text(
-                        upgrade.name,
-                        style: bolderNormalStyle.copyWith(
-                          fontSize: 14,
-                          color: colorScheme.primary,
-                        ),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              upgrade.name,
+                              style: bolderNormalStyle.copyWith(
+                                fontSize: 14,
+                                color: colorScheme.primary,
+                              ),
+                            ),
+                          ),
+                          if (upgrade.changes != null)
+                            Container(
+                              width: 10,
+                              height: 10,
+                              margin: const EdgeInsets.only(left: 8),
+                              decoration: BoxDecoration(
+                                color: GameColors.danger,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                    color: colorScheme.primaryContainer,
+                                    width: 1.5),
+                              ),
+                            ),
+                        ],
                       ),
                     ),
                     Padding(
@@ -97,9 +133,13 @@ class MonkeyPath extends StatelessWidget {
                               ),
                               const SizedBox(width: 12),
                               Expanded(
-                                child: Text(
-                                  upgrade.upgradeBody,
-                                  style: normalStyle,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(upgrade.upgradeBody, style: normalStyle),
+                                    const SizedBox(height: 8),
+                                    StatTile(label: 'XP Required', value: upgrade.unlock),
+                                  ],
                                 ),
                               ),
                             ],
@@ -108,30 +148,21 @@ class MonkeyPath extends StatelessWidget {
                           PropertyCard(
                             title: 'Cost',
                             children: [
-                              Row(
-                                children: [
-                                  Expanded(child: _CostCell(label: 'Easy', value: upgrade.cost.easy)),
-                                  Expanded(child: _CostCell(label: 'Medium', value: upgrade.cost.medium)),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              Row(
-                                children: [
-                                  Expanded(child: _CostCell(label: 'Hard', value: upgrade.cost.hard)),
-                                  Expanded(child: _CostCell(label: 'Impoppable', value: upgrade.cost.impoppable)),
-                                ],
-                              ),
-                              const SizedBox(height: 8),
-                              StatRow(label: 'XP Required', value: upgrade.unlock),
+                              StatTileGrid(items: [
+                                ('Easy', upgrade.cost.easy),
+                                ('Medium', upgrade.cost.medium),
+                                ('Hard', upgrade.cost.hard),
+                                ('Impoppable', upgrade.cost.impoppable),
+                              ]),
                             ],
                           ),
-                          if (upgrade.stats != null) ...[
+                          if (upgrade.attacks.isNotEmpty) ...[
                             const SizedBox(height: 12),
-                            UpgradeStatsWidget(stats: upgrade.stats!),
+                            AttacksWidget(attacks: upgrade.attacks, abilities: upgrade.abilities),
                           ],
                           if (upgrade.changes != null) ...[
                             const SizedBox(height: 12),
-                            ChangesWidget(changes: upgrade.changes!),
+                            ChangesWidget(changes: upgrade.changes!, attacks: upgrade.attacks, abilities: upgrade.abilities),
                           ],
                         ],
                       ),
@@ -147,21 +178,3 @@ class MonkeyPath extends StatelessWidget {
   }
 }
 
-class _CostCell extends StatelessWidget {
-  final String label;
-  final String value;
-  const _CostCell({required this.label, required this.value});
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: TextStyle(fontSize: 16, color: colorScheme.onSurfaceVariant)),
-        const SizedBox(height: 2),
-        Text(value, style: normalStyle.copyWith(fontSize: 14)),
-      ],
-    );
-  }
-}

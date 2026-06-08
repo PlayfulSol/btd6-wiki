@@ -21,9 +21,12 @@ Color difficultyColor(String difficulty) {
   }
 }
 
+const _kBadgeSize = 10.0;
+
 class MapCard extends StatelessWidget {
   final BaseMap singleMap;
   final bool isFavorite;
+  final bool showChangeBadge;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
 
@@ -31,6 +34,7 @@ class MapCard extends StatelessWidget {
     super.key,
     required this.singleMap,
     required this.isFavorite,
+    this.showChangeBadge = false,
     this.onTap,
     this.onLongPress,
   });
@@ -38,7 +42,9 @@ class MapCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = difficultyColor(singleMap.difficulty);
-    return Card(
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final card = Card(
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
@@ -102,6 +108,27 @@ class MapCard extends StatelessWidget {
         ],
         ),
       ),
+    );
+
+    if (!showChangeBadge) return card;
+
+    return Stack(
+      children: [
+        card,
+        Positioned(
+          top: 6,
+          right: 6,
+          child: Container(
+            width: _kBadgeSize,
+            height: _kBadgeSize,
+            decoration: BoxDecoration(
+              color: GameColors.danger,
+              shape: BoxShape.circle,
+              border: Border.all(color: colorScheme.surface, width: 1.5),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

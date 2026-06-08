@@ -17,6 +17,12 @@ import '/analytics/analytics.dart';
 import '/utilities/favorite_state.dart';
 import '/utilities/images_url.dart';
 import '/utilities/constants.dart';
+import '/utilities/utils.dart';
+
+// BTD6 multi-player health scaling per player count (1× base, +20% per player).
+const _mpScale2 = 1.2;
+const _mpScale3 = 1.4;
+const _mpScale4 = 1.6;
 
 // Human-readable labels and format hints for known mechanics keys.
 // Format: 'percent' → multiply by 100 + %, 'multiplier' → × prefix,
@@ -59,8 +65,6 @@ class BossBloon extends StatefulWidget {
 class _BossBloonState extends State<BossBloon> {
   final controller = CarouselSliderController();
   late final BossBloonModel boss;
-  List<String> images = [];
-  List<String> imageKeys = [];
   bool loading = true;
   int activeIndex = 0;
 
@@ -68,11 +72,7 @@ class _BossBloonState extends State<BossBloon> {
     final path = '${bossesDataPath + widget.bossId}.json';
     final data = await rootBundle.loadString(path);
     boss = BossBloonModel.fromJson(json.decode(data));
-    setState(() {
-      loading = false;
-      images = List.from(boss.images.values);
-      imageKeys = List.from(boss.images.keys);
-    });
+    setState(() => loading = false);
   }
 
   @override
@@ -86,16 +86,6 @@ class _BossBloonState extends State<BossBloon> {
   }
 
   // ── Formatters ────────────────────────────────────────────────────────────
-
-  String _fmt(int n) {
-    final s = n.toString();
-    final buf = StringBuffer();
-    for (int i = 0; i < s.length; i++) {
-      if (i > 0 && (s.length - i) % 3 == 0) buf.write(',');
-      buf.write(s[i]);
-    }
-    return buf.toString();
-  }
 
   String _fmtMechanic(String key, dynamic value) {
     if (value is! num) return value.toString();
@@ -112,7 +102,7 @@ class _BossBloonState extends State<BossBloon> {
       case 'seconds':
         return '${value}s';
       case 'health':
-        return _fmt(value.toInt());
+        return formatWithCommas(value.toInt());
       default:
         return value == value.truncateToDouble()
             ? value.toInt().toString()
@@ -121,8 +111,7 @@ class _BossBloonState extends State<BossBloon> {
   }
 
   String _mechanicLabel(String key) =>
-      _mechanicsMeta[key]?[0] ??
-      key.replaceAllMapped(RegExp(r'([A-Z])'), (m) => ' ${m.group(0)}');
+      _mechanicsMeta[key]?[0] ?? camelToTitle(key);
 
   // ── Build ─────────────────────────────────────────────────────────────────
 
@@ -135,6 +124,8 @@ class _BossBloonState extends State<BossBloon> {
       );
     }
 
+    final images = boss.images.values.toList();
+    final imageKeys = boss.images.keys.toList();
     final colorScheme = Theme.of(context).colorScheme;
     final sw = MediaQuery.of(context).size.width;
     final carH = sw > 600 ? 360.0 : sw * 0.42;
@@ -147,7 +138,7 @@ class _BossBloonState extends State<BossBloon> {
       accentColor: GameColors.danger,
       isFavorite: isFav,
       onFavoriteToggle: () =>
-          favoriteState.toggleFavoriteFunc(context, favoriteState, boss),
+          favoriteState.toggleFavoriteFunc(context, boss),
       headerContent: Padding(
         padding: const EdgeInsets.only(top: 44),
         child: ImageCarousel(
@@ -190,18 +181,38 @@ class _BossBloonState extends State<BossBloon> {
         ),
       ),
       body: [
-        Chip(
-          label: const Text(
-            'Boss',
-            style: TextStyle(
-              color: GameColors.danger,
-              fontWeight: FontWeight.w600,
-              fontSize: 12,
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            Chip(
+              label: const Text(
+                'Boss',
+                style: TextStyle(
+                  color: GameColors.danger,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                ),
+              ),
+              backgroundColor: GameColors.danger.withValues(alpha: 0.12),
+              side: BorderSide(color: GameColors.danger.withValues(alpha: 0.4)),
+              visualDensity: VisualDensity.compact,
             ),
-          ),
-          backgroundColor: GameColors.danger.withValues(alpha: 0.12),
-          side: BorderSide(color: GameColors.danger.withValues(alpha: 0.4)),
-          visualDensity: VisualDensity.compact,
+            if (boss.changes != null)
+              Chip(
+                label: Text(
+                  boss.changes == 'new' ? 'New' : 'Updated',
+                  style: const TextStyle(
+                    color: GameColors.danger,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
+                backgroundColor: GameColors.danger.withValues(alpha: 0.12),
+                side: BorderSide(color: GameColors.danger.withValues(alpha: 0.4)),
+                visualDensity: VisualDensity.compact,
+              ),
+          ],
         ),
         const SizedBox(height: 12),
 
@@ -251,15 +262,13 @@ class _BossBloonState extends State<BossBloon> {
           const SizedBox(height: 12),
           PropertyCard(
             title: 'Mechanics',
-            children: boss.mechanics.entries
-                .map((e) => Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: StatRow(
-                        label: _mechanicLabel(e.key),
-                        value: _fmtMechanic(e.key, e.value),
-                      ),
-                    ))
-                .toList(),
+            children: [
+              StatTileGrid(
+                items: boss.mechanics.entries
+                    .map((e) => (_mechanicLabel(e.key), _fmtMechanic(e.key, e.value)))
+                    .toList(),
+              ),
+            ],
           ),
         ],
 
@@ -349,14 +358,14 @@ class _BossBloonState extends State<BossBloon> {
                   ),
                   const SizedBox(height: 6),
                   if (m.healthFlat != null)
-                    Text('HP: ${_fmt(m.healthFlat!)}', style: normalStyle),
+                    Text('HP: ${formatWithCommas(m.healthFlat!)}', style: normalStyle),
                   if (m.hasTierHealth) ...[
                     Text('HP (Normal):',
                         style: bolderNormalStyle.copyWith(fontSize: 14)),
                     ...List.generate(
                         m.healthNormal!.length,
                         (i) => Text(
-                              '  Tier ${i + 1}: ${_fmt(m.healthNormal![i])}',
+                              '  Tier ${i + 1}: ${formatWithCommas(m.healthNormal![i])}',
                               style: normalStyle.copyWith(fontSize: 14),
                             )),
                     Text('HP (Elite):',
@@ -364,7 +373,7 @@ class _BossBloonState extends State<BossBloon> {
                     ...List.generate(
                         m.healthElite!.length,
                         (i) => Text(
-                              '  Tier ${i + 1}: ${_fmt(m.healthElite![i])}',
+                              '  Tier ${i + 1}: ${formatWithCommas(m.healthElite![i])}',
                               style: normalStyle.copyWith(fontSize: 14),
                             )),
                   ],
@@ -414,9 +423,9 @@ class _BossBloonState extends State<BossBloon> {
       ),
       children: tiers.map((tier) {
         final h = tier.health;
-        final h2 = (h * 1.2).round();
-        final h3 = (h * 1.4).round();
-        final h4 = (h * 1.6).round();
+        final h2 = (h * _mpScale2).round();
+        final h3 = (h * _mpScale3).round();
+        final h4 = (h * _mpScale4).round();
         return ExpansionTile(
           tilePadding: const EdgeInsets.symmetric(horizontal: 16),
           expandedCrossAxisAlignment: CrossAxisAlignment.stretch,
@@ -424,8 +433,8 @@ class _BossBloonState extends State<BossBloon> {
               style: normalStyle.copyWith(fontWeight: FontWeight.bold)),
           subtitle: Text(
               tier.speedRelative != null
-                  ? '1P: ${_fmt(h)}  •  Speed: ${tier.speed} (${(tier.speedRelative! * 100).round()}% of Red)'
-                  : '1P: ${_fmt(h)}  •  Speed: ${tier.speed}',
+                  ? '1P: ${formatWithCommas(h)}  •  Speed: ${tier.speed} (${(tier.speedRelative! * 100).round()}% of Red)'
+                  : '1P: ${formatWithCommas(h)}  •  Speed: ${tier.speed}',
               style: subtitleStyle),
           children: [
             Padding(
@@ -434,10 +443,10 @@ class _BossBloonState extends State<BossBloon> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '1 Player: ${_fmt(h)}\n'
-                    '2 Players: ${_fmt(h2)}\n'
-                    '3 Players: ${_fmt(h3)}\n'
-                    '4 Players: ${_fmt(h4)}',
+                    '1 Player: ${formatWithCommas(h)}\n'
+                    '2 Players: ${formatWithCommas(h2)}\n'
+                    '3 Players: ${formatWithCommas(h3)}\n'
+                    '4 Players: ${formatWithCommas(h4)}',
                     style: normalStyle,
                   ),
                   if (tier.mechanics.isNotEmpty) ...[
