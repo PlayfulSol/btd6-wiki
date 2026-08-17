@@ -51,10 +51,10 @@ class BossTiers {
   final List<BossTier> elite;
 
   BossTiers.fromJson(Map<String, dynamic> json)
-      : normal = (json['normal'] as List)
+      : normal = (json['normal'] as List? ?? [])
             .map((e) => BossTier.fromJson(e))
             .toList(),
-        elite = (json['elite'] as List)
+        elite = (json['elite'] as List? ?? [])
             .map((e) => BossTier.fromJson(e))
             .toList();
 }
@@ -88,10 +88,10 @@ class BossMinion {
         healthFlat =
             json['health'] is int ? json['health'] as int : null,
         healthNormal = json['health'] is Map
-            ? List<int>.from(json['health']['normal'])
+            ? List<int>.from(json['health']['normal'] ?? [])
             : null,
         healthElite = json['health'] is Map
-            ? List<int>.from(json['health']['elite'])
+            ? List<int>.from(json['health']['elite'] ?? [])
             : null,
         speedFlat =
             json['speed'] is num && json['speed'] is! Map

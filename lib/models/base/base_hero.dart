@@ -14,8 +14,9 @@ class BaseHero extends BaseModel {
     this.easyCost,
     this.mediumCost,
     this.hardCost,
-    this.impoppableCost,
-  );
+    this.impoppableCost, {
+    super.changes,
+  });
 
   static int _parseCost(dynamic value) {
     if (value == null) return 0;
@@ -33,5 +34,6 @@ class BaseHero extends BaseModel {
           json['name'] as String,
           json['image'] as String,
           json['type'] as String,
+          changes: json['changes'] as String?,
         );
 }

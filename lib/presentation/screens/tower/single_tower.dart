@@ -90,24 +90,44 @@ class _SingleTowerState extends State<SingleTower> {
       accentColor: classColor,
       isFavorite: isFav,
       onFavoriteToggle: () =>
-          favoriteState.toggleFavoriteFunc(context, favoriteState, tower),
+          favoriteState.toggleFavoriteFunc(context, tower),
       headerContent: Padding(
         padding: const EdgeInsets.fromLTRB(24, 56, 24, 52),
         child: AppImage(path: towerImage(tower.image)),
       ),
       body: [
-        Chip(
-          label: Text(
-            tower.classType,
-            style: TextStyle(
-              color: classColor,
-              fontWeight: FontWeight.w600,
-              fontSize: 12,
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            Chip(
+              label: Text(
+                tower.classType,
+                style: TextStyle(
+                  color: classColor,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                ),
+              ),
+              backgroundColor: classColor.withValues(alpha: 0.12),
+              side: BorderSide(color: classColor.withValues(alpha: 0.4)),
+              visualDensity: VisualDensity.compact,
             ),
-          ),
-          backgroundColor: classColor.withValues(alpha: 0.12),
-          side: BorderSide(color: classColor.withValues(alpha: 0.4)),
-          visualDensity: VisualDensity.compact,
+            if (tower.changes != null || tower.versionDiff != null)
+              Chip(
+                label: Text(
+                  tower.changes == 'new' ? 'New' : 'Updated',
+                  style: const TextStyle(
+                    color: GameColors.danger,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
+                ),
+                backgroundColor: GameColors.danger.withValues(alpha: 0.12),
+                side: BorderSide(color: GameColors.danger.withValues(alpha: 0.4)),
+                visualDensity: VisualDensity.compact,
+              ),
+          ],
         ),
         const SizedBox(height: 12),
         PropertyCard(
@@ -117,41 +137,52 @@ class _SingleTowerState extends State<SingleTower> {
         const SizedBox(height: 12),
         PropertyCard(
           title: 'Stats',
+          titleWidget: diffHasPrefix(tower.versionDiff, 'stats.')
+              ? cardBadgeTitle(context, 'Stats')
+              : null,
           children: [
-            for (final e in <MapEntry<String, String>>[
-              MapEntry('Damage', tower.stats.damage),
-              MapEntry('Pierce', tower.stats.pierce),
-              MapEntry('Attack Speed', tower.stats.attackSpeed),
-              MapEntry('Range', tower.stats.range),
-              MapEntry('Camo', tower.stats.camo),
-              MapEntry('Footprint', tower.stats.footprint),
-              MapEntry('Damage Type', tower.stats.damageType),
-              MapEntry('Status Effects', tower.stats.statuseffects),
-              MapEntry('Tower Boosts', tower.stats.towerboosts),
-              MapEntry('Income Boosts', tower.stats.incomeboosts),
-            ].where((e) => e.value.isNotEmpty)) ...[
-              StatRow(label: e.key, value: e.value),
-              const SizedBox(height: 4),
+            StatTileGrid(
+              items: <(String, String)>[
+                if (tower.attacks.isNotEmpty) ...[
+                  ('Damage', tower.attacks.first.damage),
+                  ('Pierce', tower.attacks.first.pierce),
+                  ('Attack Speed', tower.attacks.first.attackSpeed),
+                  ('Range', tower.attacks.first.range),
+                  ('Camo', tower.attacks.first.camo ? 'Yes' : 'No'),
+                  if (tower.attacks.first.damageModifiers.isNotEmpty)
+                    ('Damage Mods', tower.attacks.first.damageModifiers),
+                ],
+                ('Footprint', tower.footprint),
+                ('Damage Type', tower.damageType),
+                ('Target', tower.target),
+                ('Camo Unlock', tower.camoUnlock),
+              ].where((e) => e.$2.isNotEmpty).toList(),
+            ),
+            if (filterDiff(tower.versionDiff, 'stats.') != null) ...[
+              const SizedBox(height: 8),
+              ChangesWidget(changes: filterDiff(tower.versionDiff, 'stats.')!),
             ],
           ],
         ),
         const SizedBox(height: 12),
         PropertyCard(
           title: 'Cost',
+          titleWidget: diffHasPrefix(tower.versionDiff, 'cost.')
+              ? cardBadgeTitle(context, 'Cost')
+              : null,
           children: [
-            StatRow(label: 'Easy', value: tower.cost.easy),
-            const SizedBox(height: 4),
-            StatRow(label: 'Medium', value: tower.cost.medium),
-            const SizedBox(height: 4),
-            StatRow(label: 'Hard', value: tower.cost.hard),
-            const SizedBox(height: 4),
-            StatRow(label: 'Impoppable', value: tower.cost.impoppable),
+            StatTileGrid(items: [
+              ('Easy', tower.cost.easy),
+              ('Medium', tower.cost.medium),
+              ('Hard', tower.cost.hard),
+              ('Impoppable', tower.cost.impoppable),
+            ]),
+            if (filterDiff(tower.versionDiff, 'cost.') != null) ...[
+              const SizedBox(height: 8),
+              ChangesWidget(changes: filterDiff(tower.versionDiff, 'cost.')!),
+            ],
           ],
         ),
-        if (tower.changes != null) ...[
-          const SizedBox(height: 8),
-          ChangesWidget(changes: tower.changes!),
-        ],
         const SizedBox(height: 12),
         ListView.builder(
           primary: false,

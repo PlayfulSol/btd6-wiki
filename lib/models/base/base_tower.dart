@@ -8,8 +8,9 @@ class BaseTower extends BaseModel {
     super.name,
     super.image,
     super.type,
-    this.classType,
-  );
+    this.classType, {
+    super.changes,
+  });
 
   BaseTower.fromJson(Map<String, dynamic> json)
       : classType = json['classType'] as String,
@@ -18,5 +19,6 @@ class BaseTower extends BaseModel {
           json['name'] as String,
           json['image'] as String,
           json['type'] as String,
+          changes: json['changes'] as String?,
         );
 }

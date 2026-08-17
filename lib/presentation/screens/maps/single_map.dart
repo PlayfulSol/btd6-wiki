@@ -63,12 +63,22 @@ class _SingleMapState extends State<SingleMap> {
     final favoriteState = context.watch<FavoriteState>();
     final isFav = favoriteState.isFavorite(map.type, map.id);
 
+    final mapProps = <(String, String)>[
+      if (map.water != null && map.water!.isNotEmpty) ('Water', map.water!),
+      if (map.entrances != null && map.entrances!.isNotEmpty) ('Entrances', map.entrances!),
+      if (map.exits != null && map.exits!.isNotEmpty) ('Exits', map.exits!),
+      if (map.sightBlocker != null && map.sightBlocker!.isNotEmpty)
+        ('Sight Blocker', map.sightBlocker!),
+      if (map.coopDivision != null && map.coopDivision!.isNotEmpty)
+        ('Co-op Division', map.coopDivision!),
+    ];
+
     return DetailPageScaffold(
       title: map.name,
       accentColor: accentColor,
       isFavorite: isFav,
       onFavoriteToggle: () =>
-          favoriteState.toggleFavoriteFunc(context, favoriteState, map),
+          favoriteState.toggleFavoriteFunc(context, map),
       headerContent: Padding(
         padding: const EdgeInsets.fromLTRB(16, 56, 16, 48),
         child: AppImage(
@@ -92,30 +102,11 @@ class _SingleMapState extends State<SingleMap> {
         ),
         const SizedBox(height: 12),
 
-        Builder(builder: (context) {
-          final data = <(String, String)>[
-            if (map.water != null && map.water!.isNotEmpty)
-              ('Water', map.water!),
-            if (map.entrances != null && map.entrances!.isNotEmpty)
-              ('Entrances', map.entrances!),
-            if (map.exits != null && map.exits!.isNotEmpty)
-              ('Exits', map.exits!),
-            if (map.sightBlocker != null && map.sightBlocker!.isNotEmpty)
-              ('Sight Blocker', map.sightBlocker!),
-            if (map.coopDivision != null && map.coopDivision!.isNotEmpty)
-              ('Co-op Division', map.coopDivision!),
-          ];
-          if (data.isEmpty) return const SizedBox.shrink();
-          return PropertyCard(
+        if (mapProps.isNotEmpty)
+          PropertyCard(
             title: 'Map Properties',
-            children: [
-              for (int i = 0; i < data.length; i++) ...[
-                StatRow(label: data[i].$1, value: data[i].$2),
-                if (i < data.length - 1) const SizedBox(height: 4),
-              ],
-            ],
-          );
-        }),
+            children: [StatTileGrid(items: mapProps)],
+          ),
 
         if (map.length != null && map.length!.isNotEmpty) ...[
           const SizedBox(height: 12),
@@ -135,16 +126,13 @@ class _SingleMapState extends State<SingleMap> {
           const SizedBox(height: 12),
           PropertyCard(
             title: 'Reward for first completion',
-            children: () {
-              final entries =
-                  mapDifficultyToReward[map.difficulty]!.entries.toList();
-              return [
-                for (int i = 0; i < entries.length; i++) ...[
-                  StatRow(label: entries[i].key, value: entries[i].value),
-                  if (i < entries.length - 1) const SizedBox(height: 4),
-                ],
-              ];
-            }(),
+            children: [
+              StatTileGrid(
+                items: mapDifficultyToReward[map.difficulty]!.entries
+                    .map((e) => (e.key, e.value))
+                    .toList(),
+              ),
+            ],
           ),
         ],
       ],

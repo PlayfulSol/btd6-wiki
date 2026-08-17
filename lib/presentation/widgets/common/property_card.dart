@@ -5,11 +5,13 @@ import '/utilities/constants.dart';
 /// a padded content area below it for child widgets.
 class PropertyCard extends StatelessWidget {
   final String title;
+  final Widget? titleWidget;
   final List<Widget> children;
 
   const PropertyCard({
     super.key,
     required this.title,
+    this.titleWidget,
     required this.children,
   });
 
@@ -24,13 +26,14 @@ class PropertyCard extends StatelessWidget {
           Container(
             color: colorScheme.surfaceContainerHighest,
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
-            child: Text(
-              title,
-              style: bolderNormalStyle.copyWith(
-                fontSize: 19,
-                color: colorScheme.primary,
-              ),
-            ),
+            child: titleWidget ??
+                Text(
+                  title,
+                  style: bolderNormalStyle.copyWith(
+                    fontSize: 19,
+                    color: colorScheme.primary,
+                  ),
+                ),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(14, 6, 14, 6),

@@ -1,5 +1,5 @@
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import '/utilities/brand_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'about_us.dart';
@@ -293,8 +293,7 @@ class _DrawerContentState extends State<DrawerContent> {
                             );
                             openUrl(googleLink);
                           },
-                          icon: const FaIcon(FontAwesomeIcons.googlePlay,
-                              size: 14),
+                          icon: const Icon(BrandIcons.googlePlay, size: 14),
                           label: const Text('Rate Us'),
                         ),
                       ),

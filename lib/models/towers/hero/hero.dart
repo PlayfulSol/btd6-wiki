@@ -1,5 +1,5 @@
+import '/models/towers/common/attack_class.dart';
 import '/models/towers/common/cost_class.dart';
-import '/models/towers/common/stats_class.dart';
 import '/models/towers/common/hero_level_class.dart';
 import 'hero_skin.dart';
 
@@ -11,11 +11,15 @@ class HeroModelV2 {
   final String inGameDesc;
   final List<String> skinChange;
   final String target;
+  final String footprint;
+  final String damageType;
   final Cost cost;
-  final Stats stats;
+  final List<Attack> attacks;
+  final List<Ability> abilities;
   final List<HeroSkin> skins;
   final List<HeroLevelData> levels;
-  final Map<String, String>? changes;
+  final String? changes;
+  final Map<String, String>? versionDiff;
 
   HeroModelV2.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -25,15 +29,19 @@ class HeroModelV2 {
         inGameDesc = json['inGameDesc'],
         skinChange = List<String>.from(json['skinChange'] ?? []),
         target = json['target'] ?? '',
+        footprint = json['footprint'] ?? '',
+        damageType = json['damageType'] ?? '',
         cost = Cost.fromJson(json['cost']),
-        stats = Stats.fromJson(json['stats']),
-        skins = (json['skins'] as List)
+        attacks = parseAttacks(json['attacks']),
+        abilities = parseAbilities(json['abilities']),
+        skins = (json['skins'] as List? ?? [])
             .map((e) => HeroSkin.fromJson(e))
             .toList(),
-        levels = (json['levels'] as List)
+        levels = (json['levels'] as List? ?? [])
             .map((e) => HeroLevelData.fromJson(e))
             .toList(),
-        changes = json['changes'] != null
-            ? Map<String, String>.from(json['changes'])
+        changes = json['changes'] as String?,
+        versionDiff = json['versionDiff'] != null
+            ? Map<String, String>.from(json['versionDiff'])
             : null;
 }

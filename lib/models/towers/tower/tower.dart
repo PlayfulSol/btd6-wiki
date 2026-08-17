@@ -1,5 +1,5 @@
+import '/models/towers/common/attack_class.dart';
 import '/models/towers/common/cost_class.dart';
-import '/models/towers/common/stats_class.dart';
 import 'monkey_paths.dart';
 
 class TowerModelV2 {
@@ -11,10 +11,15 @@ class TowerModelV2 {
   final String unlock;
   final String inGameDesc;
   final String target;
+  final String footprint;
+  final String damageType;
+  final String camoUnlock;
   final Cost cost;
-  final Stats stats;
+  final List<Attack> attacks;
+  final List<Ability> abilities;
   final MonkeyPathsV2 paths;
-  final Map<String, String>? changes;
+  final String? changes;
+  final Map<String, String>? versionDiff;
 
   TowerModelV2.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -25,10 +30,15 @@ class TowerModelV2 {
         unlock = json['unlock'] ?? '',
         inGameDesc = json['inGameDesc'],
         target = json['target'] ?? '',
+        footprint = json['footprint'] ?? '',
+        damageType = json['damageType'] ?? '',
+        camoUnlock = json['camoUnlock'] ?? '',
         cost = Cost.fromJson(json['cost']),
-        stats = Stats.fromJson(json['stats']),
+        attacks = parseAttacks(json['attacks']),
+        abilities = parseAbilities(json['abilities']),
         paths = MonkeyPathsV2.fromJson(json['paths']),
-        changes = json['changes'] != null
-            ? Map<String, String>.from(json['changes'])
+        changes = json['changes'] as String?,
+        versionDiff = json['versionDiff'] != null
+            ? Map<String, String>.from(json['versionDiff'])
             : null;
 }

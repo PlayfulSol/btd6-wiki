@@ -17,7 +17,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 0.9.1
+version: 1.0.55
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -40,7 +40,6 @@ dependencies:
   auto_size_text: ^3.0.0
   model_viewer_plus: ^1.7.0
   url_launcher: ^6.2.2
-  font_awesome_flutter: ^10.6.0
   firebase_core: ^2.23.0
   firebase_analytics: ^10.7.1
   carousel_slider: ^5.0.0
@@ -60,11 +59,13 @@ dev_dependencies:
   flutter_lints: ^3.0.1
   build_runner: ^2.1.0
 
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
   image_path: "assets/btd6_wiki_icon.png"
-  adaptive_icon_background: "assets/btd6_wiki_icon.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#0B1A60"
+  adaptive_icon_foreground: "assets/btd6_wiki_icon_foreground.png"
 
 flutter:
   uses-material-design: true
@@ -83,6 +84,11 @@ flutter:
     - assets/images/bosses/
     - assets/images/maps/
     - assets/images/minions/
+
+  fonts:
+    - family: FontAwesomeBrands
+      fonts:
+        - asset: assets/fonts/Font-Awesome-7-Brands-Regular-400.otf
 
 compileSdkVersion: 35
 buildToolsVersion: "35.0.0"

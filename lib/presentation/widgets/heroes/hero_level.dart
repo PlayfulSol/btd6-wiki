@@ -43,9 +43,25 @@ class _HeroLevelState extends State<HeroLevel> {
       clipBehavior: Clip.antiAlias,
       child: ExpansionTile(
       collapsedBackgroundColor: colorScheme.surfaceContainerHighest,
-      title: Text(
-        'Level ${widget.level.name}',
-        style: titleStyle.copyWith(color: colorScheme.primary),
+      title: Row(
+        children: [
+          Text(
+            'Level ${widget.level.name}',
+            style: titleStyle.copyWith(color: colorScheme.primary),
+          ),
+          if (widget.level.versionDiff != null)
+            Container(
+              width: 10,
+              height: 10,
+              margin: const EdgeInsets.only(left: 8),
+              decoration: BoxDecoration(
+                color: GameColors.danger,
+                shape: BoxShape.circle,
+                border: Border.all(
+                    color: colorScheme.surfaceContainerHighest, width: 1.5),
+              ),
+            ),
+        ],
       ),
       onExpansionChanged: (bool value) {
         widget.analyticsHelper.logEvent(
@@ -101,14 +117,25 @@ class _HeroLevelState extends State<HeroLevel> {
                     ),
                   ),
                 ),
+                if (widget.level.upgradeBody != null) ...[
+                  const SizedBox(height: 6),
+                  Text(widget.level.upgradeBody!, style: normalStyle),
+                ],
                 const SizedBox(height: 8),
               ],
               Text(widget.level.description, style: normalStyle),
               const SizedBox(height: 10),
               Divider(height: 1, color: colorScheme.outlineVariant),
               const SizedBox(height: 8),
-              StatRow(label: 'XP Cost', value: widget.level.xpCost),
-              UpgradeStatsWidget(stats: widget.level.stats),
+              StatTile(label: 'XP Cost', value: widget.level.xpCost),
+              if (widget.level.attacks.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                AttacksWidget(attacks: widget.level.attacks, abilities: widget.level.abilities),
+              ],
+              if (widget.level.versionDiff != null) ...[
+                const SizedBox(height: 8),
+                ChangesWidget(changes: widget.level.versionDiff!, attacks: widget.level.attacks, abilities: widget.level.abilities),
+              ],
             ],
           ),
         ),

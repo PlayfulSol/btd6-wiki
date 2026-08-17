@@ -8,8 +8,9 @@ class BaseBloon extends BaseModel {
     super.name,
     super.image,
     super.type,
-    this.isMoab,
-  );
+    this.isMoab, {
+    super.changes,
+  });
 
   BaseBloon.fromJson(Map<String, dynamic> json)
       : isMoab = (json['isMoab'] as bool?) ?? false,
@@ -18,5 +19,6 @@ class BaseBloon extends BaseModel {
           json['name'] as String,
           json['image'] as String,
           json['type'] as String,
+          changes: json['changes'] as String?,
         );
 }

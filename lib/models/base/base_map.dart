@@ -8,8 +8,9 @@ class BaseMap extends BaseModel {
     super.name,
     super.image,
     super.type,
-    this.difficulty,
-  );
+    this.difficulty, {
+    super.changes,
+  });
 
   BaseMap.fromJson(Map<String, dynamic> json)
       : difficulty = json['difficulty'] as String,
@@ -18,5 +19,6 @@ class BaseMap extends BaseModel {
           json['name'] as String,
           json['image'] as String,
           json['type'] as String,
+          changes: json['changes'] as String?,
         );
 }
