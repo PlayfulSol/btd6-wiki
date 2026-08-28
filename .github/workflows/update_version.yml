@@ -1,12 +1,11 @@
-name: Update version
+name: Bump version on PR
 
 on:
   pull_request:
-    types: [closed]
+    types: [opened]
 
 jobs:
-  update_version:
-    if: github.event.pull_request.merged == true
+  bump_version:
     runs-on: ubuntu-latest
 
     steps:
@@ -15,7 +14,7 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Update version
+    - name: Bump version
       run: |
         # Extract the current version number
         version=$(grep 'version:' pubspec.yaml | awk '{print $2}' | awk -F "+" '{print $1}')
@@ -27,18 +26,10 @@ jobs:
         # Replace the version number in the pubspec.yaml file
         sed -i "s/version: $version+$build/version: $new_version+$build/g" pubspec.yaml
 
-    - name: Create new branch and commit changes
+    - name: Commit and push changes
       run: |
         git config --global user.name 'GitHub Action'
         git config --global user.email 'action@github.com'
-        branch_name="version-update-$(date +'%Y%m%d%H%M%S')"
-        git checkout -b $branch_name
-        git commit -am "Increment version number"
-        git push origin $branch_name
-    
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
-      with:
-        title: "Increment version number"
-        body: "This PR increments the version number in `pubspec.yaml`."
-        branch: ${{ github.ref }}
+        git checkout ${{ github.ref }}
+        git commit -am "Bump version number"
+        git push
